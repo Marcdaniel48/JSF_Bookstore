@@ -1,0 +1,63 @@
+*
+{
+  	-webkit-box-sizing: border-box;
+  	-moz-box-sizing: border-box;
+  	box-sizing: border-box;
+  	padding: 0px;
+  	margin: 0px;
+}
+
+html, body
+{
+    width: 100%;
+    height: 100%;
+}
+
+.nav
+{
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    border: 1px solid red;
+}
+
+.content
+{
+    width: 80%;
+    height: 100%;
+    position: relative;
+    top: 100px;
+    left: 10%;
+}
+
+.highlights
+{
+    width: 100%;
+    border: 1px solid green;
+}
+
+.recent-books
+{
+    width: 100%;
+    border: 1px solid blue;
+}
+
+.ad-left
+{
+    width: 10%;
+    height: 100%;
+    position: fixed;
+    top: 100px;
+    border: 1px solid black;
+}
+
+.ad-right
+{
+    width: 10%;
+    height: 100%;
+    position: fixed;
+    top: 100px;
+    right: 0;
+    border: 1px solid black;
+}
