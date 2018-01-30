@@ -1,5 +1,5 @@
 /**
- * Authors:  Jephtia, Sebastian
+ * Authors:  Jephtia, Sebastian, Marc-Daniel
  * Created: Jan 25, 2018
  */
 
