@@ -9,6 +9,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <body>
-        <div>TODO write content</div>
+        
+            <div>
+                <h:form>
+                <h:inputText value="#{searchBean.searchTerm}"/>
+                <h:commandButton type="submit" value="#{msgs.searchButtonTxt}"/>
+                 </h:form>
+            </div>
+       
     </body>
 </html>
