@@ -180,6 +180,13 @@
             <version>2.10.0</version>
             <scope>test</scope>
         </dependency>
+        
+        <!-- PrimeFaces dependency -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>6.1</version>
+        </dependency>
 
     </dependencies>
 
