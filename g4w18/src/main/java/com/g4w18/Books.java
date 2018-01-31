@@ -7,10 +7,8 @@ package com.g4w18;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,7 +25,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author 1331680
+ * @author Marc-Daniel
  */
 @Entity
 @Table(name = "books", catalog = "bookstore", schema = "")
@@ -41,7 +38,6 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Books.findByPublicationDate", query = "SELECT b FROM Books b WHERE b.publicationDate = :publicationDate")
     , @NamedQuery(name = "Books.findByPageNumber", query = "SELECT b FROM Books b WHERE b.pageNumber = :pageNumber")
     , @NamedQuery(name = "Books.findByGenre", query = "SELECT b FROM Books b WHERE b.genre = :genre")
-    , @NamedQuery(name = "Books.findByImagePath", query = "SELECT b FROM Books b WHERE b.imagePath = :imagePath")
     , @NamedQuery(name = "Books.findByFormat", query = "SELECT b FROM Books b WHERE b.format = :format")
     , @NamedQuery(name = "Books.findByWholesalePrice", query = "SELECT b FROM Books b WHERE b.wholesalePrice = :wholesalePrice")
     , @NamedQuery(name = "Books.findByListPrice", query = "SELECT b FROM Books b WHERE b.listPrice = :listPrice")
@@ -92,11 +88,6 @@ public class Books implements Serializable {
     private String description;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "IMAGE_PATH")
-    private String imagePath;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "FORMAT")
     private String format;
@@ -118,12 +109,6 @@ public class Books implements Serializable {
     @Column(name = "INVENTORY_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date inventoryDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
-    private Collection<BookAuthors> bookAuthorsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
-    private Collection<InvoiceDetails> invoiceDetailsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
-    private Collection<Reviews> reviewsCollection;
 
     public Books() {
     }
@@ -132,7 +117,7 @@ public class Books implements Serializable {
         this.bookId = bookId;
     }
 
-    public Books(Integer bookId, String isbnNumber, String title, String publisher, Date publicationDate, int pageNumber, String genre, String description, String imagePath, String format, BigDecimal wholesalePrice, BigDecimal listPrice, BigDecimal salePrice, Date inventoryDate) {
+    public Books(Integer bookId, String isbnNumber, String title, String publisher, Date publicationDate, int pageNumber, String genre, String description, String format, BigDecimal wholesalePrice, BigDecimal listPrice, BigDecimal salePrice, Date inventoryDate) {
         this.bookId = bookId;
         this.isbnNumber = isbnNumber;
         this.title = title;
@@ -141,7 +126,6 @@ public class Books implements Serializable {
         this.pageNumber = pageNumber;
         this.genre = genre;
         this.description = description;
-        this.imagePath = imagePath;
         this.format = format;
         this.wholesalePrice = wholesalePrice;
         this.listPrice = listPrice;
@@ -213,14 +197,6 @@ public class Books implements Serializable {
         this.description = description;
     }
 
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
     public String getFormat() {
         return format;
     }
@@ -259,30 +235,6 @@ public class Books implements Serializable {
 
     public void setInventoryDate(Date inventoryDate) {
         this.inventoryDate = inventoryDate;
-    }
-
-    public Collection<BookAuthors> getBookAuthorsCollection() {
-        return bookAuthorsCollection;
-    }
-
-    public void setBookAuthorsCollection(Collection<BookAuthors> bookAuthorsCollection) {
-        this.bookAuthorsCollection = bookAuthorsCollection;
-    }
-
-    public Collection<InvoiceDetails> getInvoiceDetailsCollection() {
-        return invoiceDetailsCollection;
-    }
-
-    public void setInvoiceDetailsCollection(Collection<InvoiceDetails> invoiceDetailsCollection) {
-        this.invoiceDetailsCollection = invoiceDetailsCollection;
-    }
-
-    public Collection<Reviews> getReviewsCollection() {
-        return reviewsCollection;
-    }
-
-    public void setReviewsCollection(Collection<Reviews> reviewsCollection) {
-        this.reviewsCollection = reviewsCollection;
     }
 
     @Override

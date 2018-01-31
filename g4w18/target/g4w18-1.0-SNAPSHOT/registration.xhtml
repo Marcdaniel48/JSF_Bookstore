@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Register an account</title>
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
+    </h:head>
+    <h:body>
+        <h:form>
+            
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{msgs.username}"/>
+                <h:inputText value="#{register.username}"/>
+                
+                <h:outputLabel value="#{msgs.password}"/>
+                <h:inputText value="#{register.password}"/>
+                
+                <h:outputLabel value="#{msgs.title}"/>
+                <h:selectOneMenu value="#{register.title}" required="true">
+                    <f:selectItems value="#{register.titleOptions}"/>
+                </h:selectOneMenu>
+            
+                <h:outputLabel value="#{msgs.firstname}"/>
+                <h:inputText value="#{register.firstName}"/>
+                
+                <h:outputLabel value="#{msgs.lastname}"/>
+                <h:inputText value="#{register.lastName}"/>
+                
+                <h:outputLabel value="#{msgs.companyname}"/>
+                <h:inputText value="#{register.companyName}"/>
+                
+                <h:outputLabel value="#{msgs.address1}"/>
+                <h:inputText value="#{register.address1}"/>
+                
+                <h:outputLabel value="#{msgs.address2}"/>
+                <h:inputText value="#{register.address2}"/>
+                
+                <h:outputLabel value="#{msgs.city}"/>
+                <h:inputText value="#{register.city}"/>
+                
+                <h:outputLabel value="#{msgs.province}"/>
+                <h:selectOneMenu value="#{register.province}" required="true">
+                    <f:selectItems value="#{register.provinceOptions}"/>
+                </h:selectOneMenu>
+                
+                <h:outputLabel value="#{msgs.postalcode}"/>
+                <h:inputText value="#{register.postalCode}"/>
+                
+                <h:outputLabel value="#{msgs.hometelephone}"/>
+                <h:inputText value="#{register.homeTelephone}"/>
+                
+                <h:outputLabel value="#{msgs.cellphone}"/>
+                <h:inputText value="#{register.cellPhone}"/>
+                
+                <h:outputLabel value="#{msgs.email}"/>
+                <h:inputText value="#{register.email}"/>
+            </h:panelGrid>
+            
+            <h:commandButton value="#{msgs.submitbutton}" action="showInformation"/>
+        </h:form>
+    </h:body>
+</html>
