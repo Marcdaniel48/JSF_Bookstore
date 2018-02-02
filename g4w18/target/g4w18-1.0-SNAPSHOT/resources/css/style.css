@@ -13,20 +13,38 @@ html, body
     font-family: "Open Sans Condensed";
 }
 
-.container
+.parallax
 {
-    border: 3px solid green;
+    perspective: 1px;
+    perspective-origin-x: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.parallax-layer
+{
+    transform-origin-x: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.background
+{
+    height: 1400px;
+    transform: translateZ(-1px) scale(2.1);
     background-image: url("#{resource['images/pattern.png']}");
-    background-attachment: fixed;
+}
+.content
+{
+    margin: 50px;
+    position: relative;
+    height: auto;
+    border: 3px solid red;
+    transform: translateZ(0px);
 }
 
-.test
-{
-    margin: 100px;
-    height: 1200px;
-    border: 3px solid red;
-    /*transform: translateZ(-1px);*/
-}
 
 
 
