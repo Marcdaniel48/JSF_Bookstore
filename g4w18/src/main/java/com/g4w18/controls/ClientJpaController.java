@@ -22,6 +22,8 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
@@ -41,17 +43,28 @@ public class ClientJpaController implements Serializable {
     private EntityManager em;
 
     public void create(Client client) throws RollbackFailureException, Exception {
-        try {
-            utx.begin();
-            em.persist(client);
-            utx.commit();
-        } catch (NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SecurityException | IllegalStateException ex) {
+        
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
+        Root<Client> clientRoot = cq.from(Client.class);
+        cq.select(clientRoot).where(cb.equal(clientRoot.get("username"), client.getUsername()));
+        TypedQuery<Client> query = em.createQuery(cq);
+        List<Client> existingClients = query.getResultList();
+        
+        if(existingClients.size() < 1)
+        {
             try {
-                utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+                utx.begin();
+                em.persist(client);
+                utx.commit();
+            } catch (NotSupportedException | SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SecurityException | IllegalStateException ex) {
+                try {
+                    utx.rollback();
+                } catch (IllegalStateException | SecurityException | SystemException re) {
+                    throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+                }
+                throw ex;
             }
-            throw ex;
         }
     }
     
