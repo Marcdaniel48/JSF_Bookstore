@@ -8,6 +8,7 @@ package com.g4w18.controls;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.faces.bean.RequestScoped;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
@@ -16,6 +17,7 @@ import javax.inject.Named;
  * @author Marc-Daniel
  */
 @Named("register")
+@RequestScoped
 public class Registration implements Serializable         
 {
     private String username;
@@ -179,15 +181,15 @@ public class Registration implements Serializable
         provinceOptions.add(new SelectItem(null, "Select a province", "", false, false,
                 true));
         
-        provinceOptions.add(new SelectItem("Ontario"));
-        provinceOptions.add(new SelectItem("Québec"));
-        provinceOptions.add(new SelectItem("British Columbia"));
-        provinceOptions.add(new SelectItem("Alberta"));
-        provinceOptions.add(new SelectItem("Nova Scotia"));
-        provinceOptions.add(new SelectItem("Saskatchewan"));
-        provinceOptions.add(new SelectItem("Manitoba"));
-        provinceOptions.add(new SelectItem("Newfoundland and Labrador"));
-        provinceOptions.add(new SelectItem("New Brunswick"));
-        provinceOptions.add(new SelectItem("Prince Edward Island"));
+        provinceOptions.add(new SelectItem("ON"));
+        provinceOptions.add(new SelectItem("QC"));
+        provinceOptions.add(new SelectItem("BC"));
+        provinceOptions.add(new SelectItem("AB"));
+        provinceOptions.add(new SelectItem("NS"));
+        provinceOptions.add(new SelectItem("SK"));
+        provinceOptions.add(new SelectItem("MB"));
+        provinceOptions.add(new SelectItem("NL"));
+        provinceOptions.add(new SelectItem("NB"));
+        provinceOptions.add(new SelectItem("PE"));
     }
 }

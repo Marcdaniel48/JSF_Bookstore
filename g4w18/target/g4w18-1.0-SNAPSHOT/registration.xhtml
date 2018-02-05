@@ -18,53 +18,53 @@ and open the template in the editor.
             
             <h:panelGrid columns="2">
                 <h:outputLabel value="#{msgs.username}"/>
-                <h:inputText value="#{register.username}"/>
+                <h:inputText value="#{clientBacking.client.username}"/>
                 
                 <h:outputLabel value="#{msgs.password}"/>
-                <h:inputText value="#{register.password}"/>
+                <h:inputText value="#{clientBacking.client.password}"/>
                 
                 <h:outputLabel value="#{msgs.title}"/>
-                <h:selectOneMenu value="#{register.title}" required="true">
+                <h:selectOneMenu value="#{clientBacking.client.title}" required="true">
                     <f:selectItems value="#{register.titleOptions}"/>
                 </h:selectOneMenu>
             
                 <h:outputLabel value="#{msgs.firstname}"/>
-                <h:inputText value="#{register.firstName}"/>
+                <h:inputText value="#{clientBacking.client.firstName}"/>
                 
                 <h:outputLabel value="#{msgs.lastname}"/>
-                <h:inputText value="#{register.lastName}"/>
+                <h:inputText value="#{clientBacking.client.lastName}"/>
                 
                 <h:outputLabel value="#{msgs.companyname}"/>
-                <h:inputText value="#{register.companyName}"/>
+                <h:inputText value="#{clientBacking.client.companyName}"/>
                 
                 <h:outputLabel value="#{msgs.address1}"/>
-                <h:inputText value="#{register.address1}"/>
+                <h:inputText value="#{clientBacking.client.address1}"/>
                 
                 <h:outputLabel value="#{msgs.address2}"/>
-                <h:inputText value="#{register.address2}"/>
+                <h:inputText value="#{clientBacking.client.address2}"/>
                 
                 <h:outputLabel value="#{msgs.city}"/>
-                <h:inputText value="#{register.city}"/>
+                <h:inputText value="#{clientBacking.client.city}"/>
                 
                 <h:outputLabel value="#{msgs.province}"/>
-                <h:selectOneMenu value="#{register.province}" required="true">
+                <h:selectOneMenu value="#{clientBacking.client.province}" required="true">
                     <f:selectItems value="#{register.provinceOptions}"/>
                 </h:selectOneMenu>
                 
                 <h:outputLabel value="#{msgs.postalcode}"/>
-                <h:inputText value="#{register.postalCode}"/>
+                <h:inputText value="#{clientBacking.client.postalCode}"/>
                 
                 <h:outputLabel value="#{msgs.hometelephone}"/>
-                <h:inputText value="#{register.homeTelephone}"/>
+                <h:inputText value="#{clientBacking.client.homeTelephone}"/>
                 
                 <h:outputLabel value="#{msgs.cellphone}"/>
-                <h:inputText value="#{register.cellPhone}"/>
+                <h:inputText value="#{clientBacking.client.cellphone}"/>
                 
                 <h:outputLabel value="#{msgs.email}"/>
-                <h:inputText value="#{register.email}"/>
+                <h:inputText value="#{clientBacking.client.email}"/>
             </h:panelGrid>
             
-            <h:commandButton value="#{msgs.submitbutton}" action="showInformation"/>
+            <h:commandButton value="#{msgs.submitbutton}" action="#{clientBacking.createClient()}"/>
         </h:form>
     </h:body>
 </html>

@@ -3,6 +3,7 @@
   <persistence-unit name="com.g4w18_g4w18_war_1.0-SNAPSHOTPU" transaction-type="JTA">
     <jta-data-source>java:app/myBookstore</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <validation-mode>NONE</validation-mode>
     <properties/>
   </persistence-unit>
 </persistence>

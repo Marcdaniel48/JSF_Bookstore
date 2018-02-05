@@ -9,7 +9,7 @@
 
     <name>g4w18</name>
 
-    <!-- Global settings for the project. Settings can be accessed in the pom
+        <!-- Global settings for the project. Settings can be accessed in the pom
     by placing the tag name in ${...} -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

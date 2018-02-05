@@ -1,0 +1,220 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.g4w18.controls;
+
+import com.g4w18.controls.exceptions.NonexistentEntityException;
+import com.g4w18.controls.exceptions.RollbackFailureException;
+import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import com.g4w18.entities.Book;
+import com.g4w18.entities.Client;
+import com.g4w18.entities.Review;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.transaction.UserTransaction;
+
+/**
+ *
+ * @author Marc-Daniel
+ */
+public class ReviewJpaController implements Serializable {
+
+    public ReviewJpaController(UserTransaction utx, EntityManagerFactory emf) {
+        this.utx = utx;
+        this.emf = emf;
+    }
+    private UserTransaction utx = null;
+    private EntityManagerFactory emf = null;
+
+    public EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+
+    public void create(Review review) throws RollbackFailureException, Exception {
+        EntityManager em = null;
+        try {
+            utx.begin();
+            em = getEntityManager();
+            Book bookId = review.getBookId();
+            if (bookId != null) {
+                bookId = em.getReference(bookId.getClass(), bookId.getBookId());
+                review.setBookId(bookId);
+            }
+            Client clientId = review.getClientId();
+            if (clientId != null) {
+                clientId = em.getReference(clientId.getClass(), clientId.getClientId());
+                review.setClientId(clientId);
+            }
+            em.persist(review);
+            if (bookId != null) {
+                bookId.getReviewList().add(review);
+                bookId = em.merge(bookId);
+            }
+            if (clientId != null) {
+                clientId.getReviewList().add(review);
+                clientId = em.merge(clientId);
+            }
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public void edit(Review review) throws NonexistentEntityException, RollbackFailureException, Exception {
+        EntityManager em = null;
+        try {
+            utx.begin();
+            em = getEntityManager();
+            Review persistentReview = em.find(Review.class, review.getReviewId());
+            Book bookIdOld = persistentReview.getBookId();
+            Book bookIdNew = review.getBookId();
+            Client clientIdOld = persistentReview.getClientId();
+            Client clientIdNew = review.getClientId();
+            if (bookIdNew != null) {
+                bookIdNew = em.getReference(bookIdNew.getClass(), bookIdNew.getBookId());
+                review.setBookId(bookIdNew);
+            }
+            if (clientIdNew != null) {
+                clientIdNew = em.getReference(clientIdNew.getClass(), clientIdNew.getClientId());
+                review.setClientId(clientIdNew);
+            }
+            review = em.merge(review);
+            if (bookIdOld != null && !bookIdOld.equals(bookIdNew)) {
+                bookIdOld.getReviewList().remove(review);
+                bookIdOld = em.merge(bookIdOld);
+            }
+            if (bookIdNew != null && !bookIdNew.equals(bookIdOld)) {
+                bookIdNew.getReviewList().add(review);
+                bookIdNew = em.merge(bookIdNew);
+            }
+            if (clientIdOld != null && !clientIdOld.equals(clientIdNew)) {
+                clientIdOld.getReviewList().remove(review);
+                clientIdOld = em.merge(clientIdOld);
+            }
+            if (clientIdNew != null && !clientIdNew.equals(clientIdOld)) {
+                clientIdNew.getReviewList().add(review);
+                clientIdNew = em.merge(clientIdNew);
+            }
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+            }
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Integer id = review.getReviewId();
+                if (findReview(id) == null) {
+                    throw new NonexistentEntityException("The review with id " + id + " no longer exists.");
+                }
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
+        EntityManager em = null;
+        try {
+            utx.begin();
+            em = getEntityManager();
+            Review review;
+            try {
+                review = em.getReference(Review.class, id);
+                review.getReviewId();
+            } catch (EntityNotFoundException enfe) {
+                throw new NonexistentEntityException("The review with id " + id + " no longer exists.", enfe);
+            }
+            Book bookId = review.getBookId();
+            if (bookId != null) {
+                bookId.getReviewList().remove(review);
+                bookId = em.merge(bookId);
+            }
+            Client clientId = review.getClientId();
+            if (clientId != null) {
+                clientId.getReviewList().remove(review);
+                clientId = em.merge(clientId);
+            }
+            em.remove(review);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public List<Review> findReviewEntities() {
+        return findReviewEntities(true, -1, -1);
+    }
+
+    public List<Review> findReviewEntities(int maxResults, int firstResult) {
+        return findReviewEntities(false, maxResults, firstResult);
+    }
+
+    private List<Review> findReviewEntities(boolean all, int maxResults, int firstResult) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Review.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public Review findReview(Integer id) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Review.class, id);
+        } finally {
+            em.close();
+        }
+    }
+
+    public int getReviewCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Review> rt = cq.from(Review.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    
+}
