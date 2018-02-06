@@ -8,7 +8,8 @@ and open the template in the editor.
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Register an account</title>
 <!--        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
@@ -18,41 +19,41 @@ and open the template in the editor.
             
             <h:panelGrid columns="2">
                 <h:outputLabel value="#{msgs.username}"/>
-                <h:inputText value="#{clientBacking.client.username}"/>
+                <h:inputText value="#{clientBacking.client.username}" pt:required="true"/>
                 
                 <h:outputLabel value="#{msgs.password}"/>
-                <h:inputText value="#{clientBacking.client.password}"/>
+                <h:inputSecret value="#{clientBacking.client.password}" pt:required="true"/>
                 
                 <h:outputLabel value="#{msgs.title}"/>
-                <h:selectOneMenu value="#{clientBacking.client.title}" required="true">
+                <h:selectOneMenu value="#{clientBacking.client.title}" pt:required="true">
                     <f:selectItems value="#{register.titleOptions}"/>
                 </h:selectOneMenu>
             
                 <h:outputLabel value="#{msgs.firstname}"/>
-                <h:inputText value="#{clientBacking.client.firstName}"/>
+                <h:inputText value="#{clientBacking.client.firstName}" pt:required="true"/>
                 
                 <h:outputLabel value="#{msgs.lastname}"/>
-                <h:inputText value="#{clientBacking.client.lastName}"/>
+                <h:inputText value="#{clientBacking.client.lastName}" pt:required="true"/>
                 
                 <h:outputLabel value="#{msgs.companyname}"/>
                 <h:inputText value="#{clientBacking.client.companyName}"/>
                 
                 <h:outputLabel value="#{msgs.address1}"/>
-                <h:inputText value="#{clientBacking.client.address1}"/>
+                <h:inputText value="#{clientBacking.client.address1}" pt:required="true"/>
                 
                 <h:outputLabel value="#{msgs.address2}"/>
                 <h:inputText value="#{clientBacking.client.address2}"/>
                 
                 <h:outputLabel value="#{msgs.city}"/>
-                <h:inputText value="#{clientBacking.client.city}"/>
+                <h:inputText value="#{clientBacking.client.city}" pt:required="true"/>
                 
                 <h:outputLabel value="#{msgs.province}"/>
-                <h:selectOneMenu value="#{clientBacking.client.province}" required="true">
+                <h:selectOneMenu value="#{clientBacking.client.province}" pt:required="true">
                     <f:selectItems value="#{register.provinceOptions}"/>
                 </h:selectOneMenu>
                 
                 <h:outputLabel value="#{msgs.postalcode}"/>
-                <h:inputText value="#{clientBacking.client.postalCode}"/>
+                <h:inputText value="#{clientBacking.client.postalCode}" pt:required="true"/>
                 
                 <h:outputLabel value="#{msgs.hometelephone}"/>
                 <h:inputText value="#{clientBacking.client.homeTelephone}"/>
@@ -61,7 +62,7 @@ and open the template in the editor.
                 <h:inputText value="#{clientBacking.client.cellphone}"/>
                 
                 <h:outputLabel value="#{msgs.email}"/>
-                <h:inputText value="#{clientBacking.client.email}"/>
+                <h:inputText value="#{clientBacking.client.email}" pt:required="true" pt:type="email"/>
             </h:panelGrid>
             
             <h:commandButton value="#{msgs.submitbutton}" action="#{clientBacking.createClient()}"/>

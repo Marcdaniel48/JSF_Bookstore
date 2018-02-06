@@ -36,7 +36,6 @@ public class ClientBackingBean implements Serializable
     }
 
     public String createClient() throws Exception {
-        client.setCountry("Canada");
         clientJpaController.create(client);
         return "login.xhtml";
     }
