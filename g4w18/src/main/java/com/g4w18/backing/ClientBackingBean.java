@@ -5,7 +5,7 @@
  */
 package com.g4w18.backing;
 
-import com.g4w18.controls.ClientJpaController;
+import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.entities.Client;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
@@ -38,7 +38,7 @@ public class ClientBackingBean implements Serializable
     public String createClient() throws Exception {
         client.setCountry("Canada");
         clientJpaController.create(client);
-        return null;
+        return "login.xhtml";
     }
     
 }
