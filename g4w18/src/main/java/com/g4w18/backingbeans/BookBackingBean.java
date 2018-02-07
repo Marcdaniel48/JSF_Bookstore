@@ -1,6 +1,8 @@
 package com.g4w18.backingbeans;
 
+import com.g4w18.controllers.AuthorJpaController;
 import com.g4w18.controllers.BookJpaController;
+import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
 import java.util.List;
@@ -24,8 +26,12 @@ public class BookBackingBean implements Serializable {
 
     @Inject
     private BookJpaController bookJpaController;
+    
+    @Inject
+    private AuthorJpaController authorJpaController;
 
     private Book book;
+    private Author author;
     private List<Book> books;
 
     /**
@@ -45,10 +51,21 @@ public class BookBackingBean implements Serializable {
     }
 
     public List<Book> getBooks() {
-        if(books == null){
+        if (books == null) {
             books = bookJpaController.findBookEntities();
         }
         return books;
+    }
+
+    public Author getAuthor() {
+        if (author == null) {
+            Map<String, String> params
+                    = getFacesContext().getExternalContext().getRequestParameterMap();
+            int id = Integer.parseInt(params.get("id"));
+            author = authorJpaController.findAuthor(id);
+//            book = bookJpaController.test(id);
+        }
+        return author;
     }
 
     @Produces

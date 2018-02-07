@@ -55,6 +55,14 @@ div {
     max-width:80%;
 }
 
+.lowrespic{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    max-height:2.5%;
+    max-width:2.5%;
+}
+
 .bookTitle {
     font: 24px arial, sans-serif;
 }
