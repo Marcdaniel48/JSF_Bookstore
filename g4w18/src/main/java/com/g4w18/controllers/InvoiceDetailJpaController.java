@@ -17,20 +17,19 @@ import com.g4w18.entities.Book;
 import com.g4w18.entities.InvoiceDetail;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
  *
  * @author 1331680
  */
+@Named
+@RequestScoped
 public class InvoiceDetailJpaController implements Serializable {
 
     @Resource
@@ -54,18 +53,18 @@ public class InvoiceDetailJpaController implements Serializable {
             }
             em.persist(invoiceDetail);
             if (invoiceId != null) {
-                invoiceId.getInvoiceDetailList().add(invoiceDetail);
+                invoiceId.getInvoiceDetailCollection().add(invoiceDetail);
                 invoiceId = em.merge(invoiceId);
             }
             if (bookId != null) {
-                bookId.getInvoiceDetailList().add(invoiceDetail);
+                bookId.getInvoiceDetailCollection().add(invoiceDetail);
                 bookId = em.merge(bookId);
             }
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
@@ -90,26 +89,26 @@ public class InvoiceDetailJpaController implements Serializable {
             }
             invoiceDetail = em.merge(invoiceDetail);
             if (invoiceIdOld != null && !invoiceIdOld.equals(invoiceIdNew)) {
-                invoiceIdOld.getInvoiceDetailList().remove(invoiceDetail);
+                invoiceIdOld.getInvoiceDetailCollection().remove(invoiceDetail);
                 invoiceIdOld = em.merge(invoiceIdOld);
             }
             if (invoiceIdNew != null && !invoiceIdNew.equals(invoiceIdOld)) {
-                invoiceIdNew.getInvoiceDetailList().add(invoiceDetail);
+                invoiceIdNew.getInvoiceDetailCollection().add(invoiceDetail);
                 invoiceIdNew = em.merge(invoiceIdNew);
             }
             if (bookIdOld != null && !bookIdOld.equals(bookIdNew)) {
-                bookIdOld.getInvoiceDetailList().remove(invoiceDetail);
+                bookIdOld.getInvoiceDetailCollection().remove(invoiceDetail);
                 bookIdOld = em.merge(bookIdOld);
             }
             if (bookIdNew != null && !bookIdNew.equals(bookIdOld)) {
-                bookIdNew.getInvoiceDetailList().add(invoiceDetail);
+                bookIdNew.getInvoiceDetailCollection().add(invoiceDetail);
                 bookIdNew = em.merge(bookIdNew);
             }
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             String msg = ex.getLocalizedMessage();
@@ -135,20 +134,20 @@ public class InvoiceDetailJpaController implements Serializable {
             }
             MasterInvoice invoiceId = invoiceDetail.getInvoiceId();
             if (invoiceId != null) {
-                invoiceId.getInvoiceDetailList().remove(invoiceDetail);
+                invoiceId.getInvoiceDetailCollection().remove(invoiceDetail);
                 invoiceId = em.merge(invoiceId);
             }
             Book bookId = invoiceDetail.getBookId();
             if (bookId != null) {
-                bookId.getInvoiceDetailList().remove(invoiceDetail);
+                bookId.getInvoiceDetailCollection().remove(invoiceDetail);
                 bookId = em.merge(bookId);
             }
             em.remove(invoiceDetail);
             utx.commit();
-        } catch (NonexistentEntityException | IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;

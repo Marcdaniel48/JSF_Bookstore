@@ -17,20 +17,19 @@ import com.g4w18.entities.Client;
 import com.g4w18.entities.Review;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
  *
  * @author 1331680
  */
+@Named
+@RequestScoped
 public class ReviewJpaController implements Serializable {
 
     @Resource
@@ -54,18 +53,18 @@ public class ReviewJpaController implements Serializable {
             }
             em.persist(review);
             if (bookId != null) {
-                bookId.getReviewList().add(review);
+                bookId.getReviewCollection().add(review);
                 bookId = em.merge(bookId);
             }
             if (clientId != null) {
-                clientId.getReviewList().add(review);
+                clientId.getReviewCollection().add(review);
                 clientId = em.merge(clientId);
             }
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
@@ -90,26 +89,26 @@ public class ReviewJpaController implements Serializable {
             }
             review = em.merge(review);
             if (bookIdOld != null && !bookIdOld.equals(bookIdNew)) {
-                bookIdOld.getReviewList().remove(review);
+                bookIdOld.getReviewCollection().remove(review);
                 bookIdOld = em.merge(bookIdOld);
             }
             if (bookIdNew != null && !bookIdNew.equals(bookIdOld)) {
-                bookIdNew.getReviewList().add(review);
+                bookIdNew.getReviewCollection().add(review);
                 bookIdNew = em.merge(bookIdNew);
             }
             if (clientIdOld != null && !clientIdOld.equals(clientIdNew)) {
-                clientIdOld.getReviewList().remove(review);
+                clientIdOld.getReviewCollection().remove(review);
                 clientIdOld = em.merge(clientIdOld);
             }
             if (clientIdNew != null && !clientIdNew.equals(clientIdOld)) {
-                clientIdNew.getReviewList().add(review);
+                clientIdNew.getReviewCollection().add(review);
                 clientIdNew = em.merge(clientIdNew);
             }
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             String msg = ex.getLocalizedMessage();
@@ -135,20 +134,20 @@ public class ReviewJpaController implements Serializable {
             }
             Book bookId = review.getBookId();
             if (bookId != null) {
-                bookId.getReviewList().remove(review);
+                bookId.getReviewCollection().remove(review);
                 bookId = em.merge(bookId);
             }
             Client clientId = review.getClientId();
             if (clientId != null) {
-                clientId.getReviewList().remove(review);
+                clientId.getReviewCollection().remove(review);
                 clientId = em.merge(clientId);
             }
             em.remove(review);
             utx.commit();
-        } catch (NonexistentEntityException | IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
@@ -176,7 +175,6 @@ public class ReviewJpaController implements Serializable {
 
     public Review findReview(Integer id) {
         return em.find(Review.class, id);
-
     }
 
     public int getReviewCount() {

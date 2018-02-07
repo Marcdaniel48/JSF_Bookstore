@@ -16,23 +16,23 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import com.g4w18.entities.Review;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import com.g4w18.entities.MasterInvoice;
+import java.util.List;
 import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
  *
  * @author 1331680
  */
+@Named
+@RequestScoped
 public class ClientJpaController implements Serializable {
 
     @Resource
@@ -42,50 +42,50 @@ public class ClientJpaController implements Serializable {
     private EntityManager em;
 
     public void create(Client client) throws RollbackFailureException, Exception {
-        if (client.getReviewList() == null) {
-            client.setReviewList(new ArrayList<Review>());
+        if (client.getReviewCollection() == null) {
+            client.setReviewCollection(new ArrayList<Review>());
         }
-        if (client.getMasterInvoiceList() == null) {
-            client.setMasterInvoiceList(new ArrayList<MasterInvoice>());
+        if (client.getMasterInvoiceCollection() == null) {
+            client.setMasterInvoiceCollection(new ArrayList<MasterInvoice>());
         }
         try {
             utx.begin();
-            List<Review> attachedReviewList = new ArrayList<Review>();
-            for (Review reviewListReviewToAttach : client.getReviewList()) {
-                reviewListReviewToAttach = em.getReference(reviewListReviewToAttach.getClass(), reviewListReviewToAttach.getReviewId());
-                attachedReviewList.add(reviewListReviewToAttach);
+            Collection<Review> attachedReviewCollection = new ArrayList<Review>();
+            for (Review reviewCollectionReviewToAttach : client.getReviewCollection()) {
+                reviewCollectionReviewToAttach = em.getReference(reviewCollectionReviewToAttach.getClass(), reviewCollectionReviewToAttach.getReviewId());
+                attachedReviewCollection.add(reviewCollectionReviewToAttach);
             }
-            client.setReviewList(attachedReviewList);
-            List<MasterInvoice> attachedMasterInvoiceList = new ArrayList<MasterInvoice>();
-            for (MasterInvoice masterInvoiceListMasterInvoiceToAttach : client.getMasterInvoiceList()) {
-                masterInvoiceListMasterInvoiceToAttach = em.getReference(masterInvoiceListMasterInvoiceToAttach.getClass(), masterInvoiceListMasterInvoiceToAttach.getInvoiceId());
-                attachedMasterInvoiceList.add(masterInvoiceListMasterInvoiceToAttach);
+            client.setReviewCollection(attachedReviewCollection);
+            Collection<MasterInvoice> attachedMasterInvoiceCollection = new ArrayList<MasterInvoice>();
+            for (MasterInvoice masterInvoiceCollectionMasterInvoiceToAttach : client.getMasterInvoiceCollection()) {
+                masterInvoiceCollectionMasterInvoiceToAttach = em.getReference(masterInvoiceCollectionMasterInvoiceToAttach.getClass(), masterInvoiceCollectionMasterInvoiceToAttach.getInvoiceId());
+                attachedMasterInvoiceCollection.add(masterInvoiceCollectionMasterInvoiceToAttach);
             }
-            client.setMasterInvoiceList(attachedMasterInvoiceList);
+            client.setMasterInvoiceCollection(attachedMasterInvoiceCollection);
             em.persist(client);
-            for (Review reviewListReview : client.getReviewList()) {
-                Client oldClientIdOfReviewListReview = reviewListReview.getClientId();
-                reviewListReview.setClientId(client);
-                reviewListReview = em.merge(reviewListReview);
-                if (oldClientIdOfReviewListReview != null) {
-                    oldClientIdOfReviewListReview.getReviewList().remove(reviewListReview);
-                    oldClientIdOfReviewListReview = em.merge(oldClientIdOfReviewListReview);
+            for (Review reviewCollectionReview : client.getReviewCollection()) {
+                Client oldClientIdOfReviewCollectionReview = reviewCollectionReview.getClientId();
+                reviewCollectionReview.setClientId(client);
+                reviewCollectionReview = em.merge(reviewCollectionReview);
+                if (oldClientIdOfReviewCollectionReview != null) {
+                    oldClientIdOfReviewCollectionReview.getReviewCollection().remove(reviewCollectionReview);
+                    oldClientIdOfReviewCollectionReview = em.merge(oldClientIdOfReviewCollectionReview);
                 }
             }
-            for (MasterInvoice masterInvoiceListMasterInvoice : client.getMasterInvoiceList()) {
-                Client oldClientIdOfMasterInvoiceListMasterInvoice = masterInvoiceListMasterInvoice.getClientId();
-                masterInvoiceListMasterInvoice.setClientId(client);
-                masterInvoiceListMasterInvoice = em.merge(masterInvoiceListMasterInvoice);
-                if (oldClientIdOfMasterInvoiceListMasterInvoice != null) {
-                    oldClientIdOfMasterInvoiceListMasterInvoice.getMasterInvoiceList().remove(masterInvoiceListMasterInvoice);
-                    oldClientIdOfMasterInvoiceListMasterInvoice = em.merge(oldClientIdOfMasterInvoiceListMasterInvoice);
+            for (MasterInvoice masterInvoiceCollectionMasterInvoice : client.getMasterInvoiceCollection()) {
+                Client oldClientIdOfMasterInvoiceCollectionMasterInvoice = masterInvoiceCollectionMasterInvoice.getClientId();
+                masterInvoiceCollectionMasterInvoice.setClientId(client);
+                masterInvoiceCollectionMasterInvoice = em.merge(masterInvoiceCollectionMasterInvoice);
+                if (oldClientIdOfMasterInvoiceCollectionMasterInvoice != null) {
+                    oldClientIdOfMasterInvoiceCollectionMasterInvoice.getMasterInvoiceCollection().remove(masterInvoiceCollectionMasterInvoice);
+                    oldClientIdOfMasterInvoiceCollectionMasterInvoice = em.merge(oldClientIdOfMasterInvoiceCollectionMasterInvoice);
                 }
             }
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
@@ -96,72 +96,72 @@ public class ClientJpaController implements Serializable {
         try {
             utx.begin();
             Client persistentClient = em.find(Client.class, client.getClientId());
-            List<Review> reviewListOld = persistentClient.getReviewList();
-            List<Review> reviewListNew = client.getReviewList();
-            List<MasterInvoice> masterInvoiceListOld = persistentClient.getMasterInvoiceList();
-            List<MasterInvoice> masterInvoiceListNew = client.getMasterInvoiceList();
+            Collection<Review> reviewCollectionOld = persistentClient.getReviewCollection();
+            Collection<Review> reviewCollectionNew = client.getReviewCollection();
+            Collection<MasterInvoice> masterInvoiceCollectionOld = persistentClient.getMasterInvoiceCollection();
+            Collection<MasterInvoice> masterInvoiceCollectionNew = client.getMasterInvoiceCollection();
             List<String> illegalOrphanMessages = null;
-            for (Review reviewListOldReview : reviewListOld) {
-                if (!reviewListNew.contains(reviewListOldReview)) {
+            for (Review reviewCollectionOldReview : reviewCollectionOld) {
+                if (!reviewCollectionNew.contains(reviewCollectionOldReview)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Review " + reviewListOldReview + " since its clientId field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Review " + reviewCollectionOldReview + " since its clientId field is not nullable.");
                 }
             }
-            for (MasterInvoice masterInvoiceListOldMasterInvoice : masterInvoiceListOld) {
-                if (!masterInvoiceListNew.contains(masterInvoiceListOldMasterInvoice)) {
+            for (MasterInvoice masterInvoiceCollectionOldMasterInvoice : masterInvoiceCollectionOld) {
+                if (!masterInvoiceCollectionNew.contains(masterInvoiceCollectionOldMasterInvoice)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain MasterInvoice " + masterInvoiceListOldMasterInvoice + " since its clientId field is not nullable.");
+                    illegalOrphanMessages.add("You must retain MasterInvoice " + masterInvoiceCollectionOldMasterInvoice + " since its clientId field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            List<Review> attachedReviewListNew = new ArrayList<Review>();
-            for (Review reviewListNewReviewToAttach : reviewListNew) {
-                reviewListNewReviewToAttach = em.getReference(reviewListNewReviewToAttach.getClass(), reviewListNewReviewToAttach.getReviewId());
-                attachedReviewListNew.add(reviewListNewReviewToAttach);
+            Collection<Review> attachedReviewCollectionNew = new ArrayList<Review>();
+            for (Review reviewCollectionNewReviewToAttach : reviewCollectionNew) {
+                reviewCollectionNewReviewToAttach = em.getReference(reviewCollectionNewReviewToAttach.getClass(), reviewCollectionNewReviewToAttach.getReviewId());
+                attachedReviewCollectionNew.add(reviewCollectionNewReviewToAttach);
             }
-            reviewListNew = attachedReviewListNew;
-            client.setReviewList(reviewListNew);
-            List<MasterInvoice> attachedMasterInvoiceListNew = new ArrayList<MasterInvoice>();
-            for (MasterInvoice masterInvoiceListNewMasterInvoiceToAttach : masterInvoiceListNew) {
-                masterInvoiceListNewMasterInvoiceToAttach = em.getReference(masterInvoiceListNewMasterInvoiceToAttach.getClass(), masterInvoiceListNewMasterInvoiceToAttach.getInvoiceId());
-                attachedMasterInvoiceListNew.add(masterInvoiceListNewMasterInvoiceToAttach);
+            reviewCollectionNew = attachedReviewCollectionNew;
+            client.setReviewCollection(reviewCollectionNew);
+            Collection<MasterInvoice> attachedMasterInvoiceCollectionNew = new ArrayList<MasterInvoice>();
+            for (MasterInvoice masterInvoiceCollectionNewMasterInvoiceToAttach : masterInvoiceCollectionNew) {
+                masterInvoiceCollectionNewMasterInvoiceToAttach = em.getReference(masterInvoiceCollectionNewMasterInvoiceToAttach.getClass(), masterInvoiceCollectionNewMasterInvoiceToAttach.getInvoiceId());
+                attachedMasterInvoiceCollectionNew.add(masterInvoiceCollectionNewMasterInvoiceToAttach);
             }
-            masterInvoiceListNew = attachedMasterInvoiceListNew;
-            client.setMasterInvoiceList(masterInvoiceListNew);
+            masterInvoiceCollectionNew = attachedMasterInvoiceCollectionNew;
+            client.setMasterInvoiceCollection(masterInvoiceCollectionNew);
             client = em.merge(client);
-            for (Review reviewListNewReview : reviewListNew) {
-                if (!reviewListOld.contains(reviewListNewReview)) {
-                    Client oldClientIdOfReviewListNewReview = reviewListNewReview.getClientId();
-                    reviewListNewReview.setClientId(client);
-                    reviewListNewReview = em.merge(reviewListNewReview);
-                    if (oldClientIdOfReviewListNewReview != null && !oldClientIdOfReviewListNewReview.equals(client)) {
-                        oldClientIdOfReviewListNewReview.getReviewList().remove(reviewListNewReview);
-                        oldClientIdOfReviewListNewReview = em.merge(oldClientIdOfReviewListNewReview);
+            for (Review reviewCollectionNewReview : reviewCollectionNew) {
+                if (!reviewCollectionOld.contains(reviewCollectionNewReview)) {
+                    Client oldClientIdOfReviewCollectionNewReview = reviewCollectionNewReview.getClientId();
+                    reviewCollectionNewReview.setClientId(client);
+                    reviewCollectionNewReview = em.merge(reviewCollectionNewReview);
+                    if (oldClientIdOfReviewCollectionNewReview != null && !oldClientIdOfReviewCollectionNewReview.equals(client)) {
+                        oldClientIdOfReviewCollectionNewReview.getReviewCollection().remove(reviewCollectionNewReview);
+                        oldClientIdOfReviewCollectionNewReview = em.merge(oldClientIdOfReviewCollectionNewReview);
                     }
                 }
             }
-            for (MasterInvoice masterInvoiceListNewMasterInvoice : masterInvoiceListNew) {
-                if (!masterInvoiceListOld.contains(masterInvoiceListNewMasterInvoice)) {
-                    Client oldClientIdOfMasterInvoiceListNewMasterInvoice = masterInvoiceListNewMasterInvoice.getClientId();
-                    masterInvoiceListNewMasterInvoice.setClientId(client);
-                    masterInvoiceListNewMasterInvoice = em.merge(masterInvoiceListNewMasterInvoice);
-                    if (oldClientIdOfMasterInvoiceListNewMasterInvoice != null && !oldClientIdOfMasterInvoiceListNewMasterInvoice.equals(client)) {
-                        oldClientIdOfMasterInvoiceListNewMasterInvoice.getMasterInvoiceList().remove(masterInvoiceListNewMasterInvoice);
-                        oldClientIdOfMasterInvoiceListNewMasterInvoice = em.merge(oldClientIdOfMasterInvoiceListNewMasterInvoice);
+            for (MasterInvoice masterInvoiceCollectionNewMasterInvoice : masterInvoiceCollectionNew) {
+                if (!masterInvoiceCollectionOld.contains(masterInvoiceCollectionNewMasterInvoice)) {
+                    Client oldClientIdOfMasterInvoiceCollectionNewMasterInvoice = masterInvoiceCollectionNewMasterInvoice.getClientId();
+                    masterInvoiceCollectionNewMasterInvoice.setClientId(client);
+                    masterInvoiceCollectionNewMasterInvoice = em.merge(masterInvoiceCollectionNewMasterInvoice);
+                    if (oldClientIdOfMasterInvoiceCollectionNewMasterInvoice != null && !oldClientIdOfMasterInvoiceCollectionNewMasterInvoice.equals(client)) {
+                        oldClientIdOfMasterInvoiceCollectionNewMasterInvoice.getMasterInvoiceCollection().remove(masterInvoiceCollectionNewMasterInvoice);
+                        oldClientIdOfMasterInvoiceCollectionNewMasterInvoice = em.merge(oldClientIdOfMasterInvoiceCollectionNewMasterInvoice);
                     }
                 }
             }
             utx.commit();
-        } catch (IllegalOrphanException | IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             String msg = ex.getLocalizedMessage();
@@ -186,29 +186,29 @@ public class ClientJpaController implements Serializable {
                 throw new NonexistentEntityException("The client with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<Review> reviewListOrphanCheck = client.getReviewList();
-            for (Review reviewListOrphanCheckReview : reviewListOrphanCheck) {
+            Collection<Review> reviewCollectionOrphanCheck = client.getReviewCollection();
+            for (Review reviewCollectionOrphanCheckReview : reviewCollectionOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Client (" + client + ") cannot be destroyed since the Review " + reviewListOrphanCheckReview + " in its reviewList field has a non-nullable clientId field.");
+                illegalOrphanMessages.add("This Client (" + client + ") cannot be destroyed since the Review " + reviewCollectionOrphanCheckReview + " in its reviewCollection field has a non-nullable clientId field.");
             }
-            List<MasterInvoice> masterInvoiceListOrphanCheck = client.getMasterInvoiceList();
-            for (MasterInvoice masterInvoiceListOrphanCheckMasterInvoice : masterInvoiceListOrphanCheck) {
+            Collection<MasterInvoice> masterInvoiceCollectionOrphanCheck = client.getMasterInvoiceCollection();
+            for (MasterInvoice masterInvoiceCollectionOrphanCheckMasterInvoice : masterInvoiceCollectionOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Client (" + client + ") cannot be destroyed since the MasterInvoice " + masterInvoiceListOrphanCheckMasterInvoice + " in its masterInvoiceList field has a non-nullable clientId field.");
+                illegalOrphanMessages.add("This Client (" + client + ") cannot be destroyed since the MasterInvoice " + masterInvoiceCollectionOrphanCheckMasterInvoice + " in its masterInvoiceCollection field has a non-nullable clientId field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(client);
             utx.commit();
-        } catch (IllegalOrphanException | NonexistentEntityException | IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;

@@ -11,6 +11,8 @@ import com.g4w18.entities.Tax;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -18,17 +20,14 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
  *
  * @author 1331680
  */
+@Named
+@RequestScoped
 public class TaxJpaController implements Serializable {
 
     @Resource
@@ -42,10 +41,10 @@ public class TaxJpaController implements Serializable {
             utx.begin();
             em.persist(tax);
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
@@ -57,10 +56,10 @@ public class TaxJpaController implements Serializable {
             utx.begin();
             tax = em.merge(tax);
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             String msg = ex.getLocalizedMessage();
@@ -86,7 +85,7 @@ public class TaxJpaController implements Serializable {
             }
             em.remove(tax);
             utx.commit();
-        } catch (NonexistentEntityException | IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
             } catch (Exception re) {

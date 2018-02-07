@@ -7,8 +7,8 @@ package com.g4w18.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -61,7 +61,7 @@ public class MasterInvoice implements Serializable {
     @Column(name = "GROSS_VALUE")
     private BigDecimal grossValue;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceId")
-    private List<InvoiceDetail> invoiceDetailList;
+    private Collection<InvoiceDetail> invoiceDetailCollection;
     @JoinColumn(name = "CLIENT_ID", referencedColumnName = "CLIENT_ID")
     @ManyToOne(optional = false)
     private Client clientId;
@@ -112,12 +112,12 @@ public class MasterInvoice implements Serializable {
         this.grossValue = grossValue;
     }
 
-    public List<InvoiceDetail> getInvoiceDetailList() {
-        return invoiceDetailList;
+    public Collection<InvoiceDetail> getInvoiceDetailCollection() {
+        return invoiceDetailCollection;
     }
 
-    public void setInvoiceDetailList(List<InvoiceDetail> invoiceDetailList) {
-        this.invoiceDetailList = invoiceDetailList;
+    public void setInvoiceDetailCollection(Collection<InvoiceDetail> invoiceDetailCollection) {
+        this.invoiceDetailCollection = invoiceDetailCollection;
     }
 
     public Client getClientId() {

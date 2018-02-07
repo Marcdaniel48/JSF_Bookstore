@@ -6,7 +6,7 @@
 package com.g4w18.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -135,9 +135,9 @@ public class Client implements Serializable {
     @Column(name = "IS_MANAGER")
     private boolean isManager;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientId")
-    private List<Review> reviewList;
+    private Collection<Review> reviewCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientId")
-    private List<MasterInvoice> masterInvoiceList;
+    private Collection<MasterInvoice> masterInvoiceCollection;
 
     public Client() {
     }
@@ -302,20 +302,20 @@ public class Client implements Serializable {
         this.isManager = isManager;
     }
 
-    public List<Review> getReviewList() {
-        return reviewList;
+    public Collection<Review> getReviewCollection() {
+        return reviewCollection;
     }
 
-    public void setReviewList(List<Review> reviewList) {
-        this.reviewList = reviewList;
+    public void setReviewCollection(Collection<Review> reviewCollection) {
+        this.reviewCollection = reviewCollection;
     }
 
-    public List<MasterInvoice> getMasterInvoiceList() {
-        return masterInvoiceList;
+    public Collection<MasterInvoice> getMasterInvoiceCollection() {
+        return masterInvoiceCollection;
     }
 
-    public void setMasterInvoiceList(List<MasterInvoice> masterInvoiceList) {
-        this.masterInvoiceList = masterInvoiceList;
+    public void setMasterInvoiceCollection(Collection<MasterInvoice> masterInvoiceCollection) {
+        this.masterInvoiceCollection = masterInvoiceCollection;
     }
 
     @Override

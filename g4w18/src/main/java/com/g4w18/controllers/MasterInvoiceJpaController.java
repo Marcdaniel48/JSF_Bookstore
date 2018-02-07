@@ -17,22 +17,22 @@ import com.g4w18.entities.Client;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
  *
  * @author 1331680
  */
+@Named
+@RequestScoped
 public class MasterInvoiceJpaController implements Serializable {
 
     @Resource
@@ -42,8 +42,8 @@ public class MasterInvoiceJpaController implements Serializable {
     private EntityManager em;
 
     public void create(MasterInvoice masterInvoice) throws RollbackFailureException, Exception {
-        if (masterInvoice.getInvoiceDetailList() == null) {
-            masterInvoice.setInvoiceDetailList(new ArrayList<>());
+        if (masterInvoice.getInvoiceDetailCollection() == null) {
+            masterInvoice.setInvoiceDetailCollection(new ArrayList<InvoiceDetail>());
         }
         try {
             utx.begin();
@@ -52,31 +52,31 @@ public class MasterInvoiceJpaController implements Serializable {
                 clientId = em.getReference(clientId.getClass(), clientId.getClientId());
                 masterInvoice.setClientId(clientId);
             }
-            List<InvoiceDetail> attachedInvoiceDetailList = new ArrayList<>();
-            for (InvoiceDetail invoiceDetailListInvoiceDetailToAttach : masterInvoice.getInvoiceDetailList()) {
-                invoiceDetailListInvoiceDetailToAttach = em.getReference(invoiceDetailListInvoiceDetailToAttach.getClass(), invoiceDetailListInvoiceDetailToAttach.getDetailId());
-                attachedInvoiceDetailList.add(invoiceDetailListInvoiceDetailToAttach);
+            Collection<InvoiceDetail> attachedInvoiceDetailCollection = new ArrayList<InvoiceDetail>();
+            for (InvoiceDetail invoiceDetailCollectionInvoiceDetailToAttach : masterInvoice.getInvoiceDetailCollection()) {
+                invoiceDetailCollectionInvoiceDetailToAttach = em.getReference(invoiceDetailCollectionInvoiceDetailToAttach.getClass(), invoiceDetailCollectionInvoiceDetailToAttach.getDetailId());
+                attachedInvoiceDetailCollection.add(invoiceDetailCollectionInvoiceDetailToAttach);
             }
-            masterInvoice.setInvoiceDetailList(attachedInvoiceDetailList);
+            masterInvoice.setInvoiceDetailCollection(attachedInvoiceDetailCollection);
             em.persist(masterInvoice);
             if (clientId != null) {
-                clientId.getMasterInvoiceList().add(masterInvoice);
+                clientId.getMasterInvoiceCollection().add(masterInvoice);
                 clientId = em.merge(clientId);
             }
-            for (InvoiceDetail invoiceDetailListInvoiceDetail : masterInvoice.getInvoiceDetailList()) {
-                MasterInvoice oldInvoiceIdOfInvoiceDetailListInvoiceDetail = invoiceDetailListInvoiceDetail.getInvoiceId();
-                invoiceDetailListInvoiceDetail.setInvoiceId(masterInvoice);
-                invoiceDetailListInvoiceDetail = em.merge(invoiceDetailListInvoiceDetail);
-                if (oldInvoiceIdOfInvoiceDetailListInvoiceDetail != null) {
-                    oldInvoiceIdOfInvoiceDetailListInvoiceDetail.getInvoiceDetailList().remove(invoiceDetailListInvoiceDetail);
-                    oldInvoiceIdOfInvoiceDetailListInvoiceDetail = em.merge(oldInvoiceIdOfInvoiceDetailListInvoiceDetail);
+            for (InvoiceDetail invoiceDetailCollectionInvoiceDetail : masterInvoice.getInvoiceDetailCollection()) {
+                MasterInvoice oldInvoiceIdOfInvoiceDetailCollectionInvoiceDetail = invoiceDetailCollectionInvoiceDetail.getInvoiceId();
+                invoiceDetailCollectionInvoiceDetail.setInvoiceId(masterInvoice);
+                invoiceDetailCollectionInvoiceDetail = em.merge(invoiceDetailCollectionInvoiceDetail);
+                if (oldInvoiceIdOfInvoiceDetailCollectionInvoiceDetail != null) {
+                    oldInvoiceIdOfInvoiceDetailCollectionInvoiceDetail.getInvoiceDetailCollection().remove(invoiceDetailCollectionInvoiceDetail);
+                    oldInvoiceIdOfInvoiceDetailCollectionInvoiceDetail = em.merge(oldInvoiceIdOfInvoiceDetailCollectionInvoiceDetail);
                 }
             }
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
@@ -89,15 +89,15 @@ public class MasterInvoiceJpaController implements Serializable {
             MasterInvoice persistentMasterInvoice = em.find(MasterInvoice.class, masterInvoice.getInvoiceId());
             Client clientIdOld = persistentMasterInvoice.getClientId();
             Client clientIdNew = masterInvoice.getClientId();
-            List<InvoiceDetail> invoiceDetailListOld = persistentMasterInvoice.getInvoiceDetailList();
-            List<InvoiceDetail> invoiceDetailListNew = masterInvoice.getInvoiceDetailList();
+            Collection<InvoiceDetail> invoiceDetailCollectionOld = persistentMasterInvoice.getInvoiceDetailCollection();
+            Collection<InvoiceDetail> invoiceDetailCollectionNew = masterInvoice.getInvoiceDetailCollection();
             List<String> illegalOrphanMessages = null;
-            for (InvoiceDetail invoiceDetailListOldInvoiceDetail : invoiceDetailListOld) {
-                if (!invoiceDetailListNew.contains(invoiceDetailListOldInvoiceDetail)) {
+            for (InvoiceDetail invoiceDetailCollectionOldInvoiceDetail : invoiceDetailCollectionOld) {
+                if (!invoiceDetailCollectionNew.contains(invoiceDetailCollectionOldInvoiceDetail)) {
                     if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<>();
+                        illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain InvoiceDetail " + invoiceDetailListOldInvoiceDetail + " since its invoiceId field is not nullable.");
+                    illegalOrphanMessages.add("You must retain InvoiceDetail " + invoiceDetailCollectionOldInvoiceDetail + " since its invoiceId field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -107,38 +107,38 @@ public class MasterInvoiceJpaController implements Serializable {
                 clientIdNew = em.getReference(clientIdNew.getClass(), clientIdNew.getClientId());
                 masterInvoice.setClientId(clientIdNew);
             }
-            List<InvoiceDetail> attachedInvoiceDetailListNew = new ArrayList<>();
-            for (InvoiceDetail invoiceDetailListNewInvoiceDetailToAttach : invoiceDetailListNew) {
-                invoiceDetailListNewInvoiceDetailToAttach = em.getReference(invoiceDetailListNewInvoiceDetailToAttach.getClass(), invoiceDetailListNewInvoiceDetailToAttach.getDetailId());
-                attachedInvoiceDetailListNew.add(invoiceDetailListNewInvoiceDetailToAttach);
+            Collection<InvoiceDetail> attachedInvoiceDetailCollectionNew = new ArrayList<InvoiceDetail>();
+            for (InvoiceDetail invoiceDetailCollectionNewInvoiceDetailToAttach : invoiceDetailCollectionNew) {
+                invoiceDetailCollectionNewInvoiceDetailToAttach = em.getReference(invoiceDetailCollectionNewInvoiceDetailToAttach.getClass(), invoiceDetailCollectionNewInvoiceDetailToAttach.getDetailId());
+                attachedInvoiceDetailCollectionNew.add(invoiceDetailCollectionNewInvoiceDetailToAttach);
             }
-            invoiceDetailListNew = attachedInvoiceDetailListNew;
-            masterInvoice.setInvoiceDetailList(invoiceDetailListNew);
+            invoiceDetailCollectionNew = attachedInvoiceDetailCollectionNew;
+            masterInvoice.setInvoiceDetailCollection(invoiceDetailCollectionNew);
             masterInvoice = em.merge(masterInvoice);
             if (clientIdOld != null && !clientIdOld.equals(clientIdNew)) {
-                clientIdOld.getMasterInvoiceList().remove(masterInvoice);
+                clientIdOld.getMasterInvoiceCollection().remove(masterInvoice);
                 clientIdOld = em.merge(clientIdOld);
             }
             if (clientIdNew != null && !clientIdNew.equals(clientIdOld)) {
-                clientIdNew.getMasterInvoiceList().add(masterInvoice);
+                clientIdNew.getMasterInvoiceCollection().add(masterInvoice);
                 clientIdNew = em.merge(clientIdNew);
             }
-            for (InvoiceDetail invoiceDetailListNewInvoiceDetail : invoiceDetailListNew) {
-                if (!invoiceDetailListOld.contains(invoiceDetailListNewInvoiceDetail)) {
-                    MasterInvoice oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail = invoiceDetailListNewInvoiceDetail.getInvoiceId();
-                    invoiceDetailListNewInvoiceDetail.setInvoiceId(masterInvoice);
-                    invoiceDetailListNewInvoiceDetail = em.merge(invoiceDetailListNewInvoiceDetail);
-                    if (oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail != null && !oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail.equals(masterInvoice)) {
-                        oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail.getInvoiceDetailList().remove(invoiceDetailListNewInvoiceDetail);
-                        oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail = em.merge(oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail);
+            for (InvoiceDetail invoiceDetailCollectionNewInvoiceDetail : invoiceDetailCollectionNew) {
+                if (!invoiceDetailCollectionOld.contains(invoiceDetailCollectionNewInvoiceDetail)) {
+                    MasterInvoice oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail = invoiceDetailCollectionNewInvoiceDetail.getInvoiceId();
+                    invoiceDetailCollectionNewInvoiceDetail.setInvoiceId(masterInvoice);
+                    invoiceDetailCollectionNewInvoiceDetail = em.merge(invoiceDetailCollectionNewInvoiceDetail);
+                    if (oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail != null && !oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail.equals(masterInvoice)) {
+                        oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail.getInvoiceDetailCollection().remove(invoiceDetailCollectionNewInvoiceDetail);
+                        oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail = em.merge(oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail);
                     }
                 }
             }
             utx.commit();
-        } catch (IllegalOrphanException | IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             String msg = ex.getLocalizedMessage();
@@ -163,27 +163,27 @@ public class MasterInvoiceJpaController implements Serializable {
                 throw new NonexistentEntityException("The masterInvoice with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<InvoiceDetail> invoiceDetailListOrphanCheck = masterInvoice.getInvoiceDetailList();
-            for (InvoiceDetail invoiceDetailListOrphanCheckInvoiceDetail : invoiceDetailListOrphanCheck) {
+            Collection<InvoiceDetail> invoiceDetailCollectionOrphanCheck = masterInvoice.getInvoiceDetailCollection();
+            for (InvoiceDetail invoiceDetailCollectionOrphanCheckInvoiceDetail : invoiceDetailCollectionOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This MasterInvoice (" + masterInvoice + ") cannot be destroyed since the InvoiceDetail " + invoiceDetailListOrphanCheckInvoiceDetail + " in its invoiceDetailList field has a non-nullable invoiceId field.");
+                illegalOrphanMessages.add("This MasterInvoice (" + masterInvoice + ") cannot be destroyed since the InvoiceDetail " + invoiceDetailCollectionOrphanCheckInvoiceDetail + " in its invoiceDetailCollection field has a non-nullable invoiceId field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Client clientId = masterInvoice.getClientId();
             if (clientId != null) {
-                clientId.getMasterInvoiceList().remove(masterInvoice);
+                clientId.getMasterInvoiceCollection().remove(masterInvoice);
                 clientId = em.merge(clientId);
             }
             em.remove(masterInvoice);
             utx.commit();
-        } catch (IllegalOrphanException | NonexistentEntityException | IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;

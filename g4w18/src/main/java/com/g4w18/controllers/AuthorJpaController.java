@@ -5,7 +5,6 @@
  */
 package com.g4w18.controllers;
 
-import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Author;
@@ -14,24 +13,24 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import com.g4w18.entities.BookAuthor;
+import com.g4w18.entities.Book;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
  *
  * @author 1331680
  */
+@Named
+@RequestScoped
 public class AuthorJpaController implements Serializable {
 
     @Resource
@@ -41,79 +40,64 @@ public class AuthorJpaController implements Serializable {
     private EntityManager em;
 
     public void create(Author author) throws RollbackFailureException, Exception {
-        if (author.getBookAuthorList() == null) {
-            author.setBookAuthorList(new ArrayList<>());
+        if (author.getBookCollection() == null) {
+            author.setBookCollection(new ArrayList<Book>());
         }
         try {
             utx.begin();
-            List<BookAuthor> attachedBookAuthorList = new ArrayList<>();
-            author.getBookAuthorList().stream().map((bookAuthorListBookAuthorToAttach) -> em.getReference(bookAuthorListBookAuthorToAttach.getClass(), bookAuthorListBookAuthorToAttach.getBookAuthorId())).forEachOrdered((bookAuthorListBookAuthorToAttach) -> {
-                attachedBookAuthorList.add(bookAuthorListBookAuthorToAttach);
-            });
-            author.setBookAuthorList(attachedBookAuthorList);
+            Collection<Book> attachedBookCollection = new ArrayList<Book>();
+            for (Book bookCollectionBookToAttach : author.getBookCollection()) {
+                bookCollectionBookToAttach = em.getReference(bookCollectionBookToAttach.getClass(), bookCollectionBookToAttach.getBookId());
+                attachedBookCollection.add(bookCollectionBookToAttach);
+            }
+            author.setBookCollection(attachedBookCollection);
             em.persist(author);
-            author.getBookAuthorList().forEach((bookAuthorListBookAuthor) -> {
-                Author oldAuthorIdOfBookAuthorListBookAuthor = bookAuthorListBookAuthor.getAuthorId();
-                bookAuthorListBookAuthor.setAuthorId(author);
-                bookAuthorListBookAuthor = em.merge(bookAuthorListBookAuthor);
-                if (oldAuthorIdOfBookAuthorListBookAuthor != null) {
-                    oldAuthorIdOfBookAuthorListBookAuthor.getBookAuthorList().remove(bookAuthorListBookAuthor);
-                    oldAuthorIdOfBookAuthorListBookAuthor = em.merge(oldAuthorIdOfBookAuthorListBookAuthor);
-                }
-            });
+            for (Book bookCollectionBook : author.getBookCollection()) {
+                bookCollectionBook.getAuthorCollection().add(author);
+                bookCollectionBook = em.merge(bookCollectionBook);
+            }
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
         }
     }
 
-    public void edit(Author author) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Author author) throws NonexistentEntityException, RollbackFailureException, Exception {
         try {
             utx.begin();
             Author persistentAuthor = em.find(Author.class, author.getAuthorId());
-            List<BookAuthor> bookAuthorListOld = persistentAuthor.getBookAuthorList();
-            List<BookAuthor> bookAuthorListNew = author.getBookAuthorList();
-            List<String> illegalOrphanMessages = null;
-            for (BookAuthor bookAuthorListOldBookAuthor : bookAuthorListOld) {
-                if (!bookAuthorListNew.contains(bookAuthorListOldBookAuthor)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<>();
-                    }
-                    illegalOrphanMessages.add("You must retain BookAuthor " + bookAuthorListOldBookAuthor + " since its authorId field is not nullable.");
+            Collection<Book> bookCollectionOld = persistentAuthor.getBookCollection();
+            Collection<Book> bookCollectionNew = author.getBookCollection();
+            Collection<Book> attachedBookCollectionNew = new ArrayList<Book>();
+            for (Book bookCollectionNewBookToAttach : bookCollectionNew) {
+                bookCollectionNewBookToAttach = em.getReference(bookCollectionNewBookToAttach.getClass(), bookCollectionNewBookToAttach.getBookId());
+                attachedBookCollectionNew.add(bookCollectionNewBookToAttach);
+            }
+            bookCollectionNew = attachedBookCollectionNew;
+            author.setBookCollection(bookCollectionNew);
+            author = em.merge(author);
+            for (Book bookCollectionOldBook : bookCollectionOld) {
+                if (!bookCollectionNew.contains(bookCollectionOldBook)) {
+                    bookCollectionOldBook.getAuthorCollection().remove(author);
+                    bookCollectionOldBook = em.merge(bookCollectionOldBook);
                 }
             }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<BookAuthor> attachedBookAuthorListNew = new ArrayList<>();
-            for (BookAuthor bookAuthorListNewBookAuthorToAttach : bookAuthorListNew) {
-                bookAuthorListNewBookAuthorToAttach = em.getReference(bookAuthorListNewBookAuthorToAttach.getClass(), bookAuthorListNewBookAuthorToAttach.getBookAuthorId());
-                attachedBookAuthorListNew.add(bookAuthorListNewBookAuthorToAttach);
-            }
-            bookAuthorListNew = attachedBookAuthorListNew;
-            author.setBookAuthorList(bookAuthorListNew);
-            author = em.merge(author);
-            for (BookAuthor bookAuthorListNewBookAuthor : bookAuthorListNew) {
-                if (!bookAuthorListOld.contains(bookAuthorListNewBookAuthor)) {
-                    Author oldAuthorIdOfBookAuthorListNewBookAuthor = bookAuthorListNewBookAuthor.getAuthorId();
-                    bookAuthorListNewBookAuthor.setAuthorId(author);
-                    bookAuthorListNewBookAuthor = em.merge(bookAuthorListNewBookAuthor);
-                    if (oldAuthorIdOfBookAuthorListNewBookAuthor != null && !oldAuthorIdOfBookAuthorListNewBookAuthor.equals(author)) {
-                        oldAuthorIdOfBookAuthorListNewBookAuthor.getBookAuthorList().remove(bookAuthorListNewBookAuthor);
-                        oldAuthorIdOfBookAuthorListNewBookAuthor = em.merge(oldAuthorIdOfBookAuthorListNewBookAuthor);
-                    }
+            for (Book bookCollectionNewBook : bookCollectionNew) {
+                if (!bookCollectionOld.contains(bookCollectionNewBook)) {
+                    bookCollectionNewBook.getAuthorCollection().add(author);
+                    bookCollectionNewBook = em.merge(bookCollectionNewBook);
                 }
             }
             utx.commit();
-        } catch (IllegalOrphanException | IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             String msg = ex.getLocalizedMessage();
@@ -127,7 +111,7 @@ public class AuthorJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
         try {
             utx.begin();
             Author author;
@@ -137,30 +121,20 @@ public class AuthorJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The author with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            List<BookAuthor> bookAuthorListOrphanCheck = author.getBookAuthorList();
-            for (BookAuthor bookAuthorListOrphanCheckBookAuthor : bookAuthorListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<>();
-                }
-                illegalOrphanMessages.add("This Author (" + author + ") cannot be destroyed since the BookAuthor " + bookAuthorListOrphanCheckBookAuthor + " in its bookAuthorList field has a non-nullable authorId field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
+            Collection<Book> bookCollection = author.getBookCollection();
+            for (Book bookCollectionBook : bookCollection) {
+                bookCollectionBook.getAuthorCollection().remove(author);
+                bookCollectionBook = em.merge(bookCollectionBook);
             }
             em.remove(author);
             utx.commit();
-        } catch (IllegalOrphanException | NonexistentEntityException | IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 

@@ -7,8 +7,8 @@ package com.g4w18.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,7 +16,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -112,12 +115,15 @@ public class Book implements Serializable {
     @Column(name = "INVENTORY_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date inventoryDate;
+    @JoinTable(name = "book_author", joinColumns = {
+        @JoinColumn(name = "BOOK_ID", referencedColumnName = "BOOK_ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "AUTHOR_ID")})
+    @ManyToMany
+    private Collection<Author> authorCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
-    private List<InvoiceDetail> invoiceDetailList;
+    private Collection<InvoiceDetail> invoiceDetailCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
-    private List<Review> reviewList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
-    private List<BookAuthor> bookAuthorList;
+    private Collection<Review> reviewCollection;
 
     public Book() {
     }
@@ -246,28 +252,28 @@ public class Book implements Serializable {
         this.inventoryDate = inventoryDate;
     }
 
-    public List<InvoiceDetail> getInvoiceDetailList() {
-        return invoiceDetailList;
+    public Collection<Author> getAuthorCollection() {
+        return authorCollection;
     }
 
-    public void setInvoiceDetailList(List<InvoiceDetail> invoiceDetailList) {
-        this.invoiceDetailList = invoiceDetailList;
+    public void setAuthorCollection(Collection<Author> authorCollection) {
+        this.authorCollection = authorCollection;
     }
 
-    public List<Review> getReviewList() {
-        return reviewList;
+    public Collection<InvoiceDetail> getInvoiceDetailCollection() {
+        return invoiceDetailCollection;
     }
 
-    public void setReviewList(List<Review> reviewList) {
-        this.reviewList = reviewList;
+    public void setInvoiceDetailCollection(Collection<InvoiceDetail> invoiceDetailCollection) {
+        this.invoiceDetailCollection = invoiceDetailCollection;
     }
 
-    public List<BookAuthor> getBookAuthorList() {
-        return bookAuthorList;
+    public Collection<Review> getReviewCollection() {
+        return reviewCollection;
     }
 
-    public void setBookAuthorList(List<BookAuthor> bookAuthorList) {
-        this.bookAuthorList = bookAuthorList;
+    public void setReviewCollection(Collection<Review> reviewCollection) {
+        this.reviewCollection = reviewCollection;
     }
 
     @Override

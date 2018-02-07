@@ -6,17 +6,16 @@
 package com.g4w18.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -50,8 +49,8 @@ public class Author implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "LAST_NAME")
     private String lastName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
-    private List<BookAuthor> bookAuthorList;
+    @ManyToMany(mappedBy = "authorCollection")
+    private Collection<Book> bookCollection;
 
     public Author() {
     }
@@ -90,12 +89,12 @@ public class Author implements Serializable {
         this.lastName = lastName;
     }
 
-    public List<BookAuthor> getBookAuthorList() {
-        return bookAuthorList;
+    public Collection<Book> getBookCollection() {
+        return bookCollection;
     }
 
-    public void setBookAuthorList(List<BookAuthor> bookAuthorList) {
-        this.bookAuthorList = bookAuthorList;
+    public void setBookCollection(Collection<Book> bookCollection) {
+        this.bookCollection = bookCollection;
     }
 
     @Override
