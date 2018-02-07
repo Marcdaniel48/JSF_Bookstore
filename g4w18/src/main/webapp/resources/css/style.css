@@ -83,7 +83,129 @@ html, body
 }
 
 
+@media only screen and (max-width: 800px)
+{
+    .banner1
+    {
+        width: 100%;
+        height: 100px;
+        position: relative;
+        left: 0;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        border: 3px solid blue;
+    }
+    .banner2
+    {
+        width: 100%;
+        height: 100px;
+        position: relative;
+        left: 0;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        border: 3px solid black;
+    }
+    .genres
+    {
+        width: 100%;
+        height: 200px;
+        position: relative;
+        left: 0;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        border: 3px solid green;
+    }
+    .recent-books
+    {
+        width: 100%;
+        height: 180px;
+        position: relative;
+        left: 0;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        border: 3px solid yellow;
+    }
+    .book-sales
+    {
+        width: 100%;
+        height: 180px;
+        position: relative;
+        left: 0;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        border: 3px solid aqua;
+    }
+    .news
+    {
+        width: 100%;
+        height: 150px;
+        position: relative;
+        left: 0;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        border: 3px solid orange;
+    }
+    .survey
+    {
+        width: 100%;
+        height: 100px;
+        position: relative;
+        left: 0;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        border: 3px solid darkmagenta;
+    }
+    .top-section
+    {
+        height: 1000px;
+        position: relative;
+        border: 3px solid white;
+    }
+}
 
 
 
 
+.genre-btn
+{
+    position: relative;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+}
+.genre-icon
+{
+    width: 120px;
+    height: 120px;
+    background-image: url("#{resource['images/genre_tmp.png']}");
+}
+.genre-icon:hover
+{
+    background-image: url("#{resource['images/genre_tmp_hover.png']}");
+}
+/*.overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: aqua;
+    opacity: 0;
+    transition: .5s ease;
+}
+.overlay:hover
+{
+    opacity: 0.3;
+}*/
+.genre-title
+{
+    display: block;
+}
