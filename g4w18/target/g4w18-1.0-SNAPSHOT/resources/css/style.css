@@ -185,26 +185,21 @@ html, body
     width: 120px;
     height: 120px;
     background-image: url("#{resource['images/genre_tmp.png']}");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: scale(1);
+    -o-transition: background-image .6s ease, transform .2s ease;
+    -ms-transition: background-image .6s ease, transform .2s ease;
+    -webkit-transition: background-image .6s ease, transform .2s ease;
+    -moz-transition: background-image .6s ease, transform .2s ease;
+    transition: background-image .6s ease, transform .2s ease;
 }
 .genre-icon:hover
 {
+    transform: scale(1.1);
+    cursor: pointer;
     background-image: url("#{resource['images/genre_tmp_hover.png']}");
 }
-/*.overlay
-{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: aqua;
-    opacity: 0;
-    transition: .5s ease;
-}
-.overlay:hover
-{
-    opacity: 0.3;
-}*/
 .genre-title
 {
     display: block;
