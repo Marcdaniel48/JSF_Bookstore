@@ -27,6 +27,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -285,5 +286,12 @@ public class BookJpaController implements Serializable {
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
+    
+//    public Book test(int id){
+//        TypedQuery<Book> query = em.createNamedQuery("Book.findByBookId", Book.class);
+//        query.setParameter("bookId", id);
+//        Book book = query.getSingleResult();
+//        return book;
+//    }
 
 }

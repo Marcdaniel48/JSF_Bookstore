@@ -11,7 +11,7 @@
     </h:head>
     <h:body>
         <ul>
-            <ui:repeat value="#{bookJpaController.findBookEntities()}" var="book">
+            <ui:repeat value="#{bookBackingBean.books}" var="book">
                 <li>
                     <h:link value="#{book.title}" outcome="bookDetail">
                         <f:param name="id" value="#{book.bookId}" />
