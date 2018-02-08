@@ -40,7 +40,7 @@ function adjustGenrePadding()
 function init()
 {
     console.log('init');
-    adjustGenrePadding();
+    //adjustGenrePadding();
 }
 
 window.onload = init;
