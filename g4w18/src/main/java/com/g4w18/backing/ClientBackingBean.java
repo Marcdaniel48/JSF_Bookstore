@@ -8,7 +8,10 @@ package com.g4w18.backing;
 import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.entities.Client;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -40,4 +43,49 @@ public class ClientBackingBean implements Serializable
         return "login.xhtml";
     }
     
+    public Collection<SelectItem> getTitleOptions() {
+        return titleOptions;
+    }
+
+    private static Collection<SelectItem> titleOptions;
+
+    static 
+    {
+        titleOptions = new ArrayList<SelectItem>();
+        
+        titleOptions.add(new SelectItem(null, "Select a title", "", false, false,
+                true));
+        
+        titleOptions.add(new SelectItem("Mr."));
+        titleOptions.add(new SelectItem("Ms."));
+        titleOptions.add(new SelectItem("Dr."));
+        titleOptions.add(new SelectItem("Sir"));
+        titleOptions.add(new SelectItem("Lord"));
+        titleOptions.add(new SelectItem("Lady"));
+    }
+    
+    public Collection<SelectItem> getProvinceOptions() {
+        return provinceOptions;
+    }
+    
+    private static Collection<SelectItem> provinceOptions;
+    
+    static 
+    {
+        provinceOptions = new ArrayList<SelectItem>();
+        
+        provinceOptions.add(new SelectItem(null, "Select a province", "", false, false,
+                true));
+        
+        provinceOptions.add(new SelectItem("ON"));
+        provinceOptions.add(new SelectItem("QC"));
+        provinceOptions.add(new SelectItem("BC"));
+        provinceOptions.add(new SelectItem("AB"));
+        provinceOptions.add(new SelectItem("NS"));
+        provinceOptions.add(new SelectItem("SK"));
+        provinceOptions.add(new SelectItem("MB"));
+        provinceOptions.add(new SelectItem("NL"));
+        provinceOptions.add(new SelectItem("NB"));
+        provinceOptions.add(new SelectItem("PE"));
+    }
 }

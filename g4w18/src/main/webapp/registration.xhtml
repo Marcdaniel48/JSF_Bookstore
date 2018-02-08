@@ -18,51 +18,57 @@ and open the template in the editor.
         <h:form>
             
             <h:panelGrid columns="2">
-                <h:outputLabel value="#{msgs.username}*"/>
-                <h:inputText value="#{clientBacking.client.username}" pt:required="true"/>
+                <h:outputLabel value="#{msgs.username}"/>
+                <h:inputText value="#{clientBacking.client.username}"/>
                 
-                <h:outputLabel value="#{msgs.password}*"/>
-                <h:inputSecret value="#{clientBacking.client.password}" pt:required="true"/>
+                <h:outputLabel value="#{msgs.password}"/>
+                <h:inputSecret value="#{clientBacking.client.password}"/>
                 
-                <h:outputLabel value="#{msgs.title}*"/>
-                <h:selectOneMenu value="#{clientBacking.client.title}" pt:required="true">
-                    <f:selectItems value="#{register.titleOptions}"/>
+                <h:outputLabel value="#{msgs.title}"/>
+                <h:selectOneMenu value="#{clientBacking.client.title}">
+                    <f:selectItems value="#{clientBacking.titleOptions}"/>
                 </h:selectOneMenu>
             
-                <h:outputLabel value="#{msgs.firstname}*"/>
-                <h:inputText value="#{clientBacking.client.firstName}" pt:required="true"/>
+                <h:outputLabel value="#{msgs.firstname}"/>
+                <h:inputText value="#{clientBacking.client.firstName}"/>
                 
-                <h:outputLabel value="#{msgs.lastname}*"/>
-                <h:inputText value="#{clientBacking.client.lastName}" pt:required="true"/>
+                <h:outputLabel value="#{msgs.lastname}"/>
+                <h:inputText value="#{clientBacking.client.lastName}"/>
                 
                 <h:outputLabel value="#{msgs.companyname}"/>
                 <h:inputText value="#{clientBacking.client.companyName}"/>
                 
-                <h:outputLabel value="#{msgs.address1}*"/>
-                <h:inputText value="#{clientBacking.client.address1}" pt:required="true"/>
+                <h:outputLabel value="#{msgs.address1}"/>
+                <h:inputText value="#{clientBacking.client.address1}"/>
                 
                 <h:outputLabel value="#{msgs.address2}"/>
                 <h:inputText value="#{clientBacking.client.address2}"/>
                 
-                <h:outputLabel value="#{msgs.city}*"/>
-                <h:inputText value="#{clientBacking.client.city}" pt:required="true"/>
+                <h:outputLabel value="#{msgs.city}"/>
+                <h:inputText value="#{clientBacking.client.city}"/>
                 
-                <h:outputLabel value="#{msgs.province}*"/>
-                <h:selectOneMenu value="#{clientBacking.client.province}" pt:required="true">
-                    <f:selectItems value="#{register.provinceOptions}"/>
+                <h:outputLabel value="#{msgs.province}"/>
+                <h:selectOneMenu value="#{clientBacking.client.province}">
+                    <f:selectItems value="#{clientBacking.provinceOptions}"/>    
                 </h:selectOneMenu>
                 
-                <h:outputLabel value="#{msgs.postalcode}*"/>
-                <h:inputText value="#{clientBacking.client.postalCode}" pt:required="true"/>
+                <h:outputLabel value="#{msgs.postalcode}"/>
+                <h:inputText value="#{clientBacking.client.postalCode}" validatorMessage="#{msgs.invalidPostalCode}">
+                    <f:validateRegex pattern="[A-Z0-9i]{6}"/>
+                </h:inputText>
                 
                 <h:outputLabel value="#{msgs.hometelephone}"/>
-                <h:inputText value="#{clientBacking.client.homeTelephone}"/>
+                <h:inputText value="#{clientBacking.client.homeTelephone}" validatorMessage="#{msgs.invalidTelephone}">
+                    <f:validateRegex pattern="\d{3}-\d{3}-\d{4}"/>
+                </h:inputText>
                 
                 <h:outputLabel value="#{msgs.cellphone}"/>
-                <h:inputText value="#{clientBacking.client.cellphone}"/>
+                <h:inputText value="#{clientBacking.client.cellphone}" validatorMessage="#{msgs.invalidCellPhone}">
+                   <f:validateRegex pattern="\d{3}-\d{3}-\d{4}"/>
+                </h:inputText>
                 
-                <h:outputLabel value="#{msgs.email}*"/>
-                <h:inputText value="#{clientBacking.client.email}" pt:required="true" pt:type="email"/>
+                <h:outputLabel value="#{msgs.email}"/>
+                <h:inputText value="#{clientBacking.client.email}" />
             </h:panelGrid>
             
             <h:commandButton value="#{msgs.submitbutton}" action="#{clientBacking.createClient()}"/>
