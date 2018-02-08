@@ -11,6 +11,8 @@
         <h:outputStylesheet library="css" name="parallax.css" />
         <h:outputStylesheet library="css" name="navbar.css" />
         <h:outputStylesheet library="css" name="footer.css" />
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+        <h:outputScript library="js" name="app.js" />
     </h:head>
     <h:body>
         
@@ -32,32 +34,31 @@
             <div class="parallax-layer content">
                 
                 <div class="top-section">
-                    <div class="genres">
-                        <div class="genre-btn">
-                            <div class="genre-icon"></div>
-                            <!--<h:graphicImage library="images" name="genre_tmp.png" />-->
-                            <span>Fantasy</span>
-                        </div>
-                        <div class="genre-btn">
-                            <div class="genre-icon"></div>
-                            <!--<h:graphicImage library="images" name="genre_tmp.png" />-->
-                            <span>Mystery</span>
-                        </div>
-                        <div class="genre-btn">
-                            <div class="genre-icon"></div>
-                            <!--<h:graphicImage library="images" name="genre_tmp.png" />-->
-                            <span>Science Fiction</span>
-                        </div>
-                        <div class="genre-btn">
-                            <div class="genre-icon"></div>
-                            <!--<h:graphicImage library="images" name="genre_tmp.png" />-->
-                            <span>Romance</span>
-                        </div>
-                        <div class="genre-btn">
-                            <div class="genre-icon"></div>
-                            <!--<h:graphicImage class="genre-icon" library="images" name="genre_tmp.png" />-->
-                            <span class="genre-title">Biographies</span>
-                        </div>
+                    <div id="genres">
+			<div class="outer">
+                            <div class="middle">
+                                <div class="genre-btn">
+                                    <div class="genre-icon"></div>
+                                    <span class="genre-title">Fantasy</span>
+                                </div>
+                                <div class="genre-btn">
+                                    <div class="genre-icon"></div>
+                                    <span class="genre-title">Mystery</span>
+                                </div>
+                                <div class="genre-btn">
+                                    <div class="genre-icon"></div>
+                                    <span class="genre-title">Sci-Fi</span>
+                                </div>
+                                <div class="genre-btn">
+                                    <div class="genre-icon"></div>
+                                    <span class="genre-title">Romance</span>
+                                </div>
+                                <div class="genre-btn">
+                                    <div class="genre-icon"></div>
+                                    <span class="genre-title">Biographies</span>
+                                </div>
+                            </div>
+			</div>
                     </div>
                     
                     <div class="book-sales">
@@ -65,6 +66,9 @@
                     </div>
                     <div class="recent-books">
                         Recent Books
+                    </div>
+                    <div class="search">
+                        Search
                     </div>
                     <div class="news">
                         News Highlights
