@@ -1,0 +1,86 @@
+.recent-books
+{
+    width: 100%;
+    height: auto;
+    position: relative;
+    left: 0;
+    font-size: 0;
+    border: 3px solid yellow;
+}
+.book-thumbnail-container
+{
+    position: relative;
+}
+.book-overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transform: scale(1);
+    transition: opacity .6s ease, transform .6s ease;
+    background-color: black;
+}
+.book:hover
+{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.book:hover .book-overlay,
+.book:hover .book-overlay-text
+{
+    opacity: 0.8;
+}
+.book-overlay-text
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: .5s ease;
+    text-align: center;
+    font-size: initial;
+    color: white;
+}
+.book
+{
+    width: 33.3%;
+    height: auto;
+    padding: 5%;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    text-align: center;
+    transform: scale(1);
+    -o-transition: transform .2s ease;
+    -ms-transition: transform .2s ease;
+    -webkit-transition: transform .2s ease;
+    -moz-transition: transform .2s ease;
+    transition: transform .2s ease;
+    border: 3px solid tomato;
+}
+.book-thumbnail
+{
+    width: 100%;
+    height: 100%;
+}
+.book-title
+{
+    display: block;
+    font-size: initial;
+    border: 3px solid antiquewhite;
+}
+.book-price
+{
+    display: block;
+    font-size: initial;
+    border: 3px solid green;
+}

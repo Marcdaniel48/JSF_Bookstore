@@ -36,29 +36,8 @@ html, body
         bottom: auto;
         border: 3px solid black;
     }
-    #genres
-    {
-        width: 100%;
-        height: auto;
-        position: relative;
-        left: 0;
-        right: auto;
-        top: auto;
-        bottom: auto;
-        font-size: 0;
-        border: 3px solid green;
-    }
-    .recent-books
-    {
-        width: 100%;
-        height: 180px;
-        position: relative;
-        left: 0;
-        right: auto;
-        top: auto;
-        bottom: auto;
-        border: 3px solid yellow;
-    }
+
+
     .book-sales
     {
         width: 100%;
@@ -111,54 +90,3 @@ html, body
     }
 /*}*/
 
-.outer
-{
-    height: 100%;
-    width: 100%;
-    display: table;
-    border: 3px solid black;
-}
-.middle
-{
-    width: 100%;
-    height: 100%;
-    display: table-cell;
-    vertical-align: middle;
-    border: 3px solid bisque;
-}
-.genre-btn
-{
-    width: 20%;
-    float: left;
-    border: 3px solid red;
-}
-.genre-icon
-{
-    width: 100%;
-    padding-top: 100%;
-    background-image: url("#{resource['images/genre_tmp.png']}");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: scale(1);
-    -o-transition: background-image .6s ease, transform .2s ease;
-    -ms-transition: background-image .6s ease, transform .2s ease;
-    -webkit-transition: background-image .6s ease, transform .2s ease;
-    -moz-transition: background-image .6s ease, transform .2s ease;
-    transition: background-image .6s ease, transform .2s ease;
-    border: 3px solid blue;
-}
-.genre-icon:hover
-{
-    transform: scale(1.1);
-    cursor: pointer;
-    background-image: url("#{resource['images/genre_tmp_hover.png']}");
-}
-.genre-title
-{
-    width: 100%;
-    display: block;
-    text-align: center;
-    font-size: initial;
-    border: 3px solid yellow;
-}
