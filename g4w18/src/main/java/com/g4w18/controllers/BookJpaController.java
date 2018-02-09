@@ -291,6 +291,15 @@ public class BookJpaController implements Serializable {
             return q.getResultList();
         
     }
+    
+    public List<Book> findBooksByTitle(String title)
+    {
+        List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title LIKE ?1 order by b.title asc")
+                .setParameter(1, title + "%")
+                .getResultList();
+        
+        return findBookByTitle;
+    }
 
     public Book findBook(Integer id) {
         

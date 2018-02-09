@@ -35,6 +35,8 @@ public class BookAuthorJpaController implements Serializable {
     
     @PersistenceContext
     private EntityManager em;
+    
+    
 
     
 
@@ -164,7 +166,9 @@ public class BookAuthorJpaController implements Serializable {
     public List<BookAuthor> findBookAuthorEntities(int maxResults, int firstResult) {
         return findBookAuthorEntities(false, maxResults, firstResult);
     }
-
+    
+    
+    
     private List<BookAuthor> findBookAuthorEntities(boolean all, int maxResults, int firstResult) {
        
         

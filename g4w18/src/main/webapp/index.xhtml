@@ -21,7 +21,7 @@
                 <p:inputText value="#{searchBean.searchTerm}"></p:inputText>
                     
              
-            <p:commandButton  value="#{msgs.searchButtonTxt}" action="search" />
+                <p:commandButton  value="#{msgs.searchButtonTxt}" action="#{searchBackingBean.searchTitle()}" />
             </h:form>
      
 
