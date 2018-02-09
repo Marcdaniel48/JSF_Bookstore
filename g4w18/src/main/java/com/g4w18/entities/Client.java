@@ -46,7 +46,8 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Client.findByHomeTelephone", query = "SELECT c FROM Client c WHERE c.homeTelephone = :homeTelephone")
     , @NamedQuery(name = "Client.findByCellphone", query = "SELECT c FROM Client c WHERE c.cellphone = :cellphone")
     , @NamedQuery(name = "Client.findByEmail", query = "SELECT c FROM Client c WHERE c.email = :email")
-    , @NamedQuery(name = "Client.findByIsManager", query = "SELECT c FROM Client c WHERE c.isManager = :isManager")})
+    , @NamedQuery(name = "Client.findByIsManager", query = "SELECT c FROM Client c WHERE c.isManager = :isManager")
+    , @NamedQuery(name = "Client.findByCredentials", query = "select c from Client c where c.username=?1 and c.password=?2")})
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;

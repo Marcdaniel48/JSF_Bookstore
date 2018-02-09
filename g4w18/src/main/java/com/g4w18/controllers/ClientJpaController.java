@@ -301,4 +301,16 @@ public class ClientJpaController implements Serializable {
         return existingClients;
     }
     
+    public Client findClientByCredentials(String username, String password)
+    {
+        TypedQuery<Client> query = em.createNamedQuery("Client.findByCredentials", Client.class);
+        query.setParameter(1, username);
+        query.setParameter(2, password);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
+    }
+    
 }
