@@ -27,18 +27,20 @@ and open the template in the editor.
            <b:navbarLinks pull="right" styleClass="hidden-xs">
            </b:navbarLinks>
        </b:navBar>
-        <h:form>
-            <h:outputLabel value="#{msgs.username}*"/>
-            <h:inputText value="#{loginController.username}"/>
+        <b:container fluid="true">
+            <b:panel>
+                <b:form>
+                    <b:inputText value="#{loginController.username}" label="#{msgs.username}"/>
 
-            <h:outputLabel value="#{msgs.password}*"/>
-            <h:inputSecret value="#{loginController.password}"/>
-            
-            <h:outputLabel value="Login status: "/>
-            <h:outputText value="#{session.getAttribute('loggedIn')}"/>
-            
-            <h:commandButton value="#{msgs.loginbutton}" action="#{loginController.login()}"/>
-        </h:form>
+                    <b:inputSecret value="#{loginController.password}" label="#{msgs.password}"/>
+
+                    <b:commandButton value="#{msgs.loginbutton}" action="#{loginController.login()}"/>
+                </b:form>
+                <br></br>
+                <h:outputLabel value="Login status: "/>
+                <h:outputText value="#{session.getAttribute('loggedIn')}"/>
+            </b:panel>
+        </b:container>
         
         <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
        <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
