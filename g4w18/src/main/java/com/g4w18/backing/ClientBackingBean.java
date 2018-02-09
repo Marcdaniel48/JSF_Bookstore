@@ -10,8 +10,13 @@ import com.g4w18.entities.Client;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.ResourceBundle;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -42,6 +47,29 @@ public class ClientBackingBean implements Serializable
         clientJpaController.create(client);
         return "login.xhtml";
     }
+    
+    public void validateExistingUsername(FacesContext fc, UIComponent c, Object value) {
+        
+        if (clientJpaController.findClientByUsername((String) value).size() > 0) 
+        {
+            System.out.println("HYPER TRUE");
+            String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingUsername");
+            throw new ValidatorException(new FacesMessage(validationMessage));
+        }
+    }
+    
+    public void validateExistingEmail(FacesContext fc, UIComponent c, Object value) {
+        
+        if (clientJpaController.findClientByEmail((String) value).size() > 0) 
+        {
+            String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingEmail");
+            throw new ValidatorException(new FacesMessage(validationMessage));
+        }
+    }
+    
+    
+    
+    
     
     public Collection<SelectItem> getTitleOptions() {
         return titleOptions;

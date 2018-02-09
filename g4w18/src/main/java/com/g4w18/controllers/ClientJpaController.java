@@ -22,6 +22,8 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
@@ -273,6 +275,30 @@ public class ClientJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public List<Client> findClientByUsername(String username)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
+        Root<Client> clientRoot = cq.from(Client.class);
+        cq.select(clientRoot).where(cb.equal(clientRoot.get("username"), username));
+        TypedQuery<Client> query = em.createQuery(cq);
+        List<Client> existingClients = query.getResultList();
+        
+        return existingClients;
+    }
+    
+    public List<Client> findClientByEmail(String email)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
+        Root<Client> clientRoot = cq.from(Client.class);
+        cq.select(clientRoot).where(cb.equal(clientRoot.get("email"), email));
+        TypedQuery<Client> query = em.createQuery(cq);
+        List<Client> existingClients = query.getResultList();
+        
+        return existingClients;
     }
     
 }
