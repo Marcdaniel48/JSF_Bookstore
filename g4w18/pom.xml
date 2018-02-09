@@ -125,7 +125,21 @@
             <version>2.29.0</version>
             <scope>test</scope>
         </dependency>
+        
+        <!--BootsFaces dependency -->
 
+       <dependency>
+
+           <groupId>net.bootsfaces</groupId>
+
+           <artifactId>bootsfaces</artifactId>
+
+           <version>1.2.0</version>
+
+           <scope>compile</scope>
+
+       </dependency>
+        
         <!-- You will need a driver dependency for every browser you use in
         testing. You can find the maven dependencies at
         https://mvnrepository.com/artifact/org.seleniumhq.selenium -->

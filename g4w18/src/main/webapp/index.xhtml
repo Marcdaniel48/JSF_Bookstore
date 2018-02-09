@@ -13,12 +13,12 @@
 
         
             <h:form>
-            <p:selectOneMenu id="searchOption" value="#{drop.searchOption}" style="width:150px">
+                <p:selectOneMenu id="searchOption" value="#{searchBackingBean.searchOption}" style="width:150px">
                 <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true"/>
-                <f:selectItems value="#{drop.searchOptionValue}"/>
+                <f:selectItems value="#{searchBackingBean.searchOptionValue}"/>
             </p:selectOneMenu>
            
-                <p:inputText value="#{searchBean.searchTerm}"></p:inputText>
+                <p:inputText value="#{searchBackingBean.searchTerm}"></p:inputText>
                     
              
                 <p:commandButton  value="#{msgs.searchButtonTxt}" action="#{searchBackingBean.searchTitle()}" />

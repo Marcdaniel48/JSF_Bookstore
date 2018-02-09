@@ -3,19 +3,127 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <title>TODO supply a title</title>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msgs.searchResult}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <h1>Hello</h1>
-        <div><h1>#{drop.searchOption}</h1></div>
-        <div><h1>#{searchBean.searchTerm}</h1></div>
-        
-       
-     
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
 
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
+
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+    </h:head>
+    <body>
+       <!-- 
+        <ui:repeat value="#{searchBackingBean.multipleBooks}" var="book">
+            <div>
+                <h3>#{book.title}</h3>
+                <h3>#{book.description}</h3>
+                <h3>#{book.isbnNumber}</h3>
+                <h3>#{book.listPrice}</h3>
+                <h3>#{book.publicationDate}</h3>
+            </div>
+        
+        </ui:repeat>
+       
+       -->
+       <!--
+             <b:navBar brand="Booktopia" brandHref="#" fluid="true">
+
+            <b:navbarLinks>
+
+                <b:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs">
+
+                    <b:inputText placeholder="Search for a book..."></b:inputText>
+
+                    <b:commandButton value="Search" iconAwesome="search" action="bookList"></b:commandButton>
+
+                </b:form>
+
+            </b:navbarLinks>
+
+            <b:navbarLinks pull="right" styleClass="hidden-xs">
+
+            </b:navbarLinks>
+
+        </b:navBar>
+
+        <b:container fluid="false">
+
+            <b:form>
+
+                <ui:repeat var="book" value="#{searchBackingBean.multipleBooks}">
+
+                    <b:panel>
+
+                        <b:row styleClass="show-grid">
+
+                            <b:column col-md="2">
+
+                                <b:image library="images" name="lo/#{book.isbnNumber}.jpg" tooltip="#{book.title}" height="50%" width="50%"></b:image>
+
+                            </b:column>
+
+                            <b:column col-md="8">
+
+                                <b:commandLink outcome="bookDetail">
+
+                                    <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
+
+                                    <f:param name="id" value="#{book.bookId}" />
+
+                                </b:commandLink>
+
+                            </b:column>
+
+                            <b:column col-md="2">
+
+                                <h:outputText value="#{book.listPrice} CAD"></h:outputText>
+
+                            </b:column>
+
+                        </b:row>
+
+                    </b:panel>
+
+                </ui:repeat>
+
+            </b:form>
+
+        </b:container>
+
+        <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
+
+        <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
+ -->      
+     
+<h:form> 
+    <p:dataScroller value="#{searchBackingBean.multipleBooks}" var="book" chunkSize="10">
+        <f:facet name="header">
+            Scroll Down to Load More Cars
+        </f:facet>
+ 
+        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+            <p:graphicImage url="/resources/images/lo/#{book.isbnNumber}low.jpg" width="50px" height="70px"/> 
+ 
+            <p:outputPanel>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="Title:" />
+                    <h:outputText value="#{book.title}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Description:" />
+                    <h:outputText value="#{book.description}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Genre:" />
+                    <h:outputText value="#{book.genre}" style="font-weight: bold"/>
+                </h:panelGrid>
+            </p:outputPanel>
+        </h:panelGrid>
+    </p:dataScroller>
+</h:form>
            
         
         
