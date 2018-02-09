@@ -61,13 +61,14 @@ public class LoginController implements Serializable{
         {
             System.out.println("nice login");
             loggedIn = true;
-        } 
+        }
         else 
         {
             System.out.println("unlucky fail");
             loggedIn = false;
         }
         
-        session.setAttribute("Logged in to bookstore", loggedIn);
+        session.setAttribute("loggedIn", loggedIn);
+        session.setAttribute("username", username);
     }
 }

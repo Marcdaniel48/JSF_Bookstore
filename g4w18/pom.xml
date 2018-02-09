@@ -9,7 +9,7 @@
 
     <name>g4w18</name>
 
-        <!-- Global settings for the project. Settings can be accessed in the pom
+    <!-- Global settings for the project. Settings can be accessed in the pom
     by placing the tag name in ${...} -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -45,9 +45,30 @@
     <!-- jar/war file or are expected to be found in the container such as -->
     <!-- GlassFish -->
     <dependencies>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.7-1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.1.1-1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>4.7.0</version>
+        </dependency>
         <!-- These dependencies are required to run the project on the server -->
 
         <!-- Java EE 7.0 Web profile dependency -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.5.2</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -64,17 +85,17 @@
         </dependency>
 
         <!-- PrimeFaces dependency -->
-        <!--        <dependency>
+        <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>6.1</version>
-        </dependency>-->
+        </dependency>
 
         <!-- EclipseLink dependency for the static metamodel generator -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
-            <version>2.7.1</version>
+            <version>2.5.2</version>
             <scope>provided</scope>
         </dependency>
 
@@ -144,7 +165,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>2.9.0</version>
+            <version>3.9.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -153,26 +174,32 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
-            <scope>test</scope>
+            <!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.10.0</version>
-            <scope>test</scope>
+            <!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>2.10.0</version>
-            <scope>test</scope>
+            <!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.10.0</version>
-            <scope>test</scope>
+            <!--            <scope>test</scope>-->
+        </dependency>
+        <!--BootsFaces dependency -->
+        <dependency>
+            <groupId>net.bootsfaces</groupId>
+            <artifactId>bootsfaces</artifactId>
+            <version>1.2.0</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
