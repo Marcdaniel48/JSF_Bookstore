@@ -1,0 +1,14 @@
+#book-sales
+{
+    width: 100%;
+    height: auto;
+    position: relative;
+    left: 0;
+    font-size: 0;
+    border: 3px solid aqua;
+}
+
+#book-sales .book
+{
+    width: 25%;
+}

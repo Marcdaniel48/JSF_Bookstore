@@ -13,9 +13,10 @@
         <h:outputStylesheet library="css" name="footer.css" />
         <h:outputStylesheet library="css" name="_genres.css" />
         <h:outputStylesheet library="css" name="_books.css" />
+        <h:outputStylesheet library="css" name="_onsale.css" />
         <h:outputStylesheet library="css" name="_banner.css" />
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-        <h:outputScript library="js" name="app.js" />
+        <h:outputScript library="js" name="banner.js" />
     </h:head>
     <h:body>
         
@@ -102,12 +103,57 @@
                             <h:graphicImage library="images" name="slide3.jpg" class="slide-img"/>
                             <h:graphicImage library="images" name="slide4.jpg" class="slide-img"/>
 			</div>
+                        
+                        <a class="prev">&#10094;</a>
+                        <a class="next">&#10095;</a>
+                        
+                        <div class="dots-container"></div>
                     </div>
                             
-                            
-                    <div class="book-sales">
-                        Books on Sale
+                    
+                    <div id="book-sales">
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="book-overlay"></div>
+                                <div class="book-overlay-text"><div>View</div></div>
+                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                            </div>
+                            <span class="book-title">An Even More Real Long Ass Example Title</span>
+                            <span class="book-price"><s>$12.99</s> $8.99</span>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="book-overlay"></div>
+                                <div class="book-overlay-text"><div>View</div></div>
+                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                            </div>
+                            <span class="book-title">Short Title</span>
+                            <span class="book-price"><s>$12.99</s> $8.99</span>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="book-overlay"></div>
+                                <div class="book-overlay-text"><div>View</div></div>
+                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                            </div>
+                            <span class="book-title">Some Real Long Ass Example Title</span>
+                            <span class="book-price"><s>$12.99</s> $8.99</span>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="book-overlay"></div>
+                                <div class="book-overlay-text"><div>View</div></div>
+                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                            </div>
+                            <span class="book-title">Short Title</span>
+                            <span class="book-price"><s>$12.99</s> $8.99</span>
+                        </div>
+                        
+                        <a class="prev">&#10094;</a>
+                        <a class="next">&#10095;</a>
                     </div>
+                    
+                    
                     <div class="search">
                         Search
                     </div>
@@ -116,10 +162,6 @@
                     </div>
                     <div class="survey">
                         Survey
-                    </div>
-                    
-                    <div class="banner2">
-                        Banner Ad 2
                     </div>
                 </div>
 
