@@ -13,6 +13,7 @@
         <h:outputStylesheet library="css" name="footer.css" />
         <h:outputStylesheet library="css" name="_genres.css" />
         <h:outputStylesheet library="css" name="_books.css" />
+        <h:outputStylesheet library="css" name="_banner.css" />
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
         <h:outputScript library="js" name="app.js" />
     </h:head>
@@ -64,7 +65,7 @@
                     </div>
                     
                     
-                    <div class="recent-books">
+                    <div id="recent-books">
                         <div class="book">
                             <div class="book-thumbnail-container">
                                 <div class="book-overlay"></div>
@@ -93,7 +94,15 @@
                             <span class="book-price"><s>$12.99</s> $8.99</span>
                         </div>
                     </div>
-                            
+
+                    <div class="banner">
+                        <div class="slide">
+                            <h:graphicImage library="images" name="slide1.jpg" class="slide-img"/>
+                            <h:graphicImage library="images" name="slide2.jpg" class="slide-img"/>
+                            <h:graphicImage library="images" name="slide3.jpg" class="slide-img"/>
+                            <h:graphicImage library="images" name="slide4.jpg" class="slide-img"/>
+			</div>
+                    </div>
                             
                             
                     <div class="book-sales">
@@ -108,9 +117,7 @@
                     <div class="survey">
                         Survey
                     </div>
-                    <div class="banner1">
-                        Banner Ad 1
-                    </div>
+                    
                     <div class="banner2">
                         Banner Ad 2
                     </div>

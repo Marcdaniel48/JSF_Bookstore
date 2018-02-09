@@ -1,46 +1,64 @@
 (function(){
-    
-function adjustGenrePadding()
+
+var $slides = null;
+var slideIndex = 0;
+var totalSlides = 0;
+
+function nextSlide()
 {
-    var $genreSection = $("#genres");
-    var minIconSize = 70;
-    var totalGenres = 5;
-    var minSectionWidth = minIconSize * totalGenres;
-    var $genreTitle = $(".genre-title").first();
-    var $genres = $(".genre-btn");
-    
+    var $currentSlide = $slides.eq(slideIndex);
+
+    //Update slide index
+    if(slideIndex >= (totalSlides-1))
+        slideIndex = 0;
+    else
+        slideIndex++;
+
+    var $nextSlide = $slides.eq(slideIndex);
+
+    $currentSlide.css("transform", "scale(1.5)");
+
+    $currentSlide.animate({opacity: "0"}, 500, 'linear', function()
+    {
+        $currentSlide.hide();
+        $currentSlide.css({transform: "scale(1)", opacity: "1"});
+        $nextSlide.css("position", "relative");
+    });
+
+    $nextSlide.css({
+        "opacity": 0,
+        "transform": "scale(1.5)",
+        "position": "absolute",
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+    });
+
+    $nextSlide.show();
+
     setTimeout(function()
     {
-        calculatePadding();
-    }, 200);
+        $nextSlide.css("transform", "scale(1)");
+        $nextSlide.animate({opacity: "1"}, 500, 'linear');
+    }, 100);
+}
 
-    window.addEventListener('resize', calculatePadding);
-    
-    function calculatePadding()
-    {
-        if($genreSection.width() <= minSectionWidth)
-        {
-            // How many genres can fit in one row.
-            var totalInRow = Math.floor($genreSection.width() / minIconSize);
-            // The total space left for padding.
-            var totalSpaceForPadding = $genreSection.width() % minIconSize;
-            // Padding for each genre.
-            var genrePadding = Math.floor(totalSpaceForPadding / (totalInRow * 2));
-            
-            //top right bottom left
-            $genres.css("margin", "0 " + genrePadding + "px " + $genreTitle.height() + "px " + genrePadding + "px");
-        }
-        else
-        {
-            $genres.css("margin", "0 0");
-        }
-    }
+function initBanner()
+{
+    var $nextBtn = $("#next");
+    $slides = $(".slide-img");
+    totalSlides = $slides.length;
+
+    $slides.eq(slideIndex).show();
+
+    $nextBtn.on("click", nextSlide);
 }
 
 function init()
 {
     console.log('init');
-    //adjustGenrePadding();
+    initBanner();
 }
 
 window.onload = init;
