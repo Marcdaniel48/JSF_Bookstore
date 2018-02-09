@@ -267,9 +267,10 @@ public class JPATest {
                 .setParameter(1, "c%")
                 .getResultList();
         
-        for(int i = 0;i<specificBook.size();i++)
-            logger.log(Level.INFO,"Data>>>{0}",specificBook.get(i).getTitle() + "---------");
         
+        for(int i = 0;i<specificBook.size();i++)
+            logger.log(Level.INFO,"Data>>>{0}"+specificBook.get(i).getTitle() + "---------");
+          
         assertThat(specificBook).hasSize(4);
     } 
 }

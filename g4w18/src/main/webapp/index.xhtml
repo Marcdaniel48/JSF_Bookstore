@@ -9,21 +9,24 @@
         <title>#{msgs.frontDoorTitle}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
-    <body>
+    <h:body>
+
         
-            <div>
-                
-                <p:selectOneMenu id="searchOption" value="" style="width:150px">
-                    <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true"/>
-                    <f:selectItems value="#{dropDownSearchBean.searchOptions}"/>
-                </p:selectOneMenu>
+            <h:form>
+            <p:selectOneMenu id="searchOption" value="#{drop.searchOption}" style="width:150px">
+                <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true"/>
+                <f:selectItems value="#{drop.searchOptionValue}"/>
+            </p:selectOneMenu>
+           
+                <p:inputText value="#{searchBean.searchTerm}"></p:inputText>
                     
-                <p:inputText value="#{searchBean.searchTerm}"/>
-                
-                <p:button  value="#{msgs.searchButtonTxt}"  disabled="false"/>
-                
-                 
-            </div>
-       
-    </body>
+             
+            <p:commandButton  value="#{msgs.searchButtonTxt}" action="search" />
+            </h:form>
+     
+
+
+        
+        
+    </h:body>
 </html>
