@@ -16,10 +16,10 @@ and open the template in the editor.
     <h:body>
         <h:form>
             <h:outputLabel value="#{msgs.username}*"/>
-            <h:inputText value="#{clientBacking.client.username}"/>
+            <h:inputText value="#{loginController.username}"/>
 
             <h:outputLabel value="#{msgs.password}*"/>
-            <h:inputSecret value="#{clientBacking.client.password}"/>
+            <h:inputSecret value="#{loginController.password}"/>
             
             <h:commandButton value="#{msgs.loginbutton}" action="#{loginController.login()}"/>
         </h:form>

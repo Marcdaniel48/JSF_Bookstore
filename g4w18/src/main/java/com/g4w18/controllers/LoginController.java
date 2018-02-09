@@ -42,7 +42,7 @@ public class LoginController implements Serializable{
         return password;
     }
     
-    public void setPassword()
+    public void setPassword(String password)
     {
         this.password = password;
     }
@@ -55,14 +55,16 @@ public class LoginController implements Serializable{
         boolean loggedIn = false;
         
         Client client = clientJpaController.findClientByCredentials(username, password);
+        System.out.println("Username:\t"+username+"\tPassword:\t"+password);
         
         if (client != null) 
         {
+            System.out.println("nice login");
             loggedIn = true;
         } 
         else 
         {
-            // Unsuccessful login
+            System.out.println("unlucky fail");
             loggedIn = false;
         }
         
