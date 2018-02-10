@@ -28,6 +28,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 
 /**
  *
@@ -285,6 +286,16 @@ public class BookJpaController implements Serializable {
         cq.select(em.getCriteriaBuilder().count(rt));
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
+    }
+
+    public List<Book> findBooksByGenre(String genre) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Book> book = cq.from(Book.class);
+        cq.select(book).where(cb.equal(book.get("genre"), genre));
+        TypedQuery<Book> query = em.createQuery(cq);
+        List<Book> toReturn = query.getResultList();
+        return toReturn;
     }
     
 //    public Book test(int id){

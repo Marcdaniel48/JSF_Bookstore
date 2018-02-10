@@ -4,9 +4,14 @@ import com.g4w18.controllers.AuthorJpaController;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
+import com.g4w18.entities.Review;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
@@ -26,13 +31,14 @@ public class BookBackingBean implements Serializable {
 
     @Inject
     private BookJpaController bookJpaController;
-    
+
     @Inject
     private AuthorJpaController authorJpaController;
 
     private Book book;
-    private Author author;
     private List<Book> books;
+    private List<Book> recommendedBooks;
+    private Logger log = Logger.getLogger(BookBackingBean.class.getName());
 
     /**
      * Client created if it does not exist.
@@ -45,7 +51,6 @@ public class BookBackingBean implements Serializable {
                     = getFacesContext().getExternalContext().getRequestParameterMap();
             int id = Integer.parseInt(params.get("id"));
             book = bookJpaController.findBook(id);
-//            book = bookJpaController.test(id);
         }
         return book;
     }
@@ -57,15 +62,28 @@ public class BookBackingBean implements Serializable {
         return books;
     }
 
-    public Author getAuthor() {
-        if (author == null) {
-            Map<String, String> params
-                    = getFacesContext().getExternalContext().getRequestParameterMap();
-            int id = Integer.parseInt(params.get("id"));
-            author = authorJpaController.findAuthor(id);
-//            book = bookJpaController.test(id);
+    public List<Book> getRecommendedBooks() {
+        if (recommendedBooks == null) {
+            List<Book> booksByGenre = bookJpaController.findBooksByGenre(book.getGenre());
+            booksByGenre.remove(book);
+            Collections.shuffle(booksByGenre);
+            recommendedBooks = booksByGenre.subList(0, 6);
         }
-        return author;
+        return recommendedBooks;
+    }
+
+    public int getRating() {
+        int averageRating = 0;
+        Collection<Review> reviews = book.getReviewCollection();
+        int size = reviews.size();
+        log.log(Level.INFO, "Reviews size: {0}", reviews.size());
+        if (size > 0) {
+            for (Review r : reviews) {
+                averageRating = averageRating + r.getRating();
+            }
+        }
+        log.log(Level.INFO, "Rating: {0}", averageRating);
+        return averageRating;
     }
 
     @Produces
