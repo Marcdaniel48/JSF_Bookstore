@@ -1,0 +1,9 @@
+.booktitle{
+    word-wrap: break-word;
+}
+.caption {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}

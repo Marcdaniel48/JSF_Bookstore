@@ -23,11 +23,11 @@
         </b:navBar>
         <b:container fluid="false">
             <b:form>
-                <ui:repeat var="book" value="#{bookBackingBean.books}">
+                <ui:repeat var="book" value="#{bookBackingBean.books}" size="10">
                     <b:panel>
                         <b:row styleClass="show-grid">
                             <b:column col-md="2">
-                                <b:image library="images" name="lo/#{book.isbnNumber}.jpg" tooltip="#{book.title}" height="50%" width="50%"></b:image>
+                                <b:image library="images" name="#{book.isbnNumber}hi.jpg" tooltip="#{book.title}" height="50%" width="50%"></b:image>
                             </b:column>
                             <b:column col-md="8">
                                 <b:commandLink outcome="bookDetail">
