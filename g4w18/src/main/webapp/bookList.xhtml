@@ -11,7 +11,7 @@
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
     </h:head>
     <h:body>
-        <b:navBar brand="Booktopia" brandHref="#" fluid="true">
+        <b:navBar brand="Booktopia" brandHref="bookList.xhtml" fluid="true">
             <b:navbarLinks>
                 <b:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs">
                     <b:inputText placeholder="Search for a book..."></b:inputText>
@@ -23,7 +23,7 @@
         </b:navBar>
         <b:container fluid="false">
             <b:form>
-                <ui:repeat var="book" value="#{bookBackingBean.books}" size="10">
+                <ui:repeat var="book" value="#{bookBackingBean.books}" size="50">
                     <b:panel>
                         <b:row styleClass="show-grid">
                             <b:column col-md="2">

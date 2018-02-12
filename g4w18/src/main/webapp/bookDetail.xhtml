@@ -15,7 +15,7 @@
     </h:head>
 
     <h:body>
-        <b:navBar brand="Booktopia" brandHref="#" fluid="true">
+        <b:navBar brand="Booktopia" brandHref="bookList.xhtml" fluid="true">
             <b:navbarLinks>
                 <b:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs">
                     <b:inputText placeholder="#{msgs.navBarSearchHint}"></b:inputText>
@@ -47,8 +47,9 @@
                                     by
                                     <b:form>
                                         <ui:repeat var="author" value="#{bookBackingBean.book.authorCollection}">
-                                            <b:commandLink outcome="bookDetail">
+                                            <b:commandLink outcome="authorBooks">
                                                 <h:outputText value="#{author.firstName} #{author.lastName}" styleClass="list-group-item-heading"></h:outputText>
+                                                <f:param name="authorId" value="#{author.authorId}"></f:param>
                                             </b:commandLink>
                                         </ui:repeat>
                                     </b:form>
@@ -162,6 +163,7 @@
             </b:panel>
             <b:panel collapsible="false" title="#{msgs.bookDetailsReviews}">
                 <ui:repeat var="review" value="#{bookBackingBean.book.reviewCollection}">
+                    <b:container fluid="true">
                     <b:row>
                         <b:column col-md="3">
                             <h:outputText value="TEMPORARY NAME"></h:outputText>
@@ -173,6 +175,8 @@
                             <p:rating value="#{review.rating}" readonly="true" />
                         </b:column>
                     </b:row>
+                    </b:container>
+                    <hr/>
                 </ui:repeat>
             </b:panel>
         </b:container>

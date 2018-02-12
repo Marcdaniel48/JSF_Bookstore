@@ -32,9 +32,6 @@ public class BookBackingBean implements Serializable {
     @Inject
     private BookJpaController bookJpaController;
 
-    @Inject
-    private AuthorJpaController authorJpaController;
-
     private Book book;
     private List<Book> books;
     private List<Book> recommendedBooks;
