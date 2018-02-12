@@ -178,12 +178,12 @@ public class JPATest {
     @Test
     public void find_book_with_specific_name() throws SQLException{
         
-        List specificBook = entityManager.createQuery("Select b from Book b where b.title = ?1")
+        List<Book> specificBook = entityManager.createQuery("Select b from Book b where b.title = ?1")
                 .setParameter(1, "The Silmarillion")
                 .getResultList();
         
         
-        logger.log(Level.INFO,"Data>>>{0}",specificBook.get(0));
+        logger.log(Level.INFO,"Data>>SPECIFIC TITLE>{0}"+specificBook.get(0).getTitle());
         
         assertThat(specificBook).hasSize(1);
     }
@@ -195,12 +195,12 @@ public class JPATest {
     @Test
     public void find_book_with_specific_genres() throws SQLException{
         
-        List specificBook = entityManager.createQuery("Select b from Book b where b.genre = ?1")
+        List<Book> specificBook = entityManager.createQuery("Select b from Book b where b.genre = ?1")
                 .setParameter(1, "Fantasy")
                 .getResultList();
         
         
-        logger.log(Level.INFO,"Data>>>{0}",specificBook.get(0));
+        logger.log(Level.INFO,"Data>>>{0}GENRE"+ specificBook.get(0).getGenre());
         
         assertThat(specificBook).hasSize(20);
     } 
@@ -212,12 +212,12 @@ public class JPATest {
     @Test
     public void find_book_with_specific_publisher() throws SQLException{
         
-        List specificBook = entityManager.createQuery("Select b from Book b where b.publisher = ?1")
+        List<Book> specificBook = entityManager.createQuery("Select b from Book b where b.publisher = ?1")
                 .setParameter(1, "HarperCollins")
                 .getResultList();
         
         
-        logger.log(Level.INFO,"Data>>>{0}",specificBook.get(0));
+        logger.log(Level.INFO,"Data>>>PUBLISHER{0}"+specificBook.get(0).getPublisher());
         
         assertThat(specificBook).hasSize(6);
     } 
@@ -229,12 +229,12 @@ public class JPATest {
     @Test
     public void find_book_with_specific_isbn() throws SQLException{
         
-        List specificBook = entityManager.createQuery("Select b from Book b where b.isbnNumber = ?1")
-                .setParameter(1, "978-0261102736")
+        List<Book> specificBook = entityManager.createQuery("Select b from Book b where b.isbnNumber = ?1")
+                .setParameter(1, "978-2895490845")
                 .getResultList();
         
         
-        logger.log(Level.INFO,"Data>>>{0}",specificBook.get(0));
+        logger.log(Level.INFO,"SPECIFIC ISBN PLS Data>>>{0}"+ specificBook.get(0).getTitle());
         
         assertThat(specificBook).hasSize(1);
     } 

@@ -13,15 +13,19 @@
 
         
             <h:form>
+                <p:growl id="growl" showDetail="true" sticky="true"/>
+                
                 <p:selectOneMenu id="searchOption" value="#{searchBackingBean.searchOption}" style="width:150px">
-                <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true"/>
-                <f:selectItems value="#{searchBackingBean.searchOptionValue}"/>
-            </p:selectOneMenu>
-           
-                <p:inputText value="#{searchBackingBean.searchTerm}"></p:inputText>
+                    <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{searchBackingBean.searchOptionValue}"/>
+                </p:selectOneMenu>
+                
+                <h:message for="searchText"/>
+                <p:inputText id="searchText" value="#{searchBackingBean.searchTerm}" required="true" requiredMessage="Please enter a search term!">
+                </p:inputText>
                     
              
-                <p:commandButton  value="#{msgs.searchButtonTxt}" action="#{searchBackingBean.searchTitle()}" />
+                <p:commandButton  value="#{msgs.searchButtonTxt}" action="#{searchBackingBean.search()}" update="growl" />
             </h:form>
      
 

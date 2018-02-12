@@ -292,6 +292,12 @@ public class BookJpaController implements Serializable {
         
     }
     
+    /**
+     * Get books from the database with the title provided(doesn't need to match whole)
+     * 
+     * @param title name of the book that is being searched
+     * @return List of books found with the title
+     */
     public List<Book> findBooksByTitle(String title)
     {
         List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title LIKE ?1 order by b.title asc")
@@ -299,6 +305,36 @@ public class BookJpaController implements Serializable {
                 .getResultList();
         
         return findBookByTitle;
+    }
+    
+    /**
+     * Get books from the database with the isbn provided(must match whole) 
+     * 
+     * @param isbn number of the book the user is searching for
+     * @return Book found with the isbn
+     */
+    public List<Book> findBookByIsbn(String isbn)
+    {
+        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where b.isbnNumber = ?1")
+                .setParameter(1, isbn)
+                .getResultList();
+        
+        return findBookByIsbn;
+    }
+    
+    /**
+     * Get books from the database with the author provided.
+     * 
+     * @param publisher of the book we are finding 
+     * @return books found with the associated publisher
+     */
+    public List<Book> findBooksByPublisher(String publisher)
+    {
+        List<Book> findBookByPublisher = em.createQuery("Select b from Book b where b.publisher = ?1")
+                .setParameter(1, publisher)
+                .getResultList();
+        
+        return findBookByPublisher;
     }
 
     public Book findBook(Integer id) {
