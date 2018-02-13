@@ -46,6 +46,15 @@
 {
     background-color: rgba(0,0,0,0.8);
 }
+.disabled.prev,
+.disabled.next,
+.disabled.prev:hover,
+.disabled.next:hover
+{
+    opacity: 0.2;
+    cursor: auto;
+    background-color: initial;
+}
 .dots-container
 {
     position: absolute;

@@ -125,5 +125,5 @@ function init()
     $dots.eq(slideIndex).toggleClass("active");
 }
 
-window.onload = init;
+window.addEventListener("load", init);
 })();
