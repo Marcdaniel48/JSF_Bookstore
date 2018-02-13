@@ -7,3 +7,11 @@
     text-overflow: ellipsis;
     text-align: center;
 }
+
+.reviewinput{
+    resize: none;
+}
+.reviewsubmit{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}

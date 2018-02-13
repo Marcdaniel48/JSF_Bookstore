@@ -1,8 +1,6 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.controllers.AuthorJpaController;
 import com.g4w18.controllers.BookJpaController;
-import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Review;
 import java.io.Serializable;
