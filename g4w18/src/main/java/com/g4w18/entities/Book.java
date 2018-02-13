@@ -16,7 +16,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -112,12 +115,15 @@ public class Book implements Serializable {
     @Column(name = "INVENTORY_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date inventoryDate;
+    @JoinTable(name = "book_author", joinColumns = {
+        @JoinColumn(name = "BOOK_ID", referencedColumnName = "BOOK_ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "AUTHOR_ID")})
+    @ManyToMany
+    private List<Author> authorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
     private List<InvoiceDetail> invoiceDetailList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
     private List<Review> reviewList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
-    private List<BookAuthor> bookAuthorList;
 
     public Book() {
     }
@@ -246,6 +252,14 @@ public class Book implements Serializable {
         this.inventoryDate = inventoryDate;
     }
 
+    public List<Author> getAuthorList() {
+        return authorList;
+    }
+
+    public void setAuthorList(List<Author> authorList) {
+        this.authorList = authorList;
+    }
+
     public List<InvoiceDetail> getInvoiceDetailList() {
         return invoiceDetailList;
     }
@@ -260,14 +274,6 @@ public class Book implements Serializable {
 
     public void setReviewList(List<Review> reviewList) {
         this.reviewList = reviewList;
-    }
-
-    public List<BookAuthor> getBookAuthorList() {
-        return bookAuthorList;
-    }
-
-    public void setBookAuthorList(List<BookAuthor> bookAuthorList) {
-        this.bookAuthorList = bookAuthorList;
     }
 
     @Override

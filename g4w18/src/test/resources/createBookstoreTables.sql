@@ -37,10 +37,8 @@ CREATE TABLE AUTHOR (
 ) ENGINE=InnoDB;
 
 CREATE TABLE BOOK_AUTHOR (
-    BOOK_AUTHOR_ID int NOT NULL AUTO_INCREMENT,
     BOOK_ID int NOT NULL,
     AUTHOR_ID int NOT NULL,
-    PRIMARY KEY (BOOK_AUTHOR_ID),
     FOREIGN KEY (BOOK_ID) REFERENCES BOOK(BOOK_ID),
     FOREIGN KEY (AUTHOR_ID) REFERENCES AUTHOR(AUTHOR_ID)
 ) ENGINE=InnoDB;
@@ -114,14 +112,14 @@ CREATE TABLE TAX (
 CREATE TABLE QUESTION (
     QUESTION_ID int NOT NULL AUTO_INCREMENT,
     DESCRIPTION varchar(100) NOT NULL default '',
-	ANSWER_ONE varchar(50) NOT NULL default '',
-	VOTE_ONE int(6) NOT NULL default 0,
-	ANSWER_TWO varchar(50) NOT NULL default '',
-	VOTE_TWO int(6) NOT NULL default 0,
-	ANSWER_THREE varchar(50) NOT NULL default '',
-	VOTE_THREE int(6) NOT NULL default 0,
-	ANSWER_FOUR varchar(50) NOT NULL default '',
-	VOTE_FOUR int(6) NOT NULL default 0,
+    ANSWER_ONE varchar(50) NOT NULL default '',
+    ANSWER_TWO varchar(50) NOT NULL default '',
+    ANSWER_THREE varchar(50) NOT NULL default '',
+    ANSWER_FOUR varchar(50) NOT NULL default '',
+    VOTE_ONE int(6) NOT NULL default 0,
+    VOTE_TWO int(6) NOT NULL default 0,
+    VOTE_THREE int(6) NOT NULL default 0,
+    VOTE_FOUR int(6) NOT NULL default 0,
     PRIMARY KEY (QUESTION_ID)
 ) ENGINE=InnoDB;
 
@@ -254,7 +252,7 @@ Guided by the witch-woman Red's mysterious prophecy, the trio makes their way so
 "When a murder occurs aboard a Nile steamer, the passengers find themselves in a state of panic and emotional conflict.",
 "PDF", 5.99, 11.99, 7.99, null),
 (null, "978-1501163401", "Sleeping Beauties", "Scribner", "2017-09-26 00:00:00", 720, "Mystery", 
-"In a future so real and near it might be now, something happens when women go to sleep: they become shrouded in a cocoon-like gauze. If they are awakened, if the gauze wrapping their bodies is disturbed or violated, the women become feral and spectacularly violent. And while they sleep they go to another place, a better place, where harmony prevails and conflict is rare.One woman, the mysterious â€œEve Black,â€� is immune to the blessing or curse of the sleeping disease. Is Eve a medical anomaly to be studied? Or is she a demon who must be slain? Abandoned, left to their increasingly primal urges, the men divide into warring factions, some wanting to kill Eve, some to save her. Others exploit the chaos to wreak their own vengeance on new enemies. All turn to violence in a suddenly all-male world.Set in a small Appalachian town whose primary employer is a womenâ€™s prison, Sleeping Beauties is a wildly provocative, gloriously dramatic father-son collaboration that feels particularly urgent and relevant today.",
+"In a future so real and near it might be now, something happens when women go to sleep: they become shrouded in a cocoon-like gauze. If they are awakened, if the gauze wrapping their bodies is disturbed or violated, the women become feral and spectacularly violent. And while they sleep they go to another place, a better place, where harmony prevails and conflict is rare.One woman, the mysterious â€œEve Black,ï¿½? is immune to the blessing or curse of the sleeping disease. Is Eve a medical anomaly to be studied? Or is she a demon who must be slain? Abandoned, left to their increasingly primal urges, the men divide into warring factions, some wanting to kill Eve, some to save her. Others exploit the chaos to wreak their own vengeance on new enemies. All turn to violence in a suddenly all-male world.Set in a small Appalachian town whose primary employer is a womenâ€™s prison, Sleeping Beauties is a wildly provocative, gloriously dramatic father-son collaboration that feels particularly urgent and relevant today.",
 "PDF", 8.99, 14.99, 10.99, null),
 (null, "978-0525954347", "The Punishment She Deserves", "Viking", "2017-03-20", 704, "Mystery", 
 "The cozy, bucolic town of Ludlow is stunned when one of its most revered and respected citizens--Ian Druitt, the local deacon--is accused of a serious crime. Then, while in police custody, Ian is found dead. Did he kill himself? Or was he murdered?When Barbara Havers is sent to Ludlow to investigate the chain of events that led to Ian's death, all the evidence points to suicide. But Barbara can't shake the feeling that she's missing something. She decides to take a closer look at the seemingly ordinary inhabitants of Ludlow--mainly elderly retirees and college students--and discovers that almost everyone in town has something to hide.A masterful work of suspense, The Punishment She Deserves sets Detective Sergeant Barbara Havers and Inspector Thomas Lynley against one of their most intricate cases. Fans of the longtime series will love the many characters from Elizabeth George's previous novels who join Lynley and Havers, and readers new to the series will quickly see why she is one of the most popular and critically acclaimed writers of our time. Both a page-turner and a deeply complex story about the lies we tell, the lies we believe, and the redemption we need, this novel will be remembered as one of George's best.",
@@ -329,7 +327,7 @@ Someone knows where Anna isâ€”and theyâ€™re not telling. But they are 
 "On a warm summer morning in North Carthage, Missouri, it is Nick and Amy Dunneâ€™s fifth wedding anniversary. Presents are being wrapped and reservations are being made when Nickâ€™s clever and beautiful wife disappears. Husband-of-the-Year Nick isnâ€™t doing himself any favors with cringe-worthy daydreams about the slope and shape of his wifeâ€™s head, but passages from Amy's diary reveal the alpha-girl perfectionist could have put anyone dangerously on edge. Under mounting pressure from the police and the mediaâ€”as well as Amyâ€™s fiercely doting parentsâ€”the town golden boy parades an endless series of lies, deceits, and inappropriate behavior. Nick is oddly evasive, and heâ€™s definitely bitterâ€”but is he really a killer? ",
 "MOBI", 4.99, 10.99, 7.99, null),
 (null, "978-0812976144", "The Alienist", "Random House Trade Paperbacks", "2006-10-24 00:00:00", 512, "Mystery",
-"The year is 1896. The city is New York. Newspaper reporter John Schuyler Moore is summoned by his friend Dr. Laszlo Kreizlerâ€”a psychologist, or â€œalienistâ€�â€”to view the horribly mutilated body of an adolescent boy abandoned on the unfinished Williamsburg Bridge. From there the two embark on a revolutionary effort in criminology: creating a psychological profile of the perpetrator based on the details of his crimes. Their dangerous quest takes them into the tortured past and twisted mind of a murderer who will kill again before their hunt is over.",
+"The year is 1896. The city is New York. Newspaper reporter John Schuyler Moore is summoned by his friend Dr. Laszlo Kreizlerâ€”a psychologist, or â€œalienistï¿½?â€”to view the horribly mutilated body of an adolescent boy abandoned on the unfinished Williamsburg Bridge. From there the two embark on a revolutionary effort in criminology: creating a psychological profile of the perpetrator based on the details of his crimes. Their dangerous quest takes them into the tortured past and twisted mind of a murderer who will kill again before their hunt is over.",
 "MOBI", 4.99, 9.99, 7.99, null),
 (null, "978-0143034902", "The Shadow of the Wind", "Penguin Books", "2005-01-25 00:00:00", 512, "Mystery", 
 "Barcelona, 1945: A city slowly heals in the aftermath of the Spanish Civil War, and Daniel, an antiquarian book dealerâ€™s son who mourns the loss of his mother, finds solace in a mysterious book entitled The Shadow of the Wind, by one JuliÃ¡n Carax. But when he sets out to find the authorâ€™s other works, he makes a shocking discovery: someone has been systematically destroying every copy of every book Carax has written. In fact, Daniel may have the last of Caraxâ€™s books in existence. Soon Danielâ€™s seemingly innocent quest opens a door into one of Barcelonaâ€™s darkest secrets--an epic story of murder, madness, and doomed love.",
@@ -378,7 +376,7 @@ Which among them is the killer and will any of them survive?",
 "Winston Smith works for the Ministry of Truth in London, chief city of Airstrip One. Big Brother stares out from every poster, the Thought Police uncover every act of betrayal. When Winston finds love with Julia, he discovers that life does not have to be dull and deadening, and awakens to new possibilities.",
 "MOBI", 10.79, 25.82, 22.82, null),
 (null, "978-0771008795", "The Handmaid's Tale", "Emblem Editions", "2011-09-06 00:00:00", 368, "Science Fiction", 
-"In this multi-award-winning, bestselling novel, Margaret Atwood has created a stunning Orwellian vision of the near future. This is the story of Offred, one of the unfortunate â€œHandmaidsâ€� under the new social order who have only one purpose: to breed. In Gilead, where women are prohibited from holding jobs, reading, and forming friendships, Offredâ€™s persistent memories of life in the â€œtime beforeâ€� and her will to survive are acts of rebellion. Provocative, startling, prophetic, and with Margaret Atwoodâ€™s devastating irony, wit, and acute perceptive powers in full force, The Handmaidâ€™s Tale is at once a mordant satire and a dire warning.",
+"In this multi-award-winning, bestselling novel, Margaret Atwood has created a stunning Orwellian vision of the near future. This is the story of Offred, one of the unfortunate â€œHandmaidsï¿½? under the new social order who have only one purpose: to breed. In Gilead, where women are prohibited from holding jobs, reading, and forming friendships, Offredâ€™s persistent memories of life in the â€œtime beforeï¿½? and her will to survive are acts of rebellion. Provocative, startling, prophetic, and with Margaret Atwoodâ€™s devastating irony, wit, and acute perceptive powers in full force, The Handmaidâ€™s Tale is at once a mordant satire and a dire warning.",
 "MOBI", 11.99, 17.95, 12.37, null),
 (null, "978-0553448122", "Artemis: A Novel", "Crown", "2017-11-14 00:00:00", 320, "Science Fiction", 
 "Jasmine Bashara never signed up to be a hero. She just wanted to get rich. 
@@ -453,7 +451,7 @@ Cambridge University, the visitor is eager to complete the gruesome task assigne
 
 He is disgusted by the way humans look, what they eat, and their capacity for murder and war, and he is equally baffled by the concepts of love and family. But as time goes on, he starts to realize there may be more to this weird species than he has been led to believe. Disguised as Martin, he drinks wine, reads poetry, and develops an ear for rock music and a taste for peanut butter. Slowly, unexpectedly, he forges bonds with Martinâ€™s family, and in picking up the pieces of the professorâ€™s shattered personal life, he begins to see hope and beauty in the humansâ€™ imperfections and to question the mission that brought him here.
 
-Praised by The New York Times as a â€œnovelist of great seriousness and talent,â€� Matt Haig delivers an unlikely story about human nature and the joy found in the messiness of life on Earth. The Humans is a funny, compulsively readable tale that playfully and movingly explores the ultimate subjectâ€”ourselves.",
+Praised by The New York Times as a â€œnovelist of great seriousness and talent,ï¿½? Matt Haig delivers an unlikely story about human nature and the joy found in the messiness of life on Earth. The Humans is a funny, compulsively readable tale that playfully and movingly explores the ultimate subjectâ€”ourselves.",
 "MOBI", 11.99, 16.99, 13.99, null),
 (null, "978-0441478125", "The Left Hand of Darkness", "Ace", "2000-07-01", 352, "Science Fiction", 
 "A lone human ambassador is sent to Winter, an alien world without sexual prejudice, where the inhabitants can change their gender whenever they choose. His goal is to facilitate Winter's inclusion in a growing intergalactic civilization. But to do so he must bridge the gulf between his own views and those of the strange, intriguing culture he encounters...
@@ -491,7 +489,7 @@ Her only way forward is to embark on a dicey excursion. For this, she knows she 
 But what neither she, nor any of her new Liberator comrades can prepare for, is just how deep the lies of their homelands run...'",
 "PDF", 0.45, 1.6, 1.25, null),
 (null, "978-0996135696", "Midnight Blue", " LJ Shen", "2018-01-16", 338, "Romance", 
-"It should have been easy. I needed the money. He needed a babysitter to keep him from snorting himself to death. I was cherry-picked especially for him. Responsible. Optimistic. Warm. Innocent. The worst part is that I should have known better. Alex Winslow. British rock star. Serial heartbreaker. Casanova with whiskey eyes. â€œDonâ€™t get near the devil in a leather jacket. Heâ€™ll chew you up and spit you out.â€� Guess what? I didnâ€™t listen. I signed the contract. World tour. Three months. Four Continents. One hundred shows. My name is Indigo Bellamy, and I sold my soul to a tattooed god. Problem was, my soul wasnâ€™t enough for Alex Winslow. He ended up taking my body, too. Then he took my heart. Then he took my all.", 
+"It should have been easy. I needed the money. He needed a babysitter to keep him from snorting himself to death. I was cherry-picked especially for him. Responsible. Optimistic. Warm. Innocent. The worst part is that I should have known better. Alex Winslow. British rock star. Serial heartbreaker. Casanova with whiskey eyes. â€œDonâ€™t get near the devil in a leather jacket. Heâ€™ll chew you up and spit you out.ï¿½? Guess what? I didnâ€™t listen. I signed the contract. World tour. Three months. Four Continents. One hundred shows. My name is Indigo Bellamy, and I sold my soul to a tattooed god. Problem was, my soul wasnâ€™t enough for Alex Winslow. He ended up taking my body, too. Then he took my heart. Then he took my all.", 
 "PDF", 0.75, 2.98, 1.85, null),
 (null, "978-1942215707", "Sex, Not Love", "Vi Keeland", "2018-01-15", 300, "Romance", 
 "My relationship with Hunter Delucia started backwards.
@@ -572,7 +570,7 @@ For a family held together by lies, the truth will come at a devastating price."
 (null, "978-1476729091", "The Rosie Project: A Novel", "Simon & Schuster; Reprint edition", "2014-06-03", 295, "Romance", 
 "The art of love is never a science: Meet Don Tillman, a brilliant yet socially inept professor of genetics, whoâ€™s decided itâ€™s time he found a wife. In the orderly, evidence-based manner with which Don approaches all things, he designs the Wife Project to find his perfect partner: a sixteen-page, scientifically valid survey to filter out the drinkers, the smokers, the late arrivers. 
 
-Rosie Jarman possesses all these qualities. Don easily disqualifies her as a candidate for The Wife Project (even if she is â€œquite intelligent for a barmaidâ€�). But Don is intrigued by Rosieâ€™s own quest to identify her biological father. When an unlikely relationship develops as they collaborate on The Father Project, Don is forced to confront the spontaneous whirlwind that is Rosie?and the realization that, despite your best scientific efforts, you donâ€™t find love, it finds you.",
+Rosie Jarman possesses all these qualities. Don easily disqualifies her as a candidate for The Wife Project (even if she is â€œquite intelligent for a barmaidï¿½?). But Don is intrigued by Rosieâ€™s own quest to identify her biological father. When an unlikely relationship develops as they collaborate on The Father Project, Don is forced to confront the spontaneous whirlwind that is Rosie?and the realization that, despite your best scientific efforts, you donâ€™t find love, it finds you.",
 "PDF", 4.99, 10.97, 8.75, null),
 (null, "978-1455520619", "See Me", "Grand Central Publishing; First Edition edition", "2015-10-13", 496, "Romance", 
 "See me just as I see you . . .
@@ -590,14 +588,14 @@ Rich in emotion and fueled with suspense, SEE ME reminds us that love is sometim
 (null, "978-1981689798", "Cabin Fever: A Mountain Man Romance", "CreateSpace Independent Publishing Platform", "2017-12-14", 534, "Romance","A Mountain Man Romance",
 "PDF", 0.22, 1.02, 0.83, null),
 (null, "978-1542048439", "Infraction (Players Game Book 2)", "Skyscape", "2018-01-09", 284, "Romance", 
-"Pro footballer Miller Quinton would do anything for his best friend and teammateâ€”including â€œfake datingâ€� his friendâ€™s sister. What no one knows is that seven months ago in Vegas, Miller and Kinsey did a whole lot more than just kiss. Miller knows that this cheerleader is off-limits to him and any guy on the team. Still, he canâ€™t stop himself.
+"Pro footballer Miller Quinton would do anything for his best friend and teammateâ€”including â€œfake datingï¿½? his friendâ€™s sister. What no one knows is that seven months ago in Vegas, Miller and Kinsey did a whole lot more than just kiss. Miller knows that this cheerleader is off-limits to him and any guy on the team. Still, he canâ€™t stop himself.
 
 Kinseyâ€™s whole world is on the verge of crumbling. Her dad has cancer. Her overprotective brother is falling apart. Dating Miller may be a fake-out, but heâ€™s the one guy who can make her forget about everythingâ€”including all the reasons she stayed away from football players. With each heated moment, Miller feels more like a safe placeâ€¦even though heâ€™s not safe at all.
 
 Now temptation is testing every rule in the game of love. But how long can they go on playing when winning is a harder goal than either of them imagined?",
 "PDF", 1.45, 3.99, 2.44, null),
 (null, "978-1443453516", "Killer: My Life in Hockey", "HarperCollins", "2017-10-17", 336, "Biographies", 
-"Doug Gilmour didnâ€™t look fearsome on a pair of skatesâ€”being an â€œundersizedâ€� forward would plague him during his early careerâ€”but few players matched his killer instincts in the faceoff circle or in front of the net. The Hockey Hall of Famer from Kingston, Ontario, played for seven teams over his twenty-year career, netting 450 goals and 964 assists during the regular season and another 188 points in the playoffs, making him one of the highest-scoring centres of all time. Gilmour played a big role in the 1989 Stanley Cup victory, scoring the winning goal for the Calgary Flames. Perhaps most famously, he led the Toronto Maple Leafs to multiple winning seasons and in 1993, took them to the brink of their first Stanley Cup final in decades, only to lose out on one of the most controversial calls in hockey history.In Killer, Doug Gilmour bares all about his on- and off-the-ice exploits and escapades. Gilmour has always been frank with the media, and his memoir is as revealing as it is hilarious. He played with the greatest players of his generation, and his love for the game and for life are legendary.",
+"Doug Gilmour didnâ€™t look fearsome on a pair of skatesâ€”being an â€œundersizedï¿½? forward would plague him during his early careerâ€”but few players matched his killer instincts in the faceoff circle or in front of the net. The Hockey Hall of Famer from Kingston, Ontario, played for seven teams over his twenty-year career, netting 450 goals and 964 assists during the regular season and another 188 points in the playoffs, making him one of the highest-scoring centres of all time. Gilmour played a big role in the 1989 Stanley Cup victory, scoring the winning goal for the Calgary Flames. Perhaps most famously, he led the Toronto Maple Leafs to multiple winning seasons and in 1993, took them to the brink of their first Stanley Cup final in decades, only to lose out on one of the most controversial calls in hockey history.In Killer, Doug Gilmour bares all about his on- and off-the-ice exploits and escapades. Gilmour has always been frank with the media, and his memoir is as revealing as it is hilarious. He played with the greatest players of his generation, and his love for the game and for life are legendary.",
 "PDF", 10.99, 16.99, 14.99, null),
 (null, "978-0062301239", "Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future", "Ecco", "2015-05-19", 400, "Biographies", 
 "In Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future, veteran technology journalist Ashlee Vance provides the first inside look into the extraordinary life and times of Silicon Valley's most audacious entrepreneur. Written with exclusive access to Musk, his family and friends, the book traces the entrepreneur's journey from a rough upbringing in South Africa to the pinnacle of the global business world. Vance spent more than 30 hours in conversation with Musk and interviewed close to 300 people to tell the tumultuous stories of Musk's world-changing companies: PayPal, Tesla Motors, SpaceX and SolarCity, and to characterize a man who has renewed American industry and sparked new levels of innovation while making plenty of enemies along the way.",
@@ -645,9 +643,9 @@ Tightly focused, meticulously researched, rendered with vivid detail and narrati
  
 Before the Civil War, Grant was flailing. His business ventures had ended dismally, and despite distinguished service in the Mexican War he ended up resigning from the army in disgrace amid recurring accusations of drunkenness. But in war, Grant began to realize his remarkable potential, soaring through the ranks of the Union army, prevailing at the battle of Shiloh and in the Vicksburg campaign, and ultimately defeating the legendary Confederate general Robert E. Lee. Along the way, Grant endeared himself to President Lincoln and became his most trusted general and the strategic genius of the war effort. Grantâ€™s military fame translated into a two-term presidency, but one plagued by corruption scandals involving his closest staff members.
 
-More important, he sought freedom and justice for black Americans, working to crush the Ku Klux Klan and earning the admiration of Frederick Douglass, who called him â€œthe vigilant, firm, impartial, and wise protector of my race.â€� After his presidency, he was again brought low by a dashing young swindler on Wall Street, only to resuscitate his image by working with Mark Twain to publish his memoirs, which are recognized as a masterpiece of the genre.
+More important, he sought freedom and justice for black Americans, working to crush the Ku Klux Klan and earning the admiration of Frederick Douglass, who called him â€œthe vigilant, firm, impartial, and wise protector of my race.ï¿½? After his presidency, he was again brought low by a dashing young swindler on Wall Street, only to resuscitate his image by working with Mark Twain to publish his memoirs, which are recognized as a masterpiece of the genre.
  
-With lucidity, breadth, and meticulousness, Chernow finds the threads that bind these disparate stories together, shedding new light on the man whom Walt Whitman described as â€œnothing heroic... and yet the greatest hero.â€� Chernowâ€™s probing portrait of Grant's lifelong struggle with alcoholism transforms our understanding of the man at the deepest level. This is America's greatest biographer, bringing movingly to life one of our finest but most underappreciated presidents. The definitive biography, Grant is a grand synthesis of painstaking research and literary brilliance that makes sense of all sides of Grant's life, explaining how this simple Midwesterner could at once be so ordinary and so extraordinary. ",
+With lucidity, breadth, and meticulousness, Chernow finds the threads that bind these disparate stories together, shedding new light on the man whom Walt Whitman described as â€œnothing heroic... and yet the greatest hero.ï¿½? Chernowâ€™s probing portrait of Grant's lifelong struggle with alcoholism transforms our understanding of the man at the deepest level. This is America's greatest biographer, bringing movingly to life one of our finest but most underappreciated presidents. The definitive biography, Grant is a grand synthesis of painstaking research and literary brilliance that makes sense of all sides of Grant's life, explaining how this simple Midwesterner could at once be so ordinary and so extraordinary. ",
 "PDF", 13.99, 20.29, 16.99, null),
 (null, "978-0316512589", "Obama: An Intimate Portrait", "Little, Brown and Company", "2017-11-07", 327, "Biographies", 
 "During Barack Obama's two terms, Pete Souza was with the President during more crucial moments than anyone else--and he photographed them all. Souza captured nearly two million photographs of President Obama, in moments highly classified and disarmingly candid.
@@ -693,7 +691,7 @@ Fifth in line to the throne at the time of her birth, Victoria was an ordinary w
 Drawing on sources that include fresh revelations about Victoriaâ€™s relationship with John Brown, Julia Baird brings vividly to life the fascinating story of a woman who struggled with so many of the things we do today: balancing work and family, raising children, navigating marital strife, losing parents, combating anxiety and self-doubt, finding an identity, searching for meaning.",
 "PDF", 5.85, 13.83, 11.99, null),
 (null, "978-0345298065", "Peter the Great: His Life and World", "Random House Trade Paperbacks; Reissue edition", "1981-10-12", 928, "Biographies", 
-"Against the monumental canvas of seventeenth- and eighteenth-century Europe and Russia unfolds the magnificent story of Peter the Great, crowned co-tsar at the age of ten. Robert K. Massie delves deep into the life of this captivating historical figure, chronicling the pivotal events that shaped a boy into a legendâ€”including his â€œincognitoâ€� travels in Europe, his unquenchable curiosity about Western ways, his obsession with the sea and establishment of the stupendous Russian navy, his creation of an unbeatable army, his transformation of Russia, and his relationships with those he loved most: Catherine, the robust yet gentle peasant, his loving mistress, wife, and successor; and Menshikov, the charming, bold, unscrupulous prince who rose to wealth and power through Peterâ€™s friendship. Impetuous and stubborn, generous and cruel, tender and unforgiving, a man of enormous energy and complexity, Peter the Great is brought fully to life.",
+"Against the monumental canvas of seventeenth- and eighteenth-century Europe and Russia unfolds the magnificent story of Peter the Great, crowned co-tsar at the age of ten. Robert K. Massie delves deep into the life of this captivating historical figure, chronicling the pivotal events that shaped a boy into a legendâ€”including his â€œincognitoï¿½? travels in Europe, his unquenchable curiosity about Western ways, his obsession with the sea and establishment of the stupendous Russian navy, his creation of an unbeatable army, his transformation of Russia, and his relationships with those he loved most: Catherine, the robust yet gentle peasant, his loving mistress, wife, and successor; and Menshikov, the charming, bold, unscrupulous prince who rose to wealth and power through Peterâ€™s friendship. Impetuous and stubborn, generous and cruel, tender and unforgiving, a man of enormous energy and complexity, Peter the Great is brought fully to life.",
 "PDF", 8.95, 14.75, 12.99, null),
 (null, "978-1250171085", "When They Call You a Terrorist: A Black Lives Matter Memoir", "St. Martin's Press; Reprint edition", "2018-01-16", 272, "Biographies", 
 "From one of the co-founders of the Black Lives Matter movement comes a poetic memoir and reflection on humanity. Necessary and timely, Patrisse Cullorsâ€™ story asks us to remember that protest in the interest of the most vulnerable comes from love. Leaders of the Black Lives Matter movement have been called terrorists, a threat to America. But in truth, they are loving women whose life experiences have led them to seek justice for those victimized by the powerful. In this meaningful, empowering account of survival, strength, and resilience, Patrisse Cullors and asha bandele seek to change the culture that declares innocent black life expendable.",
@@ -763,6 +761,13 @@ insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_ST
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (43, 25, '2017-04-15 11:14:14', 5, 'tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae', true);
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (100, 25, '2017-05-17 23:43:04', 4, 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet', false);
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (55, 20, '2017-07-08 11:09:01', 3, 'amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 3, CURRENT_TIME, 3, 'Test review 1', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 4, CURRENT_TIME, 1, 'Test review 2', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 5, CURRENT_TIME, 4, 'Test review 3', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 6, CURRENT_TIME, 5, 'Test review 4', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 7, CURRENT_TIME, 2, 'Test review 5', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 8, CURRENT_TIME, 1, 'Test review 6', false);
+
 
 --TAXES--
 insert into TAX (PROVINCE, GST_RATE, PST_RATE, HST_RATE) values
@@ -866,3 +871,112 @@ insert into AUTHOR (FIRST_NAME, LAST_NAME) values
 ('Marco','Morris'),
 ('Julia','Baird'),
 ('Patrisse','Khan-Cullors');
+
+insert into BOOK_AUTHOR (BOOK_ID, AUTHOR_ID) values
+(1,1),
+(2,2),
+(3,3),
+(4,4),
+(5,4),
+(6,4),
+(7,5),
+(8,6),
+(9,7),
+(10,8),
+(11,9),
+(12,10),
+(13,11),
+(14,12),
+(15,13),
+(16,10),
+(17,14),
+(18,15),
+(19,16),
+(20,17),
+(21,18),
+(22,19),
+(23,19),
+(24,20),
+(25,21),
+(26,22),
+(27,23),
+(28,24),
+(29,25),
+(30,19),
+(31,26),
+(32,27),
+(33,28),
+(34,29),
+(35,30),
+(36,31),
+(37,32),
+(38,33),
+(39,34),
+(40,19),
+(41,35),
+(42,36),
+(43,37),
+(44,38),
+(45,39),
+(46,40),
+(47,41),
+(48,42),
+(49,43),
+(50,40),
+(51,44),
+(52,45),
+(53,46),
+(54,46),
+(55,47),
+(56,48),
+(57,49),
+(58,50),
+(59,51),
+(60,52),
+(61,12),
+(62,53),
+(63,54),
+(64,55),
+(65,8),
+(66,56),
+(67,57),
+(68,58),
+(69,59),
+(70,60),
+(71,61),
+(72,62),
+(73,63),
+(74,64),
+(75,65),
+(76,66),
+(77,67),
+(78,68),
+(79,69),
+(80,70),
+(81,71),
+(82,72),
+(83,73),
+(84,24),
+(85,73),
+(86,74),
+(87,75),
+(88,76),
+(89,77),
+(90,78),
+(91,79),
+(92,80),
+(93,24),
+(94,81),
+(95,81),
+(96,82),
+(97,83),
+(98,84),
+(99,81),
+(100,85);
+
+insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_FOUR, VOTE_ONE, VOTE_TWO, VOTE_THREE, VOTE_FOUR) values
+('At what time of the day do you prefer to read?', 'Morning', 'Noon', 'Afternoon', 'Evening', 0, 0, 0, 0),
+('What is your favorite genre?', 'SciFi', 'Biography', 'Romance', 'Mystery', 0, 0, 0, 0),
+('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0),
+('How many books have you read in your life?', 'Less than 1', 'Between 1 and 10', 'Between 11 and 50', 'More than 50', 0, 0, 0, 0);
+

@@ -10,14 +10,10 @@ import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Banner;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.Resource;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
@@ -26,26 +22,24 @@ import javax.transaction.UserTransaction;
  *
  * @author Salman Haidar
  */
-@Named
-@SessionScoped
 public class BannerJpaController implements Serializable {
 
-    public BannerJpaController() {
-    
+    public BannerJpaController(UserTransaction utx, EntityManagerFactory emf) {
+        this.utx = utx;
+        this.emf = emf;
     }
-    
-    @Resource
-    private UserTransaction utx;
-    
-    @PersistenceContext
-    private EntityManager em;
+    private UserTransaction utx = null;
+    private EntityManagerFactory emf = null;
 
-    
+    public EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
 
     public void create(Banner banner) throws RollbackFailureException, Exception {
-      
+        EntityManager em = null;
         try {
             utx.begin();
+            em = getEntityManager();
             em.persist(banner);
             utx.commit();
         } catch (Exception ex) {
@@ -55,13 +49,18 @@ public class BannerJpaController implements Serializable {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
     public void edit(Banner banner) throws NonexistentEntityException, RollbackFailureException, Exception {
-        
+        EntityManager em = null;
         try {
             utx.begin();
+            em = getEntityManager();
             banner = em.merge(banner);
             utx.commit();
         } catch (Exception ex) {
@@ -78,13 +77,18 @@ public class BannerJpaController implements Serializable {
                 }
             }
             throw ex;
-        } 
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
-        
+        EntityManager em = null;
         try {
             utx.begin();
+            em = getEntityManager();
             Banner banner;
             try {
                 banner = em.getReference(Banner.class, id);
@@ -101,7 +105,11 @@ public class BannerJpaController implements Serializable {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
-        } 
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     public List<Banner> findBannerEntities() {
@@ -113,7 +121,8 @@ public class BannerJpaController implements Serializable {
     }
 
     private List<Banner> findBannerEntities(boolean all, int maxResults, int firstResult) {
-        
+        EntityManager em = getEntityManager();
+        try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Banner.class));
             Query q = em.createQuery(cq);
@@ -122,23 +131,31 @@ public class BannerJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        
+        } finally {
+            em.close();
+        }
     }
 
     public Banner findBanner(Integer id) {
-        
+        EntityManager em = getEntityManager();
+        try {
             return em.find(Banner.class, id);
-        
+        } finally {
+            em.close();
+        }
     }
 
     public int getBannerCount() {
-        
+        EntityManager em = getEntityManager();
+        try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Banner> rt = cq.from(Banner.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
-        
+        } finally {
+            em.close();
+        }
     }
     
 }

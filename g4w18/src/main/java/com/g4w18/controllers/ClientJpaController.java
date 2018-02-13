@@ -18,33 +18,26 @@ import com.g4w18.entities.Review;
 import java.util.ArrayList;
 import java.util.List;
 import com.g4w18.entities.MasterInvoice;
-import javax.annotation.Resource;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-
 
 /**
  *
  * @author Salman Haidar
  */
-@Named
-@SessionScoped
 public class ClientJpaController implements Serializable {
 
-    public ClientJpaController() {
-        
+    public ClientJpaController(UserTransaction utx, EntityManagerFactory emf) {
+        this.utx = utx;
+        this.emf = emf;
     }
-    @Resource
-    private UserTransaction utx ;
-    
-    @PersistenceContext
-    private EntityManager em;
+    private UserTransaction utx = null;
+    private EntityManagerFactory emf = null;
 
-   
+    public EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
 
     public void create(Client client) throws RollbackFailureException, Exception {
         if (client.getReviewList() == null) {
@@ -53,8 +46,10 @@ public class ClientJpaController implements Serializable {
         if (client.getMasterInvoiceList() == null) {
             client.setMasterInvoiceList(new ArrayList<MasterInvoice>());
         }
+        EntityManager em = null;
         try {
             utx.begin();
+            em = getEntityManager();
             List<Review> attachedReviewList = new ArrayList<Review>();
             for (Review reviewListReviewToAttach : client.getReviewList()) {
                 reviewListReviewToAttach = em.getReference(reviewListReviewToAttach.getClass(), reviewListReviewToAttach.getReviewId());
@@ -94,13 +89,18 @@ public class ClientJpaController implements Serializable {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
-        } 
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     public void edit(Client client) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
-        
+        EntityManager em = null;
         try {
             utx.begin();
+            em = getEntityManager();
             Client persistentClient = em.find(Client.class, client.getClientId());
             List<Review> reviewListOld = persistentClient.getReviewList();
             List<Review> reviewListNew = client.getReviewList();
@@ -178,13 +178,18 @@ public class ClientJpaController implements Serializable {
                 }
             }
             throw ex;
-        } 
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
-       
+        EntityManager em = null;
         try {
             utx.begin();
+            em = getEntityManager();
             Client client;
             try {
                 client = em.getReference(Client.class, id);
@@ -219,7 +224,11 @@ public class ClientJpaController implements Serializable {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
-        } 
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     public List<Client> findClientEntities() {
@@ -231,7 +240,8 @@ public class ClientJpaController implements Serializable {
     }
 
     private List<Client> findClientEntities(boolean all, int maxResults, int firstResult) {
-        
+        EntityManager em = getEntityManager();
+        try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Client.class));
             Query q = em.createQuery(cq);
@@ -240,23 +250,31 @@ public class ClientJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        
+        } finally {
+            em.close();
+        }
     }
 
     public Client findClient(Integer id) {
-        
+        EntityManager em = getEntityManager();
+        try {
             return em.find(Client.class, id);
-        
+        } finally {
+            em.close();
+        }
     }
 
     public int getClientCount() {
-        
+        EntityManager em = getEntityManager();
+        try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Client> rt = cq.from(Client.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
-         
+        } finally {
+            em.close();
+        }
     }
     
 }

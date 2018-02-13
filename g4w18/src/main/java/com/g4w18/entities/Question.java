@@ -29,12 +29,12 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Question.findByQuestionId", query = "SELECT q FROM Question q WHERE q.questionId = :questionId")
     , @NamedQuery(name = "Question.findByDescription", query = "SELECT q FROM Question q WHERE q.description = :description")
     , @NamedQuery(name = "Question.findByAnswerOne", query = "SELECT q FROM Question q WHERE q.answerOne = :answerOne")
-    , @NamedQuery(name = "Question.findByVoteOne", query = "SELECT q FROM Question q WHERE q.voteOne = :voteOne")
     , @NamedQuery(name = "Question.findByAnswerTwo", query = "SELECT q FROM Question q WHERE q.answerTwo = :answerTwo")
-    , @NamedQuery(name = "Question.findByVoteTwo", query = "SELECT q FROM Question q WHERE q.voteTwo = :voteTwo")
     , @NamedQuery(name = "Question.findByAnswerThree", query = "SELECT q FROM Question q WHERE q.answerThree = :answerThree")
-    , @NamedQuery(name = "Question.findByVoteThree", query = "SELECT q FROM Question q WHERE q.voteThree = :voteThree")
     , @NamedQuery(name = "Question.findByAnswerFour", query = "SELECT q FROM Question q WHERE q.answerFour = :answerFour")
+    , @NamedQuery(name = "Question.findByVoteOne", query = "SELECT q FROM Question q WHERE q.voteOne = :voteOne")
+    , @NamedQuery(name = "Question.findByVoteTwo", query = "SELECT q FROM Question q WHERE q.voteTwo = :voteTwo")
+    , @NamedQuery(name = "Question.findByVoteThree", query = "SELECT q FROM Question q WHERE q.voteThree = :voteThree")
     , @NamedQuery(name = "Question.findByVoteFour", query = "SELECT q FROM Question q WHERE q.voteFour = :voteFour")})
 public class Question implements Serializable {
 
@@ -56,17 +56,9 @@ public class Question implements Serializable {
     private String answerOne;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "VOTE_ONE")
-    private int voteOne;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "ANSWER_TWO")
     private String answerTwo;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "VOTE_TWO")
-    private int voteTwo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -74,13 +66,21 @@ public class Question implements Serializable {
     private String answerThree;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "VOTE_THREE")
-    private int voteThree;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "ANSWER_FOUR")
     private String answerFour;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "VOTE_ONE")
+    private int voteOne;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "VOTE_TWO")
+    private int voteTwo;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "VOTE_THREE")
+    private int voteThree;
     @Basic(optional = false)
     @NotNull
     @Column(name = "VOTE_FOUR")
@@ -93,16 +93,16 @@ public class Question implements Serializable {
         this.questionId = questionId;
     }
 
-    public Question(Integer questionId, String description, String answerOne, int voteOne, String answerTwo, int voteTwo, String answerThree, int voteThree, String answerFour, int voteFour) {
+    public Question(Integer questionId, String description, String answerOne, String answerTwo, String answerThree, String answerFour, int voteOne, int voteTwo, int voteThree, int voteFour) {
         this.questionId = questionId;
         this.description = description;
         this.answerOne = answerOne;
-        this.voteOne = voteOne;
         this.answerTwo = answerTwo;
-        this.voteTwo = voteTwo;
         this.answerThree = answerThree;
-        this.voteThree = voteThree;
         this.answerFour = answerFour;
+        this.voteOne = voteOne;
+        this.voteTwo = voteTwo;
+        this.voteThree = voteThree;
         this.voteFour = voteFour;
     }
 
@@ -130,28 +130,12 @@ public class Question implements Serializable {
         this.answerOne = answerOne;
     }
 
-    public int getVoteOne() {
-        return voteOne;
-    }
-
-    public void setVoteOne(int voteOne) {
-        this.voteOne = voteOne;
-    }
-
     public String getAnswerTwo() {
         return answerTwo;
     }
 
     public void setAnswerTwo(String answerTwo) {
         this.answerTwo = answerTwo;
-    }
-
-    public int getVoteTwo() {
-        return voteTwo;
-    }
-
-    public void setVoteTwo(int voteTwo) {
-        this.voteTwo = voteTwo;
     }
 
     public String getAnswerThree() {
@@ -162,20 +146,36 @@ public class Question implements Serializable {
         this.answerThree = answerThree;
     }
 
-    public int getVoteThree() {
-        return voteThree;
-    }
-
-    public void setVoteThree(int voteThree) {
-        this.voteThree = voteThree;
-    }
-
     public String getAnswerFour() {
         return answerFour;
     }
 
     public void setAnswerFour(String answerFour) {
         this.answerFour = answerFour;
+    }
+
+    public int getVoteOne() {
+        return voteOne;
+    }
+
+    public void setVoteOne(int voteOne) {
+        this.voteOne = voteOne;
+    }
+
+    public int getVoteTwo() {
+        return voteTwo;
+    }
+
+    public void setVoteTwo(int voteTwo) {
+        this.voteTwo = voteTwo;
+    }
+
+    public int getVoteThree() {
+        return voteThree;
+    }
+
+    public void setVoteThree(int voteThree) {
+        this.voteThree = voteThree;
     }
 
     public int getVoteFour() {

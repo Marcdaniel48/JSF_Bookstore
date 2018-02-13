@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -158,5 +157,5 @@ public class TaxJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }
