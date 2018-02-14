@@ -35,6 +35,9 @@
                             <b:column col-md="2">
                                 <h:outputText value="#{book.listPrice} CAD"></h:outputText>
                             </b:column>
+                            <b:column>
+                                <h:commandLink value="Delete" action="#{shoppingCartBackingBean.removeFromCart(book)}" />
+                            </b:column>
                         </b:row>
                     </ui:repeat>
                 </b:panel>

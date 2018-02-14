@@ -5,8 +5,12 @@
  */
 package com.g4w18.controllers;
 
+import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;

@@ -7,6 +7,9 @@ package com.g4w18.controllers;
 
 import com.g4w18.entities.Book;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -34,6 +37,7 @@ public class ShoppingCart implements Serializable
         {
             books = (List<Book>)session.getAttribute("shoppingCart");
         }
+        
     }
     
     public void addToCart(Book book)
@@ -71,8 +75,6 @@ public class ShoppingCart implements Serializable
     
     public List<Book> getShoppingCartBooks()
     {
-        //books.add(new Book(1, "isbn","Title of some book","publisher",Date.valueOf(LocalDate.now()), 10, "lol", "l", "l", new BigDecimal(1),new BigDecimal(1),new BigDecimal(1),Date.valueOf(LocalDate.now())));
-        
         return books;
     }
     

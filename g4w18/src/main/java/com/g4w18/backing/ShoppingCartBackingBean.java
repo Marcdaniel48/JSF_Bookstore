@@ -29,4 +29,9 @@ public class ShoppingCartBackingBean
         System.out.println("Size is: " + list.size());
         return list;
     }
+    
+    public void removeFromCart(Book book)
+    {
+        cart.removeFromCart(book);
+    }
 }
