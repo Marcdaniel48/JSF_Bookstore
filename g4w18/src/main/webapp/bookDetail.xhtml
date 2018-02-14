@@ -178,20 +178,7 @@
                     </b:container>
                     <hr/>
                 </ui:repeat>
-                <b:row>
-                <b:container fluid="true">
-                    <b:form>
-                        <b:inputTextarea placeholder="Leave a review..." value="#{reviewBackingBean.review.review}" col-md="10" styleClass="reviewinput">
-                        </b:inputTextarea>
-                        <b:panel col-md="2">
-                            <p:rating value="#{reviewBackingBean.review.rating}"/>
-                            <b:commandButton value="Submit" action="#{reviewBackingBean.createReview()}">
-                                <f:param name="bookId" value="#{bookBackingBean.book.bookId}"></f:param>
-                            </b:commandButton>
-                        </b:panel>
-                    </b:form>
-                </b:container>
-                </b:row>
+
             </b:panel>
         </b:container>
 

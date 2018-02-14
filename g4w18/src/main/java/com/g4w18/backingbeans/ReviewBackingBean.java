@@ -1,6 +1,10 @@
 package com.g4w18.backingbeans;
 
+import com.g4w18.controllers.BookJpaController;
+import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.controllers.ReviewJpaController;
+import com.g4w18.entities.Book;
+import com.g4w18.entities.Client;
 import com.g4w18.entities.Review;
 import java.io.Serializable;
 import java.util.Map;
@@ -24,6 +28,12 @@ public class ReviewBackingBean implements Serializable {
 
     @Inject
     private ReviewJpaController reviewJpaController;
+    
+    @Inject
+    private BookJpaController bookJpaController;
+    
+    @Inject
+    private ClientJpaController clientJpaController;
 
     private Review review;
 
@@ -45,7 +55,10 @@ public class ReviewBackingBean implements Serializable {
         Map<String, String> params
                 = getFacesContext().getExternalContext().getRequestParameterMap();
         int bookId = Integer.parseInt(params.get("bookId"));
-        review.setBookId(bookId);
+        Book book = bookJpaController.findBook(bookId);
+        review.setBookId(book);
+        Client client = clientJpaController.findClient(5);
+        review.setClientId(client);
         reviewJpaController.create(review);
         return null;
     }
