@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -21,8 +22,6 @@
     </h:head>
     <h:body>
         
-        
-        
         <div class="parallax">
             
             <nav class="navbar">
@@ -39,64 +38,6 @@
             <div class="parallax-layer content">
                 
                 <div class="top-section">
-                    <div id="genres">
-			<div class="outer">
-                            <div class="middle">
-                                <div class="genre-btn">
-                                    <div class="genre-icon"></div>
-                                    <span class="genre-title">Fantasy</span>
-                                </div>
-                                <div class="genre-btn">
-                                    <div class="genre-icon"></div>
-                                    <span class="genre-title">Mystery</span>
-                                </div>
-                                <div class="genre-btn">
-                                    <div class="genre-icon"></div>
-                                    <span class="genre-title">Sci-Fi</span>
-                                </div>
-                                <div class="genre-btn">
-                                    <div class="genre-icon"></div>
-                                    <span class="genre-title">Romance</span>
-                                </div>
-                                <div class="genre-btn">
-                                    <div class="genre-icon"></div>
-                                    <span class="genre-title">Biographies</span>
-                                </div>
-                            </div>
-			</div>
-                    </div>
-                    
-                    
-                    <div id="recent-books">
-                        <div class="book">
-                            <div class="book-thumbnail-container">
-                                <div class="book-overlay"></div>
-                                <div class="book-overlay-text"><div>View</div></div>
-                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
-                            </div>
-                            <span class="book-title">An Even More Real Long Ass Example Title</span>
-                            <span class="book-price"><s>$12.99</s> $8.99</span>
-                        </div>
-                        <div class="book">
-                            <div class="book-thumbnail-container">
-                                <div class="book-overlay"></div>
-                                <div class="book-overlay-text"><div>View</div></div>
-                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
-                            </div>
-                            <span class="book-title">Short Title</span>
-                            <span class="book-price"><s>$12.99</s> $8.99</span>
-                        </div>
-                        <div class="book">
-                            <div class="book-thumbnail-container">
-                                <div class="book-overlay"></div>
-                                <div class="book-overlay-text"><div>View</div></div>
-                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
-                            </div>
-                            <span class="book-title">Some Real Long Ass Example Title</span>
-                            <span class="book-price"><s>$12.99</s> $8.99</span>
-                        </div>
-                    </div>
-
                     <div class="banner">
                         <div class="slide">
                             <h:graphicImage library="images" name="slide1.jpg" class="slide-img"/>
@@ -110,7 +51,6 @@
                         
                         <div class="dots-container"></div>
                     </div>
-                            
                     
                     <div id="book-sales">
                         <div class="book">
@@ -154,6 +94,63 @@
                         <a class="next">&#10095;</a>
                     </div>
                     
+                    <div id="genres">
+			<div class="outer">
+                            <div class="middle">
+                                <div class="genre-btn">
+                                    <div class="genre-icon"></div>
+                                    <span class="genre-title">Fantasy</span>
+                                </div>
+                                <div class="genre-btn">
+                                    <div class="genre-icon"></div>
+                                    <span class="genre-title">Mystery</span>
+                                </div>
+                                <div class="genre-btn">
+                                    <div class="genre-icon"></div>
+                                    <span class="genre-title">Sci-Fi</span>
+                                </div>
+                                <div class="genre-btn">
+                                    <div class="genre-icon"></div>
+                                    <span class="genre-title">Romance</span>
+                                </div>
+                                <div class="genre-btn">
+                                    <div class="genre-icon"></div>
+                                    <span class="genre-title">Biographies</span>
+                                </div>
+                            </div>
+			</div>
+                    </div>
+                    
+                    <div id="recent-books">
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="book-overlay"></div>
+                                <div class="book-overlay-text"><div>View</div></div>
+                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                            </div>
+                            <span class="book-title">An Even More Real Long Ass Example Title</span>
+                            <span class="book-price"><s>$12.99</s> $8.99</span>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="book-overlay"></div>
+                                <div class="book-overlay-text"><div>View</div></div>
+                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                            </div>
+                            <span class="book-title">Short Title</span>
+                            <span class="book-price"><s>$12.99</s> $8.99</span>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="book-overlay"></div>
+                                <div class="book-overlay-text"><div>View</div></div>
+                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                            </div>
+                            <span class="book-title">Some Real Long Ass Example Title</span>
+                            <span class="book-price"><s>$12.99</s> $8.99</span>
+                        </div>
+                    </div>
+                    
                     
                     <div class="search">
                         Search
@@ -165,6 +162,9 @@
                         Survey
                     </div>
                 </div>
+
+                
+                
 
                 
                 
