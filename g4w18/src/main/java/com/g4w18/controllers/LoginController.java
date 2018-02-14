@@ -7,8 +7,6 @@ package com.g4w18.controllers;
 
 import com.g4w18.entities.Client;
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -52,20 +50,16 @@ public class LoginController implements Serializable{
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         
-        FacesMessage message;
         boolean loggedIn;
         
         Client client = clientJpaController.findClientByCredentials(username, password);
-        System.out.println("Username:\t"+username+"\tPassword:\t"+password);
         
         if (client != null) 
         {
-            System.out.println("nice login");
             loggedIn = true;
         }
         else 
         {
-            System.out.println("unlucky fail");
             loggedIn = false;
         }
         
