@@ -53,6 +53,8 @@ html, body
     {
         height: auto;
         position: relative;
+        background-color: beige;
+        background-clip: content-box;
         border: 3px solid white;
     }
 /*}*/

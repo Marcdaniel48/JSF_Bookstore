@@ -19,7 +19,7 @@
 {
     height: 1850px;
     transform: translateZ(-1px) scale(2.1);
-    background-image: url("#{resource['images/pattern.png']}");
+    background-image: url("#{resource['images/pattern2.jpg']}");
 }
 .content
 {
