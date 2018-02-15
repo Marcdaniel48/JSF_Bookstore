@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -165,6 +160,8 @@ public class AuthorJpaController implements Serializable {
             return em.find(Author.class, id);
         
     }
+    
+    
 
     public int getAuthorCount() {
        
@@ -174,6 +171,20 @@ public class AuthorJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         
+    }
+    
+    /**
+     * Get list of author names with the name provided
+     * @param authorName provided by user
+     * @return List of authors found with the param
+     */
+    public List<Author> findAuthor(String authorName)
+    {
+        List<Author> findAuthorByName = em.createQuery("Select a from Author a where CONCAT(a.firstName,' ',a.lastName) LIKE ?1")
+                .setParameter(1, authorName + "%")
+                .getResultList();
+        
+        return findAuthorByName;
     }
     
 }

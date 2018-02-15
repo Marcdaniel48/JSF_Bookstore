@@ -31,12 +31,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Ignore;
 
 /**
  * Testing for JPA methods. 
  * 
  * @author Salman Haidar
  */
+@Ignore
 @RunWith(Arquillian.class)
 public class JPATest {
      
@@ -238,6 +240,24 @@ public class JPATest {
         
         assertThat(specificBook).hasSize(1);
     } 
+    
+    /**
+     * Find author with general term.
+     * @throws SQLException 
+     */
+    @Test
+    public void find_author_with_general_name() throws SQLException{
+        
+        List<Author> findAuthorByName = entityManager.createQuery("Select a from Author a where CONCAT(a.firstName,' ',a.lastName) LIKE ?1")
+                .setParameter(1, "C.S." +"%")
+                .getResultList();
+        
+        
+        logger.log(Level.INFO,"AUTHORNAME Data>>>{0}"+ findAuthorByName.get(0).getFirstName());
+        
+        assertThat(findAuthorByName).hasSize(1);
+    } 
+    
     
     /**
      * Find books with title with one letter provided.

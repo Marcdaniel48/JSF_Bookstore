@@ -312,6 +312,21 @@ public class BookJpaController implements Serializable {
      * @param isbn number of the book the user is searching for
      * @return Book found with the isbn
      */
+    public List<Book> findBookByAuthor(String author)
+    {
+        List<Book> findBookByAuthor = em.createQuery("Select b from Book b where b.isbnNumber = ?1")
+                .setParameter(1, author)
+                .getResultList();
+        
+        return findBookByAuthor;
+    }
+    
+    /**
+     * Get books from the database with the isbn provided(must match whole) 
+     * 
+     * @param isbn number of the book the user is searching for
+     * @return Book found with the isbn
+     */
     public List<Book> findBookByIsbn(String isbn)
     {
         List<Book> findBookByIsbn = em.createQuery("Select b from Book b where b.isbnNumber = ?1")

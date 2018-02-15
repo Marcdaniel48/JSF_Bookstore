@@ -1,6 +1,8 @@
 package com.g4w18.beans;
 
+import com.g4w18.controllers.AuthorJpaController;
 import com.g4w18.controllers.BookJpaController;
+import com.g4w18.entities.Author;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
@@ -29,9 +31,14 @@ public class SearchBackingBean implements Serializable {
     private String searchTerm;
     //Dropdown search option that is chosen
     private String searchOption;
+    //Display in the next page how many results were found
+    private String message="";
     
     @Inject
     private BookJpaController bookJpaController;
+    
+    @Inject
+    private AuthorJpaController authorJpaController;
     
     //Drop down search options
     private static Map<String,Object> searchOptions;
@@ -82,13 +89,24 @@ public class SearchBackingBean implements Serializable {
        logger.log(Level.INFO, "NUMBER OF RESULTS RETURNED: "+ result );
       
        if(result > 1)
+       {
+           message ="We have found " + result + " books for you! You searched for: " + searchTerm;
            return "resultPlus";
+       }
        else if(result == 1)
            return "resultOne";
        else
-           return null;
+       {    
+           message="We have found nothing for you ! You searched for: " + searchTerm;
+           return "resultPlus";
+       }
     }
     
+    /**
+     * For the search page, this method returns the appropriate list to display
+     * books. It depends on the option chosen by the user.
+     * @return Book for the specific search option. 
+     */
     public List<Book> getBooks()
     {
         List<Book> userBooks = null;
@@ -115,8 +133,9 @@ public class SearchBackingBean implements Serializable {
     }
     
     /**
+     * Get books with the title provided by the user.
      * 
-     * @return 
+     * @return List of books found
      */
     public List<Book> getBooksByTitle()
     {
@@ -125,9 +144,19 @@ public class SearchBackingBean implements Serializable {
         return books;
     }
     
+    public List<Book> getBooksByAuthor()
+    {
+        List<Author> authors = authorJpaController.findAuthor(searchTerm);
+        
+        List<Book> books = authors.get(0).getBookList();
+       
+        return books;
+    }
+    
     /**
+     * Get list of books with the specific isbn provided by the user.
      * 
-     * @return 
+     * @return List of books found with the isbn
      */
     public List<Book> getBookByIsbn()
     {
@@ -137,8 +166,8 @@ public class SearchBackingBean implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * Get list of books with the publisher provided by the user.
+     * @return List of books found with the publisher
      */
     public List<Book> getBooksByPublisher()
     {
@@ -156,7 +185,8 @@ public class SearchBackingBean implements Serializable {
     }
     
     public Map<String,Object> getSearchOptionValue() {
-		return searchOptions;
+	
+        return searchOptions;
     }
     
     public String getSearchOption()
@@ -169,4 +199,13 @@ public class SearchBackingBean implements Serializable {
         this.searchOption = searchOption;
     }
     
+    public void setMessage(String message)
+    {
+        this.message = message;
+    }
+    
+    public String getMessage()
+    {
+        return message;
+    }
 }

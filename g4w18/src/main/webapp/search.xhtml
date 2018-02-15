@@ -37,7 +37,7 @@
             </b:navbarLinks>
 
         </b:navBar>
-
+        <h1>#{searchBackingBean.message}</h1>
         <b:container fluid="false">
 
             <b:form>
@@ -56,7 +56,7 @@
 
                             <b:column col-md="8">
 
-                                <b:commandLink outcome="bookDetail">
+                                <b:commandLink outcome="bookdetails">
 
                                     <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
 
@@ -71,6 +71,13 @@
                                 <h:outputText value="#{book.listPrice} CAD"></h:outputText>
 
                             </b:column>
+                            <!-- AUTHOR INFOOOOOOOO
+                            <b:form>
+                                <ui:repeat var="author" value="#{searchBackingBean.books}">
+                                    <h:outputText value="#{author.firstName} #{author.lastName}" styleClass="list-group-item-heading"></h:outputText>                     
+                                </ui:repeat>
+                                    </b:form>
+-->
 
                         </b:row>
 
