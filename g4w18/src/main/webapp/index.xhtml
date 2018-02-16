@@ -38,7 +38,7 @@
             <div class="parallax-layer content">
                 
                 <div class="top-section">
-                    <div class="banner">
+                    <div class="banner tmpspacing">
                         <div class="slide">
                             <h:graphicImage library="images" name="slide1.jpg" class="slide-img"/>
                             <h:graphicImage library="images" name="slide2.jpg" class="slide-img"/>
@@ -52,7 +52,7 @@
                         <div class="dots-container"></div>
                     </div>
                     
-                    <div id="book-sales">
+                    <div id="book-sales" class="tmpspacing">
                         <div class="book">
                             <div class="book-thumbnail-container">
                                 <div class="book-overlay"></div>
@@ -94,7 +94,7 @@
                         <a class="next">&#10095;</a>
                     </div>
                     
-                    <div id="genres">
+                    <div id="genres" class="tmpspacing">
 			<div class="outer">
                             <div class="middle">
                                 <div class="genre-btn">
@@ -121,7 +121,7 @@
 			</div>
                     </div>
                     
-                    <div id="recent-books">
+                    <div id="recent-books" class="tmpspacing">
                         <div class="book">
                             <div class="book-thumbnail-container">
                                 <div class="book-overlay"></div>
@@ -152,17 +152,22 @@
                     </div>
                     
                     
-                    <div class="search">
+                    <div class="search tmpspacing">
                         Search
                     </div>
-                    <div class="news">
+                    <div class="news tmpspacing">
                         News Highlights
                     </div>
-                    <div class="survey">
+                    <div class="survey tmpspacing">
                         Survey
                     </div>
                 </div>
 
+                <script>
+                    $("*").each(function(){
+                       $(this).css("border", "initial"); 
+                    });
+                </script>
                 
                 
 

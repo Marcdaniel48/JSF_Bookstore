@@ -17,13 +17,13 @@
 }
 .background
 {
-    height: 1850px;
+    height: 2800px;
     transform: translateZ(-1px) scale(2.1);
-    background-image: url("#{resource['images/pattern2.jpg']}");
+    background-image: url("#{resource['images/stardust.png']}");
 }
 .content
 {
-    margin: 60px 10px 10px 10px;
+    margin: 60px 0px 10px 0px;
     position: relative;
     height: auto;
     border: 3px solid red;

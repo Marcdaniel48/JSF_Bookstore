@@ -30,12 +30,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Ignore;
 
 /**
  *
  * @author 1430047
  */
 @RunWith(Arquillian.class)
+@Ignore
+
 public class JPABookTest
 {
     private Logger logger = Logger.getLogger(getClass().getName());
