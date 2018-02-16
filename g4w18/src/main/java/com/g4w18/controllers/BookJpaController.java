@@ -291,6 +291,22 @@ public class BookJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
         
     }
+    
+    /**
+     * Get books from the database with the title provided     
+     * 
+     * @param title name of the book that is being searched
+     * @return List of books found with the title
+     */
+    public List<Book> findBooksByTitleSpecific(String title)
+    {
+        List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title =?1")
+                .setParameter(1, title)
+                .getResultList();
+        
+        return findBookByTitle;
+    }
+    
     /**
      * Get books from the database with the title provided(doesn't need to match whole)
      * 

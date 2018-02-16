@@ -186,8 +186,9 @@ public class SearchBackingBean implements Serializable {
      * Get list of publisher with the specific term provided by the user.
      * @return List of publishers found
      */
-    public List<Book> getPublishers()
+    public List<Book> getPublishers(String searchTxt)
     {
+        
         List<Book> publishers = bookJpaController.findDistinctPublisher(searchTerm);
         
         return  publishers;
