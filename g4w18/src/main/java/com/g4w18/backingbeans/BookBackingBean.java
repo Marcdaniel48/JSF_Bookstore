@@ -76,6 +76,7 @@ public class BookBackingBean implements Serializable {
             for (Review r : reviews) {
                 averageRating = averageRating + r.getRating();
             }
+            return averageRating/size;
         }
         log.log(Level.INFO, "Rating: {0}", averageRating);
         return averageRating;
