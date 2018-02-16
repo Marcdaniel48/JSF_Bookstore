@@ -81,6 +81,10 @@ public class BookBackingBean implements Serializable {
         log.log(Level.INFO, "Rating: {0}", averageRating);
         return averageRating;
     }
+    
+    public String getReviewName(){
+        return "";
+    }
 
     @Produces
     @RequestScoped
