@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>g4w18</name>
+    <name>g4w18 - Sebastian</name>
 
     <!-- Global settings for the project. Settings can be accessed in the pom
     by placing the tag name in ${...} -->
