@@ -351,6 +351,20 @@ public class BookJpaController implements Serializable {
         return findBookByPublisher;
     }
     
+    /**
+     * Get publishers from the database with the publisher provided(doesn't need to match whole)
+     * 
+     * @param title publisher that is being searched
+     * @return List of books found with the publisher
+     */
+    public List<Book> findDistinctPublisher(String publisher)
+    {
+        List<Book> findPublisher = em.createQuery("Select distinct(b.publisher) from Book b where b.publisher LIKE ?1 order by b.publisher asc")
+                .setParameter(1, publisher + "%")
+                .getResultList();
+        
+        return findPublisher;
+    }
     
     
 }

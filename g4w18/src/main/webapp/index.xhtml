@@ -8,16 +8,16 @@
     <h:head>
         <title>#{msgs.frontDoorTitle}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-
         
             <h:form>
                 <p:growl id="growl" showDetail="true" sticky="true"/>
                 
-                <p:selectOneMenu id="searchOption" value="#{searchBackingBean.searchOption}" style="width:150px">
+                <p:selectOneMenu id="searchOption" value="#{searchBackingBean.searchOption}" required="true" requiredMessage="Please choose a drop down option!" style="width:150px">
                     <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{searchBackingBean.searchOptionValue}"/>
+                    <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
                 </p:selectOneMenu>
                 
                 <h:message for="searchText"/>
@@ -25,9 +25,22 @@
                 </p:inputText>
                     
              
-                <p:commandButton  value="#{msgs.searchButtonTxt}" action="#{searchBackingBean.search()}" update="growl" />
-            </h:form>
+                <p:commandButton  value="#{msgs.searchButtonTxt}"  action="#{searchBackingBean.search()}" update="growl" />
+                
+<!--                <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}">
+                    
+                    <h:graphicImage library="images" name="ca_flag.gif"
+                                    style="border: 0px; margin-right: 1em;"/>
+                    
+                </h:commandLink>
+                
+                <h:commandLink action="#{localeBean.setLanguage('en','CA')}">
+                    <h:graphicImage library="images"
+                                    name="en_flag.gif" style="border: 0px"/>
+                </h:commandLink>-->
      
+            </h:form>
+             
 
 
         

@@ -12,6 +12,7 @@ import com.g4w18.entities.Book;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -33,7 +34,6 @@ public class SearchBackingBean implements Serializable {
     private String searchOption;
     //Display in the next page how many results were found
     private String message="";
-    
     @Inject
     private BookJpaController bookJpaController;
     
@@ -78,13 +78,17 @@ public class SearchBackingBean implements Serializable {
                 
             case "Publisher":
                 result = getBooksByPublisher().size();
+//                List<Book> publishers = getPublishers();
+//                List<Book> allBooksFromPublishers = getBooksForPublishers(publishers);
+//                result = allBooksFromPublishers.size();
+                
                 break;
-            default:
+                default:
                 //nothing to display so stay on same page
                 result = 0;
                 break;
         }
-        
+       
        logger.log(Level.INFO, "SEARCH TERM USED: "+ searchTerm + "DROPDOWN OPTION CHOICE: "+ searchOption );
        logger.log(Level.INFO, "NUMBER OF RESULTS RETURNED: "+ result );
       
@@ -126,7 +130,9 @@ public class SearchBackingBean implements Serializable {
                 break;
                 
             case "Publisher":
-                userBooks = getBooksByPublisher();
+               userBooks = getBooksByPublisher();
+//                List<Book> publishers = getPublishers();
+//                userBooks = getBooksForPublishers(publishers);
                 break;
         }
         return userBooks;
@@ -174,6 +180,34 @@ public class SearchBackingBean implements Serializable {
         List<Book> books = bookJpaController.findBooksByPublisher(searchTerm);
         
         return books;
+    }
+    
+    /**
+     * Get list of publisher with the specific term provided by the user.
+     * @return List of publishers found
+     */
+    public List<Book> getPublishers()
+    {
+        List<Book> publishers = bookJpaController.findDistinctPublisher(searchTerm);
+        
+        return  publishers;
+    }
+    
+    /**
+     * Get the list of books for all the publishers in the list.
+     * @param publishers The publishers we want books from
+     * @return List of books from publishers
+     */
+    public List<Book> getBooksForPublishers(List<Book> publishers)
+    {
+        int publisherCount = publishers.size();
+        List<Book> allBooksFromPublishers = null;
+        
+        for(int i=0;i<publisherCount;i++)
+        {
+            allBooksFromPublishers.addAll(bookJpaController.findBooksByPublisher(publishers.get(i).getPublisher()));
+        }
+        return allBooksFromPublishers;
     }
     
     public void setSearchTerm(String searchTerm){

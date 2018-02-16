@@ -32,13 +32,13 @@ import javax.persistence.TypedQuery;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Ignore;
+import com.g4w18.beans.SearchBackingBean;
 
 /**
  * Testing for JPA methods. 
  * 
  * @author Salman Haidar
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class JPATest {
      
@@ -147,6 +147,7 @@ public class JPATest {
     /**
      * Find all books in DB.
      */
+    @Ignore
     @Test
     public void should_find_all_books() throws SQLException{
         List<Book> lb = bj.findBookEntities();
@@ -162,6 +163,7 @@ public class JPATest {
      * Same test as the one above, but trying with typed query.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_books_with_typed_query() throws SQLException{
         
@@ -177,6 +179,7 @@ public class JPATest {
      * Find a book with its title provided.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_specific_name() throws SQLException{
         
@@ -194,6 +197,7 @@ public class JPATest {
      * Find all the books for a specific genre.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_specific_genres() throws SQLException{
         
@@ -211,6 +215,7 @@ public class JPATest {
      * Find all the books from a specific publisher.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_specific_publisher() throws SQLException{
         
@@ -228,6 +233,7 @@ public class JPATest {
      * Find a book with the help of an isbn.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_specific_isbn() throws SQLException{
         
@@ -245,6 +251,7 @@ public class JPATest {
      * Find author with general term.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_author_with_general_name() throws SQLException{
         
@@ -263,6 +270,7 @@ public class JPATest {
      * Find books with title with one letter provided.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_general_title() throws SQLException{
         
@@ -280,6 +288,7 @@ public class JPATest {
      * Find books with title with one letter provided by asc ordering.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_general_title_by_ascending() throws SQLException{
         
@@ -293,4 +302,38 @@ public class JPATest {
           
         assertThat(specificBook).hasSize(4);
     } 
+    
+    /**
+     * Find publisher with with one letter provided by asc ordering.
+     * @throws SQLException 
+     */
+    @Ignore
+    @Test
+    public void find_book_with_general_publisher_by_ascending() throws SQLException{
+        
+        List<Book> specificBook = entityManager.createQuery("Select distinct(b.publisher) from Book b where b.publisher LIKE ?1 order by b.publisher asc")
+                .setParameter(1, "v%")
+                .getResultList();
+                 
+        assertThat(specificBook).hasSize(3);
+    } 
+    
+//    
+//    @Test
+//    public void get_books_for_all_publishers() throws SQLException{
+//        SearchBackingBean search = new SearchBackingBean();
+//        
+//        List<Book> books = null;
+//        
+//        List<Book> publishers = search.getPublishers("v");
+//        
+//        books = search.getBooksForPublishers(publishers);
+//        
+//        for(int i = 0;i<books.size();i++)
+//            logger.log(Level.INFO,"Data>>>{0}"+books.get(i).getTitle() + "---------");
+//        
+//       
+//        
+//        assertThat(books).hasSize(4);
+//    }
 }
