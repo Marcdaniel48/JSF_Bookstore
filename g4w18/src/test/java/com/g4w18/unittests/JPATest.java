@@ -150,6 +150,12 @@ public class JPATest {
                  
         assertThat(specificBook).hasSize(3);
     } 
+    
+    /**
+     * Get all books from each publisher found from the search term.
+     * @throws SQLException 
+     */
+    @Ignore
     @Test
     public void get_books_for_all_publishers() throws SQLException{
         
@@ -165,16 +171,10 @@ public class JPATest {
            
            logger.log(Level.INFO,  s);
        }
-            
-        
-        
         for(int i=0;i<publisherCount;i++)
         {
             allBooksFromPublishers.addAll(bookJpaController.findBooksByPublisher(specificBook.get(i).getPublisher()));
         }
-        
-        
- 
         
 //        for(int i = 0;i<books.size();i++)
 //            logger.log(Level.INFO,"Data>>>{0}"+allBooksFromPublishers.get(i).getTitle() + "---------");
@@ -183,12 +183,50 @@ public class JPATest {
         
         assertThat(allBooksFromPublishers).hasSize(4);
     }
+    /**
+     * Get all books from each author found from the query
+     * @throws SQLException 
+     */
+    @Test
+    public void get_author_books() throws SQLException
+    {
+        List<Author> authorList = aJc.findAuthor("c%");
+        List<Book> allDemBooks = null;
+        
+        int authorCount = authorList.size();
+        
+        List<Book> books = authorList.get(3).getBookList();
+        
+        for(int j=0;j<books.size();j++)
+        {
+            logger.log(Level.INFO,"---------========-----"+  books.get(j).getTitle());
+        }
+        
+        for(int k=0;k<books.size();k++)
+        {
+            logger.log(Level.INFO,"---------========-----"+  authorList.get(k).getFirstName());
+        }
+        
+        
+        for(int i=0;i< authorCount;i++)
+        {
+            allDemBooks.addAll(authorList.get(i).getBookList());
+        }
+        
+        assertThat(allDemBooks).hasSize(1);
+    }
+    
+    
+    
+    
+    
     
     /////////////////For Database ///////////
     /**
      * This routine is courtesy of Bartosz Majsak who also solved my Arquillian
      * remote server problem
      */
+    
     @Before
     public void seedDatabase() {
         final String seedDataScript = loadAsString("createBookstoreTables.sql");
