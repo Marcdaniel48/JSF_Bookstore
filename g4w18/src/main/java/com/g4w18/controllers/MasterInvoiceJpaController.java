@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
@@ -27,10 +22,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-/**
- *
- * @author 1331680
- */
+
 @Named
 @RequestScoped
 public class MasterInvoiceJpaController implements Serializable {
@@ -60,7 +52,7 @@ public class MasterInvoiceJpaController implements Serializable {
             masterInvoice.setInvoiceDetailCollection(attachedInvoiceDetailCollection);
             em.persist(masterInvoice);
             if (clientId != null) {
-                clientId.getMasterInvoiceCollection().add(masterInvoice);
+                clientId.getMasterInvoiceList().add(masterInvoice);
                 clientId = em.merge(clientId);
             }
             for (InvoiceDetail invoiceDetailCollectionInvoiceDetail : masterInvoice.getInvoiceDetailCollection()) {
@@ -116,11 +108,11 @@ public class MasterInvoiceJpaController implements Serializable {
             masterInvoice.setInvoiceDetailCollection(invoiceDetailCollectionNew);
             masterInvoice = em.merge(masterInvoice);
             if (clientIdOld != null && !clientIdOld.equals(clientIdNew)) {
-                clientIdOld.getMasterInvoiceCollection().remove(masterInvoice);
+                clientIdOld.getMasterInvoiceList().remove(masterInvoice);
                 clientIdOld = em.merge(clientIdOld);
             }
             if (clientIdNew != null && !clientIdNew.equals(clientIdOld)) {
-                clientIdNew.getMasterInvoiceCollection().add(masterInvoice);
+                clientIdNew.getMasterInvoiceList().add(masterInvoice);
                 clientIdNew = em.merge(clientIdNew);
             }
             for (InvoiceDetail invoiceDetailCollectionNewInvoiceDetail : invoiceDetailCollectionNew) {
@@ -175,7 +167,7 @@ public class MasterInvoiceJpaController implements Serializable {
             }
             Client clientId = masterInvoice.getClientId();
             if (clientId != null) {
-                clientId.getMasterInvoiceCollection().remove(masterInvoice);
+                clientId.getMasterInvoiceList().remove(masterInvoice);
                 clientId = em.merge(clientId);
             }
             em.remove(masterInvoice);

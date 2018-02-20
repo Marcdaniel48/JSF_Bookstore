@@ -22,10 +22,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 
-/**
- *
- * @author 1331680
- */
 @Named
 @RequestScoped
 public class BannerJpaController implements Serializable {

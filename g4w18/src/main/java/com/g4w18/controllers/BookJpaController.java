@@ -30,10 +30,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 
-/**
- *
- * @author 1331680
- */
 @Named
 @RequestScoped
 public class BookJpaController implements Serializable {
@@ -297,7 +293,7 @@ public class BookJpaController implements Serializable {
         List<Book> toReturn = query.getResultList();
         return toReturn;
     }
-    
+
 //    public Book test(int id){
 //        TypedQuery<Book> query = em.createNamedQuery("Book.findByBookId", Book.class);
 //        query.setParameter("bookId", id);

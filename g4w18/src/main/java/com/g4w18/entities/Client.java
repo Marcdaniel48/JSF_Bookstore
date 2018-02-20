@@ -6,7 +6,7 @@
 package com.g4w18.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,11 +19,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
  *
- * @author 1331680
+ * @author Marc-Daniel
  */
 @Entity
 @Table(name = "client", catalog = "bookstore", schema = "")
@@ -45,7 +46,8 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Client.findByHomeTelephone", query = "SELECT c FROM Client c WHERE c.homeTelephone = :homeTelephone")
     , @NamedQuery(name = "Client.findByCellphone", query = "SELECT c FROM Client c WHERE c.cellphone = :cellphone")
     , @NamedQuery(name = "Client.findByEmail", query = "SELECT c FROM Client c WHERE c.email = :email")
-    , @NamedQuery(name = "Client.findByIsManager", query = "SELECT c FROM Client c WHERE c.isManager = :isManager")})
+    , @NamedQuery(name = "Client.findByIsManager", query = "SELECT c FROM Client c WHERE c.isManager = :isManager")
+    , @NamedQuery(name = "Client.findByCredentials", query = "select c from Client c where c.username=?1 and c.password=?2")})
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,78 +58,79 @@ public class Client implements Serializable {
     private Integer clientId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     @Column(name = "USERNAME")
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     @Column(name = "PASSWORD")
     private String password;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     @Column(name = "TITLE")
     private String title;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     @Column(name = "FIRST_NAME")
     private String firstName;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     @Column(name = "LAST_NAME")
     private String lastName;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     @Column(name = "COMPANY_NAME")
     private String companyName;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 0, max = 100)
     @Column(name = "ADDRESS_1")
     private String address1;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 0, max = 100)
     @Column(name = "ADDRESS_2")
     private String address2;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 0, max = 20)
     @Column(name = "CITY")
     private String city;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2)
+    @Size(min = 0, max = 2)
     @Column(name = "PROVINCE")
     private String province;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 0, max = 20)
     @Column(name = "COUNTRY")
-    private String country;
+    // Since the website only accomodates Canadians at this time, the country field will be left and defaulted to "Canada"
+    private String country = "Canada";
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 6)
+    @Size(min = 0, max = 6)
     @Column(name = "POSTAL_CODE")
     private String postalCode;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 12)
+    @Size(min = 0, max = 12)
     @Column(name = "HOME_TELEPHONE")
     private String homeTelephone;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 12)
+    @Size(min = 0, max = 12)
     @Column(name = "CELLPHONE")
     private String cellphone;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Pattern(regexp="^[A-Za-z0-9\\._]+@[A-Za-z0-9\\\\._]+\\.[A-Za-z0-9\\\\._]+[^\\.]$", message="{invalidEmail}")
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     @Column(name = "EMAIL")
     private String email;
     @Basic(optional = false)
@@ -135,9 +138,9 @@ public class Client implements Serializable {
     @Column(name = "IS_MANAGER")
     private boolean isManager;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientId")
-    private Collection<Review> reviewCollection;
+    private List<Review> reviewList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientId")
-    private Collection<MasterInvoice> masterInvoiceCollection;
+    private List<MasterInvoice> masterInvoiceList;
 
     public Client() {
     }
@@ -302,20 +305,20 @@ public class Client implements Serializable {
         this.isManager = isManager;
     }
 
-    public Collection<Review> getReviewCollection() {
-        return reviewCollection;
+    public List<Review> getReviewList() {
+        return reviewList;
     }
 
-    public void setReviewCollection(Collection<Review> reviewCollection) {
-        this.reviewCollection = reviewCollection;
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
     }
 
-    public Collection<MasterInvoice> getMasterInvoiceCollection() {
-        return masterInvoiceCollection;
+    public List<MasterInvoice> getMasterInvoiceList() {
+        return masterInvoiceList;
     }
 
-    public void setMasterInvoiceCollection(Collection<MasterInvoice> masterInvoiceCollection) {
-        this.masterInvoiceCollection = masterInvoiceCollection;
+    public void setMasterInvoiceList(List<MasterInvoice> masterInvoiceList) {
+        this.masterInvoiceList = masterInvoiceList;
     }
 
     @Override
@@ -342,5 +345,5 @@ public class Client implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Client[ clientId=" + clientId + " ]";
     }
-    
+
 }

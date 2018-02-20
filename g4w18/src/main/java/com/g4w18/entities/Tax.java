@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author 1331680
+ * @author Marc-Daniel
  */
 @Entity
 @Table(name = "tax", catalog = "bookstore", schema = "")
@@ -138,5 +138,5 @@ public class Tax implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Tax[ taxId=" + taxId + " ]";
     }
-    
+
 }

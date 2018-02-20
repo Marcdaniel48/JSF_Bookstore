@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -24,10 +19,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-/**
- *
- * @author 1331680
- */
 @Named
 @RequestScoped
 public class ReviewJpaController implements Serializable {
@@ -57,7 +48,7 @@ public class ReviewJpaController implements Serializable {
                 bookId = em.merge(bookId);
             }
             if (clientId != null) {
-                clientId.getReviewCollection().add(review);
+                clientId.getReviewList().add(review);
                 clientId = em.merge(clientId);
             }
             utx.commit();
@@ -97,11 +88,11 @@ public class ReviewJpaController implements Serializable {
                 bookIdNew = em.merge(bookIdNew);
             }
             if (clientIdOld != null && !clientIdOld.equals(clientIdNew)) {
-                clientIdOld.getReviewCollection().remove(review);
+                clientIdOld.getReviewList().remove(review);
                 clientIdOld = em.merge(clientIdOld);
             }
             if (clientIdNew != null && !clientIdNew.equals(clientIdOld)) {
-                clientIdNew.getReviewCollection().add(review);
+                clientIdNew.getReviewList().add(review);
                 clientIdNew = em.merge(clientIdNew);
             }
             utx.commit();
@@ -139,7 +130,7 @@ public class ReviewJpaController implements Serializable {
             }
             Client clientId = review.getClientId();
             if (clientId != null) {
-                clientId.getReviewCollection().remove(review);
+                clientId.getReviewList().remove(review);
                 clientId = em.merge(clientId);
             }
             em.remove(review);

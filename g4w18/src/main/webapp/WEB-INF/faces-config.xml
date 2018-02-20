@@ -1,4 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- Required configuration file for JSF. The tools of the IDE fill in most
+     of this file. Here you can see a reference locale that will be used
+     to determine which message bundle to use.
+-->
 <faces-config version="2.2"
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

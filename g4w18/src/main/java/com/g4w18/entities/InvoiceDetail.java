@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author 1331680
+ * @author Marc-Daniel
  */
 @Entity
 @Table(name = "invoice_detail", catalog = "bookstore", schema = "")

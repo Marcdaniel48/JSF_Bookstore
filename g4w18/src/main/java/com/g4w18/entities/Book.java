@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author 1331680
+ * @author Marc-Daniel
  */
 @Entity
 @Table(name = "book", catalog = "bookstore", schema = "")
@@ -300,5 +301,5 @@ public class Book implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Book[ bookId=" + bookId + " ]";
     }
-    
+
 }
