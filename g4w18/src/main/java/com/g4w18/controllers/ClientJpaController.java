@@ -40,7 +40,7 @@ public class ClientJpaController implements Serializable {
     @Resource
     private UserTransaction utx = null;
 
-    @PersistenceContext(unitName="com.g4w18_g4w18_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName="bookstorePU")
     private EntityManager em;
 
 

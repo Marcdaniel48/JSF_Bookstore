@@ -120,11 +120,11 @@ public class Book implements Serializable {
         @JoinColumn(name = "BOOK_ID", referencedColumnName = "BOOK_ID")}, inverseJoinColumns = {
         @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "AUTHOR_ID")})
     @ManyToMany
-    private Collection<Author> authorCollection;
+    private List<Author> authorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
-    private Collection<InvoiceDetail> invoiceDetailCollection;
+    private List<InvoiceDetail> invoiceDetailList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
-    private Collection<Review> reviewCollection;
+    private List<Review> reviewList;
 
     public Book() {
     }
@@ -253,28 +253,28 @@ public class Book implements Serializable {
         this.inventoryDate = inventoryDate;
     }
 
-    public Collection<Author> getAuthorCollection() {
-        return authorCollection;
+    public List<Author> getAuthorList() {
+        return authorList;
     }
 
-    public void setAuthorCollection(Collection<Author> authorCollection) {
-        this.authorCollection = authorCollection;
+    public void setAuthorList(List<Author> authorList) {
+        this.authorList = authorList;
     }
 
-    public Collection<InvoiceDetail> getInvoiceDetailCollection() {
-        return invoiceDetailCollection;
+    public List<InvoiceDetail> getInvoiceDetailList() {
+        return invoiceDetailList;
     }
 
-    public void setInvoiceDetailCollection(Collection<InvoiceDetail> invoiceDetailCollection) {
-        this.invoiceDetailCollection = invoiceDetailCollection;
+    public void setInvoiceDetailList(List<InvoiceDetail> invoiceDetailList) {
+        this.invoiceDetailList = invoiceDetailList;
     }
 
-    public Collection<Review> getReviewCollection() {
-        return reviewCollection;
+    public List<Review> getReviewList() {
+        return reviewList;
     }
 
-    public void setReviewCollection(Collection<Review> reviewCollection) {
-        this.reviewCollection = reviewCollection;
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
     }
 
     @Override

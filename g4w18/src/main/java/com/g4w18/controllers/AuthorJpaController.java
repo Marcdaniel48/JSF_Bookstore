@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.controllers;
 
-import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Author;
@@ -16,46 +10,44 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import com.g4w18.entities.Book;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 /**
  *
- * @author 1331680
+ * @author Salman Haidar
  */
-@Named
-@RequestScoped
 public class AuthorJpaController implements Serializable {
 
+    public AuthorJpaController() {
+
+    }
     @Resource
     private UserTransaction utx;
 
-    @PersistenceContext(unitName = "bookstorePU")
+    @PersistenceContext
     private EntityManager em;
 
+
     public void create(Author author) throws RollbackFailureException, Exception {
-        if (author.getBookCollection() == null) {
-            author.setBookCollection(new ArrayList<Book>());
+        if (author.getBookList() == null) {
+            author.setBookList(new ArrayList<Book>());
         }
         try {
             utx.begin();
-            Collection<Book> attachedBookCollection = new ArrayList<Book>();
-            for (Book bookCollectionBookToAttach : author.getBookCollection()) {
-                bookCollectionBookToAttach = em.getReference(bookCollectionBookToAttach.getClass(), bookCollectionBookToAttach.getBookId());
-                attachedBookCollection.add(bookCollectionBookToAttach);
+            List<Book> attachedBookList = new ArrayList<Book>();
+            for (Book bookListBookToAttach : author.getBookList()) {
+                bookListBookToAttach = em.getReference(bookListBookToAttach.getClass(), bookListBookToAttach.getBookId());
+                attachedBookList.add(bookListBookToAttach);
             }
-            author.setBookCollection(attachedBookCollection);
+            author.setBookList(attachedBookList);
             em.persist(author);
-            for (Book bookCollectionBook : author.getBookCollection()) {
-                bookCollectionBook.getAuthorCollection().add(author);
-                bookCollectionBook = em.merge(bookCollectionBook);
+            for (Book bookListBook : author.getBookList()) {
+                bookListBook.getAuthorList().add(author);
+                bookListBook = em.merge(bookListBook);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -69,29 +61,30 @@ public class AuthorJpaController implements Serializable {
     }
 
     public void edit(Author author) throws NonexistentEntityException, RollbackFailureException, Exception {
+
         try {
             utx.begin();
             Author persistentAuthor = em.find(Author.class, author.getAuthorId());
-            Collection<Book> bookCollectionOld = persistentAuthor.getBookCollection();
-            Collection<Book> bookCollectionNew = author.getBookCollection();
-            Collection<Book> attachedBookCollectionNew = new ArrayList<Book>();
-            for (Book bookCollectionNewBookToAttach : bookCollectionNew) {
-                bookCollectionNewBookToAttach = em.getReference(bookCollectionNewBookToAttach.getClass(), bookCollectionNewBookToAttach.getBookId());
-                attachedBookCollectionNew.add(bookCollectionNewBookToAttach);
+            List<Book> bookListOld = persistentAuthor.getBookList();
+            List<Book> bookListNew = author.getBookList();
+            List<Book> attachedBookListNew = new ArrayList<Book>();
+            for (Book bookListNewBookToAttach : bookListNew) {
+                bookListNewBookToAttach = em.getReference(bookListNewBookToAttach.getClass(), bookListNewBookToAttach.getBookId());
+                attachedBookListNew.add(bookListNewBookToAttach);
             }
-            bookCollectionNew = attachedBookCollectionNew;
-            author.setBookCollection(bookCollectionNew);
+            bookListNew = attachedBookListNew;
+            author.setBookList(bookListNew);
             author = em.merge(author);
-            for (Book bookCollectionOldBook : bookCollectionOld) {
-                if (!bookCollectionNew.contains(bookCollectionOldBook)) {
-                    bookCollectionOldBook.getAuthorCollection().remove(author);
-                    bookCollectionOldBook = em.merge(bookCollectionOldBook);
+            for (Book bookListOldBook : bookListOld) {
+                if (!bookListNew.contains(bookListOldBook)) {
+                    bookListOldBook.getAuthorList().remove(author);
+                    bookListOldBook = em.merge(bookListOldBook);
                 }
             }
-            for (Book bookCollectionNewBook : bookCollectionNew) {
-                if (!bookCollectionOld.contains(bookCollectionNewBook)) {
-                    bookCollectionNewBook.getAuthorCollection().add(author);
-                    bookCollectionNewBook = em.merge(bookCollectionNewBook);
+            for (Book bookListNewBook : bookListNew) {
+                if (!bookListOld.contains(bookListNewBook)) {
+                    bookListNewBook.getAuthorList().add(author);
+                    bookListNewBook = em.merge(bookListNewBook);
                 }
             }
             utx.commit();
@@ -113,6 +106,7 @@ public class AuthorJpaController implements Serializable {
     }
 
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
+
         try {
             utx.begin();
             Author author;
@@ -122,10 +116,10 @@ public class AuthorJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The author with id " + id + " no longer exists.", enfe);
             }
-            Collection<Book> bookCollection = author.getBookCollection();
-            for (Book bookCollectionBook : bookCollection) {
-                bookCollectionBook.getAuthorCollection().remove(author);
-                bookCollectionBook = em.merge(bookCollectionBook);
+            List<Book> bookList = author.getBookList();
+            for (Book bookListBook : bookList) {
+                bookListBook.getAuthorList().remove(author);
+                bookListBook = em.merge(bookListBook);
             }
             em.remove(author);
             utx.commit();
@@ -148,26 +142,49 @@ public class AuthorJpaController implements Serializable {
     }
 
     private List<Author> findAuthorEntities(boolean all, int maxResults, int firstResult) {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Author.class));
-        Query q = em.createQuery(cq);
-        if (!all) {
-            q.setMaxResults(maxResults);
-            q.setFirstResult(firstResult);
-        }
-        return q.getResultList();
+
+
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Author.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
+
     }
 
     public Author findAuthor(Integer id) {
-        return em.find(Author.class, id);
+
+            return em.find(Author.class, id);
+
     }
 
+
+
     public int getAuthorCount() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<Author> rt = cq.from(Author.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Author> rt = cq.from(Author.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+
+    }
+
+    /**
+     * Get list of author names with the name provided
+     * @param authorName provided by user
+     * @return List of authors found with the param
+     */
+    public List<Author> findAuthor(String authorName)
+    {
+        List<Author> findAuthorByName = em.createQuery("Select a from Author a where CONCAT(a.firstName,' ',a.lastName) LIKE ?1")
+                .setParameter(1, authorName + "%")
+                .getResultList();
+        
+        return findAuthorByName;
     }
 
 }

@@ -3,7 +3,7 @@
 	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	 version="3.1">
-    
+
     <!-- Different error messages are displayed depending on the stage.
     Choices are Development, Production, SystemTest & UnitTest -->
     <context-param>
@@ -25,8 +25,8 @@
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>registration.xhtml</welcome-file>
-    </welcome-file-list>
+    <!-- Welcome page -->
+  <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+  </welcome-file-list>
 </web-app>
-

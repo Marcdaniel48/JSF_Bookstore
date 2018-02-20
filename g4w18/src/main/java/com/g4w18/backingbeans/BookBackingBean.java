@@ -69,7 +69,7 @@ public class BookBackingBean implements Serializable {
 
     public int getRating() {
         int averageRating = 0;
-        Collection<Review> reviews = book.getReviewCollection();
+        Collection<Review> reviews = book.getReviewList();
         int size = reviews.size();
         log.log(Level.INFO, "Reviews size: {0}", reviews.size());
         if (size > 0) {

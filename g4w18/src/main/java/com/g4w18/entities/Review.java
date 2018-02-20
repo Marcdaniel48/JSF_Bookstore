@@ -165,5 +165,5 @@ public class Review implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Review[ reviewId=" + reviewId + " ]";
     }
-    
+
 }

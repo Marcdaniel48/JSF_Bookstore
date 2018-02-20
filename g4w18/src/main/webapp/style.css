@@ -1,0 +1,13 @@
+/* 
+    Created on : 15-Feb-2018, 5:26:11 PM
+    Author     : Salman Haidar
+*/
+
+.ui-growl {   
+    position:fixed;
+    top: 30%;
+    left: 37%;
+    width: 360px;
+    height: 110px;
+    z-index:9999; 
+}

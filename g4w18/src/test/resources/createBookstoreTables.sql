@@ -130,7 +130,7 @@ CREATE TABLE BANNER(
 ) ENGINE=InnoDB;
 
 INSERT INTO BOOK values
-(null, "978-1408855652", "Harry Potter and the Philosopher's Stone", "Bloomsbury Children's Books", "2014-09-01 00:00:00", 352, "Fantasy", 
+(null, "978-1408855652", "Harry Potter and the Philosopher's Stone", "Bloomsbury Children's Books", "2014-09-01 00:00:00", 352, "Fantasy",
 "Harry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive. Addressed in green ink on yellowish parchment with a purple seal, they are swiftly confiscated by his grisly aunt and uncle. Then, on Harry's eleventh birthday, a great beetle-eyed giant of a man called Rubeus Hagrid bursts in with some astonishing news: Harry Potter is a wizard, and he has a place at Hogwarts School of Witchcraft and Wizardry. An incredible adventure is about to begin! These new editions of the classic and internationally bestselling, multi-award-winning series feature instantly pick-up-able new jackets by Jonny Duddle, with huge child appeal, to bring Harry Potter to the next generation of readers. It's time to PASS THE MAGIC ON ...",
 "PDF", 6.99, 10.99, 8.99, null),
 (null, "978-0553573404", "A Game of Thrones: A Song of Ice and Fire: Book One", "Bantam", "1997-08-04 00:00:00", 864, "Fantasy",
@@ -176,7 +176,7 @@ In a world of survivors where every stranger encountered could be either a savag
 
 The end has come. The beginning comes next.",
 "PDF", 15.99, 36, 15.99, null),
-(null, "978-0316399746", "Valor", "Orbit", "2014-07-22 00:00:00", 688, "Fantasy", 
+(null, "978-0316399746", "Valor", "Orbit", "2014-07-22 00:00:00", 688, "Fantasy",
 "Corban flees his homeland searching for peace, but he soon discovers that there is no haven in the west as the agents of Rhin and roaming bands of giants hound his every step.
 
 Veradis leaves the battleground and rushes to his King's side. But he has witnessed both combat and betrayal and his duty weighs heavily upon him.
@@ -185,7 +185,7 @@ Maquin seeks only revenge, but pirate slavers and the brutal world of pit-fighti
 
 Nathair becomes embroiled in the wars of the west as Queen Rhin marches against King Owain. The need to find the cauldron of the giants drives him on.",
 "PDF", 7.99, 12.99, 9.99, null),
-(null, "978-1250169495", "Oathbringer: Book Three of the Stormlight Archive", "Tor Books", "2017-11-14 00:00:00", 1220, "Fantasy", 
+(null, "978-1250169495", "Oathbringer: Book Three of the Stormlight Archive", "Tor Books", "2017-11-14 00:00:00", 1220, "Fantasy",
 "In Oathbringer, the third volume of the New York Times bestselling Stormlight Archive, humanity faces a new Desolation with the return of the Voidbringers, a foe with numbers as great as their thirst for vengeance.
 
 Dalinar Kholinâ€™s Alethi armies won a fleeting victory at a terrible cost: The enemy Parshendi summoned the violent Everstorm, which now sweeps the world with destruction, and in its passing awakens the once peaceful and subservient parshmen to the horror of their millennia-long enslavement by humans. While on a desperate flight to warn his family of the threat, Kaladin Stormblessed must come to grips with the fact that the newly kindled anger of the parshmen may be wholly justified.
@@ -193,21 +193,21 @@ Dalinar Kholinâ€™s Alethi armies won a fleeting victory at a terrible cost:
 Nestled in the mountains high above the storms, in the tower city of Urithiru, Shallan Davar investigates the wonders of the ancient stronghold of the Knights Radiant and unearths dark secrets lurking in its depths. And Dalinar realizes that his holy mission to unite his homeland of Alethkar was too narrow in scope. Unless all the nations of Roshar can put aside Dalinarâ€™s blood-soaked past and stand togetherâ€?and unless Dalinar himself can confront that pastâ€?even the restoration of the Knights Radiant will not prevent the end of civilization.",
 "PDF", 17.91, 22.41, 11.91, null),
 (null, "978-0316389709", "Swords of Destiny", "Orbit", "2015-12-05 00:00:00", 400, "Fantasy",
-"Geralt is a witcher, a man whose magic powers, enhanced by long training and a mysterious elixir, have made him a brilliant fighter and a merciless assassin. Yet he is no ordinary murderer: his targets are the multifarious monsters and vile fiends that ravage the land and attack the innocent. 
+"Geralt is a witcher, a man whose magic powers, enhanced by long training and a mysterious elixir, have made him a brilliant fighter and a merciless assassin. Yet he is no ordinary murderer: his targets are the multifarious monsters and vile fiends that ravage the land and attack the innocent.
 
 This is a collection of short stories, following the adventures of the hit collection THE LAST WISH. Join Geralt as he battles monsters, demons and prejudices alike...",
 "PDF", 12.99, 20.99, 15.36, null),
-(null, "978-0770428778", "Dragonfly in Amber", "Seal Books", "2001-10-09 00:00:00", 976, "Fantasy", 
+(null, "978-0770428778", "Dragonfly in Amber", "Seal Books", "2001-10-09 00:00:00", 976, "Fantasy",
 "From the author of Outlander... a magnificent epic that once again sweeps us back in time to the drama and passion of 18th-century Scotland...
 
 For twenty years Claire Randall has kept her secrets. But now she is returning with her grown daughter to Scotland's majestic mist-shrouded hills. Here Claire plans to reveal a truth as stunning as the events that gave it birth: about the mystery of an ancient circle of standing stones ...about a love that transcends the boundaries of time ...and about James Fraser, a Scottish warrior whose gallantry once drew a young Claire from the security of her century to the dangers of his ....
 
 Now a legacy of blood and desire will test her beautiful copper-haired daughter, Brianna, as Claire's spellbinding journey of self-discovery continues in the intrigue-ridden Paris court of Charles Stuart ...in a race to thwart a doomed Highlands uprising ...and in a desperate fight to save both the child and the man she loves....",
 "PDF", 10.99, 20.66, 11.69, null),
-(null, "978-0330492041", "The Hitchhiker's Guide To The Galaxy: The Trilogy Of Four", "PAN Macmillan Adult", "2002-03-08 00:00:00", 720, "Fantasy", 
+(null, "978-0330492041", "The Hitchhiker's Guide To The Galaxy: The Trilogy Of Four", "PAN Macmillan Adult", "2002-03-08 00:00:00", 720, "Fantasy",
 "THE HITCHIKER'S GUIDE TO THE GALAXY: One Thursday lunchtime the Earth gets demolished to make way for a hyperspace bypass. For Arthur, who has just had his house demolished, this is too much. Sadly, the weekend's just begun. THE RESTAURANT AT THE END OF THE UNIVERSE: When all issues of space, time, matter and the nature of being are resolved, only one question remains: Where shall we have dinner? The Restaurant at the End of the Universe provides the ultimate gastronomic experience and, for once, there is no morning after. LIFE, THE UNIVERSE AND EVERYTHING: In consequence of a number of stunning catastrophes, Arthur Dent is surprised to find himself living in a hideously miserable cave on prehistoric Earth. And then, just as he thinks that things cannot possibly get any worse, they suddenly do. SO LONG, AND THANKS FOR ALL THE FISH: Arthur Dent's sense of reality is in its dickiest state when he suddenly finds the girl of his dreams. They go in search of God's Final Message and, in a dramatic break with tradition, actually find it.",
 "PDF", 5.99, 48.81, 20.99, null),
-(null, "978-0765376671", "The Way of Kings (The Stormlight Archive, Book 1)", "Tor Books", "2014-03-04 00:00:00", 1008, "Fantasy", 
+(null, "978-0765376671", "The Way of Kings (The Stormlight Archive, Book 1)", "Tor Books", "2014-03-04 00:00:00", 1008, "Fantasy",
 "Roshar is a world of stone and storms. Uncanny tempests of incredible power sweep across the rocky terrain so frequently that they have shaped ecology and civilization alike. Animals hide in shells, trees pull in branches, and grass retracts into the soilless ground. Cities are built only where the topography offers shelter.
 
 It has been centuries since the fall of the ten consecrated orders known as the Knights Radiant, but their Shardblades and Shardplate remain: mystical swords and suits of armor that transform ordinary men into near-invincible warriors. Men trade kingdoms for Shardblades. Wars were fought for them, and won by them.
@@ -220,17 +220,17 @@ Across the ocean, an untried young woman named Shallan seeks to train under an e
 
 The result of over ten years of planning, writing, and world-building, The Way of Kings is but the opening movement of the Stormlight Archive, a bold masterpiece in the making.",
 "PDF", 10.99, 26.99, 16.03, null),
-(null, "978-0316437226", "Spice and Wolf Anniversary Collector's Edition", "Yen On", "2017-02-27 00:00:00", 944, "Fantasy", 
+(null, "978-0316437226", "Spice and Wolf Anniversary Collector's Edition", "Yen On", "2017-02-27 00:00:00", 944, "Fantasy",
 "Spice and Wolf is ten years old! To commemorate this anniversary, Yen Press is producing a lavish tome collecting all seventeen original volumes of Spice and Wolf. Beautifully bound and impressively designed to give the impression of a medieval manuscript, the book will also include all of illustrator Jyuu Ayakura's original illustrations. This book will be the crown jewel in any collector's library! The light novel series' story centers around the travels of the merchant Kraft Lawrence, who strikes a deal with the wolf god Holo that sees him transporting the homesick goddess back to her remote northern homeland. Uniquely exploring medieval trade, commerce, and religion, Lawrence plies his trade with Holo (in both human and wolf form) often becoming a decisive factor in his endeavors, but in the end, it is the story of these two memorable characters and their relationship to one another.",
 "PDF", 219.99, 399.99, 249.99, null),
-(null, "978-0316229296", "The Fifth Season", "Orbit", "2015-07-04 00:00:00", 512, "Fantasy", 
-"A season of endings has begun. 
+(null, "978-0316229296", "The Fifth Season", "Orbit", "2015-07-04 00:00:00", 512, "Fantasy",
+"A season of endings has begun.
 
-It starts with the great red rift across the heart of the world's sole continent, spewing ash that blots out the sun. 
+It starts with the great red rift across the heart of the world's sole continent, spewing ash that blots out the sun.
 
-It starts with death, with a murdered son and a missing daughter. 
+It starts with death, with a murdered son and a missing daughter.
 
-It starts with betrayal, and long dormant wounds rising up to fester. 
+It starts with betrayal, and long dormant wounds rising up to fester.
 
 This is the Stillness, a land long familiar with catastrophe, where the power of the earth is wielded as a weapon. And where there is no mercy. ",
 "PDF", 12.99, 20.99, 18.89, null),
@@ -242,19 +242,19 @@ Guided by the witch-woman Red's mysterious prophecy, the trio makes their way so
 (null, "978-0786965984", "Curse of Strahd: A Dungeons & Dragons Sourcebook", "Wizards of The Coast", "2016-03-15 00:00:00", 256, "Fantasy",
 "Under raging storm clouds, the vampire Count Strahd von Zarovich stands silhouetted against the ancient walls of Castle Ravenloft. Rumbling thunder pounds the castle spires. The windâ€™s howling increases as he turns his gaze down toward the village of Barovia. Far below, yet not beyond his keen eyesight, a party of adventurers has just entered his domain. Strahdâ€™s face forms the barest hint of a smile as his dark plan unfolds. He knew they were coming, and he knows why they came â€? all according to his plan. A lightning flash rips through the darkness, but Strahd is gone. Only the howling of the wind fills the midnight air. The master of Castle Ravenloft is having guests for dinner. And you are invited.",
 "PDF", 43.7, 63.95, 51.71, null),
-(null, "978-0241952894", "A Study in Scarlet", "Viking", "2011-09-27 00:00:00", 144, "Mystery", 
+(null, "978-0241952894", "A Study in Scarlet", "Viking", "2011-09-27 00:00:00", 144, "Mystery",
 "There's a scarlet thread of murder running through the colourless skein of life, and our duty is to unravel it, and isolate it, and expose every inch of it.' From the moment Dr John Watson takes lodgings in Baker Street with the consulting detective Sherlock Holmes, he becomes intimately acquainted with the bloody violence and frightening ingenuity of the criminal mind. In A Study in Scarlet , Holmes and Watson's first mystery, the pair are summoned to a south London house where they find a dead man whose contorted face is a twisted mask of horror. The body is unmarked by violence but on the wall a mysterious word has been written in blood. The police are baffled by the crime and its circumstances. But when Sherlock Holmes applies his brilliantly logical mind to the problem he uncovers a tragic tale of love and deadly revenge . . .",
 "PDF", 5.99, 10.99, 6.99, null),
 (null, "978-0425169209", "The ABC Murders: A Hercule Poirot Mystery", "William Morrow Paperbacks", "2003-12-15 00:00:00", 240, "Mystery",
 "There's a serial killer on the loose, bent on working his way though the alphabet. There seems little chance of the murderer being caught -- until her makes the crucial and vain mistake of challenging Hercule Poirot to frustrate his plans ...",
 "PDF", 5.99, 11.99, 7.99, null),
-(null, "978-0425173732", "Death on the Nile: Hercule Poirot investigates", "William Morrow Paperbacks", "2005-07-05 00:00:00", 320, "Mystery", 
+(null, "978-0425173732", "Death on the Nile: Hercule Poirot investigates", "William Morrow Paperbacks", "2005-07-05 00:00:00", 320, "Mystery",
 "When a murder occurs aboard a Nile steamer, the passengers find themselves in a state of panic and emotional conflict.",
 "PDF", 5.99, 11.99, 7.99, null),
-(null, "978-1501163401", "Sleeping Beauties", "Scribner", "2017-09-26 00:00:00", 720, "Mystery", 
+(null, "978-1501163401", "Sleeping Beauties", "Scribner", "2017-09-26 00:00:00", 720, "Mystery",
 "In a future so real and near it might be now, something happens when women go to sleep: they become shrouded in a cocoon-like gauze. If they are awakened, if the gauze wrapping their bodies is disturbed or violated, the women become feral and spectacularly violent. And while they sleep they go to another place, a better place, where harmony prevails and conflict is rare.One woman, the mysterious â€œEve Black,ï¿½? is immune to the blessing or curse of the sleeping disease. Is Eve a medical anomaly to be studied? Or is she a demon who must be slain? Abandoned, left to their increasingly primal urges, the men divide into warring factions, some wanting to kill Eve, some to save her. Others exploit the chaos to wreak their own vengeance on new enemies. All turn to violence in a suddenly all-male world.Set in a small Appalachian town whose primary employer is a womenâ€™s prison, Sleeping Beauties is a wildly provocative, gloriously dramatic father-son collaboration that feels particularly urgent and relevant today.",
 "PDF", 8.99, 14.99, 10.99, null),
-(null, "978-0525954347", "The Punishment She Deserves", "Viking", "2017-03-20", 704, "Mystery", 
+(null, "978-0525954347", "The Punishment She Deserves", "Viking", "2017-03-20", 704, "Mystery",
 "The cozy, bucolic town of Ludlow is stunned when one of its most revered and respected citizens--Ian Druitt, the local deacon--is accused of a serious crime. Then, while in police custody, Ian is found dead. Did he kill himself? Or was he murdered?When Barbara Havers is sent to Ludlow to investigate the chain of events that led to Ian's death, all the evidence points to suicide. But Barbara can't shake the feeling that she's missing something. She decides to take a closer look at the seemingly ordinary inhabitants of Ludlow--mainly elderly retirees and college students--and discovers that almost everyone in town has something to hide.A masterful work of suspense, The Punishment She Deserves sets Detective Sergeant Barbara Havers and Inspector Thomas Lynley against one of their most intricate cases. Fans of the longtime series will love the many characters from Elizabeth George's previous novels who join Lynley and Havers, and readers new to the series will quickly see why she is one of the most popular and critically acclaimed writers of our time. Both a page-turner and a deeply complex story about the lies we tell, the lies we believe, and the redemption we need, this novel will be remembered as one of George's best.",
 "PDF", 10.99, 15.99, 12.99, null),
 (null, "978-0385659802", "The Curious Incident of the Dog in the Night-Time", "Anchor Canada", "2014-05-18 00:00:00", 240, "Mystery",
@@ -264,13 +264,13 @@ Christopher decides that he will track down the real killer, and turns to his fa
 
 And herein lies the key to the brilliance of Mark Haddonâ€™s choice of narrator: The most wrenching of emotional moments are chronicled by a boy who cannot fathom emotions. The effect is dazzling, making for one of the freshest debut in years: a comedy, a tearjerker, a mystery story, a novel of exceptional literary merit that is great fun to read.",
 "PDF", 7.99, 12.99, 10.99, null),
-(null, "978-0762188598", "Postmortem", "Impress Pubns Ltd", "2000-11-01 00:00:00", 333, "Mystery", 
+(null, "978-0762188598", "Postmortem", "Impress Pubns Ltd", "2000-11-01 00:00:00", 333, "Mystery",
 "A serial killer is on the loose in Richmond. Three women have died, brutalized and strangled in their own bedrooms. Kay Scarpetta, investigating the case, knows she must find some forensic evidence before the next killing. The author was previously an award-winning crime reporter.",
 "PDF", 6.99, 10.99, 8.99, null),
-(null, "978-0446696616", "1st to Die", "Grand Central Publishing", "2005-05-20 00:00:00", 432, "Mystery", 
+(null, "978-0446696616", "1st to Die", "Grand Central Publishing", "2005-05-20 00:00:00", 432, "Mystery",
 "Imagine a killer who thinks, 'What is the worst thing anyone has ever done?--and then goes far beyond it. Now imagine four women --a police detective, an assistant DA, a reporter, and a medical examiner --who join forces as they sidestep their bosses to track down criminals. Known as the Women's Murder Club, they are pursuing a murderer whose twisted imagination has stunned an entire city. Their chief suspect is a socially prominent writer, but the men in charge won't touch him. On the trail of the most terrifying and unexpected killer ever, they discover a shocking surprise that turns everything about the case upside down.",
 "PDF", 4.99, 9.99, 7.99, null),
-(null, "978-0312353810", '"A" is for Alibi: A Kinsey Millhone Mystery', "St. Martin's Griffin", "2005-11-29 00:00:00", 320, "Mystery", 
+(null, "978-0312353810", '"A" is for Alibi: A Kinsey Millhone Mystery', "St. Martin's Griffin", "2005-11-29 00:00:00", 320, "Mystery",
 "A IS FOR AVENGER
 A tough-talking former cop, private investigator Kinsey Millhone has set up a modest detective agency in a quiet corner of Santa Teresa, California. A twice-divorced loner with few personal possessions and fewer personal attachments, she's got a soft spot for underdogs and lost causes.
 
@@ -289,7 +289,7 @@ With impeccable timing, and making his unforgettable debut, the brilliant Belgia
 "Biographer Margaret Lea returns one night to her apartment above her father's antiquarian bookshop. On her steps she finds a letter. It is a hand-written request from one of Britainâ€™s most prolific and well-loved novelists. Vida Winter, gravely ill, wants to recount her life story before it is too late, and she wants Margaret to be the one to capture her history. The request takes Margaret by surpriseâ€“she doesnâ€™t know the author, nor has she read any of Miss Winterâ€™s dozens of novels.
 
 Late one night, while pondering whether to accept the task of recording Miss Winterâ€™s personal story, Margaret begins to read her fatherâ€™s rare copy of Miss Winterâ€™s Thirteen Tales of Change and Desperation. She is spellbound by the stories and confused when she realizes the book only contains twelve stories. Where is the thirteenth tale? Intrigued, Margaret agrees to meet Miss Winter and act as her biographer.
- 
+
 As Vida Winter unfolds her story, she shares with Margaret the dark family secrets that she has long kept hidden as she remembers her days at Angelfield, the now burnt-out estate that was her childhood home. Margaret carefully records Miss Winterâ€™s account and finds herself more and more deeply immersed in the strange and troubling story. In the end, both women have to confront their pasts and the weight of family secrets. As well as the ghosts that haunt them still.",
 "PDF", 3.99, 9.99, 5.99, null),
 (null, "978-0425228227", "Red Dragon", "Berkley", "2009-01-06 00:00:00", 464, "Mystery",
@@ -314,7 +314,7 @@ And what could Sanger have been hiding?
 
 Not everything is as it seems; you shouldnâ€™t always believe what you read in the papers.",
 "MOBI", 0.2, 0.99, 0.5, null),
-(null, "978-1542046596", "I Am Watching You", "Thomas & Mercer", "2017-10-01 00:00:00", 300, "Mystery", 
+(null, "978-1542046596", "I Am Watching You", "Thomas & Mercer", "2017-10-01 00:00:00", 300, "Mystery",
 "When Ella Longfield overhears two attractive young men flirting with teenage girls on a train, she thinks nothing of itâ€?until she realises they are fresh out of prison and her maternal instinct is put on high alert. But just as sheâ€™s decided to call for help, something stops her. The next day, she wakes up to the news that one of the girlsâ€?beautiful, green-eyed Anna Ballardâ€?has disappeared.
 
 A year later, Anna is still missing. Ella is wracked with guilt over what she failed to do, and sheâ€™s not the only one who canâ€™t forget. Someone is sending her threatening lettersâ€?letters that make her fear for her life.
@@ -323,16 +323,16 @@ Then an anniversary appeal reveals that Annaâ€™s friends and family might h
 
 Someone knows where Anna isâ€?and theyâ€™re not telling. But they are watching Ella.",
 "MOBI", 0.5, 1.99, 0.99, null),
-(null, "978-0307588371", "Gone Girl", "Broadway Books", "2014-04-22 00:00:00", 432, "Mystery", 
+(null, "978-0307588371", "Gone Girl", "Broadway Books", "2014-04-22 00:00:00", 432, "Mystery",
 "On a warm summer morning in North Carthage, Missouri, it is Nick and Amy Dunneâ€™s fifth wedding anniversary. Presents are being wrapped and reservations are being made when Nickâ€™s clever and beautiful wife disappears. Husband-of-the-Year Nick isnâ€™t doing himself any favors with cringe-worthy daydreams about the slope and shape of his wifeâ€™s head, but passages from Amy's diary reveal the alpha-girl perfectionist could have put anyone dangerously on edge. Under mounting pressure from the police and the mediaâ€?as well as Amyâ€™s fiercely doting parentsâ€?the town golden boy parades an endless series of lies, deceits, and inappropriate behavior. Nick is oddly evasive, and heâ€™s definitely bitterâ€?but is he really a killer? ",
 "MOBI", 4.99, 10.99, 7.99, null),
 (null, "978-0812976144", "The Alienist", "Random House Trade Paperbacks", "2006-10-24 00:00:00", 512, "Mystery",
 "The year is 1896. The city is New York. Newspaper reporter John Schuyler Moore is summoned by his friend Dr. Laszlo Kreizlerâ€?a psychologist, or â€œalienistï¿½?â€?to view the horribly mutilated body of an adolescent boy abandoned on the unfinished Williamsburg Bridge. From there the two embark on a revolutionary effort in criminology: creating a psychological profile of the perpetrator based on the details of his crimes. Their dangerous quest takes them into the tortured past and twisted mind of a murderer who will kill again before their hunt is over.",
 "MOBI", 4.99, 9.99, 7.99, null),
-(null, "978-0143034902", "The Shadow of the Wind", "Penguin Books", "2005-01-25 00:00:00", 512, "Mystery", 
+(null, "978-0143034902", "The Shadow of the Wind", "Penguin Books", "2005-01-25 00:00:00", 512, "Mystery",
 "Barcelona, 1945: A city slowly heals in the aftermath of the Spanish Civil War, and Daniel, an antiquarian book dealerâ€™s son who mourns the loss of his mother, finds solace in a mysterious book entitled The Shadow of the Wind, by one JuliÃ¡n Carax. But when he sets out to find the authorâ€™s other works, he makes a shocking discovery: someone has been systematically destroying every copy of every book Carax has written. In fact, Daniel may have the last of Caraxâ€™s books in existence. Soon Danielâ€™s seemingly innocent quest opens a door into one of Barcelonaâ€™s darkest secrets--an epic story of murder, madness, and doomed love.",
 "MOBI", 9.99, 13.99, 11.99, null),
-(null, "978-0544176560", "The Name of the Rose", "Mariner Books", "2014-04-22 00:00:00", 592, "Mystery", 
+(null, "978-0544176560", "The Name of the Rose", "Mariner Books", "2014-04-22 00:00:00", 592, "Mystery",
 "The year is 1327. Franciscans in a wealthy Italian abbey are suspected of heresy, and Brother William of Baskerville arrives to investigate. When his delicate mission is suddenly overshadowed by seven bizarre deaths, Brother William turns detective. His tools are the logic of Aristotle, the theology of Aquinas, the empirical insights of Roger Bacon-all sharpened to a glistening edge by wry humor and a ferocious curiosity. He collects evidence, deciphers secret symbols and coded manuscripts,and digs into the eerie labyrinth of the abbey, where 'the most interesting things happen at night.'",
 "MOBI", 7.99, 11.99, 9.99, null),
 (null, "978-0743493468", "Angels & Demons", "Washington Square Press", "2006-05-23 00:00:00", 496, "Mystery",
@@ -342,7 +342,7 @@ Langdonâ€™s worst fears are confirmed on the eve of the Vaticanâ€™s ho
 
 Embarking on a frantic hunt through sealed crypts, dangerous catacombs, deserted cathedrals, and the most secretive vault on earth, Langdon and Vetra follow a 400-year-old trail of ancient symbols that snakes across Rome toward the long-forgotten Illuminati lair...a clandestine location that contains the only hope for Vatican salvation.",
 "MOBI", 7.99, 10.99, 8.99, null),
-(null, "978-0062490377", "And Then There Were None", "William Morrow Paperbacks", "2016-02-23 00:00:00", 272, "Mystery", 
+(null, "978-0062490377", "And Then There Were None", "William Morrow Paperbacks", "2016-02-23 00:00:00", 272, "Mystery",
 "One of the most famous and beloved mysteries from The Queen of Suspenseâ€?Agatha Christieâ€?now a Lifetime TV movie.
 
 ""Ten . . .""
@@ -357,43 +357,43 @@ Stranded by a violent storm, and haunted by a nursery rhyme counting down one by
 ""Seven . . .""
 Which among them is the killer and will any of them survive?",
 "MOBI", 6.99, 9.99, 7.99, null),
-(null, "978-0857665508", "Nexus", "Angry Robot", "2015-03-03 00:00:00", 528, "Science Fiction", 
+(null, "978-0857665508", "Nexus", "Angry Robot", "2015-03-03 00:00:00", 528, "Science Fiction",
 "In the near future, the experimental nano-drug Nexus can link humans together, mind to mind. There are some who want to improve it. There are some who want to eradicate it. And there are others who just want to exploit it.When a young scientist is caught improving Nexus, heâ€™s thrust over his head into a world of danger and international espionage â€“ for there is far more at stake than anyone realizes.From the halls of academe to the halls of power, from the headquarters of an elite US agency in Washington DC to a secret lab beneath a top university in Shanghai, from the underground parties of San Francisco to the illegal biotech markets of Bangkok, from an international neuroscience conference to a remote monastery in the mountains of Thailand â€“ Nexus is a thrill ride through a future on the brink of explosion.",
 "MOBI", 3.99, 8.99, 6.99, null),
-(null, "978-0099560432", "Ready Player One", "Arrow", "2012-04-01 00:00:00", 384, "Science Fiction", 
+(null, "978-0099560432", "Ready Player One", "Arrow", "2012-04-01 00:00:00", 384, "Science Fiction",
 "It's the year 2044, and the real world has become an ugly place. We're out of oil. We've wrecked the climate. Famine, poverty, and disease are widespread. Like most of humanity, Wade Watts escapes this depressing reality by spending his waking hours jacked into the OASIS, a sprawling virtual utopia where you can be anything you want to be, where you can live and play and fall in love on any of ten thousand planets. And like most of humanity, Wade is obsessed by the ultimate lottery ticket that lies concealed within this alternate reality: OASIS founder James Halliday, who dies with no heir, has promised that control of the OASIS - and his massive fortune - will go to the person who can solve the riddles he has left scattered throughout his creation. For years, millions have struggled fruitlessly to attain this prize, knowing only that the riddles are based in the culture of the late twentieth century. And then Wade stumbles onto the key to the first puzzle. Suddenly, he finds himself pitted against thousands of competitors in a desperate race to claim the ultimate prize, a chase that soon takes on terrifying real-world dimensions - and that will leave both Wade and his world profoundly changed.",
 "MOBI", 4.99, 9.99, 7.99,  null),
-(null, "978-0553380958", "Snow Crash", "Del Rey", "2000-05-02 00:00:00", 576, "Science Fiction", 
+(null, "978-0553380958", "Snow Crash", "Del Rey", "2000-05-02 00:00:00", 576, "Science Fiction",
 "In reality, Hiro Protagonist delivers pizza for Uncle Enzoâ€™s CosoNostra Pizza Inc., but in the Metaverse heâ€™s a warrior prince. Plunging headlong into the enigma of a new computer virus thatâ€™s striking down hackers everywhere, he races along the neon-lit streets on a search-and-destroy mission for the shadowy virtual villain threatening to bring about infocalypse.",
 "MOBI", 6.99, 10.99, 9.99, null),
 (null, "978-0553566062", "Virtual Light", "Spectra", "1994-07-01 00:00:00", 368, "Science Fiction",
 "2005: Welcome to NoCal and SoCal, the uneasy sister-states of what used to be California. Here the millenium has come and gone, leaving in its wake only stunned survivors. In Los Angeles, Berry Rydell is a former armed-response rentacop now working for a bounty hunter. Chevette Washington is a bicycle messenger turned pickpocket who impulsively snatches a pair of innocent-looking sunglasses. But these are no ordinary shades. What you can see through these high-tech specs can make you rich--or get you killed. Now Berry and Chevette are on the run, zeroing in on the digitalized heart of DatAmerica, where pure information is the greatest high. And a mind can be a terrible thing to crash...",
 "MOBI", 2.99, 8.99, 6.99, null),
-(null, "978-1534303492", "Saga Volume 8", "Image Comics", "2018-01-02 00:00:00", 152, "Science Fiction", 
+(null, "978-1534303492", "Saga Volume 8", "Image Comics", "2018-01-02 00:00:00", 152, "Science Fiction",
 "After the traumatic events of the War for Phang, Hazel, her parents, and their surviving companions embark on a life-changing adventure at the westernmost edge of the universe.",
 "MOBI", 9.99, 19.99, 13.99, null),
 (null, "978-0141036144", "Ninteneen Eighty Four", "Penguin UK", "2008-07-29 00:00:00", 336, "Science Fiction",
 "Winston Smith works for the Ministry of Truth in London, chief city of Airstrip One. Big Brother stares out from every poster, the Thought Police uncover every act of betrayal. When Winston finds love with Julia, he discovers that life does not have to be dull and deadening, and awakens to new possibilities.",
 "MOBI", 10.79, 25.82, 22.82, null),
-(null, "978-0771008795", "The Handmaid's Tale", "Emblem Editions", "2011-09-06 00:00:00", 368, "Science Fiction", 
+(null, "978-0771008795", "The Handmaid's Tale", "Emblem Editions", "2011-09-06 00:00:00", 368, "Science Fiction",
 "In this multi-award-winning, bestselling novel, Margaret Atwood has created a stunning Orwellian vision of the near future. This is the story of Offred, one of the unfortunate â€œHandmaidsï¿½? under the new social order who have only one purpose: to breed. In Gilead, where women are prohibited from holding jobs, reading, and forming friendships, Offredâ€™s persistent memories of life in the â€œtime beforeï¿½? and her will to survive are acts of rebellion. Provocative, startling, prophetic, and with Margaret Atwoodâ€™s devastating irony, wit, and acute perceptive powers in full force, The Handmaidâ€™s Tale is at once a mordant satire and a dire warning.",
 "MOBI", 11.99, 17.95, 12.37, null),
-(null, "978-0553448122", "Artemis: A Novel", "Crown", "2017-11-14 00:00:00", 320, "Science Fiction", 
-"Jasmine Bashara never signed up to be a hero. She just wanted to get rich. 
- 
+(null, "978-0553448122", "Artemis: A Novel", "Crown", "2017-11-14 00:00:00", 320, "Science Fiction",
+"Jasmine Bashara never signed up to be a hero. She just wanted to get rich.
+
 Not crazy, eccentric-billionaire rich, like many of the visitors to her hometown of Artemis, humanityâ€™s first and only lunar colony. Just rich enough to move out of her coffin-sized apartment and eat something better than flavored algae. Rich enough to pay off a debt sheâ€™s owed for a long time.
- 
-So when a chance at a huge score finally comes her way, Jazz canâ€™t say no. Sure, it requires her to graduate from small-time smuggler to full-on criminal mastermind. And it calls for a particular combination of cunning, technical skills, and large explosionsâ€?not to mention sheer brazen swagger. But Jazz has never run into a challenge her intellect canâ€™t handle, and she figures sheâ€™s got the â€˜swaggerâ€™ part down. 
- 
-The trouble is, engineering the perfect crime is just the start of Jazzâ€™s problems. Because her little heist is about to land her in the middle of a conspiracy for control of Artemis itself. 
- 
-Trapped between competing forces, pursued by a killer and the law alike, even Jazz has to admit sheâ€™s in way over her head. Sheâ€™ll have to hatch a truly spectacular scheme to have a chance at staying alive and saving her city. 
- 
-Jazz is no hero, but she is a very good criminal. 
- 
+
+So when a chance at a huge score finally comes her way, Jazz canâ€™t say no. Sure, it requires her to graduate from small-time smuggler to full-on criminal mastermind. And it calls for a particular combination of cunning, technical skills, and large explosionsâ€?not to mention sheer brazen swagger. But Jazz has never run into a challenge her intellect canâ€™t handle, and she figures sheâ€™s got the â€˜swaggerâ€™ part down.
+
+The trouble is, engineering the perfect crime is just the start of Jazzâ€™s problems. Because her little heist is about to land her in the middle of a conspiracy for control of Artemis itself.
+
+Trapped between competing forces, pursued by a killer and the law alike, even Jazz has to admit sheâ€™s in way over her head. Sheâ€™ll have to hatch a truly spectacular scheme to have a chance at staying alive and saving her city.
+
+Jazz is no hero, but she is a very good criminal.
+
 Thatâ€™ll have to do. ",
 "MOBI", 15.99, 36, 23.99, null),
-(null, "978-0316332835", "Persepolis Rising (The Expanse)", "Orbit", "2017-12-05 00:00:00", 560, "Science Fiction", 
+(null, "978-0316332835", "Persepolis Rising (The Expanse)", "Orbit", "2017-12-05 00:00:00", 560, "Science Fiction",
 "
 AN OLD ENEMY RETURNS
 
@@ -405,46 +405,46 @@ New technologies clash with old as the history of human conflict returns to its 
 "MOBI", 18.99, 36.5, 30.32, null),
 (null, "978-0141036137", "Animal Farm", "Penguin UK", "2008-07-29 00:00:00", 112, "Science Fiction", "Renowned urban artist Shepard Fairey's new look for Orwell's timeless satire 'All animals are equal. But some animals are more equal than others.' Mr Jones of Manor Farm is so lazy and drunken that one day he forgets to feed his livestock. The ensuing rebellion under the leadership of the pigs Napoleon and Snowball leads to the animals taking over the farm. Vowing to eliminate the terrible inequities of the farmyard, the renamed Animal Farm is organised to benefit all who walk on four legs. But as time passes, the ideals of the rebellion are corrupted, then forgotten. And something new and unexpected emerges. . . Animal Farm - the history of a revolution that went wrong - is George Orwell's brilliant satire on the corrupting influence of power.",
 "MOBI", 5.99, 11.99, 10.79, null),
-(null, "978-0316547611", "The Power", "Little, Brown and Company", "2017-10-10 00:00:00", 400, "Science Fiction", 
+(null, "978-0316547611", "The Power", "Little, Brown and Company", "2017-10-10 00:00:00", 400, "Science Fiction",
 "In THE POWER, the world is a recognizable place: there's a rich Nigerian boy who lounges around the family pool; a foster kid whose religious parents hide their true nature; an ambitious American politician; a tough London girl from a tricky family. But then a vital new force takes root and flourishes, causing their lives to converge with devastating effect. Teenage girls now have immense physical power--they can cause agonizing pain and even death. And, with this small twist of nature, the world drastically resets.
 
 From award-winning author Naomi Alderman, THE POWER is speculative fiction at its most ambitious and provocative, at once taking us on a thrilling journey to an alternate reality, and exposing our own world in bold and surprising ways.",
 "MOBI", 17.99, 34, 28.83, null),
-(null, "978-0765393135", "Binti: The Night Masquerade", "Tor Books", "2018-01-16 00:00:00", 208, "Science Fiction", 
+(null, "978-0765393135", "Binti: The Night Masquerade", "Tor Books", "2018-01-16 00:00:00", 208, "Science Fiction",
 "Binti has returned to her home planet, believing that the violence of the Meduse has been left behind. Unfortunately, although her people are peaceful on the whole, the same cannot be said for the Khoush, who fan the flames of their ancient rivalry with the Meduse.
 
 Far from her village when the conflicts start, Binti hurries home, but anger and resentment has already claimed the lives of many close to her.
 
 Once again it is up to Binti, and her intriguing new friend Mwinyi, to intervene--though the elders of her people do not entirely trust her motives--and try to prevent a war that could wipe out her people, once and for all.",
 "MOBI", 7.99, 19.5, 17.99, null),
-(null, "978-0765386632", "Death's End", "Tor Books", "2017-09-05", 608, "Science Fiction", 
+(null, "978-0765386632", "Death's End", "Tor Books", "2017-09-05", 608, "Science Fiction",
 "With The Three-Body Problem, English-speaking readers got their first chance to read China's most beloved science fiction author, Cixin Liu. The Three-Body Problem was released to great acclaim including coverage in The New York Times and The Wall Street Journal and reading list picks by Barack Obama and Mark Zuckerberg. It was also won the Hugo and Nebula Awards, making it the first translated novel to win a major SF award.
 
 Now this epic trilogy concludes with Death's End. Half a century after the Doomsday Battle, the uneasy balance of Dark Forest Deterrence keeps the Trisolaran invaders at bay. Earth enjoys unprecedented prosperity due to the infusion of Trisolaran knowledge. With human science advancing daily and the Trisolarans adopting Earth culture, it seems that the two civilizations will soon be able to co-exist peacefully as equals without the terrible threat of mutually assured annihilation. But the peace has also made humanity complacent.
 
 Cheng Xin, an aerospace engineer from the early twenty-first century, awakens from hibernation in this new age. She brings with her knowledge of a long-forgotten program dating from the beginning of the Trisolar Crisis, and her very presence may upset the delicate balance between two worlds. Will humanity reach for the stars or die in its cradle?",
 "MOBI", 10.99, 23.99, 21.33, null),
-(null, "978-0765386694", "The Dark Forest", "Tor Books", "2016-08-16", 512, "Science Fiction", 
+(null, "978-0765386694", "The Dark Forest", "Tor Books", "2016-08-16", 512, "Science Fiction",
 "In The Dark Forest, Earth is reeling from the revelation of a coming alien invasion-in just four centuries' time. The aliens' human collaborators may have been defeated, but the presence of the sophons, the subatomic particles that allow Trisolaris instant access to all human information, means that Earth's defense plans are totally exposed to the enemy. Only the human mind remains a secret. This is the motivation for the Wallfacer Project, a daring plan that grants four men enormous resources to design secret strategies, hidden through deceit and misdirection from Earth and Trisolaris alike. Three of the Wallfacers are influential statesmen and scientists, but the fourth is a total unknown. Luo Ji, an unambitious Chinese astronomer and sociologist, is baffled by his new status. All he knows is that he's the one Wallfacer that Trisolaris wants dead.",
 "MOBI", 10.99, 22.5, 20.25, null),
-(null, "978-0756414146", "Emergence", "DAW", "2018-01-02 00:00:00", 336, "Science Fiction", 
+(null, "978-0756414146", "Emergence", "DAW", "2018-01-02 00:00:00", 336, "Science Fiction",
 "Bren Cameron, acting as the representative of the atevi's political leader, Tabini-aiji, as well as translator between humans and atevi, has undertaken a mission to the human enclave of Mospheira. Both his presence on the island and his absence from the continent have stirred old enemies to realize new opportunities.
- 
+
 Old hatreds. Old grudges. Old ambitions.
- 
+
 The situation has strengthened the determination of power-seekers on both sides of the strait. Bren knows most of them very well, but not all of them well enough. The space station on which the world increasingly relies is desperate to get more supplies up to orbit and to get a critical oversupply of human refugees down to the world below. Rationing is in force on the station, but the overpopulation problem has to be solved quicklyâ€?and Bren's mission on Mospheira has expanded to include preparation for that landing.
- 
+
 First down will be the three children to whom Tabini's son has a close connection. But following them will be thousands of humans who have never set foot on a planet, humans descended from colonists and officers who split off from Mospheiran humans two hundred years before in a bitter parting of the ways. There is no way the atevi, native to the world, will cede any more land to these new arrivals: they will have to share the island. But certain Mospheirans are willing to use force to prevent these refugees from settling among them.
- 
+
 Bren's job is as general peacemakerâ€?but old enemies want war. Is Bren's diplomatic acumen enough to prevent a war that both sides are prepared to wage?",
 "MOBI", 14.99, 35, 30.69, null),
-(null, "978-0312536633", "The Forever War", "St. Martin's Griffin", "2009-02-17", 228, "Science Fiction", 
+(null, "978-0312536633", "The Forever War", "St. Martin's Griffin", "2009-02-17", 228, "Science Fiction",
 "The Earth's leaders have drawn a line in the interstellar sand--despite the fact that the fierce alien enemy they would oppose is inscrutable, unconquerable, and very far away. A reluctant conscript drafted into an elite Military unit, Private William Mandella has been propelled through space and time to fight in the distant thousand-year conflict; to perform his duties and do whatever it takes to survive the ordeal and return home. But 'home' may be even more terrifying than battle, because, thanks to the time dilation caused by space travel, Mandella is aging months while the Earth he left behind is aging centuries...",
 "MOBI", 10.99, 18.5, 10.99, null),
-(null, "978-1101972120", "Stories of Your Life and Others", "Vintage", "2016-05-14", 304, "Science Fiction", 
+(null, "978-1101972120", "Stories of Your Life and Others", "Vintage", "2016-05-14", 304, "Science Fiction",
 "Stories of Your Life and Others delivers dual delights of the very, very strange and the heartbreakingly familiar, often presenting characters who must confront sudden changeâ€?the inevitable rise of automatons or the appearance of aliensâ€?with some sense of normalcy. With sharp intelligence and humor, Chiang examines what it means to be alive in a world marked by uncertainty, but also by beauty and wonder. An award-winning collection from one of today's most lauded writers, Stories of Your Life and Others is a contemporary classic.",
 "MOBI", 13.99, 22, 16.82, null),
-(null, "978-1443423656", "The Humans", "HarperCollins", "2013-07-02", 304, "Science Fiction", 
+(null, "978-1443423656", "The Humans", "HarperCollins", "2013-07-02", 304, "Science Fiction",
 "The bestselling, award-winning author of The Radleys is back with what may be his best, funniest, and most devastating dark comedy yet. When an extraterrestrial visitor arrives on Earth, his first impressions of the human species are less than positive. Taking the form of Professor Andrew Martin, a prominent mathematician at
 
 Cambridge University, the visitor is eager to complete the gruesome task assigned him and hurry back home to the utopian world of his own planet, where everyone enjoys immortality and infinite knowledge.
@@ -453,45 +453,45 @@ He is disgusted by the way humans look, what they eat, and their capacity for mu
 
 Praised by The New York Times as a â€œnovelist of great seriousness and talent,ï¿½? Matt Haig delivers an unlikely story about human nature and the joy found in the messiness of life on Earth. The Humans is a funny, compulsively readable tale that playfully and movingly explores the ultimate subjectâ€?ourselves.",
 "MOBI", 11.99, 16.99, 13.99, null),
-(null, "978-0441478125", "The Left Hand of Darkness", "Ace", "2000-07-01", 352, "Science Fiction", 
+(null, "978-0441478125", "The Left Hand of Darkness", "Ace", "2000-07-01", 352, "Science Fiction",
 "A lone human ambassador is sent to Winter, an alien world without sexual prejudice, where the inhabitants can change their gender whenever they choose. His goal is to facilitate Winter's inclusion in a growing intergalactic civilization. But to do so he must bridge the gulf between his own views and those of the strange, intriguing culture he encounters...
 
 Embracing the aspects of psychology, society, and human emotion on an alien world, The Left Hand of Darkness stands as a landmark achievement in the annals of intellectual science fiction.",
 "MOBI", 10.99, 17, 15.36, null),
-(null, "978-0441783588", "Starship Troopers", "Ace", "1987-05-15", 352, "Science Fiction", 
+(null, "978-0441783588", "Starship Troopers", "Ace", "1987-05-15", 352, "Science Fiction",
 "In one of Robert Heinlein's most controversial bestsellers, a recruit of the future goes through the toughest boot camp in the Universe--and into battle with the Terran Mobile Infantry against mankind's most frightening enemy.",
 "MOBI", 10.99, 26.21, 20.52, null),
-(null, "978-1400025688", "Written in My Own Heart's Blood", "Seal Books","2016-05-31", 1152, "Romance", 
+(null, "978-1400025688", "Written in My Own Heart's Blood", "Seal Books","2016-05-31", 1152, "Romance",
 "1778: France declares war on Great Britain, the British army leaves Philadelphia, and George Washingtonâ€™s troops leave Valley Forge in pursuit. At this moment, Jamie Fraser returns from a presumed watery grave to discover that his best friend has married his wife, his illegitimate son has discovered (to his horror) who his father really is, and his beloved nephew, Ian, wants to marry a Quaker. Meanwhile, Jamieâ€™s wife, Claire, and his sister, Jenny, are busy picking up the pieces.The Frasers can only be thankful that their daughter Brianna and her family are safe in twentieth-century Scotland. Or not. In fact, Brianna is  searching for her own son, who was kidnapped by a man determined to learn her familyâ€™s secrets. Her husband, Roger, has ventured into the past in search of the missing boy . . . never suspecting that the object of his quest has not left the present. Now, with Roger out of the way, the kidnapper can focus on his true target: Brianna herself.",
 "MOBI", 6.99, 13.99, 8.99, null),
-(null, "978-0764212956", "Still Life", "BETHANY HOUSE", "2017-01-26", 352, "Romance", 
+(null, "978-0764212956", "Still Life", "BETHANY HOUSE", "2017-01-26", 352, "Romance",
 "Work hits too close to home for crime scene photographer Avery Tate when her best friend disappears. The only lead is a chilling photo of her apparently dead. As Avery, her boss Parker, and his friends dig into the case, she's forced to confront her feelings for Parker when they come face-to-face with a dangerous criminal.",
 "MOBI", 2.99, 10.99, 4.99, null),
-(null, "978-0525524984", "Hardcore Twenty-Four", "Random House Large Print", "2017-11-14", 336, "Romance", 
+(null, "978-0525524984", "Hardcore Twenty-Four", "Random House Large Print", "2017-11-14", 336, "Romance",
 "Trouble comes in bunches for Stephanie Plum. First, professional grave robber and semi-professional loon, Simon Diggery, wonâ€™t let her take him in until she agrees to care for his boa constrictor, Ethel. Stephanieâ€™s main qualification for babysitting an extremely large snake is that she owns a stun gunâ€?whether thatâ€™s for use on the wandering serpent or the petrified neighbors remains to be seen.Events take a dark turn when headless bodies start appearing across town. At first, itâ€™s just corpses from a funeral home and the morgue that have had the heads removed. But when a homeless man is murdered and dumped behind a church Stephanie knows that sheâ€™s the only one with a prayer of catching this killer.If all thatâ€™s not enough, Dieselâ€™s back in town. The 6-foot-tall, blonde-haired hunk is a man who accepts no limitsâ€?that includes locked doors, closed windows and underwear. Trentonâ€™s hottest cop, Joe Morelli isnâ€™t pleased at this unexpected arrival nor is Ranger, the high-powered security consultant who has his own plans for Stephanie.As usual Jerseyâ€™s favorite bounty hunter is stuck in the middle with more questions than answers. Whatâ€™s the deal with Grandma Mazurâ€™s latest online paramour? Who is behind the startling epidemic of mutilated corpses? And is the enigmatic Dieselâ€™s sudden appearance a coincidence or the cause of recent deadly events?  ",
 "PDF", 5.99, 15.99, 10.99, null),
-(null, "978-0749020002", "The Honeyfield Bequest", "Allison & Busby", "2016-11-21", 320, "Romance", 
+(null, "978-0749020002", "The Honeyfield Bequest", "Allison & Busby", "2016-11-21", 320, "Romance",
 "1901, Wiltshire: Kathleen's family are determined to force her into marriage with a violent man. In desperation she runs away and finds what consolation she can for her lost dreams. Then tragedy strikes and Kathleen seeks refuge at Honeyfield House, where a charitable bequest has created a hiding place for families in trouble. Nathan is attracted to Kathleen, but when his father dies suddenly, leaving the business in chaos, he can't court anyone. Godfrey Seaton is still following her and she isn't sure whose side her father is on. When Godfrey strikes, Nathan can't stand back when she needs help. Can the two of them defeat him and make a new life together?",
 "PDF", 1.99, 4.99, 3.99, null),
-(null, "978-1410493309", "Island of Glass", "Thorndike Press", "2016-12-07", 488, "Romance", 
+(null, "978-1410493309", "Island of Glass", "Thorndike Press", "2016-12-07", 488, "Romance",
 "As the hunt for the Star of Ice leads the six guardians to Ireland, Doyle, the immortal, must face his tragic past. Three centuries ago, he closed off his heart, yet his warrior spirit is still drawn to the wild. And thereâ€™s no one more familiar with the wild than Riley ? and the wolf within her . . .",
 "PDF", 6.99, 13.99, 10.99, null),
 (null, "978-1540462497", "The Gender Game 3: The Gender Lie (Volume 3)", "CreateSpace Independent Publishing Platform", "2016-12-31", 408, "Romance",
 "I'd want you to help me win a war...
 
-After discovering the shocking secret buried deep within The Green, Violet has a grave decision to make. 
+After discovering the shocking secret buried deep within The Green, Violet has a grave decision to make.
 Trust the woman who saved her, or not?
 
-So far, everything about the woman has taken Violet by surprise. Her behavior has been honest and upfront - a refreshing change for Violet. Besides, with one of her loved ones hanging on life support, and the other close to falling completely out of reach, Violet doesn't exactly have a lot of choice.  
+So far, everything about the woman has taken Violet by surprise. Her behavior has been honest and upfront - a refreshing change for Violet. Besides, with one of her loved ones hanging on life support, and the other close to falling completely out of reach, Violet doesn't exactly have a lot of choice.
 
-Her only way forward is to embark on a dicey excursion. For this, she knows she needs the Liberators' help - and must be prepared to take whatever risks that comes with. 
+Her only way forward is to embark on a dicey excursion. For this, she knows she needs the Liberators' help - and must be prepared to take whatever risks that comes with.
 
 But what neither she, nor any of her new Liberator comrades can prepare for, is just how deep the lies of their homelands run...'",
 "PDF", 0.45, 1.6, 1.25, null),
-(null, "978-0996135696", "Midnight Blue", " LJ Shen", "2018-01-16", 338, "Romance", 
-"It should have been easy. I needed the money. He needed a babysitter to keep him from snorting himself to death. I was cherry-picked especially for him. Responsible. Optimistic. Warm. Innocent. The worst part is that I should have known better. Alex Winslow. British rock star. Serial heartbreaker. Casanova with whiskey eyes. â€œDonâ€™t get near the devil in a leather jacket. Heâ€™ll chew you up and spit you out.ï¿½? Guess what? I didnâ€™t listen. I signed the contract. World tour. Three months. Four Continents. One hundred shows. My name is Indigo Bellamy, and I sold my soul to a tattooed god. Problem was, my soul wasnâ€™t enough for Alex Winslow. He ended up taking my body, too. Then he took my heart. Then he took my all.", 
+(null, "978-0996135696", "Midnight Blue", " LJ Shen", "2018-01-16", 338, "Romance",
+"It should have been easy. I needed the money. He needed a babysitter to keep him from snorting himself to death. I was cherry-picked especially for him. Responsible. Optimistic. Warm. Innocent. The worst part is that I should have known better. Alex Winslow. British rock star. Serial heartbreaker. Casanova with whiskey eyes. â€œDonâ€™t get near the devil in a leather jacket. Heâ€™ll chew you up and spit you out.ï¿½? Guess what? I didnâ€™t listen. I signed the contract. World tour. Three months. Four Continents. One hundred shows. My name is Indigo Bellamy, and I sold my soul to a tattooed god. Problem was, my soul wasnâ€™t enough for Alex Winslow. He ended up taking my body, too. Then he took my heart. Then he took my all.",
 "PDF", 0.75, 2.98, 1.85, null),
-(null, "978-1942215707", "Sex, Not Love", "Vi Keeland", "2018-01-15", 300, "Romance", 
+(null, "978-1942215707", "Sex, Not Love", "Vi Keeland", "2018-01-15", 300, "Romance",
 "My relationship with Hunter Delucia started backwards.
 
 We met at a weddingâ€?him sitting on the groomâ€™s side, me sitting on the brideâ€™s. Stealing glances at each other throughout the night, there was no denying an intense, mutual attraction.
@@ -507,14 +507,14 @@ Iâ€™d thought it was funny, until the following week when he rang the bell 
 Eight weeks of mind-blowing sex with no strings attached? What did I have to lose?
 
 
-Nothing, I thought. 
-Itâ€™s just sex, not love. 
+Nothing, I thought.
+Itâ€™s just sex, not love.
 But you know what they say about the best laid plansâ€¦",
 "PDF", 0.99, 3.99, 2.25, null),
-(null, "978-1682308585", "STRIKE (Gentry Generations)", "EverAfter Romance", "2017-08-21", 228, "Romance", 
+(null, "978-1682308585", "STRIKE (Gentry Generations)", "EverAfter Romance", "2017-08-21", 228, "Romance",
 "The story of the Gentry family continues in this sexy new spinoff series from the NYT and USA Today bestselling author of the Gentry Boys series.",
 "PDF", 0.18, 1.01, 0.75, null),
-(null, "978-1545459522", "Mixed Up", "CreateSpace Independent Publishing Platform", "2017-04-19", 270, "Romance", 
+(null, "978-1545459522", "Mixed Up", "CreateSpace Independent Publishing Platform", "2017-04-19", 270, "Romance",
 "Dirty cocktails, deadly enemies with a red-hot attraction, and one big, crazy, Greek family--what could possibly go wrong? Hiring my brother's best friend was not on my to-do list. Neither was he. Expanding my dirty cocktail bar into food was supposed to be easy, except finding a chef in my little town of Whiskey Key is anything but. Until Parker Hamilton comes home--bringing his Michelin starred chef's hat with him. He has no work. I need someone like him in my new kitchen. There's just one problem: I hate his cocky, filthy-mouthed, sexy-as-hell guts. Even if I might want him. Just a little... Working for my best friend's sister? Not on my to-do list. She's another story. Whiskey Key was supposed to be a relaxing vacation, except I haven't reached the heights I have by lying in a hammock drinking cocktails. So when Raven Archer is desperate for a chef, I offer up my skills. I'm bored. She needs what I can give her. Except there's a problem: I've always hated her. Her and her big, blue eyes, sassy mouth, and killer curves. If only I didn't want her.",
 "PDF", 1.25, 5.09, 4.5, null),
 (null, "978-1544237329", "The Low of Love (Wayward Love) (Volume 2)", "CreateSpace Independent Publishing Platform", "2017-04-19", 270, "Romance",
@@ -523,41 +523,41 @@ But you know what they say about the best laid plansâ€¦",
 (null, "978-1981681419", "Exposed: A Bad Boy Contemporary Romance", "CreateSpace Independent Publishing Platform", "2017-12-12", 260, "Romance",
 "Wanna know a secret? Iâ€™ve never had an orga*m. One night, everything changes. I lose my innocence, and I have my first O. With a man who probably doesnâ€™t care. Maxwell Brideau. Ruthless. Billionaire. Single father. Heâ€™s my bossâ€™s brother and he doesnâ€™t date. Heâ€™s never been seen with the same woman twice. Iâ€™d be foolish to get my hopes up. Iâ€™m crazy about his little girl. Bella desperately needs a mother-figure. What does Maxwell need? A marriage of convenience. He wants me to marry him and take care of his daughter. I watch over Bella during the day. My nights belong to Maxwell. Itâ€™s an arrangement, nothing more. An arrangement with benefits. Iâ€™m helpless beneath his touch. He owns me, body and soul, and is going to show me many more filthy firsts... Exposed is a STAND-ALONE, full-length contemporary romance. There are no cliffhangers, and a happy ending is guaranteed!",
 "PDF", 0.23, 1, 0.75, null),
-(null, "978-1982022488", "Damaged", "CreateSpace Independent Publishing Platform", "2017-12-25", 264, "Romance", 
-"10 years ago, I lost her. 
-Now only Charlotte could melt my cold heart. 
+(null, "978-1982022488", "Damaged", "CreateSpace Independent Publishing Platform", "2017-12-25", 264, "Romance",
+"10 years ago, I lost her.
+Now only Charlotte could melt my cold heart.
 
-I made my billions, and then I built my fortress. 
-I was alone on my mountain. 
-Till she came. 
-I saved her, but she canâ€™t remember her past. 
-And I canâ€™t forget mine. 
-The winter storm trapped us together. 
-But Iâ€™ll keep her safe and warm. 
+I made my billions, and then I built my fortress.
+I was alone on my mountain.
+Till she came.
+I saved her, but she canâ€™t remember her past.
+And I canâ€™t forget mine.
+The winter storm trapped us together.
+But Iâ€™ll keep her safe and warm.
 With every caress, I'll show her body what it craves.
-With every kiss, I'll mark her as my woman. 
-I know someone hurt her. 
-And that b@stard wants her back. 
-He doesnâ€™t know who the f*ck heâ€™s messing with. 
-Charlotte is mine now, and Iâ€™ll protect her no matter what. 
+With every kiss, I'll mark her as my woman.
+I know someone hurt her.
+And that b@stard wants her back.
+He doesnâ€™t know who the f*ck heâ€™s messing with.
+Charlotte is mine now, and Iâ€™ll protect her no matter what.
 
 But will she stay mine when her memories return?",
 "PDF", 0.24, 1.01, 0.76, null),
-(null, "978-1682814505", "Her Secret Ranger", "Entangled Publishing", "2017-03-06", 230, "Romance", 
+(null, "978-1682814505", "Her Secret Ranger", "Entangled Publishing", "2017-03-06", 230, "Romance",
 "Kissing the sexy soldier was a dare she couldnâ€™t resistâ€¦
 
 By-the-book event planner Beth Branniganâ€™s best friend dared her to kiss a cowboy. She should have said no. Instead, she said pleaseâ€¦again and again. If her brother finds out sheâ€™s datingâ€?okay, kissingâ€?okay, sleeping withâ€?one of his military buddies, heâ€™ll kill her. Assuming he doesnâ€™t kill his friend first.
 
 Former Army Ranger Brick Mitchum isnâ€™t a relationship kind of guy. But then he meets Beth and starts to wonder if maybe itâ€™s time he settled down. Sheâ€™s mysterious. Unpredictable. Curvy in every way he needsâ€¦ And hiding something. Heâ€™s just got to figure out what. ",
 "PDF", 0.14, 0.93, 0.7, null),
-(null, "978-0525501268", "Past Perfect: A Novel", "Random House Large Print; Large Print edition", "2017-11-28", 384, "Romance", 
+(null, "978-0525501268", "Past Perfect: A Novel", "Random House Large Print; Large Print edition", "2017-11-28", 384, "Romance",
 "Sybil and Blake Gregory have established a predictable, well-ordered Manhattan lifeâ€?she as a cutting-edge design authority and museum consultant, he in high-tech investmentsâ€?raising their teenagers Andrew and Caroline and six-year-old Charlie. But everything changes when Blake is offered a dream job he canâ€™t resist as CEO of a start-up in San Francisco. He accepts it without consulting his wife and buys a magnificent, irresistibly underpriced historic Pacific Heights mansion as their new home.
 
 The past and present suddenly collide for them in the elegant mansion filled with tender memories and haunting portraits when an earthquake shocks them the night they arrive. The original inhabitants appear for a few brief minutes. In the ensuing days, the Gregorys meet the large and lively family who lived there a century ago: distinguished Bertrand Butterfield and his gracious wife Gwyneth, their sons Josiah and little Magnus, daughters Bettina and Lucy, formidable Scottish matriarch Augusta and her eccentric brother Angus.
 
-All long since dead. All very much alive in spiritâ€?and visible to the Gregorys and no one else. The two families are delighted to share elegant dinners and warm friendship. They have much to teach each other, as the Gregorys watch the past unfold while living their own modern-day lives. Within these enchanted rooms, it is at once 1917 and a century later, where the Gregorys gratefully realize they have been given a perfect giftâ€?beloved friends and the wisdom to shape their own future with grace from a fascinating past.", 
+All long since dead. All very much alive in spiritâ€?and visible to the Gregorys and no one else. The two families are delighted to share elegant dinners and warm friendship. They have much to teach each other, as the Gregorys watch the past unfold while living their own modern-day lives. Within these enchanted rooms, it is at once 1917 and a century later, where the Gregorys gratefully realize they have been given a perfect giftâ€?beloved friends and the wisdom to shape their own future with grace from a fascinating past.",
 "PDF", 9.99, 15.68, 13.75, null),
-(null, "978-1786811271", "The Silent Wife", "Bookouture", "2017-02-24", 350, "Romance", 
+(null, "978-1786811271", "The Silent Wife", "Bookouture", "2017-02-24", 350, "Romance",
 "Would you risk everything for the man you loved? Even if you knew he'd done something terrible?
 'A heart-wrenching and gripping tale. I was hooked from the very first page.' Write Escape
 
@@ -567,12 +567,12 @@ Maggie is married to Massimoâ€™s brother Nico and lives with him and her tr
 
 For a family held together by lies, the truth will come at a devastating price.",
 "PDF", 0.95, 3.99, 2.1, null),
-(null, "978-1476729091", "The Rosie Project: A Novel", "Simon & Schuster; Reprint edition", "2014-06-03", 295, "Romance", 
-"The art of love is never a science: Meet Don Tillman, a brilliant yet socially inept professor of genetics, whoâ€™s decided itâ€™s time he found a wife. In the orderly, evidence-based manner with which Don approaches all things, he designs the Wife Project to find his perfect partner: a sixteen-page, scientifically valid survey to filter out the drinkers, the smokers, the late arrivers. 
+(null, "978-1476729091", "The Rosie Project: A Novel", "Simon & Schuster; Reprint edition", "2014-06-03", 295, "Romance",
+"The art of love is never a science: Meet Don Tillman, a brilliant yet socially inept professor of genetics, whoâ€™s decided itâ€™s time he found a wife. In the orderly, evidence-based manner with which Don approaches all things, he designs the Wife Project to find his perfect partner: a sixteen-page, scientifically valid survey to filter out the drinkers, the smokers, the late arrivers.
 
 Rosie Jarman possesses all these qualities. Don easily disqualifies her as a candidate for The Wife Project (even if she is â€œquite intelligent for a barmaidï¿½?). But Don is intrigued by Rosieâ€™s own quest to identify her biological father. When an unlikely relationship develops as they collaborate on The Father Project, Don is forced to confront the spontaneous whirlwind that is Rosie?and the realization that, despite your best scientific efforts, you donâ€™t find love, it finds you.",
 "PDF", 4.99, 10.97, 8.75, null),
-(null, "978-1455520619", "See Me", "Grand Central Publishing; First Edition edition", "2015-10-13", 496, "Romance", 
+(null, "978-1455520619", "See Me", "Grand Central Publishing; First Edition edition", "2015-10-13", 496, "Romance",
 "See me just as I see you . . .
 
 Colin Hancock is giving his second chance his best shot. With a history of violence and bad decisions behind him and the threat of prison dogging his every step, he's determined to walk a straight line. To Colin, that means applying himself single-mindedly toward his teaching degree and avoiding everything that proved destructive in his earlier life. Reminding himself daily of his hard-earned lessons, the last thing he is looking for is a serious relationship.
@@ -587,32 +587,32 @@ Rich in emotion and fueled with suspense, SEE ME reminds us that love is sometim
 "PDF", 2.55, 8.16, 6.25, null),
 (null, "978-1981689798", "Cabin Fever: A Mountain Man Romance", "CreateSpace Independent Publishing Platform", "2017-12-14", 534, "Romance","A Mountain Man Romance",
 "PDF", 0.22, 1.02, 0.83, null),
-(null, "978-1542048439", "Infraction (Players Game Book 2)", "Skyscape", "2018-01-09", 284, "Romance", 
+(null, "978-1542048439", "Infraction (Players Game Book 2)", "Skyscape", "2018-01-09", 284, "Romance",
 "Pro footballer Miller Quinton would do anything for his best friend and teammateâ€?including â€œfake datingï¿½? his friendâ€™s sister. What no one knows is that seven months ago in Vegas, Miller and Kinsey did a whole lot more than just kiss. Miller knows that this cheerleader is off-limits to him and any guy on the team. Still, he canâ€™t stop himself.
 
 Kinseyâ€™s whole world is on the verge of crumbling. Her dad has cancer. Her overprotective brother is falling apart. Dating Miller may be a fake-out, but heâ€™s the one guy who can make her forget about everythingâ€?including all the reasons she stayed away from football players. With each heated moment, Miller feels more like a safe placeâ€¦even though heâ€™s not safe at all.
 
 Now temptation is testing every rule in the game of love. But how long can they go on playing when winning is a harder goal than either of them imagined?",
 "PDF", 1.45, 3.99, 2.44, null),
-(null, "978-1443453516", "Killer: My Life in Hockey", "HarperCollins", "2017-10-17", 336, "Biographies", 
+(null, "978-1443453516", "Killer: My Life in Hockey", "HarperCollins", "2017-10-17", 336, "Biographies",
 "Doug Gilmour didnâ€™t look fearsome on a pair of skatesâ€?being an â€œundersizedï¿½? forward would plague him during his early careerâ€?but few players matched his killer instincts in the faceoff circle or in front of the net. The Hockey Hall of Famer from Kingston, Ontario, played for seven teams over his twenty-year career, netting 450 goals and 964 assists during the regular season and another 188 points in the playoffs, making him one of the highest-scoring centres of all time. Gilmour played a big role in the 1989 Stanley Cup victory, scoring the winning goal for the Calgary Flames. Perhaps most famously, he led the Toronto Maple Leafs to multiple winning seasons and in 1993, took them to the brink of their first Stanley Cup final in decades, only to lose out on one of the most controversial calls in hockey history.In Killer, Doug Gilmour bares all about his on- and off-the-ice exploits and escapades. Gilmour has always been frank with the media, and his memoir is as revealing as it is hilarious. He played with the greatest players of his generation, and his love for the game and for life are legendary.",
 "PDF", 10.99, 16.99, 14.99, null),
-(null, "978-0062301239", "Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future", "Ecco", "2015-05-19", 400, "Biographies", 
+(null, "978-0062301239", "Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future", "Ecco", "2015-05-19", 400, "Biographies",
 "In Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future, veteran technology journalist Ashlee Vance provides the first inside look into the extraordinary life and times of Silicon Valley's most audacious entrepreneur. Written with exclusive access to Musk, his family and friends, the book traces the entrepreneur's journey from a rough upbringing in South Africa to the pinnacle of the global business world. Vance spent more than 30 hours in conversation with Musk and interviewed close to 300 people to tell the tumultuous stories of Musk's world-changing companies: PayPal, Tesla Motors, SpaceX and SolarCity, and to characterize a man who has renewed American industry and sparked new levels of innovation while making plenty of enemies along the way.",
 "PDF", 6.99, 11.99, 9.99, null),
-(null, "978-1451648539", "Steve Jobs", "Simon & Schuster", "2011-10-24", 656, "Biographies", 
+(null, "978-1451648539", "Steve Jobs", "Simon & Schuster", "2011-10-24", 656, "Biographies",
 "Based on more than forty interviews with Jobs conducted over two yearsâ€?as well as interviews with more than a hundred family members, friends, adversaries, competitors, and colleaguesâ€?Walter Isaacson has written a riveting story of the roller-coaster life and searingly intense personality of a creative entrepreneur whose passion for perfection and ferocious drive revolutionized six industries: personal computers, animated movies, music, phones, tablet computing, and digital publishing.",
 "PDF", 7.99, 12.99, 10.99, null),
-(null, "978-0062413406", "Alibaba: The House That Jack Ma Built", "Ecco", "2016-04-12", 304, "Biographies", 
+(null, "978-0062413406", "Alibaba: The House That Jack Ma Built", "Ecco", "2016-04-12", 304, "Biographies",
 "In just a decade and half Jack Ma, a man from modest beginnings who started out as an English teacher, founded and built Alibaba into one of the worldâ€™s largest companies, an e-commerce empire on which hundreds of millions of Chinese consumers depend. Alibabaâ€™s $25 billion IPO in 2014 was the largest global IPO ever. A Rockefeller of his age who is courted by CEOs and Presidents around the world, Jack is an icon for Chinaâ€™s booming private sector and the gatekeeper to hundreds of millions of middle class consumers.",
 "PDF", 9.99, 17.99, 13.99, null),
-(null, "978-1501139154", "Leonardo Da Vinci", "Simon & Schuster", "2017-10-17", 624, "Biographies", 
+(null, "978-1501139154", "Leonardo Da Vinci", "Simon & Schuster", "2017-10-17", 624, "Biographies",
 "Based on thousands of pages from Leonardoâ€™s astonishing notebooks and new discoveries about his life and work, Walter Isaacson weaves a narrative that connects his art to his science. He shows how Leonardoâ€™s genius was based on skills we can improve in ourselves, such as passionate curiosity, careful observation, and an imagination so playful that it flirted with fantasy.",
 "PDF", 12.99, 18.99, 16.99, null),
-(null, "978-0544217621", "Johnny Carson", "Eamon Dolan/Mariner Books", "2014-10-07", 320, "Biographies", 
+(null, "978-0544217621", "Johnny Carson", "Eamon Dolan/Mariner Books", "2014-10-07", 320, "Biographies",
 "Henry Bushkin was Carsonâ€™s best friend and lawyer during that period, and his book is a tautly rendered and remarkably nuanced portrait of Carson, revealing not only how he truly was, but why. Bushkin explains why Carson, a voracious (and very talented) womanizer, felt he always had to be married; why he couldnâ€™t visit his son in the hospital and wouldnâ€™t attend his motherâ€™s funeral; and much more. Johnny Carson is by turns shocking, poignant, and uproarious â€? written with a novelistâ€™s eye for detail, a screenwriterâ€™s ear for dialogue, and a knack for comic timing that Carson himself would relish.",
 "PDF", 5.0, 7.2, 6.0, null),
-(null, "978-0062430519", "The Woman Who Smashed Codes", "Dey Street Books", "2018-06-26", 448, "Biographies", 
+(null, "978-0062430519", "The Woman Who Smashed Codes", "Dey Street Books", "2018-06-26", 448, "Biographies",
 "Joining the ranks of Hidden Figures and In the Garden of Beasts, the incredible true story of the greatest codebreaking duo that ever lived, an American woman and her husband who invented the modern science of cryptology together and used it to confront the evils of their time, solving puzzles that unmasked Nazi spies and helped win World War II.
 
 In 1916, at the height of World War I, brilliant Shakespeare expert Elizebeth Smith went to work for an eccentric tycoon on his estate outside Chicago. The tycoon had close ties to the U.S. government, and he soon asked Elizebeth to apply her language skills to an exciting new venture: code-breaking. There she met the man who would become her husband, groundbreaking cryptologist William Friedman. Though she and Friedman are in many ways the ""Adam and Eve"" of the NSA, Elizebethâ€™s story, incredibly, has never been told.
@@ -621,10 +621,10 @@ In The Woman Who Smashed Codes, Jason Fagone chronicles the life of this extraor
 
 Fagone unveils Americaâ€™s code-breaking history through the prism of Smithâ€™s life, bringing into focus the unforgettable events and colorful personalities that would help shape modern intelligence. Blending the lively pace and compelling detail that are the hallmarks of Erik Larsonâ€™s bestsellers with the atmosphere and intensity of The Imitation Game, The Woman Who Smashed Codes is page-turning popular history at its finest.",
 "PDF", 0.5, 2.73, 1, null),
-(null, "978-0718096212", "Churchill's Trial: Winston Churchill and the Salvation of Free Government", "Thomas Nelson", "2016-10-25", 416, "Biographies", 
+(null, "978-0718096212", "Churchill's Trial: Winston Churchill and the Salvation of Free Government", "Thomas Nelson", "2016-10-25", 416, "Biographies",
 "No statesman shaped the twentieth century more than Winston Churchill. To know Churchill is to understand the combinations of boldness and caution, assertiveness and humility, that define statesmanship at its best. With fresh perspective and insights based on decades of studying and teaching Churchill, Larry P. Arnn explores the greatest challenges faced by Churchill, both in war and in peacetime, in the context of Churchillâ€™s abiding devotion to constitutionalism.",
 "PDF", 0.5, 1.82, 1, null),
-(null, "978-0544320819", "Coming Clean: A Memoir", "New Harvest", "2014-05-20", 272, "Biographies", 
+(null, "978-0544320819", "Coming Clean: A Memoir", "New Harvest", "2014-05-20", 272, "Biographies",
 "Kimberly Rae Miller is an immaculately put-together woman with a great career, a loving boyfriend, and a beautifully tidy apartment in Brooklyn. You would never guess that behind the closed doors of her familyâ€™s idyllic Long Island house hid teetering stacks of aging newspaper, broken computers, and boxes upon boxes of unused junk festering in every roomâ€?the product of her fatherâ€™s painful and unending struggle with hoarding.
 
 In this dazzling memoir, Miller brings to life her experience growing up in a rat-infested home, hiding her fatherâ€™s shameful secret from friends for years, and the emotional burden that ultimately led to her suicide attempt. In beautiful prose, Miller sheds light on her complicated yet loving relationship with her parents, which has thrived in spite of the odds.
@@ -638,16 +638,16 @@ Heroes are often defined as ordinary characters who get thrust into extraordinar
 
 Tightly focused, meticulously researched, rendered with vivid detail and narrative verve, THE ACCIDENTAL PRESIDENT escorts readers into the situation room with Truman during this tumultuous, history-making 120 days, when the stakes were high and the challenge even higher. The result is narrative history of the highest order and a compelling look at a presidency with great relevance to our times.",
 "PDF", 0.7, 2.39, 1.5, null),
-(null, "978-1788541602", "Grant", "Penguin Press", "2017-10-10", 1098, "Biographies", 
+(null, "978-1788541602", "Grant", "Penguin Press", "2017-10-10", 1098, "Biographies",
 "Ulysses S. Grant's life has typically been misunderstood. All too often he is caricatured as a chronic loser and an inept businessman, or as the triumphant but brutal Union general of the Civil War. But these stereotypes don't come close to capturing him, as Chernow shows in his masterful biography, the first to provide a complete understanding of the general and president whose fortunes rose and fell with dizzying speed and frequency.
- 
+
 Before the Civil War, Grant was flailing. His business ventures had ended dismally, and despite distinguished service in the Mexican War he ended up resigning from the army in disgrace amid recurring accusations of drunkenness. But in war, Grant began to realize his remarkable potential, soaring through the ranks of the Union army, prevailing at the battle of Shiloh and in the Vicksburg campaign, and ultimately defeating the legendary Confederate general Robert E. Lee. Along the way, Grant endeared himself to President Lincoln and became his most trusted general and the strategic genius of the war effort. Grantâ€™s military fame translated into a two-term presidency, but one plagued by corruption scandals involving his closest staff members.
 
 More important, he sought freedom and justice for black Americans, working to crush the Ku Klux Klan and earning the admiration of Frederick Douglass, who called him â€œthe vigilant, firm, impartial, and wise protector of my race.ï¿½? After his presidency, he was again brought low by a dashing young swindler on Wall Street, only to resuscitate his image by working with Mark Twain to publish his memoirs, which are recognized as a masterpiece of the genre.
- 
+
 With lucidity, breadth, and meticulousness, Chernow finds the threads that bind these disparate stories together, shedding new light on the man whom Walt Whitman described as â€œnothing heroic... and yet the greatest hero.ï¿½? Chernowâ€™s probing portrait of Grant's lifelong struggle with alcoholism transforms our understanding of the man at the deepest level. This is America's greatest biographer, bringing movingly to life one of our finest but most underappreciated presidents. The definitive biography, Grant is a grand synthesis of painstaking research and literary brilliance that makes sense of all sides of Grant's life, explaining how this simple Midwesterner could at once be so ordinary and so extraordinary. ",
 "PDF", 13.99, 20.29, 16.99, null),
-(null, "978-0316512589", "Obama: An Intimate Portrait", "Little, Brown and Company", "2017-11-07", 327, "Biographies", 
+(null, "978-0316512589", "Obama: An Intimate Portrait", "Little, Brown and Company", "2017-11-07", 327, "Biographies",
 "During Barack Obama's two terms, Pete Souza was with the President during more crucial moments than anyone else--and he photographed them all. Souza captured nearly two million photographs of President Obama, in moments highly classified and disarmingly candid.
 
 Obama: An Intimate Portrait reproduces more than 300 of Souza's most iconic photographs with fine-art print quality in an oversize collectible format. Together they document the most consequential hours of the Presidency--including the historic image of President Obama and his advisors in the Situation Room during the bin Laden mission--alongside unguarded moments with the President's family, his encounters with children, interactions with world leaders and cultural figures, and more.
@@ -656,7 +656,7 @@ Souza's photographs, with the behind-the-scenes captions and stories that accomp
 
 This book puts you in the White House with President Obama, and will be a treasured record of a landmark era in American history.",
 "PDF", 14, 20.4, 17, null),
-(null, "978-1538760857", "All-American Murder", "Little, Brown and Company", "2018-01-22", 401, "Biographies", 
+(null, "978-1538760857", "All-American Murder", "Little, Brown and Company", "2018-01-22", 401, "Biographies",
 "Football coaches, players, and fans called Aaron Hernandez unstoppable. His four-year-old daughter called him Daddy. The law called him inmate #174594.
 
 He was a college All-American who became the youngest player in the NFL and later a Super Bowl veteran. He was a star tight end on the league-dominant New England Patriots, who extended his contract for a record $40 million. Aaron Hernandez's every move as a professional athlete played out in the headlines, yet he led a secret life-one that ended in a maximum security prison. What drove him to go so wrong, so fast?
@@ -665,18 +665,18 @@ All-American Murder is the first book to investigate - from the unique vantage p
 "PDF", 8.5, 15.5, 11.99, null),
 (null, "978-0345375568", "Dreadnought: Britain, Germany, and the Coming of the Great War", "Ballantine Books; Reprint edition", "1992-09-15", 1040, "Biographies",
 "With the biographerâ€™s rare genius for expressing the essence of extraordinary lives, Massie brings to life a crowd of glittery figures: the single-minded Admiral von Tirpitz; the young, ambitious Winston Churchill; the ruthless, sycophantic Chancellor Bernhard von BÃ¼low; Britainâ€™s greatest twentieth-century foreign secretary, Sir Edward Grey; and Jacky Fisher, the eccentric admiral who revolutionized the British navy and brought forth the first true battleship, the H.M.S. Dreadnought.
- 
+
 Their story, and the story of the era, filled with misunderstandings, missed opportunities, and events leading to unintended conclusions, unfolds like a Greek tragedy in this powerful narrative. Intimately human and dramatic, Dreadnought is history at its most riveting.",
 "PDF", 8.99, 14.75, 12.25, null),
-(null, "978-0345438317", "Nicholas and Alexandra: The Classic Account of the Fall of the Romanov Dynasty", "Random House Trade Paperbacks; Reprint edition", "2000-02-01", 640, "Biographies", 
+(null, "978-0345438317", "Nicholas and Alexandra: The Classic Account of the Fall of the Romanov Dynasty", "Random House Trade Paperbacks; Reprint edition", "2000-02-01", 640, "Biographies",
 "In this commanding book, Pulitzer Prizeâ€“winning author Robert K. Massie sweeps readers back to the extraordinary world of Imperial Russia to tell the story of the Romanovsâ€™ lives: Nicholasâ€™s political naÃ¯vetÃ©, Alexandraâ€™s obsession with the corrupt mystic Rasputin, and little Alexisâ€™s brave struggle with hemophilia. Against a lavish backdrop of luxury and intrigue, Massie unfolds a powerful drama of passion and historyâ€?the story of a doomed empire and the death-marked royals who watched it crumble.",
 "PDF", 5.99, 13.83, 11.5, null),
-(null, "978-1503936904", "A River in Darkness: One Man's Escape from North Korea", "AmazonCrossing", "2018-01-01", 172, "Biographies", 
+(null, "978-1503936904", "A River in Darkness: One Man's Escape from North Korea", "AmazonCrossing", "2018-01-01", 172, "Biographies",
 "Half-Korean, half-Japanese, Masaji Ishikawa has spent his whole life feeling like a man without a country. This feeling only deepened when his family moved from Japan to North Korea when Ishikawa was just thirteen years old, and unwittingly became members of the lowest social caste. His father, himself a Korean national, was lured to the new Communist country by promises of abundant work, education for his children, and a higher station in society. But the reality of their new life was far from utopian.
 
 In this memoir translated from the original Japanese, Ishikawa candidly recounts his tumultuous upbringing and the brutal thirty-six years he spent living under a crushing totalitarian regime, as well as the challenges he faced repatriating to Japan after barely escaping North Korea with his life. A River in Darkness is not only a shocking portrait of life inside the country but a testament to the dignityâ€?and indomitable natureâ€?of the human spirit.",
 "PDF", 2.2, 4.96, 3.95, null),
-(null, "978-1681771335", "A Great and Terrible King: Edward I and the Forging of Britain", "Pegasus Books; 1 edition", "2016-06-14", 480, "Biographies", 
+(null, "978-1681771335", "A Great and Terrible King: Edward I and the Forging of Britain", "Pegasus Books; 1 edition", "2016-06-14", 480, "Biographies",
 "Edward I is familiar to millions as ""Longshanks,"" conqueror of Scotland and nemesis of Sir William Wallace (in ""Braveheart""). Yet this story forms only the final chapter of the king's action-packed life. Earlier, Edward had defeated and killed the famous Simon de Montfort in battle; travelled to the Holy Land; conquered Wales, extinguishing forever its native rulers and constructing a magnificent chain of castles. He raised the greatest armies of the Middle Ages and summoned the largest parliaments; notoriously, he expelled all the Jews from his kingdom.The longest-lived of England's medieval kings, he fathered fifteen children with his first wife, Eleanor of Castile, and, after her death, he erected the Eleanor Crosses?the grandest funeral monuments ever fashioned for an English monarch.
 
 In this book, Marc Morris examines afresh the forces that drove Edward throughout his relentless career: his character, his Christian faith, and his sense of England's destiny?a sense shaped in particular by the tales of the legendary King Arthur. He also explores the competing reasons that led Edward's opponents (including Robert Bruce) to resist him.
@@ -690,10 +690,10 @@ Fifth in line to the throne at the time of her birth, Victoria was an ordinary w
 
 Drawing on sources that include fresh revelations about Victoriaâ€™s relationship with John Brown, Julia Baird brings vividly to life the fascinating story of a woman who struggled with so many of the things we do today: balancing work and family, raising children, navigating marital strife, losing parents, combating anxiety and self-doubt, finding an identity, searching for meaning.",
 "PDF", 5.85, 13.83, 11.99, null),
-(null, "978-0345298065", "Peter the Great: His Life and World", "Random House Trade Paperbacks; Reissue edition", "1981-10-12", 928, "Biographies", 
+(null, "978-0345298065", "Peter the Great: His Life and World", "Random House Trade Paperbacks; Reissue edition", "1981-10-12", 928, "Biographies",
 "Against the monumental canvas of seventeenth- and eighteenth-century Europe and Russia unfolds the magnificent story of Peter the Great, crowned co-tsar at the age of ten. Robert K. Massie delves deep into the life of this captivating historical figure, chronicling the pivotal events that shaped a boy into a legendâ€?including his â€œincognitoï¿½? travels in Europe, his unquenchable curiosity about Western ways, his obsession with the sea and establishment of the stupendous Russian navy, his creation of an unbeatable army, his transformation of Russia, and his relationships with those he loved most: Catherine, the robust yet gentle peasant, his loving mistress, wife, and successor; and Menshikov, the charming, bold, unscrupulous prince who rose to wealth and power through Peterâ€™s friendship. Impetuous and stubborn, generous and cruel, tender and unforgiving, a man of enormous energy and complexity, Peter the Great is brought fully to life.",
 "PDF", 8.95, 14.75, 12.99, null),
-(null, "978-1250171085", "When They Call You a Terrorist: A Black Lives Matter Memoir", "St. Martin's Press; Reprint edition", "2018-01-16", 272, "Biographies", 
+(null, "978-1250171085", "When They Call You a Terrorist: A Black Lives Matter Memoir", "St. Martin's Press; Reprint edition", "2018-01-16", 272, "Biographies",
 "From one of the co-founders of the Black Lives Matter movement comes a poetic memoir and reflection on humanity. Necessary and timely, Patrisse Cullorsâ€™ story asks us to remember that protest in the interest of the most vulnerable comes from love. Leaders of the Black Lives Matter movement have been called terrorists, a threat to America. But in truth, they are loving women whose life experiences have led them to seek justice for those victimized by the powerful. In this meaningful, empowering account of survival, strength, and resilience, Patrisse Cullors and asha bandele seek to change the culture that declares innocent black life expendable.",
 "PDF", 6.99, 12.2, 10.25, null);
 

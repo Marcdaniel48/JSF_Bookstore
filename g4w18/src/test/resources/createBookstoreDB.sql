@@ -1,7 +1,3 @@
-/**
- * Authors:  Jephtia, Sebastian
- * Created: Jan 25, 2018
- */
 DROP DATABASE IF EXISTS BOOKSTORE;
 CREATE DATABASE BOOKSTORE;
 

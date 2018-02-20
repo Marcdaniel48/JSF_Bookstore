@@ -46,7 +46,7 @@
                                 <h4>
                                     by
                                     <b:form>
-                                        <ui:repeat var="author" value="#{bookBackingBean.book.authorCollection}">
+                                        <ui:repeat var="author" value="#{bookBackingBean.book.authorList}">
                                             <b:commandLink outcome="authorBooks">
                                                 <h:outputText value="#{author.firstName} #{author.lastName}" styleClass="list-group-item-heading"></h:outputText>
                                                 <f:param name="authorId" value="#{author.authorId}"></f:param>
@@ -157,7 +157,7 @@
                 </h:form>
             </b:panel>
             <b:panel collapsible="false" title="#{msgs.bookDetailsReviews}">
-                <ui:repeat var="review" value="#{bookBackingBean.book.reviewCollection}">
+                <ui:repeat var="review" value="#{bookBackingBean.book.reviewList}">
                     <b:container fluid="true">
                         <b:row>
                             <b:column col-md="3">

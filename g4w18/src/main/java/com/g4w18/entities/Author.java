@@ -46,8 +46,8 @@ public class Author implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "LAST_NAME")
     private String lastName;
-    @ManyToMany(mappedBy = "authorCollection")
-    private Collection<Book> bookCollection;
+    @ManyToMany(mappedBy = "authorList")
+    private List<Book> bookList;
 
     public Author() {
     }
@@ -86,12 +86,12 @@ public class Author implements Serializable {
         this.lastName = lastName;
     }
 
-    public Collection<Book> getBookCollection() {
-        return bookCollection;
+    public List<Book> getBookList() {
+        return bookList;
     }
 
-    public void setBookCollection(Collection<Book> bookCollection) {
-        this.bookCollection = bookCollection;
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 
     @Override

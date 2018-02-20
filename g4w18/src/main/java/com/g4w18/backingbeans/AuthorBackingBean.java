@@ -48,7 +48,7 @@ public class AuthorBackingBean implements Serializable {
 
     public Collection<Book> getAuthorBooks() {
         if (authorBooks == null) {
-            authorBooks = author.getBookCollection();
+            authorBooks = author.getBookList();
         }
         return authorBooks;
     }

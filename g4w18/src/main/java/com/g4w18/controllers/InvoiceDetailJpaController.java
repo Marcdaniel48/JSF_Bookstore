@@ -48,7 +48,7 @@ public class InvoiceDetailJpaController implements Serializable {
                 invoiceId = em.merge(invoiceId);
             }
             if (bookId != null) {
-                bookId.getInvoiceDetailCollection().add(invoiceDetail);
+                bookId.getInvoiceDetailList().add(invoiceDetail);
                 bookId = em.merge(bookId);
             }
             utx.commit();
@@ -88,11 +88,11 @@ public class InvoiceDetailJpaController implements Serializable {
                 invoiceIdNew = em.merge(invoiceIdNew);
             }
             if (bookIdOld != null && !bookIdOld.equals(bookIdNew)) {
-                bookIdOld.getInvoiceDetailCollection().remove(invoiceDetail);
+                bookIdOld.getInvoiceDetailList().remove(invoiceDetail);
                 bookIdOld = em.merge(bookIdOld);
             }
             if (bookIdNew != null && !bookIdNew.equals(bookIdOld)) {
-                bookIdNew.getInvoiceDetailCollection().add(invoiceDetail);
+                bookIdNew.getInvoiceDetailList().add(invoiceDetail);
                 bookIdNew = em.merge(bookIdNew);
             }
             utx.commit();
@@ -130,7 +130,7 @@ public class InvoiceDetailJpaController implements Serializable {
             }
             Book bookId = invoiceDetail.getBookId();
             if (bookId != null) {
-                bookId.getInvoiceDetailCollection().remove(invoiceDetail);
+                bookId.getInvoiceDetailList().remove(invoiceDetail);
                 bookId = em.merge(bookId);
             }
             em.remove(invoiceDetail);

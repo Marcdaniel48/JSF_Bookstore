@@ -44,7 +44,7 @@ public class ReviewJpaController implements Serializable {
             }
             em.persist(review);
             if (bookId != null) {
-                bookId.getReviewCollection().add(review);
+                bookId.getReviewList().add(review);
                 bookId = em.merge(bookId);
             }
             if (clientId != null) {
@@ -80,11 +80,11 @@ public class ReviewJpaController implements Serializable {
             }
             review = em.merge(review);
             if (bookIdOld != null && !bookIdOld.equals(bookIdNew)) {
-                bookIdOld.getReviewCollection().remove(review);
+                bookIdOld.getReviewList().remove(review);
                 bookIdOld = em.merge(bookIdOld);
             }
             if (bookIdNew != null && !bookIdNew.equals(bookIdOld)) {
-                bookIdNew.getReviewCollection().add(review);
+                bookIdNew.getReviewList().add(review);
                 bookIdNew = em.merge(bookIdNew);
             }
             if (clientIdOld != null && !clientIdOld.equals(clientIdNew)) {
@@ -125,7 +125,7 @@ public class ReviewJpaController implements Serializable {
             }
             Book bookId = review.getBookId();
             if (bookId != null) {
-                bookId.getReviewCollection().remove(review);
+                bookId.getReviewList().remove(review);
                 bookId = em.merge(bookId);
             }
             Client clientId = review.getClientId();

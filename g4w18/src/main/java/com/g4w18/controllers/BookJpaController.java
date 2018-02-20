@@ -16,81 +16,83 @@ import javax.persistence.criteria.Root;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.Review;
-import java.util.List;
 import javax.annotation.Resource;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.transaction.UserTransaction;
-import javax.enterprise.context.RequestScoped;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.transaction.UserTransaction;
 
-@Named
-@RequestScoped
+/**
+ *
+ * @author Salman Haidar
+ */
 public class BookJpaController implements Serializable {
+
+    public BookJpaController() {
+
+    }
 
     @Resource
     private UserTransaction utx;
 
-    @PersistenceContext(unitName = "bookstorePU")
+    @PersistenceContext
     private EntityManager em;
 
     public void create(Book book) throws RollbackFailureException, Exception {
-        if (book.getAuthorCollection() == null) {
-            book.setAuthorCollection(new ArrayList<Author>());
+        if (book.getAuthorList() == null) {
+            book.setAuthorList(new ArrayList<Author>());
         }
-        if (book.getInvoiceDetailCollection() == null) {
-            book.setInvoiceDetailCollection(new ArrayList<InvoiceDetail>());
+        if (book.getInvoiceDetailList() == null) {
+            book.setInvoiceDetailList(new ArrayList<InvoiceDetail>());
         }
-        if (book.getReviewCollection() == null) {
-            book.setReviewCollection(new ArrayList<Review>());
+        if (book.getReviewList() == null) {
+            book.setReviewList(new ArrayList<Review>());
         }
         try {
             utx.begin();
-            Collection<Author> attachedAuthorCollection = new ArrayList<Author>();
-            for (Author authorCollectionAuthorToAttach : book.getAuthorCollection()) {
-                authorCollectionAuthorToAttach = em.getReference(authorCollectionAuthorToAttach.getClass(), authorCollectionAuthorToAttach.getAuthorId());
-                attachedAuthorCollection.add(authorCollectionAuthorToAttach);
+            List<Author> attachedAuthorList = new ArrayList<Author>();
+            for (Author authorListAuthorToAttach : book.getAuthorList()) {
+                authorListAuthorToAttach = em.getReference(authorListAuthorToAttach.getClass(), authorListAuthorToAttach.getAuthorId());
+                attachedAuthorList.add(authorListAuthorToAttach);
             }
-            book.setAuthorCollection(attachedAuthorCollection);
-            Collection<InvoiceDetail> attachedInvoiceDetailCollection = new ArrayList<InvoiceDetail>();
-            for (InvoiceDetail invoiceDetailCollectionInvoiceDetailToAttach : book.getInvoiceDetailCollection()) {
-                invoiceDetailCollectionInvoiceDetailToAttach = em.getReference(invoiceDetailCollectionInvoiceDetailToAttach.getClass(), invoiceDetailCollectionInvoiceDetailToAttach.getDetailId());
-                attachedInvoiceDetailCollection.add(invoiceDetailCollectionInvoiceDetailToAttach);
+            book.setAuthorList(attachedAuthorList);
+            List<InvoiceDetail> attachedInvoiceDetailList = new ArrayList<InvoiceDetail>();
+            for (InvoiceDetail invoiceDetailListInvoiceDetailToAttach : book.getInvoiceDetailList()) {
+                invoiceDetailListInvoiceDetailToAttach = em.getReference(invoiceDetailListInvoiceDetailToAttach.getClass(), invoiceDetailListInvoiceDetailToAttach.getDetailId());
+                attachedInvoiceDetailList.add(invoiceDetailListInvoiceDetailToAttach);
             }
-            book.setInvoiceDetailCollection(attachedInvoiceDetailCollection);
-            Collection<Review> attachedReviewCollection = new ArrayList<Review>();
-            for (Review reviewCollectionReviewToAttach : book.getReviewCollection()) {
-                reviewCollectionReviewToAttach = em.getReference(reviewCollectionReviewToAttach.getClass(), reviewCollectionReviewToAttach.getReviewId());
-                attachedReviewCollection.add(reviewCollectionReviewToAttach);
+            book.setInvoiceDetailList(attachedInvoiceDetailList);
+            List<Review> attachedReviewList = new ArrayList<Review>();
+            for (Review reviewListReviewToAttach : book.getReviewList()) {
+                reviewListReviewToAttach = em.getReference(reviewListReviewToAttach.getClass(), reviewListReviewToAttach.getReviewId());
+                attachedReviewList.add(reviewListReviewToAttach);
             }
-            book.setReviewCollection(attachedReviewCollection);
+            book.setReviewList(attachedReviewList);
             em.persist(book);
-            for (Author authorCollectionAuthor : book.getAuthorCollection()) {
-                authorCollectionAuthor.getBookCollection().add(book);
-                authorCollectionAuthor = em.merge(authorCollectionAuthor);
+            for (Author authorListAuthor : book.getAuthorList()) {
+                authorListAuthor.getBookList().add(book);
+                authorListAuthor = em.merge(authorListAuthor);
             }
-            for (InvoiceDetail invoiceDetailCollectionInvoiceDetail : book.getInvoiceDetailCollection()) {
-                Book oldBookIdOfInvoiceDetailCollectionInvoiceDetail = invoiceDetailCollectionInvoiceDetail.getBookId();
-                invoiceDetailCollectionInvoiceDetail.setBookId(book);
-                invoiceDetailCollectionInvoiceDetail = em.merge(invoiceDetailCollectionInvoiceDetail);
-                if (oldBookIdOfInvoiceDetailCollectionInvoiceDetail != null) {
-                    oldBookIdOfInvoiceDetailCollectionInvoiceDetail.getInvoiceDetailCollection().remove(invoiceDetailCollectionInvoiceDetail);
-                    oldBookIdOfInvoiceDetailCollectionInvoiceDetail = em.merge(oldBookIdOfInvoiceDetailCollectionInvoiceDetail);
+            for (InvoiceDetail invoiceDetailListInvoiceDetail : book.getInvoiceDetailList()) {
+                Book oldBookIdOfInvoiceDetailListInvoiceDetail = invoiceDetailListInvoiceDetail.getBookId();
+                invoiceDetailListInvoiceDetail.setBookId(book);
+                invoiceDetailListInvoiceDetail = em.merge(invoiceDetailListInvoiceDetail);
+                if (oldBookIdOfInvoiceDetailListInvoiceDetail != null) {
+                    oldBookIdOfInvoiceDetailListInvoiceDetail.getInvoiceDetailList().remove(invoiceDetailListInvoiceDetail);
+                    oldBookIdOfInvoiceDetailListInvoiceDetail = em.merge(oldBookIdOfInvoiceDetailListInvoiceDetail);
                 }
             }
-            for (Review reviewCollectionReview : book.getReviewCollection()) {
-                Book oldBookIdOfReviewCollectionReview = reviewCollectionReview.getBookId();
-                reviewCollectionReview.setBookId(book);
-                reviewCollectionReview = em.merge(reviewCollectionReview);
-                if (oldBookIdOfReviewCollectionReview != null) {
-                    oldBookIdOfReviewCollectionReview.getReviewCollection().remove(reviewCollectionReview);
-                    oldBookIdOfReviewCollectionReview = em.merge(oldBookIdOfReviewCollectionReview);
+            for (Review reviewListReview : book.getReviewList()) {
+                Book oldBookIdOfReviewListReview = reviewListReview.getBookId();
+                reviewListReview.setBookId(book);
+                reviewListReview = em.merge(reviewListReview);
+                if (oldBookIdOfReviewListReview != null) {
+                    oldBookIdOfReviewListReview.getReviewList().remove(reviewListReview);
+                    oldBookIdOfReviewListReview = em.merge(oldBookIdOfReviewListReview);
                 }
             }
             utx.commit();
@@ -105,88 +107,89 @@ public class BookJpaController implements Serializable {
     }
 
     public void edit(Book book) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+
         try {
             utx.begin();
             Book persistentBook = em.find(Book.class, book.getBookId());
-            Collection<Author> authorCollectionOld = persistentBook.getAuthorCollection();
-            Collection<Author> authorCollectionNew = book.getAuthorCollection();
-            Collection<InvoiceDetail> invoiceDetailCollectionOld = persistentBook.getInvoiceDetailCollection();
-            Collection<InvoiceDetail> invoiceDetailCollectionNew = book.getInvoiceDetailCollection();
-            Collection<Review> reviewCollectionOld = persistentBook.getReviewCollection();
-            Collection<Review> reviewCollectionNew = book.getReviewCollection();
+            List<Author> authorListOld = persistentBook.getAuthorList();
+            List<Author> authorListNew = book.getAuthorList();
+            List<InvoiceDetail> invoiceDetailListOld = persistentBook.getInvoiceDetailList();
+            List<InvoiceDetail> invoiceDetailListNew = book.getInvoiceDetailList();
+            List<Review> reviewListOld = persistentBook.getReviewList();
+            List<Review> reviewListNew = book.getReviewList();
             List<String> illegalOrphanMessages = null;
-            for (InvoiceDetail invoiceDetailCollectionOldInvoiceDetail : invoiceDetailCollectionOld) {
-                if (!invoiceDetailCollectionNew.contains(invoiceDetailCollectionOldInvoiceDetail)) {
+            for (InvoiceDetail invoiceDetailListOldInvoiceDetail : invoiceDetailListOld) {
+                if (!invoiceDetailListNew.contains(invoiceDetailListOldInvoiceDetail)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain InvoiceDetail " + invoiceDetailCollectionOldInvoiceDetail + " since its bookId field is not nullable.");
+                    illegalOrphanMessages.add("You must retain InvoiceDetail " + invoiceDetailListOldInvoiceDetail + " since its bookId field is not nullable.");
                 }
             }
-            for (Review reviewCollectionOldReview : reviewCollectionOld) {
-                if (!reviewCollectionNew.contains(reviewCollectionOldReview)) {
+            for (Review reviewListOldReview : reviewListOld) {
+                if (!reviewListNew.contains(reviewListOldReview)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Review " + reviewCollectionOldReview + " since its bookId field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Review " + reviewListOldReview + " since its bookId field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Collection<Author> attachedAuthorCollectionNew = new ArrayList<Author>();
-            for (Author authorCollectionNewAuthorToAttach : authorCollectionNew) {
-                authorCollectionNewAuthorToAttach = em.getReference(authorCollectionNewAuthorToAttach.getClass(), authorCollectionNewAuthorToAttach.getAuthorId());
-                attachedAuthorCollectionNew.add(authorCollectionNewAuthorToAttach);
+            List<Author> attachedAuthorListNew = new ArrayList<Author>();
+            for (Author authorListNewAuthorToAttach : authorListNew) {
+                authorListNewAuthorToAttach = em.getReference(authorListNewAuthorToAttach.getClass(), authorListNewAuthorToAttach.getAuthorId());
+                attachedAuthorListNew.add(authorListNewAuthorToAttach);
             }
-            authorCollectionNew = attachedAuthorCollectionNew;
-            book.setAuthorCollection(authorCollectionNew);
-            Collection<InvoiceDetail> attachedInvoiceDetailCollectionNew = new ArrayList<InvoiceDetail>();
-            for (InvoiceDetail invoiceDetailCollectionNewInvoiceDetailToAttach : invoiceDetailCollectionNew) {
-                invoiceDetailCollectionNewInvoiceDetailToAttach = em.getReference(invoiceDetailCollectionNewInvoiceDetailToAttach.getClass(), invoiceDetailCollectionNewInvoiceDetailToAttach.getDetailId());
-                attachedInvoiceDetailCollectionNew.add(invoiceDetailCollectionNewInvoiceDetailToAttach);
+            authorListNew = attachedAuthorListNew;
+            book.setAuthorList(authorListNew);
+            List<InvoiceDetail> attachedInvoiceDetailListNew = new ArrayList<InvoiceDetail>();
+            for (InvoiceDetail invoiceDetailListNewInvoiceDetailToAttach : invoiceDetailListNew) {
+                invoiceDetailListNewInvoiceDetailToAttach = em.getReference(invoiceDetailListNewInvoiceDetailToAttach.getClass(), invoiceDetailListNewInvoiceDetailToAttach.getDetailId());
+                attachedInvoiceDetailListNew.add(invoiceDetailListNewInvoiceDetailToAttach);
             }
-            invoiceDetailCollectionNew = attachedInvoiceDetailCollectionNew;
-            book.setInvoiceDetailCollection(invoiceDetailCollectionNew);
-            Collection<Review> attachedReviewCollectionNew = new ArrayList<Review>();
-            for (Review reviewCollectionNewReviewToAttach : reviewCollectionNew) {
-                reviewCollectionNewReviewToAttach = em.getReference(reviewCollectionNewReviewToAttach.getClass(), reviewCollectionNewReviewToAttach.getReviewId());
-                attachedReviewCollectionNew.add(reviewCollectionNewReviewToAttach);
+            invoiceDetailListNew = attachedInvoiceDetailListNew;
+            book.setInvoiceDetailList(invoiceDetailListNew);
+            List<Review> attachedReviewListNew = new ArrayList<Review>();
+            for (Review reviewListNewReviewToAttach : reviewListNew) {
+                reviewListNewReviewToAttach = em.getReference(reviewListNewReviewToAttach.getClass(), reviewListNewReviewToAttach.getReviewId());
+                attachedReviewListNew.add(reviewListNewReviewToAttach);
             }
-            reviewCollectionNew = attachedReviewCollectionNew;
-            book.setReviewCollection(reviewCollectionNew);
+            reviewListNew = attachedReviewListNew;
+            book.setReviewList(reviewListNew);
             book = em.merge(book);
-            for (Author authorCollectionOldAuthor : authorCollectionOld) {
-                if (!authorCollectionNew.contains(authorCollectionOldAuthor)) {
-                    authorCollectionOldAuthor.getBookCollection().remove(book);
-                    authorCollectionOldAuthor = em.merge(authorCollectionOldAuthor);
+            for (Author authorListOldAuthor : authorListOld) {
+                if (!authorListNew.contains(authorListOldAuthor)) {
+                    authorListOldAuthor.getBookList().remove(book);
+                    authorListOldAuthor = em.merge(authorListOldAuthor);
                 }
             }
-            for (Author authorCollectionNewAuthor : authorCollectionNew) {
-                if (!authorCollectionOld.contains(authorCollectionNewAuthor)) {
-                    authorCollectionNewAuthor.getBookCollection().add(book);
-                    authorCollectionNewAuthor = em.merge(authorCollectionNewAuthor);
+            for (Author authorListNewAuthor : authorListNew) {
+                if (!authorListOld.contains(authorListNewAuthor)) {
+                    authorListNewAuthor.getBookList().add(book);
+                    authorListNewAuthor = em.merge(authorListNewAuthor);
                 }
             }
-            for (InvoiceDetail invoiceDetailCollectionNewInvoiceDetail : invoiceDetailCollectionNew) {
-                if (!invoiceDetailCollectionOld.contains(invoiceDetailCollectionNewInvoiceDetail)) {
-                    Book oldBookIdOfInvoiceDetailCollectionNewInvoiceDetail = invoiceDetailCollectionNewInvoiceDetail.getBookId();
-                    invoiceDetailCollectionNewInvoiceDetail.setBookId(book);
-                    invoiceDetailCollectionNewInvoiceDetail = em.merge(invoiceDetailCollectionNewInvoiceDetail);
-                    if (oldBookIdOfInvoiceDetailCollectionNewInvoiceDetail != null && !oldBookIdOfInvoiceDetailCollectionNewInvoiceDetail.equals(book)) {
-                        oldBookIdOfInvoiceDetailCollectionNewInvoiceDetail.getInvoiceDetailCollection().remove(invoiceDetailCollectionNewInvoiceDetail);
-                        oldBookIdOfInvoiceDetailCollectionNewInvoiceDetail = em.merge(oldBookIdOfInvoiceDetailCollectionNewInvoiceDetail);
+            for (InvoiceDetail invoiceDetailListNewInvoiceDetail : invoiceDetailListNew) {
+                if (!invoiceDetailListOld.contains(invoiceDetailListNewInvoiceDetail)) {
+                    Book oldBookIdOfInvoiceDetailListNewInvoiceDetail = invoiceDetailListNewInvoiceDetail.getBookId();
+                    invoiceDetailListNewInvoiceDetail.setBookId(book);
+                    invoiceDetailListNewInvoiceDetail = em.merge(invoiceDetailListNewInvoiceDetail);
+                    if (oldBookIdOfInvoiceDetailListNewInvoiceDetail != null && !oldBookIdOfInvoiceDetailListNewInvoiceDetail.equals(book)) {
+                        oldBookIdOfInvoiceDetailListNewInvoiceDetail.getInvoiceDetailList().remove(invoiceDetailListNewInvoiceDetail);
+                        oldBookIdOfInvoiceDetailListNewInvoiceDetail = em.merge(oldBookIdOfInvoiceDetailListNewInvoiceDetail);
                     }
                 }
             }
-            for (Review reviewCollectionNewReview : reviewCollectionNew) {
-                if (!reviewCollectionOld.contains(reviewCollectionNewReview)) {
-                    Book oldBookIdOfReviewCollectionNewReview = reviewCollectionNewReview.getBookId();
-                    reviewCollectionNewReview.setBookId(book);
-                    reviewCollectionNewReview = em.merge(reviewCollectionNewReview);
-                    if (oldBookIdOfReviewCollectionNewReview != null && !oldBookIdOfReviewCollectionNewReview.equals(book)) {
-                        oldBookIdOfReviewCollectionNewReview.getReviewCollection().remove(reviewCollectionNewReview);
-                        oldBookIdOfReviewCollectionNewReview = em.merge(oldBookIdOfReviewCollectionNewReview);
+            for (Review reviewListNewReview : reviewListNew) {
+                if (!reviewListOld.contains(reviewListNewReview)) {
+                    Book oldBookIdOfReviewListNewReview = reviewListNewReview.getBookId();
+                    reviewListNewReview.setBookId(book);
+                    reviewListNewReview = em.merge(reviewListNewReview);
+                    if (oldBookIdOfReviewListNewReview != null && !oldBookIdOfReviewListNewReview.equals(book)) {
+                        oldBookIdOfReviewListNewReview.getReviewList().remove(reviewListNewReview);
+                        oldBookIdOfReviewListNewReview = em.merge(oldBookIdOfReviewListNewReview);
                     }
                 }
             }
@@ -209,6 +212,7 @@ public class BookJpaController implements Serializable {
     }
 
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+
         try {
             utx.begin();
             Book book;
@@ -219,27 +223,27 @@ public class BookJpaController implements Serializable {
                 throw new NonexistentEntityException("The book with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            Collection<InvoiceDetail> invoiceDetailCollectionOrphanCheck = book.getInvoiceDetailCollection();
-            for (InvoiceDetail invoiceDetailCollectionOrphanCheckInvoiceDetail : invoiceDetailCollectionOrphanCheck) {
+            List<InvoiceDetail> invoiceDetailListOrphanCheck = book.getInvoiceDetailList();
+            for (InvoiceDetail invoiceDetailListOrphanCheckInvoiceDetail : invoiceDetailListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Book (" + book + ") cannot be destroyed since the InvoiceDetail " + invoiceDetailCollectionOrphanCheckInvoiceDetail + " in its invoiceDetailCollection field has a non-nullable bookId field.");
+                illegalOrphanMessages.add("This Book (" + book + ") cannot be destroyed since the InvoiceDetail " + invoiceDetailListOrphanCheckInvoiceDetail + " in its invoiceDetailList field has a non-nullable bookId field.");
             }
-            Collection<Review> reviewCollectionOrphanCheck = book.getReviewCollection();
-            for (Review reviewCollectionOrphanCheckReview : reviewCollectionOrphanCheck) {
+            List<Review> reviewListOrphanCheck = book.getReviewList();
+            for (Review reviewListOrphanCheckReview : reviewListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Book (" + book + ") cannot be destroyed since the Review " + reviewCollectionOrphanCheckReview + " in its reviewCollection field has a non-nullable bookId field.");
+                illegalOrphanMessages.add("This Book (" + book + ") cannot be destroyed since the Review " + reviewListOrphanCheckReview + " in its reviewList field has a non-nullable bookId field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Collection<Author> authorCollection = book.getAuthorCollection();
-            for (Author authorCollectionAuthor : authorCollection) {
-                authorCollectionAuthor.getBookCollection().remove(book);
-                authorCollectionAuthor = em.merge(authorCollectionAuthor);
+            List<Author> authorList = book.getAuthorList();
+            for (Author authorListAuthor : authorList) {
+                authorListAuthor.getBookList().remove(book);
+                authorListAuthor = em.merge(authorListAuthor);
             }
             em.remove(book);
             utx.commit();
@@ -262,26 +266,122 @@ public class BookJpaController implements Serializable {
     }
 
     private List<Book> findBookEntities(boolean all, int maxResults, int firstResult) {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Book.class));
-        Query q = em.createQuery(cq);
-        if (!all) {
-            q.setMaxResults(maxResults);
-            q.setFirstResult(firstResult);
-        }
-        return q.getResultList();
+
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Book.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
+
     }
 
     public Book findBook(Integer id) {
-        return em.find(Book.class, id);
+
+            return em.find(Book.class, id);
+
     }
 
     public int getBookCount() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<Book> rt = cq.from(Book.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Book> rt = cq.from(Book.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+
+    }
+
+    /**
+     * Get books from the database with the title provided
+     *
+     * @param title name of the book that is being searched
+     * @return List of books found with the title
+     */
+    public List<Book> findBooksByTitleSpecific(String title)
+    {
+        List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title =?1")
+                .setParameter(1, title)
+                .getResultList();
+
+        return findBookByTitle;
+    }
+
+    /**
+     * Get books from the database with the title provided(doesn't need to match whole)
+     *
+     * @param title name of the book that is being searched
+     * @return List of books found with the title
+     */
+    public List<Book> findBooksByTitle(String title)
+    {
+        List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title LIKE ?1 order by b.title asc")
+                .setParameter(1, title + "%")
+                .getResultList();
+
+        return findBookByTitle;
+    }
+
+    /**
+     * Get books from the database with the isbn provided(must match whole) 
+     *
+     * @param isbn number of the book the user is searching for
+     * @return Book found with the isbn
+     */
+    public List<Book> findBookByAuthor(String author)
+    {
+        List<Book> findBookByAuthor = em.createQuery("Select b from Book b where b.isbnNumber = ?1")
+                .setParameter(1, author)
+                .getResultList();
+
+        return findBookByAuthor;
+    }
+
+    /**
+     * Get books from the database with the isbn provided(must match whole)
+     *
+     * @param isbn number of the book the user is searching for
+     * @return Book found with the isbn
+     */
+    public List<Book> findBookByIsbn(String isbn)
+    {
+        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where b.isbnNumber = ?1")
+                .setParameter(1, isbn)
+                .getResultList();
+
+        return findBookByIsbn;
+    }
+
+    /**
+     * Get books from the database with the author provided.
+     *
+     * @param publisher of the book we are finding
+     * @return books found with the associated publisher
+     */
+    public List<Book> findBooksByPublisher(String publisher)
+    {
+        List<Book> findBookByPublisher = em.createQuery("Select b from Book b where b.publisher = ?1")
+                .setParameter(1, publisher)
+                .getResultList();
+
+        return findBookByPublisher;
+    }
+
+    /**
+     * Get publishers from the database with the publisher provided(doesn't need to match whole)
+     *
+     * @param title publisher that is being searched
+     * @return List of books found with the publisher
+     */
+    public List<Book> findDistinctPublisher(String publisher)
+    {
+        List<Book> findPublisher = em.createQuery("Select distinct(b.publisher) from Book b where b.publisher LIKE ?1 order by b.publisher asc")
+                .setParameter(1, publisher + "%")
+                .getResultList();
+
+        return findPublisher;
     }
 
     public List<Book> findBooksByGenre(String genre) {
@@ -294,11 +394,5 @@ public class BookJpaController implements Serializable {
         return toReturn;
     }
 
-//    public Book test(int id){
-//        TypedQuery<Book> query = em.createNamedQuery("Book.findByBookId", Book.class);
-//        query.setParameter("bookId", id);
-//        Book book = query.getSingleResult();
-//        return book;
-//    }
 
 }

@@ -26,47 +26,47 @@ import javax.servlet.http.HttpSession;
 public class LoginController implements Serializable{
     @Inject
     private ClientJpaController clientJpaController;
-    
+
     private String username;
     private String password;
-    
+
     public String getUsername()
     {
         return username;
     }
-    
+
     public void setUsername(String username)
     {
         this.username = username;
     }
-    
+
     public String getPassword()
     {
         return password;
     }
-    
+
     public void setPassword(String password)
     {
         this.password = password;
     }
-    
+
     public void login()
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        
+
         boolean loggedIn;
-        
+
         Client client = clientJpaController.findClientByCredentials(username, password);
-        
-        if (client != null) 
+
+        if (client != null)
         {
             loggedIn = true;
         }
-        else 
+        else
         {
             loggedIn = false;
         }
-        
+
         session.setAttribute("loggedIn", loggedIn);
         session.setAttribute("username", username);
     }
