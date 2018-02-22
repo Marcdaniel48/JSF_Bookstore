@@ -1,0 +1,14 @@
+#survey
+{
+    position: absolute;
+    left: 58%;
+    right: 0;
+    top: 69%;
+    bottom: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transform: translateX(100%);
+    animation: 1s ease-out 2.3s 1 slideInFromRight;
+    animation-fill-mode: forwards;
+}

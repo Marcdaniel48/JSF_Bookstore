@@ -1,17 +1,28 @@
 #recent-books
 {
-    width: 100%;
-    height: auto;
-    position: relative;
-    left: 0;
+    position: absolute;
+    left: 20%;
+    right: 42%;
+    top: 0;
+    bottom: 50%;
+    margin-left: 30px;
+    margin-right: 10px;
+    margin-bottom: 5px;
     font-size: 0;
-    border: 3px solid yellow;
+    letter-spacing: 0px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transform: translateY(-100%);
+    animation: 1s ease-out 2.2s 1 slideInFromTop;
+    animation-fill-mode: forwards;
+    /* border: 3px solid yellow; */
 }
 .book-thumbnail-container
 {
     position: relative;
 }
-.book-overlay
+.overlay
 {
     position: absolute;
     top: 0;
@@ -26,14 +37,16 @@
 .book:hover
 {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
-.book:hover .book-overlay,
-.book:hover .book-overlay-text
+.book:hover .overlay,
+#rss-feed:hover .overlay,
+.book:hover .overlay-text,
+#rss-feed:hover .overlay-text
 {
     opacity: 0.8;
 }
-.book-overlay-text
+.overlay-text
 {
     position: absolute;
     top: 50%;
@@ -44,7 +57,6 @@
     transition: .5s ease;
     text-align: center;
     font-size: initial;
-    color: white;
 }
 .book
 {
@@ -65,22 +77,23 @@
     -webkit-transition: transform .2s ease;
     -moz-transition: transform .2s ease;
     transition: transform .2s ease;
-    border: 3px solid tomato;
+/*     border: 3px solid tomato; */
 }
 .book-thumbnail
 {
     width: 100%;
     height: 100%;
+    border: 2px solid #F2BFA0;
 }
 .book-title
 {
     display: block;
     font-size: initial;
-    border: 3px solid antiquewhite;
+/*     border: 3px solid antiquewhite; */
 }
 .book-price
 {
     display: block;
     font-size: initial;
-    border: 3px solid green;
+/*     border: 3px solid green; */
 }

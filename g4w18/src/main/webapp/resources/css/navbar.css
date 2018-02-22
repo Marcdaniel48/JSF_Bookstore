@@ -1,18 +1,72 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Feb 2, 2018, 3:02:10 PM
-    Author     : 1430047
-*/
 .navbar {
-    height: 50px;
+    height: 70px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 999;
-    background-color: green;
+    text-align: center;
+    line-height: 70px;
+    color: #F2BFA0;
+    font-size: 1.5em;
+    background-color: rgba(0,0,0,0.95);
+    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    animation: 1s ease-out 2s 1 fadeIn;
+    animation-fill-mode: forwards;
+}
+.navbar .logo
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 90%;
+    bottom: 0;
+    background-image: url("#{resource['images/logo.png']}");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    transition: opacity 1s ease;
+/*     border: 3px solid yellow; */
+}
+.navbar .logo:hover
+{
+    cursor: pointer;
+    opacity: 0.4;
+}
+.navbar .right
+{
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 0;
+    bottom: 0;
+    padding-right: 10px;
+    text-align: right;
+/*     border: 3px solid red; */
+}
+.login
+{
+    height: 100%;
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 5px;
+    padding-left: 5px;
+    border-left: 1px solid #F2BFA0;
+/*     border: 1px solid blue; */
+}
+.navbar-icon
+{
+    height: 100%;
+    display: inline-block;
+    padding: 20px 0px;
+    opacity: 1;
+    transition: opacity .4s ease;
+/*     border: 1px solid yellow; */
+}
+.navbar-icon:hover
+{
+    cursor: pointer;
+    opacity: 0.4;
 }

@@ -7,8 +7,9 @@
     <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Roboto" rel="stylesheet"/>
+        <link rel="icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
         <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="_animations.css" />
         <h:outputStylesheet library="css" name="parallax.css" />
         <h:outputStylesheet library="css" name="navbar.css" />
         <h:outputStylesheet library="css" name="footer.css" />
@@ -16,180 +17,139 @@
         <h:outputStylesheet library="css" name="_books.css" />
         <h:outputStylesheet library="css" name="_onsale.css" />
         <h:outputStylesheet library="css" name="_banner.css" />
+        <h:outputStylesheet library="css" name="_survey.css" />
+        <h:outputStylesheet library="css" name="_rss.css" />
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
         <h:outputScript library="js" name="banner.js" />
         <h:outputScript library="js" name="onsale.js" />
+        <h:outputScript library="js" name="rss.js" />
     </h:head>
     <h:body>
         
+        <nav class="navbar">
+            <div class="logo"></div>
+
+            <div class="right">
+                <h:graphicImage class="navbar-icon" library="images" name="search.png" alt="Search Icon" />
+                <h:graphicImage class="navbar-icon" library="images" name="shopping-cart.png" alt="Shoppping Cart Icon" />
+                <a class="login" href="#">Login</a>
+            </div>
+        </nav>
+
         <div class="parallax">
-            
-            <nav class="navbar">
-                navbar
-            </nav>
-            
-            
-            
-            <div class="parallax-layer background"><div class="footer">
-                footer
-            </div></div>
-        
-        
-            <div class="parallax-layer content">
-                
+
+            <div class="parallax-layer background"></div>
+
+
+            <div class="content">
+
                 <div class="top-section">
-                    <div class="banner tmpspacing">
-                        <div class="slide">
-                            <h:graphicImage library="images" name="slide1.jpg" class="slide-img"/>
-                            <h:graphicImage library="images" name="slide2.jpg" class="slide-img"/>
-                            <h:graphicImage library="images" name="slide3.jpg" class="slide-img"/>
-                            <h:graphicImage library="images" name="slide4.jpg" class="slide-img"/>
-			</div>
-                        
-                        <a class="prev">&#10094;</a>
-                        <a class="next">&#10095;</a>
-                        
-                        <div class="dots-container"></div>
+                    <div id="recent-books">
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+                        <a class="view-more" href="">View More</a>
                     </div>
-                    
-                    <div id="book-sales" class="tmpspacing">
-                        <div class="section-image"></div>
+
+                    <div id="genres">
+                        <div class="outer">
+                                    <a class="genre-title" href="#">Fantasy</a>
+                                    <a class="genre-title" href="#">Mystery</a>
+                                    <a class="genre-title" href="#">Sci-Fi</a>
+                                    <a class="genre-title" href="#">Biographies</a>
+                                    <a class="genre-title" href="#">Romance</a>
+                        </div>
+                    </div>
+
+                    <div id="book-sales">
                         <div class="book">
                             <div class="book-thumbnail-container">
-                                <div class="book-overlay"></div>
-                                <div class="book-overlay-text"><div>View</div></div>
-                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
                             </div>
-                            <span class="book-title">An Even More Real Long Ass Example Title</span>
-                            <span class="book-price"><s>$12.99</s> $8.99</span>
                         </div>
                         <div class="book">
                             <div class="book-thumbnail-container">
-                                <div class="book-overlay"></div>
-                                <div class="book-overlay-text"><div>View</div></div>
-                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
                             </div>
-                            <span class="book-title">Short Title</span>
-                            <span class="book-price"><s>$12.99</s> $8.99</span>
                         </div>
                         <div class="book">
                             <div class="book-thumbnail-container">
-                                <div class="book-overlay"></div>
-                                <div class="book-overlay-text"><div>View</div></div>
-                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
                             </div>
-                            <span class="book-title">Some Real Long Ass Example Title</span>
-                            <span class="book-price"><s>$12.99</s> $8.99</span>
                         </div>
-                        <div class="book">
-                            <div class="book-thumbnail-container">
-                                <div class="book-overlay"></div>
-                                <div class="book-overlay-text"><div>View</div></div>
-                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
-                            </div>
-                            <span class="book-title">Short Title</span>
-                            <span class="book-price"><s>$12.99</s> $8.99</span>
-                        </div>
-                        
+
+                        <a class="view-more" href="">View More</a>
+
                         <a class="prev disabled">&#10094;</a>
                         <a class="next">&#10095;</a>
                     </div>
-                    
-                    <div id="genres" class="tmpspacing">
-                        <div class="section-image"></div>
-			<div class="outer">
-                            <div class="middle">
-                                <div class="genre-btn">
-                                    <div class="genre-icon"></div>
-                                    <span class="genre-title">Fantasy</span>
-                                </div>
-                                <div class="genre-btn">
-                                    <div class="genre-icon"></div>
-                                    <span class="genre-title">Mystery</span>
-                                </div>
-                                <div class="genre-btn">
-                                    <div class="genre-icon"></div>
-                                    <span class="genre-title">Sci-Fi</span>
-                                </div>
-                                <div class="genre-btn">
-                                    <div class="genre-icon"></div>
-                                    <span class="genre-title">Romance</span>
-                                </div>
-                                <div class="genre-btn">
-                                    <div class="genre-icon"></div>
-                                    <span class="genre-title">Biographies</span>
-                                </div>
-                            </div>
-			</div>
+
+                    <div id="banner">
+                        <div class="slide">
+                            
+                            <h:graphicImage class="slide-img" library="images" name="slide1.jpg" alt="Ad 1" />
+                            <h:graphicImage class="slide-img" library="images" name="slide2.jpg" alt="Ad 2" />
+                            <h:graphicImage class="slide-img" library="images" name="slide3.jpg" alt="Ad 3" />
+                            <h:graphicImage class="slide-img" library="images" name="slide4.jpg" alt="Ad 4" />
+                         </div>
+
+                        <a class="prev">&#10094;</a>
+                        <a class="next">&#10095;</a>
+
+                        <div class="dots-container"></div>
                     </div>
-                    
-                    <div id="recent-books" class="tmpspacing">
-                        <div class="section-image"></div>
-                        <div class="book">
-                            <div class="book-thumbnail-container">
-                                <div class="book-overlay"></div>
-                                <div class="book-overlay-text"><div>View</div></div>
-                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+
+                    <div id="rss-feed">
+
+                        <div class="center-vertical">
+                            <div>
+                                <h2>Read, Watch &amp; Discuss! Five great book club books that are now movies</h2>
+                                <br/>
+                                <p>
+        Of course, we think any season is the right season to read, but winter can be a perfect time to read <i>and </i>watch! What better way to keep busy in these cold, dark months than reading with your book club, watching the movie version and then discussing both?
+                                </p>
                             </div>
-                            <span class="book-title">An Even More Real Long Ass Example Title</span>
-                            <span class="book-price"><s>$12.99</s> $8.99</span>
                         </div>
-                        <div class="book">
-                            <div class="book-thumbnail-container">
-                                <div class="book-overlay"></div>
-                                <div class="book-overlay-text"><div>View</div></div>
-                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
+                        <div class="overlay"></div>
+                        <div class="overlay-text"><div>Read More</div></div>
+                    </div>
+
+                    <div id="survey">
+                        <div class="center-vertical center-horizontal">
+                            <div>
+                                <h2>Survey coming soon...</h2>
                             </div>
-                            <span class="book-title">Short Title</span>
-                            <span class="book-price"><s>$12.99</s> $8.99</span>
-                        </div>
-                        <div class="book">
-                            <div class="book-thumbnail-container">
-                                <div class="book-overlay"></div>
-                                <div class="book-overlay-text"><div>View</div></div>
-                                <h:graphicImage library="images" name="book_thumbnail.jpg" class="book-thumbnail"/>
-                            </div>
-                            <span class="book-title">Some Real Long Ass Example Title</span>
-                            <span class="book-price"><s>$12.99</s> $8.99</span>
                         </div>
                     </div>
 
-                    <div class="news tmpspacing">
-                        News Highlights
-                    </div>
-                    <div class="survey tmpspacing">
-                        Survey
-                    </div>
                 </div>
 
-                <script>
-//                    $("*").each(function(){
-//                       $(this).css("border", "initial"); 
-//                    });
-                </script>
-                
-                
-
-                
-                
-<!--                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <div class="">
-                    Search
-                </div>-->
-            
             </div>
-        
-            
-            
+
         </div>
         
     </h:body>

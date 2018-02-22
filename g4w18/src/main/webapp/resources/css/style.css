@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:100');
+
 *{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -10,95 +13,48 @@ html, body
 {
     width: 100%;
     height: 100%;
+    color: #F2BFA0;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
 }
 
-/*@media only screen and (max-width: 800px)
-{*/
-
-
-    .news
-    {
-        width: 100%;
-        height: 150px;
-        position: relative;
-        left: 0;
-        right: auto;
-        top: auto;
-        bottom: auto;
-        border: 3px solid orange;
-    }
-    .survey
-    {
-        width: 100%;
-        height: 100px;
-        position: relative;
-        left: 0;
-        right: auto;
-        top: auto;
-        bottom: auto;
-        border: 3px solid darkmagenta;
-    }
-    .search
-    {
-        width: 100%;
-        height: 200px;
-        position: relative;
-        left: 0;
-        right: auto;
-        top: auto;
-        bottom: auto;
-        border: 3px solid fuchsia;
-    }
-    .top-section
-    {
-        height: auto;
-        position: relative;
-        /*background-color: beige;*/
-        /*background-clip: content-box;*/
-        border: 3px solid white;
-    }
-/*}*/
-
-@media only screen and (min-width: 1400px)
+hr
 {
-    .top-section
-    {
-        /*padding: 0 5%;*/
-    }
+    border: 0;
+    height: 1px;
+    color: #F2BFA0;
+    background-color: #F2BFA0;
 }
-@media only screen and (min-width: 1600px)
+a
 {
-    .top-section
-    {
-        /*padding: 0 10%;*/
-    }
+    text-decoration: none;
+    color: #F2BFA0;
+    opacity: 1;
+    transition: opacity .4s ease;
+}
+a:hover
+{
+    opacity: 0.4;
 }
 
-.tmpspacing
+.top-section
 {
-    margin-bottom: 50px;
+    height: 100%;
+    position: relative;
+/*     border: 3px solid yellow; */
 }
-.section-image
+
+.center-vertical
 {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-position: center;
-    background-size: cover;
-    -webkit-filter: blur(4px);
-    filter: blur(4px);
+    top: 50%;
+    transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
 }
-#book-sales .section-image
+.center-horizontal
 {
-    background-image: url('/g4w18/javax.faces.resource/images/b4.jpeg.xhtml');
-}
-#recent-books .section-image
-{
-    background-image: url('/g4w18/javax.faces.resource/images/b2.jpeg.xhtml');
-}
-#genres .section-image
-{
-    background-image: url('/g4w18/javax.faces.resource/images/b3.jpeg.xhtml');
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
 }
