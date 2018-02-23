@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.entities;
 
 import java.io.Serializable;
@@ -24,11 +19,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
-<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/Client.java
- * @author 1430047
-=======
  * @author Marc-Daniel
->>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/Client.java
  */
 @Entity
 @Table(name = "client", catalog = "bookstore", schema = "")
@@ -50,12 +41,8 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Client.findByHomeTelephone", query = "SELECT c FROM Client c WHERE c.homeTelephone = :homeTelephone")
     , @NamedQuery(name = "Client.findByCellphone", query = "SELECT c FROM Client c WHERE c.cellphone = :cellphone")
     , @NamedQuery(name = "Client.findByEmail", query = "SELECT c FROM Client c WHERE c.email = :email")
-<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/Client.java
-    , @NamedQuery(name = "Client.findByIsManager", query = "SELECT c FROM Client c WHERE c.isManager = :isManager")})
-=======
     , @NamedQuery(name = "Client.findByIsManager", query = "SELECT c FROM Client c WHERE c.isManager = :isManager")
     , @NamedQuery(name = "Client.findByCredentials", query = "select c from Client c where c.username=?1 and c.password=?2")})
->>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/Client.java
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;

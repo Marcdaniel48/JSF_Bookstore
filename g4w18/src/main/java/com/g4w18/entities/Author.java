@@ -1,15 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.entities;
 
 import java.io.Serializable;
-<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/Author.java
-=======
-import java.util.Collection;
->>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/Author.java
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -24,13 +15,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/Author.java
-/**
- *
- * @author 1430047
- */
-=======
->>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/Author.java
 @Entity
 @Table(name = "author", catalog = "bookstore", schema = "")
 @NamedQueries({
