@@ -1,49 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>#{msgs.frontDoorTitle}</title>
+        <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="_animations.css" />
+        <h:outputStylesheet library="css" name="parallax.css" />
+        <h:outputStylesheet library="css" name="navbar.css" />
+        <h:outputStylesheet library="css" name="footer.css" />
+        <h:outputStylesheet library="css" name="_genres.css" />
+        <h:outputStylesheet library="css" name="_books.css" />
+        <h:outputStylesheet library="css" name="_onsale.css" />
+        <h:outputStylesheet library="css" name="_banner.css" />
+        <h:outputStylesheet library="css" name="_survey.css" />
+        <h:outputStylesheet library="css" name="_rss.css" />
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+        <h:outputScript library="js" name="banner.js" />
+        <h:outputScript library="js" name="onsale.js" />
+        <h:outputScript library="js" name="rss.js" />
     </h:head>
     <h:body>
         
-            <h:form>
-                <p:growl id="growl" showDetail="true" sticky="true"/>
-                
-                <p:selectOneMenu id="searchOption" value="#{searchBackingBean.searchOption}" required="true" requiredMessage="Please choose a drop down option!" style="width:150px">
-                    <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
-                </p:selectOneMenu>
-                
-                <h:message for="searchText"/>
-                <p:inputText id="searchText" value="#{searchBackingBean.searchTerm}" required="true" requiredMessage="Please enter a search term!">
-                </p:inputText>
-                    
-             
-                <p:commandButton  value="#{msgs.searchButtonTxt}"  action="#{searchBackingBean.search()}" update="growl" />
-                
-<!--                <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}">
-                    
-                    <h:graphicImage library="images" name="ca_flag.gif"
-                                    style="border: 0px; margin-right: 1em;"/>
-                    
-                </h:commandLink>
-                
-                <h:commandLink action="#{localeBean.setLanguage('en','CA')}">
-                    <h:graphicImage library="images"
-                                    name="en_flag.gif" style="border: 0px"/>
-                </h:commandLink>-->
-     
-            </h:form>
-             
+        <nav class="navbar">
+            <div class="logo"></div>
+
+            <div class="right">
+                <h:graphicImage class="navbar-icon" library="images" name="search.png" alt="Search Icon" />
+                <h:graphicImage class="navbar-icon" library="images" name="shopping-cart.png" alt="Shoppping Cart Icon" />
+                <a class="login" href="#">Login</a>
+            </div>
+        </nav>
+
+        <div class="parallax">
+
+            <div class="parallax-layer background"></div>
 
 
-        
+            <div class="content">
+
+                <div class="top-section">
+                    <div id="recent-books">
+                        
+<!--                        <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
+                            <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+                        </ui:repeat>-->
+                        
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+                        <a class="view-more" href="">View More</a>
+                    </div>
+
+                    <div id="genres">
+                        <div class="outer">
+                            <ui:repeat value="#{theBooks.genres}" var="genre">
+                                <a class="genre-title" href="#">#{genre}</a>
+                            </ui:repeat>
+                        </div>
+                    </div>
+
+                    <div id="book-sales">
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+                        <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+
+                        <a class="view-more" href="">View More</a>
+
+                        <a class="prev disabled">&#10094;</a>
+                        <a class="next">&#10095;</a>
+                    </div>
+
+                    <div id="banner">
+                        <div class="slide">
+                            
+                            <h:graphicImage class="slide-img" library="images" name="slide1.jpg" alt="Ad 1" />
+                            <h:graphicImage class="slide-img" library="images" name="slide2.jpg" alt="Ad 2" />
+                            <h:graphicImage class="slide-img" library="images" name="slide3.jpg" alt="Ad 3" />
+                            <h:graphicImage class="slide-img" library="images" name="slide4.jpg" alt="Ad 4" />
+                         </div>
+
+                        <a class="prev">&#10094;</a>
+                        <a class="next">&#10095;</a>
+
+                        <div class="dots-container"></div>
+                    </div>
+
+                    <div id="rss-feed">
+
+                        <div class="center-vertical">
+                            <div>
+                                <h2>Read, Watch &amp; Discuss! Five great book club books that are now movies</h2>
+                                <br/>
+                                <p>
+        Of course, we think any season is the right season to read, but winter can be a perfect time to read <i>and </i>watch! What better way to keep busy in these cold, dark months than reading with your book club, watching the movie version and then discussing both?
+                                </p>
+                            </div>
+                        </div>
+                        <div class="overlay"></div>
+                        <div class="overlay-text"><div>Read More</div></div>
+                    </div>
+
+                    <div id="survey">
+                        <div class="center-vertical center-horizontal">
+                            <div>
+                                <h2>Survey coming soon...</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
         
     </h:body>
 </html>

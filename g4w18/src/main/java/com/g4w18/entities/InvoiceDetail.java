@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.entities;
 
 import java.io.Serializable;
@@ -22,7 +17,11 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
+<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/InvoiceDetail.java
+ * @author 1430047
+=======
  * @author Marc-Daniel
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/InvoiceDetail.java
  */
 @Entity
 @Table(name = "invoice_detail", catalog = "bookstore", schema = "")

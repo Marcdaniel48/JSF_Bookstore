@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -30,10 +24,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author Marc-Daniel
- */
 @Entity
 @Table(name = "book", catalog = "bookstore", schema = "")
 @NamedQueries({
@@ -49,6 +39,7 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Book.findByWholesalePrice", query = "SELECT b FROM Book b WHERE b.wholesalePrice = :wholesalePrice")
     , @NamedQuery(name = "Book.findByListPrice", query = "SELECT b FROM Book b WHERE b.listPrice = :listPrice")
     , @NamedQuery(name = "Book.findBySalePrice", query = "SELECT b FROM Book b WHERE b.salePrice = :salePrice")
+    , @NamedQuery(name = "Book.findOnSale", query = "select b from Book b where b.salePrice > 0")
     , @NamedQuery(name = "Book.findByInventoryDate", query = "SELECT b FROM Book b WHERE b.inventoryDate = :inventoryDate")})
 public class Book implements Serializable {
 

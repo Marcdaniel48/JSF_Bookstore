@@ -21,7 +21,11 @@ import javax.validation.constraints.Size;
 
 /**
  *
+<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/Tax.java
+ * @author 1430047
+=======
  * @author Marc-Daniel
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/Tax.java
  */
 @Entity
 @Table(name = "tax", catalog = "bookstore", schema = "")
