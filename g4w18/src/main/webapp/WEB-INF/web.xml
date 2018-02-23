@@ -25,16 +25,9 @@
             30
         </session-timeout>
     </session-config>
-<<<<<<< HEAD
 
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
-=======
-    <!-- Welcome page -->
-  <welcome-file-list>
-    <welcome-file>index.xhtml</welcome-file>
-  </welcome-file-list>
->>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9
 </web-app>

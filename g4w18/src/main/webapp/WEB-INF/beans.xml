@@ -5,8 +5,4 @@ beans.xml file. It can be completely empty of contain just these line -->
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_1_2.xsd"
        version="1.2" bean-discovery-mode="all">
-<<<<<<< HEAD
 </beans>
-=======
-</beans>
->>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9

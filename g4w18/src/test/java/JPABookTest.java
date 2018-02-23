@@ -75,7 +75,7 @@ public class JPABookTest
     @Inject
     private CustomBookController bookController;
     
-    @Resource(name = "java:app/jdbc/myBookstore")
+    @Resource(name = "java:app/jdbc/TheBooktopia")
     private DataSource ds;
     
     @Test
