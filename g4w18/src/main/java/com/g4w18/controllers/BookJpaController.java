@@ -13,8 +13,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import com.g4w18.entities.Author;
-import com.g4w18.entities.Book;
+import com.g4w18.entities.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.g4w18.entities.InvoiceDetail;
@@ -23,7 +22,6 @@ import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.UserTransaction;
@@ -292,30 +290,5 @@ public class BookJpaController implements Serializable {
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
 
-    }
-    
-    public List<Book> getBooksOnSale()
-    {
-        Query findBooksOnSale = em.createNamedQuery("Book.findOnSale");
-        List<Book> books = findBooksOnSale.getResultList();
-        return books;
-    }
-    
-    public List<Book> getMostRecentBooks()
-    {
-        //Query findRecentBooks = em.createNamedQuery("Book.findMostRecentBooks");
-
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
-        Root<Book> root = cq.from(Book.class);
-        cq.select(root);
-        cq.orderBy(cb.asc(root.get("inventoryDate")));
-        
-        
-        Query q = em.createQuery(cq);
-        q.setMaxResults(3);
-        
-        List<Book> books = q.getResultList();
-        return books;
     }
 }

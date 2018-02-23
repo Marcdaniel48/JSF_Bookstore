@@ -1,5 +1,5 @@
 
-import com.g4w18.controllers.BookJpaController;
+import com.g4w18.controllers.CustomBookController;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
 
@@ -37,7 +37,6 @@ import org.junit.Ignore;
  * @author 1430047
  */
 @RunWith(Arquillian.class)
-
 public class JPABookTest
 {
     private Logger logger = Logger.getLogger(getClass().getName());
@@ -60,7 +59,7 @@ public class JPABookTest
         // container
         final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(BookJpaController.class.getPackage())
+                .addPackage(CustomBookController.class.getPackage())
                 .addPackage(RollbackFailureException.class.getPackage())
                 .addPackage(Book.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
@@ -74,7 +73,7 @@ public class JPABookTest
 
     
     @Inject
-    private BookJpaController bookController;
+    private CustomBookController bookController;
     
     @Resource(name = "java:app/jdbc/myBookstore")
     private DataSource ds;
@@ -90,10 +89,24 @@ public class JPABookTest
     @Test
     public void testFindMostRecentBooks()
     {
+        logger.log(Level.INFO, "testFindMostRecentBooks");
+        
         List<Book> recentBooks = bookController.getMostRecentBooks();
-        logger.log(Level.INFO, "Data>>>{0}", recentBooks.get(0));
+        
         //TODO
         assertThat(recentBooks).hasSize(3);
+    }
+    
+    @Test
+    public void testFindGenres()
+    {
+        logger.log(Level.INFO, "testFindGenres");
+        
+        List<String> genres = bookController.getGenres();
+        
+        String[] expectedGenres = {"Biographies", "Fantasy", "Mystery", "Romance", "Science Fiction"};
+
+        assertThat(genres).contains(expectedGenres);
     }
     
     /**

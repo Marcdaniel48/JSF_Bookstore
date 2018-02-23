@@ -45,6 +45,17 @@
 
                 <div class="top-section">
                     <div id="recent-books">
+                        
+<!--                        <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
+                            <div class="book">
+                            <div class="book-thumbnail-container">
+                                <div class="overlay"></div>
+                                <div class="overlay-text"><div>View</div></div>
+                                <h:graphicImage class="book-thumbnail" library="images" name="book_thumbnail.jpg" />
+                            </div>
+                        </div>
+                        </ui:repeat>-->
+                        
                         <div class="book">
                             <div class="book-thumbnail-container">
                                 <div class="overlay"></div>
@@ -71,11 +82,9 @@
 
                     <div id="genres">
                         <div class="outer">
-                                    <a class="genre-title" href="#">Fantasy</a>
-                                    <a class="genre-title" href="#">Mystery</a>
-                                    <a class="genre-title" href="#">Sci-Fi</a>
-                                    <a class="genre-title" href="#">Biographies</a>
-                                    <a class="genre-title" href="#">Romance</a>
+                            <ui:repeat value="#{theBooks.genres}" var="genre">
+                                <a class="genre-title" href="#">#{genre}</a>
+                            </ui:repeat>
                         </div>
                     </div>
 
