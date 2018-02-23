@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -24,21 +19,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-/**
- *
- * @author 1430047
- */
 @Named
 @RequestScoped
 public class InvoiceDetailJpaController implements Serializable {
 
     @Resource
     private UserTransaction utx;
+
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
 
     public void create(InvoiceDetail invoiceDetail) throws RollbackFailureException, Exception {
-
         try {
             utx.begin();
             MasterInvoice invoiceId = invoiceDetail.getInvoiceId();
@@ -53,7 +44,7 @@ public class InvoiceDetailJpaController implements Serializable {
             }
             em.persist(invoiceDetail);
             if (invoiceId != null) {
-                invoiceId.getInvoiceDetailList().add(invoiceDetail);
+                invoiceId.getInvoiceDetailCollection().add(invoiceDetail);
                 invoiceId = em.merge(invoiceId);
             }
             if (bookId != null) {
@@ -72,7 +63,6 @@ public class InvoiceDetailJpaController implements Serializable {
     }
 
     public void edit(InvoiceDetail invoiceDetail) throws NonexistentEntityException, RollbackFailureException, Exception {
-
         try {
             utx.begin();
             InvoiceDetail persistentInvoiceDetail = em.find(InvoiceDetail.class, invoiceDetail.getDetailId());
@@ -90,11 +80,11 @@ public class InvoiceDetailJpaController implements Serializable {
             }
             invoiceDetail = em.merge(invoiceDetail);
             if (invoiceIdOld != null && !invoiceIdOld.equals(invoiceIdNew)) {
-                invoiceIdOld.getInvoiceDetailList().remove(invoiceDetail);
+                invoiceIdOld.getInvoiceDetailCollection().remove(invoiceDetail);
                 invoiceIdOld = em.merge(invoiceIdOld);
             }
             if (invoiceIdNew != null && !invoiceIdNew.equals(invoiceIdOld)) {
-                invoiceIdNew.getInvoiceDetailList().add(invoiceDetail);
+                invoiceIdNew.getInvoiceDetailCollection().add(invoiceDetail);
                 invoiceIdNew = em.merge(invoiceIdNew);
             }
             if (bookIdOld != null && !bookIdOld.equals(bookIdNew)) {
@@ -124,7 +114,6 @@ public class InvoiceDetailJpaController implements Serializable {
     }
 
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
-
         try {
             utx.begin();
             InvoiceDetail invoiceDetail;
@@ -136,7 +125,7 @@ public class InvoiceDetailJpaController implements Serializable {
             }
             MasterInvoice invoiceId = invoiceDetail.getInvoiceId();
             if (invoiceId != null) {
-                invoiceId.getInvoiceDetailList().remove(invoiceDetail);
+                invoiceId.getInvoiceDetailCollection().remove(invoiceDetail);
                 invoiceId = em.merge(invoiceId);
             }
             Book bookId = invoiceDetail.getBookId();
@@ -165,7 +154,6 @@ public class InvoiceDetailJpaController implements Serializable {
     }
 
     private List<InvoiceDetail> findInvoiceDetailEntities(boolean all, int maxResults, int firstResult) {
-
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(InvoiceDetail.class));
         Query q = em.createQuery(cq);
@@ -174,23 +162,18 @@ public class InvoiceDetailJpaController implements Serializable {
             q.setFirstResult(firstResult);
         }
         return q.getResultList();
-
     }
 
     public InvoiceDetail findInvoiceDetail(Integer id) {
-
         return em.find(InvoiceDetail.class, id);
-
     }
 
     public int getInvoiceDetailCount() {
-
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<InvoiceDetail> rt = cq.from(InvoiceDetail.class);
         cq.select(em.getCriteriaBuilder().count(rt));
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
-
     }
-    
+
 }

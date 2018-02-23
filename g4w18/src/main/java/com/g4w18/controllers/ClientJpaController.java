@@ -19,25 +19,30 @@ import java.util.ArrayList;
 import java.util.List;
 import com.g4w18.entities.MasterInvoice;
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
  *
- * @author 1430047
+ * @author Marc-Daniel
  */
-@Named
-@RequestScoped
 public class ClientJpaController implements Serializable {
 
     @Resource
-    private UserTransaction utx;
-    @PersistenceContext(unitName = "bookstorePU")
+    private UserTransaction utx = null;
+
+    @PersistenceContext(unitName="bookstorePU")
     private EntityManager em;
+
 
     public void create(Client client) throws RollbackFailureException, Exception {
         if (client.getReviewList() == null) {
@@ -49,6 +54,7 @@ public class ClientJpaController implements Serializable {
 
         try {
             utx.begin();
+
             List<Review> attachedReviewList = new ArrayList<Review>();
             for (Review reviewListReviewToAttach : client.getReviewList()) {
                 reviewListReviewToAttach = em.getReference(reviewListReviewToAttach.getClass(), reviewListReviewToAttach.getReviewId());
@@ -81,10 +87,10 @@ public class ClientJpaController implements Serializable {
                 }
             }
             utx.commit();
-        } catch (Exception ex) {
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
             try {
                 utx.rollback();
-            } catch (Exception re) {
+            } catch (IllegalStateException | SecurityException | SystemException re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
@@ -95,6 +101,7 @@ public class ClientJpaController implements Serializable {
 
         try {
             utx.begin();
+
             Client persistentClient = em.find(Client.class, client.getClientId());
             List<Review> reviewListOld = persistentClient.getReviewList();
             List<Review> reviewListNew = client.getReviewList();
@@ -179,6 +186,7 @@ public class ClientJpaController implements Serializable {
 
         try {
             utx.begin();
+
             Client client;
             try {
                 client = em.getReference(Client.class, id);
@@ -225,32 +233,62 @@ public class ClientJpaController implements Serializable {
     }
 
     private List<Client> findClientEntities(boolean all, int maxResults, int firstResult) {
-
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Client.class));
-        Query q = em.createQuery(cq);
-        if (!all) {
-            q.setMaxResults(maxResults);
-            q.setFirstResult(firstResult);
-        }
-        return q.getResultList();
-        
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Client.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
     }
 
     public Client findClient(Integer id) {
-
             return em.find(Client.class, id);
-
     }
 
     public int getClientCount() {
-
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<Client> rt = cq.from(Client.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
-
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Client> rt = cq.from(Client.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
     }
-    
+
+    public List<Client> findClientByUsername(String username)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
+        Root<Client> clientRoot = cq.from(Client.class);
+        cq.select(clientRoot).where(cb.equal(clientRoot.get("username"), username));
+        TypedQuery<Client> query = em.createQuery(cq);
+        List<Client> existingClients = query.getResultList();
+
+        return existingClients;
+    }
+
+    public List<Client> findClientByEmail(String email)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
+        Root<Client> clientRoot = cq.from(Client.class);
+        cq.select(clientRoot).where(cb.equal(clientRoot.get("email"), email));
+        TypedQuery<Client> query = em.createQuery(cq);
+        List<Client> existingClients = query.getResultList();
+
+        return existingClients;
+    }
+
+    public Client findClientByCredentials(String username, String password)
+    {
+        TypedQuery<Client> query = em.createNamedQuery("Client.findByCredentials", Client.class);
+        query.setParameter(1, username);
+        query.setParameter(2, password);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
+    }
+
 }

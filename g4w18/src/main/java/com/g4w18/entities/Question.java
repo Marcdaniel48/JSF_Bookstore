@@ -18,10 +18,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+<<<<<<< HEAD
 /**
  *
  * @author 1430047
  */
+=======
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9
 @Entity
 @Table(name = "question", catalog = "bookstore", schema = "")
 @NamedQueries({
@@ -210,5 +213,9 @@ public class Question implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Question[ questionId=" + questionId + " ]";
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9
 }

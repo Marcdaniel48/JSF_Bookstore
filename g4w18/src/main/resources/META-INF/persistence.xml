@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="bookstorePU" transaction-type="JTA">
+<<<<<<< HEAD
     <jta-data-source>java:app/jdbc/myBookstore</jta-data-source>
+=======
+    <jta-data-source>java:app/jdbc/TheBooktopia</jta-data-source>
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>

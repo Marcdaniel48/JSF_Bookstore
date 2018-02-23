@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -22,21 +17,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 
-/**
- *
- * @author 1430047
- */
 @Named
 @RequestScoped
 public class TaxJpaController implements Serializable {
 
     @Resource
     private UserTransaction utx;
+
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
 
     public void create(Tax tax) throws RollbackFailureException, Exception {
-
         try {
             utx.begin();
             em.persist(tax);
@@ -48,11 +39,10 @@ public class TaxJpaController implements Serializable {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
-        } 
+        }
     }
 
     public void edit(Tax tax) throws NonexistentEntityException, RollbackFailureException, Exception {
-
         try {
             utx.begin();
             tax = em.merge(tax);
@@ -75,7 +65,6 @@ public class TaxJpaController implements Serializable {
     }
 
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
-
         try {
             utx.begin();
             Tax tax;
@@ -106,7 +95,6 @@ public class TaxJpaController implements Serializable {
     }
 
     private List<Tax> findTaxEntities(boolean all, int maxResults, int firstResult) {
-
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Tax.class));
         Query q = em.createQuery(cq);
@@ -115,23 +103,18 @@ public class TaxJpaController implements Serializable {
             q.setFirstResult(firstResult);
         }
         return q.getResultList();
-
     }
 
     public Tax findTax(Integer id) {
-
         return em.find(Tax.class, id);
-
     }
 
     public int getTaxCount() {
-
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Tax> rt = cq.from(Tax.class);
         cq.select(em.getCriteriaBuilder().count(rt));
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
-
     }
-    
+
 }

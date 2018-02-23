@@ -26,7 +26,11 @@ import javax.validation.constraints.Size;
 
 /**
  *
+<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/Review.java
  * @author 1430047
+=======
+ * @author Marc-Daniel
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/Review.java
  */
 @Entity
 @Table(name = "review", catalog = "bookstore", schema = "")
@@ -165,5 +169,5 @@ public class Review implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Review[ reviewId=" + reviewId + " ]";
     }
-    
+
 }

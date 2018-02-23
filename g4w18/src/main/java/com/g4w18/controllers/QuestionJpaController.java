@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -22,21 +17,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 
-/**
- *
- * @author 1430047
- */
 @Named
 @RequestScoped
 public class QuestionJpaController implements Serializable {
 
     @Resource
     private UserTransaction utx;
+
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
 
     public void create(Question question) throws RollbackFailureException, Exception {
-
         try {
             utx.begin();
             em.persist(question);
@@ -52,7 +43,6 @@ public class QuestionJpaController implements Serializable {
     }
 
     public void edit(Question question) throws NonexistentEntityException, RollbackFailureException, Exception {
-
         try {
             utx.begin();
             question = em.merge(question);
@@ -75,7 +65,6 @@ public class QuestionJpaController implements Serializable {
     }
 
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
-
         try {
             utx.begin();
             Question question;
@@ -106,7 +95,6 @@ public class QuestionJpaController implements Serializable {
     }
 
     private List<Question> findQuestionEntities(boolean all, int maxResults, int firstResult) {
-
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Question.class));
         Query q = em.createQuery(cq);
@@ -115,23 +103,18 @@ public class QuestionJpaController implements Serializable {
             q.setFirstResult(firstResult);
         }
         return q.getResultList();
-
     }
 
     public Question findQuestion(Integer id) {
-
         return em.find(Question.class, id);
-
     }
 
     public int getQuestionCount() {
-
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Question> rt = cq.from(Question.class);
         cq.select(em.getCriteriaBuilder().count(rt));
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
-
     }
-    
+
 }

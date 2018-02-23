@@ -28,7 +28,11 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
+<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/MasterInvoice.java
  * @author 1430047
+=======
+ * @author Marc-Daniel
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/MasterInvoice.java
  */
 @Entity
 @Table(name = "master_invoice", catalog = "bookstore", schema = "")
@@ -61,7 +65,11 @@ public class MasterInvoice implements Serializable {
     @Column(name = "GROSS_VALUE")
     private BigDecimal grossValue;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceId")
+<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/MasterInvoice.java
     private List<InvoiceDetail> invoiceDetailList;
+=======
+    private Collection<InvoiceDetail> invoiceDetailCollection;
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/MasterInvoice.java
     @JoinColumn(name = "CLIENT_ID", referencedColumnName = "CLIENT_ID")
     @ManyToOne(optional = false)
     private Client clientId;
@@ -112,12 +120,21 @@ public class MasterInvoice implements Serializable {
         this.grossValue = grossValue;
     }
 
+<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/MasterInvoice.java
     public List<InvoiceDetail> getInvoiceDetailList() {
         return invoiceDetailList;
     }
 
     public void setInvoiceDetailList(List<InvoiceDetail> invoiceDetailList) {
         this.invoiceDetailList = invoiceDetailList;
+=======
+    public Collection<InvoiceDetail> getInvoiceDetailCollection() {
+        return invoiceDetailCollection;
+    }
+
+    public void setInvoiceDetailCollection(Collection<InvoiceDetail> invoiceDetailCollection) {
+        this.invoiceDetailCollection = invoiceDetailCollection;
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/MasterInvoice.java
     }
 
     public Client getClientId() {
@@ -152,5 +169,5 @@ public class MasterInvoice implements Serializable {
     public String toString() {
         return "com.g4w18.entities.MasterInvoice[ invoiceId=" + invoiceId + " ]";
     }
-    
+
 }

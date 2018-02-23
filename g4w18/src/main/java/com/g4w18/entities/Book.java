@@ -31,7 +31,11 @@ import javax.validation.constraints.Size;
 
 /**
  *
+<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/Book.java
  * @author 1430047
+=======
+ * @author Marc-Daniel
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/Book.java
  */
 @Entity
 @Table(name = "book", catalog = "bookstore", schema = "")
@@ -48,7 +52,10 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Book.findByWholesalePrice", query = "SELECT b FROM Book b WHERE b.wholesalePrice = :wholesalePrice")
     , @NamedQuery(name = "Book.findByListPrice", query = "SELECT b FROM Book b WHERE b.listPrice = :listPrice")
     , @NamedQuery(name = "Book.findBySalePrice", query = "SELECT b FROM Book b WHERE b.salePrice = :salePrice")
+<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/Book.java
     , @NamedQuery(name = "Book.findOnSale", query = "select b from Book b where b.salePrice > 0")
+=======
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/Book.java
     , @NamedQuery(name = "Book.findByInventoryDate", query = "SELECT b FROM Book b WHERE b.inventoryDate = :inventoryDate")})
 public class Book implements Serializable {
 
@@ -301,5 +308,5 @@ public class Book implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Book[ bookId=" + bookId + " ]";
     }
-    
+
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -160,6 +161,53 @@
             </div>
 
         </div>
+=======
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msgs.frontDoorTitle}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        
+            <h:form>
+                <p:growl id="growl" showDetail="true" sticky="true"/>
+                
+                <p:selectOneMenu id="searchOption" value="#{searchBackingBean.searchOption}" required="true" requiredMessage="Please choose a drop down option!" style="width:150px">
+                    <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
+                </p:selectOneMenu>
+                
+                <h:message for="searchText"/>
+                <p:inputText id="searchText" value="#{searchBackingBean.searchTerm}" required="true" requiredMessage="Please enter a search term!">
+                </p:inputText>
+                    
+             
+                <p:commandButton  value="#{msgs.searchButtonTxt}"  action="#{searchBackingBean.search()}" update="growl" />
+                
+<!--                <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}">
+                    
+                    <h:graphicImage library="images" name="ca_flag.gif"
+                                    style="border: 0px; margin-right: 1em;"/>
+                    
+                </h:commandLink>
+                
+                <h:commandLink action="#{localeBean.setLanguage('en','CA')}">
+                    <h:graphicImage library="images"
+                                    name="en_flag.gif" style="border: 0px"/>
+                </h:commandLink>-->
+     
+            </h:form>
+             
+
+
+        
+>>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9
         
     </h:body>
 </html>

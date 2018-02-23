@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -17,30 +12,30 @@ import com.g4w18.entities.Book;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 /**
  *
- * @author 1430047
+ * @author Salman Haidar
  */
-@Named
-@RequestScoped
 public class AuthorJpaController implements Serializable {
 
+    public AuthorJpaController() {
+
+    }
     @Resource
     private UserTransaction utx;
-    @PersistenceContext(unitName = "bookstorePU")
+
+    @PersistenceContext
     private EntityManager em;
+
 
     public void create(Author author) throws RollbackFailureException, Exception {
         if (author.getBookList() == null) {
             author.setBookList(new ArrayList<Book>());
         }
-
         try {
             utx.begin();
             List<Book> attachedBookList = new ArrayList<Book>();
@@ -148,31 +143,48 @@ public class AuthorJpaController implements Serializable {
 
     private List<Author> findAuthorEntities(boolean all, int maxResults, int firstResult) {
 
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Author.class));
-        Query q = em.createQuery(cq);
-        if (!all) {
-            q.setMaxResults(maxResults);
-            q.setFirstResult(firstResult);
-        }
-        return q.getResultList();
+
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Author.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
 
     }
 
     public Author findAuthor(Integer id) {
 
-        return em.find(Author.class, id);
+            return em.find(Author.class, id);
 
     }
+
+
 
     public int getAuthorCount() {
 
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<Author> rt = cq.from(Author.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Author> rt = cq.from(Author.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
 
     }
-    
+
+    /**
+     * Get list of author names with the name provided
+     * @param authorName provided by user
+     * @return List of authors found with the param
+     */
+    public List<Author> findAuthor(String authorName)
+    {
+        List<Author> findAuthorByName = em.createQuery("Select a from Author a where CONCAT(a.firstName,' ',a.lastName) LIKE ?1")
+                .setParameter(1, authorName + "%")
+                .getResultList();
+        
+        return findAuthorByName;
+    }
+
 }
