@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.g4w18.backing;
+package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.entities.Client;

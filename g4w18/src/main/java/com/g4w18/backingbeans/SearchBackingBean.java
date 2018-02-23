@@ -1,4 +1,4 @@
-package com.g4w18.beans;
+package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.AuthorJpaController;
 import com.g4w18.controllers.BookJpaController;

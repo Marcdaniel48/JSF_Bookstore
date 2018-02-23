@@ -1,4 +1,4 @@
-package com.g4w18.beans;
+package com.g4w18.backingbeans;
 
 import java.io.Serializable;
 import java.util.Locale;
