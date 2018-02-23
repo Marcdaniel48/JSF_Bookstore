@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+    </h:head>
+    <h:body>
+        <b:navBar brand="Booktopia" brandHref="bookList.xhtml" fluid="true">
+            <b:navbarLinks>
+                <b:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs">
+                    <b:inputText placeholder="Search for a book..."></b:inputText>
+                    <b:commandButton value="Search" iconAwesome="search" action="bookList"></b:commandButton>
+                </b:form>
+            </b:navbarLinks>
+            <b:navbarLinks pull="right" styleClass="hidden-xs">
+            </b:navbarLinks>
+        </b:navBar>
+        <b:container fluid="false">
+            <h:outputText value="#{msgs.authorBooksBy} #{authorBackingBean.author.firstName} #{authorBackingBean.author.lastName}"></h:outputText>
+            <b:form>
+                <ui:repeat var="book" value="#{authorBackingBean.authorBooks}">
+                    <b:panel>
+                        <b:row styleClass="show-grid">
+                            <b:column col-md="2">
+                                <b:image library="images" name="#{book.isbnNumber}hi.jpg" tooltip="#{book.title}" height="50%" width="50%"></b:image>
+                            </b:column>
+                            <b:column col-md="8">
+                                <b:commandLink outcome="bookDetail">
+                                    <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
+                                    <f:param name="id" value="#{book.bookId}" />
+                                </b:commandLink>
+                            </b:column>
+                            <b:column col-md="2">
+                                <h:outputText value="#{book.listPrice} CAD"></h:outputText>
+                            </b:column>
+                        </b:row>
+                    </b:panel>
+                </ui:repeat>
+            </b:form>
+        </b:container>
+        <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
+        <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
+    </h:body>
+</html>
