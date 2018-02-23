@@ -43,14 +43,18 @@ public class ClientBackingBean implements Serializable
         return client;
     }
 
-    public String createClient() throws Exception {
+    public String createClient() throws Exception 
+    {
+        client.setUsername(client.getUsername().toLowerCase());
+        client.setEmail(client.getEmail().toLowerCase());
         clientJpaController.create(client);
         return "login.xhtml";
     }
     
-    public void validateExistingUsername(FacesContext fc, UIComponent c, Object value) {
+    public void validateExistingUsername(FacesContext fc, UIComponent c, Object value) 
+    {
         
-        if (clientJpaController.findClientByUsername((String) value).size() > 0) 
+        if (clientJpaController.findClientByUsername(((String) value).toLowerCase()).size() > 0) 
         {
             System.out.println("HYPER TRUE");
             String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingUsername");
@@ -58,9 +62,10 @@ public class ClientBackingBean implements Serializable
         }
     }
     
-    public void validateExistingEmail(FacesContext fc, UIComponent c, Object value) {
+    public void validateExistingEmail(FacesContext fc, UIComponent c, Object value) 
+    {
         
-        if (clientJpaController.findClientByEmail((String) value).size() > 0) 
+        if (clientJpaController.findClientByEmail(((String) value).toLowerCase()).size() > 0) 
         {
             String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingEmail");
             throw new ValidatorException(new FacesMessage(validationMessage));
