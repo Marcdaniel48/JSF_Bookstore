@@ -33,7 +33,7 @@
                                 <f:param name="id" value="#{book.bookId}" />
                             </b:column>
                             <b:column col-md="2">
-                                <h:outputText value="#{book.listPrice} CAD"></h:outputText>
+                                <h:outputText value="#{shoppingCartBackingBean.getPrice(book)} CAD"></h:outputText>
                             </b:column>
                             <b:column>
                                 <h:commandLink value="Delete" action="#{shoppingCartBackingBean.removeFromCart(book)}" />

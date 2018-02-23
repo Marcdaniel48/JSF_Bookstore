@@ -61,6 +61,7 @@ public class LoginController implements Serializable{
         if (client != null)
         {
             loggedIn = true;
+            session.setAttribute("username", username);
         }
         else
         {
@@ -68,6 +69,5 @@ public class LoginController implements Serializable{
         }
 
         session.setAttribute("loggedIn", loggedIn);
-        session.setAttribute("username", username);
     }
 }

@@ -26,7 +26,6 @@ public class ShoppingCart implements Serializable
 
     public ShoppingCart()
     {
-        System.out.println("calling you");
         session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
         books = new ArrayList<>();
@@ -37,7 +36,7 @@ public class ShoppingCart implements Serializable
         }
 
         //DELETE THESE - SAMPLE DATA
-        Book sample1 = new Book(1, "ISBN###", "Title of book", "Publisher of book", Date.valueOf(LocalDate.now()), 324, "Genre of book", "description of book", "format of book", new BigDecimal(9.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), new BigDecimal(9.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), new BigDecimal(9.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), Date.valueOf(LocalDate.now()));
+        Book sample1 = new Book(1, "ISBN###", "Title of book", "Publisher of book", Date.valueOf(LocalDate.now()), 324, "Genre of book", "description of book", "format of book", new BigDecimal(9.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), new BigDecimal(9.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), new BigDecimal(912.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), Date.valueOf(LocalDate.now()));
         Book sample2 = new Book(2, "ISBN###", "Another books", "Publisher of book", Date.valueOf(LocalDate.now()), 324, "Genre of book", "description of book", "format of book", new BigDecimal(4.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), new BigDecimal(4.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), new BigDecimal(4.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), Date.valueOf(LocalDate.now()));
         addToCart(sample1);
         addToCart(sample2);
@@ -50,7 +49,7 @@ public class ShoppingCart implements Serializable
             if(session.getAttribute("loggedIn") != null)
             {
                 if(!books.contains(book))
-                {System.out.println("calling him");
+                {
                     books.add(book);
                     session.setAttribute("shoppingCart", books);
                 }

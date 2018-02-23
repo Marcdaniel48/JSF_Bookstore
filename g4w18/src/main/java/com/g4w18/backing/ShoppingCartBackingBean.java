@@ -40,4 +40,13 @@ public class ShoppingCartBackingBean implements Serializable
     {
         cart.removeFromCart(book);
     }
+    
+    public BigDecimal getPrice(Book book)
+    {
+        System.out.println("sale: " + book.getSalePrice().floatValue());
+        if(book.getSalePrice() != null)
+            return book.getSalePrice();
+        
+        return book.getListPrice();
+    }
 }
