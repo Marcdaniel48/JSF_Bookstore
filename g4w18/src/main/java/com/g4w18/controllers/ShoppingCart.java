@@ -11,6 +11,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -23,7 +24,9 @@ public class ShoppingCart implements Serializable
     private List<Book> books;
     private HttpSession session;
 
-
+    @Inject
+    private BookJpaController control;
+    
     public ShoppingCart()
     {
         session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -34,14 +37,7 @@ public class ShoppingCart implements Serializable
         {
             books = (List<Book>)session.getAttribute("shoppingCart");
         }
-
-        //DELETE THESE - SAMPLE DATA
-        Book sample1 = new Book(1, "ISBN###", "Title of book", "Publisher of book", Date.valueOf(LocalDate.now()), 324, "Genre of book", "description of book", "format of book", new BigDecimal(9.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), new BigDecimal(9.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), new BigDecimal(912.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), Date.valueOf(LocalDate.now()));
-        Book sample2 = new Book(2, "ISBN###", "Another books", "Publisher of book", Date.valueOf(LocalDate.now()), 324, "Genre of book", "description of book", "format of book", new BigDecimal(4.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), new BigDecimal(4.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), new BigDecimal(4.99).setScale(2, BigDecimal.ROUND_HALF_EVEN), Date.valueOf(LocalDate.now()));
-        addToCart(sample1);
-        addToCart(sample2);
     }
-
     public void addToCart(Book book)
     {
         if(session!=null)

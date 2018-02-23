@@ -49,4 +49,9 @@ public class ShoppingCartBackingBean implements Serializable
         
         return book.getListPrice();
     }
+    
+    public void addToCart(Book book)
+    {
+        cart.addToCart(book);
+    }
 }

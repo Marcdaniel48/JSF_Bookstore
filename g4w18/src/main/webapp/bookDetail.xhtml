@@ -131,8 +131,8 @@
                             <h:outputText value="#{bookBackingBean.book.salePrice}"></h:outputText>
                         </h4>
                         <b:form>
-                            <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info">
-
+                            <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.addToCart(bookBackingBean.book)}">
+                                <f:param name="id" value="#{bookBackingBean.book.bookId}"></f:param>
                             </b:commandButton>
                         </b:form>
                     </b:panel>
@@ -173,6 +173,22 @@
                     </b:container>
                     <hr/>
                 </ui:repeat>
+                <b:container fluid="true">
+                    <b:row>
+                        <h:form>
+                        <b:column col-md="11">
+                            <b:inputTextarea placeholder="#{msgs.bookDetailsLeaveReview}" value="#{reviewBackingBean.review.review}">            
+                            </b:inputTextarea>
+                        </b:column>
+                        <b:column col-md="1">
+                            <p:rating value="#{reviewBackingBean.review.rating}"></p:rating>
+                            <b:commandButton value="#{msgs.bookDetailsSubmitReview}" action="#{reviewBackingBean.createReview()}">
+                                
+                            </b:commandButton>
+                        </b:column>
+                        </h:form>
+                    </b:row>
+                </b:container>
             </b:panel>
         </b:container>
 
@@ -181,4 +197,3 @@
         <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
     </h:body>
 </html>
-
