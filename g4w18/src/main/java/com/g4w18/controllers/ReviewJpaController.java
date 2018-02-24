@@ -15,8 +15,12 @@ import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 @Named
@@ -52,10 +56,10 @@ public class ReviewJpaController implements Serializable {
                 clientId = em.merge(clientId);
             }
             utx.commit();
-        } catch (Exception ex) {
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
             try {
                 utx.rollback();
-            } catch (Exception re) {
+            } catch (IllegalStateException | SecurityException | SystemException re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;

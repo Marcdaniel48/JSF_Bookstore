@@ -1,7 +1,10 @@
 package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.BookJpaController;
+import com.g4w18.controllers.ClientJpaController;
+import com.g4w18.controllers.ReviewJpaController;
 import com.g4w18.entities.Book;
+import com.g4w18.entities.Client;
 import com.g4w18.entities.Review;
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,10 +14,10 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 /**
  * This is a backing bean. It is used when a page or form must interact with
@@ -25,36 +28,30 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class BookBackingBean implements Serializable {
+public class BookDetailsBackingBean implements Serializable {
 
     @Inject
     private BookJpaController bookJpaController;
-
+    @Inject
+    private ReviewJpaController reviewJpaController;
+    @Inject
+    private ClientJpaController clientJpaController;
+    
+    private HttpSession session;
+    
     private Book book;
-    private List<Book> books;
+    private Review review;
     private List<Book> recommendedBooks;
-    private Logger log = Logger.getLogger(BookBackingBean.class.getName());
-
-    /**
-     * Client created if it does not exist.
-     *
-     * @return
-     */
+    private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
+    
     public Book getBook() {
         if (book == null) {
             Map<String, String> params
-                    = getFacesContext().getExternalContext().getRequestParameterMap();
+                    = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             int id = Integer.parseInt(params.get("id"));
             book = bookJpaController.findBook(id);
         }
         return book;
-    }
-
-    public List<Book> getBooks() {
-        if (books == null) {
-            books = bookJpaController.findBookEntities();
-        }
-        return books;
     }
 
     public List<Book> getRecommendedBooks() {
@@ -82,13 +79,22 @@ public class BookBackingBean implements Serializable {
         return averageRating;
     }
     
-    public String getReviewName(){
-        return "";
+        public Review getReview() {
+        if (review == null) {
+            review = new Review();
+        }
+        return review;
     }
 
-    @Produces
-    @RequestScoped
-    public FacesContext getFacesContext() {
-        return FacesContext.getCurrentInstance();
+    public String createReview() throws Exception {
+        review.setBookId(book);
+        review.setClientId(findClient());
+        review.setApprovalStatus(false);
+        reviewJpaController.create(review);
+        return null;
+    }
+    private Client findClient(){
+        String username = (String) session.getAttribute("username");
+        return clientJpaController.findClientByUsername(username).get(0x0);
     }
 }

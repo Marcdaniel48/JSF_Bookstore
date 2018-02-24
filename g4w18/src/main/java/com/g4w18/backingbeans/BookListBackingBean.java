@@ -1,10 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.AuthorJpaController;
+import com.g4w18.controllers.BookJpaController;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
-import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -14,22 +20,23 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * This is a backing bean. It is used when a page or form must interact with
- * beans that are not managed such as entity beans. In this example the entity
- * bean for Inventory will be manually loaded with data for the example page.
  *
- * @author Ken
+ * @author 1331680
  */
 @Named
 @RequestScoped
-public class AuthorBackingBean implements Serializable {
+public class BookListBackingBean {
 
     @Inject
     private AuthorJpaController authorJpaController;
+    @Inject
+    private BookJpaController bookJpaController;
 
     private Author author;
-    private Collection<Book> authorBooks;
-    private Logger log = Logger.getLogger(BookBackingBean.class.getName());
+    //Temporary, only used to display the list of all books in bookList
+    private List<Book> allBooks;
+    private List<Book> authorBooks;
+    private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
     /**
      * Client created if it does not exist.
@@ -39,7 +46,7 @@ public class AuthorBackingBean implements Serializable {
     public Author getAuthor() {
         if (author == null) {
             Map<String, String> params
-                    = getFacesContext().getExternalContext().getRequestParameterMap();
+                    = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             int id = Integer.parseInt(params.get("authorId"));
             author = authorJpaController.findAuthor(id);
         }
@@ -53,9 +60,10 @@ public class AuthorBackingBean implements Serializable {
         return authorBooks;
     }
 
-    @Produces
-    @RequestScoped
-    public FacesContext getFacesContext() {
-        return FacesContext.getCurrentInstance();
+    public List<Book> getAllBooks() {
+        if (allBooks == null) {
+            allBooks = bookJpaController.findBookEntities();
+        }
+        return allBooks;
     }
 }

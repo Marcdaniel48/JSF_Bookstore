@@ -261,17 +261,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <resources>
-                        <resource>
-                            <!-- Set source and destination dirs -->
-                            <source>
-                                <directory>${project.basedir}/src/main/webapp/resources/scss</directory>
-                            </source>
-                            <destination>${project.basedir}/src/main/webapp/resources/css</destination>
-                        </resource>
-                    </resources>
-                </configuration>
             </plugin>
 
 

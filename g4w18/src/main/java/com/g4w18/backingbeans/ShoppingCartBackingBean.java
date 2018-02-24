@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
@@ -26,6 +28,8 @@ import javax.inject.Named;
 @SessionScoped
 public class ShoppingCartBackingBean implements Serializable
 {
+        private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
+
     @Inject
     private ShoppingCart cart;
     
@@ -39,5 +43,12 @@ public class ShoppingCartBackingBean implements Serializable
     public void removeFromCart(Book book)
     {
         cart.removeFromCart(book);
+    }
+    
+    public void addToCart(Book book)
+    {
+        log.info("Adding to cart");
+        
+        cart.addToCart(book);
     }
 }

@@ -29,7 +29,7 @@
             <b:row>
                 <b:column col-md="3" col-xs="12">
                     <b:container>
-                        <b:image library="images" name="#{bookBackingBean.book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
+                        <b:image library="images" name="#{bookDetailsBackingBean.book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
                     </b:container>
                 </b:column>
                 <b:column col-md="6" col-xs="12">
@@ -37,7 +37,7 @@
                         <b:row>
                             <b:column col-md="11">
                                 <h1 class="booktitle">
-                                    <h:outputText value="#{bookBackingBean.book.title}"></h:outputText>    
+                                    <h:outputText value="#{bookDetailsBackingBean.book.title}"></h:outputText>    
                                 </h1>
                             </b:column>
                         </b:row>
@@ -46,7 +46,7 @@
                                 <h4>
                                     by
                                     <b:form>
-                                        <ui:repeat var="author" value="#{bookBackingBean.book.authorList}">
+                                        <ui:repeat var="author" value="#{bookDetailsBackingBean.book.authorList}">
                                             <b:commandLink outcome="authorBooks">
                                                 <h:outputText value="#{author.firstName} #{author.lastName}" styleClass="list-group-item-heading"></h:outputText>
                                                 <f:param name="authorId" value="#{author.authorId}"></f:param>
@@ -58,7 +58,7 @@
                         </b:row>
                         <b:row>
                             <b:column col-md="3">
-                                <p:rating value="#{bookBackingBean.rating}" readonly="true" />
+                                <p:rating value="#{bookDetailsBackingBean.rating}" readonly="true" />
                             </b:column>
                         </b:row>
                         <hr align="left" width="90%"/>
@@ -66,13 +66,13 @@
                             <b:column col-md="3">
                                 <h4>
                                     <span>Format: </span>
-                                    <h:outputText value="#{bookBackingBean.book.format}"></h:outputText>
+                                    <h:outputText value="#{bookDetailsBackingBean.book.format}"></h:outputText>
                                 </h4>   
                             </b:column>
                         </b:row>
                         <b:row>
                             <b:column col-md="10">
-                                <h:outputText value="#{bookBackingBean.book.description}"></h:outputText>
+                                <h:outputText value="#{bookDetailsBackingBean.book.description}"></h:outputText>
                             </b:column>
                         </b:row>
                         <hr align="left" width="90%"/>
@@ -80,13 +80,13 @@
                             <b:column col-md="3">
                                 <h4>
                                     <span>#{msgs.bookDetailsISBN}: </span>
-                                    <h:outputText value="#{bookBackingBean.book.isbnNumber}"></h:outputText>
+                                    <h:outputText value="#{bookDetailsBackingBean.book.isbnNumber}"></h:outputText>
                                 </h4>   
                             </b:column>
                             <b:column col-md="3">
                                 <h4>
                                     <span>#{msgs.bookDetailsPublisher}: </span>
-                                    <h:outputText value="#{bookBackingBean.book.publisher}"></h:outputText>
+                                    <h:outputText value="#{bookDetailsBackingBean.book.publisher}"></h:outputText>
                                 </h4>   
                             </b:column>
                         </b:row>
@@ -94,13 +94,13 @@
                             <b:column col-md="3">
                                 <h4>
                                     <span>#{msgs.bookDetailsGenre}: </span>
-                                    <h:outputText value="#{bookBackingBean.book.genre}"></h:outputText>
+                                    <h:outputText value="#{bookDetailsBackingBean.book.genre}"></h:outputText>
                                 </h4>   
                             </b:column>
                             <b:column col-md="3">
                                 <h4>
                                     <span>#{msgs.bookDetailsPageNumber}: </span>
-                                    <h:outputText value="#{bookBackingBean.book.pageNumber}"></h:outputText>
+                                    <h:outputText value="#{bookDetailsBackingBean.book.pageNumber}"></h:outputText>
                                 </h4>   
                             </b:column>
                         </b:row>
@@ -108,13 +108,13 @@
                             <b:column col-md="3">
                                 <h4>
                                     <span>#{msgs.bookDetailsPublicationDate}: </span>
-                                    <h:outputText value="#{bookBackingBean.book.publicationDate}"></h:outputText>
+                                    <h:outputText value="#{bookDetailsBackingBean.book.publicationDate}"></h:outputText>
                                 </h4>   
                             </b:column>
                             <b:column col-md="3">
                                 <h4>
                                     <span>#{msgs.bookDetailsInventoryDate}: </span>
-                                    <h:outputText value="#{bookBackingBean.book.inventoryDate}"></h:outputText>
+                                    <h:outputText value="#{bookDetailsBackingBean.book.inventoryDate}"></h:outputText>
                                 </h4>   
                             </b:column>
                         </b:row>
@@ -124,15 +124,15 @@
                     <b:panel  collapsible="false" title="#{msgs.bookDetailsCartPanelTitle}">
                         <h4>
                             <span>#{msgs.bookDetailsListPrice}: </span>
-                            <h:outputText value="#{bookBackingBean.book.listPrice}"></h:outputText>
+                            <h:outputText value="#{bookDetailsBackingBean.book.listPrice}"></h:outputText>
                         </h4>  
                         <h4>
                             <span>#{msgs.bookDetailsSalePrice}: </span>
-                            <h:outputText value="#{bookBackingBean.book.salePrice}"></h:outputText>
+                            <h:outputText value="#{bookDetailsBackingBean.book.salePrice}"></h:outputText>
                         </h4>
                         <b:form>
-                            <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info">
-
+                            <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.addToCart(bookDetailsBackingBean.book)}">
+                                <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
                             </b:commandButton>
                         </b:form>
                     </b:panel>
@@ -141,7 +141,7 @@
             <br/>
             <b:panel  collapsible="false" title="#{msgs.bookDetailsRecommendedBooks}">
                 <h:form>
-                    <ui:repeat var="recommended" value="#{bookBackingBean.recommendedBooks}">
+                    <ui:repeat var="recommended" value="#{bookDetailsBackingBean.recommendedBooks}">
                         <b:column col-sm="6" col-md="2" col-xs="12">
                             <b:thumbnail>
                                 <b:image library="images" name="#{recommended.isbnNumber}low.jpg" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
@@ -157,7 +157,7 @@
                 </h:form>
             </b:panel>
             <b:panel collapsible="false" title="#{msgs.bookDetailsReviews}">
-                <ui:repeat var="review" value="#{bookBackingBean.book.reviewList}">
+                <ui:repeat var="review" value="#{bookDetailsBackingBean.book.reviewList}">
                     <b:container fluid="true">
                         <b:row>
                             <b:column col-md="3">
@@ -173,6 +173,23 @@
                     </b:container>
                     <hr/>
                 </ui:repeat>
+                <b:container fluid="true">
+                    <b:row>
+                        <h:form>
+                        <b:column col-md="11">
+                            <b:inputTextarea placeholder="#{msgs.bookDetailsLeaveReview}" value="#{bookDetailsBackingBean.review.review}">            
+                            </b:inputTextarea>
+                        </b:column>
+                        <b:column col-md="1">
+                            <p:rating value="#{bookDetailsBackingBean.review.rating}"></p:rating>
+                            <b:commandButton value="#{msgs.bookDetailsSubmitReview}" action="#{bookDetailsBackingBean.createReview()}">
+                                <f:param name="bookId" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
+                                <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
+                            </b:commandButton>
+                        </b:column>
+                        </h:form>
+                    </b:row>
+                </b:container>
             </b:panel>
         </b:container>
 
