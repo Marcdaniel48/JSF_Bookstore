@@ -31,15 +31,21 @@ public class CustomBookController implements Serializable
     
     public List<Book> getBooksOnSale()
     {
-        Query findBooksOnSale = em.createNamedQuery("Book.findOnSale");
-        List<Book> books = findBooksOnSale.getResultList();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+        Root<Book> book = cq.from(Book.class);
+        cq.select(book);
+        cq.where(cb.gt(book.get("salePrice"), 0));
+        
+        Query q = em.createQuery(cq);
+        q.setMaxResults(10);
+       
+        List<Book> books = q.getResultList();
         return books;
     }
     
     public List<Book> getMostRecentBooks()
     {
-        //Query findRecentBooks = em.createNamedQuery("Book.findMostRecentBooks");
-
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> root = cq.from(Book.class);

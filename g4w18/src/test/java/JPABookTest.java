@@ -83,7 +83,7 @@ public class JPABookTest
     {
         List<Book> booksOnSale = bookController.getBooksOnSale();
         logger.log(Level.INFO, "Data>>>{0}", booksOnSale.get(0));
-        assertThat(booksOnSale).hasSize(100);
+        assertThat(booksOnSale).hasSize(10);
     }
     
     @Test

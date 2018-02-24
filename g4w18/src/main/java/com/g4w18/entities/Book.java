@@ -39,7 +39,6 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Book.findByWholesalePrice", query = "SELECT b FROM Book b WHERE b.wholesalePrice = :wholesalePrice")
     , @NamedQuery(name = "Book.findByListPrice", query = "SELECT b FROM Book b WHERE b.listPrice = :listPrice")
     , @NamedQuery(name = "Book.findBySalePrice", query = "SELECT b FROM Book b WHERE b.salePrice = :salePrice")
-    , @NamedQuery(name = "Book.findOnSale", query = "select b from Book b where b.salePrice > 0")
     , @NamedQuery(name = "Book.findByInventoryDate", query = "SELECT b FROM Book b WHERE b.inventoryDate = :inventoryDate")})
 public class Book implements Serializable {
 

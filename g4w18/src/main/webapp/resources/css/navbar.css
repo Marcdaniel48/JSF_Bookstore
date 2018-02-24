@@ -70,3 +70,31 @@
     cursor: pointer;
     opacity: 0.4;
 }
+.search-icon-container
+{
+    height: 100%;
+    display: inline-block;
+}
+.search-input
+{
+    display: none;
+    width: 0px;
+    height: 40px;
+    margin: 15px 5px;
+    vertical-align: top;
+    padding-left: 5px;
+    background-color: transparent;
+    color: #F2BFA0;
+    border: none;
+    border-bottom: 1px solid #F2BFA0;
+}
+.search-options
+{
+    background: green;
+}
+.search-options .ui-selectonemenu-label { 
+    background: pink;
+}
+.search-options .ui-selectonemenu-list { 
+    background: yellow;
+}
