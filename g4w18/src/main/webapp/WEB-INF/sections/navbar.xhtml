@@ -1,0 +1,67 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <nav class="navbar">
+        <h:link outcome="index">
+            <div class="logo"></div>
+        </h:link>
+
+        <div class="right">
+
+            <h:form id="searchForm" class="search-icon-container">
+
+<!--                     <select>
+                     <ui:repeat value="#{searchBackingBean.searchOptionValue}" var="option">
+                         <option value="#{option}">#{option}</option>
+                     </ui:repeat>
+                  </select> 
+                -->
+<!--                    <p:selectOneMenu styleClass="search-options" id="searchOption" value="#{searchBackingBean.searchOption}">
+                    <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
+                </p:selectOneMenu>-->
+
+
+                <h:inputText class="search-input" value="#{searchBackingBean.searchTerm}" />
+
+                <h:commandLink action="#{searchBackingBean.search}">
+                    <h:graphicImage id="t1" class="navbar-icon" library="images" name="search.png" alt="Search Icon" />
+                </h:commandLink>
+
+            </h:form>
+
+            <h:link outcome="shopping_cart">
+                <h:graphicImage class="navbar-icon" library="images" name="shopping-cart.png" alt="Shoppping Cart Icon" />
+            </h:link>
+
+            <h:link class="navbar-login" value="#{msgs.loginbutton}" outcome="login" />
+
+            <script>
+                var $searchInput = $(".search-input").first();
+
+                $("#searchForm\\:t1").mouseenter(function()
+                {
+                    $searchInput.stop();
+                    $searchInput.show();
+                    $searchInput.animate({width: "200px"}, 900, function()
+                    {
+
+                    });
+                });
+
+                $searchInput.focusout(function()
+                {
+                    $searchInput.stop();
+                    $searchInput.animate({width: "0px"}, 900, function()
+                    {
+                        $searchInput.hide();
+                    });
+                });
+            </script>
+        </div>
+    </nav>
+    
+</ui:composition>

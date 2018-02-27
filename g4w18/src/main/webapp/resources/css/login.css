@@ -1,0 +1,45 @@
+.login
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: 1s ease-out 1.5s 1 fadeIn;
+    animation-fill-mode: forwards;
+}
+.login .container
+{
+    text-align: center;
+}
+
+.login input
+{
+    display: block;
+    font-size: 1.5em;
+    color: #F2BFA0;
+    padding: 5px;
+    margin: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: none;
+}
+.login .label
+{
+    font-weight: bolder;
+    font-size: 1.5em;
+    margin: 5px;
+    color: black;
+}
+.login input[type=submit]
+{
+    margin: auto;
+    transition: color .6s ease, background-color .6s ease;
+}
+.login input[type=submit]:hover
+{
+    cursor: pointer;
+    margin: auto;
+    color: black;
+    background-color: #F2BFA0;
+}
