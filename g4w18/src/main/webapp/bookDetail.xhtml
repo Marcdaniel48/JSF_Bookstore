@@ -173,25 +173,33 @@
                     </b:container>
                     <hr/>
                 </ui:repeat>
+
                 <b:container fluid="true">
                     <b:row>
                         <h:form>
                             <b:column col-md="11">
-                                <b:inputTextarea placeholder="#{msgs.bookDetailsLeaveReview}" value="#{bookDetailsBackingBean.review.review}">            
+                                <b:inputTextarea placeholder="#{msgs.bookDetailsLeaveReview}" value="#{bookDetailsBackingBean.review.review}" id="reviewInputTextArea" >
+                                    <f:validateLength minimum="1" maximum="255"></f:validateLength>
+                                    <f:validateRequired></f:validateRequired>
                                 </b:inputTextarea>
                             </b:column>
                             <b:column col-md="1">
-                                <h:outputText value="#{bookDetailsBackingBean.client.firstName}"></h:outputText>
-                                <p:rating value="#{bookDetailsBackingBean.review.rating}"></p:rating>
+                                <h:outputText value="#{bookDetailsBackingBean.client.firstName} #{bookDetailsBackingBean.client.lastName}"></h:outputText>
+                                <p:rating value="#{bookDetailsBackingBean.review.rating}" required="true" id="reviewRating">
+                                    <f:validateRequired></f:validateRequired>
+                                </p:rating>
                                 <p:commandButton id="primebutton" value="#{msgs.bookDetailsSubmitReview}"
                                                  action="#{bookDetailsBackingBean.createReview}" ajax="false">
                                     <f:param name="bookId" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
                                     <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
                                 </p:commandButton>
                             </b:column>
+                            <p:message for="reviewInputTextArea" style="color:red"/>
+                            <p:message for="reviewRating" style="color:red"/>
                         </h:form>
                     </b:row>
                 </b:container>
+
             </b:panel>
         </b:container>
 

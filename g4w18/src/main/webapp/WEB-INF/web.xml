@@ -27,7 +27,7 @@
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>invoice.xhtml</welcome-file>
+        <welcome-file>bookList.xhtml</welcome-file>
     </welcome-file-list>
 
 </web-app>

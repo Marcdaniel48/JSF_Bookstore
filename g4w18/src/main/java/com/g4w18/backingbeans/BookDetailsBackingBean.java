@@ -107,6 +107,6 @@ public class BookDetailsBackingBean implements Serializable {
         review.setClientId(client);
         review.setApprovalStatus(false);
         reviewJpaController.create(review);
-        return "index.xhtml";
+        return null;
     }
 }
