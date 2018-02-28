@@ -14,7 +14,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -27,7 +29,7 @@ import javax.servlet.http.HttpSession;
  * @author Ken
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class BookDetailsBackingBean implements Serializable {
 
     @Inject
@@ -36,14 +38,15 @@ public class BookDetailsBackingBean implements Serializable {
     private ReviewJpaController reviewJpaController;
     @Inject
     private ClientJpaController clientJpaController;
-    
+
     private HttpSession session;
-    
+
     private Book book;
     private Review review;
+    private Client client;
     private List<Book> recommendedBooks;
     private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
-    
+
     public Book getBook() {
         if (book == null) {
             Map<String, String> params
@@ -73,28 +76,37 @@ public class BookDetailsBackingBean implements Serializable {
             for (Review r : reviews) {
                 averageRating = averageRating + r.getRating();
             }
-            return averageRating/size;
+            return averageRating / size;
         }
         log.log(Level.INFO, "Rating: {0}", averageRating);
         return averageRating;
     }
-    
-        public Review getReview() {
+
+    public Review getReview() {
+        log.log(Level.INFO, "getReview() called");
         if (review == null) {
             review = new Review();
         }
         return review;
     }
 
+    public Client getClient() {
+        log.log(Level.INFO, "getClient() called");
+        if (client == null) {
+            log.log(Level.INFO, "client was null");
+            client = clientJpaController.findClientByUsername("sramirez").get(0x0);
+            log.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
+        }
+        return client;
+    }
+
     public String createReview() throws Exception {
+        log.log(Level.INFO, "Book is: {0}", book.getBookId() + "");
+        log.log(Level.INFO, "Review is: {0}", review);
         review.setBookId(book);
-        review.setClientId(findClient());
+        review.setClientId(client);
         review.setApprovalStatus(false);
         reviewJpaController.create(review);
-        return null;
-    }
-    private Client findClient(){
-        String username = (String) session.getAttribute("username");
-        return clientJpaController.findClientByUsername(username).get(0x0);
+        return "index.xhtml";
     }
 }

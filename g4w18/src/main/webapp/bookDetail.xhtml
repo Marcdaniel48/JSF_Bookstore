@@ -157,17 +157,17 @@
                 </h:form>
             </b:panel>
             <b:panel collapsible="false" title="#{msgs.bookDetailsReviews}">
-                <ui:repeat var="review" value="#{bookDetailsBackingBean.book.reviewList}">
+                <ui:repeat var="existingReview" value="#{bookDetailsBackingBean.book.reviewList}">
                     <b:container fluid="true">
                         <b:row>
                             <b:column col-md="3">
-                                <h:outputText value="#{review.clientId.firstName} #{review.clientId.lastName}"></h:outputText>
+                                <h:outputText value="#{existingReview.clientId.firstName} #{existingReview.clientId.lastName}"></h:outputText>
                             </b:column>
                             <b:column col-md="6">
-                                <h:outputText value="#{review.review}"></h:outputText>
+                                <h:outputText value="#{existingReview.review}"></h:outputText>
                             </b:column>
                             <b:column col-md="3">
-                                <p:rating value="#{review.rating}" readonly="true" />
+                                <p:rating value="#{existingReview.rating}" readonly="true" />
                             </b:column>
                         </b:row>
                     </b:container>
@@ -176,17 +176,19 @@
                 <b:container fluid="true">
                     <b:row>
                         <h:form>
-                        <b:column col-md="11">
-                            <b:inputTextarea placeholder="#{msgs.bookDetailsLeaveReview}" value="#{bookDetailsBackingBean.review.review}">            
-                            </b:inputTextarea>
-                        </b:column>
-                        <b:column col-md="1">
-                            <p:rating value="#{bookDetailsBackingBean.review.rating}"></p:rating>
-                            <b:commandButton value="#{msgs.bookDetailsSubmitReview}" action="#{bookDetailsBackingBean.createReview()}">
-                                <f:param name="bookId" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
-                                <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
-                            </b:commandButton>
-                        </b:column>
+                            <b:column col-md="11">
+                                <b:inputTextarea placeholder="#{msgs.bookDetailsLeaveReview}" value="#{bookDetailsBackingBean.review.review}">            
+                                </b:inputTextarea>
+                            </b:column>
+                            <b:column col-md="1">
+                                <h:outputText value="#{bookDetailsBackingBean.client.firstName}"></h:outputText>
+                                <p:rating value="#{bookDetailsBackingBean.review.rating}"></p:rating>
+                                <p:commandButton id="primebutton" value="#{msgs.bookDetailsSubmitReview}"
+                                                 action="#{bookDetailsBackingBean.createReview}" ajax="false">
+                                    <f:param name="bookId" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
+                                    <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
+                                </p:commandButton>
+                            </b:column>
                         </h:form>
                     </b:row>
                 </b:container>
