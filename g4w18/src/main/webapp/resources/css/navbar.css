@@ -88,13 +88,3 @@
     border: none;
     border-bottom: 1px solid #F2BFA0;
 }
-.search-options
-{
-    background: green;
-}
-.search-options .ui-selectonemenu-label { 
-    background: pink;
-}
-.search-options .ui-selectonemenu-list { 
-    background: yellow;
-}

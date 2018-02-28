@@ -2,6 +2,8 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <nav class="navbar">
@@ -19,10 +21,12 @@
                      </ui:repeat>
                   </select> 
                 -->
-<!--                    <p:selectOneMenu styleClass="search-options" id="searchOption" value="#{searchBackingBean.searchOption}">
-                    <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
-                </p:selectOneMenu>-->
+<!--                <div class="search-options">
+                    <p:selectOneMenu id="searchOption" value="#{searchBackingBean.searchOption}">
+                        <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
+                    </p:selectOneMenu>
+                </div>-->
 
 
                 <h:inputText class="search-input" value="#{searchBackingBean.searchTerm}" />
@@ -40,6 +44,15 @@
             <h:link class="navbar-login" value="#{msgs.loginbutton}" outcome="login" />
 
             <script>
+                
+                //REMOVE DEFAULT STYLING FOR 'SELECTONEMENU'//
+//                $(".search-options").find("*").each(function()
+//                {
+//                   $(this).attr("style", "all: unset"); 
+//                });
+                    
+                ////
+                
                 var $searchInput = $(".search-input").first();
 
                 $("#searchForm\\:t1").mouseenter(function()
