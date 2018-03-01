@@ -5,12 +5,51 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Log in</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
+       <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
+       <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+    </h:head>
+    <h:body>
+        <b:navBar brand="Booktopia" brandHref="#" fluid="true">
+           <b:navbarLinks>
+               <b:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs">
+                   <b:inputText placeholder="Search for a book..."></b:inputText>
+                   <b:commandButton value="Search" iconAwesome="search" action="bookList"></b:commandButton>
+               </b:form>
+           </b:navbarLinks>
+           <b:navbarLinks pull="right" styleClass="hidden-xs">
+           </b:navbarLinks>
+       </b:navBar>
+        <b:container fluid="true">
+            <b:panel>
+                <h:form>
+                    <b:inputText label="#{msgs.finalCardName}" id="cardname" value="#{finalizationBacking.creditCard.name}"/>
+                    <b:message for="cardname" style="color:red" />
+                    
+                    <b:inputText label="#{msgs.finalCardNumber}" id="cardnumber" value="#{finalizationBacking.creditCard.number}"/>
+                    <b:message for="cardnumber" style="color:red" />
+                    
+                    <b:selectOneMenu label="#{msgs.month}" id="monthOptions" value="#{finalizationBacking.creditCard.month}">
+                        <f:selectItems value="#{finalizationBacking.monthOptions}"/>
+                    </b:selectOneMenu>
+                    
+                    <b:inputText label="#{msgs.year}" id="cardexpirationyear" value="#{finalizationBacking.creditCard.year}"/>
+                    <b:message for="cardexpirationyear" style="color:red" />
+                    
+                    <h:commandButton value="#{msgs.finalize}" action="."/>
+                </h:form>
+            </b:panel>
+            
+        </b:container>
+        
+        <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
+       <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
+    </h:body>
 </html>
