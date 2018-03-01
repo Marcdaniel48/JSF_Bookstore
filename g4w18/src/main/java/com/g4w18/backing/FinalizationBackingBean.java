@@ -26,6 +26,12 @@ import javax.inject.Named;
 public class FinalizationBackingBean implements Serializable
 {
     private CreditCard creditCard;
+    private String shippingAddress;
+    
+    public String getShippingAddress()
+    {
+        return shippingAddress;
+    }
     
     public CreditCard getCreditCard() {
         if (creditCard == null) {
