@@ -5,6 +5,9 @@
  */
 package com.g4w18.controllers;
 
+import com.g4w18.controllers.exceptions.IllegalOrphanException;
+import com.g4w18.controllers.exceptions.NonexistentEntityException;
+import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Banner;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
@@ -13,6 +16,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -28,6 +32,111 @@ public class CustomBookController implements Serializable
     
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
+    
+    public void create(Book book) throws RollbackFailureException, Exception
+    {
+        
+    }
+    
+    public void edit(Book book) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception
+    {
+    }
+    
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception
+    {
+        
+    }
+    
+    public List<Book> findBookEntities()
+    {
+       return bookController.findBookEntities();
+    }
+
+    public List<Book> findBookEntities(int maxResults, int firstResult)
+    {
+        return bookController.findBookEntities(maxResults, firstResult);
+    }
+
+    public Book findBook(Integer id)
+    {
+        return bookController.findBook(id);
+    }
+
+    public int getBookCount()
+    {
+        return bookController.getBookCount();
+    }
+
+    /**
+     * Get books from the database with the title provided
+     *
+     * @param title name of the book that is being searched
+     * @return List of books found with the title
+     */
+    public List<Book> findBooksByTitleSpecific(String title)
+    {
+        return bookController.findBooksByTitleSpecific(title);
+    }
+
+    /**
+     * Get books from the database with the title provided(doesn't need to match whole)
+     *
+     * @param title name of the book that is being searched
+     * @return List of books found with the title
+     */
+    public List<Book> findBooksByTitle(String title)
+    {
+        return bookController.findBooksByTitle(title);
+    }
+
+    /**
+     * Get books from the database with the isbn provided(must match whole) 
+     *
+     * @param isbn number of the book the user is searching for
+     * @return Book found with the isbn
+     */
+    public List<Book> findBookByAuthor(String author)
+    {
+        return bookController.findBookByAuthor(author);
+    }
+
+    /**
+     * Get books from the database with the isbn provided(must match whole)
+     *
+     * @param isbn number of the book the user is searching for
+     * @return Book found with the isbn
+     */
+    public List<Book> findBookByIsbn(String isbn)
+    {
+        return bookController.findBookByIsbn(isbn);
+    }
+
+    /**
+     * Get books from the database with the author provided.
+     *
+     * @param publisher of the book we are finding
+     * @return books found with the associated publisher
+     */
+    public List<Book> findBooksByPublisher(String publisher)
+    {
+        return bookController.findBooksByPublisher(publisher);
+    }
+
+    /**
+     * Get publishers from the database with the publisher provided(doesn't need to match whole)
+     *
+     * @param title publisher that is being searched
+     * @return List of books found with the publisher
+     */
+    public List<Book> findDistinctPublisher(String publisher)
+    {
+        return bookController.findDistinctPublisher(publisher);
+    }
+
+    public List<Book> findBooksByGenre(String genre)
+    {
+        return bookController.findBooksByGenre(genre);
+    }
     
     public List<Book> getBooksOnSale()
     {

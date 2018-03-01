@@ -88,3 +88,34 @@
     border: none;
     border-bottom: 1px solid #F2BFA0;
 }
+.search-icon-container
+{
+/*     background-color: yellow; */
+}
+.search-dropdown
+{
+    display: none;
+    opacity: 0;
+    width: auto;
+    height: 30px;
+    padding: 5px;
+    margin-top: 25px;
+    text-align: center;
+    vertical-align: top;
+    color: #F2BFA0;
+    background-color: transparent;
+    border: 1px solid #F2BFA0;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+.search-dropdown:hover
+{
+    background-color: #F2BFA0;
+    color: black;
+}
+.search-dropdown option
+{
+    color: #F2BFA0;
+    background-color: black;
+}

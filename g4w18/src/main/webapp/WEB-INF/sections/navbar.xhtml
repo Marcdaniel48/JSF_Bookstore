@@ -15,19 +15,9 @@
 
             <h:form id="searchForm" class="search-icon-container">
 
-<!--                     <select>
-                     <ui:repeat value="#{searchBackingBean.searchOptionValue}" var="option">
-                         <option value="#{option}">#{option}</option>
-                     </ui:repeat>
-                  </select> 
-                -->
-<!--                <div class="search-options">
-                    <p:selectOneMenu id="searchOption" value="#{searchBackingBean.searchOption}">
-                        <f:selectItem itemLabel="#{msgs.searchSelection}" itemValue="" noSelectionOption="true" />
-                        <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
-                    </p:selectOneMenu>
-                </div>-->
-
+                <h:selectOneMenu styleClass="search-dropdown" id="searchOption" value="#{searchBackingBean.searchOption}">
+                    <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
+                </h:selectOneMenu>
 
                 <h:inputText class="search-input" value="#{searchBackingBean.searchTerm}" />
 
@@ -45,28 +35,32 @@
 
             <script>
                 
-                //REMOVE DEFAULT STYLING FOR 'SELECTONEMENU'//
-//                $(".search-options").find("*").each(function()
-//                {
-//                   $(this).attr("style", "all: unset"); 
-//                });
-                    
-                ////
-                
                 var $searchInput = $(".search-input").first();
-
+                var $searchDropdown = $(".search-dropdown").first();
+                
                 $("#searchForm\\:t1").mouseenter(function()
                 {
                     $searchInput.stop();
                     $searchInput.show();
                     $searchInput.animate({width: "200px"}, 900, function()
                     {
-
+                        $searchDropdown.stop();
+                        $searchDropdown.show();
+                        $searchDropdown.animate({opacity: 1}, 900, function()
+                        {
+                            
+                        });
                     });
                 });
 
                 $searchInput.focusout(function()
                 {
+                    $searchDropdown.stop();
+                    $searchDropdown.animate({opacity: 0}, 900, function()
+                    {
+                        $searchDropdown.hide();
+                    });
+                    
                     $searchInput.stop();
                     $searchInput.animate({width: "0px"}, 900, function()
                     {
