@@ -6,6 +6,7 @@
 package com.g4w18.backing;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -37,13 +38,27 @@ public class FinalizationBackingBean implements Serializable
         return monthOptions;
     }
     
+    public Collection<SelectItem> getYearOptions()
+    {
+        return yearOptions;
+    }
+    
     private static Collection<SelectItem> monthOptions;
-    static{
+    private static Collection<SelectItem> yearOptions;
+    static
+    {
         monthOptions = new ArrayList<>();
+        yearOptions = new ArrayList<>();
         
         for(int i = 1; i < 13; i++)
         {
             monthOptions.add(new SelectItem(i));
+        }
+        
+        LocalDateTime currentDate = LocalDateTime.now();
+        for(int i = currentDate.getYear(); i < currentDate.getYear()+21; i++)
+        {
+            yearOptions.add(new SelectItem(i));
         }
     }
 }

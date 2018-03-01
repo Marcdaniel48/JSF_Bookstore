@@ -30,7 +30,9 @@ and open the template in the editor.
         <b:container fluid="true">
             <b:panel title="#{msgs.finalCreditCardInformation}" collapsible="false">
                 <h:form>
-                    <b:inputText label="#{msgs.finalCardName}" id="cardname" value="#{finalizationBacking.creditCard.name}"/>
+                    <b:inputText label="#{msgs.finalCardName}" id="cardname" value="#{finalizationBacking.creditCard.name}">
+                        <f:validateLength minimum="1"></f:validateLength>
+                    </b:inputText>
                     <b:message for="cardname" style="color:red" />
                     
                     <b:inputText label="#{msgs.finalCardNumber}" id="cardnumber" value="#{finalizationBacking.creditCard.number}"/>
@@ -42,7 +44,9 @@ and open the template in the editor.
                             <f:selectItems value="#{finalizationBacking.monthOptions}"/>
                         </b:selectOneMenu>
 
-                        <b:inputText label="#{msgs.year}" id="cardexpirationyear" value="#{finalizationBacking.creditCard.year}"/>
+                        <b:selectOneMenu label="#{msgs.year}" id="cardexpirationyear" value="#{finalizationBacking.creditCard.year}">
+                            <f:selectItems value="#{finalizationBacking.yearOptions}"/>
+                        </b:selectOneMenu>
                         <b:message for="cardexpirationyear" style="color:red" />
                     </b:panel>
                     
