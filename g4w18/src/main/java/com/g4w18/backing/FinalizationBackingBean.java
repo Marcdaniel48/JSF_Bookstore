@@ -33,6 +33,11 @@ public class FinalizationBackingBean implements Serializable
         return shippingAddress;
     }
     
+    public void setShippingAddress(String shippingAddress)
+    {
+        this.shippingAddress = shippingAddress;
+    }
+    
     public CreditCard getCreditCard() {
         if (creditCard == null) {
             creditCard = new CreditCard();
@@ -67,4 +72,6 @@ public class FinalizationBackingBean implements Serializable
             yearOptions.add(new SelectItem(i));
         }
     }
+    
+    
 }
