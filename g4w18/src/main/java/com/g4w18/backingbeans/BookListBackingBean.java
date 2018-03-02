@@ -64,6 +64,8 @@ public class BookListBackingBean {
         if (allBooks == null) {
             allBooks = bookJpaController.findBookEntities();
         }
+        
+        
         return allBooks;
     }
 }

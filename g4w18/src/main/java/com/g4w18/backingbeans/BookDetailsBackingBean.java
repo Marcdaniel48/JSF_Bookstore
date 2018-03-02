@@ -11,10 +11,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -38,8 +38,6 @@ public class BookDetailsBackingBean implements Serializable {
     private ReviewJpaController reviewJpaController;
     @Inject
     private ClientJpaController clientJpaController;
-
-    private HttpSession session;
 
     private Book book;
     private Review review;
@@ -91,17 +89,35 @@ public class BookDetailsBackingBean implements Serializable {
     }
 
     public Client getClient() {
-        log.log(Level.INFO, "getClient() called");
         if (client == null) {
-            log.log(Level.INFO, "client was null");
-            String username = (String)session.getAttribute("username");
-            client = clientJpaController.findClientByUsername(username).get(0x0);
-            log.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            String username = (String) session.getAttribute("username");
+            if (username != null) {
+                client = clientJpaController.findClientByUsername(username).get(0x0);
+                log.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
+            } else {
+                client = new Client();
+                client.setFirstName("Guest");
+            }
         }
         return client;
     }
 
     public String createReview() throws Exception {
+        if (client.getFirstName().equals("Guest")) {
+//            FacesMessage loginMessage = new FacesMessage("Please login before leaving a review");
+//            loginMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+//            FacesContext.getCurrentInstance().addMessage("", loginMessage);
+            return "login.xhtml";
+        }
+        for (Review r : client.getReviewList()) {
+            if (Objects.equals(r.getBookId().getBookId(), book.getBookId())) {
+//                FacesMessage loginMessage = new FacesMessage("You already reviewed this book");
+//                loginMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+//                FacesContext.getCurrentInstance().addMessage("", loginMessage);
+                return null;
+            }
+        }
         log.log(Level.INFO, "Book is: {0}", book.getBookId() + "");
         log.log(Level.INFO, "Review is: {0}", review);
         review.setBookId(book);
