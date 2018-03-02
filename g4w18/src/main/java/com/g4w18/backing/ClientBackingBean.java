@@ -19,6 +19,7 @@ import javax.faces.model.SelectItem;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -53,13 +54,24 @@ public class ClientBackingBean implements Serializable
     
     public void validateExistingUsername(FacesContext fc, UIComponent c, Object value) 
     {
-        
-        if (clientJpaController.findClientByUsername(((String) value).toLowerCase()) != null) 
+        String username = (String) value;
+        try
         {
-            System.out.println("HYPER TRUE");
+            Client potentialUser = clientJpaController.findClientByUsername(username);
+            if (potentialUser == null) 
+            {
+                String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingUsername");
+                throw new ValidatorException(new FacesMessage(validationMessage));
+            }
+        }
+        catch(NoResultException nre)
+        {
             String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingUsername");
             throw new ValidatorException(new FacesMessage(validationMessage));
         }
+        
+        
+        
     }
     
     public void validateExistingEmail(FacesContext fc, UIComponent c, Object value) 
