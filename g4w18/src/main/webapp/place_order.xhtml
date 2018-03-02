@@ -32,7 +32,13 @@ and open the template in the editor.
                 <b:panel collapsible="false">
                     <b:column col-md="6">
                         <h4>#{msgs.finalShipping}</h4>
-                        
+                        #{orderBacking.currentClient.firstName} #{orderBacking.currentClient.lastName}
+                        <br/>
+                        #{finalizationBacking.shippingAddress}
+                        <br/>
+                        #{orderBacking.currentClient.country}
+                        <br/>
+                        #{msgs.phone}: #{orderBacking.currentClient.homeTelephone}
                         <br/><br/>
                                 
                         <h4>#{msgs.billingAddress}</h4>
@@ -41,6 +47,7 @@ and open the template in the editor.
                     
                     <b:column col-md="6">
                         <h4>#{msgs.paymentMethod}</h4>
+                        #{msgs.creditCardEnding} #{orderBacking.last4Characters(finalizationBacking.creditCard.number)}
                     </b:column>
                 </b:panel>
             </b:column>
@@ -49,7 +56,13 @@ and open the template in the editor.
                 <b:panel collapsible="false">
                     <h:form>
                         <h4>#{msgs.orderSummary}</h4>
-                        
+                        #{msgs.items}:
+                        <hr/>
+                        #{msgs.totalBeforeTax}:
+                        <br/>
+                        #{msgs.estimatedTax}:
+                        <br/>
+                        <b>#{msgs.orderTotal}:</b>
                         <br/><br/>
                         
                         <b:commandButton value="#{msgs.placeOrder}" action="place_order.xhtml"/>

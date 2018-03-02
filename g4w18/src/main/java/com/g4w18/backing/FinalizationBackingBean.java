@@ -9,12 +9,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 /**

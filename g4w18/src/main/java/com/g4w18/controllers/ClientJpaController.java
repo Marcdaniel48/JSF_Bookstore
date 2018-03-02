@@ -255,16 +255,16 @@ public class ClientJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
     }
 
-    public List<Client> findClientByUsername(String username)
+    public Client findClientByUsername(String username)
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Client> cq = cb.createQuery(Client.class);
         Root<Client> clientRoot = cq.from(Client.class);
         cq.select(clientRoot).where(cb.equal(clientRoot.get("username"), username));
         TypedQuery<Client> query = em.createQuery(cq);
-        List<Client> existingClients = query.getResultList();
+        Client existingClient = query.getSingleResult();
 
-        return existingClients;
+        return existingClient;
     }
 
     public List<Client> findClientByEmail(String email)

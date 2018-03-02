@@ -54,7 +54,7 @@ public class ClientBackingBean implements Serializable
     public void validateExistingUsername(FacesContext fc, UIComponent c, Object value) 
     {
         
-        if (clientJpaController.findClientByUsername(((String) value).toLowerCase()).size() > 0) 
+        if (clientJpaController.findClientByUsername(((String) value).toLowerCase()) != null) 
         {
             System.out.println("HYPER TRUE");
             String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingUsername");
