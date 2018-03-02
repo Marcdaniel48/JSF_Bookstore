@@ -1,22 +1,15 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.controllers.MasterInvoiceJpaController;
-import com.g4w18.entities.Book;
-import com.g4w18.entities.Client;
 import com.g4w18.entities.MasterInvoice;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.view.ViewScoped;
@@ -39,7 +32,6 @@ public class InvoiceBackingBean implements Serializable {
     private MasterInvoiceJpaController masterInvoiceJpaController;
 
     private MasterInvoice masterInvoice;
-    private Email email;
 
     private int taxes;
 
@@ -55,39 +47,32 @@ public class InvoiceBackingBean implements Serializable {
         return masterInvoice;
     }
 
-    private void createEmail() throws IOException {
-        email = Email.create().from("sramirezdawson2017@gmail.com")
-                .to("booktopiag4w18@gmail.com")
-                .subject("Hi").addHtml(viewAsHtml());
+    private Email createEmail() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msgs");
+        String subject = bundle.getString("invoiceEmailSubject");
+        log.log(Level.INFO, "Subject: {0}", subject);
+        log.log(Level.INFO, "Destinatary: {0}", masterInvoice.getClientId().getEmail());
+        return Email.create().from("sramirezdawson2017@gmail.com")
+                .to(masterInvoice.getClientId().getEmail())
+                .subject(subject).addHtml(viewAsHtml());
     }
 
     public String sendEmail() throws IOException {
-//        log.log(Level.INFO, html);
-//        log.log(Level.INFO,"sendMail called");
-//        //log.debug("ADDRESS: "+this.userEmailAddress);
-//        //log.debug("PASSWORD: "+this.userEmailAddress);
-//        // Create am SMTP server object
         SmtpServer<SmtpSslServer> smtpServer = SmtpSslServer
                 .create("smtp.gmail.com")
                 .authenticateWith("sramirezdawson2017@gmail.com",
                         "catsLoveFood");
-
-        // Display Java Mail debug conversation with the server
         smtpServer.debug(false);
-        // Like a file we open the session, send the message and close the
-        // session
-        try ( // A session is the object responsible for communicating with the server
-                SendMailSession session = smtpServer.createSession()) {
-            // Like a file we open the session, send the message and close the
-            // session
+        try (SendMailSession session = smtpServer.createSession()) {
             session.open();
             createEmail();
-            session.sendMail(email);
+//            session.sendMail(email);
         }
         return null;
     }
 
-//    Code provided by BalusC at 
+//    part of the code provided by BalusC at:
 //    https://stackoverflow.com/questions/16965229/is-there-a-way-to-get-the-generated-html-as-a-string-from-a-uicomponent-object
     private String viewAsHtml() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -103,6 +88,7 @@ public class InvoiceBackingBean implements Serializable {
                 context.setResponseWriter(originalWriter);
             }
         }
+//        log.log(Level.INFO, "HTML: {0}", writer.toString());
         return writer.toString();
     }
 

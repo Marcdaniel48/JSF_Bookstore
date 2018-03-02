@@ -179,5 +179,5 @@ public class ReviewJpaController implements Serializable {
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-
+    
 }
