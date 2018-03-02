@@ -94,7 +94,8 @@ public class BookDetailsBackingBean implements Serializable {
         log.log(Level.INFO, "getClient() called");
         if (client == null) {
             log.log(Level.INFO, "client was null");
-            client = clientJpaController.findClientByUsername("sramirez").get(0x0);
+            String username = (String)session.getAttribute("username");
+            client = clientJpaController.findClientByUsername(username).get(0x0);
             log.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
         }
         return client;
