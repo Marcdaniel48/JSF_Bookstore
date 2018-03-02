@@ -8,6 +8,7 @@ package com.g4w18.backing;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
@@ -16,6 +17,7 @@ import javax.faces.validator.ValidatorException;
  * 
  * @author Marc-Daniel
  */
+@FacesValidator("creditCardValidator")
 public class CreditCardValidator implements Validator
 {
 
@@ -24,6 +26,13 @@ public class CreditCardValidator implements Validator
     {
         String cardNumber = (String) value;
         int sum = 0;
+        
+        if(!cardNumber.matches("^[0-9]+$"))
+        {
+            FacesMessage msg = com.g4w18.util.Messages.getMessage("com.g4w18.bundles.messages", "emptyCreditCard", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
+        }
 
         for (int i = cardNumber.length() - 1; i >= 0; i -= 2) 
         {
@@ -44,10 +53,9 @@ public class CreditCardValidator implements Validator
         
         if (!(sum % 10 == 0)) 
         {
-        /*    FaceMessage msg = com.g4w18.
-            FacesMessage message = com.kfwebstandard.util.Messages.getMessage("com.kenfogel.bundles.messages", "badLuhnCheck", null);
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(message);*/
+            FacesMessage msg = com.g4w18.util.Messages.getMessage("com.g4w18.bundles.messages", "invalidCreditCard", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
         }
     }
     

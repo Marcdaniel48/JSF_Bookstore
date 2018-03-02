@@ -36,7 +36,9 @@ and open the template in the editor.
                         <b:inputText label="#{msgs.finalCardName}" id="cardname" value="#{finalizationBacking.creditCard.name}" required="true"/>
                         <b:message for="cardname" style="color:red" />
 
-                        <b:inputText label="#{msgs.finalCardNumber}" id="cardnumber" value="#{finalizationBacking.creditCard.number}" required="true"/>
+                        <b:inputText label="#{msgs.finalCardNumber}" id="cardnumber" value="#{finalizationBacking.creditCard.number}" required="true">
+                            <f:validator validatorId="creditCardValidator" />
+                        </b:inputText>
                         <b:message for="cardnumber" style="color:red" />
 
 
