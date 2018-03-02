@@ -36,7 +36,6 @@ public class PlaceOrderBackingBean implements Serializable
     public String last4Characters(String creditCardNumber)
     {
         return creditCardNumber.substring(creditCardNumber.length()-4);
-    }
-    
+    }    
     
 }

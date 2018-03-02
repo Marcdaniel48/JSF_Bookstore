@@ -75,5 +75,20 @@ public class ShoppingCart implements Serializable
     {
         return books;
     }
+    
+    public double getSubtotal()
+    {
+        double sum = 0;
+        
+        for(Book book : books)
+        {
+            if(book.getSalePrice().doubleValue() > 0)
+                sum += book.getSalePrice().doubleValue();
+            else
+                sum += book.getListPrice().doubleValue();
+        }
+        
+        return sum;
+    }
 
 }

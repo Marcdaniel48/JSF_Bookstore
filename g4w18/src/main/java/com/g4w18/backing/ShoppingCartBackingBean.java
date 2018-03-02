@@ -54,4 +54,9 @@ public class ShoppingCartBackingBean implements Serializable
     {
         cart.addToCart(book);
     }
+    
+    public double getSubtotal()
+    {
+        return cart.getSubtotal();
+    }
 }
