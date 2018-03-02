@@ -25,48 +25,39 @@ and open the template in the editor.
            </b:navbarLinks>
        </b:navBar>
          
-        <b:column col-md="6">
-            <b:panel title="#{msgs.finalCreditCardInformation}" collapsible="false">
-                <h:form>
-                    <b:inputText label="#{msgs.finalCardName}" id="cardname" value="#{finalizationBacking.creditCard.name}" required= "true"/>
-                    <b:message for="cardname" style="color:red" />
+        <b:container fluid="true">
+            <h3>#{msgs.finalReviewOrder}</h3>
 
-                    <b:inputText label="#{msgs.finalCardNumber}" id="cardnumber" value="#{finalizationBacking.creditCard.number}" required="true">
+            <b:column col-md="6">
+                <b:panel collapsible="false">
+                    <b:column col-md="6">
+                        <h4>#{msgs.finalShipping}</h4>
                         
-                    </b:inputText>
-                    <b:message for="cardnumber" style="color:red" />
+                        <br/><br/>
+                                
+                        <h4>#{msgs.billingAddress}</h4>
+                        #{msgs.sameAddress}
+                    </b:column>
+                    
+                    <b:column col-md="6">
+                        <h4>#{msgs.paymentMethod}</h4>
+                    </b:column>
+                </b:panel>
+            </b:column>
 
-
-                    <b:panel title="#{msgs.finalExpiration}" collapsible="false" col-md="2">
-                        <b:column col-md="6">
-                            <b:selectOneMenu label="#{msgs.month}" id="monthOptions" value="#{finalizationBacking.creditCard.month}">
-                                <f:selectItems value="#{finalizationBacking.monthOptions}"/>
-                            </b:selectOneMenu>
-                        </b:column>
-
-                        <b:column col-md="6">
-                            <b:selectOneMenu label="#{msgs.year}" id="cardexpirationyear" value="#{finalizationBacking.creditCard.year}">
-                                <f:selectItems value="#{finalizationBacking.yearOptions}"/>
-                            </b:selectOneMenu>
-                        </b:column>
-                        <b:message for="cardexpirationyear" style="color:red" />
-                    </b:panel>
-
-                    <b:inputText label="#{msgs.finalShipping}" id="shippingAddress" value="#{finalizationBacking.shippingAddress}" required="true"/>
-                    <b:message for="shippingAddress" style="color:red" />
-
-                    <b:commandButton value="#{msgs.continue}" action="place_order.xhtml" style="float: right"/>
-                </h:form>
-            </b:panel>
-        </b:column>
-    <b:column col-md="6">
-        <b:panel title="#{msgs.finalOrderSummary}" collapsible="false">
-                <h:form>
-
-                    <b:commandButton value="#{msgs.placeOrder}" action="place_order.xhtml"/>
-                </h:form>
-            </b:panel>
-        </b:column>
+            <b:column col-md="6">
+                <b:panel collapsible="false">
+                    <h:form>
+                        <h4>#{msgs.orderSummary}</h4>
+                        
+                        <br/><br/>
+                        
+                        <b:commandButton value="#{msgs.placeOrder}" action="place_order.xhtml"/>
+                    </h:form>
+                </b:panel>
+            </b:column>
+        </b:container>
+        
         
         <!-- load js at bottom for faster loading-->
         <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
