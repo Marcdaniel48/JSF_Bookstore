@@ -45,9 +45,9 @@ public class PlaceOrderBackingBean implements Serializable
         
         double taxRate = 0;
         
-        taxRate += tax.getGstRate().doubleValue() /10;
-        taxRate += tax.getPstRate().doubleValue() /10;
-        taxRate += tax.getPstRate().doubleValue() /10;
+        taxRate += tax.getGstRate().doubleValue() /100;
+        taxRate += tax.getPstRate().doubleValue() /100;
+        taxRate += tax.getHstRate().doubleValue() /100;
         
         return taxRate;
     }
@@ -55,6 +55,12 @@ public class PlaceOrderBackingBean implements Serializable
     public String last4Characters(String creditCardNumber)
     {
         return creditCardNumber.substring(creditCardNumber.length()-4);
-    }    
+    }  
+    
+    public double roundDouble(String price)
+    {
+        double roundedPrice = Double.valueOf(price);
+        return Math.round(roundedPrice * 100.) / 100.;
+    }
     
 }

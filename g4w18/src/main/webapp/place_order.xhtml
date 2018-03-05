@@ -60,7 +60,7 @@ and open the template in the editor.
                         <hr/>
                         #{msgs.totalBeforeTax}: #{shoppingCartBackingBean.shoppingCart.subtotal}
                         <br/>
-                        #{msgs.estimatedTax}: #{shoppingCartBackingBean.shoppingCart.subtotal * (1 + orderBacking.taxRate)}
+                        #{msgs.estimatedTax}: #{orderBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * (1 + orderBacking.taxRate))}
                         <br/>
                         <b>#{msgs.orderTotal}:</b>
                         <br/><br/>
