@@ -36,9 +36,9 @@ public class ShoppingCartBackingBean implements Serializable
         return list;
     }
     
-    public void removeFromCart(Book book)
+    public ShoppingCart getShoppingCart()
     {
-        cart.removeFromCart(book);
+        return cart;
     }
     
     public BigDecimal getPrice(Book book)
@@ -48,15 +48,5 @@ public class ShoppingCartBackingBean implements Serializable
             return book.getSalePrice();
         
         return book.getListPrice();
-    }
-    
-    public void addToCart(Book book)
-    {
-        cart.addToCart(book);
-    }
-    
-    public double getSubtotal()
-    {
-        return cart.getSubtotal();
     }
 }

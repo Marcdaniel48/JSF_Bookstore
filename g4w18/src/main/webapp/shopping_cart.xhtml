@@ -41,7 +41,7 @@
                                 <h:outputText value="#{shoppingCartBackingBean.getPrice(book)} CAD"></h:outputText>
                             </b:column>
                             <b:column col-md="3">
-                                <h:commandLink value="Delete" action="#{shoppingCartBackingBean.removeFromCart(book)}" />
+                                <h:commandLink value="Delete" action="#{shoppingCartBackingBean.shoppingCart.removeFromCart(book)}" />
                             </b:column>
                         </b:row>
                     </ui:repeat>

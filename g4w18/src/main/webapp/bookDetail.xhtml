@@ -131,7 +131,7 @@
                             <h:outputText value="#{bookBackingBean.book.salePrice}"></h:outputText>
                         </h4>
                         <b:form>
-                            <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.addToCart(bookBackingBean.book)}">
+                            <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.shoppingCart.addToCart(bookBackingBean.book)}">
                                 <f:param name="id" value="#{bookBackingBean.book.bookId}"></f:param>
                             </b:commandButton>
                         </b:form>

@@ -54,15 +54,9 @@ public class ClientBackingBean implements Serializable
     
     public void validateExistingUsername(FacesContext fc, UIComponent c, Object value) 
     {
-        String username = (String) value;
         try
         {
-            Client potentialUser = clientJpaController.findClientByUsername(username);
-            if (potentialUser == null) 
-            {
-                String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingUsername");
-                throw new ValidatorException(new FacesMessage(validationMessage));
-            }
+            clientJpaController.findClientByUsername(((String) value).toLowerCase());
         }
         catch(NoResultException nre)
         {
@@ -76,8 +70,11 @@ public class ClientBackingBean implements Serializable
     
     public void validateExistingEmail(FacesContext fc, UIComponent c, Object value) 
     {
-        
-        if (clientJpaController.findClientByEmail(((String) value).toLowerCase()).size() > 0) 
+        try
+        {
+            clientJpaController.findClientByEmail(((String) value).toLowerCase());
+        }
+        catch(NoResultException nre)
         {
             String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingEmail");
             throw new ValidatorException(new FacesMessage(validationMessage));
