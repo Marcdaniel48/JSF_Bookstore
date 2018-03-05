@@ -35,16 +35,17 @@ public class CustomBookController implements Serializable
     
     public void create(Book book) throws RollbackFailureException, Exception
     {
-        
+        bookController.edit(book);
     }
     
     public void edit(Book book) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception
     {
+        bookController.edit(book);
     }
     
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception
     {
-        
+        bookController.destroy(id);
     }
     
     public List<Book> findBookEntities()
