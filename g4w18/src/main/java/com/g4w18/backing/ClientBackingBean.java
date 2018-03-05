@@ -53,35 +53,22 @@ public class ClientBackingBean implements Serializable
     }
     
     public void validateExistingUsername(FacesContext fc, UIComponent c, Object value) 
-    {
-        try
+    {   
+        if (clientJpaController.findClientByUsername(((String) value).toLowerCase()) == null) 
         {
-            clientJpaController.findClientByUsername(((String) value).toLowerCase());
-        }
-        catch(NoResultException nre)
-        {
-            String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingUsername");
+            String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingEmail");
             throw new ValidatorException(new FacesMessage(validationMessage));
-        }
-        
-        
-        
+        }   
     }
     
     public void validateExistingEmail(FacesContext fc, UIComponent c, Object value) 
     {
-        try
-        {
-            clientJpaController.findClientByEmail(((String) value).toLowerCase());
-        }
-        catch(NoResultException nre)
+        if (clientJpaController.findClientByEmail(((String) value).toLowerCase()) == null) 
         {
             String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidExistingEmail");
             throw new ValidatorException(new FacesMessage(validationMessage));
         }
     }
-    
-    
     
     
     
@@ -119,15 +106,19 @@ public class ClientBackingBean implements Serializable
         provinceOptions.add(new SelectItem(null, "Select a province", "", false, false,
                 true));
         
-        provinceOptions.add(new SelectItem("ON"));
-        provinceOptions.add(new SelectItem("QC"));
-        provinceOptions.add(new SelectItem("BC"));
         provinceOptions.add(new SelectItem("AB"));
-        provinceOptions.add(new SelectItem("NS"));
-        provinceOptions.add(new SelectItem("SK"));
+        provinceOptions.add(new SelectItem("BC"));
         provinceOptions.add(new SelectItem("MB"));
-        provinceOptions.add(new SelectItem("NL"));
         provinceOptions.add(new SelectItem("NB"));
+        provinceOptions.add(new SelectItem("NL"));
+        provinceOptions.add(new SelectItem("NS"));
+        provinceOptions.add(new SelectItem("NT"));
+        provinceOptions.add(new SelectItem("NU"));
+        provinceOptions.add(new SelectItem("ON"));
         provinceOptions.add(new SelectItem("PE"));
+        provinceOptions.add(new SelectItem("QC"));
+        provinceOptions.add(new SelectItem("SK"));
+        provinceOptions.add(new SelectItem("YT"));
+        
     }
 }

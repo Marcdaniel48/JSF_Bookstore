@@ -258,22 +258,23 @@ public class ClientJpaController implements Serializable {
     public Client findClientByUsername(String username)
     {
         TypedQuery<Client> query = em.createNamedQuery("Client.findByUsername", Client.class);
-        query.setParameter(1, username);
-        Client existingClient = query.getSingleResult();
-
-        return existingClient;
+        query.setParameter("username", username);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
     }
 
     public Client findClientByEmail(String email)
     {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
-        Root<Client> clientRoot = cq.from(Client.class);
-        cq.select(clientRoot).where(cb.equal(clientRoot.get("email"), email));
-        TypedQuery<Client> query = em.createQuery(cq);
-        Client existingClient = query.getSingleResult();
-
-        return existingClient;
+        TypedQuery<Client> query = em.createNamedQuery("Client.findByEmail", Client.class);
+        query.setParameter("email", email);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
     }
 
     public Client findClientByCredentials(String username, String password)
@@ -281,9 +282,11 @@ public class ClientJpaController implements Serializable {
         TypedQuery<Client> query = em.createNamedQuery("Client.findByCredentials", Client.class);
         query.setParameter(1, username);
         query.setParameter(2, password);
-        Client existingClient = query.getSingleResult();
-        
-        return existingClient;
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
     }
 
 }

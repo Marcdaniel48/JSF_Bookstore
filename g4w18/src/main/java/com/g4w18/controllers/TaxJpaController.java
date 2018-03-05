@@ -121,7 +121,7 @@ public class TaxJpaController implements Serializable {
     public Tax findTaxByProvince(String province)
     {
         TypedQuery<Tax> query = em.createNamedQuery("Tax.findByProvince", Tax.class);
-        query.setParameter(1, province);
+        query.setParameter("province", province);
         List<Tax> clients = query.getResultList();
         if (!clients.isEmpty()) {
             return clients.get(0);
