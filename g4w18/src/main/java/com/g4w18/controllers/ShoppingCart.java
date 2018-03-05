@@ -40,34 +40,19 @@ public class ShoppingCart implements Serializable
     }
     public void addToCart(Book book)
     {
-        if(session!=null)
+        if(!books.contains(book))
         {
-            if(session.getAttribute("loggedIn") != null)
-            {
-                if(!books.contains(book))
-                {
-                    books.add(book);
-                    session.setAttribute("shoppingCart", books);
-                }
-            }
+            books.add(book);
+            session.setAttribute("shoppingCart", books);
         }
     }
 
     public void removeFromCart(Book book)
     {
-        if(session!=null)
+        if(books.contains(book))
         {
-            if(session.getAttribute("loggedIn") != null)
-            {
-                if((List<Book>)session.getAttribute("shoppingCart") != null)
-                {
-                    if(books.contains(book))
-                    {
-                        books.remove(book);
-                        session.setAttribute("shoppingCart", books);
-                    }
-                }
-            }
+            books.remove(book);
+            session.setAttribute("shoppingCart", books);
         }
     }
 
