@@ -70,4 +70,11 @@ public class LoginController implements Serializable{
 
         session.setAttribute("loggedIn", loggedIn);
     }
+    
+    public void logout()
+    {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        session.setAttribute("username", null);
+        session.setAttribute("loggedIn", null);
+    }
 }
