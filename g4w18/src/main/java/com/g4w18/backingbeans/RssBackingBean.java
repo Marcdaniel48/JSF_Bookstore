@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package backing;
+package com.g4w18.backingbeans;
 
 /**
  * @author Jephthia Louis

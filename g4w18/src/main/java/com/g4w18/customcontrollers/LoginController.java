@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.g4w18.controllers;
+package com.g4w18.customcontrollers;
 
+import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.backingbeans.BookDetailsBackingBean;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
@@ -28,7 +29,7 @@ import javax.servlet.http.HttpSession;
 @ViewScoped
 public class LoginController implements Serializable{
     @Inject
-    private ClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
 
     private String username;
     private String password;

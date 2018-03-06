@@ -21,25 +21,20 @@ import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.Review;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.UserTransaction;
 
 /**
  *
- * @author Salman Haidar
+ * @author 1331680
  */
 public class BookJpaController implements Serializable {
-
-    public BookJpaController() {
-
-    }
 
     @Resource
     private UserTransaction utx;
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
 
     public void create(Book book) throws RollbackFailureException, Exception {
@@ -107,7 +102,6 @@ public class BookJpaController implements Serializable {
     }
 
     public void edit(Book book) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
-
         try {
             utx.begin();
             Book persistentBook = em.find(Book.class, book.getBookId());
@@ -212,7 +206,6 @@ public class BookJpaController implements Serializable {
     }
 
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
-
         try {
             utx.begin();
             Book book;
@@ -265,8 +258,7 @@ public class BookJpaController implements Serializable {
         return findBookEntities(false, maxResults, firstResult);
     }
 
-    private List<Book> findBookEntities(boolean all, int maxResults, int firstResult) {
-
+    private List<Book> findBookEntities(boolean all, int maxResults, int firstResult){
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Book.class));
             Query q = em.createQuery(cq);
@@ -275,124 +267,18 @@ public class BookJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-
     }
 
     public Book findBook(Integer id) {
-
             return em.find(Book.class, id);
-
     }
 
     public int getBookCount() {
-
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Book> rt = cq.from(Book.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
-
+            return ((Long) q.getSingleResult()).intValue(); 
     }
-
-    /**
-     * Get books from the database with the title provided
-     *
-     * @param title name of the book that is being searched
-     * @return List of books found with the title
-     */
-    public List<Book> findBooksByTitleSpecific(String title)
-    {
-        List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title =?1")
-                .setParameter(1, title)
-                .getResultList();
-
-        return findBookByTitle;
-    }
-
-    /**
-     * Get books from the database with the title provided(doesn't need to match whole)
-     *
-     * @param title name of the book that is being searched
-     * @return List of books found with the title
-     */
-    public List<Book> findBooksByTitle(String title)
-    {
-        List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title LIKE ?1 order by b.title asc")
-                .setParameter(1, title + "%")
-                .getResultList();
-
-        return findBookByTitle;
-    }
-
-    /**
-     * Get books from the database with the isbn provided(must match whole) 
-     *
-     * @param isbn number of the book the user is searching for
-     * @return Book found with the isbn
-     */
-    public List<Book> findBookByAuthor(String author)
-    {
-        List<Book> findBookByAuthor = em.createQuery("Select b from Book b where b.isbnNumber = ?1")
-                .setParameter(1, author)
-                .getResultList();
-
-        return findBookByAuthor;
-    }
-
-    /**
-     * Get books from the database with the isbn provided(must match whole)
-     *
-     * @param isbn number of the book the user is searching for
-     * @return Book found with the isbn
-     */
-    public List<Book> findBookByIsbn(String isbn)
-    {
-        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where b.isbnNumber = ?1")
-                .setParameter(1, isbn)
-                .getResultList();
-
-        return findBookByIsbn;
-    }
-
-    /**
-     * Get books from the database with the author provided.
-     *
-     * @param publisher of the book we are finding
-     * @return books found with the associated publisher
-     */
-    public List<Book> findBooksByPublisher(String publisher)
-    {
-        List<Book> findBookByPublisher = em.createQuery("Select b from Book b where b.publisher = ?1")
-                .setParameter(1, publisher)
-                .getResultList();
-
-        return findBookByPublisher;
-    }
-
-    /**
-     * Get publishers from the database with the publisher provided(doesn't need to match whole)
-     *
-     * @param title publisher that is being searched
-     * @return List of books found with the publisher
-     */
-    public List<Book> findDistinctPublisher(String publisher)
-    {
-        List<Book> findPublisher = em.createQuery("Select distinct(b.publisher) from Book b where b.publisher LIKE ?1 order by b.publisher asc")
-                .setParameter(1, publisher + "%")
-                .getResultList();
-
-        return findPublisher;
-    }
-
-    public List<Book> findBooksByGenre(String genre) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery();
-        Root<Book> book = cq.from(Book.class);
-        cq.select(book).where(cb.equal(book.get("genre"), genre));
-        TypedQuery<Book> query = em.createQuery(cq);
-        List<Book> toReturn = query.getResultList();
-        return toReturn;
-    }
-
-
+    
 }

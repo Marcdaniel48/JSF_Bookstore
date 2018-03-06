@@ -1,7 +1,7 @@
 package com.g4w18.unittests;
 
 
-import com.g4w18.controllers.CustomBookController;
+import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
 

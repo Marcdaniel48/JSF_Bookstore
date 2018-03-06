@@ -1,9 +1,9 @@
 package com.g4w18.backingbeans;
 
-import backing.BookBackingBean;
+import com.g4w18.backingbeans.BookBackingBean;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.controllers.ClientJpaController;
-import com.g4w18.controllers.CustomReviewController;
+import com.g4w18.customcontrollers.CustomReviewController;
 import com.g4w18.controllers.ReviewJpaController;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;

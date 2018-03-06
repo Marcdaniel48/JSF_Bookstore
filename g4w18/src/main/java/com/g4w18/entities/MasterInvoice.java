@@ -7,7 +7,6 @@ package com.g4w18.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -29,7 +28,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Marc-Daniel
+ * @author 1331680
  */
 @Entity
 @Table(name = "master_invoice", catalog = "bookstore", schema = "")
@@ -153,5 +152,5 @@ public class MasterInvoice implements Serializable {
     public String toString() {
         return "com.g4w18.entities.MasterInvoice[ invoiceId=" + invoiceId + " ]";
     }
-
+    
 }

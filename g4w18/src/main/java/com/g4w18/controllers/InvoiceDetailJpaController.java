@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -12,15 +17,15 @@ import com.g4w18.entities.Book;
 import com.g4w18.entities.InvoiceDetail;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-@Named
-@RequestScoped
+/**
+ *
+ * @author 1331680
+ */
 public class InvoiceDetailJpaController implements Serializable {
 
     @Resource
@@ -28,7 +33,7 @@ public class InvoiceDetailJpaController implements Serializable {
 
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
-
+    
     public void create(InvoiceDetail invoiceDetail) throws RollbackFailureException, Exception {
         try {
             utx.begin();
@@ -154,26 +159,26 @@ public class InvoiceDetailJpaController implements Serializable {
     }
 
     private List<InvoiceDetail> findInvoiceDetailEntities(boolean all, int maxResults, int firstResult) {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(InvoiceDetail.class));
-        Query q = em.createQuery(cq);
-        if (!all) {
-            q.setMaxResults(maxResults);
-            q.setFirstResult(firstResult);
-        }
-        return q.getResultList();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(InvoiceDetail.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
     }
 
     public InvoiceDetail findInvoiceDetail(Integer id) {
-        return em.find(InvoiceDetail.class, id);
+            return em.find(InvoiceDetail.class, id);
     }
 
     public int getInvoiceDetailCount() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<InvoiceDetail> rt = cq.from(InvoiceDetail.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<InvoiceDetail> rt = cq.from(InvoiceDetail.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
     }
-
+    
 }

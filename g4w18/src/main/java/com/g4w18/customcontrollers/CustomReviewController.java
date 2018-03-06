@@ -1,5 +1,6 @@
-package com.g4w18.controllers;
+package com.g4w18.customcontrollers;
 
+import com.g4w18.controllers.ReviewJpaController;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;

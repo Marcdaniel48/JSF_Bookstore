@@ -1,4 +1,4 @@
-package com.g4w18.controllers;
+package com.g4w18.customcontrollers;
 
 import com.g4w18.backingbeans.BookDetailsBackingBean;
 import com.g4w18.entities.Book;
