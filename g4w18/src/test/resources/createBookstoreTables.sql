@@ -979,3 +979,16 @@ insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_
 ('What is your favorite genre?', 'SciFi', 'Biography', 'Romance', 'Mystery', 0, 0, 0, 0),
 ('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0),
 ('How many books have you read in your life?', 'Less than 1', 'Between 1 and 10', 'Between 11 and 50', 'More than 50', 0, 0, 0, 0);
+
+INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE) VALUES
+(10, CURRENT_TIME, 28.96, 33.29676);
+
+INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE, HST_RATE) VALUES
+(1, 1, 8.99, 9.975, 5, 0),
+(1, 2, 5.99, 9.975, 5, 0),
+(1, 3, 5.99, 9.975, 5, 0),
+(1, 4, 7.99, 9.975, 5, 0)
+;
+
+
+

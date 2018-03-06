@@ -5,7 +5,6 @@
  */
 package com.g4w18.controllers;
 
-import com.g4w18.entities.Banner;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
 import java.util.List;

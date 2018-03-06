@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.entities;
 
 import java.io.Serializable;
@@ -21,17 +16,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-/**
- *
-<<<<<<< HEAD:g4w18/src/main/java/com/g4w18/entities/Review.java
- * @author 1430047
-=======
- * @author Marc-Daniel
->>>>>>> 0507d7671f35fa61c1c7b3313788726a5dce35e9:g4w18/src/main/java/com/g4w18/entities/Review.java
- */
 @Entity
 @Table(name = "review", catalog = "bookstore", schema = "")
 @NamedQueries({
@@ -49,18 +39,19 @@ public class Review implements Serializable {
     @Column(name = "REVIEW_ID")
     private Integer reviewId;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "REVIEW_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date reviewDate;
     @Basic(optional = false)
     @NotNull
+    @Min(1)
+    @Max(5)
     @Column(name = "RATING")
     private int rating;
     @Basic(optional = false)
     @NotNull
     @Lob
-    @Size(min = 1, max = 16777215)
+    @Size(min = 0, max = 16777215)
     @Column(name = "REVIEW")
     private String review;
     @Basic(optional = false)
