@@ -188,4 +188,38 @@ public class CustomBookController implements Serializable {
 
         return findPublisher;
     }
+
+    /**
+     * Get a List of Book objects comprised only of Books which their Sale Price
+     * is bigger than 0.
+     *
+     * @return List of books on sale.
+     */
+    //Author: Sebastian
+    public List<Book> findBooksOnSale() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Book> book = cq.from(Book.class);
+        cq.select(book).where(cb.gt(book.get("salePrice"), 0));
+        TypedQuery<Book> query = em.createQuery(cq);
+        List<Book> toReturn = query.getResultList();
+        return toReturn;
+    }
+
+    /**
+     * Get a List of Book objects comprised only of Books which their Sale Price
+     * is equal to 0.
+     *
+     * @return List of books not on sale.
+     */
+    //Author: Sebastian
+    public List<Book> findBooksNotSale() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Book> book = cq.from(Book.class);
+        cq.select(book).where(cb.equal(book.get("salePrice"), 0));
+        TypedQuery<Book> query = em.createQuery(cq);
+        List<Book> toReturn = query.getResultList();
+        return toReturn;
+    }
 }
