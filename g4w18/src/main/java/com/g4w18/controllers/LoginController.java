@@ -5,12 +5,15 @@
  */
 package com.g4w18.controllers;
 
+import com.g4w18.backingbeans.BookDetailsBackingBean;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -29,6 +32,8 @@ public class LoginController implements Serializable{
 
     private String username;
     private String password;
+        private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
+
 
     public String getUsername()
     {
@@ -50,9 +55,9 @@ public class LoginController implements Serializable{
         this.password = password;
     }
 
-    public void login()
+    public String login()
     {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 
         boolean loggedIn;
 
@@ -69,5 +74,7 @@ public class LoginController implements Serializable{
 
         session.setAttribute("loggedIn", loggedIn);
         session.setAttribute("username", username);
+        log.log(Level.INFO, "Username: {0}", session.getAttribute("username"));
+        return "bookList.xhtml";
     }
 }

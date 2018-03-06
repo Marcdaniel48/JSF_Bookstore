@@ -63,7 +63,7 @@
         <!-- These dependencies are required to run the project on the server -->
 
         <!-- Java EE 7.0 Web profile dependency -->
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
             <version>2.5.1</version>
@@ -201,8 +201,11 @@
             <version>1.2.0</version>
             <scope>compile</scope>
         </dependency>
-        
-        
+        <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd-mail</artifactId>
+            <version>3.8.6</version>
+        </dependency>
 
     </dependencies>
 

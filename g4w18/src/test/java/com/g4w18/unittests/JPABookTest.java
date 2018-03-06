@@ -38,6 +38,7 @@ import org.junit.Ignore;
  *
  * @author 1430047
  */
+@Ignore
 @RunWith(Arquillian.class)
 public class JPABookTest
 {

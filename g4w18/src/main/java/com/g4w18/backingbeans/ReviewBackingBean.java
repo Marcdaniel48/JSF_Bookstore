@@ -1,5 +1,6 @@
 package com.g4w18.backingbeans;
 
+import backing.BookBackingBean;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.controllers.CustomReviewController;

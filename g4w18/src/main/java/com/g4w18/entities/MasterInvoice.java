@@ -62,7 +62,7 @@ public class MasterInvoice implements Serializable {
     @Column(name = "GROSS_VALUE")
     private BigDecimal grossValue;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceId")
-    private Collection<InvoiceDetail> invoiceDetailCollection;
+    private List<InvoiceDetail> invoiceDetailList;
     @JoinColumn(name = "CLIENT_ID", referencedColumnName = "CLIENT_ID")
     @ManyToOne(optional = false)
     private Client clientId;
@@ -113,12 +113,12 @@ public class MasterInvoice implements Serializable {
         this.grossValue = grossValue;
     }
 
-    public Collection<InvoiceDetail> getInvoiceDetailCollection() {
-        return invoiceDetailCollection;
+    public List<InvoiceDetail> getInvoiceDetailList() {
+        return invoiceDetailList;
     }
 
-    public void setInvoiceDetailCollection(Collection<InvoiceDetail> invoiceDetailCollection) {
-        this.invoiceDetailCollection = invoiceDetailCollection;
+    public void setInvoiceDetailList(List<InvoiceDetail> invoiceDetailList) {
+        this.invoiceDetailList = invoiceDetailList;
     }
 
     public Client getClientId() {
