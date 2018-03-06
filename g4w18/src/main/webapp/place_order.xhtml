@@ -56,16 +56,14 @@ and open the template in the editor.
                 <b:panel collapsible="false">
                     <h:form>
                         <h4>#{msgs.orderSummary}</h4>
-                        #{msgs.items}:
-                        <hr/>
                         #{msgs.totalBeforeTax}: #{shoppingCartBackingBean.shoppingCart.subtotal}
-                        <br/>
+                        <hr/>
                         #{msgs.estimatedTax}: #{orderBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * (1 + orderBacking.taxRate))}
                         <br/>
                         <b>#{msgs.orderTotal}:</b>
                         <br/><br/>
                         
-                        <b:commandButton value="#{msgs.placeOrder}" action="place_order.xhtml"/>
+                        <b:commandButton value="#{msgs.placeOrder}" action="#{orderBacking.createInvoice}"/>
                     </h:form>
                 </b:panel>
             </b:column>
