@@ -37,7 +37,7 @@
                         <b:row>
                             <b:column col-md="11">
                                 <h1 class="booktitle">
-                                    <h:outputText value="#{bookDetailsBackingBean.book.title}"></h:outputText>    
+                                    <h:outputText value="#{bookDetailsBackingBean.book.title}"></h:outputText>
                                 </h1>
                             </b:column>
                         </b:row>
@@ -67,7 +67,7 @@
                                 <h4>
                                     <span>Format: </span>
                                     <h:outputText value="#{bookDetailsBackingBean.book.format}"></h:outputText>
-                                </h4>   
+                                </h4>
                             </b:column>
                         </b:row>
                         <b:row>
@@ -81,13 +81,13 @@
                                 <h4>
                                     <span>#{msgs.bookDetailsISBN}: </span>
                                     <h:outputText value="#{bookDetailsBackingBean.book.isbnNumber}"></h:outputText>
-                                </h4>   
+                                </h4>
                             </b:column>
                             <b:column col-md="3">
                                 <h4>
                                     <span>#{msgs.bookDetailsPublisher}: </span>
                                     <h:outputText value="#{bookDetailsBackingBean.book.publisher}"></h:outputText>
-                                </h4>   
+                                </h4>
                             </b:column>
                         </b:row>
                         <b:row>
@@ -95,13 +95,13 @@
                                 <h4>
                                     <span>#{msgs.bookDetailsGenre}: </span>
                                     <h:outputText value="#{bookDetailsBackingBean.book.genre}"></h:outputText>
-                                </h4>   
+                                </h4>
                             </b:column>
                             <b:column col-md="3">
                                 <h4>
                                     <span>#{msgs.bookDetailsPageNumber}: </span>
                                     <h:outputText value="#{bookDetailsBackingBean.book.pageNumber}"></h:outputText>
-                                </h4>   
+                                </h4>
                             </b:column>
                         </b:row>
                         <b:row>
@@ -109,13 +109,13 @@
                                 <h4>
                                     <span>#{msgs.bookDetailsPublicationDate}: </span>
                                     <h:outputText value="#{bookDetailsBackingBean.book.publicationDate}"></h:outputText>
-                                </h4>   
+                                </h4>
                             </b:column>
                             <b:column col-md="3">
                                 <h4>
                                     <span>#{msgs.bookDetailsInventoryDate}: </span>
                                     <h:outputText value="#{bookDetailsBackingBean.book.inventoryDate}"></h:outputText>
-                                </h4>   
+                                </h4>
                             </b:column>
                         </b:row>
                     </b:container>
@@ -125,14 +125,14 @@
                         <h4>
                             <span>#{msgs.bookDetailsListPrice}: </span>
                             <h:outputText value="#{bookDetailsBackingBean.book.listPrice}"></h:outputText>
-                        </h4>  
+                        </h4>
                         <h4>
                             <span>#{msgs.bookDetailsSalePrice}: </span>
                             <h:outputText value="#{bookDetailsBackingBean.book.salePrice}"></h:outputText>
                         </h4>
                         <b:form>
-                            <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.addToCart(bookDetailsBackingBean.book)}">
-                                <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
+                            <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.shoppingCart.addToCart(bookDetailsBackingBean.book)}">
+                                <f:param name="id" value="#{bookBackingBean.book.bookId}"></f:param>
                             </b:commandButton>
                         </b:form>
                     </b:panel>
@@ -208,4 +208,3 @@
         <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
     </h:body>
 </html>
-
