@@ -23,26 +23,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
  *
- * @author Marc-Daniel
+ * @author 1331680
  */
 public class ClientJpaController implements Serializable {
 
     @Resource
-    private UserTransaction utx = null;
+    private UserTransaction utx;
 
-    @PersistenceContext(unitName="bookstorePU")
+    @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
-
 
     public void create(Client client) throws RollbackFailureException, Exception {
         if (client.getReviewList() == null) {
@@ -51,10 +44,8 @@ public class ClientJpaController implements Serializable {
         if (client.getMasterInvoiceList() == null) {
             client.setMasterInvoiceList(new ArrayList<MasterInvoice>());
         }
-
         try {
             utx.begin();
-
             List<Review> attachedReviewList = new ArrayList<Review>();
             for (Review reviewListReviewToAttach : client.getReviewList()) {
                 reviewListReviewToAttach = em.getReference(reviewListReviewToAttach.getClass(), reviewListReviewToAttach.getReviewId());
@@ -87,10 +78,10 @@ public class ClientJpaController implements Serializable {
                 }
             }
             utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
+        } catch (Exception ex) {
             try {
                 utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
+            } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
@@ -98,10 +89,8 @@ public class ClientJpaController implements Serializable {
     }
 
     public void edit(Client client) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
-
         try {
             utx.begin();
-
             Client persistentClient = em.find(Client.class, client.getClientId());
             List<Review> reviewListOld = persistentClient.getReviewList();
             List<Review> reviewListNew = client.getReviewList();
@@ -183,10 +172,8 @@ public class ClientJpaController implements Serializable {
     }
 
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
-
         try {
             utx.begin();
-
             Client client;
             try {
                 client = em.getReference(Client.class, id);
@@ -233,18 +220,18 @@ public class ClientJpaController implements Serializable {
     }
 
     private List<Client> findClientEntities(boolean all, int maxResults, int firstResult) {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Client.class));
-            Query q = em.createQuery(cq);
-            if (!all) {
-                q.setMaxResults(maxResults);
-                q.setFirstResult(firstResult);
-            }
-            return q.getResultList();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Client.class));
+        Query q = em.createQuery(cq);
+        if (!all) {
+            q.setMaxResults(maxResults);
+            q.setFirstResult(firstResult);
+        }
+        return q.getResultList();
     }
 
     public Client findClient(Integer id) {
-            return em.find(Client.class, id);
+        return em.find(Client.class, id);
     }
 
     public int getClientCount() {

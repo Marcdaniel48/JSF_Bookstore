@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Marc-Daniel
+ * @author 1331680
  */
 @Entity
 @Table(name = "tax", catalog = "bookstore", schema = "")
@@ -138,11 +138,11 @@ public class Tax implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Tax[ taxId=" + taxId + " ]";
     }
-    
+
     public BigDecimal getOverallTaxRate()
     {
         BigDecimal taxRate = gstRate.add(hstRate).add(pstRate);
-        
+
         return taxRate.divide(new BigDecimal("100"));
     }
 

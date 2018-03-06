@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Marc-Daniel
+ * @author 1331680
  */
 @Entity
 @Table(name = "invoice_detail", catalog = "bookstore", schema = "")
@@ -160,5 +160,5 @@ public class InvoiceDetail implements Serializable {
     public String toString() {
         return "com.g4w18.entities.InvoiceDetail[ detailId=" + detailId + " ]";
     }
-
+    
 }

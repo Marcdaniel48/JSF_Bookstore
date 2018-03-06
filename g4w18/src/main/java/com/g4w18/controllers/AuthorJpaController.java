@@ -161,8 +161,6 @@ public class AuthorJpaController implements Serializable {
 
     }
 
-
-
     public int getAuthorCount() {
 
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -172,19 +170,4 @@ public class AuthorJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
 
     }
-
-    /**
-     * Get list of author names with the name provided
-     * @param authorName provided by user
-     * @return List of authors found with the param
-     */
-    public List<Author> findAuthor(String authorName)
-    {
-        List<Author> findAuthorByName = em.createQuery("Select a from Author a where CONCAT(a.firstName,' ',a.lastName) LIKE ?1")
-                .setParameter(1, authorName + "%")
-                .getResultList();
-        
-        return findAuthorByName;
-    }
-
 }

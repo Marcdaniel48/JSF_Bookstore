@@ -1,94 +1,54 @@
 package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.BookJpaController;
+import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Book;
-import com.g4w18.entities.Review;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
-import javax.faces.context.FacesContext;
+import javax.annotation.Resource;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 
 /**
- * This is a backing bean. It is used when a page or form must interact with
- * beans that are not managed such as entity beans. In this example the entity
- * bean for Inventory will be manually loaded with data for the example page.
  *
- * @author Ken
+ * @author 1430047
  */
-@Named
-@RequestScoped
-public class BookBackingBean implements Serializable {
-
+@Named("theBooks")
+@SessionScoped
+public class BookBackingBean implements Serializable
+{
     @Inject
-    private BookJpaController bookJpaController;
-
-    private Book book;
-    private List<Book> books;
-    private List<Book> recommendedBooks;
-    private Logger log = Logger.getLogger(BookBackingBean.class.getName());
+    private CustomBookController bookController;
 
     /**
-     * Client created if it does not exist.
+     * Get the list of books on sale
      *
      * @return
      */
-    public Book getBook() {
-        if (book == null) {
-            Map<String, String> params
-                    = getFacesContext().getExternalContext().getRequestParameterMap();
-            int id = Integer.parseInt(params.get("id"));
-            book = bookJpaController.findBook(id);
-        }
-        return book;
+    public List<Book> getBooksOnSale() {
+
+        return bookController.getBooksOnSale();
     }
 
-    public List<Book> getBooks() {
-        if (books == null) {
-            books = bookJpaController.findBookEntities();
-        }
-        return books;
-    }
+    /**
+     * Get 3 most recent books
+     *
+     * @return
+     */
+    public List<Book> getMostRecentBooks() {
 
-    public List<Book> getRecommendedBooks() {
-        if (recommendedBooks == null) {
-            List<Book> booksByGenre = bookJpaController.findBooksByGenre(book.getGenre());
-            booksByGenre.remove(book);
-            Collections.shuffle(booksByGenre);
-            recommendedBooks = booksByGenre.subList(0, 6);
-        }
-        return recommendedBooks;
-    }
-
-    public int getRating() {
-        int averageRating = 0;
-        Collection<Review> reviews = book.getReviewList();
-        int size = reviews.size();
-        log.log(Level.INFO, "Reviews size: {0}", reviews.size());
-        if (size > 0) {
-            for (Review r : reviews) {
-                averageRating = averageRating + r.getRating();
-            }
-            return averageRating/size;
-        }
-        log.log(Level.INFO, "Rating: {0}", averageRating);
-        return averageRating;
+        return bookController.getMostRecentBooks();
     }
     
-    public String getReviewName(){
-        return "";
-    }
+    /**
+     * Get the list of genres
+     *
+     * @return
+     */
+    public List<String> getGenres() {
 
-    @Produces
-    @RequestScoped
-    public FacesContext getFacesContext() {
-        return FacesContext.getCurrentInstance();
+        return bookController.getGenres();
     }
 }

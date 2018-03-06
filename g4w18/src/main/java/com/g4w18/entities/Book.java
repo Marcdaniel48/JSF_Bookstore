@@ -7,7 +7,6 @@ package com.g4w18.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -32,7 +31,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Marc-Daniel
+ * @author 1331680
  */
 @Entity
 @Table(name = "book", catalog = "bookstore", schema = "")
@@ -49,7 +48,8 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Book.findByWholesalePrice", query = "SELECT b FROM Book b WHERE b.wholesalePrice = :wholesalePrice")
     , @NamedQuery(name = "Book.findByListPrice", query = "SELECT b FROM Book b WHERE b.listPrice = :listPrice")
     , @NamedQuery(name = "Book.findBySalePrice", query = "SELECT b FROM Book b WHERE b.salePrice = :salePrice")
-    , @NamedQuery(name = "Book.findByInventoryDate", query = "SELECT b FROM Book b WHERE b.inventoryDate = :inventoryDate")})
+    , @NamedQuery(name = "Book.findByInventoryDate", query = "SELECT b FROM Book b WHERE b.inventoryDate = :inventoryDate")
+    , @NamedQuery(name = "Book.findByRemovalStatus", query = "SELECT b FROM Book b WHERE b.removalStatus = :removalStatus")})
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -116,6 +116,10 @@ public class Book implements Serializable {
     @Column(name = "INVENTORY_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date inventoryDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "REMOVAL_STATUS")
+    private boolean removalStatus;
     @JoinTable(name = "book_author", joinColumns = {
         @JoinColumn(name = "BOOK_ID", referencedColumnName = "BOOK_ID")}, inverseJoinColumns = {
         @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "AUTHOR_ID")})
@@ -133,7 +137,7 @@ public class Book implements Serializable {
         this.bookId = bookId;
     }
 
-    public Book(Integer bookId, String isbnNumber, String title, String publisher, Date publicationDate, int pageNumber, String genre, String description, String format, BigDecimal wholesalePrice, BigDecimal listPrice, BigDecimal salePrice, Date inventoryDate) {
+    public Book(Integer bookId, String isbnNumber, String title, String publisher, Date publicationDate, int pageNumber, String genre, String description, String format, BigDecimal wholesalePrice, BigDecimal listPrice, BigDecimal salePrice, Date inventoryDate, boolean removalStatus) {
         this.bookId = bookId;
         this.isbnNumber = isbnNumber;
         this.title = title;
@@ -147,6 +151,7 @@ public class Book implements Serializable {
         this.listPrice = listPrice;
         this.salePrice = salePrice;
         this.inventoryDate = inventoryDate;
+        this.removalStatus = removalStatus;
     }
 
     public Integer getBookId() {
@@ -253,6 +258,14 @@ public class Book implements Serializable {
         this.inventoryDate = inventoryDate;
     }
 
+    public boolean getRemovalStatus() {
+        return removalStatus;
+    }
+
+    public void setRemovalStatus(boolean removalStatus) {
+        this.removalStatus = removalStatus;
+    }
+
     public List<Author> getAuthorList() {
         return authorList;
     }
@@ -301,5 +314,5 @@ public class Book implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Book[ bookId=" + bookId + " ]";
     }
-
+    
 }

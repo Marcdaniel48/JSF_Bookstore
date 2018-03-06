@@ -18,12 +18,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ *
+ * @author 1331680
+ */
 @Entity
 @Table(name = "banner", catalog = "bookstore", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Banner.findAll", query = "SELECT b FROM Banner b")
     , @NamedQuery(name = "Banner.findByBannerId", query = "SELECT b FROM Banner b WHERE b.bannerId = :bannerId")
-    , @NamedQuery(name = "Banner.findByBannerName", query = "SELECT b FROM Banner b WHERE b.bannerName = :bannerName")})
+    , @NamedQuery(name = "Banner.findByBannerName", query = "SELECT b FROM Banner b WHERE b.bannerName = :bannerName")
+    , @NamedQuery(name = "Banner.findByBannerLink", query = "SELECT b FROM Banner b WHERE b.bannerLink = :bannerLink")
+    , @NamedQuery(name = "Banner.findByIsActive", query = "SELECT b FROM Banner b WHERE b.isActive = :isActive")})
 public class Banner implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +43,15 @@ public class Banner implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "BANNER_NAME")
     private String bannerName;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "BANNER_LINK")
+    private String bannerLink;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "IS_ACTIVE")
+    private boolean isActive;
 
     public Banner() {
     }
@@ -45,9 +60,11 @@ public class Banner implements Serializable {
         this.bannerId = bannerId;
     }
 
-    public Banner(Integer bannerId, String bannerName) {
+    public Banner(Integer bannerId, String bannerName, String bannerLink, boolean isActive) {
         this.bannerId = bannerId;
         this.bannerName = bannerName;
+        this.bannerLink = bannerLink;
+        this.isActive = isActive;
     }
 
     public Integer getBannerId() {
@@ -64,6 +81,22 @@ public class Banner implements Serializable {
 
     public void setBannerName(String bannerName) {
         this.bannerName = bannerName;
+    }
+
+    public String getBannerLink() {
+        return bannerLink;
+    }
+
+    public void setBannerLink(String bannerLink) {
+        this.bannerLink = bannerLink;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     @Override
@@ -90,5 +123,5 @@ public class Banner implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Banner[ bannerId=" + bannerId + " ]";
     }
-
+    
 }

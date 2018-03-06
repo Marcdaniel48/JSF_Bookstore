@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -12,15 +17,15 @@ import com.g4w18.entities.Client;
 import com.g4w18.entities.Review;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-@Named
-@RequestScoped
+/**
+ *
+ * @author 1331680
+ */
 public class ReviewJpaController implements Serializable {
 
     @Resource
@@ -154,26 +159,26 @@ public class ReviewJpaController implements Serializable {
     }
 
     private List<Review> findReviewEntities(boolean all, int maxResults, int firstResult) {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Review.class));
-        Query q = em.createQuery(cq);
-        if (!all) {
-            q.setMaxResults(maxResults);
-            q.setFirstResult(firstResult);
-        }
-        return q.getResultList();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Review.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
     }
 
     public Review findReview(Integer id) {
-        return em.find(Review.class, id);
+            return em.find(Review.class, id);
     }
 
     public int getReviewCount() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<Review> rt = cq.from(Review.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Review> rt = cq.from(Review.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
     }
-
+    
 }

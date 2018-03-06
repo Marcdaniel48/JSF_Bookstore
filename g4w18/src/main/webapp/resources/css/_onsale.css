@@ -1,0 +1,26 @@
+#book-sales
+{
+    position: absolute;
+/*     height: auto; */
+    left: 20%;
+    right: 42%;
+    top: 50%;
+    bottom: 0;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 0;
+    letter-spacing: 0px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transform: translateY(100%);
+    animation: 1s ease-out 2.2s 1 slideInFromBottom;
+    animation-fill-mode: forwards;
+}
+#book-sales .prev,
+#book-sales .next
+{
+    padding-left: 6px;
+    padding-right: 8px;
+}

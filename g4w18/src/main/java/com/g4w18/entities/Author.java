@@ -6,7 +6,6 @@
 package com.g4w18.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -21,6 +20,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ *
+ * @author 1331680
+ */
 @Entity
 @Table(name = "author", catalog = "bookstore", schema = "")
 @NamedQueries({
@@ -118,5 +121,5 @@ public class Author implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Author[ authorId=" + authorId + " ]";
     }
-
+    
 }

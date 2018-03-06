@@ -2,6 +2,8 @@ package com.g4w18.unittests;
 
 import com.g4w18.controllers.AuthorJpaController;
 import com.g4w18.controllers.BookJpaController;
+import com.g4w18.customcontrollers.CustomAuthorController;
+import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
@@ -75,10 +77,10 @@ public class JPATest {
     private Logger logger = Logger.getLogger(JPATest.class.getName());
     
     @Inject
-    private BookJpaController bookJpaController;
+    private CustomBookController bookJpaController;
     
     @Inject
-    private AuthorJpaController aJc;
+    private CustomAuthorController aJc;
     
     @Resource(name = "java:app/jdbc/TheBooktopia")
     private DataSource ds;

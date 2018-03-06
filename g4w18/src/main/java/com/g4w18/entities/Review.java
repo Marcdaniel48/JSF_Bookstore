@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Marc-Daniel
+ * @author 1331680
  */
 @Entity
 @Table(name = "review", catalog = "bookstore", schema = "")
@@ -165,5 +165,5 @@ public class Review implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Review[ reviewId=" + reviewId + " ]";
     }
-
+    
 }
