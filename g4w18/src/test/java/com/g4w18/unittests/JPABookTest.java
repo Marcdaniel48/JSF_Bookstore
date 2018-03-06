@@ -1,3 +1,5 @@
+package com.g4w18.unittests;
+
 
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
@@ -84,7 +86,7 @@ public class JPABookTest
     {
         List<Book> booksOnSale = bookController.getBooksOnSale();
         logger.log(Level.INFO, "Data>>>{0}", booksOnSale.get(0));
-        assertThat(booksOnSale).hasSize(100);
+        assertThat(booksOnSale).hasSize(10);
     }
     
     @Test

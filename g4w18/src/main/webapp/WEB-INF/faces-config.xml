@@ -17,6 +17,13 @@
 
     <navigation-rule>
         <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <navigation-case>
             <from-outcome>resultPlus</from-outcome>
             <to-view-id>/search.xhtml</to-view-id>
         </navigation-case>
@@ -25,7 +32,42 @@
     <navigation-rule>
         <navigation-case>
             <from-outcome>resultOne</from-outcome>
-            <to-view-id>/bookdetails.xhtml</to-view-id>
+            <to-view-id>/bookDetails.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>bookDetails</from-outcome>
+            <to-view-id>/bookDetail.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>shopping_cart</from-outcome>
+            <to-view-id>/shopping_cart.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>inventory</from-outcome>
+            <to-view-id>/management/inventory.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>reviews</from-outcome>
+            <to-view-id>/management/reviews.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 

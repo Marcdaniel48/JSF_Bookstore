@@ -1,0 +1,57 @@
+.inventory
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+#inventorySearchForm
+{
+    height: 70px;
+    /*background-color: yellow;*/
+}
+#inventorySearchForm .search-input
+{
+    width: 80%;
+    display: initial;
+}
+#inventorySearchForm .search-dropdown
+{
+    width: 10%;
+    display: initial;
+    opacity: 1;
+}
+.inventory .book
+{
+    width: 50%;
+    height: 300px;
+    padding: 0;
+    display: block;
+    overflow: hidden;
+    float: left;
+    border: 1px solid #F2BFA0;
+}
+.inventory .book:hover
+{
+    transform: initial;
+}
+.inventory .book-thumbnail-container
+{
+    height: 100%;
+}
+.inventory .book-thumbnail
+{
+    width: 20%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    text-align: initial;
+    border: none;
+}
+.inventory .book-details
+{
+    position: absolute;
+    left: 20%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}

@@ -24,3 +24,7 @@
     padding-left: 6px;
     padding-right: 8px;
 }
+#book-sales .book
+{
+    display: none;
+}

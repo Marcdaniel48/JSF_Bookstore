@@ -210,6 +210,14 @@ public class Book implements Serializable {
         this.genre = genre;
     }
 
+    public String getLimitedDescription(int charTotal)
+    {   
+        if(description == null || description.length() < charTotal)
+            return description;
+        
+        return description.substring(0, charTotal);
+    }
+    
     public String getDescription() {
         return description;
     }

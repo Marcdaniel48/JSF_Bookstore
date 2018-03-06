@@ -16,10 +16,10 @@
                 for(var i = 0; i < items.length; i++)
                 {
                     var item = items[i];
-                    console.log("------------------------");
-                    console.log("title      : " + item.title);
-                    console.log("link       : " + item.link);
-                    console.log("description: " + item.description);
+//                    console.log("------------------------");
+//                    console.log("title      : " + item.title);
+//                    console.log("link       : " + item.link);
+//                    console.log("description: " + item.description);
                 }
             }
         });
