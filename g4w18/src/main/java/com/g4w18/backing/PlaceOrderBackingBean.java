@@ -34,16 +34,15 @@ import javax.servlet.http.HttpSession;
 @RequestScoped
 public class PlaceOrderBackingBean implements Serializable 
 {
-    @Inject
-    private ClientJpaController clientJpaController;
+    @Inject private ClientJpaController clientJpaController;
     
-    @Inject TaxJpaController taxJpaController;
+    @Inject private TaxJpaController taxJpaController;
     
-    @Inject InvoiceDetailJpaController invoiceJpaController;
+    @Inject private InvoiceDetailJpaController invoiceJpaController;
     
-    @Inject MasterInvoiceJpaController masterInvoiceJpaController;
+    @Inject private MasterInvoiceJpaController masterInvoiceJpaController;
     
-    @Inject ShoppingCart shoppingCart;
+    @Inject private ShoppingCart shoppingCart;
     
     public Client getCurrentClient()
     {
@@ -59,19 +58,13 @@ public class PlaceOrderBackingBean implements Serializable
         
         Tax tax = taxJpaController.findTaxByProvince(user.getProvince());
         
-        double taxRate = 0;
-        
-        taxRate += tax.getGstRate().doubleValue() /100;
-        taxRate += tax.getPstRate().doubleValue() /100;
-        taxRate += tax.getHstRate().doubleValue() /100;
-        
-        return taxRate;
+        return tax.getOverallTaxRate().doubleValue();
     }
     
     public String last4Characters(String creditCardNumber)
     {
         return creditCardNumber.substring(creditCardNumber.length()-4);
-    }  
+    }
     
     public double roundDouble(String price)
     {
@@ -91,11 +84,8 @@ public class PlaceOrderBackingBean implements Serializable
         master.setSaleDate(Date.valueOf(LocalDate.now()));
         master.setGrossValue(new BigDecimal(shoppingCart.getSubtotal()));
         
-        double rate = 1;
-        rate += tax.getGstRate().doubleValue() /100;
-        rate += tax.getPstRate().doubleValue() /100;
-        rate += tax.getHstRate().doubleValue() /100;
-        double net = Math.round((shoppingCart.getSubtotal() * rate) * 100.) / 100.;
+        Double taxIncludedPercentage = tax.getOverallTaxRate().add(BigDecimal.ONE).doubleValue();
+        double net = Math.round((shoppingCart.getSubtotal() * taxIncludedPercentage) * 100.) / 100.;
         
         master.setNetValue(new BigDecimal(net));
         masterInvoiceJpaController.create(master);

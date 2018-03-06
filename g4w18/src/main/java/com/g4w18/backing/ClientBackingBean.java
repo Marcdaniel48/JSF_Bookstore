@@ -19,7 +19,6 @@ import javax.faces.model.SelectItem;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.NoResultException;
 
 /**
  *
@@ -77,21 +76,6 @@ public class ClientBackingBean implements Serializable
     }
 
     private static Collection<SelectItem> titleOptions;
-
-    static 
-    {
-        titleOptions = new ArrayList<SelectItem>();
-        
-        titleOptions.add(new SelectItem(null, "Select a title", "", false, false,
-                true));
-        
-        titleOptions.add(new SelectItem("Mr."));
-        titleOptions.add(new SelectItem("Ms."));
-        titleOptions.add(new SelectItem("Dr."));
-        titleOptions.add(new SelectItem("Sir"));
-        titleOptions.add(new SelectItem("Lord"));
-        titleOptions.add(new SelectItem("Lady"));
-    }
     
     public Collection<SelectItem> getProvinceOptions() {
         return provinceOptions;
@@ -101,11 +85,17 @@ public class ClientBackingBean implements Serializable
     
     static 
     {
+        titleOptions = new ArrayList<SelectItem>();
+        titleOptions.add(new SelectItem(null, "Select a title", "", false, false, true));
+        titleOptions.add(new SelectItem("Mr."));
+        titleOptions.add(new SelectItem("Ms."));
+        titleOptions.add(new SelectItem("Dr."));
+        titleOptions.add(new SelectItem("Sir"));
+        titleOptions.add(new SelectItem("Lord"));
+        titleOptions.add(new SelectItem("Lady"));
+        
         provinceOptions = new ArrayList<SelectItem>();
-        
-        provinceOptions.add(new SelectItem(null, "Select a province", "", false, false,
-                true));
-        
+        provinceOptions.add(new SelectItem(null, "Select a province", "", false, false, true));
         provinceOptions.add(new SelectItem("AB"));
         provinceOptions.add(new SelectItem("BC"));
         provinceOptions.add(new SelectItem("MB"));
@@ -119,6 +109,5 @@ public class ClientBackingBean implements Serializable
         provinceOptions.add(new SelectItem("QC"));
         provinceOptions.add(new SelectItem("SK"));
         provinceOptions.add(new SelectItem("YT"));
-        
     }
 }

@@ -43,7 +43,6 @@ public class ShoppingCartBackingBean implements Serializable
     
     public BigDecimal getPrice(Book book)
     {
-        System.out.println("sale: " + book.getSalePrice().floatValue());
         if(book.getSalePrice() != null)
             return book.getSalePrice();
         
