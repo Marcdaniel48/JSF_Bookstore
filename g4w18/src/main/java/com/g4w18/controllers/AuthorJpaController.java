@@ -22,9 +22,6 @@ import javax.transaction.UserTransaction;
  */
 public class AuthorJpaController implements Serializable {
 
-    public AuthorJpaController() {
-
-    }
     @Resource
     private UserTransaction utx;
 
