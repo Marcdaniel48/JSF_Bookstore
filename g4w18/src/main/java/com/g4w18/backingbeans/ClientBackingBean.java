@@ -6,6 +6,7 @@
 package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.ClientJpaController;
+import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.entities.Client;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import javax.inject.Named;
 public class ClientBackingBean implements Serializable
 {
     @Inject
-    private ClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
     
     private Client client;
     

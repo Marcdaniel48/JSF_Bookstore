@@ -1,7 +1,7 @@
-package backing;
+package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.BookJpaController;
-import com.g4w18.controllers.CustomBookController;
+import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
 import java.util.List;

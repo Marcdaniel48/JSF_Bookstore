@@ -2,6 +2,8 @@ package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.controllers.ClientJpaController;
+import com.g4w18.customcontrollers.CustomBookController;
+import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.controllers.ReviewJpaController;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
@@ -33,11 +35,11 @@ import javax.servlet.http.HttpSession;
 public class BookDetailsBackingBean implements Serializable {
 
     @Inject
-    private BookJpaController bookJpaController;
+    private CustomBookController customBookController;
     @Inject
     private ReviewJpaController reviewJpaController;
     @Inject
-    private ClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
 
     private Book book;
     private Review review;
@@ -50,14 +52,14 @@ public class BookDetailsBackingBean implements Serializable {
             Map<String, String> params
                     = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             int id = Integer.parseInt(params.get("id"));
-            book = bookJpaController.findBook(id);
+            book = customBookController.findBook(id);
         }
         return book;
     }
 
     public List<Book> getRecommendedBooks() {
         if (recommendedBooks == null) {
-            List<Book> booksByGenre = bookJpaController.findBooksByGenre(book.getGenre());
+            List<Book> booksByGenre = customBookController.findBooksByGenre(book.getGenre());
             booksByGenre.remove(book);
             Collections.shuffle(booksByGenre);
             recommendedBooks = booksByGenre.subList(0, 6);

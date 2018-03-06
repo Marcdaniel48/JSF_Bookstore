@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.g4w18.entities;
 
 import java.io.Serializable;
@@ -15,6 +20,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ *
+ * @author 1331680
+ */
 @Entity
 @Table(name = "author", catalog = "bookstore", schema = "")
 @NamedQueries({
@@ -112,5 +121,5 @@ public class Author implements Serializable {
     public String toString() {
         return "com.g4w18.entities.Author[ authorId=" + authorId + " ]";
     }
-
+    
 }
