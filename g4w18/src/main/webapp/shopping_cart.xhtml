@@ -26,17 +26,22 @@
         <b:container fluid="false">
             <b:form>
                 <b:panel>
-                    <ui:repeat var="book" value="#{shoppingCartBackingBean.shoppingCartBooks}">
+                    <ui:repeat var="book" value="#{shoppingCartBackingBean.shoppingCart.shoppingCartBooks}">
                         <b:row styleClass="show-grid">
-                            <b:column col-md="8">
+                            <b:column col-md="1" col-xs="12">
+                                <b:container>
+                                    <b:image library="images" name="#{book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid" height="10%" width="5%"></b:image>
+                                </b:container>
+                            </b:column>
+                            <b:column col-md="1">
                                 <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
                                 <f:param name="id" value="#{book.bookId}" />
                             </b:column>
                             <b:column col-md="2">
-                                <h:outputText value="#{book.listPrice} CAD"></h:outputText>
+                                <h:outputText value="#{shoppingCartBackingBean.getPrice(book)} CAD"></h:outputText>
                             </b:column>
-                            <b:column>
-                                <h:commandLink value="Delete" action="#{shoppingCartBackingBean.removeFromCart(book)}" />
+                            <b:column col-md="3">
+                                <h:commandLink value="Delete" action="#{shoppingCartBackingBean.shoppingCart.removeFromCart(book)}" />
                             </b:column>
                         </b:row>
                     </ui:repeat>

@@ -9,14 +9,9 @@ import com.g4w18.customcontrollers.ShoppingCart;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -28,27 +23,29 @@ import javax.inject.Named;
 @SessionScoped
 public class ShoppingCartBackingBean implements Serializable
 {
-        private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
+    private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
     @Inject
     private ShoppingCart cart;
-    
+
     public List<Book> getShoppingCartBooks()
     {
         List<Book> list = cart.getShoppingCartBooks();
-        
+
         return list;
     }
-    
-    public void removeFromCart(Book book)
+
+    public ShoppingCart getShoppingCart()
     {
-        cart.removeFromCart(book);
+        return cart;
     }
-    
-    public void addToCart(Book book)
+
+    public BigDecimal getPrice(Book book)
     {
-        log.info("Adding to cart");
-        
-        cart.addToCart(book);
+        System.out.println(book.toString());
+        if(book.getSalePrice() != null)
+            return book.getSalePrice();
+
+        return book.getListPrice();
     }
 }

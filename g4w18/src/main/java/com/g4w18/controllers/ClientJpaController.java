@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.UserTransaction;
 
 /**
@@ -234,11 +235,45 @@ public class ClientJpaController implements Serializable {
     }
 
     public int getClientCount() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<Client> rt = cq.from(Client.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Client> rt = cq.from(Client.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+    }
+
+    public Client findClientByUsername(String username)
+    {
+        TypedQuery<Client> query = em.createNamedQuery("Client.findByUsername", Client.class);
+        query.setParameter("username", username);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
+    }
+
+    public Client findClientByEmail(String email)
+    {
+        TypedQuery<Client> query = em.createNamedQuery("Client.findByEmail", Client.class);
+        query.setParameter("email", email);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
+    }
+
+    public Client findClientByCredentials(String username, String password)
+    {
+        TypedQuery<Client> query = em.createNamedQuery("Client.findByCredentials", Client.class);
+        query.setParameter(1, username);
+        query.setParameter(2, password);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
     }
 
 }

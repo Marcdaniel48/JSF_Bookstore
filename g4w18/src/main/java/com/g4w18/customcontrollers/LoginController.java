@@ -67,6 +67,7 @@ public class LoginController implements Serializable{
         if (client != null)
         {
             loggedIn = true;
+            session.setAttribute("username", username);
         }
         else
         {
@@ -77,5 +78,12 @@ public class LoginController implements Serializable{
         session.setAttribute("username", username);
         log.log(Level.INFO, "Username: {0}", session.getAttribute("username"));
         return "bookList.xhtml";
+    }
+
+    public void logout()
+    {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        session.setAttribute("username", null);
+        session.setAttribute("loggedIn", null);
     }
 }
