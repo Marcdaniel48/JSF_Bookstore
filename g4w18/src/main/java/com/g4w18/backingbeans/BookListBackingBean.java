@@ -9,6 +9,7 @@ import com.g4w18.controllers.AuthorJpaController;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class BookListBackingBean {
+public class BookListBackingBean  implements Serializable{
 
     @Inject
     private AuthorJpaController authorJpaController;

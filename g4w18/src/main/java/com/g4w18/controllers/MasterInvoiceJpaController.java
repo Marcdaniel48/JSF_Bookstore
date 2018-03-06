@@ -1,6 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.g4w18.controllers;
 
-import com.g4w18.backingbeans.BookDetailsBackingBean;
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
@@ -13,19 +17,17 @@ import com.g4w18.entities.Client;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-@Named
-@RequestScoped
+/**
+ *
+ * @author 1331680
+ */
 public class MasterInvoiceJpaController implements Serializable {
 
     @Resource
@@ -33,8 +35,6 @@ public class MasterInvoiceJpaController implements Serializable {
 
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
-
-    private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
     public void create(MasterInvoice masterInvoice) throws RollbackFailureException, Exception {
         if (masterInvoice.getInvoiceDetailList() == null) {
@@ -47,24 +47,24 @@ public class MasterInvoiceJpaController implements Serializable {
                 clientId = em.getReference(clientId.getClass(), clientId.getClientId());
                 masterInvoice.setClientId(clientId);
             }
-            List<InvoiceDetail> attachedInvoiceDetailCollection = new ArrayList<InvoiceDetail>();
-            for (InvoiceDetail invoiceDetailCollectionInvoiceDetailToAttach : masterInvoice.getInvoiceDetailList()) {
-                invoiceDetailCollectionInvoiceDetailToAttach = em.getReference(invoiceDetailCollectionInvoiceDetailToAttach.getClass(), invoiceDetailCollectionInvoiceDetailToAttach.getDetailId());
-                attachedInvoiceDetailCollection.add(invoiceDetailCollectionInvoiceDetailToAttach);
+            List<InvoiceDetail> attachedInvoiceDetailList = new ArrayList<InvoiceDetail>();
+            for (InvoiceDetail invoiceDetailListInvoiceDetailToAttach : masterInvoice.getInvoiceDetailList()) {
+                invoiceDetailListInvoiceDetailToAttach = em.getReference(invoiceDetailListInvoiceDetailToAttach.getClass(), invoiceDetailListInvoiceDetailToAttach.getDetailId());
+                attachedInvoiceDetailList.add(invoiceDetailListInvoiceDetailToAttach);
             }
-            masterInvoice.setInvoiceDetailList(attachedInvoiceDetailCollection);
+            masterInvoice.setInvoiceDetailList(attachedInvoiceDetailList);
             em.persist(masterInvoice);
             if (clientId != null) {
                 clientId.getMasterInvoiceList().add(masterInvoice);
                 clientId = em.merge(clientId);
             }
-            for (InvoiceDetail invoiceDetailCollectionInvoiceDetail : masterInvoice.getInvoiceDetailList()) {
-                MasterInvoice oldInvoiceIdOfInvoiceDetailCollectionInvoiceDetail = invoiceDetailCollectionInvoiceDetail.getInvoiceId();
-                invoiceDetailCollectionInvoiceDetail.setInvoiceId(masterInvoice);
-                invoiceDetailCollectionInvoiceDetail = em.merge(invoiceDetailCollectionInvoiceDetail);
-                if (oldInvoiceIdOfInvoiceDetailCollectionInvoiceDetail != null) {
-                    oldInvoiceIdOfInvoiceDetailCollectionInvoiceDetail.getInvoiceDetailList().remove(invoiceDetailCollectionInvoiceDetail);
-                    oldInvoiceIdOfInvoiceDetailCollectionInvoiceDetail = em.merge(oldInvoiceIdOfInvoiceDetailCollectionInvoiceDetail);
+            for (InvoiceDetail invoiceDetailListInvoiceDetail : masterInvoice.getInvoiceDetailList()) {
+                MasterInvoice oldInvoiceIdOfInvoiceDetailListInvoiceDetail = invoiceDetailListInvoiceDetail.getInvoiceId();
+                invoiceDetailListInvoiceDetail.setInvoiceId(masterInvoice);
+                invoiceDetailListInvoiceDetail = em.merge(invoiceDetailListInvoiceDetail);
+                if (oldInvoiceIdOfInvoiceDetailListInvoiceDetail != null) {
+                    oldInvoiceIdOfInvoiceDetailListInvoiceDetail.getInvoiceDetailList().remove(invoiceDetailListInvoiceDetail);
+                    oldInvoiceIdOfInvoiceDetailListInvoiceDetail = em.merge(oldInvoiceIdOfInvoiceDetailListInvoiceDetail);
                 }
             }
             utx.commit();
@@ -84,15 +84,15 @@ public class MasterInvoiceJpaController implements Serializable {
             MasterInvoice persistentMasterInvoice = em.find(MasterInvoice.class, masterInvoice.getInvoiceId());
             Client clientIdOld = persistentMasterInvoice.getClientId();
             Client clientIdNew = masterInvoice.getClientId();
-            List<InvoiceDetail> invoiceDetailCollectionOld = persistentMasterInvoice.getInvoiceDetailList();
-            List<InvoiceDetail> invoiceDetailCollectionNew = masterInvoice.getInvoiceDetailList();
+            List<InvoiceDetail> invoiceDetailListOld = persistentMasterInvoice.getInvoiceDetailList();
+            List<InvoiceDetail> invoiceDetailListNew = masterInvoice.getInvoiceDetailList();
             List<String> illegalOrphanMessages = null;
-            for (InvoiceDetail invoiceDetailCollectionOldInvoiceDetail : invoiceDetailCollectionOld) {
-                if (!invoiceDetailCollectionNew.contains(invoiceDetailCollectionOldInvoiceDetail)) {
+            for (InvoiceDetail invoiceDetailListOldInvoiceDetail : invoiceDetailListOld) {
+                if (!invoiceDetailListNew.contains(invoiceDetailListOldInvoiceDetail)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain InvoiceDetail " + invoiceDetailCollectionOldInvoiceDetail + " since its invoiceId field is not nullable.");
+                    illegalOrphanMessages.add("You must retain InvoiceDetail " + invoiceDetailListOldInvoiceDetail + " since its invoiceId field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -102,13 +102,13 @@ public class MasterInvoiceJpaController implements Serializable {
                 clientIdNew = em.getReference(clientIdNew.getClass(), clientIdNew.getClientId());
                 masterInvoice.setClientId(clientIdNew);
             }
-            List<InvoiceDetail> attachedInvoiceDetailCollectionNew = new ArrayList<InvoiceDetail>();
-            for (InvoiceDetail invoiceDetailCollectionNewInvoiceDetailToAttach : invoiceDetailCollectionNew) {
-                invoiceDetailCollectionNewInvoiceDetailToAttach = em.getReference(invoiceDetailCollectionNewInvoiceDetailToAttach.getClass(), invoiceDetailCollectionNewInvoiceDetailToAttach.getDetailId());
-                attachedInvoiceDetailCollectionNew.add(invoiceDetailCollectionNewInvoiceDetailToAttach);
+            List<InvoiceDetail> attachedInvoiceDetailListNew = new ArrayList<InvoiceDetail>();
+            for (InvoiceDetail invoiceDetailListNewInvoiceDetailToAttach : invoiceDetailListNew) {
+                invoiceDetailListNewInvoiceDetailToAttach = em.getReference(invoiceDetailListNewInvoiceDetailToAttach.getClass(), invoiceDetailListNewInvoiceDetailToAttach.getDetailId());
+                attachedInvoiceDetailListNew.add(invoiceDetailListNewInvoiceDetailToAttach);
             }
-            invoiceDetailCollectionNew = attachedInvoiceDetailCollectionNew;
-            masterInvoice.setInvoiceDetailList(invoiceDetailCollectionNew);
+            invoiceDetailListNew = attachedInvoiceDetailListNew;
+            masterInvoice.setInvoiceDetailList(invoiceDetailListNew);
             masterInvoice = em.merge(masterInvoice);
             if (clientIdOld != null && !clientIdOld.equals(clientIdNew)) {
                 clientIdOld.getMasterInvoiceList().remove(masterInvoice);
@@ -118,14 +118,14 @@ public class MasterInvoiceJpaController implements Serializable {
                 clientIdNew.getMasterInvoiceList().add(masterInvoice);
                 clientIdNew = em.merge(clientIdNew);
             }
-            for (InvoiceDetail invoiceDetailCollectionNewInvoiceDetail : invoiceDetailCollectionNew) {
-                if (!invoiceDetailCollectionOld.contains(invoiceDetailCollectionNewInvoiceDetail)) {
-                    MasterInvoice oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail = invoiceDetailCollectionNewInvoiceDetail.getInvoiceId();
-                    invoiceDetailCollectionNewInvoiceDetail.setInvoiceId(masterInvoice);
-                    invoiceDetailCollectionNewInvoiceDetail = em.merge(invoiceDetailCollectionNewInvoiceDetail);
-                    if (oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail != null && !oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail.equals(masterInvoice)) {
-                        oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail.getInvoiceDetailList().remove(invoiceDetailCollectionNewInvoiceDetail);
-                        oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail = em.merge(oldInvoiceIdOfInvoiceDetailCollectionNewInvoiceDetail);
+            for (InvoiceDetail invoiceDetailListNewInvoiceDetail : invoiceDetailListNew) {
+                if (!invoiceDetailListOld.contains(invoiceDetailListNewInvoiceDetail)) {
+                    MasterInvoice oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail = invoiceDetailListNewInvoiceDetail.getInvoiceId();
+                    invoiceDetailListNewInvoiceDetail.setInvoiceId(masterInvoice);
+                    invoiceDetailListNewInvoiceDetail = em.merge(invoiceDetailListNewInvoiceDetail);
+                    if (oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail != null && !oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail.equals(masterInvoice)) {
+                        oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail.getInvoiceDetailList().remove(invoiceDetailListNewInvoiceDetail);
+                        oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail = em.merge(oldInvoiceIdOfInvoiceDetailListNewInvoiceDetail);
                     }
                 }
             }
@@ -158,12 +158,12 @@ public class MasterInvoiceJpaController implements Serializable {
                 throw new NonexistentEntityException("The masterInvoice with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<InvoiceDetail> invoiceDetailCollectionOrphanCheck = masterInvoice.getInvoiceDetailList();
-            for (InvoiceDetail invoiceDetailCollectionOrphanCheckInvoiceDetail : invoiceDetailCollectionOrphanCheck) {
+            List<InvoiceDetail> invoiceDetailListOrphanCheck = masterInvoice.getInvoiceDetailList();
+            for (InvoiceDetail invoiceDetailListOrphanCheckInvoiceDetail : invoiceDetailListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This MasterInvoice (" + masterInvoice + ") cannot be destroyed since the InvoiceDetail " + invoiceDetailCollectionOrphanCheckInvoiceDetail + " in its invoiceDetailCollection field has a non-nullable invoiceId field.");
+                illegalOrphanMessages.add("This MasterInvoice (" + masterInvoice + ") cannot be destroyed since the InvoiceDetail " + invoiceDetailListOrphanCheckInvoiceDetail + " in its invoiceDetailList field has a non-nullable invoiceId field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
@@ -194,27 +194,26 @@ public class MasterInvoiceJpaController implements Serializable {
     }
 
     private List<MasterInvoice> findMasterInvoiceEntities(boolean all, int maxResults, int firstResult) {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(MasterInvoice.class));
-        Query q = em.createQuery(cq);
-        if (!all) {
-            q.setMaxResults(maxResults);
-            q.setFirstResult(firstResult);
-        }
-        return q.getResultList();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(MasterInvoice.class));
+            Query q = em.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
     }
 
     public MasterInvoice findMasterInvoice(Integer id) {
-        log.info("findMasterInvoice called");
-        return em.find(MasterInvoice.class, id);
+            return em.find(MasterInvoice.class, id);
     }
 
     public int getMasterInvoiceCount() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<MasterInvoice> rt = cq.from(MasterInvoice.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<MasterInvoice> rt = cq.from(MasterInvoice.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
     }
-
+    
 }

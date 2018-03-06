@@ -54,7 +54,7 @@ public class InvoiceBackingBean implements Serializable {
         log.log(Level.INFO, "Subject: {0}", subject);
         log.log(Level.INFO, "Destinatary: {0}", masterInvoice.getClientId().getEmail());
         return Email.create().from("sramirezdawson2017@gmail.com")
-                .to(masterInvoice.getClientId().getEmail())
+                .to("sramirezdawson2017@gmail.com")
                 .subject(subject).addHtml(viewAsHtml());
     }
 
@@ -67,7 +67,7 @@ public class InvoiceBackingBean implements Serializable {
         try (SendMailSession session = smtpServer.createSession()) {
             session.open();
             createEmail();
-//            session.sendMail(email);
+            session.sendMail(createEmail());
         }
         return null;
     }

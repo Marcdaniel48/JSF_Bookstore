@@ -2,6 +2,8 @@ package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.AuthorJpaController;
 import com.g4w18.controllers.BookJpaController;
+import com.g4w18.customcontrollers.CustomAuthorController;
+import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Author;
 
 import java.io.Serializable;
@@ -35,10 +37,10 @@ public class SearchBackingBean implements Serializable {
     //Display in the next page how many results were found
     private String message="";
     @Inject
-    private BookJpaController bookJpaController;
+    private CustomBookController bookJpaController;
     
     @Inject
-    private AuthorJpaController authorJpaController;
+    private CustomAuthorController authorJpaController;
     
     //Drop down search options
     private static Map<String,Object> searchOptions;
