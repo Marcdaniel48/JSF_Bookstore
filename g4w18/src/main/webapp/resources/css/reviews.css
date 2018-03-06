@@ -1,0 +1,7 @@
+.reviews .container
+{
+    /*text-align: center;*/
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+}

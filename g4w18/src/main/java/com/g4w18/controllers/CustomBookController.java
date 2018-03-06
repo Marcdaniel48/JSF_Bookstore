@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
@@ -23,7 +18,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author 1430047
+ * @author Jephthia
  */
 public class CustomBookController implements Serializable
 {

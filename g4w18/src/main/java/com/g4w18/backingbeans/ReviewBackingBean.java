@@ -2,11 +2,13 @@ package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.controllers.ClientJpaController;
+import com.g4w18.controllers.CustomReviewController;
 import com.g4w18.controllers.ReviewJpaController;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.Review;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -20,7 +22,7 @@ import javax.inject.Named;
  * beans that are not managed such as entity beans. In this example the entity
  * bean for Inventory will be manually loaded with data for the example page.
  *
- * @author Ken
+ * @author Sebastien, Jephthia
  */
 @Named
 @RequestScoped
@@ -28,6 +30,9 @@ public class ReviewBackingBean implements Serializable {
 
     @Inject
     private ReviewJpaController reviewJpaController;
+    
+    @Inject
+    private CustomReviewController reviewController;
     
     @Inject
     private BookJpaController bookJpaController;
@@ -67,5 +72,15 @@ public class ReviewBackingBean implements Serializable {
     @RequestScoped
     public FacesContext getFacesContext() {
         return FacesContext.getCurrentInstance();
+    }
+    
+    public List<Review> getApprovedReviews()
+    {
+        return reviewController.getApprovedReviews();
+    }
+    
+    public List<Review> getNotApprovedReviews()
+    {
+        return reviewController.getNotApprovedReviews();
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        
+        <h:outputStylesheet library="css" name="reviews.css" />
+        
+        <div class="parallax">
+
+            <div class="parallax-layer background">
+                <div class="content">
+                    <div class="reviews">
+                        <div class="container">
+                            <h1>Reviews waiting for approval</h1>
+                            
+                            <ui:repeat value="#{reviewBackingBean.approvedReviews}" var="review">
+                                <p>#{review.review}</p>
+                            </ui:repeat>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+            
+    </ui:define>
+</ui:composition>
