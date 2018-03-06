@@ -7,6 +7,8 @@ package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.AuthorJpaController;
 import com.g4w18.controllers.BookJpaController;
+import com.g4w18.customcontrollers.CustomAuthorController;
+import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
@@ -22,16 +24,16 @@ import javax.inject.Named;
 
 /**
  *
- * @author 1331680
+ * @author Sebastien, Jephthia
  */
 @Named
 @RequestScoped
 public class BookListBackingBean  implements Serializable{
 
     @Inject
-    private AuthorJpaController authorJpaController;
+    private CustomAuthorController authorController;
     @Inject
-    private BookJpaController bookJpaController;
+    private CustomBookController bookController;
 
     private Author author;
     //Temporary, only used to display the list of all books in bookList
@@ -49,7 +51,7 @@ public class BookListBackingBean  implements Serializable{
             Map<String, String> params
                     = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             int id = Integer.parseInt(params.get("authorId"));
-            author = authorJpaController.findAuthor(id);
+            author = authorController.findAuthor(id);
         }
         return author;
     }
@@ -62,8 +64,15 @@ public class BookListBackingBean  implements Serializable{
     }
 
     public List<Book> getAllBooks() {
+        
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String genre = params.get("genre");
+        
+        if(genre != null)
+            return bookController.findBooksByGenre(genre);
+        
         if (allBooks == null) {
-            allBooks = bookJpaController.findBookEntities();
+            allBooks = bookController.findBookEntities();
         }
         
         
