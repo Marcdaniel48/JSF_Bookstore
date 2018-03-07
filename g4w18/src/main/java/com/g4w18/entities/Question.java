@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author 1331680
+ * @author Jephthia
  */
 @Entity
 @Table(name = "question", catalog = "bookstore", schema = "")

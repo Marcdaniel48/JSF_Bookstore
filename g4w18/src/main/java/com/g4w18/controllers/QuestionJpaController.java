@@ -6,8 +6,6 @@ import com.g4w18.entities.Question;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -17,10 +15,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 
-@Named
-@RequestScoped
-public class QuestionJpaController implements Serializable {
-
+/**
+ * @author Jephthia
+ */
+public class QuestionJpaController implements Serializable
+{
     @Resource
     private UserTransaction utx;
 
@@ -116,5 +115,5 @@ public class QuestionJpaController implements Serializable {
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-
+    
 }
