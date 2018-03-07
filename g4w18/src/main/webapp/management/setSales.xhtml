@@ -24,13 +24,8 @@ and open the template in the editor.
             <p:dataTable var="booksOnSale" value="#{setSalesBackingBean.allBooks}" 
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                          paginator="true" rows="15"
-                         emptyMessage="#{msgs.managerSetSalesNoBooksFound}">
-                <f:facet name="header">
-                    <p:outputPanel>
-                        <h:outputText value="All Books on Sale" />
-                        <p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()" style="width:150px" placeholder="Enter keyword"/>
-                    </p:outputPanel>
-                </f:facet>
+                         emptyMessage="#{msgs.managerSetSalesNoBooksFound}"
+                         editable="true">
                 <p:column headerText="#{msgs.managerSetSalesBookId}" filterBy="#{booksOnSale.bookId}" filterMatchMode="contains">
                     <h:outputText value="#{booksOnSale.bookId}"></h:outputText>
                 </p:column>
@@ -52,9 +47,14 @@ and open the template in the editor.
                 </p:column>
 
                 <p:column headerText="#{msgs.managerSetSalesBookSalePrice}" filterBy="#{booksOnSale.salePrice}" filterMatchMode="contains">
-                    <h:outputText value="#{booksOnSale.salePrice}"></h:outputText>
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{booksOnSale.salePrice}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{booksOnSale.salePrice}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
                 </p:column>
-
+                <p:column style="width:32px">
+                    <p:rowEditor />
+                </p:column>
             </p:dataTable>
         </h:form>
     </h:body>
