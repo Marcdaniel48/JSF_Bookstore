@@ -32,9 +32,14 @@
 
                     <div id="genres">
                         <div class="outer">
-                            <ui:repeat value="#{theBooks.genres}" var="genre">
-                                <a class="genre-title" href="#">#{genre}</a>
-                            </ui:repeat>
+                            <h:form>
+                                <ui:repeat value="#{theBooks.genres}" var="genre">
+                                    <h:commandLink styleClass="genre-title" action="bookList" value="#{genre}">
+                                        <f:param name="genre" value="#{genre}"/>
+                                    </h:commandLink>
+                                    <!--<a class="genre-title" href="#">#{genre}</a>-->
+                                </ui:repeat>
+                            </h:form>
                         </div>
                     </div>
 
@@ -86,11 +91,11 @@
 
                         <div class="center-vertical">
                             <div>
-                                <h2>Read, Watch &amp; Discuss! Five great book club books that are now movies</h2>
-                                <br/>
-                                <p>
-        Of course, we think any season is the right season to read, but winter can be a perfect time to read <i>and </i>watch! What better way to keep busy in these cold, dark months than reading with your book club, watching the movie version and then discussing both?
-                                </p>
+                                <ui:repeat value="#{rssBackingBean.articles}" var="article" size="1">
+                                    <h2>#{article.title}</h2>
+                                    <br/>
+                                    <p>#{article.description}</p>
+                                </ui:repeat>
                             </div>
                         </div>
                         <div class="overlay"></div>

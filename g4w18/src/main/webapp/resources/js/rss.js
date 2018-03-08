@@ -1,4 +1,26 @@
 (function(){
+    
+    var articles = [];
+    var currentArticle = null;
+    var currentIndex = 0;
+    
+    function nextArticle()
+    {
+        if(currentIndex >= articles.length - 1)
+            return;
+                
+        currentArticle = articles[currentIndex++];
+        
+        
+        
+        
+        
+        if(currentIndex === articles.length - 1)
+        {
+            //disable next button
+        }
+    }
+    
     function init()
     {
         // $.getJSON("https://www.bookbrowse.com/blogs/editor/rss.cfm"+"&callback=?").done(function (data) {

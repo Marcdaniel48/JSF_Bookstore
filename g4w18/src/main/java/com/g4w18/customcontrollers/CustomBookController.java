@@ -10,6 +10,7 @@ import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
+import com.g4w18.entities.Book_;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -61,14 +62,23 @@ public class CustomBookController implements Serializable {
         return bookController.getBookCount();
     }
 
-    public List<Book> getBooksOnSale() {
-        Query findBooksOnSale = em.createNamedQuery("Book.findOnSale");
-        List<Book> books = findBooksOnSale.getResultList();
+    public List<Book> getBooksOnSale()
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+        Root<Book> root = cq.from(Book.class);
+        cq.select(root);
+        cq.where(cb.gt(root.get(Book_.salePrice), 0));
+        
+        Query q = em.createQuery(cq);
+        q.setMaxResults(10);
+
+        List<Book> books = q.getResultList();
         return books;
     }
 
-    public List<Book> getMostRecentBooks() {
-        //Query findRecentBooks = em.createNamedQuery("Book.findMostRecentBooks");
+    public List<Book> getMostRecentBooks()
+    {
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
