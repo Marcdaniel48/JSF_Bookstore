@@ -121,6 +121,7 @@ CREATE TABLE QUESTION (
     VOTE_TWO int(6) NOT NULL default 0,
     VOTE_THREE int(6) NOT NULL default 0,
     VOTE_FOUR int(6) NOT NULL default 0,
+    IS_ACTIVE boolean NOT NULL default false,
     PRIMARY KEY (QUESTION_ID)
 ) ENGINE=InnoDB;
 
@@ -978,10 +979,10 @@ insert into BOOK_AUTHOR (BOOK_ID, AUTHOR_ID) values
 (100,85);
 
 insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_FOUR, VOTE_ONE, VOTE_TWO, VOTE_THREE, VOTE_FOUR) values
-('At what time of the day do you prefer to read?', 'Morning', 'Noon', 'Afternoon', 'Evening', 0, 0, 0, 0),
-('What is your favorite genre?', 'SciFi', 'Biography', 'Romance', 'Mystery', 0, 0, 0, 0),
-('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0),
-('How many books have you read in your life?', 'Less than 1', 'Between 1 and 10', 'Between 11 and 50', 'More than 50', 0, 0, 0, 0);
+('At what time of the day do you prefer to read?', 'Morning', 'Noon', 'Afternoon', 'Evening', 0, 0, 0, 0, false),
+('What is your favorite genre?', 'SciFi', 'Biography', 'Romance', 'Mystery', 0, 0, 0, 0, false),
+('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0, true),
+('How many books have you read in your life?', 'Less than 1', 'Between 1 and 10', 'Between 11 and 50', 'More than 50', 0, 0, 0, 0, false);
 
 INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE) VALUES
 (10, CURRENT_TIME, 28.96, 33.29676);

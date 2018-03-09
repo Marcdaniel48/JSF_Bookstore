@@ -22,6 +22,8 @@ import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,7 +42,7 @@ public class BookListBackingBean implements Serializable {
     //Temporary, only used to display the list of all books in bookList
     private List<Book> allBooks;
     private List<Book> authorBooks;
-    private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
+    private Logger log = Logger.getLogger(getClass().getName());
 
     /**
      * Client created if it does not exist.
@@ -68,11 +70,12 @@ public class BookListBackingBean implements Serializable {
 
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String genre = params.get("genre");
-
-        if (genre != null) {
+        
+        if(genre != null && !"".equals(genre))
             return bookController.findBooksByGenre(genre);
-        }
-
+        
+        log.log(Level.INFO, genre);
+        
         if (allBooks == null) {
             allBooks = bookController.findBookEntities();
             log.log(Level.INFO, "allBooks size: {0}", allBooks.size());
