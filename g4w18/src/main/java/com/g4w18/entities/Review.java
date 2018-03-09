@@ -21,6 +21,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -52,6 +54,8 @@ public class Review implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "RATING")
+    @Min(1)
+    @Max(5)
     private int rating;
     @Basic(optional = false)
     @NotNull

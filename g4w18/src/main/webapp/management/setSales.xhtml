@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>#{msgs.managerSetSalesTitle}</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:dataTable var="booksOnSale" value="#{setSalesBackingBean.allBooks}" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                         paginator="true" rows="15"
+                         emptyMessage="#{msgs.managerSetSalesNoBooksFound}"
+                         editable="true">
+                <p:column headerText="#{msgs.managerSetSalesBookId}" filterBy="#{booksOnSale.bookId}" filterMatchMode="contains">
+                    <h:outputText value="#{booksOnSale.bookId}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerSetSalesBookISBN}" filterBy="#{booksOnSale.isbnNumber}" filterMatchMode="contains">
+                    <h:outputText value="#{booksOnSale.isbnNumber}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerSetSalesBookTitle}" filterBy="#{booksOnSale.title}" filterMatchMode="contains">
+                    <h:outputText value="#{booksOnSale.title}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerSetSalesBookWholesalePrice}" filterBy="#{booksOnSale.wholesalePrice}" filterMatchMode="contains">
+                    <h:outputText value="#{booksOnSale.wholesalePrice}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerSetSalesBookListPrice}" filterBy="#{booksOnSale.listPrice}" filterMatchMode="contains">
+                    <h:outputText value="#{booksOnSale.listPrice}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerSetSalesBookSalePrice}" filterBy="#{booksOnSale.salePrice}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{booksOnSale.salePrice}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{booksOnSale.salePrice}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column style="width:32px">
+                    <p:rowEditor />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

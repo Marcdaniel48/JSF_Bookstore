@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
@@ -30,7 +31,7 @@ import java.util.logging.Logger;
  */
 @Named
 @RequestScoped
-public class BookListBackingBean  implements Serializable{
+public class BookListBackingBean implements Serializable {
 
     @Inject
     private CustomAuthorController authorController;
@@ -66,7 +67,7 @@ public class BookListBackingBean  implements Serializable{
     }
 
     public List<Book> getAllBooks() {
-        
+
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String genre = params.get("genre");
         
@@ -77,9 +78,9 @@ public class BookListBackingBean  implements Serializable{
         
         if (allBooks == null) {
             allBooks = bookController.findBookEntities();
+            log.log(Level.INFO, "allBooks size: {0}", allBooks.size());
         }
-        
-        
+
         return allBooks;
     }
 }
