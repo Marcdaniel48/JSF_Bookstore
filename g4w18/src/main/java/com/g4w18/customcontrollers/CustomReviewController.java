@@ -6,7 +6,6 @@ import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.Review;
-import com.g4w18.entities.Review_;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -71,7 +70,7 @@ public class CustomReviewController implements Serializable
         CriteriaQuery<Review> cq = cb.createQuery(Review.class);
         Root<Review> review = cq.from(Review.class);
         cq.select(review);
-        cq.where(cb.isTrue(review.get(Review_.approvalStatus)));
+        cq.where(cb.isTrue(review.get("approvalStatus")));
         
         Query genres = em.createQuery(cq);
         return genres.getResultList();
@@ -83,7 +82,7 @@ public class CustomReviewController implements Serializable
         CriteriaQuery<Review> cq = cb.createQuery(Review.class);
         Root<Review> review = cq.from(Review.class);
         cq.select(review);
-        cq.where(cb.isFalse(review.get(Review_.approvalStatus)));
+        cq.where(cb.isFalse(review.get("approvalStatus")));
         
         Query genres = em.createQuery(cq);
         return genres.getResultList();

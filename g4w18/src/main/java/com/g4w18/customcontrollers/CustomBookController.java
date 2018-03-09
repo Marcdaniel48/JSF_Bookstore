@@ -10,6 +10,7 @@ import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
+import com.g4w18.entities.Book_;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -61,14 +62,23 @@ public class CustomBookController implements Serializable {
         return bookController.getBookCount();
     }
 
-    public List<Book> getBooksOnSale() {
-        Query findBooksOnSale = em.createNamedQuery("Book.findOnSale");
-        List<Book> books = findBooksOnSale.getResultList();
+    public List<Book> getBooksOnSale()
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+        Root<Book> root = cq.from(Book.class);
+        cq.select(root);
+        cq.where(cb.gt(root.get(Book_.salePrice), 0));
+        
+        Query q = em.createQuery(cq);
+        q.setMaxResults(10);
+
+        List<Book> books = q.getResultList();
         return books;
     }
 
-    public List<Book> getMostRecentBooks() {
-        //Query findRecentBooks = em.createNamedQuery("Book.findMostRecentBooks");
+    public List<Book> getMostRecentBooks()
+    {
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
@@ -187,5 +197,39 @@ public class CustomBookController implements Serializable {
                 .getResultList();
 
         return findPublisher;
+    }
+
+    /**
+     * Get a List of Book objects comprised only of Books which their Sale Price
+     * is bigger than 0.
+     *
+     * @return List of books on sale.
+     */
+    //Author: Sebastian
+    public List<Book> findBooksOnSale() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Book> book = cq.from(Book.class);
+        cq.select(book).where(cb.gt(book.get("salePrice"), 0));
+        TypedQuery<Book> query = em.createQuery(cq);
+        List<Book> toReturn = query.getResultList();
+        return toReturn;
+    }
+
+    /**
+     * Get a List of Book objects comprised only of Books which their Sale Price
+     * is equal to 0.
+     *
+     * @return List of books not on sale.
+     */
+    //Author: Sebastian
+    public List<Book> findBooksNotSale() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Book> book = cq.from(Book.class);
+        cq.select(book).where(cb.equal(book.get("salePrice"), 0));
+        TypedQuery<Book> query = em.createQuery(cq);
+        List<Book> toReturn = query.getResultList();
+        return toReturn;
     }
 }
