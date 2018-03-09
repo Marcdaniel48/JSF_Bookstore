@@ -54,8 +54,8 @@ public class CustomQuestionController
         return questionController.getQuestionCount();
     }
     
-    public Question getActiveQuestion()
-    {
-        
-    }
+//    public Question getActiveQuestion()
+//    {
+//        
+//    }
 }
