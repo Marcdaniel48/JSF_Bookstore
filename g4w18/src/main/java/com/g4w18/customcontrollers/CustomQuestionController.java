@@ -6,8 +6,12 @@ import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Question;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -18,6 +22,9 @@ public class CustomQuestionController
 {
     @Inject
     private QuestionJpaController questionController;
+    
+    @PersistenceContext(unitName = "bookstorePU")
+    private EntityManager em;
     
     public void create(Question question) throws RollbackFailureException, Exception
     {
@@ -56,6 +63,15 @@ public class CustomQuestionController
     
     public Question getActiveQuestion()
     {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Question> question = cq.from(Question.class);
         
+        cq.select(question);
+        cq.where(cb.isTrue(question.get("isActive")));
+        
+        TypedQuery<Question> query = em.createQuery(cq);
+        Question toReturn = query.getSingleResult();
+        return toReturn;
     }
 }
