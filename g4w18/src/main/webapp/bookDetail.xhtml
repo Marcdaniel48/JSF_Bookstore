@@ -27,12 +27,12 @@
         </b:navBar>
         <b:container fluid="true">
             <b:row>
-                <b:column col-md="3" col-xs="12">
+                <b:column col-md="4" col-lg="3">
                     <b:container>
                         <b:image library="images" name="#{bookDetailsBackingBean.book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
                     </b:container>
                 </b:column>
-                <b:column col-md="6" col-xs="12">
+                <b:column col-md="5" col-lg="5">
                     <b:container>
                         <b:row>
                             <b:column col-md="11">
@@ -47,7 +47,7 @@
                                     by
                                     <b:form>
                                         <ui:repeat var="author" value="#{bookDetailsBackingBean.book.authorList}">
-                                            <b:commandLink outcome="authorBooks">
+                                            <b:commandLink outcome="bookList">
                                                 <h:outputText value="#{author.firstName} #{author.lastName}" styleClass="list-group-item-heading"></h:outputText>
                                                 <f:param name="authorId" value="#{author.authorId}"></f:param>
                                             </b:commandLink>
@@ -58,7 +58,9 @@
                         </b:row>
                         <b:row>
                             <b:column col-md="3">
-                                <p:rating value="#{bookDetailsBackingBean.rating}" readonly="true" />
+                                <h:form>
+                                    <p:rating value="#{bookDetailsBackingBean.rating}" readonly="true" />
+                                </h:form>
                             </b:column>
                         </b:row>
                         <hr align="left" width="90%"/>
@@ -120,7 +122,7 @@
                         </b:row>
                     </b:container>
                 </b:column>
-                <b:column col-md="2" col-xs="12" offset-md="1">
+                <b:column col-md="12" offset-lg="2" col-lg="2">
                     <b:panel  collapsible="false" title="#{msgs.bookDetailsCartPanelTitle}">
                         <h4>
                             <span>#{msgs.bookDetailsListPrice}: </span>
@@ -157,49 +159,45 @@
                 </h:form>
             </b:panel>
             <b:panel collapsible="false" title="#{msgs.bookDetailsReviews}">
-                <ui:repeat var="existingReview" value="#{bookDetailsBackingBean.book.reviewList}">
+                <h:form>
+                    <ui:repeat var="existingReview" value="#{bookDetailsBackingBean.book.reviewList}">
+                        <b:container fluid="true">
+                            <b:row>
+                                <b:column col-md="3">
+                                    <h:outputText value="#{existingReview.clientId.firstName} #{existingReview.clientId.lastName}"></h:outputText>
+                                </b:column>
+                                <b:column col-md="6">
+                                    <h:outputText value="#{existingReview.review}"></h:outputText>
+                                </b:column>
+                                <b:column col-md="3">
+                                    <p:rating value="#{existingReview.rating}" readonly="true" />
+                                </b:column>
+                            </b:row>
+                        </b:container>
+                        <hr/>
+                    </ui:repeat>
+                </h:form>
+                <h:form>
+                    <p:growl id="growl" sticky="true"></p:growl>
                     <b:container fluid="true">
                         <b:row>
-                            <b:column col-md="3">
-                                <h:outputText value="#{existingReview.clientId.firstName} #{existingReview.clientId.lastName}"></h:outputText>
-                            </b:column>
-                            <b:column col-md="6">
-                                <h:outputText value="#{existingReview.review}"></h:outputText>
-                            </b:column>
-                            <b:column col-md="3">
-                                <p:rating value="#{existingReview.rating}" readonly="true" />
-                            </b:column>
-                        </b:row>
-                    </b:container>
-                    <hr/>
-                </ui:repeat>
-
-                <b:container fluid="true">
-                    <b:row>
-                        <h:form>
                             <b:column col-md="11">
                                 <b:inputTextarea placeholder="#{msgs.bookDetailsLeaveReview}" value="#{bookDetailsBackingBean.review.review}" id="reviewInputTextArea">
-                                    <f:validateLength minimum="1" maximum="255"></f:validateLength>
-                                    <f:validateRequired></f:validateRequired>
                                 </b:inputTextarea>
                             </b:column>
                             <b:column col-md="1">
                                 <h:outputText value="#{bookDetailsBackingBean.client.firstName} #{bookDetailsBackingBean.client.lastName}"></h:outputText>
-                                <p:rating value="#{bookDetailsBackingBean.review.rating}" required="true" id="reviewRating">
-                                    <f:validateRequired></f:validateRequired>
+                                <p:rating value="#{bookDetailsBackingBean.review.rating}" id="reviewRating">
                                 </p:rating>
                                 <p:commandButton id="primebutton" value="#{msgs.bookDetailsSubmitReview}"
-                                                 action="#{bookDetailsBackingBean.createReview}" ajax="false">
+                                                 action="#{bookDetailsBackingBean.createReview}" ajax="false" update="growl">
                                     <f:param name="bookId" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
                                     <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
                                 </p:commandButton>
                             </b:column>
-                            <p:message for="reviewInputTextArea" style="color:red"/>
-                            <p:message for="reviewRating" style="color:red"/>
-                        </h:form>
-                    </b:row>
-                </b:container>
-
+                        </b:row>
+                    </b:container>
+                </h:form>
             </b:panel>
         </b:container>
 
