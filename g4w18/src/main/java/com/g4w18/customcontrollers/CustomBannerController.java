@@ -67,7 +67,9 @@ public class CustomBannerController implements Serializable
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Banner> cq = cb.createQuery(Banner.class);
         Root<Banner> banner = cq.from(Banner.class);
+        
         cq.select(banner);
+        cq.where(cb.isTrue(banner.get("isActive")));
         
         Query genres = em.createQuery(cq);
         return genres.getResultList();

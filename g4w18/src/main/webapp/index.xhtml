@@ -17,17 +17,25 @@
                 <div class="top-section">
                     <div id="recent-books">
                         
-                        <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
-                            <div class="book">
-                                <div class="book-thumbnail-container">
-                                    <div class="overlay"></div>
-                                    <div class="overlay-text"><div>View</div></div>
-                                    <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.jpg" />
-                                </div>
-                            </div>
-                        </ui:repeat>
+                        <h:form>
                         
-                        <a class="view-more" href="">View More</a>
+                            <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
+                                <h:commandLink action="bookDetail">
+                                    <f:param name="id" value="#{book.bookId}" />
+
+                                    <div class="book">
+                                        <div class="book-thumbnail-container">
+                                            <div class="overlay"></div>
+                                            <div class="overlay-text"><div>View</div></div>
+                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.jpg" />
+                                        </div>
+                                    </div>
+                                </h:commandLink>
+                            </ui:repeat>
+
+                            <a class="view-more" href="">View More</a>
+                        
+                        </h:form>
                     </div>
 
                     <div id="genres">
@@ -73,10 +81,11 @@
                     <div id="banner">
                         <div class="slide">
                             
-                            <h:graphicImage class="slide-img" library="images" name="slide1.jpg" alt="Ad 1" />
-                            <h:graphicImage class="slide-img" library="images" name="slide2.jpg" alt="Ad 2" />
-                            <h:graphicImage class="slide-img" library="images" name="slide3.jpg" alt="Ad 3" />
-                            <h:graphicImage class="slide-img" library="images" name="slide4.jpg" alt="Ad 4" />
+                            <ui:repeat value="#{bannerBackingBean.activeBanners}" var="banner">
+                                <h:outputLink styleClass="slide-link" value="https://google.com">
+                                    <h:graphicImage class="slide-img" library="images" name="#{banner.bannerName}" alt="#{banner.bannerName}" />
+                                </h:outputLink>
+                            </ui:repeat>
                          </div>
 
                         <a class="prev">&#10094;</a>

@@ -133,6 +133,13 @@ CREATE TABLE BANNER(
     PRIMARY KEY (BANNER_ID)
 ) ENGINE=InnoDB;
 
+--TEMPORARY
+insert into banner values
+(null, "slide1.jpg", "", true),
+(null, "slide2.jpg", "", false),
+(null, "slide3.jpg", "", true),
+(null, "slide4.jpg", "", true);
+
 INSERT INTO BOOK values
 (null, "978-1408855652", "Harry Potter and the Philosopher's Stone", "Bloomsbury Children's Books", "2014-09-01 00:00:00", 352, "Fantasy",
 "Harry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive. Addressed in green ink on yellowish parchment with a purple seal, they are swiftly confiscated by his grisly aunt and uncle. Then, on Harry's eleventh birthday, a great beetle-eyed giant of a man called Rubeus Hagrid bursts in with some astonishing news: Harry Potter is a wizard, and he has a place at Hogwarts School of Witchcraft and Wizardry. An incredible adventure is about to begin! These new editions of the classic and internationally bestselling, multi-award-winning series feature instantly pick-up-able new jackets by Jonny Duddle, with huge child appeal, to bring Harry Potter to the next generation of readers. It's time to PASS THE MAGIC ON ...",
