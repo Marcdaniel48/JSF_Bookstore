@@ -11,7 +11,6 @@
 
             <div class="parallax-layer background"></div>
 
-
             <div class="content">
 
                 <div class="top-section">
@@ -82,7 +81,7 @@
                         <div class="slide">
                             
                             <ui:repeat value="#{bannerBackingBean.activeBanners}" var="banner">
-                                <h:outputLink styleClass="slide-link" value="https://google.com">
+                                <h:outputLink styleClass="slide-link" value="#{banner.bannerLink}">
                                     <h:graphicImage class="slide-img" library="images" name="#{banner.bannerName}" alt="#{banner.bannerName}" />
                                 </h:outputLink>
                             </ui:repeat>
@@ -112,11 +111,17 @@
                     </div>
 
                     <div id="survey">
-                        <div class="center-vertical center-horizontal">
-                            <div>
-                                <h2>Survey coming soon...</h2>
-                            </div>
-                        </div>
+                        <h:form>
+                            <ui:repeat value="#{surveyBackingBean.activeQuestion}" var="question">
+                                <h2>#{question.description}</h2>
+
+                                <h:selectOneRadio value="#{surveyBackingBean.answer}">
+                                    <f:selectItems value="#{surveyBackingBean.answers}" />
+                                </h:selectOneRadio>
+                            </ui:repeat>
+                            
+                            <h:commandButton type="submit" value="Submit" action="#{surveyBackingBean.submitVote}" />
+                        </h:form>
                     </div>
 
                 </div>

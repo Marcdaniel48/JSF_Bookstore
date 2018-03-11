@@ -16,10 +16,11 @@ import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 
 /**
+ *
  * @author Jephthia
  */
-public class QuestionJpaController implements Serializable
-{
+public class QuestionJpaController implements Serializable {
+
     @Resource
     private UserTransaction utx;
 
@@ -114,6 +115,5 @@ public class QuestionJpaController implements Serializable
         cq.select(em.getCriteriaBuilder().count(rt));
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
-    }
-    
+    }   
 }

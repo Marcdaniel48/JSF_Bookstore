@@ -12,11 +12,12 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.Serializable;
 
 /**
  * @author Jephthia
  */
-public class CustomQuestionController
+public class CustomQuestionController implements Serializable
 {
     @Inject
     private QuestionJpaController questionController;
