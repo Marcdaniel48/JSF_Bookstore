@@ -1,5 +1,5 @@
 USE BOOKSTORE;
-select question_id, description, vote_one, vote_two, vote_three, vote_four from question;
+
 DROP TABLE IF EXISTS BOOK_AUTHOR;
 DROP TABLE IF EXISTS INVOICE_DETAIL;
 DROP TABLE IF EXISTS MASTER_INVOICE;
