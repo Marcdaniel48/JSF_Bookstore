@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msgs.managerTitle}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+    
+    <p:panel id="basic" header="#{msgs.managerExplanationSousTitre}" style="margin-bottom:20px">
+        <h:panelGrid columns="1" cellpadding="10">
+            <h:outputText
+                value="#{msgs.managerExplanation}" />
+        </h:panelGrid>
+    </p:panel>
+ 
+        <p:panel id="toggleable" header="#{msgs.managerAddSousTitre}" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+ 
+        
+        <h:form>
+            
+             <p:growl id="growl" showDetail="true" sticky="true"/>
+         <h:panelGrid columns="2" cellpadding="10">
+                 <p:outputLabel>#{msgs.managerAddIsbn}</p:outputLabel>
+                 <p:inputText disabled="true" required="true" value="#{managerBookHandling.book.isbnNumber}" ></p:inputText>
+                 
+                 <p:outputLabel>#{msgs.managerAddTitle}</p:outputLabel>
+                 <p:inputText required="true" value="#{managerBookHandling.book.title}" ></p:inputText>
+                 
+                 <p:outputLabel>#{msgs.managerAddPublisher}</p:outputLabel>
+                 <p:inputText required="true" value="#{managerBookHandling.book.publisher}" ></p:inputText>
+                 
+                 <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
+                 <p:inputText required="true" value="#{managerBookHandling.book.publicationDate}">
+                     <f:convertDateTime pattern="d/M/yyyy" />
+                 </p:inputText>
+                 
+                 <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
+                 <p:inputNumber required="true" value="#{managerBookHandling.book.pageNumber}" ></p:inputNumber>
+                 
+                 <p:outputLabel>#{msgs.managerAddGenre}</p:outputLabel>
+                 <p:inputText required="true" value="#{managerBookHandling.book.genre}" ></p:inputText>
+                 
+                 <p:outputLabel>#{msgs.managerAddDescription}</p:outputLabel>
+                 <p:inputTextarea rows="6" cols="50"  required="true" />
+                 
+                 <p:outputLabel>#{msgs.managerAddFormat}</p:outputLabel>
+                 <p:selectOneRadio id="console" value="" required="true" >
+                    <f:selectItem itemLabel="PDF" itemValue="Xbox One" />
+                    <f:selectItem itemLabel="MOBI" itemValue="PS4" />
+                    <f:selectItem itemLabel="EPUB" itemValue="Wii U" />
+                </p:selectOneRadio>
+                 
+                 <p:outputLabel>#{msgs.managerAddWholePrice}</p:outputLabel>
+                 <p:inputNumber  value="" required="true"  ></p:inputNumber>
+                 
+                 <p:outputLabel>#{msgs.managerAddListPrice}</p:outputLabel>
+                 <p:inputNumber  value="" required="true"  ></p:inputNumber>
+                 
+                 <p:outputLabel>#{msgs.managerAddSalePrice}</p:outputLabel>
+                 <p:inputNumber  value="" required="true"  ></p:inputNumber>
+                 
+                 <p:outputLabel>#{msgs.managerAddInventoryDate}</p:outputLabel>
+                 <p:calendar id="restricted" value="" mindate="0" maxdate="0" />
+                 
+                 <p:outputLabel>#{msgs.managerAddRemovalStatus}</p:outputLabel>
+                 <p:selectBooleanButton required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
+                 
+                 <p:commandButton value="#{msgs.submitButton}" update="growl"/>
+                 <h1></h1>
+        </h:panelGrid>
+         </h:form>
+    </p:panel>
+    
+        <p:panel header="#{msgs.managerEditRemoveTitle}" widgetVar="panelEdit" toggleable="true"  toggleSpeed="500" closeSpeed="500" style="margin-bottom:100px">
+ 
+        
+        <h:form>
+             <p:growl id="growl" showDetail="true" sticky="true"/>
+         <h:panelGrid columns="2" cellpadding="10">
+                 <p:outputLabel>#{msgs.managerSearch}</p:outputLabel>
+                 <p:inputText required="true" requiredMessage="#{msgs.requiredMessageForSearch}" value="#{managerBookHandling.searchBook}" ></p:inputText>
+                 
+                 <p:commandButton value="#{msgs.searchButtonTxt}" action="#{managerBookHandling.search()}"  update="growl"/>
+                 <h1></h1>
+        </h:panelGrid>
+         </h:form>
+    </p:panel>
+        
+    </h:body>
+</html>

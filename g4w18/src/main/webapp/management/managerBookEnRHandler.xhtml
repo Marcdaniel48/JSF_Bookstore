@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+    </h:head>
+    <h:body>
+        <b:navBar brand="Booktopia" brandHref="bookList.xhtml" fluid="true">
+            <b:navbarLinks>
+                <b:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs">
+                    <b:inputText placeholder="Search for a book..."></b:inputText>
+                    <b:commandButton value="Search" iconAwesome="search" action="bookList"></b:commandButton>
+                </b:form>
+            </b:navbarLinks>
+            <b:navbarLinks pull="right" styleClass="hidden-xs">
+            </b:navbarLinks>
+        </b:navBar>
+        <b:container fluid="false">
+
+            <b:form>
+
+                <ui:repeat var="book" value="#{managerBookHandling.booksByTitle}">
+
+                    <b:panel>
+
+                        <b:row styleClass="show-grid">
+
+                            <b:column col-md="2">
+
+                                <b:image library="images" name="lo/#{book.isbnNumber}low.jpg" tooltip="#{book.title}" height="50%" width="50%"></b:image>
+
+                            </b:column>
+
+                            <b:column >
+                                <p:panel  header="#{msgs.managerEdit}#{book.title}"  toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="#{book.title}" style="margin-bottom:20px"  >
+
+
+                                    <h:form>
+
+                                        <p:growl id="growl" showDetail="true" sticky="true"/>
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <p:outputLabel >#{msgs.managerAddIsbn}</p:outputLabel>
+                                            <p:inputText required="true" disabled="true" value="#{book.isbnNumber}" ></p:inputText>
+
+                                            <p:outputLabel>#{msgs.managerAddTitle}</p:outputLabel>
+                                            <p:inputText required="true" value="#{book.title}" ></p:inputText>
+                                            
+                                            <outputLabel>#{msgs.authorBooksBy}</outputLabel>
+                                            <ui:repeat var="author" value="#{managerBookHandling.book.authorList}">
+                                                <p:inputText value="#{author.firstName}"></p:inputText>
+                                                <p:inputText value="#{author.lastName}" ></p:inputText>
+                                            </ui:repeat>
+                                            
+                                            <p:outputLabel>#{msgs.managerAddPublisher}</p:outputLabel>
+                                            <p:inputText required="true" value="#{book.publisher}" ></p:inputText>
+
+                                            <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
+                                            <p:inputText required="true" value="#{book.publicationDate}">
+                                                <f:convertDateTime pattern="d/M/yyyy" />
+                                            </p:inputText>
+
+                                            <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
+                                            <p:inputNumber required="true" value="#{book.pageNumber}" ></p:inputNumber>
+
+                                            <p:outputLabel>#{msgs.managerAddGenre}</p:outputLabel>
+                                            <p:inputText required="true" value="#{book.genre}" ></p:inputText>
+
+                                            <p:outputLabel>#{msgs.managerAddDescription}</p:outputLabel>
+                                            <p:inputTextarea rows="6" cols="50"  required="true" value="#{book.description}" />
+                                            
+                                            <p:outputLabel>#{msgs.managerAddFormat}</p:outputLabel>
+                                            <p:selectOneRadio id="console" value="#{book.format}" required="true" >
+                                                <f:selectItem itemLabel="PDF" itemValue="PDF" />
+                                                <f:selectItem itemLabel="MOBI" itemValue="MOBI" />
+                                                <f:selectItem itemLabel="EPUB" itemValue="EPUB" />
+                                            </p:selectOneRadio>
+
+                                            <p:outputLabel>#{msgs.managerAddWholePrice}</p:outputLabel>
+                                            <p:inputNumber value="#{book.wholesalePrice}" required="true"  ></p:inputNumber>
+
+                                            <p:outputLabel>#{msgs.managerAddListPrice}</p:outputLabel>
+                                            <p:inputNumber  value="#{book.listPrice}" required="true"  ></p:inputNumber>
+
+                                            <p:outputLabel>#{msgs.managerAddSalePrice}</p:outputLabel>
+                                            <p:inputNumber  value="#{book.salePrice}" required="true"  ></p:inputNumber>
+
+                                            <p:outputLabel>#{msgs.managerAddInventoryDate}</p:outputLabel>
+                                            <p:inputText required="true" value="#{book.inventoryDate}" disabled="true">
+                                                <f:convertDateTime pattern="d/M/yyyy" />
+                                            </p:inputText>
+
+                                            <p:outputLabel>#{msgs.managerAddRemovalStatus}</p:outputLabel>
+                                            <p:selectBooleanButton required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" value="#{book.removalStatus}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
+
+                                            <p:commandButton value="#{msgs.submitButton}" update="growl" action="#{managerBookHandling.editBook()}"/>
+                                            <p:commandButton value="Cancel" update="growl"/>
+                                            
+                                            <h1>#{managerBookHandling.message}</h1>
+                                            <h1></h1>
+                                        </h:panelGrid>
+                                    </h:form>
+                                </p:panel>
+                            </b:column>
+<!--                            <b:column >
+                                <p:panel rendered="#{managerBookHandling.renderForm}" id="panelEdit">
+                                <p:panel  header="#{msgs.managerEdit}"  >
+
+
+                                    <h:form>
+
+                                        <p:growl id="growl" showDetail="true" sticky="true"/>
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <p:outputLabel>#{msgs.managerAddIsbn}</p:outputLabel>
+                                            <p:inputText required="true" value="#{book.isbnNumber}" ></p:inputText>
+
+                                            <p:outputLabel>#{msgs.managerAddTitle}</p:outputLabel>
+                                            <p:inputText required="true" value="#{book.title}" ></p:inputText>
+
+                                            <p:outputLabel>#{msgs.managerAddPublisher}</p:outputLabel>
+                                            <p:inputText required="true" value="#{book.publisher}" ></p:inputText>
+
+                                            <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
+                                            <p:inputText required="true" value="#{book.publicationDate}">
+                                                <f:convertDateTime pattern="d/M/yyyy" />
+                                            </p:inputText>
+
+                                            <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
+                                            <p:inputNumber required="true" value="#{book.pageNumber}" ></p:inputNumber>
+
+                                            <p:outputLabel>#{msgs.managerAddGenre}</p:outputLabel>
+                                            <p:inputText required="true" value="#{book.genre}" ></p:inputText>
+
+                                            <p:outputLabel>#{msgs.managerAddDescription}</p:outputLabel>
+                                            <p:inputTextarea rows="6" cols="50"  required="true" value="#{book.description}" />
+
+                                            <p:outputLabel>#{msgs.managerAddFormat}</p:outputLabel>
+                                            <p:selectOneRadio id="console" value="" required="true" >
+                                                <f:selectItem itemLabel="PDF" itemValue="Xbox One" />
+                                                <f:selectItem itemLabel="MOBI" itemValue="PS4" />
+                                                <f:selectItem itemLabel="EPUB" itemValue="Wii U" />
+                                            </p:selectOneRadio>
+
+                                            <p:outputLabel>#{msgs.managerAddWholePrice}</p:outputLabel>
+                                            <p:inputNumber  value="" required="true"  ></p:inputNumber>
+
+                                            <p:outputLabel>#{msgs.managerAddListPrice}</p:outputLabel>
+                                            <p:inputNumber  value="" required="true"  ></p:inputNumber>
+
+                                            <p:outputLabel>#{msgs.managerAddSalePrice}</p:outputLabel>
+                                            <p:inputNumber  value="" required="true"  ></p:inputNumber>
+
+                                            <p:outputLabel>#{msgs.managerAddInventoryDate}</p:outputLabel>
+                                            <p:calendar id="restricted" value="" mindate="0" maxdate="0" />
+
+                                            <p:outputLabel>#{msgs.managerAddRemovalStatus}</p:outputLabel>
+                                            <p:selectBooleanButton required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
+
+                                            <p:commandButton value="#{msgs.submitButton}" update="growl"/>
+                                            <p:commandButton value="Cancel" action="#{managerBookHandling.hideEditForm()}" update="growl editBtn removeBtn"/>
+                                        </h:panelGrid>
+                                    </h:form>
+                                </p:panel>
+                                    </p:panel>
+                            </b:column>-->
+                            <!-- AUTHOR INFOOOOOOOO
+                            <b:form>
+                                <ui:repeat var="author" value="#{searchBackingBean.books}">
+                                    <h:outputText value="#{author.firstName} #{author.lastName}" styleClass="list-group-item-heading"></h:outputText>                     
+                                </ui:repeat>
+                                    </b:form>
+                            -->
+
+                        </b:row>
+
+                    </b:panel>
+
+                </ui:repeat>
+
+            </b:form>
+
+        </b:container>
+        <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
+        <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
+    </h:body>
+</html>
