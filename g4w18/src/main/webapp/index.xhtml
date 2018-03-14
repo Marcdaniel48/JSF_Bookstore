@@ -111,17 +111,25 @@
                     </div>
 
                     <div id="survey">
-                        <h:form>
+                            
+                        <h:form rendered="#{!surveyBackingBean.showResults()}">
                             <ui:repeat value="#{surveyBackingBean.activeQuestion}" var="question">
                                 <h2>#{question.description}</h2>
 
-                                <h:selectOneRadio value="#{surveyBackingBean.answer}">
+                                <h:selectOneRadio id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="Please select one option">
                                     <f:selectItems value="#{surveyBackingBean.answers}" />
                                 </h:selectOneRadio>
+                                <h:message for="surveyChoices" />
                             </ui:repeat>
-                            
-                            <h:commandButton type="submit" value="Submit" action="#{surveyBackingBean.submitVote}" />
+
+                            <h:commandButton type="submit" value="Submit" action="#{surveyBackingBean.submitVote}"/>
+
                         </h:form>
+                        
+                        <div id="surveyChart">
+                            <p:chart rendered="#{surveyBackingBean.showResults()}" type="pie" model="#{surveyBackingBean.chart}" />                        
+                        </div>
+                        
                     </div>
 
                 </div>
