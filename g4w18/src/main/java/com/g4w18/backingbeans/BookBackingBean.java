@@ -77,4 +77,14 @@ public class BookBackingBean implements Serializable
         
         return books;
     }
+    
+    public boolean hasRecommendations()
+    {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Map<String, Object> cookies = context.getExternalContext().getRequestCookieMap();
+        
+        Cookie genresCookie = (Cookie)cookies.get("VisitedGenres");
+        
+        return genresCookie != null;
+    }
 }

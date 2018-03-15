@@ -132,9 +132,9 @@
                         
                     </div>
                     
-                    <div class="recommendations" rendered="#{not empty theBooks.recommendedBooks}">
+                    <div class="recommendations">
                         
-                        <h:form>
+                        <h:form rendered="#{theBooks.hasRecommendations()}">
                         
                             <ui:repeat value="#{theBooks.recommendedBooks}" var="book">
                                 <h1>#{book.title}</h1>
