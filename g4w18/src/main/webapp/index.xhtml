@@ -131,6 +131,30 @@
                         </div>
                         
                     </div>
+                    
+                    <div class="recommendations" rendered="#{not empty theBooks.recommendedBooks}">
+                        
+                        <h:form>
+                        
+                            <ui:repeat value="#{theBooks.recommendedBooks}" var="book">
+                                <h1>#{book.title}</h1>
+                                <h:commandLink action="bookDetail">
+                                    <f:param name="id" value="#{book.bookId}" />
+
+                                    <div class="book">
+                                        <div class="book-thumbnail-container">
+                                            <div class="overlay"></div>
+                                            <div class="overlay-text"><div>View</div></div>
+                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.jpg" />
+                                        </div>
+                                    </div>
+
+                                </h:commandLink>
+                            </ui:repeat>
+                            
+                        </h:form>
+                        
+                    </div>
 
                 </div>
 

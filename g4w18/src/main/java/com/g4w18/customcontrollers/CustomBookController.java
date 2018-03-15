@@ -232,4 +232,21 @@ public class CustomBookController implements Serializable {
         List<Book> toReturn = query.getResultList();
         return toReturn;
     }
+    
+    public List<Book> getRecommendedBooks(String[] genres)
+    {   
+        String whereIN = "";
+        
+        for(String genre : genres)
+            whereIN += "'" + genre + "',";
+        
+        //Remove last comma
+        whereIN = whereIN.substring(0, whereIN.length() - 1);
+        
+        Query query = em.createNativeQuery("select * from book where genre in (" + whereIN + ") order by rand() limit 10", Book.class);
+        
+        List<Book> books = (List<Book>)query.getResultList();
+        
+        return books;
+    }
 }
