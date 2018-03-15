@@ -20,9 +20,59 @@
                         <div class="container">
                             <h1>Reviews waiting for approval</h1>
                             
-                            <ui:repeat value="#{reviewBackingBean.approvedReviews}" var="review">
-                                <p>#{review.review}</p>
-                            </ui:repeat>
+                            <h:form id="pendingReviews">
+                            
+                                <h:dataTable value="#{reviewBackingBean.notApprovedReviews}" var="review"
+                                             styleClass="reviews-table">
+
+                                    <h:column>
+                                        <f:facet name="header">Review</f:facet>
+                                        <h4>#{review.clientId.firstName} #{review.clientId.lastName}</h4>
+                                        <h5>#{review.reviewDate}</h5>
+                                        <p>#{review.review}</p>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">Approval</f:facet>
+                                        
+                                        <h:commandButton value="Approve" action="#{reviewBackingBean.approve(review)}">
+                                            <f:ajax execute="@form" render="pendingReviews :approvedReviews" />
+                                        </h:commandButton>
+                                        <h:commandButton value="Disapprove" action="#{reviewBackingBean.disapprove(review)}">
+                                            <f:ajax execute="@form" render="pendingReviews" />
+                                        </h:commandButton>
+                                    </h:column>
+
+                                </h:dataTable>
+                            
+                            </h:form>
+                            
+                            <hr/>
+                            
+                            <h1>Approved Reviews</h1>
+                            
+                            <h:form id="approvedReviews">
+                            
+                                <h:dataTable value="#{reviewBackingBean.approvedReviews}" var="review"
+                                             styleClass="reviews-table">
+
+                                    <h:column>
+                                        <f:facet name="header">Review</f:facet>
+                                        <h4>#{review.clientId.firstName} #{review.clientId.lastName}</h4>
+                                        <h5>#{review.reviewDate}</h5>
+                                        <p>#{review.review}</p>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">Approval</f:facet>
+                                        <h:commandButton value="Remove Approval" action="#{reviewBackingBean.removeApproval(review)}">
+                                            <f:ajax execute="@form" render=":pendingReviews approvedReviews" />
+                                        </h:commandButton>
+                                    </h:column>
+
+                                </h:dataTable>
+                            
+                            </h:form>
                             
                         </div>
                     </div>
