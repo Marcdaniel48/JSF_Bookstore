@@ -35,7 +35,7 @@ public class CustomBookController implements Serializable {
     private EntityManager em;
 
     public void create(Book book) throws RollbackFailureException, Exception {
-        bookController.edit(book);
+        bookController.create(book);
     }
 
     public void edit(Book book) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {

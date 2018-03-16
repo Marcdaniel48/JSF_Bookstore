@@ -81,6 +81,34 @@ public class ManagerBookBackingBean implements Serializable {
     }
     
     /**
+     * Add book to database
+     * @return Website to move to 
+     * @throws Exception 
+     */
+    public String createBook() throws Exception
+    {
+        logger.log(Level.INFO, "INSIDE OF CREATE BOOK");
+        List<Book> bookResult = bookJpaController.findBookByIsbn(book.getIsbnNumber());
+        logger.log(Level.INFO, book.getIsbnNumber());
+        logger.log(Level.INFO, "RESULTS OF BOOKS FOUND WITH THEW ISBN"+ bookResult.size());
+        if(bookResult.size() == 0)
+        {
+            logger.log(Level.INFO, "INSIDE OF CREATE BOOK 1 IF +++++");
+            message="The book was created!";
+            bookJpaController.create(book);
+            return "managerBookHandler.xhtml";
+        }
+        else
+        {
+            logger.log(Level.INFO, "INSIDE OF BOOK CREATE IF 0----");
+            message="Book already exists!";
+            return "managerBookHandler.xhtml";
+        }
+        
+        
+    }
+    
+    /**
      * Get books with the title provided by the user.
      * 
      * @return List of books found
