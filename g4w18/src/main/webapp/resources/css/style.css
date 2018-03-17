@@ -43,7 +43,10 @@ a:hover
     position: relative;
 /*     border: 3px solid yellow; */
 }
-
+.section-title
+{
+    font-size: initial;
+}
 .center-vertical
 {
     position: absolute;

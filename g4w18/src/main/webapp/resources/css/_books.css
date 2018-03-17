@@ -120,8 +120,4 @@
         animation-fill-mode: none;
         border: 1px solid black;
     }
-    #recent-books .section-title
-    {
-        font-size: initial;
-    }
 }

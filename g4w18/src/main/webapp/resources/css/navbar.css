@@ -15,6 +15,10 @@
     animation: 1s ease-out 2s 1 fadeIn;
     animation-fill-mode: forwards;*/
 }
+.navbar a
+{
+    color: #F2BFA0;
+}
 .navbar .logo
 {
     min-width: 150px;
@@ -145,6 +149,7 @@
     {
         display: block;
         margin: 10px 0px;
+        color: #F2BFA0;
     }
     #hamburger-icon
     {
