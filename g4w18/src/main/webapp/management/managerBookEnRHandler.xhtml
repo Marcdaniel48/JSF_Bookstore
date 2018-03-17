@@ -34,7 +34,7 @@
 
                             <b:column col-md="2">
 
-                                <b:image library="images" name="lo/#{book.isbnNumber}low.jpg" tooltip="#{book.title}" height="50%" width="50%"></b:image>
+                                <b:image library="images" name="lo/#{book.isbnNumber}hi.jpg" tooltip="#{book.title}" height="50%" width="50%"></b:image>
 
                             </b:column>
 
@@ -52,7 +52,7 @@
                                             <p:outputLabel>#{msgs.managerAddTitle}</p:outputLabel>
                                             <p:inputText required="true" value="#{book.title}" ></p:inputText>
                                             
-                                            <outputLabel>#{msgs.authorBooksBy}</outputLabel>
+                                            <p:outputLabel>#{msgs.authorBooksBy}</p:outputLabel>
                                             <ui:repeat var="author" value="#{managerBookHandling.book.authorList}">
                                                 <p:inputText value="#{author.firstName}"></p:inputText>
                                                 <p:inputText value="#{author.lastName}" ></p:inputText>
@@ -100,7 +100,7 @@
                                             <p:selectBooleanButton required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" value="#{book.removalStatus}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
 
                                             <p:commandButton value="#{msgs.submitButton}" update="growl" action="#{managerBookHandling.editBook()}"/>
-                                            <p:commandButton value="Cancel" update="growl"/>
+                                            <p:commandButton value="Cancel" action="managerBookHandler.xhtml" update="growl"/>
                                             
                                             <h1>#{managerBookHandling.message}</h1>
                                             <h1></h1>

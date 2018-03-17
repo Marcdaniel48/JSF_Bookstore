@@ -73,7 +73,7 @@
                  <p:selectBooleanButton value="#{managerBookHandling.book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
                  
                  <p:commandButton value="#{msgs.submitButton}" action="#{managerBookHandling.createBook()}" update="growl"/>
-                 <h1></h1>
+                 <h:outputLabel>#{managerBookHandling.message}</h:outputLabel>
         </h:panelGrid>
          </h:form>
     </p:panel>

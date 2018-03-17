@@ -80,10 +80,6 @@ public class SearchBackingBean implements Serializable {
                 
             case "Publisher":
                 result = getBooksByPublisher().size();
-//                List<Book> publishers = getPublishers();
-//                List<Book> allBooksFromPublishers = getBooksForPublishers(publishers);
-//                result = allBooksFromPublishers.size();
-                
                 break;
                 default:
                 //nothing to display so stay on same page
@@ -133,8 +129,6 @@ public class SearchBackingBean implements Serializable {
                 
             case "Publisher":
                userBooks = getBooksByPublisher();
-//                List<Book> publishers = getPublishers();
-//                userBooks = getBooksForPublishers(publishers);
                 break;
         }
         return userBooks;

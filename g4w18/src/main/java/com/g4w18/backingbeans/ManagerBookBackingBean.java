@@ -51,6 +51,7 @@ public class ManagerBookBackingBean implements Serializable {
      * @throws Exception 
      */
     public String editBook() throws Exception {
+        logger.log(Level.INFO, "WHATS INSIDE OF BOOK: " + book.getTitle());
         bookJpaController.edit(book);
         message = "The book was updated.";
         return "null";
