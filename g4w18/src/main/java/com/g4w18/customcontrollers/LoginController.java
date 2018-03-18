@@ -5,18 +5,13 @@
  */
 package com.g4w18.customcontrollers;
 
-import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.backingbeans.BookDetailsBackingBean;
-import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -26,14 +21,17 @@ import javax.servlet.http.HttpSession;
  * @author Marc-Daniel
  */
 @Named
-@ViewScoped
-public class LoginController implements Serializable{
+@SessionScoped
+public class LoginController implements Serializable
+{
     @Inject
     private CustomClientController clientJpaController;
 
     private String username;
     private String password;
-        private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
+    private boolean loggedIn;
+    
+    private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
 
     public String getUsername()
@@ -55,12 +53,20 @@ public class LoginController implements Serializable{
     {
         this.password = password;
     }
+    
+    public boolean getLoggedIn()
+    {
+        return loggedIn;
+    }
+    
+    public void setLoggedIn(boolean loggedIn)
+    {
+        this.loggedIn = loggedIn;
+    }
 
     public String login()
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-
-        boolean loggedIn;
 
         Client client = clientJpaController.findClientByCredentials(username, password);
 
@@ -85,5 +91,9 @@ public class LoginController implements Serializable{
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.setAttribute("username", null);
         session.setAttribute("loggedIn", null);
+        
+        username = null;
+        password = null;
+        loggedIn = false;
     }
 }
