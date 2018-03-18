@@ -11,6 +11,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.g4w18.entities.Book;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.validation.constraints.Size;
 
 
@@ -100,7 +103,21 @@ public class SearchBackingBean implements Serializable {
            return "resultPlus";
        }
        else if(result == 1)
-           return "resultOne";
+       {
+            try {
+                
+//                Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+//                params.put("id", "1");
+                
+                ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+                context.redirect(context.getRequestContextPath() + "/bookDetail.xhtml?id=1");
+                
+                
+            } catch (IOException ex) {
+                Logger.getLogger(SearchBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return "";
+       }
        else
        {    
            message="We have found nothing for you ! You searched for: " + searchTerm;
