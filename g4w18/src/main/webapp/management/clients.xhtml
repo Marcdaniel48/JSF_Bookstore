@@ -17,7 +17,8 @@ and open the template in the editor.
         
         <h:form>
             <p:dataTable value="#{manageClientsBackingBean.clientJpaController.findClientEntities()}" var="client" paginator="true" rows="25" 
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                         editable="true">
                 <p:column headerText="Id">
                     <h:outputText value="#{client.clientId}"/>
                 </p:column>
@@ -43,7 +44,10 @@ and open the template in the editor.
                     <h:outputText value="#{client.address1}"/>
                 </p:column>
                 <p:column headerText="#{msgs.address2}">
-                    <h:outputText value="#{client.address2}"/>
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.address2}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.address2}"/></f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="#{msgs.postalcode}">
                     <h:outputText value="#{client.postalCode}"/>
@@ -66,8 +70,11 @@ and open the template in the editor.
                 <p:column headerText="#{msgs.manager}">
                     <h:outputText value="#{client.isManager}"/>
                 </p:column>
+                
+                <p:column>
+                    <p:rowEditor />
+                </p:column>
             </p:dataTable>
-            
         </h:form>
         
     </h:body>
