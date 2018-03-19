@@ -28,13 +28,6 @@ public class ShoppingCartBackingBean implements Serializable
     @Inject
     private ShoppingCart cart;
 
-    public List<Book> getShoppingCartBooks()
-    {
-        List<Book> list = cart.getShoppingCartBooks();
-
-        return list;
-    }
-
     public ShoppingCart getShoppingCart()
     {
         return cart;
@@ -47,5 +40,10 @@ public class ShoppingCartBackingBean implements Serializable
             return book.getSalePrice();
 
         return book.getListPrice();
+    }
+    
+    public void proceedToCheckout()
+    {
+        
     }
 }

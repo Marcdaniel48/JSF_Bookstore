@@ -25,26 +25,57 @@
        </b:navBar>
         <b:container fluid="false">
             <b:form>
-                <b:panel>
+                <b:panel title="#{msgs.shoppingCart}" collapsible="false">
+                    <b:row styleClass="show-grid">
+                            <b:column col-md="3">
+                            </b:column>
+                            <b:column col-md="3">
+                                <b>#{msgs.title}</b>
+                            </b:column>
+                            <b:column col-md="3">
+                                <b>#{msgs.price}</b>
+                            </b:column>
+                            <b:column col-md="3">
+                                <b>#{msgs.removeItem}</b>
+                            </b:column>
+                    </b:row>
+                    
+                    <br></br> 
+                
                     <ui:repeat var="book" value="#{shoppingCartBackingBean.shoppingCart.shoppingCartBooks}">
                         <b:row styleClass="show-grid">
-                            <b:column col-md="1" col-xs="12">
+                            <b:column col-md="3">
                                 <b:container>
                                     <b:image library="images" name="#{book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid" height="10%" width="5%"></b:image>
                                 </b:container>
                             </b:column>
-                            <b:column col-md="1">
+                            <b:column col-md="3">
                                 <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
                                 <f:param name="id" value="#{book.bookId}" />
                             </b:column>
-                            <b:column col-md="2">
+                            <b:column col-md="3">
                                 <h:outputText value="#{shoppingCartBackingBean.getPrice(book)} CAD"></h:outputText>
                             </b:column>
                             <b:column col-md="3">
-                                <h:commandLink value="Delete" action="#{shoppingCartBackingBean.shoppingCart.removeFromCart(book)}" />
+                                <b:commandButton value="#{msgs.remove}" action="#{shoppingCartBackingBean.shoppingCart.removeFromCart(book)}" />
                             </b:column>
                         </b:row>
                     </ui:repeat>
+                    
+                    <br></br>
+                    <br></br>
+                    
+                    <b:row>
+                        <b:column col-md="3">
+                        </b:column>
+                        <b:column col-md="3">
+                        </b:column>
+                        <b:column col-md="3">
+                        </b:column>
+                        <b:column col-md="3">
+                            <b:commandButton value="#{msgs.checkout}" action="#{shoppingCartBackingBean.proceedToCheckout()}" />
+                        </b:column>
+                    </b:row>
                 </b:panel>
             </b:form>
         </b:container>
