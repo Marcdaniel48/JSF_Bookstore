@@ -73,9 +73,10 @@
                         <b:column col-md="3">
                         </b:column>
                         <b:column col-md="3">
-                            <b:commandButton value="#{msgs.checkout}" action="#{shoppingCartBackingBean.proceedToCheckout()}" />
+                            <b:commandButton id="checkoutButton" value="#{msgs.checkout}" action="#{shoppingCartBackingBean.proceedToCheckout()}"/>
                         </b:column>
                     </b:row>
+                    
                 </b:panel>
             </b:form>
         </b:container>
