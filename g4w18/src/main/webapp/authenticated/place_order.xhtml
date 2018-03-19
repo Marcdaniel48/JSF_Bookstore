@@ -59,9 +59,9 @@ and open the template in the editor.
                         <h4>#{msgs.orderSummary}</h4>
                         #{msgs.totalBeforeTax}: #{shoppingCartBackingBean.shoppingCart.subtotal}
                         <hr/>
-                        #{msgs.estimatedTax}: #{orderBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * (1 + orderBacking.taxRate))}
+                        #{msgs.estimatedTax}: #{orderBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * orderBacking.taxRate)}
                         <br/>
-                        <b>#{msgs.orderTotal}:</b>
+                        <b>#{msgs.orderTotal}: #{orderBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * (1 + orderBacking.taxRate))}</b>
                         <br/><br/>
                         
                         <b:commandButton value="#{msgs.placeOrder}" action="#{orderBacking.createInvoice}"/>
