@@ -16,7 +16,8 @@ and open the template in the editor.
     <h:body>
         
         <h:form>
-            <p:dataTable value="#{manageClientsBackingBean.clientJpaController.findClientEntities()}" var="client">
+            <p:dataTable value="#{manageClientsBackingBean.clientJpaController.findClientEntities()}" var="client" paginator="true" rows="25" 
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
                 <p:column headerText="Id">
                     <h:outputText value="#{client.clientId}"/>
                 </p:column>
