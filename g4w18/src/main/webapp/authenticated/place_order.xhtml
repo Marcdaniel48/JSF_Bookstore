@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>#{msgs.placeOrder}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -67,7 +68,43 @@ and open the template in the editor.
                     </h:form>
                 </b:panel>
             </b:column>
+            
+            <b:column>
+                <b:panel>
+                    <b:row styleClass="show-grid">
+                            <b:column col-md="4">
+                            </b:column>
+                            <b:column col-md="4">
+                                <b>#{msgs.title}</b>
+                            </b:column>
+                            <b:column col-md="4">
+                                <b>#{msgs.price}</b>
+                            </b:column>
+                    </b:row>
+
+                    <br></br> 
+
+                    <ui:repeat var="book" value="#{shoppingCartBackingBean.shoppingCart.shoppingCartBooks}">
+                        <b:row styleClass="show-grid">
+                            <b:column col-md="4">
+                                <b:container>
+                                    <b:image library="images" name="#{book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid" height="10%" width="5%"></b:image>
+                                </b:container>
+                            </b:column>
+                            <b:column col-md="4">
+                                <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
+                                <f:param name="id" value="#{book.bookId}" />
+                            </b:column>
+                            <b:column col-md="4">
+                                <h:outputText value="#{shoppingCartBackingBean.getPrice(book)} CAD"></h:outputText>
+                            </b:column>
+                        </b:row>
+                    </ui:repeat>
+                </b:panel>
+            </b:column>
         </b:container>
+        
+        
         
         
         <!-- load js at bottom for faster loading-->
