@@ -78,6 +78,7 @@ public class LoginController implements Serializable
         else
         {
             loggedIn = false;
+            return "";
         }
 
         session.setAttribute("loggedIn", loggedIn);

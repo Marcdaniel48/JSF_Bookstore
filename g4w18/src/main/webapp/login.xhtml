@@ -29,9 +29,10 @@
                                 <h:outputLabel class="label" for="password" value="#{msgs.password}"/>
                                 <h:inputSecret id="password" value="#{loginController.password}" label="#{msgs.password}"/>
 
+                                <h:commandButton value="#{msgs.registerbutton}" action="registration.xhtml"/>
                                 <h:commandButton value="#{msgs.loginbutton}" action="#{loginController.login()}"/>
                             </h:form>
-
+                            
                             <h:outputLabel value="Login status: "/>
                             <h:outputText value="#{session.getAttribute('loggedIn')}"/>
                         
