@@ -90,3 +90,23 @@
 {
     background-color: #F2BFA0;
 }
+
+@media only screen and (max-width: 800px)
+{
+    #banner
+    {
+        width: 100%;
+        height: 120px;
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        margin: 5px 0px;
+        background-color: transparent;
+        opacity: 1;
+        transform: none;
+        animation: none;
+        animation-fill-mode: none;
+    }
+}

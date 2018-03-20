@@ -61,3 +61,10 @@ a:hover
     transform: translate(-50%, 0%);
     -ms-transform: translate(-50%, 0%);
 }
+@media only screen and (max-width: 800px)
+{
+    .top-section
+    {
+        padding: 0px 10px;
+    }
+}

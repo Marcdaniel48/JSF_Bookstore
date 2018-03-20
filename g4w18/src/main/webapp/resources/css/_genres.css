@@ -46,10 +46,10 @@
         right: auto;
         top: auto;
         bottom: auto;
-        margin-left: 10px;
-        margin-right: 10px;
         text-align: center;
         font-size: 1em;
+        margin: 5px 0px;
+        padding-top: 10px;
         opacity: 1;
         transform: none;
         animation: none;
@@ -71,6 +71,6 @@
         display: inline-block;
         margin: 5px 5px;
         padding: 5px;
-        border: 1px solid black;
+        /*border: 1px solid black;*/
     }
 }

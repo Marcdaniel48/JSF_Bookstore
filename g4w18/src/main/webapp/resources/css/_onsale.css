@@ -19,12 +19,38 @@
     animation-fill-mode: forwards;
 }
 #book-sales .prev,
-#book-sales .next
+#book-sales .next,
+.recommendations .prev,
+.recommendations .next
 {
     padding-left: 6px;
     padding-right: 8px;
 }
-#book-sales .book
+#book-sales .book,
+.recommendations .book
 {
     display: none;
+}
+@media only screen and (max-width: 800px)
+{
+    #book-sales
+    {
+        position: relative;
+    /*     height: auto; */
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        margin: 5px 0px;
+        padding-top: 10px;
+        font-size: 0;
+        letter-spacing: 0px;
+        text-align: center;
+        background-color: transparent;
+        opacity: 1;
+        transform: none;
+        animation: none;
+        animation-fill-mode: none;
+        border: 1px solid black;
+    }
 }

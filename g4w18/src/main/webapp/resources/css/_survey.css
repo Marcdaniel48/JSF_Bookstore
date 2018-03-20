@@ -12,3 +12,33 @@
     animation: 1s ease-out 2.3s 1 slideInFromRight;
     animation-fill-mode: forwards;
 }
+.surveyChoices
+{
+    width: 100%;
+}
+.surveyChoices td
+{
+    display: block;
+    padding: 5px;
+}
+
+@media only screen and (max-width: 800px)
+{
+    #survey
+    {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        margin: 5px 0px;
+        padding-top: 10px;
+        text-align: center;
+        background-color: transparent;
+        opacity: 1;
+        transform: none;
+        animation: none;
+        animation-fill-mode: none;
+        border: 1px solid black;
+    }
+}

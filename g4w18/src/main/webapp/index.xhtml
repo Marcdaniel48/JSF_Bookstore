@@ -51,10 +51,27 @@
                             </h:form>
                         </div>
                     </div>
+                    
+                    <div id="banner">
+                        <div class="slide">
+                            
+                            <ui:repeat value="#{bannerBackingBean.activeBanners}" var="banner">
+                                <h:outputLink styleClass="slide-link" value="#{banner.bannerLink}">
+                                    <h:graphicImage class="slide-img" library="images" name="#{banner.bannerName}" alt="#{banner.bannerName}" />
+                                </h:outputLink>
+                            </ui:repeat>
+                         </div>
 
-                    <!--
+                        <a class="prev">&#10094;</a>
+                        <a class="next">&#10095;</a>
+
+                        <div class="dots-container"></div>
+                    </div>
+
 
                     <div id="book-sales">
+                        
+                        <h1 class="section-title">Books On Sale!</h1>
                         
                         <h:form>
                         
@@ -75,27 +92,62 @@
                             
                         </h:form>
 
-                        <a class="view-more" href="">View More</a>
-
                         <a class="prev disabled">&#10094;</a>
                         <a class="next">&#10095;</a>
                     </div>
+                    
+                    <div class="recommendations">
+                        
+                        <h1 class="section-title">Recommendations</h1>
+                        
+                        <h:form rendered="#{theBooks.hasRecommendations()}">
+                        
+                            <ui:repeat value="#{theBooks.recommendedBooks}" var="book">
+                                <h:commandLink action="bookDetail">
+                                    <f:param name="id" value="#{book.bookId}" />
 
-                    <div id="banner">
-                        <div class="slide">
-                            
-                            <ui:repeat value="#{bannerBackingBean.activeBanners}" var="banner">
-                                <h:outputLink styleClass="slide-link" value="#{banner.bannerLink}">
-                                    <h:graphicImage class="slide-img" library="images" name="#{banner.bannerName}" alt="#{banner.bannerName}" />
-                                </h:outputLink>
+                                    <div class="book">
+                                        <div class="book-thumbnail-container">
+                                            <div class="overlay"></div>
+                                            <div class="overlay-text"><div>View</div></div>
+                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
+                                        </div>
+                                    </div>
+
+                                </h:commandLink>
                             </ui:repeat>
-                         </div>
-
-                        <a class="prev">&#10094;</a>
+                            
+                        </h:form>
+                        
+                        <a class="prev disabled">&#10094;</a>
                         <a class="next">&#10095;</a>
-
-                        <div class="dots-container"></div>
+                        
                     </div>
+                    
+                    <div id="survey">
+                            
+                        <h:form id="surveyForm" rendered="#{!surveyBackingBean.showResults()}">
+                            <ui:repeat value="#{surveyBackingBean.activeQuestion}" var="question">
+                                <h1 class="section-title">#{question.description}</h1>
+
+                                <h:selectOneRadio class="surveyChoices" id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="Please select one option">
+                                    <f:selectItems value="#{surveyBackingBean.answers}" />
+                                </h:selectOneRadio>
+                                <h:message for="surveyChoices" />
+                            </ui:repeat>
+
+                            <h:commandButton type="submit" value="Submit" action="#{surveyBackingBean.submitVote}"/>
+
+                        </h:form>
+                        
+                        <div id="surveyChart">
+                            <p:chart rendered="#{surveyBackingBean.showResults()}" type="pie" model="#{surveyBackingBean.chart}" />                        
+                        </div>
+                        
+                    </div>
+
+                                <!--
+        
 
                     <div id="rss-feed">
                         
@@ -114,51 +166,9 @@
                         <div class="overlay-text"><div>Read More</div></div>
                     </div>
 
-                    <div id="survey">
-                            
-                        <h:form rendered="#{!surveyBackingBean.showResults()}">
-                            <ui:repeat value="#{surveyBackingBean.activeQuestion}" var="question">
-                                <h2>#{question.description}</h2>
-
-                                <h:selectOneRadio id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="Please select one option">
-                                    <f:selectItems value="#{surveyBackingBean.answers}" />
-                                </h:selectOneRadio>
-                                <h:message for="surveyChoices" />
-                            </ui:repeat>
-
-                            <h:commandButton type="submit" value="Submit" action="#{surveyBackingBean.submitVote}"/>
-
-                        </h:form>
-                        
-                        <div id="surveyChart">
-                            <p:chart rendered="#{surveyBackingBean.showResults()}" type="pie" model="#{surveyBackingBean.chart}" />                        
-                        </div>
-                        
-                    </div>
                     
-                    <div class="recommendations">
-                        
-                        <h:form rendered="#{theBooks.hasRecommendations()}">
-                        
-                            <ui:repeat value="#{theBooks.recommendedBooks}" var="book">
-                                <h1>#{book.title}</h1>
-                                <h:commandLink action="bookDetail">
-                                    <f:param name="id" value="#{book.bookId}" />
-
-                                    <div class="book">
-                                        <div class="book-thumbnail-container">
-                                            <div class="overlay"></div>
-                                            <div class="overlay-text"><div>View</div></div>
-                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
-                                        </div>
-                                    </div>
-
-                                </h:commandLink>
-                            </ui:repeat>
-                            
-                        </h:form>
-                        
-                    </div>
+                    
+                    
 -->
                 </div>
 
