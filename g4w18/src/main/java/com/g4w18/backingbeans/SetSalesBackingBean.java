@@ -1,5 +1,7 @@
 package com.g4w18.backingbeans;
 
+import com.g4w18.controllers.exceptions.NonexistentEntityException;
+import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
@@ -9,6 +11,7 @@ import java.util.logging.Logger;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.RowEditEvent;
 
 /**
  * This class is responsible for backing a list of books on sale coming from the
@@ -66,6 +69,12 @@ public class SetSalesBackingBean implements Serializable {
             log.log(Level.INFO, "allBooks size: {0}", allBooks.size());
         }
         return allBooks;
+    }
+
+    public String onRowEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
+        Book editedBook = (Book) event.getObject();
+        customBookController.edit(editedBook);
+        return null;
     }
 
 }

@@ -26,6 +26,17 @@ and open the template in the editor.
                          paginator="true" rows="15"
                          emptyMessage="#{msgs.managerSetSalesNoBooksFound}"
                          editable="true">
+                <f:facet name="header">
+                    #{msgs.managerSetSalesTitle}
+                    <p:menuButton value="#{msgs.managerSetSalesFilterBy}" >
+                        <p:menuitem value="#{msgs.managerSetSalesAllBooks}"></p:menuitem>
+                        <p:menuitem value="#{msgs.managerSetSalesSaleBooks}"></p:menuitem>
+                        <p:menuitem value="#{msgs.managerSetSalesNoSaleBooks}"></p:menuitem>
+                    </p:menuButton>
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{setSalesBackingBean.onRowEdit}"/>
+
                 <p:column headerText="#{msgs.managerSetSalesBookId}" filterBy="#{booksOnSale.bookId}" filterMatchMode="contains">
                     <h:outputText value="#{booksOnSale.bookId}"></h:outputText>
                 </p:column>
