@@ -3,15 +3,10 @@ package com.g4w18.customcontrollers;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -19,55 +14,68 @@ import javax.servlet.http.HttpSession;
  *
  * @author Marc-Daniel
  */
-@ViewScoped
+@SessionScoped
 public class ShoppingCart implements Serializable
 {
-    private List<Book> books;
-    private HttpSession session;
+    private List<Book> shoppingCartBooks;
 
     @Inject
     private BookJpaController control;
     
-    public ShoppingCart()
-    {
-        session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-
-        books = new ArrayList<>();
-
-        if((List<Book>)session.getAttribute("shoppingCart") != null)
-        {
-            books = (List<Book>)session.getAttribute("shoppingCart");
-        }
-    }
     public void addToCart(Book book)
     {
-        if(!books.contains(book))
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        
+        shoppingCartBooks = (List<Book>)(session.getAttribute("shoppingCart"));
+        if(shoppingCartBooks == null)
         {
-            books.add(book);
-            session.setAttribute("shoppingCart", books);
-            System.out.println("added");
-        }System.out.println("not");
+            shoppingCartBooks = new ArrayList<>();
+        }
+        
+        if(!shoppingCartBooks.contains(book))
+        {
+            shoppingCartBooks.add(book);
+            session.setAttribute("shoppingCart", shoppingCartBooks);
+        }
     }
 
     public void removeFromCart(Book book)
     {
-        if(books.contains(book))
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        
+        shoppingCartBooks = (List<Book>)(session.getAttribute("shoppingCart"));
+        if(shoppingCartBooks == null)
         {
-            books.remove(book);
-            session.setAttribute("shoppingCart", books);
+            shoppingCartBooks = new ArrayList<>();
+        }
+        
+        if(shoppingCartBooks.contains(book))
+        {
+            shoppingCartBooks.remove(book);
+            session.setAttribute("shoppingCart", shoppingCartBooks);
         }
     }
 
     public List<Book> getShoppingCartBooks()
     {
-        return books;
+        if(shoppingCartBooks == null)
+        {
+            shoppingCartBooks = new ArrayList<>();
+        }
+        
+        return shoppingCartBooks;
+    }
+    
+    public void setShoppingCartBooks(List<Book> shoppingCartBooks)
+    {
+        this.shoppingCartBooks = shoppingCartBooks;
     }
     
     public double getSubtotal()
     {
         double sum = 0;
         
-        for(Book book : books)
+        for(Book book : shoppingCartBooks)
         {
             if(book.getSalePrice().doubleValue() > 0)
                 sum += book.getSalePrice().doubleValue();

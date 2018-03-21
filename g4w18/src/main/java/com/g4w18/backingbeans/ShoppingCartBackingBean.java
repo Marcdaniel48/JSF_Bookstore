@@ -5,6 +5,7 @@
  */
 package com.g4w18.backingbeans;
 
+import com.g4w18.customcontrollers.LoginController;
 import com.g4w18.customcontrollers.ShoppingCart;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
@@ -12,6 +13,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -27,13 +30,9 @@ public class ShoppingCartBackingBean implements Serializable
 
     @Inject
     private ShoppingCart cart;
-
-    public List<Book> getShoppingCartBooks()
-    {
-        List<Book> list = cart.getShoppingCartBooks();
-
-        return list;
-    }
+    
+    @Inject
+    private LoginController login;
 
     public ShoppingCart getShoppingCart()
     {
@@ -47,5 +46,19 @@ public class ShoppingCartBackingBean implements Serializable
             return book.getSalePrice();
 
         return book.getListPrice();
+    }
+    
+    public String proceedToCheckout()
+    {
+        if(cart.getShoppingCartBooks().isEmpty())
+        {
+            return "";
+        }
+        else if(login == null || !login.getLoggedIn())
+        {
+            return "login.xhtml";
+        }
+        
+        return "authenticated/finalization.xhtml";
     }
 }
