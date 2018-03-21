@@ -5,19 +5,18 @@
  */
 package com.g4w18.backingbeans;
 
-import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.entities.Client;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.validator.ValidatorException;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,7 +25,7 @@ import javax.inject.Named;
  * @author Marc-Daniel
  */
 @Named("clientBacking")
-@RequestScoped
+@ViewScoped
 public class ClientBackingBean implements Serializable
 {
     @Inject
@@ -71,18 +70,20 @@ public class ClientBackingBean implements Serializable
     }
     
     
-    
+    private static Collection<SelectItem> titleOptions;
     public Collection<SelectItem> getTitleOptions() {
         return titleOptions;
     }
-
-    private static Collection<SelectItem> titleOptions;
     
+    private static Collection<SelectItem> provinceOptions;
     public Collection<SelectItem> getProvinceOptions() {
         return provinceOptions;
     }
     
-    private static Collection<SelectItem> provinceOptions;
+    private static Collection<SelectItem> isManagerOptions;
+    public Collection<SelectItem> getIsManagerOptions() {
+        return isManagerOptions;
+    }
     
     static 
     {
@@ -110,5 +111,9 @@ public class ClientBackingBean implements Serializable
         provinceOptions.add(new SelectItem("QC"));
         provinceOptions.add(new SelectItem("SK"));
         provinceOptions.add(new SelectItem("YT"));
+        
+        isManagerOptions = new ArrayList<SelectItem>();
+        isManagerOptions.add(new SelectItem(Boolean.TRUE));
+        isManagerOptions.add(new SelectItem(Boolean.FALSE));
     }
 }
