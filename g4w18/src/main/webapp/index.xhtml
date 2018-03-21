@@ -56,7 +56,7 @@
                         <div class="slide">
                             
                             <ui:repeat value="#{bannerBackingBean.activeBanners}" var="banner">
-                                <h:outputLink styleClass="slide-link" value="#{banner.bannerLink}">
+                                <h:outputLink styleClass="slide-link" target="_blank" value="#{banner.bannerLink}">
                                     <h:graphicImage class="slide-img" library="images" name="#{banner.bannerName}" alt="#{banner.bannerName}" />
                                 </h:outputLink>
                             </ui:repeat>
@@ -147,31 +147,30 @@
                         </div>
                         
                     </div>
-
-                                <!--
         
-
                     <div id="rss-feed">
-                        
-                        
 
-                        <div class="center-vertical">
-                            <div>
+                        <!--<h1 class="section-title">News</h1>-->
+                        
+                        <!--<div class="center-vertical">-->
+                            <form>
                                 <ui:repeat value="#{rssBackingBean.articles}" var="article" size="1">
-                                    <h2>#{article.title}</h2>
+                                    <h1 class="section-title">Title #{article.title}</h1>
                                     <br/>
-                                    <p>#{article.description}</p>
+                                    <p>Description: #{article.description}</p>
+                                    <br/>
+                                    <h:outputLink target="_blank" value="#{article.link}"><b>Read More</b></h:outputLink>
                                 </ui:repeat>
-                            </div>
-                        </div>
-                        <div class="overlay"></div>
-                        <div class="overlay-text"><div>Read More</div></div>
+                            </form>
+                        
+                            <a class="prev">&#10094;</a>
+                            <a class="next">&#10095;</a>
+                        <!--</div>-->
+<!--                        <div class="overlay"></div>
+                        <div class="overlay-text"><div>Read More</div></div>-->
+                        
                     </div>
 
-                    
-                    
-                    
--->
                 </div>
 
             </div>
