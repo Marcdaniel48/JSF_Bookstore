@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS TAX;
 DROP TABLE IF EXISTS QUESTION;
 DROP TABLE IF EXISTS QUESTION_OPTION;
 DROP TABLE IF EXISTS BANNER;
+DROP TABLE IF EXISTS RSS;
 
 CREATE TABLE BOOK (
     BOOK_ID int NOT NULL AUTO_INCREMENT,
@@ -132,6 +133,13 @@ CREATE TABLE BANNER(
     IS_ACTIVE boolean NOT NULL default false,
     PRIMARY KEY (BANNER_ID)
 ) ENGINE=InnoDB;
+
+CREATE TABLE RSS(
+    RSS_ID int NOT NULL AUTO_INCREMENT,
+    RSS_LINK varchar(100) NOT NULL default '',
+    IS_ACTIVE boolean NOT NULL default false,
+    PRIMARY KEY (RSS_ID)
+) engine=InnoDB;
 
 INSERT INTO BOOK values
 (null, "978-1408855652", "Harry Potter and the Philosopher's Stone", "Bloomsbury Children's Books", "2014-09-01 00:00:00", 352, "Fantasy",
@@ -978,7 +986,7 @@ insert into BOOK_AUTHOR (BOOK_ID, AUTHOR_ID) values
 (99,81),
 (100,85);
 
-insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_FOUR, VOTE_ONE, VOTE_TWO, VOTE_THREE, VOTE_FOUR) values
+insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_FOUR, VOTE_ONE, VOTE_TWO, VOTE_THREE, VOTE_FOUR, IS_ACTIVE) values
 ('At what time of the day do you prefer to read?', 'Morning', 'Noon', 'Afternoon', 'Evening', 0, 0, 0, 0, false),
 ('What is your favorite genre?', 'SciFi', 'Biography', 'Romance', 'Mystery', 0, 0, 0, 0, false),
 ('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0, true),
@@ -991,8 +999,7 @@ INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE,
 (1, 1, 8.99, 9.975, 5, 0),
 (1, 2, 5.99, 9.975, 5, 0),
 (1, 3, 5.99, 9.975, 5, 0),
-(1, 4, 7.99, 9.975, 5, 0)
-;
+(1, 4, 7.99, 9.975, 5, 0);
 
-
-
+INSERT INTO RSS (RSS_LINK, IS_ACTIVE) values
+('http://www.cbc.ca/cmlink/rss-sports', true);
