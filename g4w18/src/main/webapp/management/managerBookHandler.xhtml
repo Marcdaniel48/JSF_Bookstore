@@ -42,19 +42,19 @@
                  </p:inputText>
                  
                  <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
-                 <p:inputNumber  required="true" value="#{managerBookHandling.book.pageNumber}" ></p:inputNumber>
+                 <p:inputNumber   value="#{managerBookHandling.book.pageNumber}" required="true" ></p:inputNumber>
                  
                  <p:outputLabel>#{msgs.managerAddGenre}</p:outputLabel>
-                 <p:inputText required="true" value="#{managerBookHandling.book.genre}" ></p:inputText>
+                 <p:selectOneMenu required="true" value="#{managerBookHandling.book.genre}" >
+                     <f:selectItems value="#{managerBookHandling.genreOptionValue}"/>
+                 </p:selectOneMenu>
                  
                  <p:outputLabel>#{msgs.managerAddDescription}</p:outputLabel>
                  <p:inputTextarea rows="6" cols="50" value="#{managerBookHandling.book.description}"  required="true" />
                  
                  <p:outputLabel>#{msgs.managerAddFormat}</p:outputLabel>
-                 <p:selectOneRadio id="console" value="#{managerBookHandling.book.format}" required="true" >
-                    <f:selectItem itemLabel="PDF" itemValue="Xbox One" />
-                    <f:selectItem itemLabel="MOBI" itemValue="PS4" />
-                    <f:selectItem itemLabel="EPUB" itemValue="Wii U" />
+                 <p:selectOneRadio id="format" value="#{managerBookHandling.book.format}" required="true" >
+                     <f:selectItems value="#{managerBookHandling.formats}" var="f" itemLabel="#{managerBookHandling.book.format}" itemValue="#{managerBookHandling.book.format}"></f:selectItems>
                 </p:selectOneRadio>
                  
                  <p:outputLabel>#{msgs.managerAddWholePrice}</p:outputLabel>
@@ -72,8 +72,12 @@
                  <p:outputLabel>#{msgs.managerAddRemovalStatus}</p:outputLabel>
                  <p:selectBooleanButton value="#{managerBookHandling.book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
                  
+                 <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
+                 <p:fileUpload fileLimit="1" required="true" mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                 
                  <p:commandButton value="#{msgs.submitButton}" action="#{managerBookHandling.createBook()}" update="growl"/>
                  <h:outputLabel>#{managerBookHandling.message}</h:outputLabel>
+                 
         </h:panelGrid>
          </h:form>
     </p:panel>

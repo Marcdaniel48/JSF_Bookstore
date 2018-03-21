@@ -4,9 +4,13 @@ import com.g4w18.controllers.BookJpaController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
@@ -32,6 +36,36 @@ public class ManagerBookBackingBean implements Serializable {
     
     private boolean render=true;
     private boolean renderEdit=false;
+    private List<String> formats;
+    
+    
+    //Genredown search options
+    private static Map<String,Object> genreOptions;
+    static{
+        genreOptions = new LinkedHashMap<String,Object>();
+        
+        genreOptions.put("Fantasy","Fantasy");
+        genreOptions.put("Mystery","Mystery");
+        genreOptions.put("Science Fiction","Science Fiction");
+        genreOptions.put("Romance","Romance");
+        genreOptions.put("Biographies","Biographies");
+    }
+    
+    @PostConstruct
+    public void init()
+    {
+        formats = new ArrayList<String>();
+        
+        formats.add("PDF");
+        formats.add("MOBI");
+        formats.add("EPUB");
+        
+    }
+    
+    public List<String> getFormats()
+    {
+        return formats;
+    }
     
     @Inject
     private CustomBookController bookJpaController;
@@ -50,9 +84,10 @@ public class ManagerBookBackingBean implements Serializable {
      * @return Return to the same page.
      * @throws Exception 
      */
-    public String editBook() throws Exception {
-        logger.log(Level.INFO, "WHATS INSIDE OF BOOK: " + book.getTitle());
-        bookJpaController.edit(book);
+    public String editBook(Book bookForm) throws Exception {
+        logger.log(Level.INFO, "WHATS INSIDE OF BOOK: " + bookForm.getTitle());
+        logger.log(Level.INFO, "WHATS INSIDE OF BOOK: " + bookForm.getDescription());
+        bookJpaController.edit(bookForm);
         message = "The book was updated.";
         return "null";
     }
@@ -173,6 +208,11 @@ public class ManagerBookBackingBean implements Serializable {
     {
         logger.log(Level.INFO, "setRenderForm: "+ renderEdit );
         this.renderEdit = renderEdit;
+    }
+    
+    public Map<String,Object> getGenreOptionValue() {
+	
+        return genreOptions;
     }
     
 }
