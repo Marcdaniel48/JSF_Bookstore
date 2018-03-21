@@ -96,33 +96,35 @@
                         <a class="next">&#10095;</a>
                     </div>
                     
-                    <div class="recommendations">
-                        
-                        <h1 class="section-title">Recommendations</h1>
-                        
-                        <h:form rendered="#{theBooks.hasRecommendations()}">
-                        
-                            <ui:repeat value="#{theBooks.recommendedBooks}" var="book">
-                                <h:commandLink action="bookDetail">
-                                    <f:param name="id" value="#{book.bookId}" />
+                    <ui:fragment rendered="#{theBooks.hasRecommendations()}">
+                        <div class="recommendations">
 
-                                    <div class="book">
-                                        <div class="book-thumbnail-container">
-                                            <div class="overlay"></div>
-                                            <div class="overlay-text"><div>View</div></div>
-                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
+                            <h1 class="section-title">Recommendations</h1>
+
+                            <h:form>
+
+                                <ui:repeat value="#{theBooks.recommendedBooks}" var="book">
+                                    <h:commandLink action="bookDetail">
+                                        <f:param name="id" value="#{book.bookId}" />
+
+                                        <div class="book">
+                                            <div class="book-thumbnail-container">
+                                                <div class="overlay"></div>
+                                                <div class="overlay-text"><div>View</div></div>
+                                                <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </h:commandLink>
-                            </ui:repeat>
-                            
-                        </h:form>
-                        
-                        <a class="prev disabled">&#10094;</a>
-                        <a class="next">&#10095;</a>
-                        
-                    </div>
+                                    </h:commandLink>
+                                </ui:repeat>
+
+                            </h:form>
+
+                            <a class="prev disabled">&#10094;</a>
+                            <a class="next">&#10095;</a>
+
+                        </div>
+                    </ui:fragment>
                     
                     <div id="survey">
                             
