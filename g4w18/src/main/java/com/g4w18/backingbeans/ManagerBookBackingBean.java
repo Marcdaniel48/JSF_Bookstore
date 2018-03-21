@@ -4,6 +4,8 @@ import com.g4w18.controllers.BookJpaController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -16,6 +18,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  * Handle manager ability to add, edit and remove books. 
@@ -26,6 +30,9 @@ import javax.inject.Named;
 @SessionScoped
 public class ManagerBookBackingBean implements Serializable {
     
+    
+    @Inject
+    private CustomBookController bookJpaController;
     private Logger logger = Logger.getLogger(SearchBackingBean.class.getName());
     //Manager's search term
     private String searchBook;
@@ -38,6 +45,7 @@ public class ManagerBookBackingBean implements Serializable {
     private boolean renderEdit=false;
     private List<String> formats;
     
+    private UploadedFile uploadedImage;
     
     //Genredown search options
     private static Map<String,Object> genreOptions;
@@ -59,16 +67,7 @@ public class ManagerBookBackingBean implements Serializable {
         formats.add("PDF");
         formats.add("MOBI");
         formats.add("EPUB");
-        
     }
-    
-    public List<String> getFormats()
-    {
-        return formats;
-    }
-    
-    @Inject
-    private CustomBookController bookJpaController;
     
     public Book getBook()
     {
@@ -114,6 +113,16 @@ public class ManagerBookBackingBean implements Serializable {
             logger.log(Level.INFO, "INSIDE of SEARCH of more than 0: "+ result );
             return "resultEdit";
         }
+    }
+    
+    /**
+     * Upload book cover to resources.
+     * @param event 
+     */
+    public void handleFileUpload(FileUploadEvent event)
+    {
+        Path folder = Paths.get("/resources/images");
+        String filename = book.getIsbnNumber();
     }
     
     /**
@@ -215,4 +224,9 @@ public class ManagerBookBackingBean implements Serializable {
         return genreOptions;
     }
     
+    
+    public List<String> getFormats()
+    {
+        return formats;
+    }
 }
