@@ -5,7 +5,9 @@ import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.view.ViewScoped;
@@ -26,36 +28,8 @@ public class SetSalesBackingBean implements Serializable {
     @Inject
     private CustomBookController customBookController;
 
-    private List<Book> booksOnSale;
-    private List<Book> booksNotOnSale;
     private List<Book> allBooks;
-    private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
-
-    /**
-     * Getter method for booksOnSale If booksOnSale is null, it will retrieve a
-     * list of book objects which are on sale.
-     *
-     * @return List of books on sale.
-     */
-    public List<Book> getBooksOnSale() {
-        if (booksOnSale == null) {
-            booksOnSale = customBookController.findBooksOnSale();
-        }
-        return booksOnSale;
-    }
-
-    /**
-     * Getter method for booksNotOnSale If booksNotOnSale is null, it will
-     * retrieve a list of book objects which are on sale.
-     *
-     * @return List of books on sale.
-     */
-    public List<Book> getBooksNotOnSale() {
-        if (booksNotOnSale == null) {
-            booksNotOnSale = customBookController.findBooksNotSale();
-        }
-        return booksNotOnSale;
-    }
+    private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
     /**
      * Getter method for booksNotOnSale If booksNotOnSale is null, it will
@@ -66,7 +40,7 @@ public class SetSalesBackingBean implements Serializable {
     public List<Book> getAllBooks() {
         if (allBooks == null) {
             allBooks = customBookController.findBookEntities();
-            log.log(Level.INFO, "allBooks size: {0}", allBooks.size());
+            LOGGER.log(Level.INFO, "allBooks size: {0}", allBooks.size());
         }
         return allBooks;
     }
@@ -75,6 +49,29 @@ public class SetSalesBackingBean implements Serializable {
         Book editedBook = (Book) event.getObject();
         customBookController.edit(editedBook);
         return null;
+    }
+
+    public boolean filterBySalePrice(Object value, Object filter, Locale locale) {
+        String filterText = (filter == null) ? null : filter.toString().trim();
+        String valueText = (value == null) ? null : value.toString().trim();
+        LOGGER.log(Level.INFO, "filter text {0}", filterText);
+        LOGGER.log(Level.INFO, "value text {0}", valueText);
+        if (filterText == null || filterText.equals("")) {
+            return true;
+        }
+        if (value == null) {
+            return false;
+        }
+        BigDecimal selectItem = (BigDecimal) filter;
+        BigDecimal selectValue = (BigDecimal) value;
+//        LOGGER.log(Level.INFO, "select item {0}", selectItem.toString());
+//        LOGGER.log(Level.INFO, "select value {0}", selectValue.toString());
+//        LOGGER.log(Level.INFO, "BOOLEAN: {0}", selectItem.intValue() == 0);
+        if (selectItem.doubleValue() == 0) {
+            return selectValue.doubleValue() == 0;
+        } else {
+            return selectValue.doubleValue() != 0;
+        }
     }
 
 }
