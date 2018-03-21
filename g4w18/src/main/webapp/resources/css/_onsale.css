@@ -21,7 +21,9 @@
 #book-sales .prev,
 #book-sales .next,
 .recommendations .prev,
-.recommendations .next
+.recommendations .next,
+#rss-feed .prev,
+#rss-feed .next
 {
     padding-left: 6px;
     padding-right: 8px;

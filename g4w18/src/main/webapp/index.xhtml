@@ -14,13 +14,13 @@
             <div class="content">
 
                 <div class="top-section">
-                    <div id="recent-books">
-                        
-                        <h1 class="section-title">Recent Books</h1>
-                        
+                    <div id="book-sales">
+
+                        <h1 class="section-title">Books On Sale!</h1>
+
                         <h:form>
-                        
-                            <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
+
+                            <ui:repeat value="#{theBooks.booksOnSale}" var="book">
                                 <h:commandLink action="bookDetail">
                                     <f:param name="id" value="#{book.bookId}" />
 
@@ -31,10 +31,14 @@
                                             <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
                                         </div>
                                     </div>
+
                                 </h:commandLink>
                             </ui:repeat>
-                        
+
                         </h:form>
+
+                        <a class="prev disabled">&#10094;</a>
+                        <a class="next">&#10095;</a>
                     </div>
 
                     <div id="genres">
@@ -68,14 +72,13 @@
                         <div class="dots-container"></div>
                     </div>
 
+                    <div id="recent-books">
 
-                    <div id="book-sales">
-                        
-                        <h1 class="section-title">Books On Sale!</h1>
-                        
+                        <h1 class="section-title">Recent Books</h1>
+
                         <h:form>
-                        
-                            <ui:repeat value="#{theBooks.booksOnSale}" var="book">
+
+                            <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
                                 <h:commandLink action="bookDetail">
                                     <f:param name="id" value="#{book.bookId}" />
 
@@ -86,16 +89,12 @@
                                             <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
                                         </div>
                                     </div>
-
                                 </h:commandLink>
                             </ui:repeat>
-                            
-                        </h:form>
 
-                        <a class="prev disabled">&#10094;</a>
-                        <a class="next">&#10095;</a>
+                        </h:form>
                     </div>
-                    
+
                     <ui:fragment rendered="#{theBooks.hasRecommendations()}">
                         <div class="recommendations">
 
@@ -153,18 +152,20 @@
                         <!--<h1 class="section-title">News</h1>-->
                         
                         <!--<div class="center-vertical">-->
-                            <form>
-                                <ui:repeat value="#{rssBackingBean.articles}" var="article" size="1">
-                                    <h1 class="section-title">Title #{article.title}</h1>
+                        <form>
+                            <ui:repeat value="#{rssBackingBean.articles}" var="article">
+                                <div class="article">
+                                    <h1 class="section-title">#{article.title}</h1>
                                     <br/>
                                     <p>Description: #{article.description}</p>
                                     <br/>
                                     <h:outputLink target="_blank" value="#{article.link}"><b>Read More</b></h:outputLink>
-                                </ui:repeat>
-                            </form>
-                        
-                            <a class="prev">&#10094;</a>
-                            <a class="next">&#10095;</a>
+                                </div>
+                            </ui:repeat>
+                        </form>
+
+                        <a class="prev disabled">&#10094;</a>
+                        <a class="next">&#10095;</a>
                         <!--</div>-->
 <!--                        <div class="overlay"></div>
                         <div class="overlay-text"><div>Read More</div></div>-->

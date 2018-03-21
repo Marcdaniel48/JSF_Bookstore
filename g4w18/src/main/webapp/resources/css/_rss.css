@@ -14,6 +14,10 @@
     animation: 1s ease-out 2.2s 1 slideInFromRight;
     animation-fill-mode: forwards;
 }
+#rss-feed .article
+{
+    display: none;
+}
 
 @media only screen and (max-width: 800px)
 {
@@ -25,7 +29,7 @@
         top: auto;
         bottom: auto;
         margin: 10px 0;
-        padding: 10px;
+        padding: 10px 20px;
         text-align: center;
         background-color: transparent;
         opacity: 1;
