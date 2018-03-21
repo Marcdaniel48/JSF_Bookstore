@@ -5,3 +5,11 @@
     padding: 40px;
     border-radius: 10px;
 }
+.reviews-table
+{
+    border-collapse: collapse;
+    border: 1px solid red;
+}
+.reviews-table, th, td {
+    border: 1px solid red;
+}

@@ -10,7 +10,6 @@ import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
-import com.g4w18.entities.Book_;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -68,7 +67,7 @@ public class CustomBookController implements Serializable {
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> root = cq.from(Book.class);
         cq.select(root);
-        cq.where(cb.gt(root.get(Book_.salePrice), 0));
+        cq.where(cb.gt(root.get("salePrice"), 0));
         
         Query q = em.createQuery(cq);
         q.setMaxResults(10);
@@ -231,5 +230,22 @@ public class CustomBookController implements Serializable {
         TypedQuery<Book> query = em.createQuery(cq);
         List<Book> toReturn = query.getResultList();
         return toReturn;
+    }
+    
+    public List<Book> getRecommendedBooks(String[] genres)
+    {   
+        String whereIN = "";
+        
+        for(String genre : genres)
+            whereIN += "'" + genre + "',";
+        
+        //Remove last comma
+        whereIN = whereIN.substring(0, whereIN.length() - 1);
+        
+        Query query = em.createNativeQuery("select * from book where genre in (" + whereIN + ") order by rand() limit 10", Book.class);
+        
+        List<Book> books = (List<Book>)query.getResultList();
+        
+        return books;
     }
 }

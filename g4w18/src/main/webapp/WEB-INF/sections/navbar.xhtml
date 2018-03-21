@@ -11,8 +11,13 @@
             <div class="logo"></div>
         </h:link>
 
+        <div id="hamburger-icon">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+        </div>
+        
         <div class="right">
-
             <h:form id="searchForm" class="search-icon-container">
 
                 <h:selectOneMenu styleClass="search-dropdown" id="searchOption" value="#{searchBackingBean.searchOption}">
@@ -70,5 +75,11 @@
             </script>
         </div>
     </nav>
+    
+    <div id="navbar-menu">
+        <a href="#news">Login</a>
+        <a href="#contact">Shopping Cart</a>
+        <a href="#about">About</a>
+    </div>
     
 </ui:composition>

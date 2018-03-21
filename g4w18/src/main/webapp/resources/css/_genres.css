@@ -13,8 +13,8 @@
     animation-fill-mode: forwards;
     background-color: rgba(0, 0, 0, 0.8);
 }
-
-.outer {
+.outer
+{
     margin: auto;
     top: 50%;
     position: relative;
@@ -35,4 +35,42 @@
 .view-more
 {
     font-size: 25px;
+}
+
+@media only screen and (max-width: 800px)
+{
+    #genres
+    {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        text-align: center;
+        font-size: 1em;
+        margin: 5px 0px;
+        padding-top: 10px;
+        opacity: 1;
+        transform: none;
+        animation: none;
+        animation-fill-mode: none;
+        background-color: initial;
+        border: 1px solid black;
+    }
+    .outer
+    {
+        margin: auto;
+        top: auto;
+        position: relative;
+        -webkit-transform: none;
+        -ms-transform: none;
+        transform: none;
+    }
+    .genre-title
+    {
+        display: inline-block;
+        margin: 5px 5px;
+        padding: 5px;
+        /*border: 1px solid black;*/
+    }
 }

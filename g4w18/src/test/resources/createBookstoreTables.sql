@@ -113,10 +113,10 @@ CREATE TABLE TAX (
 CREATE TABLE QUESTION (
     QUESTION_ID int NOT NULL AUTO_INCREMENT,
     DESCRIPTION varchar(100) NOT NULL default '',
-    ANSWER_ONE varchar(50) NOT NULL default '',
-    ANSWER_TWO varchar(50) NOT NULL default '',
-    ANSWER_THREE varchar(50) NOT NULL default '',
-    ANSWER_FOUR varchar(50) NOT NULL default '',
+    ANSWER_ONE varchar(50),
+    ANSWER_TWO varchar(50),
+    ANSWER_THREE varchar(50),
+    ANSWER_FOUR varchar(50),
     VOTE_ONE int(6) NOT NULL default 0,
     VOTE_TWO int(6) NOT NULL default 0,
     VOTE_THREE int(6) NOT NULL default 0,
@@ -132,6 +132,13 @@ CREATE TABLE BANNER(
     IS_ACTIVE boolean NOT NULL default false,
     PRIMARY KEY (BANNER_ID)
 ) ENGINE=InnoDB;
+
+--TEMPORARY
+insert into banner values
+(null, "slide1.jpg", "https://google.com", true),
+(null, "slide2.jpg", "https://google.com", false),
+(null, "slide3.jpg", "https://google.com", true),
+(null, "slide4.jpg", "https://google.com", true);
 
 INSERT INTO BOOK values
 (null, "978-1408855652", "Harry Potter and the Philosopher's Stone", "Bloomsbury Children's Books", "2014-09-01 00:00:00", 352, "Fantasy",
@@ -978,7 +985,7 @@ insert into BOOK_AUTHOR (BOOK_ID, AUTHOR_ID) values
 (99,81),
 (100,85);
 
-insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_FOUR, VOTE_ONE, VOTE_TWO, VOTE_THREE, VOTE_FOUR) values
+insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_FOUR, VOTE_ONE, VOTE_TWO, VOTE_THREE, VOTE_FOUR, IS_ACTIVE) values
 ('At what time of the day do you prefer to read?', 'Morning', 'Noon', 'Afternoon', 'Evening', 0, 0, 0, 0, false),
 ('What is your favorite genre?', 'SciFi', 'Biography', 'Romance', 'Mystery', 0, 0, 0, 0, false),
 ('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0, true),

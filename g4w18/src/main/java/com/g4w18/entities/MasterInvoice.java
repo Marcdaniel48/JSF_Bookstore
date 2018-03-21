@@ -37,7 +37,8 @@ import javax.validation.constraints.NotNull;
     , @NamedQuery(name = "MasterInvoice.findByInvoiceId", query = "SELECT m FROM MasterInvoice m WHERE m.invoiceId = :invoiceId")
     , @NamedQuery(name = "MasterInvoice.findBySaleDate", query = "SELECT m FROM MasterInvoice m WHERE m.saleDate = :saleDate")
     , @NamedQuery(name = "MasterInvoice.findByNetValue", query = "SELECT m FROM MasterInvoice m WHERE m.netValue = :netValue")
-    , @NamedQuery(name = "MasterInvoice.findByGrossValue", query = "SELECT m FROM MasterInvoice m WHERE m.grossValue = :grossValue")})
+    , @NamedQuery(name = "MasterInvoice.findByGrossValue", query = "SELECT m FROM MasterInvoice m WHERE m.grossValue = :grossValue")
+    , @NamedQuery(name = "MasterInvoice.findByClientId", query = "SELECT m FROM MasterInvoice m WHERE m.clientId = :clientId")})
 public class MasterInvoice implements Serializable {
 
     private static final long serialVersionUID = 1L;

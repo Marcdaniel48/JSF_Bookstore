@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>#{msgs.placeOrder}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Booktopia" brandHref="#" fluid="true">
+           <b:navbarLinks>
+               <b:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs">
+                   <b:inputText placeholder="Search for a book..."></b:inputText>
+                   <b:commandButton value="Search" iconAwesome="search" action="bookList"></b:commandButton>
+               </b:form>
+           </b:navbarLinks>
+           <b:navbarLinks pull="right" styleClass="hidden-xs">
+           </b:navbarLinks>
+       </b:navBar>
+         
+        <b:container fluid="true">
+            <h3>#{msgs.finalReviewOrder}</h3>
+
+            <b:column col-md="6">
+                <b:panel collapsible="false">
+                    <b:column col-md="6">
+                        <h4>#{msgs.finalShipping}</h4>
+                        #{orderBacking.currentClient.firstName} #{orderBacking.currentClient.lastName}
+                        <br/>
+                        #{finalizationBacking.shippingAddress}
+                        <br/>
+                        #{orderBacking.currentClient.country}
+                        <br/>
+                        #{msgs.phone}: #{orderBacking.currentClient.homeTelephone}
+                        <br/><br/>
+                                
+                        <h4>#{msgs.billingAddress}</h4>
+                        #{msgs.sameAddress}
+                    </b:column>
+                    
+                    <b:column col-md="6">
+                        <h4>#{msgs.paymentMethod}</h4>
+                        #{msgs.creditCardEnding} #{orderBacking.last4Characters(finalizationBacking.creditCard.number)}
+                    </b:column>
+                </b:panel>
+            </b:column>
+
+            <b:column col-md="6">
+                <b:panel collapsible="false">
+                    <h:form>
+                        <h4>#{msgs.orderSummary}</h4>
+                        #{msgs.totalBeforeTax}: #{shoppingCartBackingBean.shoppingCart.subtotal}
+                        <hr/>
+                        #{msgs.estimatedTax}: #{orderBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * orderBacking.taxRate)}
+                        <br/>
+                        <b>#{msgs.orderTotal}: #{orderBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * (1 + orderBacking.taxRate))}</b>
+                        <br/><br/>
+                        
+                        <b:commandButton value="#{msgs.placeOrder}" action="#{orderBacking.createInvoice}"/>
+                    </h:form>
+                </b:panel>
+            </b:column>
+            
+            <b:column>
+                <b:panel>
+                    <b:row styleClass="show-grid">
+                            <b:column col-md="4">
+                            </b:column>
+                            <b:column col-md="4">
+                                <b>#{msgs.title}</b>
+                            </b:column>
+                            <b:column col-md="4">
+                                <b>#{msgs.price}</b>
+                            </b:column>
+                    </b:row>
+
+                    <br></br> 
+
+                    <ui:repeat var="book" value="#{shoppingCartBackingBean.shoppingCart.shoppingCartBooks}">
+                        <b:row styleClass="show-grid">
+                            <b:column col-md="4">
+                                <b:container>
+                                    <b:image library="images" name="#{book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid" height="10%" width="5%"></b:image>
+                                </b:container>
+                            </b:column>
+                            <b:column col-md="4">
+                                <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
+                                <f:param name="id" value="#{book.bookId}" />
+                            </b:column>
+                            <b:column col-md="4">
+                                <h:outputText value="#{shoppingCartBackingBean.getPrice(book)} CAD"></h:outputText>
+                            </b:column>
+                        </b:row>
+                    </ui:repeat>
+                </b:panel>
+            </b:column>
+        </b:container>
+        
+        
+        
+        
+        <!-- load js at bottom for faster loading-->
+        <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
+        <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
+    </h:body>
+</html>

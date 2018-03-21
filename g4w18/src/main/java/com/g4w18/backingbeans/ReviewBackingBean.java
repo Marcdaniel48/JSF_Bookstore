@@ -5,12 +5,14 @@ import com.g4w18.controllers.BookJpaController;
 import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.customcontrollers.CustomReviewController;
 import com.g4w18.controllers.ReviewJpaController;
+import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.Review;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
@@ -43,7 +45,7 @@ public class ReviewBackingBean implements Serializable {
 
     private Review review;
 
-    private Logger log = Logger.getLogger(BookBackingBean.class.getName());
+    private Logger logger = Logger.getLogger(BookBackingBean.class.getName());
 
     /**
      * Client created if it does not exist.
@@ -75,13 +77,76 @@ public class ReviewBackingBean implements Serializable {
         return FacesContext.getCurrentInstance();
     }
     
+    /**
+     * @author Jephthia
+     * @return All the reviews that have been approved
+     */
     public List<Review> getApprovedReviews()
     {
         return reviewController.getApprovedReviews();
     }
     
+    /**
+     * @author Jephthia
+     * @return All the reviews that haven't been approved yet
+     */
     public List<Review> getNotApprovedReviews()
     {
         return reviewController.getNotApprovedReviews();
+    }
+    
+    /**
+     * @author Jephthia
+     * Sets the approval status to true
+     * and saves it to the database
+     * @param review 
+     */
+    public void approve(Review review)
+    {
+        try
+        {
+            review.setApprovalStatus(true);
+            reviewController.edit(review);
+        }
+        catch(Exception ex)
+        {
+            logger.log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * @author Jephthia
+     * Removes the review from the database
+     * @param review 
+     */
+    public void disapprove(Review review)
+    {
+        try
+        {
+            reviewController.destroy(review.getReviewId());
+        }
+        catch(Exception ex)
+        {
+            logger.log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * @author Jephthia
+     * Sets the approval status to false to put it back
+     * in pending mode.
+     * @param review 
+     */
+    public void removeApproval(Review review)
+    {
+        try
+        {
+            review.setApprovalStatus(false);
+            reviewController.edit(review);
+        }
+        catch(Exception ex)
+        {
+            logger.log(Level.SEVERE, null, ex);
+        }
     }
 }
