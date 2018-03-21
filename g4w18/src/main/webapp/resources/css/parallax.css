@@ -19,7 +19,7 @@
 {
     height: auto;
 /*     transform: translateZ(-1px) scale(2.1); */
-    background-image: url("#{resource['images/b2.jpeg']}");
+    background-image: url("#{resource['images/background_gradient.png']}");
     background-size: cover;
     background-position: center;
 }

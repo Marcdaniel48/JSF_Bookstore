@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.entities;
 
 import java.io.Serializable;
@@ -35,7 +30,8 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Question.findByVoteOne", query = "SELECT q FROM Question q WHERE q.voteOne = :voteOne")
     , @NamedQuery(name = "Question.findByVoteTwo", query = "SELECT q FROM Question q WHERE q.voteTwo = :voteTwo")
     , @NamedQuery(name = "Question.findByVoteThree", query = "SELECT q FROM Question q WHERE q.voteThree = :voteThree")
-    , @NamedQuery(name = "Question.findByVoteFour", query = "SELECT q FROM Question q WHERE q.voteFour = :voteFour")})
+    , @NamedQuery(name = "Question.findByVoteFour", query = "SELECT q FROM Question q WHERE q.voteFour = :voteFour")
+    , @NamedQuery(name = "Question.findByIsActive", query = "SELECT q FROM Question q WHERE q.isActive = :isActive")})
 public class Question implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,24 +45,16 @@ public class Question implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "DESCRIPTION")
     private String description;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "ANSWER_ONE")
     private String answerOne;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "ANSWER_TWO")
     private String answerTwo;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "ANSWER_THREE")
     private String answerThree;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "ANSWER_FOUR")
     private String answerFour;
     @Basic(optional = false)
@@ -85,6 +73,10 @@ public class Question implements Serializable {
     @NotNull
     @Column(name = "VOTE_FOUR")
     private int voteFour;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "IS_ACTIVE")
+    private boolean isActive;
 
     public Question() {
     }
@@ -93,17 +85,14 @@ public class Question implements Serializable {
         this.questionId = questionId;
     }
 
-    public Question(Integer questionId, String description, String answerOne, String answerTwo, String answerThree, String answerFour, int voteOne, int voteTwo, int voteThree, int voteFour) {
+    public Question(Integer questionId, String description, int voteOne, int voteTwo, int voteThree, int voteFour, boolean isActive) {
         this.questionId = questionId;
         this.description = description;
-        this.answerOne = answerOne;
-        this.answerTwo = answerTwo;
-        this.answerThree = answerThree;
-        this.answerFour = answerFour;
         this.voteOne = voteOne;
         this.voteTwo = voteTwo;
         this.voteThree = voteThree;
         this.voteFour = voteFour;
+        this.isActive = isActive;
     }
 
     public Integer getQuestionId() {
@@ -184,6 +173,14 @@ public class Question implements Serializable {
 
     public void setVoteFour(int voteFour) {
         this.voteFour = voteFour;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     @Override
