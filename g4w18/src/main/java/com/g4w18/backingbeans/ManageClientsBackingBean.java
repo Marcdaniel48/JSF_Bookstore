@@ -5,10 +5,13 @@
  */
 package com.g4w18.backingbeans;
 
-import com.g4w18.controllers.ClientJpaController;
+import com.g4w18.controllers.MasterInvoiceJpaController;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
+import com.g4w18.customcontrollers.CustomClientController;
+import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
 import com.g4w18.entities.Client;
+import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.view.ViewScoped;
@@ -26,13 +29,21 @@ import org.primefaces.event.RowEditEvent;
 public class ManageClientsBackingBean implements Serializable
 {
     @Inject
-    private ClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
+    
+    @Inject
+    private CustomMasterInvoiceJpaController masterInvoiceJpaController;
     
     private List<Client> clients;
     
-    public ClientJpaController getClientJpaController()
+    public CustomClientController getClientJpaController()
     {
         return clientJpaController;
+    }
+    
+    public CustomMasterInvoiceJpaController getMasterInvoiceJpaController()
+    {
+        return masterInvoiceJpaController;
     }
     
     public List<Client> getClients()
@@ -47,5 +58,15 @@ public class ManageClientsBackingBean implements Serializable
         DataTable dataTable = (DataTable) (event.getSource());
         Client updatedClient = (Client)(dataTable.getRowData());
         clientJpaController.edit(updatedClient);
+    }
+    
+    public double getTotalValueOfPurchases(int clientId)
+    {
+        MasterInvoice clientMasterInvoice = masterInvoiceJpaController.findMasterInvoiceByClientId(clientId);
+        
+        if(clientMasterInvoice == null)
+            return 0;
+        else
+            return clientMasterInvoice.getGrossValue().doubleValue();
     }
 }
