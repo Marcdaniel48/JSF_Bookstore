@@ -54,8 +54,8 @@ public class SetSalesBackingBean implements Serializable {
     public boolean filterBySalePrice(Object value, Object filter, Locale locale) {
         String filterText = (filter == null) ? null : filter.toString().trim();
         String valueText = (value == null) ? null : value.toString().trim();
-        LOGGER.log(Level.INFO, "filter text {0}", filterText);
-        LOGGER.log(Level.INFO, "value text {0}", valueText);
+//        LOGGER.log(Level.INFO, "filter text {0}", filterText);
+//        LOGGER.log(Level.INFO, "value text {0}", valueText);
         if (filterText == null || filterText.equals("")) {
             return true;
         }

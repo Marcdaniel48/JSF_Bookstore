@@ -187,7 +187,7 @@
                             </b:column>
                             <b:column col-md="1">
                                 <h:outputText value="#{bookDetailsBackingBean.client.firstName} #{bookDetailsBackingBean.client.lastName}"></h:outputText>
-                                <p:rating value="#{bookDetailsBackingBean.review.rating}" id="reviewRating">
+                                <p:rating value="#{bookDetailsBackingBean.review.rating}" id="reviewRating" >
                                 </p:rating>
                                 <p:commandButton id="primebutton" value="#{msgs.bookDetailsSubmitReview}"
                                                  action="#{bookDetailsBackingBean.createReview}" ajax="false" update="growl">
