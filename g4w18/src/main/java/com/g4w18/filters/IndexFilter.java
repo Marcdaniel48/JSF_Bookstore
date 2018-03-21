@@ -5,6 +5,7 @@
  */
 package com.g4w18.filters;
 
+import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.customcontrollers.LoginController;
 import com.g4w18.customcontrollers.ShoppingCart;
 import java.io.IOException;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Marc-Daniel
  */
-@WebFilter(filterName = "IndexFilter", urlPatterns = {"/authenticated/*", "/registration.xhtml", "/login.xhtml"})
+@WebFilter(filterName = "IndexFilter", urlPatterns = {"/authenticated/*", "/management/*", "/registration.xhtml", "/login.xhtml"})
 public class IndexFilter implements Filter
 {
     @Inject
@@ -31,6 +32,9 @@ public class IndexFilter implements Filter
     
     @Inject
     private LoginController login;
+    
+    @Inject
+    private CustomClientController clientJpaController;
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException 
@@ -50,19 +54,31 @@ public class IndexFilter implements Filter
         String contextPath = ((HttpServletRequest) request).getContextPath();
         String uri = ((HttpServletRequest)request).getRequestURI();
                
-        // If the user is trying to finalize with an empty shopping cart
+        // If the user is trying to finalize with an empty shopping cart, then redirect to index
         if(uri.startsWith("/g4w18/authenticated/") && (cart == null || cart.getShoppingCartBooks().isEmpty()))
         {
             ((HttpServletResponse) response).sendRedirect(contextPath);
         }
-        // If the user is trying to access the registration or login pages while logged in
-        else if (!uri.startsWith("/g4w18/authenticated/") && login.getLoggedIn()) 
+        // If the user is trying to access the registration or login pages while logged in, then redirect to index
+        else if ((uri.startsWith("/g4w18/registration") || uri.startsWith("/g4w18/login")) && login.getLoggedIn()) 
         {
             ((HttpServletResponse) response).sendRedirect(contextPath);
         } 
-        else 
+        // If the user, who's logged in, is trying to access a manager's page, but is not a manager, then redirect to index
+        // OR if the user is not logged in, then redirect as well.
+        else if(uri.startsWith("/g4w18/management/"))
         {
-            chain.doFilter(request, response);
+            if(login.getLoggedIn())
+            {
+                if(!clientJpaController.findClientByUsername(login.getUsername()).getIsManager())
+                    ((HttpServletResponse) response).sendRedirect(contextPath);
+            }
+            else if(!login.getLoggedIn())
+            {
+                ((HttpServletResponse) response).sendRedirect(contextPath);
+            }
         }
+            
+        chain.doFilter(request, response);
     }
 }

@@ -67,28 +67,26 @@ public class CustomClientController implements Serializable
         return clientController.getClientCount();
     }
     
-    public List<Client> findClientByUsername(String username)
+        public Client findClientByUsername(String username)
     {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
-        Root<Client> clientRoot = cq.from(Client.class);
-        cq.select(clientRoot).where(cb.equal(clientRoot.get("username"), username));
-        TypedQuery<Client> query = em.createQuery(cq);
-        List<Client> existingClients = query.getResultList();
-
-        return existingClients;
+        TypedQuery<Client> query = em.createNamedQuery("Client.findByUsername", Client.class);
+        query.setParameter("username", username);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
     }
 
-    public List<Client> findClientByEmail(String email)
+    public Client findClientByEmail(String email)
     {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
-        Root<Client> clientRoot = cq.from(Client.class);
-        cq.select(clientRoot).where(cb.equal(clientRoot.get("email"), email));
-        TypedQuery<Client> query = em.createQuery(cq);
-        List<Client> existingClients = query.getResultList();
-
-        return existingClients;
+        TypedQuery<Client> query = em.createNamedQuery("Client.findByEmail", Client.class);
+        query.setParameter("email", email);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
     }
 
     public Client findClientByCredentials(String username, String password)
