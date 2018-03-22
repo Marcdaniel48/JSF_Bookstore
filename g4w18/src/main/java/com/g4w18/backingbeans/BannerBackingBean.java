@@ -137,6 +137,8 @@ public class BannerBackingBean implements Serializable
             ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
             ServletContext sc = (ServletContext)context.getContext();
             String path = sc.getRealPath("/resources/images/");
+            
+            logger.log(Level.INFO, LocalDateTime.now() + " >>> file {0}", path);
              
             Files.copy(input, new File(path, fileName).toPath());
             

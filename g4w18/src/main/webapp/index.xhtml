@@ -14,13 +14,13 @@
             <div class="content">
 
                 <div class="top-section">
-                    <div id="recent-books">
-                        
-                        <h1 class="section-title">Recent Books</h1>
-                        
+                    <div id="book-sales">
+
+                        <h1 class="section-title">Books On Sale!</h1>
+
                         <h:form>
-                        
-                            <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
+
+                            <ui:repeat value="#{theBooks.booksOnSale}" var="book">
                                 <h:commandLink action="bookDetail">
                                     <f:param name="id" value="#{book.bookId}" />
 
@@ -31,10 +31,14 @@
                                             <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
                                         </div>
                                     </div>
+
                                 </h:commandLink>
                             </ui:repeat>
-                        
+
                         </h:form>
+
+                        <a class="prev disabled">&#10094;</a>
+                        <a class="next">&#10095;</a>
                     </div>
 
                     <div id="genres">
@@ -51,41 +55,12 @@
                             </h:form>
                         </div>
                     </div>
-
-                    <!--
-
-                    <div id="book-sales">
-                        
-                        <h:form>
-                        
-                            <ui:repeat value="#{theBooks.booksOnSale}" var="book">
-                                <h:commandLink action="bookDetail">
-                                    <f:param name="id" value="#{book.bookId}" />
-
-                                    <div class="book">
-                                        <div class="book-thumbnail-container">
-                                            <div class="overlay"></div>
-                                            <div class="overlay-text"><div>View</div></div>
-                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
-                                        </div>
-                                    </div>
-
-                                </h:commandLink>
-                            </ui:repeat>
-                            
-                        </h:form>
-
-                        <a class="view-more" href="">View More</a>
-
-                        <a class="prev disabled">&#10094;</a>
-                        <a class="next">&#10095;</a>
-                    </div>
-
+                    
                     <div id="banner">
                         <div class="slide">
                             
                             <ui:repeat value="#{bannerBackingBean.activeBanners}" var="banner">
-                                <h:outputLink styleClass="slide-link" value="#{banner.bannerLink}">
+                                <h:outputLink styleClass="slide-link" target="_blank" value="#{banner.bannerLink}">
                                     <h:graphicImage class="slide-img" library="images" name="#{banner.bannerName}" alt="#{banner.bannerName}" />
                                 </h:outputLink>
                             </ui:repeat>
@@ -97,30 +72,66 @@
                         <div class="dots-container"></div>
                     </div>
 
-                    <div id="rss-feed">
-                        
-                        
+                    <div id="recent-books">
 
-                        <div class="center-vertical">
-                            <div>
-                                <ui:repeat value="#{rssBackingBean.articles}" var="article" size="1">
-                                    <h2>#{article.title}</h2>
-                                    <br/>
-                                    <p>#{article.description}</p>
-                                </ui:repeat>
-                            </div>
-                        </div>
-                        <div class="overlay"></div>
-                        <div class="overlay-text"><div>Read More</div></div>
+                        <h1 class="section-title">Recent Books</h1>
+
+                        <h:form>
+
+                            <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
+                                <h:commandLink action="bookDetail">
+                                    <f:param name="id" value="#{book.bookId}" />
+
+                                    <div class="book">
+                                        <div class="book-thumbnail-container">
+                                            <div class="overlay"></div>
+                                            <div class="overlay-text"><div>View</div></div>
+                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
+                                        </div>
+                                    </div>
+                                </h:commandLink>
+                            </ui:repeat>
+
+                        </h:form>
                     </div>
 
+                    <ui:fragment rendered="#{theBooks.hasRecommendations()}">
+                        <div class="recommendations">
+
+                            <h1 class="section-title">Recommendations</h1>
+
+                            <h:form>
+
+                                <ui:repeat value="#{theBooks.recommendedBooks}" var="book">
+                                    <h:commandLink action="bookDetail">
+                                        <f:param name="id" value="#{book.bookId}" />
+
+                                        <div class="book">
+                                            <div class="book-thumbnail-container">
+                                                <div class="overlay"></div>
+                                                <div class="overlay-text"><div>View</div></div>
+                                                <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
+                                            </div>
+                                        </div>
+
+                                    </h:commandLink>
+                                </ui:repeat>
+
+                            </h:form>
+
+                            <a class="prev disabled">&#10094;</a>
+                            <a class="next">&#10095;</a>
+
+                        </div>
+                    </ui:fragment>
+                    
                     <div id="survey">
                             
-                        <h:form rendered="#{!surveyBackingBean.showResults()}">
+                        <h:form id="surveyForm" rendered="#{!surveyBackingBean.showResults()}">
                             <ui:repeat value="#{surveyBackingBean.activeQuestion}" var="question">
-                                <h2>#{question.description}</h2>
+                                <h1 class="section-title">#{question.description}</h1>
 
-                                <h:selectOneRadio id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="Please select one option">
+                                <h:selectOneRadio class="surveyChoices" id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="Please select one option">
                                     <f:selectItems value="#{surveyBackingBean.answers}" />
                                 </h:selectOneRadio>
                                 <h:message for="surveyChoices" />
@@ -135,31 +146,32 @@
                         </div>
                         
                     </div>
-                    
-                    <div class="recommendations">
-                        
-                        <h:form rendered="#{theBooks.hasRecommendations()}">
-                        
-                            <ui:repeat value="#{theBooks.recommendedBooks}" var="book">
-                                <h1>#{book.title}</h1>
-                                <h:commandLink action="bookDetail">
-                                    <f:param name="id" value="#{book.bookId}" />
+        
+                    <div id="rss-feed">
 
-                                    <div class="book">
-                                        <div class="book-thumbnail-container">
-                                            <div class="overlay"></div>
-                                            <div class="overlay-text"><div>View</div></div>
-                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
-                                        </div>
-                                    </div>
-
-                                </h:commandLink>
+                        <!--<h1 class="section-title">News</h1>-->
+                        
+                        <!--<div class="center-vertical">-->
+                        <form>
+                            <ui:repeat value="#{rssBackingBean.articles}" var="article">
+                                <div class="article">
+                                    <h1 class="section-title">#{article.title}</h1>
+                                    <br/>
+                                    <p>Description: #{article.description}</p>
+                                    <br/>
+                                    <h:outputLink target="_blank" value="#{article.link}"><b>Read More</b></h:outputLink>
+                                </div>
                             </ui:repeat>
-                            
-                        </h:form>
+                        </form>
+
+                        <a class="prev disabled">&#10094;</a>
+                        <a class="next">&#10095;</a>
+                        <!--</div>-->
+<!--                        <div class="overlay"></div>
+                        <div class="overlay-text"><div>Read More</div></div>-->
                         
                     </div>
--->
+
                 </div>
 
             </div>

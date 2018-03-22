@@ -10,7 +10,6 @@ import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
-import com.g4w18.entities.Book_;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -68,7 +67,7 @@ public class CustomBookController implements Serializable {
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> root = cq.from(Book.class);
         cq.select(root);
-        cq.where(cb.gt(root.get(Book_.salePrice), 0));
+        cq.where(cb.gt(root.get("salePrice"), 0));
         
         Query q = em.createQuery(cq);
         q.setMaxResults(10);
