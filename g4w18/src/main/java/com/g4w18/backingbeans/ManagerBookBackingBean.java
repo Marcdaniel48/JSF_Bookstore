@@ -3,9 +3,13 @@ package com.g4w18.backingbeans;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Book;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,6 +22,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -114,17 +119,6 @@ public class ManagerBookBackingBean implements Serializable {
             return "resultEdit";
         }
     }
-    
-    /**
-     * Upload book cover to resources.
-     * @param event 
-     */
-    public void handleFileUpload(FileUploadEvent event)
-    {
-        Path folder = Paths.get("/resources/images");
-        String filename = book.getIsbnNumber();
-    }
-    
     /**
      * Add book to database
      * @return Website to move to 
@@ -223,7 +217,28 @@ public class ManagerBookBackingBean implements Serializable {
 	
         return genreOptions;
     }
-    
+    /**
+     * Add book cover to resources image folder.
+     * @param event Image to be added.
+     * @throws IOException 
+     */
+    public void fileUploadHandler(FileUploadEvent event) throws IOException
+    {
+        logger.log(Level.INFO, "INSIDE OF FILE UPLOAD HANDLER");
+        
+        uploadedImage = event.getFile();
+        Path folder = Paths.get("/resources/images");
+        String filename = book.getIsbnNumber();
+        String extension = FilenameUtils.getExtension(uploadedImage.getFileName());
+        logger.log(Level.INFO, "EXTENSION SHOW PLS " + extension + "   -----FOLDER PATHG::::" + folder.toString());
+        Path file = Files.createTempFile(folder, filename +"hi.", extension);
+        logger.log(Level.INFO, "PATH FILEEEEEEEEEEEEE" + file.toString());
+        
+        try(InputStream input = uploadedImage.getInputstream())
+        {
+            Files.copy(input, file);
+        }
+    }
     
     public List<String> getFormats()
     {

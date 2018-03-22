@@ -38,7 +38,7 @@
                  
                  <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
                  <p:inputText required="true" value="#{managerBookHandling.book.publicationDate}">
-                     <f:convertDateTime pattern="d/M/yyyy" />
+                     <f:convertDateTime pattern="dd/mm/yyyy" />
                  </p:inputText>
                  
                  <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
@@ -73,7 +73,7 @@
                  <p:selectBooleanButton value="#{managerBookHandling.book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
                  
                  <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
-                 <p:fileUpload fileLimit="1" required="true" mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                 <p:fileUpload fileLimit="1" required="true" mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{managerBookHandling.fileUploadHandler}" />
                  
                  <p:commandButton value="#{msgs.submitButton}" action="#{managerBookHandling.createBook()}" update="growl"/>
                  <h:outputLabel>#{managerBookHandling.message}</h:outputLabel>
