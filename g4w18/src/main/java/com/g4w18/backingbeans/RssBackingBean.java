@@ -1,12 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.backingbeans;
 
+import com.g4w18.customcontrollers.CustomRssController;
+import com.g4w18.entities.Rss;
+import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import rss.Feed;
 import rss.FeedMessage;
@@ -14,15 +13,46 @@ import rss.RSSFeedParser;
 
 /**
  * @author Jephthia Louis
+ * @author Sebastian Ramirez
  */
+
 @Named("rssBackingBean")
 @RequestScoped
-public class RssBackingBean
-{
-   public List<FeedMessage> getArticles()
-   {
-       RSSFeedParser parser = new RSSFeedParser("http://www.cbc.ca/cmlink/rss-sports");
-       Feed feed = parser.readFeed();
-       return feed.getMessages();
-   }
+public class RssBackingBean implements Serializable {
+
+    @Inject
+    private CustomRssController rssController;
+
+    private List<FeedMessage> articles;
+    private Rss rss;
+
+    /**
+     * Getter for the Feed Messages. If it is null, it will generate a new list
+     * of Feed Messages from the link in the current active RSS entry.
+     *
+     * @return a list of FeedMessage objects.
+     */
+    public List<FeedMessage> getArticles() {
+        //Sebastian: added the if null check
+        if (articles == null) {
+            RSSFeedParser parser = new RSSFeedParser(rss.getRssLink());
+            Feed feed = parser.readFeed();
+            articles = feed.getMessages();
+        }
+        return articles;
+    }
+
+    /**
+     * Getter for the Rss object. If it is null, it will retrieve the current
+     * active RSS entry from the database.
+     *
+     * @return The RSS object.
+     */
+    //autor: Sebastian
+    public Rss getRss() {
+        if (rss == null) {
+            rss = rssController.findActiveRss();
+        }
+        return rss;
+    }
 }

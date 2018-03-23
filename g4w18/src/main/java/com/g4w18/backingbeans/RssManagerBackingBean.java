@@ -9,16 +9,13 @@ import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.customcontrollers.CustomRssController;
 import com.g4w18.entities.Rss;
-import com.g4w18.util.Messages;
 import java.io.Serializable;
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
@@ -36,6 +33,8 @@ public class RssManagerBackingBean implements Serializable {
 
     private List<Rss> rssList;
     private List<Rss> filteredRss;
+    private Rss toDelete;
+    private final FacesContext context = FacesContext.getCurrentInstance();
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
     public List<Rss> getRssList() {
@@ -57,10 +56,31 @@ public class RssManagerBackingBean implements Serializable {
     public String onRowEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
         Rss editedRss = (Rss) event.getObject();
         rssController.edit(editedRss);
-        FacesContext fc = FacesContext.getCurrentInstance();
-        String message = fc.getApplication().getResourceBundle(fc, "msgs").getString("managerRSSEdit");
-        FacesMessage msg = new FacesMessage(message);
-        fc.addMessage(null, msg);
+        addMessage("managerRSSEdit");
         return null;
+    }
+
+    public String delete() throws Exception {
+        if (rssController.getRssCount() > 1) {
+            rssController.destroy(toDelete.getRssId());
+            addMessage("managerDeleteSuccessful");
+        } else {
+            addMessage("managerCantDelete");
+        }
+        return null;
+    }
+
+    private void addMessage(String key) {
+        String message = context.getApplication().getResourceBundle(context, "msgs").getString(key);
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
+        context.addMessage(null, msg);
+    }
+
+    public Rss getToDelete() {
+        return toDelete;
+    }
+
+    public void setToDelete(Rss rss) {
+        this.toDelete = rss;
     }
 }

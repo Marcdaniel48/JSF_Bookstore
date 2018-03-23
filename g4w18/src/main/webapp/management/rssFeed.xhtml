@@ -20,9 +20,8 @@ and open the template in the editor.
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
     </h:head>
     <h:body>
-        <b:container>
             <h:form id="form">
-                <p:growl id="msgs" showDetail="true" />
+                <p:growl id="growl" life="3000"/>
                 <p:dataTable var="rss" value="#{rssManagerBackingBean.rssList}" 
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                              paginator="true" rows="15"
@@ -33,7 +32,7 @@ and open the template in the editor.
                         #{msgs.managerRSSTitle}
                     </f:facet>
 
-                    <p:ajax event="rowEdit" listener="#{rssManagerBackingBean.onRowEdit}" update=":form:msgs" oncomplete="PF('newsTable').filter()"/>
+                    <p:ajax event="rowEdit" listener="#{rssManagerBackingBean.onRowEdit}" update=":form:growl" oncomplete="PF('newsTable').filter()"/>
 
                     <p:column headerText="#{msgs.managerRSSId}" filterBy="#{rss.rssId}" filterMatchMode="contains">
                         <h:outputText value="#{rss.rssId}"></h:outputText>
@@ -60,11 +59,15 @@ and open the template in the editor.
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column style="width:32px" headerText="#{msgs.managerEdit}">
+                    <p:column headerText="#{msgs.managerEdit}">
                         <p:rowEditor />
+                    </p:column>
+                    <p:column headerText="#{msgs.managerDeleteEntry}">
+                        <p:commandButton value="#{msgs.managerDelete}" action="#{rssManagerBackingBean.delete}" oncomplete="PF('newsTable').filter()" update=":form:growl">
+                            <f:setPropertyActionListener value="#{rss}" target="#{rssManagerBackingBean.toDelete}"></f:setPropertyActionListener>
+                        </p:commandButton>
                     </p:column>
                 </p:dataTable>
             </h:form>
-        </b:container>
     </h:body>
 </html>
