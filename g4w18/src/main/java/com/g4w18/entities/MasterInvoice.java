@@ -60,6 +60,10 @@ public class MasterInvoice implements Serializable {
     @NotNull
     @Column(name = "GROSS_VALUE")
     private BigDecimal grossValue;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "AVAILABLE")
+    private boolean available;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceId")
     private List<InvoiceDetail> invoiceDetailList;
     @JoinColumn(name = "CLIENT_ID", referencedColumnName = "CLIENT_ID")
@@ -73,11 +77,12 @@ public class MasterInvoice implements Serializable {
         this.invoiceId = invoiceId;
     }
 
-    public MasterInvoice(Integer invoiceId, Date saleDate, BigDecimal netValue, BigDecimal grossValue) {
+    public MasterInvoice(Integer invoiceId, Date saleDate, BigDecimal netValue, BigDecimal grossValue, boolean available) {
         this.invoiceId = invoiceId;
         this.saleDate = saleDate;
         this.netValue = netValue;
         this.grossValue = grossValue;
+        this.available = available;
     }
 
     public Integer getInvoiceId() {
@@ -111,7 +116,15 @@ public class MasterInvoice implements Serializable {
     public void setGrossValue(BigDecimal grossValue) {
         this.grossValue = grossValue;
     }
-
+    
+    public boolean getAvailable(){
+        return available;
+    }
+    
+    public void setAvailable(boolean available){
+        this.available = available;
+    }
+    
     public List<InvoiceDetail> getInvoiceDetailList() {
         return invoiceDetailList;
     }
@@ -152,5 +165,5 @@ public class MasterInvoice implements Serializable {
     public String toString() {
         return "com.g4w18.entities.MasterInvoice[ invoiceId=" + invoiceId + " ]";
     }
-    
+
 }

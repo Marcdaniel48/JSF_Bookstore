@@ -5,12 +5,66 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>#{msgs.managerOrdersTitle}</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:growl id="growl" life="3000"/>
+            <p:dataTable var="order" value="#{orderManagerBackingBean.allMasterInvoices}" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                         paginator="true" rows="15"
+                         emptyMessage="#{msgs.managerOrdersNoneFound}"
+                         editable="true"
+                         widgetVar="ordersTable">
+                <f:facet name="header">
+                    #{msgs.managerOrdersTitle}
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{orderManagerBackingBean.onRowEdit}" update=":form:growl" oncomplete="PF('ordersTable').filter()"/>
+                <p:column headerText="#{msgs.managerOrdersSeeDetails}">
+                    <p:rowToggler />
+                </p:column>
+                <p:column headerText="#{msgs.managerOrdersId}">
+                    <h:outputText value="#{order.invoiceId}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerOrdersClient}">
+                    <h:outputText value="#{order.clientId.firstName} #{order.clientId.lastName}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerOrdersSaleDate}">
+                    <h:outputText value="#{order.saleDate}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerOrdersNetValue}">
+                    <h:outputText value="#{order.netValue}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerOrdersGrossValue}">
+                    <h:outputText value="#{order.grossValue}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerOrdersAvailable}">
+                    <h:outputText value="#{order.available}"></h:outputText>
+                </p:column>
+                
+                <p:column>
+                    
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </h:body>
 </html>
