@@ -1,10 +1,6 @@
 #recent-books
 {
-    position: absolute;
-    left: 20%;
-    right: 42%;
-    top: 0;
-    bottom: 50%;
+    position: relative;
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 5px;

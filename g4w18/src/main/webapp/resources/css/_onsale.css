@@ -1,11 +1,6 @@
 #book-sales
 {
-    position: absolute;
-/*     height: auto; */
-    left: 20%;
-    right: 42%;
-    top: 50%;
-    bottom: 0;
+    position: relative;
     margin-top: 5px;
     margin-left: 10px;
     margin-right: 10px;

@@ -69,7 +69,8 @@ function showSlide($currentSlide, $nextSlide)
     $currentSlide.animate({opacity: "0"}, 500, 'linear', function()
     {
         $currentSlide.hide();
-        $currentSlide.css("style", "");
+//        $currentSlide.css("style", "");
+        $currentSlide.removeAttr("style");
         inAnimation = false;
     });
 
@@ -89,7 +90,8 @@ function showSlide($currentSlide, $nextSlide)
     {
         $nextSlide.css("transform", "scale(1)");
         $nextSlide.animate({opacity: "1"}, 500, 'linear');
-        $nextSlide.css("style", "");
+//        $nextSlide.css("style", "");
+        $nextSlide.removeAttr("style");
     }, 100);
 }
 
@@ -126,7 +128,7 @@ function init()
 
     setInterval(function()
     {
-        nextSlide();
+        //nextSlide();
     }, 5000);
 }
 

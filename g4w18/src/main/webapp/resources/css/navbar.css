@@ -122,8 +122,12 @@
 }
 .search-dropdown option
 {
-    color: #F2BFA0;
+    color: white;
     background-color: black;
+}
+#navbar-menu
+{
+    display: none;
 }
 
 @media only screen and (max-width: 800px)
