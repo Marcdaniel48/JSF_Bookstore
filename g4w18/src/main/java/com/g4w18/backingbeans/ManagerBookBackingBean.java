@@ -1,8 +1,11 @@
 package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.BookJpaController;
+import com.g4w18.controllers.exceptions.NonexistentEntityException;
+import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Book;
+import com.g4w18.entities.Client;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -25,6 +28,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.io.FilenameUtils;
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.UploadedFile;
@@ -219,9 +223,16 @@ public class ManagerBookBackingBean implements Serializable {
         }
     }
     
-    public void onBookEdit(RowEditEvent event) {
+    public void onBookEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
         FacesMessage msg = new FacesMessage("Book edited!", ((Book) event.getObject()).getIsbnNumber());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+        //Marc-Daniels code
+        DataTable dataTable = (DataTable) (event.getSource());
+        Book updatedBook = (Book)(dataTable.getRowData());
+        bookJpaController.edit(updatedBook);
+        
+        
     }
      
     public void onBookEditCancel(RowEditEvent event) {
