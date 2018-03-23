@@ -123,7 +123,7 @@ public class BookDetailsBackingBean implements Serializable {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             String username = (String) session.getAttribute("username");
             if (username != null) {
-                client = clientJpaController.findClientByUsername(username).get(0x0);
+                client = clientJpaController.findClientByUsername(username);
                 log.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
             } else {
                 client = new Client();
