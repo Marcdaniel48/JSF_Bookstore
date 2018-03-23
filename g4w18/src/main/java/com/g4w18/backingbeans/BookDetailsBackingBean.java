@@ -45,7 +45,7 @@ public class BookDetailsBackingBean implements Serializable {
     private Review review;
     private Client client;
     private List<Book> recommendedBooks;
-    private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
     public Book getBook() {
         if (book == null) {
@@ -71,19 +71,19 @@ public class BookDetailsBackingBean implements Serializable {
         int averageRating = 0;
         Collection<Review> reviews = book.getReviewList();
         int size = reviews.size();
-        log.log(Level.INFO, "Reviews size: {0}", reviews.size());
+        LOGGER.log(Level.INFO, "Reviews size: {0}", reviews.size());
         if (size > 0) {
             for (Review r : reviews) {
                 averageRating = averageRating + r.getRating();
             }
             return averageRating / size;
         }
-        log.log(Level.INFO, "Rating: {0}", averageRating);
+        LOGGER.log(Level.INFO, "Rating: {0}", averageRating);
         return averageRating;
     }
 
     public Review getReview() {
-        log.log(Level.INFO, "getReview() called");
+        LOGGER.log(Level.INFO, "getReview() called");
         if (review == null) {
             review = new Review();
         }
@@ -96,7 +96,7 @@ public class BookDetailsBackingBean implements Serializable {
             String username = (String) session.getAttribute("username");
             if (username != null) {
                 client = clientJpaController.findClientByUsername(username).get(0x0);
-                log.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
+                LOGGER.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
             } else {
                 client = new Client();
                 client.setFirstName("Guest");
@@ -120,8 +120,8 @@ public class BookDetailsBackingBean implements Serializable {
                 return null;
             }
         }
-        log.log(Level.INFO, "Book is: {0}", book.getBookId() + "");
-        log.log(Level.INFO, "Review is: {0}", review);
+        LOGGER.log(Level.INFO, "Book is: {0}", book.getBookId() + "");
+        LOGGER.log(Level.INFO, "Review is: {0}", review);
         review.setBookId(book);
         review.setClientId(client);
         review.setApprovalStatus(false);

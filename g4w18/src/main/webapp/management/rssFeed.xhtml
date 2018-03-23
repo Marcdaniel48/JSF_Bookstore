@@ -20,26 +20,51 @@ and open the template in the editor.
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
     </h:head>
     <h:body>
-        <h:form>
-            <p:dataTable var="rss" value="#{rssManagerBackingBean.rssList}" 
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                         paginator="true" rows="15"
-                         emptyMessage="#{msgs.managerSetSalesNoBooksFound}"
-                         editable="true"
-                         widgetVar="booksTable">
-                <f:facet name="header">
-                    #{msgs.managerRSSTitle}
-                </f:facet>
-                <p:column>
-                    <h:outputText value="#{rss.rssId}"></h:outputText>
-                </p:column>
-                <p:column>
-                    <h:outputText value="#{rss.rssLink}"></h:outputText>
-                </p:column>
-                <p:column>
-                    <h:outputText value="#{rss.isActive}"></h:outputText>
-                </p:column>
-            </p:dataTable>
-        </h:form>
+        <b:container>
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true" />
+                <p:dataTable var="rss" value="#{rssManagerBackingBean.rssList}" 
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             paginator="true" rows="15"
+                             emptyMessage="#{msgs.managerRSSNoneFound}"
+                             editable="true"
+                             widgetVar="newsTable">
+                    <f:facet name="header">
+                        #{msgs.managerRSSTitle}
+                    </f:facet>
+
+                    <p:ajax event="rowEdit" listener="#{rssManagerBackingBean.onRowEdit}" update=":form:msgs" oncomplete="PF('newsTable').filter()"/>
+
+                    <p:column headerText="#{msgs.managerRSSId}" filterBy="#{rss.rssId}" filterMatchMode="contains">
+                        <h:outputText value="#{rss.rssId}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="#{msgs.managerRSSLink}" filterBy="#{rss.rssLink}" filterMatchMode="contains">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{rss.rssLink}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="linkInput" value="#{rss.rssLink}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="#{msgs.managerRSSCurrentActive}" filterBy="#{rss.isActive}" filterMatchMode="equals">
+                        <f:facet name="filter">
+                            <p:selectOneButton onchange="PF('newsTable').filter()">
+                                <f:converter converterId="javax.faces.Boolean" />
+                                <f:selectItem itemLabel="#{msgs.managerRSSAll}" itemValue="" />
+                                <f:selectItem itemLabel="#{msgs.managerRSSActive}" itemValue="true" />
+                                <f:selectItem itemLabel="#{msgs.managerRSSInactive}" itemValue="false" />
+                            </p:selectOneButton>
+                        </f:facet>
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{rss.isActive}"/></f:facet>
+                            <f:facet name="input">
+                                <p:selectBooleanCheckbox value="#{rss.isActive}"></p:selectBooleanCheckbox>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column style="width:32px" headerText="#{msgs.managerEdit}">
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </b:container>
     </h:body>
 </html>

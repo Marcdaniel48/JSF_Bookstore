@@ -1002,4 +1002,7 @@ INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE,
 (1, 4, 7.99, 9.975, 5, 0);
 
 INSERT INTO RSS (RSS_LINK, IS_ACTIVE) values
-('http://www.cbc.ca/cmlink/rss-sports', true);
+('http://www.cbc.ca/cmlink/rss-sports', true),
+('http://feeds.reuters.com/reuters/topNews', false),
+('http://rss.cnn.com/rss/cnn_topstories.rss', false),
+('http://abcnews.go.com/abcnews/topstories', false);

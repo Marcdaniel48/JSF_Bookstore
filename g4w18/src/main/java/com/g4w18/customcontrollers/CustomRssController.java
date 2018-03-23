@@ -126,7 +126,7 @@ public class CustomRssController implements Serializable {
     private void setCurrentAsInactive() throws Exception {
         Rss currentActive = findActiveRss();
         currentActive.setIsActive(false);
-        edit(currentActive);
+        rssController.edit(currentActive);
     }
 
     /**
@@ -153,7 +153,7 @@ public class CustomRssController implements Serializable {
     private void setFirstAsActive() throws Exception {
         Rss toBeActive = findInactiveRss().get(0);
         toBeActive.setIsActive(true);
-        edit(toBeActive);
+        rssController.edit(toBeActive);
     }
 
 }
