@@ -15,14 +15,13 @@ import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 
 /**
  *
- * @author 1331680
+ * @author Sebastian Ramirez
  */
 @Named
 @RequestScoped
@@ -37,6 +36,11 @@ public class RssManagerBackingBean implements Serializable {
     private final FacesContext context = FacesContext.getCurrentInstance();
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
+    /**
+     * Getter method for the RSS list variable.
+     *
+     * @return All the RSS entries in the database.
+     */
     public List<Rss> getRssList() {
         if (rssList == null) {
 //            LOGGER.log(Level.INFO, "List was null");
@@ -45,14 +49,34 @@ public class RssManagerBackingBean implements Serializable {
         return rssList;
     }
 
+    /**
+     * Getter method for the Filtered RSS objects.
+     *
+     * @return the Filtered Rss objects used by PrimeFace's datatable.
+     */
     public List<Rss> getFilteredRss() {
         return filteredRss;
     }
 
+    /**
+     * Setter method for the Filtered RSS objects.
+     *
+     * @param filteredRss the RSS objects filtered by Primeface's datatable.
+     */
     public void setFilteredRss(List<Rss> filteredRss) {
         this.filteredRss = filteredRss;
     }
 
+    /**
+     * The onRowEdit method updates any record edited in the datatable by
+     * updating the values of the entry in the database.
+     *
+     * @param event
+     * @return
+     * @throws NonexistentEntityException
+     * @throws RollbackFailureException
+     * @throws Exception
+     */
     public String onRowEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
         Rss editedRss = (Rss) event.getObject();
         rssController.edit(editedRss);
@@ -60,6 +84,17 @@ public class RssManagerBackingBean implements Serializable {
         return null;
     }
 
+    /**
+     * The delete method deletes the appropriate RSS entry from the database in
+     * accordance to the RSS object toDelete passed by the view to the backing
+     * bean. If there are no more than 1 RSS objects in the database, this
+     * method will not delete the last record and inform the manager that at
+     * least one RSS entry should be kept in order to not break the sites main
+     * display.
+     *
+     * @return null This method will cause the view to return to itself.
+     * @throws Exception
+     */
     public String delete() throws Exception {
         if (rssController.getRssCount() > 1) {
             rssController.destroy(toDelete.getRssId());
@@ -70,16 +105,34 @@ public class RssManagerBackingBean implements Serializable {
         return null;
     }
 
+    /**
+     * The addMessage method simplifies and reduces redundancy of code when
+     * displaying a message is necessary.
+     *
+     * @param key The string key in the messages bundle.
+     */
     private void addMessage(String key) {
         String message = context.getApplication().getResourceBundle(context, "msgs").getString(key);
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
         context.addMessage(null, msg);
     }
 
+    /**
+     * Getter method for the toDelete variable.
+     *
+     * @return The entry in a row to be deleted.
+     */
     public Rss getToDelete() {
         return toDelete;
     }
 
+    /**
+     * Setter method for the toDelete variable. It is needed for the
+     * setPropertyActionListener tag in the view to pass the attribute to be
+     * handled to the backing bean.
+     *
+     * @param rss The RSS entry to be deleted.
+     */
     public void setToDelete(Rss rss) {
         this.toDelete = rss;
     }
