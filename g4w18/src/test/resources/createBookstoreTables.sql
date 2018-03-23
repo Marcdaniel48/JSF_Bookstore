@@ -85,6 +85,7 @@ CREATE TABLE MASTER_INVOICE (
     SALE_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
     NET_VALUE decimal(6,2) NOT NULL default 0.00,
     GROSS_VALUE decimal(6,2) NOT NULL default 0.00,
+    AVAILABLE boolean NOT NULL default true,
     PRIMARY KEY (INVOICE_ID),
     FOREIGN KEY (CLIENT_ID) REFERENCES CLIENT(CLIENT_ID)
 ) ENGINE=InnoDB;
@@ -97,6 +98,7 @@ CREATE TABLE INVOICE_DETAIL (
     GST_RATE decimal (6,2) NOT NULL default 0.00,
     PST_RATE decimal (6,2) NOT NULL default 0.00,
     HST_RATE decimal (6,2) NOT NULL default 0.00,
+    AVAILABLE boolean NOT NULL default true,
     PRIMARY KEY (DETAIL_ID),
     FOREIGN KEY (INVOICE_ID) REFERENCES MASTER_INVOICE(INVOICE_ID),
     FOREIGN KEY (BOOK_ID) REFERENCES BOOK(BOOK_ID)
@@ -992,14 +994,23 @@ insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_
 ('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0, true),
 ('How many books have you read in your life?', 'Less than 1', 'Between 1 and 10', 'Between 11 and 50', 'More than 50', 0, 0, 0, 0, false);
 
-INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE) VALUES
-(10, CURRENT_TIME, 28.96, 33.29676);
+INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE, AVAILABLE) VALUES
+(10, CURRENT_TIME, 28.96, 33.29676, true),
+(20, CURRENT_TIME, 29.07, 33.42, true),
+(15, CURRENT_TIME, 37.68, 43.32, true),
+(25, CURRENT_TIME, 1.85, 2.13, false);
 
-INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE, HST_RATE) VALUES
-(1, 1, 8.99, 9.975, 5, 0),
-(1, 2, 5.99, 9.975, 5, 0),
-(1, 3, 5.99, 9.975, 5, 0),
-(1, 4, 7.99, 9.975, 5, 0);
+INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE, HST_RATE, AVAILABLE) VALUES
+(1, 1, 8.99, 9.975, 5, 0, true),
+(1, 2, 5.99, 9.975, 5, 0, true),
+(1, 3, 5.99, 9.975, 5, 0, true),
+(1, 4, 7.99, 9.975, 5, 0, false),
+(2, 22, 7.99, 9.975, 5, 0, true),
+(2, 54, 20.25, 9.975, 5, 0, false),
+(2, 79, 0.83, 9.975, 5, 0, true),
+(3, 55, 30.69, 9.975, 5, 0, true),
+(3, 44, 6.99, 9.975, 5, 0, true),
+(4, 67, 1.85, 9.975, 5, 0, false);
 
 INSERT INTO RSS (RSS_LINK, IS_ACTIVE) values
 ('http://www.cbc.ca/cmlink/rss-sports', true),

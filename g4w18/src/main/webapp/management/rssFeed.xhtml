@@ -68,19 +68,21 @@ and open the template in the editor.
                     </p:commandButton>
                 </p:column>
                 <f:facet name="footer">
-                    <p:commandButton value="#{msgs.managerNew}" type="button" onclick="PF('newEntryDialog').show();"></p:commandButton>
-                    <p:dialog header="#{msgs.managerRSSNew}" widgetVar="newEntryDialog" modal="true">
-                        <p:panelGrid columns="2">
-                            <h:outputLabel for="newLink" value="#{msgs.managerRSSLink}"></h:outputLabel>
-                            <h:inputText id="newLint" value="#{rssManagerBackingBean.newRss.rssLink}"></h:inputText>
-                            <h:outputLabel for="newIsActive" value="#{msgs.managerRSSCurrentActive}"></h:outputLabel>
-                            <p:selectBooleanCheckbox value="#{rssManagerBackingBean.newRss.isActive}"></p:selectBooleanCheckbox>
-                            <p:commandButton value="#{msgs.bookDetailsSubmitReview}" onsuccess="PF('newEntryDialog').hide();" oncomplete="PF('newsTable').filter();" action="#{rssManagerBackingBean.createRss}"></p:commandButton>
-                            <p:commandButton value="#{msgs.managerCancel}" type="button" onclick="PF('newEntryDialog').hide();"></p:commandButton>
-                        </p:panelGrid>
-                    </p:dialog>
                 </f:facet>
             </p:dataTable>
+        </h:form>
+        <h:form>
+            <p:commandButton value="#{msgs.managerNew}" type="button" onclick="PF('newEntryDialog').show();"></p:commandButton>
+            <p:dialog header="#{msgs.managerRSSNew}" widgetVar="newEntryDialog" modal="true">
+                <p:panelGrid columns="2">
+                    <h:outputLabel for="newLink" value="#{msgs.managerRSSLink}"></h:outputLabel>
+                    <h:inputText id="newLink" value="#{rssManagerBackingBean.newRss.rssLink}"></h:inputText>
+                    <h:outputLabel for="newIsActive" value="#{msgs.managerRSSCurrentActive}"></h:outputLabel>
+                    <p:selectBooleanCheckbox value="#{rssManagerBackingBean.newRss.isActive}" id="newIsActive"></p:selectBooleanCheckbox>
+                    <p:commandButton value="#{msgs.bookDetailsSubmitReview}" onsuccess="PF('newEntryDialog').hide();" oncomplete="PF('newsTable').filter();" action="#{rssManagerBackingBean.createRss}" update=":form:growl"></p:commandButton>
+                    <p:commandButton value="#{msgs.managerCancel}" type="reset" onclick="PF('newEntryDialog').hide();"></p:commandButton>
+                </p:panelGrid>
+            </p:dialog>
         </h:form>
     </h:body>
 </html>

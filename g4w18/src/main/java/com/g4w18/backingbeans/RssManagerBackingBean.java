@@ -21,7 +21,7 @@ import org.primefaces.event.RowEditEvent;
 
 /**
  *
- * @author Sebastian Ramirez
+ * @author Juan Sebastian Ramirez
  */
 @Named
 @RequestScoped
