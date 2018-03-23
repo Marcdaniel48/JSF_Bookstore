@@ -33,6 +33,7 @@ public class RssManagerBackingBean implements Serializable {
     private List<Rss> rssList;
     private List<Rss> filteredRss;
     private Rss toDelete;
+    private Rss newRss;
     private final FacesContext context = FacesContext.getCurrentInstance();
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
@@ -124,6 +125,19 @@ public class RssManagerBackingBean implements Serializable {
      */
     public Rss getToDelete() {
         return toDelete;
+    }
+
+    public Rss getNewRss() {
+        if (newRss == null) {
+            newRss = new Rss();
+        }
+        return newRss;
+    }
+
+    public String createRss() throws Exception {
+        rssController.create(newRss);
+        addMessage("managerRSSNewSuccess");
+        return null;
     }
 
     /**
