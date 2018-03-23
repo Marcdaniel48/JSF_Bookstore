@@ -12,90 +12,144 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+
+<!--    <p:panel id="basic" header="#{msgs.managerExplanationSousTitre}" style="margin-bottom:20px">
+    <h:panelGrid columns="1" cellpadding="10">
+        <h:outputText
+            value="#{msgs.managerExplanation}" />
+    </h:panelGrid>
+</p:panel>
+
+    <p:panel id="toggleable" header="#{msgs.managerAddSousTitre}" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+
     
-    <p:panel id="basic" header="#{msgs.managerExplanationSousTitre}" style="margin-bottom:20px">
-        <h:panelGrid columns="1" cellpadding="10">
-            <h:outputText
-                value="#{msgs.managerExplanation}" />
-        </h:panelGrid>
-    </p:panel>
- 
-        <p:panel id="toggleable" header="#{msgs.managerAddSousTitre}" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
- 
+    <h:form>
         
+         <p:growl id="growl" showDetail="true" sticky="true"/>
+     <h:panelGrid columns="2" cellpadding="10">
+             <p:outputLabel>#{msgs.managerAddIsbn}</p:outputLabel>
+             <p:inputText required="true" value="#{managerBookHandling.book.isbnNumber}" ></p:inputText>
+             
+             <p:outputLabel>#{msgs.managerAddTitle}</p:outputLabel>
+             <p:inputText required="true" value="#{managerBookHandling.book.title}" ></p:inputText>
+             
+             <p:outputLabel>#{msgs.managerAddPublisher}</p:outputLabel>
+             <p:inputText required="true" value="#{managerBookHandling.book.publisher}" ></p:inputText>
+             
+             <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
+             <p:inputText required="true" value="#{managerBookHandling.book.publicationDate}">
+                 <f:convertDateTime pattern="dd/mm/yyyy" />
+             </p:inputText>
+             
+             <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
+             <p:inputNumber   value="#{managerBookHandling.book.pageNumber}" required="true" ></p:inputNumber>
+             
+             <p:outputLabel>#{msgs.managerAddGenre}</p:outputLabel>
+             <p:selectOneMenu required="true" value="#{managerBookHandling.book.genre}" >
+                 <f:selectItems value="#{managerBookHandling.genreOptionValue}"/>
+             </p:selectOneMenu>
+             
+             <p:outputLabel>#{msgs.managerAddDescription}</p:outputLabel>
+             <p:inputTextarea rows="6" cols="50" value="#{managerBookHandling.book.description}"  required="true" />
+             
+             <p:outputLabel>#{msgs.managerAddFormat}</p:outputLabel>
+             <p:selectOneRadio id="format" value="#{managerBookHandling.book.format}" required="true" >
+                 <f:selectItems value="#{managerBookHandling.formats}" var="f" itemLabel="#{managerBookHandling.book.format}" itemValue="#{managerBookHandling.book.format}"></f:selectItems>
+            </p:selectOneRadio>
+             
+             <p:outputLabel>#{msgs.managerAddWholePrice}</p:outputLabel>
+             <p:inputNumber  value="#{managerBookHandling.book.wholesalePrice}" required="true"  ></p:inputNumber>
+             
+             <p:outputLabel>#{msgs.managerAddListPrice}</p:outputLabel>
+             <p:inputNumber  value="#{managerBookHandling.book.listPrice}" required="true"  ></p:inputNumber>
+             
+             <p:outputLabel>#{msgs.managerAddSalePrice}</p:outputLabel>
+             <p:inputNumber  value="#{managerBookHandling.book.salePrice}" required="true"  ></p:inputNumber>
+             
+             <p:outputLabel>#{msgs.managerAddInventoryDate}</p:outputLabel>
+             <p:calendar id="restricted"  value="#{managerBookHandling.book.inventoryDate}" mindate="0" maxdate="0" />
+             
+             <p:outputLabel>#{msgs.managerAddRemovalStatus}</p:outputLabel>
+             <p:selectBooleanButton value="#{managerBookHandling.book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
+             
+             <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
+             <p:fileUpload fileLimit="1" required="true" mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{managerBookHandling.fileUploadHandler}" />
+             
+             <p:commandButton value="#{msgs.submitButton}" action="#{managerBookHandling.createBook()}" update="growl"/>
+             <h:outputLabel>#{managerBookHandling.message}</h:outputLabel>
+             
+    </h:panelGrid>
+     </h:form>
+</p:panel>-->
+
+<!--        <p:panel header="#{msgs.managerEditRemoveTitle}" widgetVar="panelEdit" toggleable="true"  toggleSpeed="500" closeSpeed="500" style="margin-bottom:100px ">-->
         <h:form>
-            
-             <p:growl id="growl" showDetail="true" sticky="true"/>
-         <h:panelGrid columns="2" cellpadding="10">
-                 <p:outputLabel>#{msgs.managerAddIsbn}</p:outputLabel>
-                 <p:inputText required="true" value="#{managerBookHandling.book.isbnNumber}" ></p:inputText>
-                 
-                 <p:outputLabel>#{msgs.managerAddTitle}</p:outputLabel>
-                 <p:inputText required="true" value="#{managerBookHandling.book.title}" ></p:inputText>
-                 
-                 <p:outputLabel>#{msgs.managerAddPublisher}</p:outputLabel>
-                 <p:inputText required="true" value="#{managerBookHandling.book.publisher}" ></p:inputText>
-                 
-                 <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
-                 <p:inputText required="true" value="#{managerBookHandling.book.publicationDate}">
-                     <f:convertDateTime pattern="dd/mm/yyyy" />
-                 </p:inputText>
-                 
-                 <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
-                 <p:inputNumber   value="#{managerBookHandling.book.pageNumber}" required="true" ></p:inputNumber>
-                 
-                 <p:outputLabel>#{msgs.managerAddGenre}</p:outputLabel>
-                 <p:selectOneMenu required="true" value="#{managerBookHandling.book.genre}" >
-                     <f:selectItems value="#{managerBookHandling.genreOptionValue}"/>
-                 </p:selectOneMenu>
-                 
-                 <p:outputLabel>#{msgs.managerAddDescription}</p:outputLabel>
-                 <p:inputTextarea rows="6" cols="50" value="#{managerBookHandling.book.description}"  required="true" />
-                 
-                 <p:outputLabel>#{msgs.managerAddFormat}</p:outputLabel>
-                 <p:selectOneRadio id="format" value="#{managerBookHandling.book.format}" required="true" >
-                     <f:selectItems value="#{managerBookHandling.formats}" var="f" itemLabel="#{managerBookHandling.book.format}" itemValue="#{managerBookHandling.book.format}"></f:selectItems>
-                </p:selectOneRadio>
-                 
-                 <p:outputLabel>#{msgs.managerAddWholePrice}</p:outputLabel>
-                 <p:inputNumber  value="#{managerBookHandling.book.wholesalePrice}" required="true"  ></p:inputNumber>
-                 
-                 <p:outputLabel>#{msgs.managerAddListPrice}</p:outputLabel>
-                 <p:inputNumber  value="#{managerBookHandling.book.listPrice}" required="true"  ></p:inputNumber>
-                 
-                 <p:outputLabel>#{msgs.managerAddSalePrice}</p:outputLabel>
-                 <p:inputNumber  value="#{managerBookHandling.book.salePrice}" required="true"  ></p:inputNumber>
-                 
-                 <p:outputLabel>#{msgs.managerAddInventoryDate}</p:outputLabel>
-                 <p:calendar id="restricted"  value="#{managerBookHandling.book.inventoryDate}" mindate="0" maxdate="0" />
-                 
-                 <p:outputLabel>#{msgs.managerAddRemovalStatus}</p:outputLabel>
-                 <p:selectBooleanButton value="#{managerBookHandling.book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
-                 
-                 <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
-                 <p:fileUpload fileLimit="1" required="true" mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{managerBookHandling.fileUploadHandler}" />
-                 
-                 <p:commandButton value="#{msgs.submitButton}" action="#{managerBookHandling.createBook()}" update="growl"/>
-                 <h:outputLabel>#{managerBookHandling.message}</h:outputLabel>
-                 
-        </h:panelGrid>
-         </h:form>
-    </p:panel>
-    
-        <p:panel header="#{msgs.managerEditRemoveTitle}" widgetVar="panelEdit" toggleable="true"  toggleSpeed="500" closeSpeed="500" style="margin-bottom:100px">
- 
-        
-        <h:form>
-             <p:growl id="growl" showDetail="true" sticky="true"/>
-         <h:panelGrid columns="2" cellpadding="10">
-                 <p:outputLabel>#{msgs.managerSearch}</p:outputLabel>
-                 <p:inputText required="true" requiredMessage="#{msgs.requiredMessageForSearch}" value="#{managerBookHandling.searchBook}" ></p:inputText>
-                 
-                 <p:commandButton value="#{msgs.searchButtonTxt}" action="#{managerBookHandling.search()}"  update="growl"/>
-                 <h1>#{managerBookHandling.message}</h1>
-        </h:panelGrid>
-         </h:form>
-    </p:panel>
-        
+            <p:growl id="msgs" showDetail="true"></p:growl>
+            <p:dataTable  var="book" value="#{managerBookHandling.books}" editable="true" style="margin-bottom:20px" paginator="true" rows="20"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                <f:facet name="header">
+                    Row Editing
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{managerBookHandling.onBookEdit}"  />
+                <p:ajax event="rowEditCancel" listener="#{managerBookHandling.onBookEditCancel}"  />
+
+                <p:column headerText="#{msgs.managerAddIsbn}" sortBy="#{book.isbnNumber}" filterBy="#{book.isbnNumber}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{book.isbnNumber}" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{book.title}" filterBy="#{book.title}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{book.title}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{book.title}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerAddPublisher}" sortBy="#{book.publisher}" filterBy="#{book.publisher}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{book.publisher}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{book.publisher}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerAddPublisherDate}" sortBy="#{book.publicationDate}" filterBy="#{book.publicationDate}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{book.publicationDate}" /></f:facet>
+                        <f:facet name="input"> <p:inputText required="true" value="#{book.publicationDate}">
+                                <f:convertDateTime pattern="dd/mm/yyyy" />
+                            </p:inputText>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="#{msgs.bookDetailsPageNumber}" sortBy="#{book.pageNumber}" filterBy="#{book.pageNumber}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{book.pageNumber}" /></f:facet>
+                        <f:facet name="input"><p:inputNumber value="#{book.pageNumber}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerAddGenre}" sortBy="#{book.genre}" filterBy="#{book.genre}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{book.genre}" /></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{book.genre}" style="width:100%">
+                                <f:selectItems value="#{managerBookHandling.genreOptionValue}"  />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:32px">
+                    <p:rowEditor />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+        <!--        </p:panel>-->
+
     </h:body>
 </html>

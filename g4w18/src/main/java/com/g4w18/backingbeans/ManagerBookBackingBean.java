@@ -19,11 +19,14 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -95,30 +98,6 @@ public class ManagerBookBackingBean implements Serializable {
         message = "The book was updated.";
         return "null";
     }
-    
-    /**
-     * Search for the book the manager wants. It nothing found, stay in the same page
-     * and display the message.
-     * @return Page to go to
-     */
-    public String search()
-    {
-        int result = 0;
-        logger.log(Level.INFO, "inside of SEARCH HEREHERE: "+ result );
-        result = getBooksByTitle().size();
-        
-        if(result == 0)
-        {
-            logger.log(Level.INFO, "inside of SEARCH of 0: "+ result );
-            message = "fail nothing was returned";
-            return null;
-        }
-        else
-        {
-            logger.log(Level.INFO, "INSIDE of SEARCH of more than 0: "+ result );
-            return "resultEdit";
-        }
-    }
     /**
      * Add book to database
      * @return Website to move to 
@@ -148,13 +127,13 @@ public class ManagerBookBackingBean implements Serializable {
     }
     
     /**
-     * Get books with the title provided by the user.
+     * Get all books from database.
      * 
      * @return List of books found
      */
-    public List<Book> getBooksByTitle()
+    public List<Book> getBooks()
     {
-        List<Book> books = bookJpaController.findBooksByTitle(searchBook);
+        List<Book> books = bookJpaController.findBookEntities();
         
         return books;
     }
@@ -238,6 +217,16 @@ public class ManagerBookBackingBean implements Serializable {
         {
             Files.copy(input, file);
         }
+    }
+    
+    public void onBookEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Book edited!", ((Book) event.getObject()).getIsbnNumber());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+    public void onBookEditCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Book edit cancelled!", ((Book) event.getObject()).getIsbnNumber());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
     public List<String> getFormats()
