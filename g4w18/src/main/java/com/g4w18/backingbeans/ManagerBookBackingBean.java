@@ -39,7 +39,7 @@ import org.primefaces.model.UploadedFile;
  * @author Salman Haidar
  */
 @Named("managerBookHandling")
-@SessionScoped
+@RequestScoped
 public class ManagerBookBackingBean implements Serializable {
     
     
@@ -52,6 +52,8 @@ public class ManagerBookBackingBean implements Serializable {
     private String message=null;
     
     private Book book;
+    
+    private List<Book> books;
     
     private boolean render=true;
     private boolean renderEdit=false;
@@ -137,8 +139,9 @@ public class ManagerBookBackingBean implements Serializable {
      */
     public List<Book> getBooks()
     {
-        List<Book> books = bookJpaController.findBookEntities();
-        
+        if(books == null){
+            books = bookJpaController.findBookEntities();
+        }
         return books;
     }
     
@@ -224,12 +227,13 @@ public class ManagerBookBackingBean implements Serializable {
     }
     
     public void onBookEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
+        logger.log(Level.INFO, "onRowEdit Called");
         FacesMessage msg = new FacesMessage("Book edited!", ((Book) event.getObject()).getIsbnNumber());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         
         //Marc-Daniels code
-        DataTable dataTable = (DataTable) (event.getSource());
-        Book updatedBook = (Book)(dataTable.getRowData());
+//        DataTable dataTable = (DataTable) (event.getSource());
+        Book updatedBook = (Book)(event.getObject());
         bookJpaController.edit(updatedBook);
         
         
