@@ -68,6 +68,11 @@ a:hover
     transform: translate(-50%, 0%);
     -ms-transform: translate(-50%, 0%);
 }
+.website-image
+{
+    width: 100%;
+}
+
 @media only screen and (max-width: 800px)
 {
     .top-section

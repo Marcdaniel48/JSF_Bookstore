@@ -1,10 +1,6 @@
 #rss-feed
 {
-    position: absolute;
-    left: 58%;
-    right: 0;
-    top: 31%;
-    bottom: 31%;
+    position: relative;
     margin: 10px 0;
     padding: 10px;
     text-align: center;

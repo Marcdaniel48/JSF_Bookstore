@@ -7,13 +7,20 @@
 
     <ui:define name="content">
         
+
+        
         <div class="parallax">
 
             <div class="parallax-layer background"></div>
+            
+
 
             <div class="content">
 
+    
                 <div class="top-section">
+                                                  <!--<h:graphicImage library="images" name="b3.jpeg" styleClass="website-image"/>-->
+
                     <div id="book-sales">
 
                         <h1 class="section-title">Books On Sale!</h1>
@@ -149,9 +156,6 @@
         
                     <div id="rss-feed">
 
-                        <!--<h1 class="section-title">News</h1>-->
-                        
-                        <!--<div class="center-vertical">-->
                         <form>
                             <ui:repeat value="#{rssBackingBean.articles}" var="article">
                                 <div class="article">
@@ -166,9 +170,6 @@
 
                         <a class="prev disabled">&#10094;</a>
                         <a class="next">&#10095;</a>
-                        <!--</div>-->
-<!--                        <div class="overlay"></div>
-                        <div class="overlay-text"><div>Read More</div></div>-->
                         
                     </div>
 

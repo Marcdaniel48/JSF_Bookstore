@@ -1,10 +1,6 @@
 #survey
 {
-    position: absolute;
-    left: 58%;
-    right: 0;
-    top: 69%;
-    bottom: 0;
+    position: relative;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.8);
     opacity: 0;
