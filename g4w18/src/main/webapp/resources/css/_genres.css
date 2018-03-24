@@ -2,31 +2,43 @@
 {
     position: relative;
     text-align: center;
-    font-size: 1.9em;
+    font-size: 1.2em;
+    padding: 10px 0;
     opacity: 0;
     transform: translateX(-100%);
     animation: 1s ease-out 1.98s 1 slideInFromLeft;
     animation-fill-mode: forwards;
-    background-color: rgba(0, 0, 0, 0.8);
+    /*background-color: rgba(0, 0, 0, 0.8);*/
 }
 .outer
 {
-    margin: auto;
-    top: 50%;
+/*    margin: auto;
+    top: 50%;*/
     position: relative;
-    -webkit-transform: translateY(-50%);
+/*    -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    transform: translateY(-50%);*/
 }
 .genre-title
 {
-    display: block;
+    /*display: block;*/
     margin: 20px 0px 20px 0px;
     transition: font-size .2s ease;
 }
 .genre-title:hover
 {
     font-size: 1.2em;
+}
+.genre-item
+{
+    width: 150px;
+    margin: 0 3%;
+    display: inline-block;
+    vertical-align: top;
+}
+.genre-item img
+{
+    width: 100%;
 }
 .view-more
 {

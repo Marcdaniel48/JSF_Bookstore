@@ -1,18 +1,23 @@
 #recent-books
 {
     position: relative;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    font-size: 0;
-    letter-spacing: 0px;
+    /*margin-left: 10px;*/
+    /*margin-right: 10px;*/
+    /*margin-bottom: 5px;*/
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url("#{resource['images/b3.jpeg']}");
+    background-size: cover;
+    background-position: center;
     opacity: 0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
     transform: translateY(-100%);
     animation: 1s ease-out 2.2s 1 slideInFromTop;
     animation-fill-mode: forwards;
     /* border: 3px solid yellow; */
+}
+#recent-books a:hover
+{
+    opacity: 1;
 }
 .book-thumbnail-container
 {
@@ -33,7 +38,7 @@
 .book:hover
 {
     cursor: pointer;
-    transform: scale(1.2);
+    /*transform: scale(1.2);*/
 }
 .book:hover .overlay,
 #rss-feed:hover .overlay,
@@ -58,7 +63,7 @@
 {
     width: 33.3%;
     height: auto;
-    padding: 5%;
+    padding: 10px 5%;
     display: inline-block;
     position: relative;
     vertical-align: top;

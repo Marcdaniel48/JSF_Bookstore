@@ -2,7 +2,7 @@
 {
     position: relative;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
+    /*background-color: rgba(0, 0, 0, 0.8);*/
     opacity: 0;
     transform: translateX(100%);
     animation: 1s ease-out 2.3s 1 slideInFromRight;

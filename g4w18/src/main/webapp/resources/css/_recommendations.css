@@ -1,3 +1,19 @@
+.recommendations
+{
+    position: relative;
+    text-align: center;
+    /*margin: 5px 0px;*/
+    padding-top: 10px;
+    background-image: url("#{resource['images/b4.jpg']}");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
+}
+.recommendations a:hover
+{
+    opacity: 1;
+}
+
 @media only screen and (max-width: 800px)
 {
     .recommendations
@@ -6,8 +22,7 @@
         text-align: center;
         margin: 5px 0px;
         padding-top: 10px;
-        font-size: 0;
-        letter-spacing: 0px;
+        background-color: transparent;
         border: 1px solid black;
     }
 }

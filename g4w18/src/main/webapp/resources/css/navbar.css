@@ -10,7 +10,7 @@
     color: #F2BFA0;
     font-size: 1.5em;
     background-color: rgba(0,0,0,0.95);
-    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
 /*    opacity: 0;
     animation: 1s ease-out 2s 1 fadeIn;
     animation-fill-mode: forwards;*/
