@@ -8,6 +8,7 @@
     background-size: cover;
     background-position: center;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
+    clear: both;
 }
 .recommendations a:hover
 {

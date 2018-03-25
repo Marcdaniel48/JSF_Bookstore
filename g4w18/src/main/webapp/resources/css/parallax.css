@@ -32,7 +32,8 @@
     padding-top: 70px;
     position: relative;
     padding-bottom: 10px;
-    background-color: #F2BFA0;
+    /*background-color: #F2BFA0;*/
+    background-image: url("#{resource['images/t.png']}");
     /*background-size: cover;*/
     /*background-position: center;*/
     /* border: 3px solid red; */

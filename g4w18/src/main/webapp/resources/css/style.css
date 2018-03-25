@@ -77,6 +77,13 @@ a:hover
     font-size: 0;
     letter-spacing: 0px;
 }
+.vertical-hr
+{
+    width: 3px;
+    height: 100%;
+    background-color: black;
+}
+
 @media only screen and (max-width: 800px)
 {
     .top-section

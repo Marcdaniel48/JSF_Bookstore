@@ -9,10 +9,21 @@
     transform: translateX(100%);
     animation: 1s ease-out 2.2s 1 slideInFromRight;
     animation-fill-mode: forwards;
+    font-weight: bolder;
+}
+#rss-feed.mobile
+{
+    display: none;
 }
 #rss-feed .article
 {
-    display: none;
+    width: 33.3%;
+    padding: 0 10px;
+    vertical-align: middle;
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
 }
 
 @media only screen and (max-width: 800px)
@@ -33,5 +44,17 @@
         animation: none;
         animation-fill-mode: none;
         border: 1px solid black;
+    }
+    #rss-feed.desktop
+    {
+        display: none;
+    }
+    #rss-feed.mobile
+    {
+        display: block;
+    }
+    #rss-feed.mobile .article
+    {
+        display: none;
     }
 }
