@@ -6,6 +6,7 @@ import com.g4w18.customcontrollers.CustomMasterInvoiceController;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -26,6 +27,7 @@ public class OrderManagerBackingBean implements Serializable {
     private CustomMasterInvoiceController masterInvoiceController;
 
     private List<MasterInvoice> allMasterInvoices;
+    private MasterInvoice masterInvoice;
     private final FacesContext context = FacesContext.getCurrentInstance();
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
@@ -34,6 +36,24 @@ public class OrderManagerBackingBean implements Serializable {
             allMasterInvoices = masterInvoiceController.findMasterInvoiceEntities();
         }
         return allMasterInvoices;
+    }
+
+    public MasterInvoice getMasterInvoice() {
+
+        return masterInvoice;
+    }
+
+    /**
+     * Setter method for the toDelete variable. It is needed for the
+     * setPropertyActionListener tag in the view to pass the attribute to be
+     * handled to the backing bean.
+     *
+     * @param masterInvoice The RSS entry to be deleted.
+     */
+    public void setMasterInvoice(MasterInvoice masterInvoice) {
+        LOGGER.log(Level.INFO, "masterInvoice setter called");
+        LOGGER.log(Level.INFO, "masterInvoice ID {0}", masterInvoice.getInvoiceId());
+        this.masterInvoice = masterInvoice;
     }
 
     /**

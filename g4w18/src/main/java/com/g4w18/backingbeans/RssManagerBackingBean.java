@@ -11,6 +11,7 @@ import com.g4w18.customcontrollers.CustomRssController;
 import com.g4w18.entities.Rss;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -148,6 +149,7 @@ public class RssManagerBackingBean implements Serializable {
      * @param rss The RSS entry to be deleted.
      */
     public void setToDelete(Rss rss) {
+        LOGGER.log(Level.INFO, "toDelete setter called");
         this.toDelete = rss;
     }
 }

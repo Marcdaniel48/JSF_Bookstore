@@ -14,7 +14,7 @@ and open the template in the editor.
 
     <h:head>
         <title>#{msgs.managerOrdersTitle}</title>
-        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
         <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
         <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
@@ -27,13 +27,14 @@ and open the template in the editor.
                          paginator="true" rows="15"
                          emptyMessage="#{msgs.managerOrdersNoneFound}"
                          editable="true"
-                         widgetVar="ordersTable">
+                         widgetVar="ordersTable"
+                         rowStyleClass="">
                 <f:facet name="header">
                     #{msgs.managerOrdersTitle}
                 </f:facet>
 
                 <p:ajax event="rowEdit" listener="#{orderManagerBackingBean.onRowEdit}" update=":form:growl" oncomplete="PF('ordersTable').filter()"/>
-                <p:column headerText="#{msgs.managerOrdersSeeDetails}">
+                <p:column>
                     <p:rowToggler />
                 </p:column>
                 <p:column headerText="#{msgs.managerOrdersId}">
@@ -59,11 +60,34 @@ and open the template in the editor.
                 <p:column headerText="#{msgs.managerOrdersAvailable}">
                     <h:outputText value="#{order.available}"></h:outputText>
                 </p:column>
-                
-                <p:column>
-                    
+                <p:column headerText="#{msgs.managerEdit}">
+                    <p:rowEditor />
                 </p:column>
-
+                <p:rowExpansion>
+                    <p:dataTable var="detail" value="#{order.invoiceDetailList}" editable="true">
+                        <p:column headerText="#{msgs.managerDetailId}">
+                            <h:outputText value="#{detail.detailId}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="#{msgs.managerDetailBook}">
+                            <h:outputText value="#{detail.bookId.title}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="#{msgs.managerDetailPrice}">
+                            <h:outputText value="#{detail.bookPrice}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="#{msgs.managerDetailGST}">
+                            <h:outputText value="#{detail.gstRate}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="#{msgs.managerDetailPST}">
+                            <h:outputText value="#{detail.pstRate}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="#{msgs.managerDetailHST}">
+                            <h:outputText value="#{detail.hstRate}"></h:outputText>
+                        </p:column>
+                        <p:column headerText="#{msgs.managerEdit}">
+                            <p:rowEditor />
+                        </p:column>
+                    </p:dataTable>
+                </p:rowExpansion>
             </p:dataTable>
         </h:form>
     </h:body>
