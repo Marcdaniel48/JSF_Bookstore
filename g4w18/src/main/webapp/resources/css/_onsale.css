@@ -14,13 +14,9 @@
     animation: 1s ease-out 2.2s 1 slideInFromBottom;
     animation-fill-mode: forwards;
 }
-#book-sales .section-title
+#book-sales .section-title-img
 {
-    margin-bottom: 20px;
     background-image: url("#{resource['images/b2.jpeg']}");
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
 }
 #book-sales a:hover
 {
@@ -29,12 +25,12 @@
 #book-sales .prev,
 #book-sales .next,
 .recommendations .prev,
-.recommendations .next,
-#rss-feed .prev,
-#rss-feed .next
+.recommendations .next
 {
-    padding-left: 6px;
-    padding-right: 8px;
+    color: white;
+    font-size: 32px;
+    padding-left: 14px;
+    padding-right: 16px;
 }
 #book-sales .book,
 .recommendations .book
