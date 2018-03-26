@@ -23,7 +23,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Jephtia, Salman, Sebastian
+ * @author Jephtia, Salman, Sebastian, Marc-Daniel
  */
 public class CustomBookController implements Serializable {
 
@@ -247,5 +247,14 @@ public class CustomBookController implements Serializable {
         List<Book> books = (List<Book>)query.getResultList();
         
         return books;
+    }
+    
+    public Book findBookByInvoice(int invoiceId)
+    {
+        List<Book> books = em.createNativeQuery("Select b from book left join InvoiceDetail i on b.bookId = i.bookId where i.bookId = ?1").setParameter(1, invoiceId).getResultList();
+        if (!books.isEmpty()) {
+            return books.get(0);
+        }
+        return null;
     }
 }

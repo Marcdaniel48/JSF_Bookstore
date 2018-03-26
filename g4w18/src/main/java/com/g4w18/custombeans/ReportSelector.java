@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package custombeans;
+package com.g4w18.custombeans;
 
 import java.io.Serializable;
 import java.util.Date;

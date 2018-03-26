@@ -12,6 +12,9 @@ import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -71,5 +74,15 @@ public class CustomMasterInvoiceJpaController implements Serializable
             return masterInvoices.get(0);
         }
         return null;
+    }
+    
+    public List<MasterInvoice> findMasterInvoicesBetweenDates(LocalDate firstDate, LocalDate secondDate)
+    {
+        LocalDateTime date1 = LocalDateTime.of(firstDate, LocalTime.MIN);
+        LocalDateTime date2 = LocalDateTime.of(secondDate, LocalTime.MIN);
+        
+        List<MasterInvoice> masterInvoices = em.createQuery("Select m from MasterInvoice m where m.saleDate between ?1 and ?2")
+                .setParameter(1, date1).setParameter(2, date2).getResultList();
+        return masterInvoices;  
     }
 }
