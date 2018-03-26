@@ -20,10 +20,18 @@ html, body
 input[type="submit"],
 button
 {
+    cursor: pointer;
     padding: 5px;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid black;
+    transition: .6s ease-in;
+}
+input[type="submit"]:hover,
+button:hover
+{
+    filter: drop-shadow(0 0  10px black);
+    transform: translateY(-5px);
 }
 hr
 {

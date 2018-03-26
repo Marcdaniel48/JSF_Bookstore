@@ -1,5 +1,6 @@
 #recent-books
 {
+    cursor: default;
     position: relative;
     /*margin-left: 10px;*/
     /*margin-right: 10px;*/
@@ -23,10 +24,6 @@
 {
     opacity: 1;
 }
-.book-thumbnail-container
-{
-    position: relative;
-}
 .overlay
 {
     position: absolute;
@@ -38,11 +35,6 @@
     transform: scale(1);
     transition: opacity .6s ease, transform .6s ease;
     background-color: black;
-}
-.book:hover
-{
-    cursor: pointer;
-    /*transform: scale(1.2);*/
 }
 .book:hover .overlay,
 #rss-feed:hover .overlay,
@@ -68,6 +60,8 @@
     width: 33.3%;
     height: auto;
     padding: 10px 5%;
+    margin-bottom: 10px;
+    cursor: default;
     display: inline-block;
     position: relative;
     vertical-align: top;
@@ -88,7 +82,21 @@
 {
     width: 100%;
     height: 100%;
+    cursor: pointer;
     filter: drop-shadow(0 0 10px black);
+    filter: sepia(0%);
+    transition: .6s ease-in;
+}
+.book-thumbnail:hover
+{
+    transform: scale(1.05);
+    filter: sepia(100%);
+}
+.book-thumbnail:hover + .book-price
+{
+    transform: translateY(10px);
+    margin-top: 0;
+    padding-top: 0;
 }
 .book-title
 {
@@ -102,15 +110,18 @@
 }
 .book-price
 {
-    display: inline;
+    display: inline-block;
     padding-top: 10px;
+    margin-top: -10px;
     padding-left: 10px;
     padding-right: 10px;
+    z-index: -1;
     font-size: 28px;
     font-weight: bolder;
     color: #F2BFA0;
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 5px;
+    transition: .6s ease-in;
 /*     border: 3px solid green; */
 }
 

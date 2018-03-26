@@ -31,7 +31,6 @@
     width: 100%;
     padding-top: 70px;
     position: relative;
-    padding-bottom: 10px;
     /*background-color: #F2BFA0;*/
     background-image: url("#{resource['images/t.png']}");
     background-attachment: fixed;

@@ -27,13 +27,14 @@
     font-weight: bolder;
     transition: font-size .2s ease;
 }
-.genre-title:hover
+.genre-item:hover .genre-title
 {
     font-size: 1.2em;
 }
 .genre-item
 {
     width: 150px;
+    cursor: pointer;
     margin: 0 3%;
     display: inline-block;
     vertical-align: top;
@@ -41,6 +42,11 @@
 .genre-item img
 {
     width: 100%;
+    transition: .3s ease-in;
+}
+.genre-item:hover img
+{
+    filter: drop-shadow(0 0 10px black);
 }
 .view-more
 {

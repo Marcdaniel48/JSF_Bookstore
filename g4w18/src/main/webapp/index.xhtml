@@ -35,16 +35,13 @@
                                         <f:param name="id" value="#{book.bookId}" />
 
                                         <div class="book">
-                                            <div class="book-thumbnail-container">
-                                                <!--<div class="overlay"></div>-->
-                                                <!--<div class="overlay-text"><div>View</div></div>-->
-                                                <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
-                                            </div>
+                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
+                                            
                                             <ui:fragment rendered="#{book.salePrice le 0}">
-                                                <p class="book-price">#{book.listPrice}</p>
+                                                <p class="book-price">$#{book.listPrice}</p>
                                             </ui:fragment>
                                             <ui:fragment rendered="#{book.salePrice gt 0}">
-                                                <p class="book-price"><s>#{book.listPrice}</s> <span class="sale-price">#{book.salePrice}</span></p>
+                                                <p class="book-price"><s>$#{book.listPrice}</s> <span class="sale-price">$#{book.salePrice}</span></p>
                                             </ui:fragment>
                                         </div>
                                     </h:commandLink>
@@ -90,16 +87,13 @@
                                         <f:param name="id" value="#{book.bookId}" />
 
                                         <div class="book">
-                                            <div class="book-thumbnail-container">
-                                                <!--<div class="overlay"></div>-->
-                                                <!--<div class="overlay-text"><div>View</div></div>-->
-                                                <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
-                                            </div>
+                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
+
                                             <ui:fragment rendered="#{book.salePrice le 0}">
-                                                <p class="book-price">#{book.listPrice}</p>
+                                                <p class="book-price">$#{book.listPrice}</p>
                                             </ui:fragment>
                                             <ui:fragment rendered="#{book.salePrice gt 0}">
-                                                <p class="book-price"><s>#{book.listPrice}</s> <span class="sale-price">#{book.salePrice}</span></p>
+                                                <p class="book-price"><s>$#{book.listPrice}</s> <span class="sale-price">$#{book.salePrice}</span></p>
                                             </ui:fragment>
                                         </div>
                                     </h:commandLink>
@@ -162,17 +156,14 @@
                                         <h:commandLink action="bookDetail">
                                             <f:param name="id" value="#{book.bookId}" />
 
-                                            <div class="book">
-                                                <div class="book-thumbnail-container">
-                                                    <!--<div class="overlay"></div>-->
-                                                    <!--<div class="overlay-text"><div>View</div></div>-->
-                                                    <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
-                                                </div>
+                                            <div class="book">                                                
+                                                <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
+
                                                 <ui:fragment rendered="#{book.salePrice le 0}">
-                                                    <p class="book-price">#{book.listPrice}</p>
+                                                    <p class="book-price">$#{book.listPrice}</p>
                                                 </ui:fragment>
                                                 <ui:fragment rendered="#{book.salePrice gt 0}">
-                                                    <p class="book-price"><s>#{book.listPrice}</s> <span class="sale-price">#{book.salePrice}</span></p>
+                                                    <p class="book-price"><s>$#{book.listPrice}</s> <span class="sale-price">$#{book.salePrice}</span></p>
                                                 </ui:fragment>
                                             </div>
 
@@ -210,7 +201,7 @@
                         <form>
                             <ui:repeat value="#{rssBackingBean.articles}" var="article" size="3"><!--
                                 --><div class="article">
-                                    <h2>#{article.title}</h2>
+                                    <h2 class="section-title">#{article.title}</h2>
                                     <br/>
                                     <p>#{article.description}</p>
                                     <br/>
