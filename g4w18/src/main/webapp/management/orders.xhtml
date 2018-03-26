@@ -64,7 +64,8 @@ and open the template in the editor.
                     <p:rowEditor />
                 </p:column>
                 <p:rowExpansion>
-                    <p:dataTable var="detail" value="#{order.invoiceDetailList}" editable="true">
+                    <p:dataTable var="detail" value="#{order.invoiceDetailList}" 
+                                 editable="true">
                         <p:column headerText="#{msgs.managerDetailId}">
                             <h:outputText value="#{detail.detailId}"></h:outputText>
                         </p:column>
