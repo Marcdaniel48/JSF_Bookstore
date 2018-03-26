@@ -230,9 +230,7 @@ public class ManagerBookBackingBean implements Serializable {
         logger.log(Level.INFO, "onRowEdit Called");
         FacesMessage msg = new FacesMessage("Book edited!", ((Book) event.getObject()).getIsbnNumber());
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        
-        //Marc-Daniels code
-//        DataTable dataTable = (DataTable) (event.getSource());
+
         Book updatedBook = (Book)(event.getObject());
         bookJpaController.edit(updatedBook);
         
