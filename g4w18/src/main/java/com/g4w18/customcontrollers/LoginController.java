@@ -15,6 +15,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -26,7 +27,7 @@ import javax.servlet.http.HttpSession;
  * @author Marc-Daniel
  */
 @Named
-@ViewScoped
+@SessionScoped
 public class LoginController implements Serializable{
     @Inject
     private CustomClientController clientJpaController;

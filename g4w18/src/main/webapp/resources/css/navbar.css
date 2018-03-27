@@ -51,13 +51,14 @@
     text-align: right;
 /*     border: 3px solid red; */
 }
-.navbar-login
+.navbar-link
 {
     height: 100%;
+    cursor: pointer;
     vertical-align: top;
     display: inline-block;
     margin-left: 10px;
-    padding-left: 5px;
+    padding-left: 10px;
     border-left: 1px solid #F2BFA0;
 /*     border: 1px solid blue; */
 }
@@ -124,6 +125,26 @@
 {
     color: white;
     background-color: black;
+}
+.navbar-user-menu
+{
+    height: auto;
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 70px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #F2BFA0;
+    background-color: black;
+    box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.9);
+}
+.navbar-user-menu a
+{
+    display: block;
+    padding: 10px;
+    color: #F2BFA0;
 }
 #navbar-menu
 {
