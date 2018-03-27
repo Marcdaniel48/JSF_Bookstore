@@ -25,6 +25,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 /**
  *
@@ -47,6 +48,7 @@ public class MasterInvoice implements Serializable {
     @Column(name = "INVOICE_ID")
     private Integer invoiceId;
     @Basic(optional = false)
+    @Past
     @NotNull
     @Column(name = "SALE_DATE")
     @Temporal(TemporalType.TIMESTAMP)

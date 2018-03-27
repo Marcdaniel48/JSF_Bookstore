@@ -58,6 +58,10 @@ public class InvoiceDetail implements Serializable {
     @NotNull
     @Column(name = "HST_RATE")
     private BigDecimal hstRate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "AVAILABLE")
+    private boolean available;
     @JoinColumn(name = "INVOICE_ID", referencedColumnName = "INVOICE_ID")
     @ManyToOne(optional = false)
     private MasterInvoice invoiceId;
@@ -72,7 +76,7 @@ public class InvoiceDetail implements Serializable {
         this.detailId = detailId;
     }
 
-    public InvoiceDetail(Integer detailId, BigDecimal bookPrice, BigDecimal gstRate, BigDecimal pstRate, BigDecimal hstRate) {
+    public InvoiceDetail(Integer detailId, BigDecimal bookPrice, BigDecimal gstRate, BigDecimal pstRate, BigDecimal hstRate, boolean available) {
         this.detailId = detailId;
         this.bookPrice = bookPrice;
         this.gstRate = gstRate;
@@ -119,6 +123,14 @@ public class InvoiceDetail implements Serializable {
     public void setHstRate(BigDecimal hstRate) {
         this.hstRate = hstRate;
     }
+    
+    public boolean getAvailable(){
+        return available;
+    }
+    
+    public void setAvailable(boolean available){
+        this.available = available;
+    }
 
     public MasterInvoice getInvoiceId() {
         return invoiceId;
@@ -160,5 +172,5 @@ public class InvoiceDetail implements Serializable {
     public String toString() {
         return "com.g4w18.entities.InvoiceDetail[ detailId=" + detailId + " ]";
     }
-    
+
 }

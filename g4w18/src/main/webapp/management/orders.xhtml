@@ -27,16 +27,13 @@ and open the template in the editor.
                          paginator="true" rows="15"
                          emptyMessage="#{msgs.managerOrdersNoneFound}"
                          editable="true"
-                         widgetVar="ordersTable"
-                         rowStyleClass="">
+                         widgetVar="ordersTable">
                 <f:facet name="header">
                     #{msgs.managerOrdersTitle}
                 </f:facet>
 
                 <p:ajax event="rowEdit" listener="#{orderManagerBackingBean.onRowEdit}" update=":form:growl" oncomplete="PF('ordersTable').filter()"/>
-                <p:column>
-                    <p:rowToggler />
-                </p:column>
+
                 <p:column headerText="#{msgs.managerOrdersId}">
                     <h:outputText value="#{order.invoiceId}"></h:outputText>
                 </p:column>
@@ -46,6 +43,17 @@ and open the template in the editor.
                 </p:column>
 
                 <p:column headerText="#{msgs.managerOrdersSaleDate}">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="">
+                            </h:outputText>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:calendar id="mask" value="#{order.saleDate}" pattern="dd-MM-yyyy HH:mm:ss" mask="true">
+                                <f:validator validatorId="dateRangeValidator"></f:validator>
+                            </p:calendar>
+                        </f:facet>
+                    </p:cellEditor>
                     <h:outputText value="#{order.saleDate}"></h:outputText>
                 </p:column>
 
@@ -62,6 +70,9 @@ and open the template in the editor.
                 </p:column>
                 <p:column headerText="#{msgs.managerEdit}">
                     <p:rowEditor />
+                </p:column>
+                <p:column headerText="#{msgs.managerOrdersSeeDetails}">
+                    <p:rowToggler />
                 </p:column>
                 <p:rowExpansion>
                     <p:dataTable var="detail" value="#{order.invoiceDetailList}" 
