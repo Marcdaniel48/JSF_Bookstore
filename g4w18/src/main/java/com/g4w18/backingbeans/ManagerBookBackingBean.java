@@ -226,6 +226,13 @@ public class ManagerBookBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Get edited content from table and save it in the database.
+     * @param event
+     * @throws NonexistentEntityException
+     * @throws RollbackFailureException
+     * @throws Exception 
+     */
     public void onBookEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
         logger.log(Level.INFO, "onRowEdit Called");
         FacesMessage msg = new FacesMessage("Book edited!", ((Book) event.getObject()).getIsbnNumber());
@@ -236,7 +243,11 @@ public class ManagerBookBackingBean implements Serializable {
         
         
     }
-     
+    
+    /**
+     * Cancel the editing of row.
+     * @param event 
+     */
     public void onBookEditCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Book edit cancelled!", ((Book) event.getObject()).getIsbnNumber());
         FacesContext.getCurrentInstance().addMessage(null, msg);

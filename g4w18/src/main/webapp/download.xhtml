@@ -1,17 +1,72 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>#{msgs.helpTitle}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link href="style.css" rel="stylesheet" type="text/css"/>
-    </h:head>
-      <h:body> 
-                        <h1>#{download.downloadInfo}</h1>
+<ui:composition
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:b="http://bootsfaces.net/ui">
 
-      </h:body>
-    </html>
+    <ui:define name="content">
+
+        <ui:repeat var="client" value="#{download.clientInfo}" varStatus="counter"  >
+            <b:panel style="background:  purple;">
+                <b:row styleClass="show-grid"> 
+                    <b:column col-md="2">
+                        <h:outputText value="Sale date"></h:outputText>
+                        <h:outputText value="#{client.saleDate}"></h:outputText>
+                    </b:column>
+                    <b:column col-md="2">
+                        <h:outputText value="You paid: "></h:outputText>
+                        <h:outputText value="#{client.netValue}"></h:outputText>
+                    </b:column>
+
+                    <ui:repeat var="invoice" value="#{client.invoiceDetailList}">
+                        <b:panel style="background: #00ff00;">
+                            
+                            <b:column col-md="8">
+                                <h:outputText value="Price"></h:outputText>
+                                <h:outputText value="#{invoice.bookPrice}" styleClass="list-group-item-heading"></h:outputText>
+                            </b:column>
+                            
+                            <ui:repeat var="book" value="#{download.getBookInvoice(invoice.bookId.bookId)}" >
+                                <b:panel style="background: green;">
+                                    <b:column col-md="8">
+                                        <b:image  name="/resources/images/#{book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
+                                    </b:column>
+                                    <b:column col-md="8">
+                                        <h:outputText value="#{msgs.managerAddTitle}" styleClass="list-group-item-heading"></h:outputText>
+                                        <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
+                                    </b:column>
+                                    <b:column col-md="8">
+                                        <h:outputText value="#{msgs.managerAddGenre}" styleClass="list-group-item-heading"></h:outputText>
+                                        <h:outputText value="#{book.genre}" styleClass="list-group-item-heading"></h:outputText>
+                                    </b:column>
+                                    <b:column col-md="8">
+                                        <h:outputText value="#{msgs.managerAddPageNumber}" styleClass="list-group-item-heading"></h:outputText>
+                                        <h:outputText value="#{book.pageNumber}" styleClass="list-group-item-heading"></h:outputText>
+                                    </b:column>
+                                    <b:column col-md="8">
+                                        <h:form>
+                                            <p:commandButton style="background: aqua" value="#{msgs.managerDownload}" ajax="false"  icon="ui-icon-arrowthick-1-s">
+                                                <p:fileDownload value="#{download.file}" />
+                                            </p:commandButton>
+                                            
+                                        </h:form>
+                                    </b:column>
+                                    
+                                    
+                                </b:panel>
+                            </ui:repeat>
+                            
+                        </b:panel>
+                    </ui:repeat>
+
+
+                </b:row>
+            </b:panel>
+        </ui:repeat>
+
+
+
+    </ui:define>
+</ui:composition>
