@@ -6,13 +6,9 @@
 package com.g4w18.custombeans;
 
 import com.g4w18.entities.Book;
-import com.g4w18.entities.InvoiceDetail;
-import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.Timestamp;
-import java.sql.Date;
 
 /**
  *

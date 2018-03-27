@@ -84,4 +84,11 @@
             <to-view-id>/management/managerBookEnRHandler.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>totalSales</from-outcome>
+            <to-view-id>/totalSales.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
