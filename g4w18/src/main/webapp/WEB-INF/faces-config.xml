@@ -89,6 +89,7 @@
         <navigation-case>
             <from-outcome>totalSales</from-outcome>
             <to-view-id>/totalSales.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
 </faces-config>

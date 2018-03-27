@@ -8,13 +8,15 @@ package com.g4w18.backingbeans;
 import com.g4w18.custombeans.BookWithTotalSales;
 import com.g4w18.custombeans.ReportSelector;
 import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
-import com.g4w18.customcontrollers.CustomQueries;
+import com.g4w18.customcontrollers.ReportQueries;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -25,18 +27,19 @@ import javax.inject.Named;
  * @author Marc-Daniel
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class ReportsBackingBean implements Serializable
 {
-    private ReportSelector reportSelector;
-
     @Inject
     private CustomMasterInvoiceJpaController masterJpaController;
     
     @Inject
-    private CustomQueries customJpa;
+    private ReportQueries reportQueries;
     
     private List<BookWithTotalSales> booksWithTotalSales;
+    
+    @Inject
+    private ReportSelector reportSelector;
     
     public ReportSelector getReportSelector()
     {
@@ -45,8 +48,15 @@ public class ReportsBackingBean implements Serializable
         return reportSelector;
     }
     
+    public void setReportSelector(ReportSelector reportSelector)
+    {
+        this.reportSelector = reportSelector;
+    }
+    
     public String goToReportPage()
     {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("reportTypeAndDates", reportSelector);
+        
         switch(reportSelector.getReportType())
         {
             case "Total Sales":
@@ -66,23 +76,28 @@ public class ReportsBackingBean implements Serializable
     
     public List<BookWithTotalSales> getBooksWithTotalSales()
     {
+        if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
+            reportSelector = (ReportSelector)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("reportTypeAndDates");
+
         if(booksWithTotalSales == null)
         {
             booksWithTotalSales = new ArrayList<>();
             
-            List<MasterInvoice> masterInvoicesBetweenDates = masterJpaController.findMasterInvoiceEntities();
+            List<MasterInvoice> masterInvoicesBetweenDates = masterJpaController.findMasterInvoicesBetweenDates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
 
             for(MasterInvoice master : masterInvoicesBetweenDates)
             {
                 for(InvoiceDetail invoice : master.getInvoiceDetailList())
                 {
-                    booksWithTotalSales.add(customJpa.findBookWithTotalSalesByDetail(invoice.getDetailId()));
+                    booksWithTotalSales.add(reportQueries.findBookWithTotalSalesByDetail(invoice.getDetailId()));
                 }
             }
         }
         
         return booksWithTotalSales;
     }
+    
+    
     
     private static Collection<SelectItem> reportOptions;
     static 

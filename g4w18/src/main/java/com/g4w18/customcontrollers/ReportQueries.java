@@ -23,7 +23,7 @@ import javax.persistence.Query;
  *
  * @author Marc-Daniel
  */
-public class CustomQueries implements Serializable {
+public class ReportQueries implements Serializable {
     
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;

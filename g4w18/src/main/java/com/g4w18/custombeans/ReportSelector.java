@@ -7,17 +7,18 @@ package com.g4w18.custombeans;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author Marc-Daniel
  */
+@ManagedBean
 public class ReportSelector implements Serializable
 {
     private String reportType;
     private Date firstDate;
     private Date secondDate;
-
     public String getReportType() {
         return reportType;
     }

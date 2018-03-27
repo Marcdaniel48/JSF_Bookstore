@@ -26,10 +26,7 @@ and open the template in the editor.
             <p:calendar id="button2" value="#{reportsBackingBean.reportSelector.secondDate}" showOn="button" />
             
             <br/>
-            <p:commandButton value="#{msgs.reportsManagementRequest}" action="#{reportsBackingBean.goToReportPage}">
-                <f:setPropertyActionListener target="#{reportsBackingBean.reportSelector.firstDate}" value="#{reportsBackingBean.reportSelector.firstDate}" />
-                <f:setPropertyActionListener target="#{reportsBackingBean.reportSelector.secondDate}" value="#{reportsBackingBean.reportSelector.secondDate}" />
-            </p:commandButton>
+            <p:commandButton value="#{msgs.reportsManagementRequest}" action="#{reportsBackingBean.goToReportPage}"/>
         </h:form>
     </h:body>
 </html>
