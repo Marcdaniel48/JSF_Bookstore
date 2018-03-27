@@ -12,9 +12,12 @@ import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -76,13 +79,14 @@ public class CustomMasterInvoiceJpaController implements Serializable
         return null;
     }
     
-    public List<MasterInvoice> findMasterInvoicesBetweenDates(LocalDate firstDate, LocalDate secondDate)
+    public List<MasterInvoice> findMasterInvoicesBetweenDates(Date firstDate, Date secondDate)
     {
-        LocalDateTime date1 = LocalDateTime.of(firstDate, LocalTime.MIN);
-        LocalDateTime date2 = LocalDateTime.of(secondDate, LocalTime.MIN);
+        
+        LocalDateTime date1 = LocalDateTime.of(firstDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalTime.MIN);
+        LocalDateTime date2 = LocalDateTime.of(secondDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalTime.MIN);
         
         List<MasterInvoice> masterInvoices = em.createQuery("Select m from MasterInvoice m where m.saleDate between ?1 and ?2")
-                .setParameter(1, date1).setParameter(2, date2).getResultList();
+                .setParameter(1, Timestamp.valueOf(date1)).setParameter(2, Timestamp.valueOf(date2)).getResultList();
         return masterInvoices;  
     }
 }

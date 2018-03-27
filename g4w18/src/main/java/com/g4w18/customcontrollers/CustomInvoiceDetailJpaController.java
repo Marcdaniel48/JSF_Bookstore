@@ -58,6 +58,6 @@ public class CustomInvoiceDetailJpaController implements Serializable
     public List<InvoiceDetail> findInvoicesByMasterInvoice(int invoiceId)
     {
         List<InvoiceDetail> invoices = em.createQuery("Select i from InvoiceDetail i where i.invoiceId = ?1").setParameter(1, invoiceId).getResultList();
-        return invoices;
-    }
+        return invoices; 
+   }
 }

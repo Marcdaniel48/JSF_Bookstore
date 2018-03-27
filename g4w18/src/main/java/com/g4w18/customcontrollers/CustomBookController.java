@@ -251,7 +251,7 @@ public class CustomBookController implements Serializable {
     
     public Book findBookByInvoice(int invoiceId)
     {
-        List<Book> books = em.createNativeQuery("Select b from book left join InvoiceDetail i on b.bookId = i.bookId where i.bookId = ?1").setParameter(1, invoiceId).getResultList();
+        List<Book> books = em.createNativeQuery("Select b from book b right join InvoiceDetail i on b.bookId = i.bookId where i.bookId = ?1").setParameter(1, invoiceId).getResultList();
         if (!books.isEmpty()) {
             return books.get(0);
         }

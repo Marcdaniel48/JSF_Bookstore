@@ -9,6 +9,9 @@ import com.g4w18.entities.Book;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  *
@@ -17,8 +20,8 @@ import java.io.Serializable;
 public class MasterBookInvoice implements Serializable
 {
     private Book book;
-    private MasterInvoice master;
-    private InvoiceDetail invoice;
+    private Timestamp lastSoldDate;
+    private BigDecimal totalSales;
 
     public Book getBook() {
         return book;
@@ -28,20 +31,21 @@ public class MasterBookInvoice implements Serializable
         this.book = book;
     }
 
-    public MasterInvoice getMaster() {
-        return master;
+    public BigDecimal getTotalSales() {
+        return totalSales;
     }
 
-    public void setMaster(MasterInvoice master) {
-        this.master = master;
+    public void setTotalSales(BigDecimal totalSales) {
+        this.totalSales = totalSales;
+    }
+    
+    public Timestamp getLastSoldDate()
+    {
+        return lastSoldDate;
     }
 
-    public InvoiceDetail getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(InvoiceDetail invoice) {
-        this.invoice = invoice;
+    public void setLastSoldDate(Timestamp lastSoldDate) {
+        this.lastSoldDate = lastSoldDate;
     }
     
 }

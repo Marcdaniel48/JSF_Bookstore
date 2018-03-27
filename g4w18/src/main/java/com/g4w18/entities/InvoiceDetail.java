@@ -161,4 +161,9 @@ public class InvoiceDetail implements Serializable {
         return "com.g4w18.entities.InvoiceDetail[ detailId=" + detailId + " ]";
     }
     
+    public BigDecimal getSoldPrice()
+    {
+        return bookPrice.multiply(BigDecimal.ONE.add(gstRate).add(hstRate).add(pstRate));
+    }
+    
 }
