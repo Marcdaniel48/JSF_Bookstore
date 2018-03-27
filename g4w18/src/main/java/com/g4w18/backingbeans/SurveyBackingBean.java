@@ -9,11 +9,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.primefaces.model.chart.PieChartModel;
 
@@ -150,6 +152,37 @@ public class SurveyBackingBean implements Serializable
             logger.log(Level.INFO, "Question >>> {0} ", question);
             logger.log(Level.INFO, "Couldn't save the question's result.", e);
         }
+    }
+    
+    public List<Question> getAllQuestions()
+    {
+        return surveyController.findQuestionEntities();
+    }
+    
+    public void saveActiveQuestion()
+    {
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        
+        String x = request.getParameter("question");
+        
+        Question activeQuestion = getActiveQuestion();
+        
+        Question newQuestion = surveyController.findQuestion(Integer.parseInt(x));
+        
+        activeQuestion.setIsActive(false);
+        newQuestion.setIsActive(true);
+        
+        try
+        {
+            surveyController.edit(activeQuestion);
+            surveyController.edit(newQuestion);
+        }
+        catch(Exception e)
+        {
+            logger.log(Level.INFO, LocalDateTime.now() + " >>> Couldn't update the question.", e);
+        }
+        
+        logger.log(Level.INFO, LocalDateTime.now() + " >>> survey questionID: {0}", x);
     }
     
     public boolean showResults()

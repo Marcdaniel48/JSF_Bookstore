@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        
+        <h:outputStylesheet library="css" name="survey_page.css" />
+        
+        <div class="page">
+        
+            <h:form id="allSurveysForm">
+
+                <f:passThroughAttribute name="autocomplete" value="off" />
+
+                    <ui:repeat value="#{surveyBackingBean.allQuestions}" var="survey">
+
+                        <input id="question#{survey.questionId}" type="radio" name="question"
+                               value="#{survey.questionId}" checked="#{survey.isActive ? 'checked' : null}">
+                            <div>
+                                <p>#{survey.description}</p>
+
+                                <p>#{survey.answerOne}</p>
+                                <p>#{survey.answerTwo}</p>
+                                <p>#{survey.answerThree}</p>
+                                <p>#{survey.answerFour}</p>
+                            </div>
+                        </input>
+                        
+                    </ui:repeat>
+
+                <h:commandButton type="submit" value="Save" action="#{surveyBackingBean.saveActiveQuestion}" />
+
+            </h:form>
+        
+        </div>
+            
+    </ui:define>
+</ui:composition>
