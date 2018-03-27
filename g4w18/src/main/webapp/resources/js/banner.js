@@ -91,6 +91,7 @@ function showSlide($currentSlide, $nextSlide)
             $currentSlide.removeAttr("style");
 
             $nextSlide.attr("style", "display: inline");
+            $banner.removeAttr("style");
 
             inAnimation = false;
         });

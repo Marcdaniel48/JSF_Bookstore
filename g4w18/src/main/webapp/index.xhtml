@@ -7,86 +7,147 @@
 
     <ui:define name="content">
         
+        <div class="content">
 
-        
-<!--        <div class="parallax">
+            <div class="top-section">
 
-            <div class="parallax-layer background"></div>-->
-            
-<!--<div class="background"></div>-->
+                <div id="book-sales">
 
-            <div class="content">
+                    <div class="section-title-container">
+                        <div class="section-title-img"></div>
+                        <h1 class="section-title">Books On Sale!</h1>
+                    </div>                        
 
-    
-                <div class="top-section">
-                    
-                    <div id="book-sales">
+                    <div class="fix-image-gap">  
+                        <h:form>
 
-                        <div class="section-title-container">
-                            <div class="section-title-img"></div>
-                            <h1 class="section-title">Books On Sale!</h1>
-                        </div>                        
-                            
-                        <div class="fix-image-gap">  
-                            <h:form>
+                            <ui:repeat value="#{theBooks.booksOnSale}" var="book">
+                                <h:commandLink action="bookDetail">
+                                    <f:param name="id" value="#{book.bookId}" />
 
-                                <ui:repeat value="#{theBooks.booksOnSale}" var="book">
-                                    <h:commandLink action="bookDetail">
-                                        <f:param name="id" value="#{book.bookId}" />
+                                    <div class="book">
+                                        <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
 
-                                        <div class="book">
-                                            <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
-                                            
-                                            <ui:fragment rendered="#{book.salePrice le 0}">
-                                                <p class="book-price">$#{book.listPrice}</p>
-                                            </ui:fragment>
-                                            <ui:fragment rendered="#{book.salePrice gt 0}">
-                                                <p class="book-price"><s>$#{book.listPrice}</s> <span class="sale-price">$#{book.salePrice}</span></p>
-                                            </ui:fragment>
-                                        </div>
-                                    </h:commandLink>
-                                </ui:repeat>
-
-                            </h:form>
-                        </div>
-                            
-                        <a class="prev disabled">&#10094;</a>
-                        <a class="next">&#10095;</a>
-                    </div>
-
-                    <div id="genres">
-                        
-                        <h1 class="section-title">Genres</h1>
-                        
-                        <div class="outer">
-                            <h:form>
-                                <ui:repeat value="#{theBooks.genres}" var="genre">
-                                    <div class="genre-item">
-                                        <h:graphicImage library="images" name="#{genre}.png" />
-                                        <h:commandLink styleClass="genre-title" action="bookList" value="#{genre}">
-                                            <f:param name="genre" value="#{genre}"/>
-                                        </h:commandLink>
+                                        <ui:fragment rendered="#{book.salePrice le 0}">
+                                            <p class="book-price">$#{book.listPrice}</p>
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{book.salePrice gt 0}">
+                                            <p class="book-price"><s>$#{book.listPrice}</s> <span class="sale-price">$#{book.salePrice}</span></p>
+                                        </ui:fragment>
                                     </div>
-                                </ui:repeat>
-                            </h:form>
-                        </div>
+                                </h:commandLink>
+                            </ui:repeat>
+
+                        </h:form>
                     </div>
 
-                    <div id="recent-books">
+                    <a class="prev disabled">&#10094;</a>
+                    <a class="next">&#10095;</a>
+                </div>
+
+                <div id="genres">
+
+                    <h1 class="section-title">Genres</h1>
+
+                    <div class="outer">
+                        <h:form>
+                            <ui:repeat value="#{theBooks.genres}" var="genre">
+                                <div class="genre-item">
+                                    <h:graphicImage library="images" name="#{genre}.png" />
+                                    <h:commandLink styleClass="genre-title" action="bookList" value="#{genre}">
+                                        <f:param name="genre" value="#{genre}"/>
+                                    </h:commandLink>
+                                </div>
+                            </ui:repeat>
+                        </h:form>
+                    </div>
+                </div>
+
+                <div id="recent-books">
+
+                    <div class="section-title-container">
+                        <div class="section-title-img"></div>
+                        <h1 class="section-title">Recent Books</h1>
+                    </div>
+
+                    <div class="fix-image-gap">
+                        <h:form>
+
+                            <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
+                                <h:commandLink action="bookDetail">
+                                    <f:param name="id" value="#{book.bookId}" />
+
+                                    <div class="book">
+                                        <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
+
+                                        <ui:fragment rendered="#{book.salePrice le 0}">
+                                            <p class="book-price">$#{book.listPrice}</p>
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{book.salePrice gt 0}">
+                                            <p class="book-price"><s>$#{book.listPrice}</s> <span class="sale-price">$#{book.salePrice}</span></p>
+                                        </ui:fragment>
+                                    </div>
+                                </h:commandLink>
+                            </ui:repeat>
+
+                        </h:form>
+                    </div>
+                </div>
+
+                <div id="banner">
+                    <div class="slide">
+
+                        <ui:repeat value="#{bannerBackingBean.activeBanners}" var="banner">
+                            <h:outputLink styleClass="slide-link" target="_blank" value="#{banner.bannerLink}">
+                                <h:graphicImage class="slide-img" library="images" name="#{banner.bannerName}" alt="#{banner.bannerName}" />
+                            </h:outputLink>
+                        </ui:repeat>
+                     </div>
+
+                    <a class="prev">&#10094;</a>
+                    <a class="next">&#10095;</a>
+
+                    <div class="dots-container"></div>
+                </div>
+
+                <div id="survey">
+
+                    <h:form id="surveyForm" rendered="#{!surveyBackingBean.showResults()}">
+                        <ui:repeat value="#{surveyBackingBean.activeQuestion}" var="question">
+                            <h1 class="section-title">#{question.description}</h1>
+
+                            <h:selectOneRadio class="surveyChoices" id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="Please select one option">
+                                <f:selectItems value="#{surveyBackingBean.answers}" />
+                            </h:selectOneRadio>
+                            <h:message for="surveyChoices" />
+                        </ui:repeat>
+
+                        <h:commandButton type="submit" value="Submit" action="#{surveyBackingBean.submitVote}"/>
+
+                    </h:form>
+
+                    <div id="surveyChart">
+                        <p:chart rendered="#{surveyBackingBean.showResults()}" type="pie" model="#{surveyBackingBean.chart}" />                        
+                    </div>
+
+                </div>
+
+                <ui:fragment rendered="#{theBooks.hasRecommendations()}">
+                    <div class="recommendations">
 
                         <div class="section-title-container">
                             <div class="section-title-img"></div>
-                            <h1 class="section-title">Recent Books</h1>
+                            <h1 class="section-title">Recommendations</h1>
                         </div>
 
                         <div class="fix-image-gap">
                             <h:form>
 
-                                <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
+                                <ui:repeat value="#{theBooks.recommendedBooks}" var="book">
                                     <h:commandLink action="bookDetail">
                                         <f:param name="id" value="#{book.bookId}" />
 
-                                        <div class="book">
+                                        <div class="book">                                                
                                             <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
 
                                             <ui:fragment rendered="#{book.salePrice le 0}">
@@ -96,127 +157,55 @@
                                                 <p class="book-price"><s>$#{book.listPrice}</s> <span class="sale-price">$#{book.salePrice}</span></p>
                                             </ui:fragment>
                                         </div>
+
                                     </h:commandLink>
                                 </ui:repeat>
 
                             </h:form>
                         </div>
-                    </div>
-                    
-                    <div id="banner">
-                        <div class="slide">
-                            
-                            <ui:repeat value="#{bannerBackingBean.activeBanners}" var="banner">
-                                <h:outputLink styleClass="slide-link" target="_blank" value="#{banner.bannerLink}">
-                                    <h:graphicImage class="slide-img" library="images" name="#{banner.bannerName}" alt="#{banner.bannerName}" />
-                                </h:outputLink>
-                            </ui:repeat>
-                         </div>
-
-                        <a class="prev">&#10094;</a>
-                        <a class="next">&#10095;</a>
-
-                        <div class="dots-container"></div>
-                    </div>
-                    
-                    <div id="survey">
-                            
-                        <h:form id="surveyForm" rendered="#{!surveyBackingBean.showResults()}">
-                            <ui:repeat value="#{surveyBackingBean.activeQuestion}" var="question">
-                                <h1 class="section-title">#{question.description}</h1>
-
-                                <h:selectOneRadio class="surveyChoices" id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="Please select one option">
-                                    <f:selectItems value="#{surveyBackingBean.answers}" />
-                                </h:selectOneRadio>
-                                <h:message for="surveyChoices" />
-                            </ui:repeat>
-
-                            <h:commandButton type="submit" value="Submit" action="#{surveyBackingBean.submitVote}"/>
-
-                        </h:form>
-                        
-                        <div id="surveyChart">
-                            <p:chart rendered="#{surveyBackingBean.showResults()}" type="pie" model="#{surveyBackingBean.chart}" />                        
-                        </div>
-                        
-                    </div>
-                    
-                    <ui:fragment rendered="#{theBooks.hasRecommendations()}">
-                        <div class="recommendations">
-
-                            <div class="section-title-container">
-                                <div class="section-title-img"></div>
-                                <h1 class="section-title">Recommendations</h1>
-                            </div>
-                            
-                            <div class="fix-image-gap">
-                                <h:form>
-
-                                    <ui:repeat value="#{theBooks.recommendedBooks}" var="book">
-                                        <h:commandLink action="bookDetail">
-                                            <f:param name="id" value="#{book.bookId}" />
-
-                                            <div class="book">                                                
-                                                <h:graphicImage class="book-thumbnail" library="images" name="#{book.isbnNumber}hi.png" />
-
-                                                <ui:fragment rendered="#{book.salePrice le 0}">
-                                                    <p class="book-price">$#{book.listPrice}</p>
-                                                </ui:fragment>
-                                                <ui:fragment rendered="#{book.salePrice gt 0}">
-                                                    <p class="book-price"><s>$#{book.listPrice}</s> <span class="sale-price">$#{book.salePrice}</span></p>
-                                                </ui:fragment>
-                                            </div>
-
-                                        </h:commandLink>
-                                    </ui:repeat>
-
-                                </h:form>
-                            </div>
-                            
-                            <a class="prev disabled">&#10094;</a>
-                            <a class="next">&#10095;</a>
-                        </div>
-                    </ui:fragment>
-        
-                    <div id="rss-feed" class="mobile">
-
-                        <form>
-                            <ui:repeat value="#{rssBackingBean.articles}" var="article">
-                                <div class="article">
-                                    <h1 class="section-title">#{article.title}</h1>
-                                    <br/>
-                                    <p>#{article.description}</p>
-                                    <br/>
-                                    <h:outputLink target="_blank" value="#{article.link}"><b>Read More</b></h:outputLink>
-                                </div>
-                            </ui:repeat>
-                        </form>
 
                         <a class="prev disabled">&#10094;</a>
                         <a class="next">&#10095;</a>
-                        
                     </div>
-                    <div id="rss-feed" class="desktop">
+                </ui:fragment>
 
-                        <form>
-                            <ui:repeat value="#{rssBackingBean.articles}" var="article" size="3"><!--
-                                --><div class="article">
-                                    <h2 class="section-title">#{article.title}</h2>
-                                    <br/>
-                                    <p>#{article.description}</p>
-                                    <br/>
-                                    <h:outputLink target="_blank" value="#{article.link}"><b>Read More</b></h:outputLink>
-                                </div>
-                            </ui:repeat>
-                        </form>
-                        
-                    </div>
+                <div id="rss-feed" class="mobile">
+
+                    <form>
+                        <ui:repeat value="#{rssBackingBean.articles}" var="article">
+                            <div class="article">
+                                <h1 class="section-title">#{article.title}</h1>
+                                <br/>
+                                <p>#{article.description}</p>
+                                <br/>
+                                <h:outputLink target="_blank" value="#{article.link}"><b>Read More</b></h:outputLink>
+                            </div>
+                        </ui:repeat>
+                    </form>
+
+                    <a class="prev disabled">&#10094;</a>
+                    <a class="next">&#10095;</a>
+
+                </div>
+                <div id="rss-feed" class="desktop">
+
+                    <form>
+                        <ui:repeat value="#{rssBackingBean.articles}" var="article" size="3"><!--
+                            --><div class="article">
+                                <h2 class="section-title">#{article.title}</h2>
+                                <br/>
+                                <p>#{article.description}</p>
+                                <br/>
+                                <h:outputLink target="_blank" value="#{article.link}"><b>Read More</b></h:outputLink>
+                            </div>
+                        </ui:repeat>
+                    </form>
 
                 </div>
 
             </div>
-            
-        <!--</div>-->
+
+        </div>
         
     </ui:define>
 </ui:composition>
