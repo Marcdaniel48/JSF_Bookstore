@@ -46,7 +46,7 @@ public class CustomQueries implements Serializable {
             Timestamp lastSoldDate = (Timestamp) query.getSingleResult();
             bookWithTotalSales.setLastSoldDate(lastSoldDate);
             
-            query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate + pst_rate + hst_rate)) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+            query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
                 + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where i.detail_Id = ?1 group by b.isbn_number").setParameter(1, invoiceId);
             BigDecimal totalSalesForBook = (BigDecimal) query.getSingleResult();
             bookWithTotalSales.setTotalSales(totalSalesForBook);
