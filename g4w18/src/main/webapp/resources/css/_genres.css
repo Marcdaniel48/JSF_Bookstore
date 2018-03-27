@@ -57,19 +57,11 @@
     #genres
     {
         position: relative;
-        left: auto;
-        right: auto;
-        top: auto;
-        bottom: auto;
         text-align: center;
         font-size: 1em;
         margin: 5px 0px;
         padding-top: 10px;
-        opacity: 1;
-        transform: none;
-        animation: none;
-        animation-fill-mode: none;
-        background-color: initial;
+        background-color: rgba(255, 255, 255, 0.4);
         border: 1px solid black;
     }
     .outer
@@ -81,11 +73,22 @@
         -ms-transform: none;
         transform: none;
     }
-    .genre-title
+    .genre-item
     {
+        width: auto;
+        margin: auto;
+        display: initial;
+        vertical-align: initial;
+    }
+    .genre-item img
+    {
+        display: none;
+    }
+    .genre-title
+    {   
         display: inline-block;
         margin: 5px 5px;
         padding: 5px;
-        /*border: 1px solid black;*/
+        font-weight: 300;
     }
 }
