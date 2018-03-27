@@ -5,7 +5,7 @@
  */
 package com.g4w18.backingbeans;
 
-import com.g4w18.custombeans.MasterBookInvoice;
+import com.g4w18.custombeans.BookWithTotalSales;
 import com.g4w18.custombeans.ReportSelector;
 import com.g4w18.customcontrollers.CustomInvoiceDetailJpaController;
 import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
@@ -13,7 +13,6 @@ import com.g4w18.customcontrollers.CustomQueries;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.ZoneId;
@@ -45,6 +44,8 @@ public class ReportsBackingBean implements Serializable
     
     @Inject
     private CustomQueries customJpa;
+    
+    private List<BookWithTotalSales> booksWithTotalSales;
 
     public CustomQueries getCustomJpa() 
     {
@@ -75,18 +76,21 @@ public class ReportsBackingBean implements Serializable
         return "";
     }
     
-    public List<MasterBookInvoice> getBooksWithTotalSales()
+    public List<BookWithTotalSales> getBooksWithTotalSales()
     {
-        List<MasterBookInvoice> booksWithTotalSales = new ArrayList<>();
-        
-        List<MasterInvoice> masterInvoicesBetweenDates = masterJpaController
-                .findMasterInvoicesBetweenDates(Date.from(LocalDate.of(2017, Month.MARCH, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(LocalDate.of(2019, Month.MARCH, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        
-        for(MasterInvoice master : masterInvoicesBetweenDates)
+        if(booksWithTotalSales == null)
         {
-            for(InvoiceDetail invoice : master.getInvoiceDetailList())
+            booksWithTotalSales = new ArrayList<>();
+
+            List<MasterInvoice> masterInvoicesBetweenDates = masterJpaController
+                    .findMasterInvoicesBetweenDates(Date.from(LocalDate.of(2017, Month.MARCH, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()), Date.from(LocalDate.of(2019, Month.MARCH, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+
+            for(MasterInvoice master : masterInvoicesBetweenDates)
             {
-                booksWithTotalSales.add(customJpa.findBookWithTotalSalesByDetail(invoice.getDetailId()));
+                for(InvoiceDetail invoice : master.getInvoiceDetailList())
+                {
+                    booksWithTotalSales.add(customJpa.findBookWithTotalSalesByDetail(invoice.getDetailId()));
+                }
             }
         }
         

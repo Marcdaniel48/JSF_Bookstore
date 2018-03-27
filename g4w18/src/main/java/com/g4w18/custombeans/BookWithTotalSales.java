@@ -10,6 +10,7 @@ import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.sql.Date;
 
@@ -17,7 +18,7 @@ import java.sql.Date;
  *
  * @author Marc-Daniel
  */
-public class MasterBookInvoice implements Serializable
+public class BookWithTotalSales implements Serializable
 {
     private Book book;
     private Timestamp lastSoldDate;
@@ -33,6 +34,11 @@ public class MasterBookInvoice implements Serializable
 
     public BigDecimal getTotalSales() {
         return totalSales;
+    }
+    
+    public BigDecimal getTotalSalesRounded()
+    {
+        return totalSales.setScale(2, BigDecimal.ROUND_HALF_EVEN);
     }
 
     public void setTotalSales(BigDecimal totalSales) {

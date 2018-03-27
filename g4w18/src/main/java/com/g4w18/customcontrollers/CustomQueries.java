@@ -5,7 +5,7 @@
  */
 package com.g4w18.customcontrollers;
 
-import com.g4w18.custombeans.MasterBookInvoice;
+import com.g4w18.custombeans.BookWithTotalSales;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
@@ -28,7 +28,7 @@ public class CustomQueries implements Serializable {
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
     
-    public MasterBookInvoice findBookWithTotalSalesByDetail(int invoiceId)
+    public BookWithTotalSales findBookWithTotalSalesByDetail(int invoiceId)
     {
         Query query = em.createNativeQuery("Select b.* from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
                 + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where i.detail_Id = ?1", Book.class).setParameter(1, invoiceId);
@@ -37,7 +37,7 @@ public class CustomQueries implements Serializable {
         
         if (!books.isEmpty())
         {
-            MasterBookInvoice bookWithTotalSales = new MasterBookInvoice();
+            BookWithTotalSales bookWithTotalSales = new BookWithTotalSales();
             bookWithTotalSales.setBook(books.get(0));
             
             query = em.createNativeQuery("Select max(sale_date) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
