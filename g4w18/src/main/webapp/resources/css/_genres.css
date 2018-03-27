@@ -5,11 +5,10 @@
     font-size: 1.2em;
     padding: 10px 0;
     margin-bottom: 10px;
-    opacity: 0;
-    transform: translateX(-100%);
-    animation: 1s ease-out 1.98s 1 slideInFromLeft;
-    animation-fill-mode: forwards;
-    /*background-color: rgba(0, 0, 0, 0.8);*/
+    /*opacity: 0;*/
+    /*transform: translateX(-100%);*/
+    /*animation: 1s ease-out 1.98s 1 slideInFromLeft;*/
+    /*animation-fill-mode: forwards;*/
 }
 .outer
 {

@@ -5,10 +5,10 @@
     text-align: center;
     padding: 10px;
     margin: 50px 2%;
-    opacity: 0;
-    transform: translateX(100%);
-    animation: 1s ease-out 2.3s 1 slideInFromRight;
-    animation-fill-mode: forwards;
+    /*opacity: 0;*/
+    /*transform: translateX(100%);*/
+    /*animation: 1s ease-out 2.3s 1 slideInFromRight;*/
+    /*animation-fill-mode: forwards;*/
     float: left;
 }
 #survey .section-title

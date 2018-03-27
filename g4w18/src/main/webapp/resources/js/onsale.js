@@ -10,6 +10,8 @@ var rightIndex = 2;
 
 var inAnimation = false;
 
+var autoDirectionRight = true;
+
 function prevItem()
 {
     if(inAnimation) return;
@@ -49,6 +51,20 @@ function prevItem()
         $last.attr("style", "");
         inAnimation = false;
     });
+}
+
+function autoNextItem()
+{
+    if(rightIndex === ($books.length - 1))
+        autoDirectionRight = false;
+
+    if(leftIndex === 0)
+        autoDirectionRight = true;
+    
+    if(autoDirectionRight)
+        nextItem();
+    else
+        prevItem();
 }
 
 function nextItem()
@@ -108,6 +124,11 @@ function init()
     }
     
     $books.slice(0, 3).css("display", "inline-block");
+    
+    setInterval(function()
+    {
+        autoNextItem();
+    }, 7000);
 }
 
 window.addEventListener("load", init);
