@@ -15,11 +15,13 @@
                         <h:outputText value="Sale date"></h:outputText>
                         <h:outputText value="#{client.saleDate}"></h:outputText>
                     </b:column>
-                    <b:column col-md="2">
+                    
+                    <b:column>
                         <h:outputText value="You paid: "></h:outputText>
                         <h:outputText value="#{client.netValue}"></h:outputText>
                     </b:column>
-
+                    
+                    
                     <ui:repeat var="invoice" value="#{client.invoiceDetailList}">
                         <b:panel style="background: #00ff00;">
                             
@@ -31,7 +33,7 @@
                             <ui:repeat var="book" value="#{download.getBookInvoice(invoice.bookId.bookId)}" >
                                 <b:panel style="background: green;">
                                     <b:column col-md="8">
-                                        <b:image  name="/resources/images/#{book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
+                                        <b:image  library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}" height="50%" width="50%"></b:image>
                                     </b:column>
                                     <b:column col-md="8">
                                         <h:outputText value="#{msgs.managerAddTitle}" styleClass="list-group-item-heading"></h:outputText>

@@ -26,7 +26,7 @@
 
                     <b:inputText placeholder="Search for a book..."></b:inputText>
 
-                    <b:commandButton value="Search" iconAwesome="search" action="bookList"></b:commandButton>
+                    <b:commandButton value="Search" iconAwesome="search" action="#{searchBackingBean.books}"></b:commandButton>
 
                 </b:form>
 
@@ -50,7 +50,7 @@
 
                             <b:column col-md="2">
 
-                                <b:image library="images" name="lo/#{book.isbnNumber}low.jpg" tooltip="#{book.title}" height="50%" width="50%"></b:image>
+                                <b:image library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}" height="50%" width="50%"></b:image>
 
                             </b:column>
 

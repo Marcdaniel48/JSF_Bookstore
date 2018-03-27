@@ -5,6 +5,7 @@
  */
 package com.g4w18.customcontrollers;
 
+import com.g4w18.backingbeans.SearchBackingBean;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -12,6 +13,7 @@ import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,7 +28,9 @@ import javax.persistence.criteria.Root;
  * @author Jephtia, Salman, Sebastian
  */
 public class CustomBookController implements Serializable {
-
+    
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+    
     @Inject
     private BookJpaController bookController;
 
@@ -141,6 +145,22 @@ public class CustomBookController implements Serializable {
         return findBookByTitle;
     }
 
+     /**
+     * Get publishers from the database with the publisher provided(doesn't need
+     * to match whole)
+     *
+     * @param title publisher that is being searched
+     * @return List of books found with the publisher
+     */
+    public List<Book> findLikePublisher(String publisher) {
+        List<Book> findPublisher = em.createQuery("Select b from Book b where b.publisher LIKE ?1 order by b.publisher asc")
+                .setParameter(1, publisher + "%")
+                .getResultList();
+
+        return findPublisher;
+    }
+
+    
     /**
      * Get books from the database with the isbn provided(must match whole)
      *
@@ -169,35 +189,8 @@ public class CustomBookController implements Serializable {
         return findBookByIsbn;
     }
 
-    /**
-     * Get books from the database with the author provided.
-     *
-     * @param publisher of the book we are finding
-     * @return books found with the associated publisher
-     */
-    public List<Book> findBooksByPublisher(String publisher) {
-        List<Book> findBookByPublisher = em.createQuery("Select b from Book b where b.publisher = ?1")
-                .setParameter(1, publisher)
-                .getResultList();
 
-        return findBookByPublisher;
-    }
-
-    /**
-     * Get publishers from the database with the publisher provided(doesn't need
-     * to match whole)
-     *
-     * @param title publisher that is being searched
-     * @return List of books found with the publisher
-     */
-    public List<Book> findDistinctPublisher(String publisher) {
-        List<Book> findPublisher = em.createQuery("Select distinct(b.publisher) from Book b where b.publisher LIKE ?1 order by b.publisher asc")
-                .setParameter(1, publisher + "%")
-                .getResultList();
-
-        return findPublisher;
-    }
-
+   
     /**
      * Get a List of Book objects comprised only of Books which their Sale Price
      * is bigger than 0.

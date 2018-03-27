@@ -23,6 +23,7 @@ import javax.sql.DataSource;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -38,7 +39,6 @@ import org.junit.Ignore;
  * 
  * @author Salman Haidar
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class JPATest {
 
@@ -61,6 +61,7 @@ public class JPATest {
         // container
         final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
+                .addPackage(CustomBookController.class.getPackage())
                 .addPackage(AuthorJpaController.class.getPackage())
                 .addPackage(IllegalOrphanException.class.getPackage())
                 .addPackage(Book.class.getPackage())
@@ -149,43 +150,10 @@ public class JPATest {
     @Test
     public void find_book_with_general_publisher_by_ascending() throws SQLException{
         
-        List<Book> specificBook = bookJpaController.findDistinctPublisher("v%"); 
+        List<Book> specificBook = bookJpaController.findLikePublisher("v%"); 
                  
-        assertThat(specificBook).hasSize(3);
+        assertThat(specificBook).hasSize(4);
     } 
-    
-    /**
-     * Get all books from each publisher found from the search term.
-     * @throws SQLException 
-     */
-    @Ignore
-    @Test
-    public void get_books_for_all_publishers() throws SQLException{
-        
-        List<Book> specificBook = bookJpaController.findDistinctPublisher("v%");
-        
-        logger.log(Level.INFO,"GET ALL PUBLISHERS BOOKS TEST: "+ specificBook.size());
-        
-        int publisherCount = specificBook.size();
-        List<Book> allBooksFromPublishers = null;
-        
-       for(int i = 0;i<specificBook.size();i++) {
-           String s = specificBook.get(i).getPublisher();
-           
-           logger.log(Level.INFO,  s);
-       }
-        for(int i=0;i<publisherCount;i++)
-        {
-            allBooksFromPublishers.addAll(bookJpaController.findBooksByPublisher(specificBook.get(i).getPublisher()));
-        }
-        
-//        for(int i = 0;i<books.size();i++)
-//            logger.log(Level.INFO,"Data>>>{0}"+allBooksFromPublishers.get(i).getTitle() + "---------");
-//        
-//       
-        
-        assertThat(allBooksFromPublishers).hasSize(4);
-    }
     /**
      * Get all books from each author found from the query
      * @throws SQLException 
@@ -194,29 +162,19 @@ public class JPATest {
     public void get_author_books() throws SQLException
     {
         List<Author> authorList = aJc.findAuthor("c%");
-        List<Book> allDemBooks = null;
+        List<Book> allBooks = new ArrayList<Book>();
         
         int authorCount = authorList.size();
         
-        List<Book> books = authorList.get(3).getBookList();
-        
-        for(int j=0;j<books.size();j++)
-        {
-            logger.log(Level.INFO,"---------========-----"+  books.get(j).getTitle());
-        }
-        
-        for(int k=0;k<books.size();k++)
-        {
-            logger.log(Level.INFO,"---------========-----"+  authorList.get(k).getFirstName());
-        }
+        logger.log(Level.INFO,"---------==HOW MANY AUTHORS WITH c======-----"+  authorCount);
         
         
         for(int i=0;i< authorCount;i++)
         {
-            allDemBooks.addAll(authorList.get(i).getBookList());
+            allBooks.addAll(authorList.get(i).getBookList());
         }
         
-        assertThat(allDemBooks).hasSize(1);
+        assertThat(allBooks).hasSize(7);
     }
     
     
