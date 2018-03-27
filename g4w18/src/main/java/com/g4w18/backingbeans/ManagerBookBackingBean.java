@@ -6,6 +6,7 @@ import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -218,7 +219,12 @@ public class ManagerBookBackingBean implements Serializable {
         String extension = FilenameUtils.getExtension(uploadedImage.getFileName());
         logger.log(Level.INFO, "EXTENSION SHOW PLS " + extension + "   -----FOLDER PATHG::::" + folder.toString());
         Path file = Files.createTempFile(folder, filename +"hi.", extension);
-        logger.log(Level.INFO, "PATH FILEEEEEEEEEEEEE" + file.toString());
+        
+        //File imageFile = new File("/resources/images/"+book.getIsbnNumber());
+        
+        
+        
+        //logger.log(Level.INFO, "PATH FILEEEEEEEEEEEEE" + file.toString());
         
         try(InputStream input = uploadedImage.getInputstream())
         {
