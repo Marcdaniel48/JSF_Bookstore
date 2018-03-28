@@ -64,6 +64,8 @@ public class NavbarBackingBean implements Serializable
     
     public boolean isManager()
     {
+        logger.log(Level.INFO, LocalDateTime.now() + " isManager() {0}", getUsername());
+        
         Client client = clientJpaController.findClientByUsername(getUsername()).get(0);
         
         return client.getIsManager();

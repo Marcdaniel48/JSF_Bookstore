@@ -85,16 +85,18 @@
         <a href="#about">About</a>
     </div>
     
-    <div class="navbar-user-menu">
-        <h:form>
-            <h:commandLink value="Downloads" action="@null" />
+    <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
+        <div class="navbar-user-menu">
+            <h:form>
+                <h:commandLink value="Downloads" action="@null" />
 
-            <ui:fragment rendered="#{navbarBackingBean.manager}">
-                <h:commandLink value="Manager" action="management_home" />
-            </ui:fragment>
+                <ui:fragment rendered="#{navbarBackingBean.manager}">
+                    <h:commandLink value="Manager" action="management_home" />
+                </ui:fragment>
 
-            <h:commandLink value="Logout" action="#{navbarBackingBean.logout()}" />
-        </h:form>
-    </div>
+                <h:commandLink value="Logout" action="#{navbarBackingBean.logout()}" />
+            </h:form>
+        </div>
+    </ui:fragment>
     
 </ui:composition>
