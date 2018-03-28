@@ -60,6 +60,10 @@ public class CustomQuestionController implements Serializable
         return questionController.getQuestionCount();
     }
     
+    /**
+     * @author Jephthia
+     * @return The currently active question
+     */
     public Question getActiveQuestion()
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();

@@ -4,7 +4,9 @@ package com.g4w18.unittests;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
+import com.g4w18.customcontrollers.CustomQuestionController;
 import com.g4w18.entities.Book;
+import com.g4w18.entities.Question;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,6 +24,7 @@ import java.sql.Connection;
 import javax.sql.DataSource;
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -32,13 +35,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 /**
  * @author Jephthia
  */
 @RunWith(Arquillian.class)
-public class JPABookTest
+public class JPASurveyTest
 {
     private Logger logger = Logger.getLogger(getClass().getName());
     
@@ -75,7 +76,7 @@ public class JPABookTest
 
     
     @Inject
-    private CustomBookController bookController;
+    private CustomQuestionController questionController;
     
     @Resource(name = "java:app/jdbc/TheBooktopia")
     private DataSource ds;
@@ -84,53 +85,10 @@ public class JPABookTest
     /**
      * @author Jephthia
      */
-    public void testFindBooksOnSale()
+    public void testFindActiveQuestion()
     {
-        List<Book> booksOnSale = bookController.getBooksOnSale();
-        logger.log(Level.INFO, "Data>>>{0}", booksOnSale.get(0));
-        
-        assertThat(booksOnSale).hasSize(10);
-    }
-    
-    @Test
-    /**
-     * @author Jephthia
-     */
-    public void testFindMostRecentBooks()
-    {
-        logger.log(Level.INFO, "testFindMostRecentBooks");
-        
-        List<Book> recentBooks = bookController.getMostRecentBooks();
-        
-        assertThat(recentBooks).hasSize(3);
-    }
-    
-    @Test
-    /**
-     * @author Jephthia
-     */
-    public void testFindGenres()
-    {
-        logger.log(Level.INFO, "testFindGenres");
-        
-        List<String> genres = bookController.getGenres();
-        
-        String[] expectedGenres = {"Biographies", "Fantasy", "Mystery", "Romance", "Science Fiction"};
-
-        assertThat(genres).contains(expectedGenres);
-    }
-    
-    @Test
-    /**
-     * @author Jephthia
-     */
-    public void testFindBooksByGenre()
-    {
-        String genre = "Fantasy";
-        
-        List<Book> results = bookController.findBooksByGenre(genre);
-        
-        assertThat(results).hasSize(20);
+        Question question = questionController.getActiveQuestion();
+        assertThat(question).hasFieldOrPropertyWithValue("questionId", 2);
     }
     
     /**
