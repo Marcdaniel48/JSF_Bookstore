@@ -6,14 +6,12 @@
 package com.g4w18.customcontrollers;
 
 import com.g4w18.custombeans.BookWithTotalSales;
+import com.g4w18.custombeans.ClientWithTotalSales;
 import com.g4w18.entities.Book;
-import com.g4w18.entities.InvoiceDetail;
-import com.g4w18.entities.MasterInvoice;
+import com.g4w18.entities.Client;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -52,6 +50,37 @@ public class ReportQueries implements Serializable {
             bookWithTotalSales.setTotalSales(totalSalesForBook);
             
             return bookWithTotalSales;
+        }
+        return null;
+    }
+    
+    public ClientWithTotalSales findClientWithTotalSalesByDetail(int invoiceId)
+    {
+        Query query = em.createNativeQuery("Select c.* from client c right join Master_Invoice m on c.client_id = m.user_id "
+                + "right join Invoice_Detail i on m.invoice_id = m.invoice_id where i.detail_Id = ?1", Client.class).setParameter(1, invoiceId);
+        
+        List<Client> clients = query.getResultList();
+        
+        if (!clients.isEmpty())
+        {
+            ClientWithTotalSales clientWithTotalSales = new ClientWithTotalSales();
+            clientWithTotalSales.setClient(clients.get(0));
+            
+            query = em.createNativeQuery("Select max(m.sale_date) from client c right join Master_Invoice m on c.client_id = m.user_id "
+                + "right join Invoice_Detail i on m.invoice_id = m.invoice_id where i.detail_Id = ?1 and c.client_id = ?2")
+                    .setParameter(1, invoiceId).setParameter(2, clients.get(0).getClientId());
+            
+            Timestamp lastBoughtDate = (Timestamp) query.getSingleResult();
+            clientWithTotalSales.setLastBoughtDate(lastBoughtDate);
+            
+            query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+                + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id right join Client c on m.user_id = c.client_id where i.detail_Id = ?1 group by b.isbn_number")
+                    .setParameter(1, invoiceId);
+            
+            BigDecimal totalSalesForClient = (BigDecimal) query.getSingleResult();
+            clientWithTotalSales.setTotalSales(totalSalesForClient);
+            
+            return clientWithTotalSales;
         }
         return null;
     }

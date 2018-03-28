@@ -15,7 +15,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
@@ -27,7 +26,7 @@ import javax.inject.Named;
  * @author Marc-Daniel
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class ReportsBackingBean implements Serializable
 {
     @Inject
@@ -97,6 +96,28 @@ public class ReportsBackingBean implements Serializable
         return booksWithTotalSales;
     }
     
+        public List<BookWithTotalSales> getClientsWithTotalSales()
+    {
+        if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
+            reportSelector = (ReportSelector)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("reportTypeAndDates");
+
+        if(booksWithTotalSales == null)
+        {
+            booksWithTotalSales = new ArrayList<>();
+            
+            List<MasterInvoice> masterInvoicesBetweenDates = masterJpaController.findMasterInvoicesBetweenDates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
+
+            for(MasterInvoice master : masterInvoicesBetweenDates)
+            {
+                for(InvoiceDetail invoice : master.getInvoiceDetailList())
+                {
+                    booksWithTotalSales.add(reportQueries.findBookWithTotalSalesByDetail(invoice.getDetailId()));
+                }
+            }
+        }
+        
+        return booksWithTotalSales;
+    }
     
     
     private static Collection<SelectItem> reportOptions;
