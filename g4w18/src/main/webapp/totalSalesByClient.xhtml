@@ -15,20 +15,20 @@ and open the template in the editor.
     <h:body>
         
         <h:form>
-            <p:dataTable value="#{reportsBackingBean.booksWithTotalSales}" var="sale" paginator="true" rows="25" 
+            <p:dataTable value="#{reportsBackingBean.clientsWithTotalSales}" var="sale" paginator="true" rows="25" 
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
                 
-                <p:column headerText="#{msgs.reportsBookId}" sortBy="#{sale.book.bookId}" filterBy="#{sale.book.bookId}">
-                    <h:outputText value="#{sale.book.bookId}"/>
+                <p:column headerText="#{msgs.reportsClientId}" sortBy="#{sale.client.clientId}" filterBy="#{sale.client.clientId}">
+                    <h:outputText value="#{sale.client.clientId}"/>
                 </p:column>
-                <p:column headerText="#{msgs.reportsBookIsbn}" sortBy="#{sale.book.isbnNumber}" filterBy="#{sale.book.isbnNumber}" filterMatchMode="contains">
-                    <h:outputText value="#{sale.book.isbnNumber}"/>
+                <p:column headerText="#{msgs.reportsClientName}" sortBy="#{sale.client.firstName} #{sale.client.lastName}" filterBy="#{sale.client.firstName} #{sale.client.lastName}" filterMatchMode="contains">
+                    <h:outputText value="#{sale.client.firstName} #{sale.client.lastName}"/>
                 </p:column>
                 <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{sale.totalSalesRounded}" filterBy="#{sale.totalSalesRounded}">
                     <h:outputText value="#{sale.totalSalesRounded}"/>
                 </p:column>
-                <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastSoldDate}" filterBy="#{sale.lastSoldDate}" filterMatchMode="contains">
-                    <h:outputText value="#{sale.lastSoldDate}"/>
+                <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastBoughtDate}" filterBy="#{sale.lastSoldDate}" filterMatchMode="contains">
+                    <h:outputText value="#{sale.lastBoughtDate}"/>
                 </p:column>
             </p:dataTable>
         </h:form>

@@ -6,6 +6,7 @@
 package com.g4w18.backingbeans;
 
 import com.g4w18.custombeans.BookWithTotalSales;
+import com.g4w18.custombeans.ClientWithTotalSales;
 import com.g4w18.custombeans.ReportSelector;
 import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
 import com.g4w18.customcontrollers.ReportQueries;
@@ -36,6 +37,7 @@ public class ReportsBackingBean implements Serializable
     private ReportQueries reportQueries;
     
     private List<BookWithTotalSales> booksWithTotalSales;
+    private List<ClientWithTotalSales> clientsWithTotalSales;
     
     @Inject
     private ReportSelector reportSelector;
@@ -80,43 +82,23 @@ public class ReportsBackingBean implements Serializable
 
         if(booksWithTotalSales == null)
         {
-            booksWithTotalSales = new ArrayList<>();
-            
-            List<MasterInvoice> masterInvoicesBetweenDates = masterJpaController.findMasterInvoicesBetweenDates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
-
-            for(MasterInvoice master : masterInvoicesBetweenDates)
-            {
-                for(InvoiceDetail invoice : master.getInvoiceDetailList())
-                {
-                    booksWithTotalSales.add(reportQueries.findBookWithTotalSalesByDetail(invoice.getDetailId()));
-                }
-            }
+            booksWithTotalSales = reportQueries.findBooksWithTotalSalesBetweenDates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
         }
         
         return booksWithTotalSales;
     }
     
-        public List<BookWithTotalSales> getClientsWithTotalSales()
+    public List<ClientWithTotalSales> getClientsWithTotalSales()
     {
         if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
             reportSelector = (ReportSelector)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("reportTypeAndDates");
 
-        if(booksWithTotalSales == null)
+        if(clientsWithTotalSales == null)
         {
-            booksWithTotalSales = new ArrayList<>();
-            
-            List<MasterInvoice> masterInvoicesBetweenDates = masterJpaController.findMasterInvoicesBetweenDates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
-
-            for(MasterInvoice master : masterInvoicesBetweenDates)
-            {
-                for(InvoiceDetail invoice : master.getInvoiceDetailList())
-                {
-                    booksWithTotalSales.add(reportQueries.findBookWithTotalSalesByDetail(invoice.getDetailId()));
-                }
-            }
+            clientsWithTotalSales = reportQueries.findClientsWithTotalSalesBetweenDates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
         }
         
-        return booksWithTotalSales;
+        return clientsWithTotalSales;
     }
     
     

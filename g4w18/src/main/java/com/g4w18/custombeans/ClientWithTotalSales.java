@@ -19,4 +19,33 @@ public class ClientWithTotalSales implements Serializable
     private Client client;
     private Timestamp lastBoughtDate;
     private BigDecimal totalSales;
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Timestamp getLastBoughtDate() {
+        return lastBoughtDate;
+    }
+
+    public void setLastBoughtDate(Timestamp lastBoughtDate) {
+        this.lastBoughtDate = lastBoughtDate;
+    }
+
+    public BigDecimal getTotalSales() {
+        return totalSales;
+    }
+    
+    public BigDecimal getTotalSalesRounded()
+    {
+        return totalSales.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+    }
+
+    public void setTotalSales(BigDecimal totalSales) {
+        this.totalSales = totalSales;
+    }
 }

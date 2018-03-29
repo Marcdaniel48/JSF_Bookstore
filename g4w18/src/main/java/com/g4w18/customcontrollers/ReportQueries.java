@@ -12,6 +12,8 @@ import com.g4w18.entities.Client;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,63 +28,70 @@ public class ReportQueries implements Serializable {
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
     
-    public BookWithTotalSales findBookWithTotalSalesByDetail(int invoiceId)
+    public List<BookWithTotalSales> findBooksWithTotalSalesBetweenDates(Date date1, Date date2)
     {
+        List<BookWithTotalSales> booksWithTotalSales = new ArrayList<>();
+        
         Query query = em.createNativeQuery("Select b.* from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
-                + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where i.detail_Id = ?1", Book.class).setParameter(1, invoiceId);
+                + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where m.sale_date between ?1 and ?2", Book.class)
+                .setParameter(1, date1).setParameter(2, date2);
         
         List<Book> books = query.getResultList();
         
         if (!books.isEmpty())
         {
-            BookWithTotalSales bookWithTotalSales = new BookWithTotalSales();
-            bookWithTotalSales.setBook(books.get(0));
-            
-            query = em.createNativeQuery("Select max(sale_date) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
-                + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where i.detail_Id = ?1 and i.book_id = ?2")
-                    .setParameter(1, invoiceId).setParameter(2, books.get(0).getBookId());
-            Timestamp lastSoldDate = (Timestamp) query.getSingleResult();
-            bookWithTotalSales.setLastSoldDate(lastSoldDate);
-            
-            query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
-                + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where i.detail_Id = ?1 group by b.isbn_number").setParameter(1, invoiceId);
-            BigDecimal totalSalesForBook = (BigDecimal) query.getSingleResult();
-            bookWithTotalSales.setTotalSales(totalSalesForBook);
-            
-            return bookWithTotalSales;
+            for(Book book : books)
+            {
+                BookWithTotalSales bookWithTotalSales = new BookWithTotalSales();
+                bookWithTotalSales.setBook(book);
+
+                query = em.createNativeQuery("Select max(sale_date) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+                    + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.book_id = ?1").setParameter(1, book.getBookId());
+                Timestamp lastSoldDate = (Timestamp) query.getSingleResult();
+                bookWithTotalSales.setLastSoldDate(lastSoldDate);
+
+                query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+                    + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.book_id = ?1 group by b.isbn_number").setParameter(1, book.getBookId());
+                BigDecimal totalSalesForBook = (BigDecimal) query.getSingleResult();
+                bookWithTotalSales.setTotalSales(totalSalesForBook);
+                
+                booksWithTotalSales.add(bookWithTotalSales);
+            }
         }
-        return null;
+        return booksWithTotalSales;
     }
     
-    public ClientWithTotalSales findClientWithTotalSalesByDetail(int invoiceId)
+    public List<ClientWithTotalSales> findClientsWithTotalSalesBetweenDates(Date date1, Date date2)
     {
-        Query query = em.createNativeQuery("Select c.* from client c right join Master_Invoice m on c.client_id = m.user_id "
-                + "right join Invoice_Detail i on m.invoice_id = m.invoice_id where i.detail_Id = ?1", Client.class).setParameter(1, invoiceId);
+        List<ClientWithTotalSales> clientsWithTotalSales = new ArrayList<>();
+        
+        Query query = em.createNativeQuery("Select c.* from client c right join Master_Invoice m on c.client_id = m.client_id where m.sale_date between ?1 and ?2", Client.class)
+                .setParameter(1, date1).setParameter(2, date2);
         
         List<Client> clients = query.getResultList();
         
         if (!clients.isEmpty())
         {
-            ClientWithTotalSales clientWithTotalSales = new ClientWithTotalSales();
-            clientWithTotalSales.setClient(clients.get(0));
-            
-            query = em.createNativeQuery("Select max(m.sale_date) from client c right join Master_Invoice m on c.client_id = m.user_id "
-                + "right join Invoice_Detail i on m.invoice_id = m.invoice_id where i.detail_Id = ?1 and c.client_id = ?2")
-                    .setParameter(1, invoiceId).setParameter(2, clients.get(0).getClientId());
-            
-            Timestamp lastBoughtDate = (Timestamp) query.getSingleResult();
-            clientWithTotalSales.setLastBoughtDate(lastBoughtDate);
-            
-            query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
-                + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id right join Client c on m.user_id = c.client_id where i.detail_Id = ?1 group by b.isbn_number")
-                    .setParameter(1, invoiceId);
-            
-            BigDecimal totalSalesForClient = (BigDecimal) query.getSingleResult();
-            clientWithTotalSales.setTotalSales(totalSalesForClient);
-            
-            return clientWithTotalSales;
+            for(Client client : clients)
+            {
+                ClientWithTotalSales clientWithTotalSales = new ClientWithTotalSales();
+                clientWithTotalSales.setClient(client);
+
+                query = em.createNativeQuery("Select max(m.sale_date) from client c right join Master_Invoice m on c.client_id = m.client_id where c.client_id = ?1")
+                        .setParameter(1, client.getClientId());
+                Timestamp lastBoughtDate = (Timestamp) query.getSingleResult();
+                clientWithTotalSales.setLastBoughtDate(lastBoughtDate);
+
+                query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from Invoice_Detail i "
+                        + "right join Master_Invoice m on i.invoice_Id = m.invoice_Id right join Client c on m.client_id = c.client_id where c.client_id = ?1 group by c.client_id")
+                        .setParameter(1, client.getClientId());
+                BigDecimal totalSalesForClient = (BigDecimal) query.getSingleResult();
+                clientWithTotalSales.setTotalSales(totalSalesForClient);
+                
+                clientsWithTotalSales.add(clientWithTotalSales);
+            }
         }
-        return null;
+        return clientsWithTotalSales;
     }
     
 }

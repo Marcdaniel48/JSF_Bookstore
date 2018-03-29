@@ -78,15 +78,4 @@ public class CustomMasterInvoiceJpaController implements Serializable
         }
         return null;
     }
-    
-    public List<MasterInvoice> findMasterInvoicesBetweenDates(Date firstDate, Date secondDate)
-    {
-        
-        LocalDateTime date1 = LocalDateTime.of(firstDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalTime.MIN);
-        LocalDateTime date2 = LocalDateTime.of(secondDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalTime.MIN);
-        
-        List<MasterInvoice> masterInvoices = em.createQuery("Select m from MasterInvoice m where m.saleDate between ?1 and ?2")
-                .setParameter(1, Timestamp.valueOf(date1)).setParameter(2, Timestamp.valueOf(date2)).getResultList();
-        return masterInvoices;  
-    }
 }
