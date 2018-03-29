@@ -1,5 +1,5 @@
 USE BOOKSTORE;
-select review_id from review where approval_status = false;
+
 DROP TABLE IF EXISTS BOOK_AUTHOR;
 DROP TABLE IF EXISTS INVOICE_DETAIL;
 DROP TABLE IF EXISTS MASTER_INVOICE;
