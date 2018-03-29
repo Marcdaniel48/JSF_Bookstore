@@ -5,7 +5,7 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:p="http://primefaces.org/ui"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-
+    <f:view locale="#{localeBean.locale}">
     <nav class="navbar">
         <h:link outcome="index">
             <div class="logo"></div>
@@ -19,7 +19,9 @@
         
         <div class="right">
             <h:form id="searchForm" class="search-icon-container">
-
+                
+            
+                
                 <h:selectOneMenu styleClass="search-dropdown" id="searchOption" value="#{searchBackingBean.searchOption}">
                     <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
                 </h:selectOneMenu>
@@ -29,16 +31,25 @@
                 <h:commandLink action="#{searchBackingBean.search}">
                     <h:graphicImage id="t1" class="navbar-icon" library="images" name="search.png" alt="Search Icon" />
                 </h:commandLink>
+                
 
             </h:form>
-
+            
             <h:link outcome="shopping_cart">
                 <h:graphicImage class="navbar-icon" library="images" name="shopping-cart.png" alt="Shoppping Cart Icon" />
             </h:link>
-
+            
+            <h:form>
+                
+                <h:commandButton value="#{msgs.english}" action="#{localeBean.setLanguage('en', 'CA')}"></h:commandButton>
+                <h:commandButton value="#{msgs.francais}" action="#{localeBean.setLanguage('fr', 'CA')}"></h:commandButton>
+            </h:form>
+            
             <h:link class="navbar-login" value="#{msgs.loginbutton}" outcome="login" />
             
-            <h:link class="navbar-login" value="Download" outcome="download" />
+            <h:link class="navbar-login" value="#{msgs.managerDownload}" outcome="download" />
+            
+            
             
             <script>
                 
@@ -77,11 +88,5 @@
             </script>
         </div>
     </nav>
-    
-    <div id="navbar-menu">
-        <a href="#news">Login</a>
-        <a href="#contact">Shopping Cart</a>
-        <a href="#about">About</a>
-    </div>
-    
+    </f:view>
 </ui:composition>
