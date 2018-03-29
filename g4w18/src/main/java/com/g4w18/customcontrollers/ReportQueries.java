@@ -5,8 +5,10 @@
  */
 package com.g4w18.customcontrollers;
 
+import com.g4w18.custombeans.AuthorWithTotalSales;
 import com.g4w18.custombeans.BookWithTotalSales;
 import com.g4w18.custombeans.ClientWithTotalSales;
+import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import java.io.Serializable;
@@ -45,7 +47,7 @@ public class ReportQueries implements Serializable {
                 BookWithTotalSales bookWithTotalSales = new BookWithTotalSales();
                 bookWithTotalSales.setBook(book);
 
-                query = em.createNativeQuery("Select max(sale_date) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+                query = em.createNativeQuery("Select max(m.sale_date) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
                     + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.book_id = ?1").setParameter(1, book.getBookId());
                 Timestamp lastSoldDate = (Timestamp) query.getSingleResult();
                 bookWithTotalSales.setLastSoldDate(lastSoldDate);
@@ -80,7 +82,7 @@ public class ReportQueries implements Serializable {
                 query = em.createNativeQuery("Select max(m.sale_date) from client c right join Master_Invoice m on c.client_id = m.client_id where c.client_id = ?1")
                         .setParameter(1, client.getClientId());
                 Timestamp lastBoughtDate = (Timestamp) query.getSingleResult();
-                clientWithTotalSales.setLastBoughtDate(lastBoughtDate);
+                clientWithTotalSales.setLastPurchaseDate(lastBoughtDate);
 
                 query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from Invoice_Detail i "
                         + "right join Master_Invoice m on i.invoice_Id = m.invoice_Id right join Client c on m.client_id = c.client_id where c.client_id = ?1 group by c.client_id")
@@ -92,6 +94,40 @@ public class ReportQueries implements Serializable {
             }
         }
         return clientsWithTotalSales;
+    }
+    
+    public List<AuthorWithTotalSales> findAuthorsWithTotalSalesBetweenDates(Date date1, Date date2)
+    {
+        List<AuthorWithTotalSales> authorsWithTotalSales = new ArrayList<>();
+        
+        Query query = em.createNativeQuery("Select a.* from author a right join book_author ba on a.author_id = ba.author_id right join Invoice_Detail i on ba.book_id = i.book_id "
+                + "right join Master_Invoice m on i.invoice_id = m.invoice_id where m.sale_date between ?1 and ?2", Author.class)
+                .setParameter(1, date1).setParameter(2, date2);
+        
+        List<Author> authors = query.getResultList();
+        
+        if (!authors.isEmpty())
+        {
+            for(Author author : authors)
+            {
+                AuthorWithTotalSales authorWithTotalSales = new AuthorWithTotalSales();
+                authorWithTotalSales.setAuthor(author);
+
+                query = em.createNativeQuery("Select max(m.sale_date) from Master_Invoice m right join Invoice_Detail i on m.invoice_id = i.invoice_id"
+                    + " right join book_author ba on i.book_id = ba.book_id where ba.author_id = ?1").setParameter(1, author.getAuthorId());
+                Timestamp lastSoldDate = (Timestamp) query.getSingleResult();
+                authorWithTotalSales.setLastSoldDate(lastSoldDate);
+
+                query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from Master_Invoice m "
+                        + "right join Invoice_Detail i on m.invoice_Id = i.invoice_Id right join book_author ba on i.book_id = ba.book_id "
+                        + "where ba.author_id = ?1 group by ba.author_id").setParameter(1, author.getAuthorId());
+                BigDecimal totalSalesForBook = (BigDecimal) query.getSingleResult();
+                authorWithTotalSales.setTotalSales(totalSalesForBook);
+                
+                authorsWithTotalSales.add(authorWithTotalSales);
+            }
+        }
+        return authorsWithTotalSales;
     }
     
 }

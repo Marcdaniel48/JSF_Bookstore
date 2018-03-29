@@ -100,4 +100,12 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>totalSalesByAuthor</from-outcome>
+            <to-view-id>/totalSalesByAuthor.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

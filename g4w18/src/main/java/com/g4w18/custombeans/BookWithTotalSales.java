@@ -49,5 +49,4 @@ public class BookWithTotalSales implements Serializable
     public void setLastSoldDate(Timestamp lastSoldDate) {
         this.lastSoldDate = lastSoldDate;
     }
-    
 }

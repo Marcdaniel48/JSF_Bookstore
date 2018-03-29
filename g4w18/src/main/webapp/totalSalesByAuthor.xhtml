@@ -9,26 +9,26 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>#{msgs.reportsClientSales}</title>
+        <title>#{msgs.reportsAuthorSales}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
         
         <h:form>
-            <p:dataTable value="#{reportsBackingBean.clientsWithTotalSales}" var="sale" paginator="true" rows="25" 
+            <p:dataTable value="#{reportsBackingBean.authorsWithTotalSales}" var="sale" paginator="true" rows="25" 
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
                 
-                <p:column headerText="#{msgs.reportsClientId}" sortBy="#{sale.client.clientId}" filterBy="#{sale.client.clientId}">
-                    <h:outputText value="#{sale.client.clientId}"/>
+                <p:column headerText="#{msgs.reportsAuthorId}" sortBy="#{sale.author.authorId}" filterBy="#{sale.author.authorId}">
+                    <h:outputText value="#{sale.author.authorId}"/>
                 </p:column>
-                <p:column headerText="#{msgs.reportsClientName}" sortBy="#{sale.client.firstName} #{sale.client.lastName}" filterBy="#{sale.client.firstName} #{sale.client.lastName}" filterMatchMode="contains">
-                    <h:outputText value="#{sale.client.firstName} #{sale.client.lastName}"/>
+                <p:column headerText="#{msgs.reportsAuthorName}" sortBy="#{sale.author.firstName} #{sale.author.lastName}" filterBy="#{sale.author.firstName} #{sale.author.lastName}" filterMatchMode="contains">
+                    <h:outputText value="#{sale.author.firstName} #{sale.author.lastName}"/>
                 </p:column>
                 <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{sale.totalSalesRounded}" filterBy="#{sale.totalSalesRounded}">
                     <h:outputText value="#{sale.totalSalesRounded}"/>
                 </p:column>
-                <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastPurchaseDate}" filterBy="#{sale.lastSoldDate}" filterMatchMode="contains">
-                    <h:outputText value="#{sallastPurchaseDatete}"/>
+                <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastSoldDate}" filterBy="#{sale.lastSoldDate}" filterMatchMode="contains">
+                    <h:outputText value="#{sale.lastSoldDate}"/>
                 </p:column>
             </p:dataTable>
         </h:form>

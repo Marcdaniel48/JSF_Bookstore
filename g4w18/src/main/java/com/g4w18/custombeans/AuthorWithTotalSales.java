@@ -5,8 +5,7 @@
  */
 package com.g4w18.custombeans;
 
-import com.g4w18.entities.Client;
-import java.io.Serializable;
+import com.g4w18.entities.Author;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
@@ -14,26 +13,18 @@ import java.sql.Timestamp;
  *
  * @author Marc-Daniel
  */
-public class ClientWithTotalSales implements Serializable
+public class AuthorWithTotalSales 
 {
-    private Client client;
-    private Timestamp lastPurchaseDate;
+    private Author author;
+    private Timestamp lastSoldDate;
     private BigDecimal totalSales;
 
-    public Client getClient() {
-        return client;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Timestamp getLastPurchaseDate() {
-        return lastPurchaseDate;
-    }
-
-    public void setLastPurchaseDate(Timestamp lastPurchaseDate) {
-        this.lastPurchaseDate = lastPurchaseDate;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public BigDecimal getTotalSales() {
@@ -47,5 +38,14 @@ public class ClientWithTotalSales implements Serializable
 
     public void setTotalSales(BigDecimal totalSales) {
         this.totalSales = totalSales;
+    }
+    
+    public Timestamp getLastSoldDate()
+    {
+        return lastSoldDate;
+    }
+
+    public void setLastSoldDate(Timestamp lastSoldDate) {
+        this.lastSoldDate = lastSoldDate;
     }
 }

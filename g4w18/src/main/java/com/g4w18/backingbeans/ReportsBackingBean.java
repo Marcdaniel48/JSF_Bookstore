@@ -5,6 +5,7 @@
  */
 package com.g4w18.backingbeans;
 
+import com.g4w18.custombeans.AuthorWithTotalSales;
 import com.g4w18.custombeans.BookWithTotalSales;
 import com.g4w18.custombeans.ClientWithTotalSales;
 import com.g4w18.custombeans.ReportSelector;
@@ -38,6 +39,7 @@ public class ReportsBackingBean implements Serializable
     
     private List<BookWithTotalSales> booksWithTotalSales;
     private List<ClientWithTotalSales> clientsWithTotalSales;
+    private List<AuthorWithTotalSales> authorsWithTotalSales;
     
     @Inject
     private ReportSelector reportSelector;
@@ -99,6 +101,19 @@ public class ReportsBackingBean implements Serializable
         }
         
         return clientsWithTotalSales;
+    }
+    
+    public List<AuthorWithTotalSales> getAuthorsWithTotalSales()
+    {
+        if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
+            reportSelector = (ReportSelector)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("reportTypeAndDates");
+
+        if(authorsWithTotalSales == null)
+        {
+            authorsWithTotalSales = reportQueries.findAuthorsWithTotalSalesBetweenDates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
+        }
+        
+        return authorsWithTotalSales;
     }
     
     
