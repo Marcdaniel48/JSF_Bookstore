@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -81,7 +83,7 @@ public class PlaceOrderBackingBean implements Serializable
         
         MasterInvoice master = new MasterInvoice();
         master.setClientId(user);
-        master.setSaleDate(Date.valueOf(LocalDate.now()));
+        master.setSaleDate(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
         master.setGrossValue(new BigDecimal(shoppingCart.getSubtotal()));
         
         Double taxIncludedPercentage = tax.getOverallTaxRate().add(BigDecimal.ONE).doubleValue();
