@@ -1,54 +1,72 @@
 package com.g4w18.selenium;
 
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import java.awt.Robot;
+import java.util.List;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- *
  * @author Jephthia
  */
 public class HomepageTest
 {
     private WebDriver driver;
     
-    @Test
-    public void sdas() throws InterruptedException
+    @Before
+    public void init()
     {
-        System.setProperty("webdriver.chrome.driver", "C:\\dev\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        ChromeDriverManager.getInstance().setup();
+        driver = new ChromeDriver();
+        //driver.manage().window().maximize();
+    }
+    
+    @Test
+    public void testClickOnBook() throws Exception
+    {
+        driver.get("http://localhost:8080/g4w18/login.xhtml");
+        Thread.sleep(5000);
+        
+        WebElement username = driver.findElement(By.id("loginForm:username"));
+        username.sendKeys("jlouis");
+        
+        WebElement password = driver.findElement(By.id("loginForm:password"));
+        password.sendKeys("booktopia");
+        
+        WebElement submit = driver.findElement(By.id("loginForm:submit"));
+        submit.click();
+        
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        wait.until(ExpectedConditions.titleIs("BookList"));
+        
+        Thread.sleep(5000);
         
         driver.get("http://localhost:8080/g4w18/index.xhtml");
         
-        Thread.sleep(1000);
+        Thread.sleep(8000);
         
-        WebElement loginBox = driver.findElement(By.className("loginform:login-username"));
-        loginBox.sendKeys("test@test.com");
-
-        //register-password
-        Thread.sleep(1000);
-        WebElement passwordBox = driver.findElement(By.id("loginform:login-password"));
-        passwordBox.sendKeys("password");
-
-//        Robot robot = new Robot();
-//        robot.keyPress(KeyEvent.VK_ENTER);
-//        robot.keyRelease(KeyEvent.VK_ENTER);
-//        robot.delay(2000);
+        WebElement recommendations = driver.findElement(By.id("recent-books"));
+        List<WebElement> books = recommendations.findElements(By.className("book"));
         
-//        robot.keyPress(KeyEvent.VK_ENTER);
-//        robot.keyRelease(KeyEvent.VK_ENTER);
+        books.get(0).click();
+        
+        wait.until(ExpectedConditions.titleIs("Book Details"));
+        
+        Thread.sleep(5000);
     }
     
-//    @After
-//	public void tearDown() throws Exception {
-//		this.driver.quit();
-//	}
+    @After
+    public void clean()
+    {
+        driver.quit();
+    }
 }
