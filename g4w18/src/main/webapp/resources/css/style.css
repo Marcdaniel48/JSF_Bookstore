@@ -51,6 +51,11 @@ a:hover
 {
     opacity: 0.4;
 }
+.error
+{
+    color: red;
+    font-weight: bolder;
+}
 
 .top-section
 {

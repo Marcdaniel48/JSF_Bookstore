@@ -117,25 +117,29 @@
                     <div class="dots-container"></div>
                 </div>
 
-                <div id="survey">
+                <h:panelGroup id="surveyPanel">
+                    <div id="survey">
 
-                    <h:form id="surveyForm" rendered="#{!surveyBackingBean.showResults()}">
-                        <h1 class="section-title">#{surveyBackingBean.activeQuestion.description}</h1>
+                        <h:form id="surveyForm" rendered="#{!surveyBackingBean.showResults()}">
+                            <h1 class="section-title">#{surveyBackingBean.activeQuestion.description}</h1>
 
-                        <h:selectOneRadio class="surveyChoices" id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="Please select one option">
-                            <f:selectItems id="choice" class="c" value="#{surveyBackingBean.answers}" />
-                        </h:selectOneRadio>
-                        <h:message for="surveyChoices" />
+                            <h:message id="choiceError" for="surveyChoices" styleClass="error" />
+                            <h:selectOneRadio class="surveyChoices" id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="Please select one option">
+                                <f:selectItems id="choice" class="c" value="#{surveyBackingBean.answers}" />
+                            </h:selectOneRadio>
 
-                        <h:commandButton id="submit" type="submit" value="Submit" action="#{surveyBackingBean.submitVote}"/>
+                            <h:commandButton id="submit" type="submit" value="Submit" action="#{surveyBackingBean.submitVote}">
+                                <f:ajax execute="@form" render="surveyPanel" />
+                            </h:commandButton>
 
-                    </h:form>
+                        </h:form>
 
-                    <div id="surveyChart">
-                        <p:chart id="pie" rendered="#{surveyBackingBean.showResults()}" type="pie" model="#{surveyBackingBean.chart}" />                        
+                        <div id="surveyChart">
+                            <p:chart id="pie" rendered="#{surveyBackingBean.showResults()}" type="pie" model="#{surveyBackingBean.chart}" />                        
+                        </div>
+
                     </div>
-
-                </div>
+                </h:panelGroup>
 
                 <ui:fragment rendered="#{theBooks.hasRecommendations()}">
                     <div class="recommendations">

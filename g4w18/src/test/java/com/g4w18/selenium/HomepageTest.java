@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * @author Jephthia
  */
+@Ignore
 public class HomepageTest
 {
     private static Logger logger = Logger.getLogger(HomepageTest.class.getName());

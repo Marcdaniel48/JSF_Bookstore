@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * @author Jephthia
  */
+@Ignore
 public class NavbarTest
 {
     private static Logger logger = Logger.getLogger(NavbarTest.class.getName());
