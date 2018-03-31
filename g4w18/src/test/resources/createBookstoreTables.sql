@@ -134,10 +134,10 @@ CREATE TABLE BANNER(
 
 --TEMPORARY
 insert into banner values
-(null, "slide1.jpg", "https://google.com", true),
-(null, "slide2.jpg", "https://google.com", false),
-(null, "slide3.jpg", "https://google.com", true),
-(null, "slide4.jpg", "https://google.com", true);
+(null, "slide1.jpg", "https://google.ca", true),
+(null, "slide2.jpg", "https://google.ca", false),
+(null, "slide3.jpg", "https://google.ca", true),
+(null, "slide4.jpg", "https://google.ca", true);
 
 INSERT INTO BOOK values
 (null, "978-1408855652", "Harry Potter and the Philosopher's Stone", "Bloomsbury Children's Books", "2014-09-01 00:00:00", 352, "Fantasy",

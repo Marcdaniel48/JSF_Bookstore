@@ -1,7 +1,6 @@
 package com.g4w18.selenium;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
-import java.awt.Robot;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
@@ -34,7 +33,7 @@ public class HomepageTest
         driver = new ChromeDriver();
     }
     
-    //@Test
+    @Test
     public void testRecommendations() throws Exception
     {
         driver.get("http://localhost:8080/g4w18/index.xhtml");
@@ -114,6 +113,41 @@ public class HomepageTest
         logger.log(Level.INFO, LocalDateTime.now() + " >>> URL: {0}", url);
         
         links.get(0).click();
+        
+        Thread.sleep(5000);
+        
+        Iterator<String> i = driver.getWindowHandles().iterator();
+        
+        driver.switchTo().window(i.next());
+
+        driver.switchTo().window(i.next());
+        
+        Thread.sleep(5000);
+
+        driver.navigate().refresh();
+        
+        Thread.sleep(5000);
+        
+        wait.until(ExpectedConditions.urlContains(url));
+    }
+    
+    @Test
+    public void testBanner() throws Exception
+    {
+        driver.get("http://localhost:8080/g4w18/index.xhtml");
+        
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        
+        List<WebElement> links = driver.findElements(By.className("slide-link"));
+        
+        String url = links.get(0).getAttribute("href");
+        
+        url = url.replace("https://", "");
+        url = url.replace("http://", "");
+        
+        logger.log(Level.INFO, LocalDateTime.now() + " >>> URL: {0}", url);
+        
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click()", links.get(0));
         
         Thread.sleep(5000);
         

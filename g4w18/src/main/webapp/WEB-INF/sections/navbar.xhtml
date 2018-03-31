@@ -7,7 +7,7 @@
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <nav class="navbar">
-        <h:link outcome="index">
+        <h:link id="homeLink" outcome="index">
             <div class="logo"></div>
         </h:link>
 
@@ -32,12 +32,12 @@
 
             </h:form>
 
-            <h:link outcome="shopping_cart">
+            <h:link id="cartLink" outcome="shopping_cart">
                 <h:graphicImage class="navbar-icon" library="images" name="shopping-cart.png" alt="Shoppping Cart Icon" />
             </h:link>
 
             <ui:fragment rendered="#{!navbarBackingBean.userLoggedIn}">
-                <h:link class="navbar-link" value="#{msgs.loginbutton}" outcome="login" />
+                <h:link id="loginLink" class="navbar-link" value="#{msgs.loginbutton}" outcome="login" />
             </ui:fragment>
             
             <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
@@ -87,14 +87,14 @@
     
     <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
         <div class="navbar-user-menu">
-            <h:form>
-                <h:commandLink value="Downloads" action="@null" />
+            <h:form id="navbarDropdownForm">
+                <h:commandLink id="downloadsLink" value="Downloads" action="@null" />
 
                 <ui:fragment rendered="#{navbarBackingBean.manager}">
-                    <h:commandLink value="Manager" action="management_home" />
+                    <h:commandLink id="managerLink" value="Manager" action="management_home" />
                 </ui:fragment>
 
-                <h:commandLink value="Logout" action="#{navbarBackingBean.logout()}" />
+                <h:commandLink id="logoutLink" value="Logout" action="#{navbarBackingBean.logout()}" />
             </h:form>
         </div>
     </ui:fragment>
