@@ -40,7 +40,7 @@ import org.primefaces.model.UploadedFile;
  * @author Salman Haidar
  */
 @Named("managerBookHandling")
-@RequestScoped
+@SessionScoped
 public class ManagerBookBackingBean implements Serializable {
     
     
@@ -114,11 +114,11 @@ public class ManagerBookBackingBean implements Serializable {
     {
         logger.log(Level.INFO, "INSIDE OF CREATE BOOK");
         List<Book> bookResult = bookJpaController.findBookByIsbn(book.getIsbnNumber());
-        logger.log(Level.INFO, book.getIsbnNumber());
+        logger.log(Level.INFO,"BOOK ISBN THAT WILL BE ADDED TO DB "+ book.getIsbnNumber());
         logger.log(Level.INFO, "RESULTS OF BOOKS FOUND WITH THEW ISBN"+ bookResult.size());
         if(bookResult.size() == 0)
         {
-            logger.log(Level.INFO, "INSIDE OF CREATE BOOK 1 IF +++++");
+            
             message="The book was created!";
             bookJpaController.create(book);
             return "managerBookHandler.xhtml";
@@ -164,40 +164,6 @@ public class ManagerBookBackingBean implements Serializable {
     public String getMessage()
     {
         return message;
-    }
-    
-    public void showEditForm()
-    {
-        renderEdit = true;
-        render = false;
-    }
-    
-    public void hideEditForm()
-    {
-        renderEdit = false;
-        render = true;
-    }
-    
-    public boolean getRender()
-    {
-        return render;
-    }
-    
-    public boolean getRenderForm()
-    {
-        return renderEdit;
-    }
-    
-    public void setRender(boolean render)
-    {
-        logger.log(Level.INFO, "setRender: "+ render );
-        this.render = render;
-    }
-    
-    public void setRenderForm(boolean renderEdit)
-    {
-        logger.log(Level.INFO, "setRenderForm: "+ renderEdit );
-        this.renderEdit = renderEdit;
     }
     
     public Map<String,Object> getGenreOptionValue() {

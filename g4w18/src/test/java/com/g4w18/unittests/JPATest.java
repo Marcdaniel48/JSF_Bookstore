@@ -5,6 +5,8 @@ import com.g4w18.controllers.BookJpaController;
 import com.g4w18.customcontrollers.CustomAuthorController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
+import com.g4w18.custombeans.TopSellersResultBean;
+import com.g4w18.customcontrollers.CustomReportQueries;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -23,6 +25,9 @@ import javax.sql.DataSource;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -63,6 +68,7 @@ public class JPATest {
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
                 .addPackage(CustomBookController.class.getPackage())
                 .addPackage(AuthorJpaController.class.getPackage())
+                .addPackage(TopSellersResultBean.class.getPackage())
                 .addPackage(IllegalOrphanException.class.getPackage())
                 .addPackage(Book.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
@@ -82,6 +88,9 @@ public class JPATest {
     
     @Inject
     private CustomAuthorController aJc;
+    
+    @Inject
+    private CustomReportQueries reportQueries;
     
     @Resource(name = "java:app/jdbc/TheBooktopia")
     private DataSource ds;
@@ -175,6 +184,34 @@ public class JPATest {
         }
         
         assertThat(allBooks).hasSize(7);
+    }
+    
+    /**
+     * Test top sellers method without any purchases
+     */
+    @Test
+    public void get_top_sellers_between_two_good_dates_but_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.MARCH, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.MARCH, 31, 0, 0, 0));;
+        
+        List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
+        
+        assertThat(topSellers).hasSize(0);
+    }
+    
+    /**
+     * Test top sellers method purchases
+     */
+    @Test
+    public void get_top_sellers_between_two_good_dates_with_three_purchases() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.MARCH, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.MARCH, 31, 0, 0, 0));;
+        
+        List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
+        
+        assertThat(topSellers).hasSize(0);
     }
     
     
