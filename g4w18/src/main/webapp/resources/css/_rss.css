@@ -12,6 +12,7 @@
     /*animation: 1s ease-out 2.2s 1 slideInFromRight;*/
     /*animation-fill-mode: forwards;*/
     font-weight: bolder;
+    clear: both;
 }
 #rss-feed a:hover
 {
