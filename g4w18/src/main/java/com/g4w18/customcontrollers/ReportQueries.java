@@ -34,7 +34,7 @@ public class ReportQueries implements Serializable {
     {
         List<BookWithTotalSales> booksWithTotalSales = new ArrayList<>();
         
-        Query query = em.createNativeQuery("Select b.* from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+        Query query = em.createNativeQuery("Select distinct b.* from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
                 + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where m.sale_date between ?1 and ?2", Book.class)
                 .setParameter(1, date1).setParameter(2, date2);
         
@@ -67,7 +67,7 @@ public class ReportQueries implements Serializable {
     {
         List<ClientWithTotalSales> clientsWithTotalSales = new ArrayList<>();
         
-        Query query = em.createNativeQuery("Select c.* from client c right join Master_Invoice m on c.client_id = m.client_id where m.sale_date between ?1 and ?2", Client.class)
+        Query query = em.createNativeQuery("Select distinct c.* from client c right join Master_Invoice m on c.client_id = m.client_id where m.sale_date between ?1 and ?2", Client.class)
                 .setParameter(1, date1).setParameter(2, date2);
         
         List<Client> clients = query.getResultList();
@@ -100,7 +100,7 @@ public class ReportQueries implements Serializable {
     {
         List<AuthorWithTotalSales> authorsWithTotalSales = new ArrayList<>();
         
-        Query query = em.createNativeQuery("Select a.* from author a right join book_author ba on a.author_id = ba.author_id right join Invoice_Detail i on ba.book_id = i.book_id "
+        Query query = em.createNativeQuery("Select distinct a.* from author a right join book_author ba on a.author_id = ba.author_id right join Invoice_Detail i on ba.book_id = i.book_id "
                 + "right join Master_Invoice m on i.invoice_id = m.invoice_id where m.sale_date between ?1 and ?2", Author.class)
                 .setParameter(1, date1).setParameter(2, date2);
         
