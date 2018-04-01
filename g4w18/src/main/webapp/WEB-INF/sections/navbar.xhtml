@@ -19,10 +19,6 @@
         
         <div class="right">
             
-            <h:form>
-                <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}" class="navbar-link" value="French" />
-            </h:form>
-            
             <h:form id="searchForm" class="search-icon-container">
 
                 <h:selectOneMenu styleClass="search-dropdown" id="searchOption" value="#{searchBackingBean.searchOption}">
@@ -40,6 +36,15 @@
             <h:link id="cartLink" outcome="shopping_cart">
                 <h:graphicImage class="navbar-icon" library="images" name="shopping-cart.png" alt="Shoppping Cart Icon" />
             </h:link>
+            
+            <h:form id="navbarLangForm">
+                <h:commandLink rendered="#{localeBean.language ne 'fr'}" action="#{localeBean.setLanguage('fr', 'CA')}">
+                    <h:graphicImage class="navbar-icon" library="images" name="ca_flag.png" alt="Language Flag" />
+                </h:commandLink>
+                <h:commandLink rendered="#{localeBean.language ne 'en'}" action="#{localeBean.setLanguage('en', 'CA')}">
+                    <h:graphicImage class="navbar-icon" library="images" name="en_flag.png" alt="Language Flag" />
+                </h:commandLink>
+            </h:form>
 
             <ui:fragment rendered="#{!navbarBackingBean.userLoggedIn}">
                 <h:link id="loginLink" class="navbar-link" value="#{msgs.loginbutton}" outcome="login" />

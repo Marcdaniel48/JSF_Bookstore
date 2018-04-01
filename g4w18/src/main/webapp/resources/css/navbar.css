@@ -72,6 +72,11 @@
     transition: opacity .4s ease;
 /*     border: 1px solid yellow; */
 }
+#navbarLangForm
+{
+    height: 100%;
+    display: inline;
+}
 .navbar-icon:hover
 {
     cursor: pointer;
