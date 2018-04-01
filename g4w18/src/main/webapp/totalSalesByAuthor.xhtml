@@ -13,6 +13,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        <h2>#{msgs.reportsTotalSales} : CDN$ #{reportsBackingBean.getTotalSales(reportsBackingBean.authorsWithTotalSales)}</h2>
         
         <h:form>
             <p:dataTable value="#{reportsBackingBean.authorsWithTotalSales}" var="sale" paginator="true" rows="25" 
@@ -27,8 +28,8 @@ and open the template in the editor.
                 <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{sale.totalSalesRounded}" filterBy="#{sale.totalSalesRounded}">
                     <h:outputText value="#{sale.totalSalesRounded}"/>
                 </p:column>
-                <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastSoldDate}" filterBy="#{sale.lastSoldDate}" filterMatchMode="contains">
-                    <h:outputText value="#{sale.lastSoldDate}"/>
+                <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastRecordedSale}" filterBy="#{sale.lastRecordedSale}" filterMatchMode="contains">
+                    <h:outputText value="#{sale.lastRecordedSale}"/>
                 </p:column>
             </p:dataTable>
         </h:form>

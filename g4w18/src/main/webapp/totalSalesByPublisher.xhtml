@@ -13,19 +13,20 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        <h2>#{msgs.reportsTotalSales} : CDN$ #{reportsBackingBean.getTotalSales(reportsBackingBean.publishersWithTotalSales)}</h2>
         
         <h:form>
             <p:dataTable value="#{reportsBackingBean.publishersWithTotalSales}" var="sale" paginator="true" rows="25" 
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
                 
-                <p:column headerText="#{msgs.reportsBookId}" sortBy="#{ssale.publisher}" filterBy="#{ssale.publisher}" filterMatchMode="contains">
+                <p:column headerText="#{msgs.reportsPublisher}" sortBy="#{sale.publisher}" filterBy="#{sale.publisher}" filterMatchMode="contains">
                     <h:outputText value="#{sale.publisher}"/>
                 </p:column>
                 <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{sale.totalSalesRounded}" filterBy="#{sale.totalSalesRounded}">
                     <h:outputText value="#{sale.totalSalesRounded}"/>
                 </p:column>
-                <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastSoldDate}" filterBy="#{sale.lastSoldDate}" filterMatchMode="contains">
-                    <h:outputText value="#{sale.lastSoldDate}"/>
+                <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastRecordedSale}" filterBy="#{sale.lastRecordedSale}" filterMatchMode="contains">
+                    <h:outputText value="#{sale.lastRecordedSale}"/>
                 </p:column>
             </p:dataTable>
         </h:form>

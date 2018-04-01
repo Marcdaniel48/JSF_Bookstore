@@ -51,7 +51,7 @@ public class ReportQueries implements Serializable {
                 query = em.createNativeQuery("Select max(m.sale_date) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
                     + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.book_id = ?1").setParameter(1, book.getBookId());
                 Timestamp lastSoldDate = (Timestamp) query.getSingleResult();
-                bookWithTotalSales.setLastSoldDate(lastSoldDate);
+                bookWithTotalSales.setLastRecordedSale(lastSoldDate);
 
                 query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
                     + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.book_id = ?1 group by b.isbn_number").setParameter(1, book.getBookId());
@@ -83,7 +83,7 @@ public class ReportQueries implements Serializable {
                 query = em.createNativeQuery("Select max(m.sale_date) from client c right join Master_Invoice m on c.client_id = m.client_id where c.client_id = ?1")
                         .setParameter(1, client.getClientId());
                 Timestamp lastBoughtDate = (Timestamp) query.getSingleResult();
-                clientWithTotalSales.setLastPurchaseDate(lastBoughtDate);
+                clientWithTotalSales.setLastRecordedSale(lastBoughtDate);
 
                 query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from Invoice_Detail i "
                         + "right join Master_Invoice m on i.invoice_Id = m.invoice_Id right join Client c on m.client_id = c.client_id where c.client_id = ?1 group by c.client_id")
@@ -117,7 +117,7 @@ public class ReportQueries implements Serializable {
                 query = em.createNativeQuery("Select max(m.sale_date) from Master_Invoice m right join Invoice_Detail i on m.invoice_id = i.invoice_id"
                     + " right join book_author ba on i.book_id = ba.book_id where ba.author_id = ?1").setParameter(1, author.getAuthorId());
                 Timestamp lastSoldDate = (Timestamp) query.getSingleResult();
-                authorWithTotalSales.setLastSoldDate(lastSoldDate);
+                authorWithTotalSales.setLastRecordedSale(lastSoldDate);
 
                 query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from Master_Invoice m "
                         + "right join Invoice_Detail i on m.invoice_Id = i.invoice_Id right join book_author ba on i.book_id = ba.book_id "
@@ -151,7 +151,7 @@ public class ReportQueries implements Serializable {
                 query = em.createNativeQuery("Select max(m.sale_date) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
                     + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.publisher = ?1").setParameter(1, publisher);
                 Timestamp lastSoldDate = (Timestamp) query.getSingleResult();
-                publisherWithTotalSales.setLastSoldDate(lastSoldDate);
+                publisherWithTotalSales.setLastRecordedSale(lastSoldDate);
 
                 query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
                     + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.publisher = ?1 group by b.publisher").setParameter(1, publisher);

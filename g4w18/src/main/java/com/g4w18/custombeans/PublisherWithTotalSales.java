@@ -12,11 +12,9 @@ import java.sql.Timestamp;
  *
  * @author Marc-Daniel
  */
-public class PublisherWithTotalSales 
+public class PublisherWithTotalSales extends TotalSalesBean
 {
     private String publisher;
-    private Timestamp lastSoldDate;
-    private BigDecimal totalSales;
 
     public String getPublisher() {
         return publisher;
@@ -25,26 +23,4 @@ public class PublisherWithTotalSales
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
-
-    public Timestamp getLastSoldDate() {
-        return lastSoldDate;
-    }
-
-    public void setLastSoldDate(Timestamp lastSoldDate) {
-        this.lastSoldDate = lastSoldDate;
-    }
-
-    public BigDecimal getTotalSales() {
-        return totalSales;
-    }
-    
-    public BigDecimal getTotalSalesRounded()
-    {
-        return totalSales.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-    }
-
-    public void setTotalSales(BigDecimal totalSales) {
-        this.totalSales = totalSales;
-    }
-    
 }

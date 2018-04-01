@@ -10,8 +10,10 @@ import com.g4w18.custombeans.BookWithTotalSales;
 import com.g4w18.custombeans.ClientWithTotalSales;
 import com.g4w18.custombeans.PublisherWithTotalSales;
 import com.g4w18.custombeans.ReportSelector;
+import com.g4w18.custombeans.TotalSalesBean;
 import com.g4w18.customcontrollers.ReportQueries;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -124,6 +126,17 @@ public class ReportsBackingBean implements Serializable
         }
         
         return publishersWithTotalSales;
+    }
+    
+    public BigDecimal getTotalSales(List<TotalSalesBean> totalSalesList)
+    {
+        BigDecimal totalSales = BigDecimal.ZERO;
+        for(TotalSalesBean totalSalesBean : totalSalesList)
+        {
+            totalSales = totalSales.add(totalSalesBean.getTotalSalesRounded());
+        }
+        
+        return totalSales;
     }
     
     
