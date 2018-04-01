@@ -1,6 +1,7 @@
 package com.g4w18.custombeans;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  *
@@ -15,7 +16,7 @@ public class TopSellersResultBean {
     public TopSellersResultBean(String title, String isbn, BigDecimal totalSales) {
         this.title = title;
         this.isbn = isbn;
-        this.totalSales = totalSales;
+        this.totalSales = totalSales.setScale(2, RoundingMode.CEILING);
     }
 
     public String getTitle() {

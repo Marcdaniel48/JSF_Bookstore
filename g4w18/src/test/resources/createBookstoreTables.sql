@@ -992,14 +992,22 @@ insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_
 ('How many books have you read in your life?', 'Less than 1', 'Between 1 and 10', 'Between 11 and 50', 'More than 50', 0, 0, 0, 0, false);
 
 INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE) VALUES
-(10, CURRENT_TIME, 28.96, 33.29676);
+(10, CURRENT_TIME, 28.96, 33.29676),
+(6,'2018-02-18 02:19:53',28.96,33.29676),
+(7,'2018-02-12 02:19:53',13.98,16.07),
+(7,'2017-12-01 02:19:53',28.94,33.26);
 
 INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE, HST_RATE) VALUES
 (1, 1, 8.99, 9.975, 5, 0),
 (1, 2, 5.99, 9.975, 5, 0),
 (1, 3, 5.99, 9.975, 5, 0),
-(1, 4, 7.99, 9.975, 5, 0)
+(1, 4, 7.99, 9.975, 5, 0),
+(2, 1, 8.99, 9.975, 5, 0),
+(2, 2, 5.99, 9.975, 5, 0),
+(2, 3, 5.99, 9.975, 5, 0),
+(2, 4, 7.99, 9.975, 5, 0),
+(3, 3, 5.99, 9.975, 5, 0),
+(3, 4, 7.99, 9.975, 5, 0),
+(4, 9, 14.95, 9.975, 5, 0),
+(4, 37, 13.99, 9.975, 5, 0)
 ;
-
-
-

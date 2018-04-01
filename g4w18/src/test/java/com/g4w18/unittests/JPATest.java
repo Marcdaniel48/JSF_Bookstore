@@ -5,6 +5,7 @@ import com.g4w18.controllers.BookJpaController;
 import com.g4w18.customcontrollers.CustomAuthorController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
+import com.g4w18.custombeans.TopClientsResultBean;
 import com.g4w18.custombeans.TopSellersResultBean;
 import com.g4w18.customcontrollers.CustomReportQueries;
 import com.g4w18.entities.Author;
@@ -95,23 +96,13 @@ public class JPATest {
     @Resource(name = "java:app/jdbc/TheBooktopia")
     private DataSource ds;
     
-    /**
-     * Find all books in DB.
-     */
-    @Test
-    public void should_find_all_books() throws SQLException{
-        List<Book> lb = bookJpaController.findBookEntities();
-        
-        logger.log(Level.INFO,"Data>>>{0}",lb.get(0).getTitle());
-        
-        assertThat(lb).hasSize(100);
-        
-    }
+    
     
     /**
      * Find a book with its title provided.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_specific_name() throws SQLException{
         
@@ -125,6 +116,7 @@ public class JPATest {
      * Find author with general term.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_author_with_general_name() throws SQLException{
         
@@ -140,6 +132,7 @@ public class JPATest {
      * Find books with title with one letter provided by asc ordering.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_general_title_by_ascending() throws SQLException{
         
@@ -156,6 +149,7 @@ public class JPATest {
      * Find publisher with with one letter provided by asc ordering.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_general_publisher_by_ascending() throws SQLException{
         
@@ -190,7 +184,7 @@ public class JPATest {
      * Test top sellers method without any purchases
      */
     @Test
-    public void get_top_sellers_between_two_good_dates_but_purchase() throws SQLException
+    public void get_top_sellers_between_two_good_dates_but_no_purchase() throws SQLException
     {
         Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.MARCH, 01, 0, 0, 0));
         Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.MARCH, 31, 0, 0, 0));;
@@ -201,21 +195,153 @@ public class JPATest {
     }
     
     /**
-     * Test top sellers method purchases
+     * Test top sellers method purchases with 2 results
      */
     @Test
-    public void get_top_sellers_between_two_good_dates_with_three_purchases() throws SQLException
+    public void get_top_sellers_between_two_good_dates_with_2_purchases() throws SQLException
     {
-        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.MARCH, 01, 0, 0, 0));
-        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.MARCH, 31, 0, 0, 0));;
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 13, 0, 0, 0));;
         
         List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
         
-        assertThat(topSellers).hasSize(0);
+       
+        
+           for(int i = 0;i<topSellers.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 2  : "+topSellers.get(i).getTitle() + "---------" + "MONEEEEEEy       " + topSellers.get(i).getTotalSales());
+        
+        assertThat(topSellers).hasSize(2);
     }
     
+    /**
+     * Test top sellers method purchases with 4 result
+     */
+    @Test
+    public void get_top_sellers_between_two_good_dates_with_4_purchases() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 15, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 19, 0, 0, 0));;
+        
+        List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
+        
+        for(int i = 0;i<topSellers.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 4 (4 days) : "+topSellers.get(i).getTitle() + "---------" + "MONEEEEEEy       " + topSellers.get(i).getTotalSales());
+        
+        assertThat(topSellers).hasSize(4);
+    }
     
+    /**
+     * Test top sellers method purchases with 4 result but with calculations
+     */
+    @Test
+    public void get_top_sellers_between_two_good_dates_with_4_purchases_but_calculations() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 27, 0, 0, 0));;
+        
+        List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
+        
+        for(int i = 0;i<topSellers.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 4 (whole feb): "+topSellers.get(i).getTitle() + "---------" + "MONEEEEEEy      " + topSellers.get(i).getTotalSales());
+        
+        assertThat(topSellers).hasSize(4);
+    }
     
+    /**
+     * Test top sellers method purchases with 6 result but with calculations
+     */
+    @Test
+    public void get_top_sellers_between_two_good_dates_with_6_purchases_but_calculations() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2017, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 27, 0, 0, 0));;
+        
+        List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
+        
+        for(int i = 0;i<topSellers.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 6 : "+topSellers.get(i).getTitle() + "---------" + "MONEEEEEEy      "  + topSellers.get(i).getTotalSales());
+        
+        
+        logger.log(Level.INFO,"==================================================");
+        
+        assertThat(topSellers).hasSize(6);
+    }
+    
+    /**
+     * Test top client method purchases with 1 results
+     */
+    @Test
+    public void get_top_client_between_two_good_dates_with_1_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 13, 0, 0, 0));;
+        
+        List<TopClientsResultBean> topClients = reportQueries.getTopClientsBetween2Dates(begin, end);
+        
+       
+        
+           for(int i = 0;i<topClients.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 2  : "+topClients.get(i).getUsername() + "---------" + "MONEEEEEEy     " + topClients.get(i).getGrossValue().toString());
+        
+        assertThat(topClients).hasSize(1);
+    }
+    
+    /**
+     * Test top client method purchases with 2 results
+     */
+    @Test
+    public void get_top_client_between_two_good_dates_with_2_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 19, 0, 0, 0));;
+        
+        List<TopClientsResultBean> topClients = reportQueries.getTopClientsBetween2Dates(begin, end);
+        
+       
+        
+           for(int i = 0;i<topClients.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 2  : "+topClients.get(i).getUsername() + "---------" + "MONEEEEEEy     " + topClients.get(i).getGrossValue().toString());
+        
+        assertThat(topClients).hasSize(2);
+    }
+    
+    /**
+     * Test top client method purchases with 3 results
+     */
+    @Test
+    public void get_top_client_between_two_good_dates_with_3_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2017, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.MAY, 19, 0, 0, 0));;
+        
+        List<TopClientsResultBean> topClients = reportQueries.getTopClientsBetween2Dates(begin, end);
+        
+       
+        
+           for(int i = 0;i<topClients.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 2  : "+topClients.get(i).getUsername() + "---------" + "MONEEEEEEy     " + topClients.get(i).getGrossValue().toString());
+        
+        assertThat(topClients).hasSize(3);
+    }
+    
+    /**
+     * Test top client method purchases with 0 results
+     */
+    @Test
+    public void get_top_client_between_two_good_dates_with_0_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 14, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 15, 0, 0, 0));;
+        
+        List<TopClientsResultBean> topClients = reportQueries.getTopClientsBetween2Dates(begin, end);
+        
+       
+        
+           for(int i = 0;i<topClients.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 2  : "+topClients.get(i).getUsername() + "---------" + "MONEEEEEEy     " + topClients.get(i).getGrossValue().toString());
+        
+        assertThat(topClients).hasSize(0);
+    }
     
     
     
