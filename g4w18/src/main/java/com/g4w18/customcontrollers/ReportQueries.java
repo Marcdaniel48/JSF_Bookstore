@@ -8,6 +8,7 @@ package com.g4w18.customcontrollers;
 import com.g4w18.custombeans.AuthorWithTotalSales;
 import com.g4w18.custombeans.BookWithTotalSales;
 import com.g4w18.custombeans.ClientWithTotalSales;
+import com.g4w18.custombeans.PublisherWithTotalSales;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
@@ -128,6 +129,39 @@ public class ReportQueries implements Serializable {
             }
         }
         return authorsWithTotalSales;
+    }
+    
+    public List<PublisherWithTotalSales> findPublishersWithTotalSalesBetweenDates(Date date1, Date date2)
+    {
+        List<PublisherWithTotalSales> publishersWithTotalSales = new ArrayList<>();
+        
+        Query query = em.createNativeQuery("Select distinct b.publisher from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+                + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where m.sale_date between ?1 and ?2")
+                .setParameter(1, date1).setParameter(2, date2);
+        
+        List<String> publishers = query.getResultList();
+        
+        if (!publishers.isEmpty())
+        {
+            for(String publisher : publishers)
+            {
+                PublisherWithTotalSales publisherWithTotalSales = new PublisherWithTotalSales();
+                publisherWithTotalSales.setPublisher(publisher);
+
+                query = em.createNativeQuery("Select max(m.sale_date) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+                    + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.publisher = ?1").setParameter(1, publisher);
+                Timestamp lastSoldDate = (Timestamp) query.getSingleResult();
+                publisherWithTotalSales.setLastSoldDate(lastSoldDate);
+
+                query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+                    + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.publisher = ?1 group by b.publisher").setParameter(1, publisher);
+                BigDecimal totalSalesForPublisher = (BigDecimal) query.getSingleResult();
+                publisherWithTotalSales.setTotalSales(totalSalesForPublisher);
+                
+                publishersWithTotalSales.add(publisherWithTotalSales);
+            }
+        }
+        return publishersWithTotalSales;
     }
     
 }

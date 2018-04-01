@@ -8,11 +8,9 @@ package com.g4w18.backingbeans;
 import com.g4w18.custombeans.AuthorWithTotalSales;
 import com.g4w18.custombeans.BookWithTotalSales;
 import com.g4w18.custombeans.ClientWithTotalSales;
+import com.g4w18.custombeans.PublisherWithTotalSales;
 import com.g4w18.custombeans.ReportSelector;
-import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
 import com.g4w18.customcontrollers.ReportQueries;
-import com.g4w18.entities.InvoiceDetail;
-import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,8 +29,6 @@ import javax.inject.Named;
 @ViewScoped
 public class ReportsBackingBean implements Serializable
 {
-    @Inject
-    private CustomMasterInvoiceJpaController masterJpaController;
     
     @Inject
     private ReportQueries reportQueries;
@@ -40,6 +36,7 @@ public class ReportsBackingBean implements Serializable
     private List<BookWithTotalSales> booksWithTotalSales;
     private List<ClientWithTotalSales> clientsWithTotalSales;
     private List<AuthorWithTotalSales> authorsWithTotalSales;
+    private List<PublisherWithTotalSales> publishersWithTotalSales;
     
     @Inject
     private ReportSelector reportSelector;
@@ -114,6 +111,19 @@ public class ReportsBackingBean implements Serializable
         }
         
         return authorsWithTotalSales;
+    }
+    
+    public List<PublisherWithTotalSales> getPublishersWithTotalSales()
+    {
+        if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
+            reportSelector = (ReportSelector)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("reportTypeAndDates");
+
+        if(publishersWithTotalSales == null)
+        {
+            publishersWithTotalSales = reportQueries.findPublishersWithTotalSalesBetweenDates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
+        }
+        
+        return publishersWithTotalSales;
     }
     
     
