@@ -33,11 +33,13 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 
 /**
  * @author Jephthia
  */
+@Ignore
 @RunWith(Arquillian.class)
 public class JPASurveyTest
 {

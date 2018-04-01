@@ -18,6 +18,11 @@
         </div>
         
         <div class="right">
+            
+            <h:form>
+                <h:commandLink action="#{localeBean.setLanguage('fr', 'CA')}" class="navbar-link" value="French" />
+            </h:form>
+            
             <h:form id="searchForm" class="search-icon-container">
 
                 <h:selectOneMenu styleClass="search-dropdown" id="searchOption" value="#{searchBackingBean.searchOption}">
