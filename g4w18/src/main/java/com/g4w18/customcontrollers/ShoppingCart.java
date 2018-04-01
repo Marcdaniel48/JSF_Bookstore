@@ -85,5 +85,13 @@ public class ShoppingCart implements Serializable
         
         return sum;
     }
+    
+    public void emptyShoppingCart()
+    {
+        shoppingCartBooks = new ArrayList<>();
+        
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        session.setAttribute("shoppingCart", shoppingCartBooks);
+    }
 
 }

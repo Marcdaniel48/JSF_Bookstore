@@ -111,6 +111,7 @@ public class PlaceOrderBackingBean implements Serializable
             invoiceJpaController.create(invoice);
         }
         
+        shoppingCart.emptyShoppingCart();
         return "/index";
     }
     
