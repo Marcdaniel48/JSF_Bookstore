@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Marc-Daniel
  */
-@WebFilter(filterName = "IndexFilter", urlPatterns = {"/authenticated/*", "/management/*", "/registration.xhtml", "/login.xhtml"})
+@WebFilter(filterName = "IndexFilter", urlPatterns = {"/checkout/*", "/management/*", "/registration.xhtml", "/login.xhtml"})
 public class IndexFilter implements Filter
 {
     @Inject
@@ -53,9 +53,9 @@ public class IndexFilter implements Filter
     {
         String contextPath = ((HttpServletRequest) request).getContextPath();
         String uri = ((HttpServletRequest)request).getRequestURI();
-               System.out.println("database database" + login.getLoggedIn());
+        
         // If the user is trying to finalize with an empty shopping cart, then redirect to index
-        if(uri.startsWith("/g4w18/authenticated/") && (cart == null || cart.getShoppingCartBooks().isEmpty()))
+        if(uri.startsWith("/g4w18/checkout/") && (cart == null || cart.getShoppingCartBooks().isEmpty()))
         {
             ((HttpServletResponse) response).sendRedirect(contextPath);
         }

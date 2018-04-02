@@ -88,7 +88,7 @@
     <navigation-rule>
         <navigation-case>
             <from-outcome>totalSales</from-outcome>
-            <to-view-id>/totalSales.xhtml</to-view-id>
+            <to-view-id>/management/reports/totalSales.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -96,7 +96,7 @@
     <navigation-rule>
         <navigation-case>
             <from-outcome>totalSalesByClient</from-outcome>
-            <to-view-id>/totalSalesByClient.xhtml</to-view-id>
+            <to-view-id>/management/reports/totalSalesByClient.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -104,7 +104,7 @@
     <navigation-rule>
         <navigation-case>
             <from-outcome>totalSalesByAuthor</from-outcome>
-            <to-view-id>/totalSalesByAuthor.xhtml</to-view-id>
+            <to-view-id>/management/reports/totalSalesByAuthor.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -112,7 +112,7 @@
     <navigation-rule>
         <navigation-case>
             <from-outcome>totalSalesByPublisher</from-outcome>
-            <to-view-id>/totalSalesByPublisher.xhtml</to-view-id>
+            <to-view-id>/management/reports/totalSalesByPublisher.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
