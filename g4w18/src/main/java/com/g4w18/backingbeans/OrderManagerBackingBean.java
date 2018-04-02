@@ -3,6 +3,7 @@ package com.g4w18.backingbeans;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.customcontrollers.CustomMasterInvoiceController;
+import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
@@ -20,7 +22,7 @@ import org.primefaces.event.RowEditEvent;
  * @author Juan Sebastian Ramirez
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class OrderManagerBackingBean implements Serializable {
 
     @Inject
@@ -28,6 +30,7 @@ public class OrderManagerBackingBean implements Serializable {
 
     private List<MasterInvoice> allMasterInvoices;
     private MasterInvoice masterInvoice;
+    private List<InvoiceDetail> details;
     private final FacesContext context = FacesContext.getCurrentInstance();
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
@@ -54,6 +57,28 @@ public class OrderManagerBackingBean implements Serializable {
         LOGGER.log(Level.INFO, "masterInvoice setter called");
         LOGGER.log(Level.INFO, "masterInvoice ID {0}", masterInvoice.getInvoiceId());
         this.masterInvoice = masterInvoice;
+    }
+
+    public List<InvoiceDetail> getDetails() {
+//        LOGGER.log(Level.INFO, "getDetails called");
+//        for (InvoiceDetail id : details) {
+//            LOGGER.log(Level.INFO, "detail: {0}", id.getDetailId());
+//        }
+        if(details == null){
+            LOGGER.log(Level.INFO, "mf details is null");
+        }
+        return details;
+    }
+
+    public void setDetails(List<InvoiceDetail> invoiceDetails) {
+        LOGGER.log(Level.INFO, "setDetails called");
+        for (InvoiceDetail id : invoiceDetails) {
+            LOGGER.log(Level.INFO, "incoming details: {0}", id.getDetailId());
+        }
+        this.details = invoiceDetails;
+        for (InvoiceDetail id : details) {
+            LOGGER.log(Level.INFO, "set details: {0}", id.getDetailId());
+        }
     }
 
     /**

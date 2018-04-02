@@ -86,71 +86,73 @@ and open the template in the editor.
                     <p:rowEditor />
                 </p:column>
                 <p:column headerText="#{msgs.managerOrdersSeeDetails}">
-                    <p:rowToggler />
+                    <p:commandButton value="#{msgs.managerOrdersSeeDetails}" oncomplete="PF('detailsDialog').show();">
+                        <f:setPropertyActionListener value="#{order.invoiceDetailList}" target="#{orderManagerBackingBean.details}" ></f:setPropertyActionListener>
+                    </p:commandButton>
                 </p:column>
-                <p:rowExpansion>
-                    <p:dataTable var="detail" value="#{order.invoiceDetailList}" 
-                                 editable="true">
-
-                        <p:column headerText="#{msgs.managerDetailId}">
-                            <h:outputText value="#{detail.detailId}"></h:outputText>
-                        </p:column>
-
-                        <p:column headerText="#{msgs.managerDetailBook}">
-                            <h:outputText value="#{detail.bookId.title}"></h:outputText>
-                        </p:column>
-
-                        <p:column headerText="#{msgs.managerDetailPrice}">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{detail.bookPrice}"></h:outputText>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{detail.bookPrice}"></p:inputText>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-
-                        <p:column headerText="#{msgs.managerDetailGST}">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{detail.bookPrice}"></h:outputText>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{detail.gstRate}"></p:inputText>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-
-                        <p:column headerText="#{msgs.managerDetailPST}">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{detail.bookPrice}"></h:outputText>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{detail.pstRate}"></p:inputText>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-
-                        <p:column headerText="#{msgs.managerDetailHST}">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{detail.bookPrice}"></h:outputText>
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{detail.hstRate}"></p:inputText>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-
-                        <p:column headerText="#{msgs.managerEdit}">
-                            <p:rowEditor />
-                        </p:column>
-
-                    </p:dataTable>
-                </p:rowExpansion>
             </p:dataTable>
+        </h:form>
+        <h:form>
+            <p:dialog header="#{msgs.managerOrdersSeeDetails}" widgetVar="detailsDialog" modal="true" dynamic="true" onShow="PF('detailsTable').filter();">
+                <p:dataTable var="detail" value="#{orderManagerBackingBean.details}" 
+                             editable="true"
+                             widgetVar="detailsTable">
+                    <p:column headerText="#{msgs.managerDetailId}">
+                        <h:outputText value="#{detail.detailId}"></h:outputText>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerDetailBook}">
+                        <h:outputText value="#{detail.bookId.title}"></h:outputText>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerDetailPrice}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{detail.bookPrice}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{detail.bookPrice}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerDetailGST}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{detail.bookPrice}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{detail.gstRate}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerDetailPST}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{detail.bookPrice}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{detail.pstRate}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerDetailHST}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{detail.bookPrice}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{detail.hstRate}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="#{msgs.managerEdit}">
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
         </h:form>
     </h:body>
 </html>
