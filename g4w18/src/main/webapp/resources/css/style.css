@@ -105,7 +105,7 @@ a:hover
 }
 .page_container
 {
-    height: auto;
+    height: 100%;
     width: 100%;
     padding-top: 70px;
     position: relative;
