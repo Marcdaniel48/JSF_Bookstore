@@ -10,7 +10,8 @@
     color: #F2BFA0;
     font-size: 1.5em;
     background-color: rgba(0,0,0,0.95);
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.8);
+    border-radius: 0px;
 /*    opacity: 0;
     animation: 1s ease-out 2s 1 fadeIn;
     animation-fill-mode: forwards;*/
@@ -109,12 +110,13 @@
     display: none;
     opacity: 0;
     width: auto;
-    height: 30px;
+    height: 30px !important;
     padding: 5px;
     margin-top: 25px;
     text-align: center;
     vertical-align: top;
     color: #F2BFA0;
+    font-size: initial;
     background-color: transparent;
     border: 1px solid #F2BFA0;
     -moz-appearance:none; /* Firefox */

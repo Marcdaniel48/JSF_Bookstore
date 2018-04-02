@@ -103,6 +103,18 @@ a:hover
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
     filter: brightness(50%);
 }
+.no-padding-left
+{
+    padding-left: 0px !important;
+}
+.no-padding-right
+{
+    padding-right: 0px !important;
+}
+.no-padding-bottom
+{
+    padding-right: 0px !important;
+}
 
 @media only screen and (max-width: 800px)
 {

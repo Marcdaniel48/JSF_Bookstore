@@ -6,7 +6,7 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:b="http://bootsfaces.net/ui"
+    xmlns:b="http://bootsfaces.net/ui"
     xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="windowTitle">
@@ -42,9 +42,15 @@
                     <hr/>
                     <h1>Others</h1>
                 </h:panelGroup>
-                                
+                
+                <b:row>
+                    
                 <ui:repeat var="book" value="#{bookListBackingBean.allBooks}">
-                    <b:panel>
+                    <b:column col-md="2">
+                        <b:image library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}"></b:image>
+                    </b:column>
+                    
+<!--                    <b:panel>
                         <b:row styleClass="show-grid">
                             <b:column col-md="2">
                                 <b:image library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}" height="50%" width="50%"></b:image>
@@ -59,11 +65,14 @@
                                 <h:outputText value="#{book.listPrice} CAD"></h:outputText>
                             </b:column>
                         </b:row>
-                    </b:panel>
+                    </b:panel>-->
                 </ui:repeat>
+                    
+                </b:row>
+                    
             </b:form>
         </b:container>
-        <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
+        
         <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
             
     </ui:define>

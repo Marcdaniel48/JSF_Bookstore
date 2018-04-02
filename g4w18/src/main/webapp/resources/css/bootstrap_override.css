@@ -1,0 +1,33 @@
+.panel-default
+{
+    border-color: black;
+}
+.panel-default > .panel-heading
+{
+    background-color: black;
+    color: #F2BFA0;
+    background-image: none;
+}
+.thumbnail
+{
+    border: none;
+    text-align: center;
+    box-shadow: initial;
+}
+.form-control
+{
+    color: black;
+    border: 1px solid black;
+    box-shadow: none;
+}
+.mButton
+{
+    background-color: #f2bfa0;
+    border: 1px solid black;
+    color: black;
+    font-family: inherit;
+    box-shadow: none;
+    text-shadow: none;
+    font-weight: initial;
+    border-radius: 4px;
+}
