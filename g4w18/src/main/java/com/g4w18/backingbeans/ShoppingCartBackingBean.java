@@ -5,16 +5,21 @@
  */
 package com.g4w18.backingbeans;
 
+import com.g4w18.customcontrollers.CustomClientJpaController;
+import com.g4w18.customcontrollers.CustomInvoiceDetailJpaController;
+import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
 import com.g4w18.customcontrollers.LoginController;
 import com.g4w18.customcontrollers.ShoppingCart;
 import com.g4w18.entities.Book;
+import com.g4w18.entities.Client;
+import com.g4w18.entities.InvoiceDetail;
+import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -33,6 +38,16 @@ public class ShoppingCartBackingBean implements Serializable
     
     @Inject
     private LoginController login;
+    
+    @Inject
+    private CustomClientJpaController clientJpaController;
+    
+    @Inject
+    private CustomMasterInvoiceJpaController masterInvoiceJpaController;
+    
+    @Inject
+    private CustomInvoiceDetailJpaController invoiceDetailJpaController;
+    
 
     public ShoppingCart getShoppingCart()
     {
@@ -60,5 +75,26 @@ public class ShoppingCartBackingBean implements Serializable
         }
         
         return "authenticated/finalization.xhtml";
+    }
+    
+    public boolean isBookBoughtAlready(Book book)
+    {
+        if(login.getLoggedIn())
+        {
+            Client user = clientJpaController.findClientByUsername(login.getUsername());
+            List<MasterInvoice> masterInvoicesOfUser = masterInvoiceJpaController.findMasterInvoicesByClientId(user.getClientId());
+            
+            
+            for(MasterInvoice mi : masterInvoicesOfUser)
+            {
+                for(InvoiceDetail invoice : invoiceDetailJpaController.findInvoicesByMasterInvoice(mi))
+                {
+                    if(Objects.equals(invoice.getBookId().getBookId(), book.getBookId()))
+                        return true;
+                }
+            }
+            
+        }
+        return false;
     }
 }

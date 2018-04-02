@@ -34,7 +34,7 @@ public class CustomMasterInvoiceJpaController implements Serializable
     private MasterInvoiceJpaController masterInvoiceJpaController;
     
     @Inject
-    private CustomClientController clientJpaController;
+    private CustomClientJpaController clientJpaController;
     
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
@@ -67,15 +67,12 @@ public class CustomMasterInvoiceJpaController implements Serializable
         return masterInvoiceJpaController.getMasterInvoiceCount();
     }
     
-    public MasterInvoice findMasterInvoiceByClientId(int clientId)
+    public List<MasterInvoice> findMasterInvoicesByClientId(int clientId)
     {
         TypedQuery<MasterInvoice> query = em.createNamedQuery("MasterInvoice.findByClientId", MasterInvoice.class);
         Client client = clientJpaController.findClient(clientId);
         query.setParameter("clientId", client);
         List<MasterInvoice> masterInvoices = query.getResultList();
-        if (!masterInvoices.isEmpty()) {
-            return masterInvoices.get(0);
-        }
-        return null;
+        return masterInvoices;
     }
 }

@@ -7,7 +7,10 @@ package com.g4w18.customcontrollers;
 
 import com.g4w18.backingbeans.BookDetailsBackingBean;
 import com.g4w18.entities.Client;
+import com.g4w18.entities.InvoiceDetail;
+import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -25,7 +28,16 @@ import javax.servlet.http.HttpSession;
 public class LoginController implements Serializable
 {
     @Inject
-    private CustomClientController clientJpaController;
+    private CustomClientJpaController clientJpaController;
+    
+    @Inject
+    private ShoppingCart shoppingCart;
+    
+    @Inject
+    private CustomMasterInvoiceJpaController masterInvoiceJpaController;
+    
+    @Inject
+    private CustomInvoiceDetailJpaController invoiceDetailJpaController;
 
     private String username;
     private String password;
@@ -44,14 +56,14 @@ public class LoginController implements Serializable
         this.username = username;
     }
 
-    public String getPassword()
-    {
-        return password;
-    }
-
     public void setPassword(String password)
     {
         this.password = password;
+    }
+    
+    public String getPassword()
+    {
+        return password;
     }
     
     public boolean getLoggedIn()
@@ -68,22 +80,39 @@ public class LoginController implements Serializable
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 
-        Client client = clientJpaController.findClientByCredentials(username, password);
+        Client user = clientJpaController.findClientByCredentials(username, password);
 
-        if (client != null)
+        if (user != null)
         {
             loggedIn = true;
-            session.setAttribute("username", username);
         }
         else
         {
             loggedIn = false;
+            username = null;
             return "";
         }
 
         session.setAttribute("loggedIn", loggedIn);
         session.setAttribute("username", username);
         log.log(Level.INFO, "Username: {0}", session.getAttribute("username"));
+        
+        // If the shopping cart contains items before the user has logged in, check if any books in the shopping cart has already been bought by the user.
+        // If so, remove the book from the shopping cart.
+        if(!shoppingCart.getShoppingCartBooks().isEmpty())
+        {
+            List<MasterInvoice> masterInvoicesOfUser = masterInvoiceJpaController.findMasterInvoicesByClientId(user.getClientId());
+
+            for(MasterInvoice mi : masterInvoicesOfUser)
+            {
+                for(InvoiceDetail invoice : invoiceDetailJpaController.findInvoicesByMasterInvoice(mi))
+                {
+                    if(shoppingCart.getShoppingCartBooks().contains(invoice.getBookId()))
+                        shoppingCart.getShoppingCartBooks().remove(invoice.getBookId());
+                }
+            }
+        }
+        
         return "bookList.xhtml";
     }
 

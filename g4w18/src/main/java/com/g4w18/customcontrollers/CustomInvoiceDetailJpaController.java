@@ -9,6 +9,7 @@ import com.g4w18.controllers.InvoiceDetailJpaController;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.InvoiceDetail;
+import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -55,9 +56,9 @@ public class CustomInvoiceDetailJpaController implements Serializable
         return invoiceJpaController.getInvoiceDetailCount();
     }
     
-    public List<InvoiceDetail> findInvoicesByMasterInvoice(int invoiceId)
+    public List<InvoiceDetail> findInvoicesByMasterInvoice(MasterInvoice masterInvoice)
     {
-        List<InvoiceDetail> invoices = em.createQuery("Select i from InvoiceDetail i where i.invoiceId = ?1").setParameter(1, invoiceId).getResultList();
+        List<InvoiceDetail> invoices = em.createQuery("Select i from InvoiceDetail i where i.invoiceId = ?1").setParameter(1, masterInvoice).getResultList();
         return invoices; 
    }
 }

@@ -21,7 +21,7 @@ import javax.persistence.TypedQuery;
  *
  * @author Marc-Daniel
  */
-public class CustomClientController implements Serializable
+public class CustomClientJpaController implements Serializable
 {
     @Inject
     private ClientJpaController clientController;

@@ -5,7 +5,7 @@
  */
 package com.g4w18.filters;
 
-import com.g4w18.customcontrollers.CustomClientController;
+import com.g4w18.customcontrollers.CustomClientJpaController;
 import com.g4w18.customcontrollers.LoginController;
 import com.g4w18.customcontrollers.ShoppingCart;
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class IndexFilter implements Filter
     private LoginController login;
     
     @Inject
-    private CustomClientController clientJpaController;
+    private CustomClientJpaController clientJpaController;
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException 
@@ -53,7 +53,7 @@ public class IndexFilter implements Filter
     {
         String contextPath = ((HttpServletRequest) request).getContextPath();
         String uri = ((HttpServletRequest)request).getRequestURI();
-               
+               System.out.println("database database" + login.getLoggedIn());
         // If the user is trying to finalize with an empty shopping cart, then redirect to index
         if(uri.startsWith("/g4w18/authenticated/") && (cart == null || cart.getShoppingCartBooks().isEmpty()))
         {

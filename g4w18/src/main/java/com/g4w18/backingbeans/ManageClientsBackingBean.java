@@ -7,7 +7,7 @@ package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
-import com.g4w18.customcontrollers.CustomClientController;
+import com.g4w18.customcontrollers.CustomClientJpaController;
 import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.MasterInvoice;
@@ -28,14 +28,14 @@ import org.primefaces.event.RowEditEvent;
 public class ManageClientsBackingBean implements Serializable
 {
     @Inject
-    private CustomClientController clientJpaController;
+    private CustomClientJpaController clientJpaController;
     
     @Inject
     private CustomMasterInvoiceJpaController masterInvoiceJpaController;
     
     private List<Client> clients;
     
-    public CustomClientController getClientJpaController()
+    public CustomClientJpaController getClientJpaController()
     {
         return clientJpaController;
     }
@@ -61,11 +61,14 @@ public class ManageClientsBackingBean implements Serializable
     
     public double getTotalValueOfPurchases(int clientId)
     {
-        MasterInvoice clientMasterInvoice = masterInvoiceJpaController.findMasterInvoiceByClientId(clientId);
+        List<MasterInvoice> clientMasterInvoices = masterInvoiceJpaController.findMasterInvoicesByClientId(clientId);
+        double totalValueOfPurchases = 0;
         
-        if(clientMasterInvoice == null)
-            return 0;
-        else
-            return clientMasterInvoice.getGrossValue().doubleValue();
+        for(MasterInvoice masterInvoice : clientMasterInvoices)
+        {
+            totalValueOfPurchases += masterInvoice.getGrossValue().doubleValue();
+        }
+        
+        return totalValueOfPurchases;
     }
 }

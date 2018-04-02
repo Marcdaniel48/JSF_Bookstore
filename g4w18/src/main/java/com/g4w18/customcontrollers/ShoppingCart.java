@@ -1,13 +1,11 @@
 package com.g4w18.customcontrollers;
 
-import com.g4w18.controllers.BookJpaController;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -18,9 +16,6 @@ import javax.servlet.http.HttpSession;
 public class ShoppingCart implements Serializable
 {
     private List<Book> shoppingCartBooks;
-
-    @Inject
-    private BookJpaController control;
     
     public void addToCart(Book book)
     {
