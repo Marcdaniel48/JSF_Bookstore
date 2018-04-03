@@ -8,8 +8,9 @@ package com.g4w18.backingbeans;
 import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.controllers.InvoiceDetailJpaController;
 import com.g4w18.controllers.MasterInvoiceJpaController;
-import com.g4w18.customcontrollers.ShoppingCart;
 import com.g4w18.controllers.TaxJpaController;
+import com.g4w18.custombeans.CreditCard;
+import com.g4w18.customcontrollers.ShoppingCart;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.InvoiceDetail;
@@ -20,9 +21,12 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -31,19 +35,49 @@ import javax.servlet.http.HttpSession;
  *
  * @author Marc-Daniel
  */
-@Named("orderBacking")
+@Named("checkoutBacking")
 @RequestScoped
-public class PlaceOrderBackingBean implements Serializable 
+public class CheckoutBackingBean implements Serializable
 {
+    private CreditCard creditCard;
+    private String shippingAddress;
+    
+    private static Collection<SelectItem> monthOptions;
+    private static Collection<SelectItem> yearOptions;
+    
     @Inject private ClientJpaController clientJpaController;
-    
     @Inject private TaxJpaController taxJpaController;
-    
     @Inject private InvoiceDetailJpaController invoiceJpaController;
-    
     @Inject private MasterInvoiceJpaController masterInvoiceJpaController;
-    
     @Inject private ShoppingCart shoppingCart;
+    
+    public String getShippingAddress()
+    {
+        return shippingAddress;
+    }
+    
+    public void setShippingAddress(String shippingAddress)
+    {
+        this.shippingAddress = shippingAddress;
+    }
+    
+    public CreditCard getCreditCard() 
+    {
+        if (creditCard == null) {
+            creditCard = new CreditCard();
+        }
+        return creditCard;
+    }
+    
+    public Collection<SelectItem> getMonthOptions()
+    {   
+        return monthOptions;
+    }
+    
+    public Collection<SelectItem> getYearOptions()
+    {
+        return yearOptions;
+    }
     
     public Client getCurrentClient()
     {
@@ -64,7 +98,7 @@ public class PlaceOrderBackingBean implements Serializable
     
     public String last4Characters(String creditCardNumber)
     {
-        return creditCardNumber.substring(creditCardNumber.length()-4);
+        return creditCardNumber.substring(creditCardNumber.length() - 4);
     }
     
     public double roundDouble(String price)
@@ -114,4 +148,20 @@ public class PlaceOrderBackingBean implements Serializable
         return "/index";
     }
     
+        static
+    {
+        monthOptions = new ArrayList<>();
+        yearOptions = new ArrayList<>();
+        
+        for(int i = 1; i < 13; i++)
+        {
+            monthOptions.add(new SelectItem(i));
+        }
+        
+        LocalDateTime currentDate = LocalDateTime.now();
+        for(int i = currentDate.getYear(); i < currentDate.getYear()+21; i++)
+        {
+            yearOptions.add(new SelectItem(i));
+        }
+    }
 }

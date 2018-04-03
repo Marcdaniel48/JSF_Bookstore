@@ -116,4 +116,12 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>proceedToCheckout</from-outcome>
+            <to-view-id>/checkout/payment_information.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

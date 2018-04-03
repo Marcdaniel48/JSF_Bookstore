@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.backingbeans;
 
 import com.g4w18.customcontrollers.CustomClientJpaController;
@@ -71,10 +66,10 @@ public class ShoppingCartBackingBean implements Serializable
         }
         else if(login == null || !login.getLoggedIn())
         {
-            return "login.xhtml";
+            return "login";
         }
         
-        return "authenticated/finalization.xhtml";
+        return "proceedToCheckout";
     }
     
     public boolean isBookBoughtAlready(Book book)
