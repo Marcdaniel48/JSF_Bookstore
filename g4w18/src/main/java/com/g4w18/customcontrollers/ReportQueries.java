@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.customcontrollers;
 
 import com.g4w18.custombeans.AuthorWithTotalSales;
@@ -23,7 +18,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
- *
+ * JPA controller class responsible for querying and returning manager report information.
+ * 
  * @author Marc-Daniel
  */
 public class ReportQueries implements Serializable {
@@ -31,6 +27,13 @@ public class ReportQueries implements Serializable {
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
     
+    /**
+     * Given a range of dates, returns a list of books alongside their total sales and last recorded sale dates.
+     * 
+     * @param date1
+     * @param date2
+     * @return 
+     */
     public List<BookWithTotalSales> findBooksWithTotalSalesBetweenDates(Date date1, Date date2)
     {
         List<BookWithTotalSales> booksWithTotalSales = new ArrayList<>();
@@ -64,6 +67,13 @@ public class ReportQueries implements Serializable {
         return booksWithTotalSales;
     }
     
+    /**
+     * Given a range of dates, returns a list of clients alongside their total sales and last recorded sale dates.
+     * 
+     * @param date1
+     * @param date2
+     * @return 
+     */
     public List<ClientWithTotalSales> findClientsWithTotalSalesBetweenDates(Date date1, Date date2)
     {
         List<ClientWithTotalSales> clientsWithTotalSales = new ArrayList<>();
@@ -97,6 +107,13 @@ public class ReportQueries implements Serializable {
         return clientsWithTotalSales;
     }
     
+    /**
+     * Given a range of dates, returns a list of authors alongside their total sales and last recorded sale dates.
+     * 
+     * @param date1
+     * @param date2
+     * @return 
+     */
     public List<AuthorWithTotalSales> findAuthorsWithTotalSalesBetweenDates(Date date1, Date date2)
     {
         List<AuthorWithTotalSales> authorsWithTotalSales = new ArrayList<>();
@@ -131,6 +148,13 @@ public class ReportQueries implements Serializable {
         return authorsWithTotalSales;
     }
     
+    /**
+     * Given a range of dates, returns a list of publishers alongside their total sales and last recorded sale dates.
+     * 
+     * @param date1
+     * @param date2
+     * @return 
+     */
     public List<PublisherWithTotalSales> findPublishersWithTotalSalesBetweenDates(Date date1, Date date2)
     {
         List<PublisherWithTotalSales> publishersWithTotalSales = new ArrayList<>();

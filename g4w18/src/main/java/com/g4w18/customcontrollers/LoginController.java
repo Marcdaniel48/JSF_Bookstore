@@ -15,22 +15,30 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Controller class responsible for handling the login and logout feature of the bookstore website.
+ * 
  * @author Marc-Daniel
  */
 @Named
 @SessionScoped
 public class LoginController implements Serializable
 {
+    // Used to retrieve the Client record with the given username and password combination.
     @Inject
     private CustomClientJpaController clientJpaController;
     
+    // Once the user has logged in, used to check if the shopping cart contains any books that the user has already purchased.
     @Inject
     private ShoppingCart shoppingCart;
     
+    // Used to find all purchases of the user. Works with the injected shopping cart to remove any books that the user has already purchased.
     @Inject
     private CustomMasterInvoiceJpaController masterInvoiceJpaController;
     
+    /* 
+        Used to find all the purchased books of the user. 
+        Works with the injected shopping cart and master invoice JPA controller to remove any books that the user has already purchased.
+    */
     @Inject
     private CustomInvoiceDetailJpaController invoiceDetailJpaController;
 
@@ -38,39 +46,69 @@ public class LoginController implements Serializable
     private String password;
     private boolean loggedIn;
     
+    // Logger
     private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
-
+    /**
+     * Getter method. Returns the username of the current user.
+     * @return username
+     */
     public String getUsername()
     {
         return username;
     }
 
+    /**
+     * Setter method. Sets the username of the current user.
+     * @param username 
+     */
     public void setUsername(String username)
     {
         this.username = username;
     }
 
+    /**
+     * Setter method. Sets the password of the current user.
+     * @param password 
+     */
     public void setPassword(String password)
     {
         this.password = password;
     }
     
+    /**
+     * Getter method. Returns the password of the current user.
+     * @return password
+     */
     public String getPassword()
     {
         return password;
     }
     
+    /**
+     * Getter method. Returns the login status of the current user as a boolean.
+     * @return loggedIn
+     */
     public boolean getLoggedIn()
     {
         return loggedIn;
     }
     
+    /**
+     * Setter method. Sets the login status of the current user as a boolean.
+     * @param loggedIn 
+     */
     public void setLoggedIn(boolean loggedIn)
     {
         this.loggedIn = loggedIn;
     }
 
+    /**
+     * Uses the current user's entered username and password combination in order to login.
+     * Login is done by setting a few HTTP session attributes.
+     * 
+     * @return 
+     */
     public String login()
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -111,6 +149,10 @@ public class LoginController implements Serializable
         return "bookList.xhtml";
     }
 
+    /**
+     * Logs the user out.
+     * Logout is done by setting the HTTP session attributes that have been used to login the user to null.
+     */
     public void logout()
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
