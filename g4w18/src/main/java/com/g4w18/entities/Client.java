@@ -127,7 +127,7 @@ public class Client implements Serializable {
     @Size(min = 0, max = 12)
     @Column(name = "CELLPHONE")
     private String cellphone;
-    @Pattern(regexp="^[A-Za-z0-9\\._]+@[A-Za-z0-9\\\\._]+\\.[A-Za-z0-9\\\\._]+[^\\.]$", message="{invalidEmail}")
+    @Pattern(regexp="^[A-Za-z0-9_\\.]+@[A-Za-z0-9_\\.]+\\.[A-Za-z0-9_\\.]+$", message="Invalid Email")
     @Basic(optional = false)
     @NotNull
     @Size(min = 0, max = 50)

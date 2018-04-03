@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.customcontrollers;
 
 import com.g4w18.controllers.MasterInvoiceJpaController;
@@ -19,7 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
- *
+ * Custom JPA controller used to access and manipulate the MasterInvoice records of the database.
  * @author Marc-Daniel
  */
 public class CustomMasterInvoiceJpaController implements Serializable
@@ -28,7 +23,7 @@ public class CustomMasterInvoiceJpaController implements Serializable
     private MasterInvoiceJpaController masterInvoiceJpaController;
     
     @Inject
-    private CustomClientController clientJpaController;
+    private CustomClientJpaController clientJpaController;
     
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
@@ -61,15 +56,17 @@ public class CustomMasterInvoiceJpaController implements Serializable
         return masterInvoiceJpaController.getMasterInvoiceCount();
     }
     
-    public MasterInvoice findMasterInvoiceByClientId(int clientId)
+    /**
+     * Returns a master invoice with the given client ID.
+     * @param clientId
+     * @return 
+     */
+    public List<MasterInvoice> findMasterInvoicesByClientId(int clientId)
     {
         TypedQuery<MasterInvoice> query = em.createNamedQuery("MasterInvoice.findByClientId", MasterInvoice.class);
         Client client = clientJpaController.findClient(clientId);
         query.setParameter("clientId", client);
         List<MasterInvoice> masterInvoices = query.getResultList();
-        if (!masterInvoices.isEmpty()) {
-            return masterInvoices.get(0);
-        }
-        return null;
+        return masterInvoices;
     }
 }
