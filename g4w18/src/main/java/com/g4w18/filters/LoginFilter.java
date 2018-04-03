@@ -19,13 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Filter that checks to see if the user, who's not logged in, is trying to access pages that require login, and redirects the user to the login page.
+ * 
  * @author Marc-Daniel
  */
 @WebFilter(filterName = "LoginFilter", urlPatterns = {"/management/*", "/checkout/*"})
 public class LoginFilter implements Filter
 {
-
+    // Used to check if the current user is logged in.
     @Inject
     private LoginController login;
     
@@ -41,6 +42,15 @@ public class LoginFilter implements Filter
         //
     }
 
+    /**
+     * If the user is trying to access any checkout or management pages while not logged in, redirect the user to the login page.
+     * 
+     * @param request
+     * @param response
+     * @param chain
+     * @throws IOException
+     * @throws ServletException 
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException 
     {
@@ -54,5 +64,4 @@ public class LoginFilter implements Filter
             chain.doFilter(request, response);
         }
     }
-    
 }

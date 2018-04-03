@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.filters;
 
 import com.g4w18.customcontrollers.CustomClientJpaController;
@@ -21,18 +16,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Filter that checks to see if the user is trying to access certain pages that he shouldn't be allowed to access right now, and redirects the user to the index page.
+ * The user shouldn't be able to:
+ *  - access any checkout pages with an empty shopping cart.
+ *  - access the registration and login pages while logged in.
+ *  - access any management pages while not logged in with a manager account.
+ * 
  * @author Marc-Daniel
  */
 @WebFilter(filterName = "IndexFilter", urlPatterns = {"/checkout/*", "/management/*", "/registration.xhtml", "/login.xhtml"})
 public class IndexFilter implements Filter
 {
+    // Used to check if the shopping cart is empty.
     @Inject
     private ShoppingCart cart;
     
+    // Used to check if the user is logged in and if the user logged-in user is a manager.
     @Inject
     private LoginController login;
     
+    // Used to check if the user is logged in with a correct username and password combination.
     @Inject
     private CustomClientJpaController clientJpaController;
     
@@ -48,6 +51,15 @@ public class IndexFilter implements Filter
         //
     }
 
+    /**
+     * Redirects the user to the index page of the bookstore site, if they're trying to view pages they shouldn't access right now.
+     * 
+     * @param request
+     * @param response
+     * @param chain
+     * @throws IOException
+     * @throws ServletException 
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException 
     {
