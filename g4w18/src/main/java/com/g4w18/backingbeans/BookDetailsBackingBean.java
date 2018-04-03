@@ -61,6 +61,7 @@ public class BookDetailsBackingBean implements Serializable {
     }
     
     /**
+     * @author Jephthia
      * Saves the genre of the book that was viewed by the user
      * in a cookie so that we are able to give recommended
      * books to the user based on what they've looked at.

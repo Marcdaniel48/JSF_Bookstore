@@ -13,6 +13,7 @@
     border: none;
     text-align: center;
     box-shadow: initial;
+    background-color: transparent;
 }
 .form-control
 {

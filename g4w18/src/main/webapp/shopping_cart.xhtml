@@ -11,32 +11,43 @@
     </ui:define>
 
     <ui:define name="content">
+        
+        <h:outputStylesheet library="css" name="cart_page.css" />
+        
         <div class="page_container">
-            <b:container fluid="false">
-                <b:form>
-                    <b:panel>
-                        <ui:repeat var="book" value="#{shoppingCartBackingBean.shoppingCart.shoppingCartBooks}">
-                            <b:row styleClass="show-grid">
-                                <b:column col-md="2" col-xs="12">
-                                    <!--<b:container>-->
-                                        <b:image library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}" styleClass="img-responsive" height="10%" width="5%"></b:image>
-                                    <!--</b:container>-->
-                                </b:column>
-                                <b:column col-md="7">
-                                    <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
-                                    <f:param name="id" value="#{book.bookId}" />
-                                </b:column>
-                                <b:column col-md="1">
-                                    <h:outputText value="#{shoppingCartBackingBean.getPrice(book)} CAD"></h:outputText>
-                                </b:column>
-                                <b:column col-md="2">
-                                    <h:commandLink value="Delete" action="#{shoppingCartBackingBean.shoppingCart.removeFromCart(book)}" />
-                                </b:column>
-                            </b:row>
-                        </ui:repeat>
-                    </b:panel>
-                </b:form>
-            </b:container>        
+            <div class="cart-page">
+                <div class="img-bg"></div>
+                <b:container fluid="false">
+                    <b:row styleClass="show-grid">
+                        <ui:fragment rendered="#{not empty shoppingCartBackingBean.shoppingCartBooks}">
+                            <h1 style="text-align: center;">Your Shopping Cart</h1>
+                            <b:form styleClass="col-xs-12 ">
+                                <!--<b:panel>-->
+                                    <ui:repeat var="book" value="#{shoppingCartBackingBean.shoppingCart.shoppingCartBooks}">
+
+                                        <b:column col-md="3">
+                                            <b:thumbnail>
+                                                <b:commandLink outcome="bookDetail">
+                                                    <b:image library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}" width="100%"></b:image>
+                                                    <f:param name="id" value="#{book.bookId}"></f:param>
+                                                </b:commandLink>
+                                                <f:facet name="caption">
+                                                    <h4>$#{shoppingCartBackingBean.getPrice(book)} CAD</h4>
+                                                    <h:commandLink style="color: red;" value="Delete" action="#{shoppingCartBackingBean.shoppingCart.removeFromCart(book)}" />
+                                                </f:facet>
+                                            </b:thumbnail>
+                                        </b:column>
+
+                                    </ui:repeat>
+                                <!--</b:panel>-->
+                            </b:form>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{empty shoppingCartBackingBean.shoppingCartBooks}">
+                            <h1>Your cart is empty</h1>
+                        </ui:fragment>
+                    </b:row>
+                </b:container>
+            </div>
         </div>
     
         <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />

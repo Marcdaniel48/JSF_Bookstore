@@ -16,7 +16,7 @@
             <div class="bar2"></div>
             <div class="bar3"></div>
         </div>
-        
+                
         <div class="right">
             
             <h:form id="searchForm" class="search-icon-container">
@@ -87,12 +87,27 @@
                 });
             </script>
         </div>
+        
     </nav>
     
     <div id="navbar-menu">
-        <a href="#news">Login</a>
-        <a href="#contact">Shopping Cart</a>
-        <a href="#about">About</a>
+        <h:form>
+            <h:commandLink value="Shopping Cart" action="shopping_cart" />
+            <a href="#search">Search</a>
+            <h:commandLink rendered="#{localeBean.language ne 'fr'}" value="French" action="#{localeBean.setLanguage('fr', 'CA')}" />
+            <h:commandLink rendered="#{localeBean.language ne 'en'}" value="English" action="#{localeBean.setLanguage('en', 'CA')}" />
+            <ui:fragment rendered="#{!navbarBackingBean.userLoggedIn}">
+                <h:link value="#{msgs.loginbutton}" outcome="login" />
+            </ui:fragment>
+            <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
+                <h:commandLink value="Downloads" action="@null" />
+                <ui:fragment rendered="#{navbarBackingBean.manager}">
+                    <h:commandLink value="Manager" action="management_home" />
+                </ui:fragment>
+                <h:commandLink value="Logout" action="#{navbarBackingBean.logout()}" />
+            </ui:fragment>
+            <a href="#help">Help</a>
+        </h:form>
     </div>
     
     <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
