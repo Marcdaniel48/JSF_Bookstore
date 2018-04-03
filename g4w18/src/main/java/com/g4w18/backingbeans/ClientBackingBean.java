@@ -18,7 +18,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * A backing bean that is used to interact with pages or forms that wish to access Client records from the bookstore database.
+ * A backing bean that is used to interact with the pages and forms that wish to access and/or display information stored in the Client records 
+ * from the bookstore database. 
  * Registration, Login, as well as Client Management use this backing bean.
  * 
  * @author Marc-Daniel
@@ -38,8 +39,8 @@ public class ClientBackingBean implements Serializable
     private Client client;
     
     /* 
-        When creating or editing a Client, instead of entering the title, province, manager status of the client in a regular input field,
-        they're values will be selected through dropdown select boxes.
+        When creating or editing a Client, instead of entering the title, province, manager status of the client in regular input fields,
+        they're values will be selected through dropdown select lists.
         The following fields will be used to contain the possible options of those select fields.
     */
     private static Collection<SelectItem> titleOptions;
@@ -47,7 +48,7 @@ public class ClientBackingBean implements Serializable
     private static Collection<SelectItem> isManagerOptions;
 
     /**
-     * Getter method
+     * Getter method. Returns client.
      * @return client
      */
     public Client getClient() {
@@ -110,7 +111,7 @@ public class ClientBackingBean implements Serializable
     }
     
     /**
-     * Getter method
+     * Getter method. Returns title drop-down list options.
      * @return titleOptions
      */
     public Collection<SelectItem> getTitleOptions() {
@@ -118,7 +119,7 @@ public class ClientBackingBean implements Serializable
     }
     
     /**
-     * Getter method
+     * Getter method. Returns province drop-down list options.
      * @return provinceOptions
      */
     public Collection<SelectItem> getProvinceOptions() {
@@ -126,7 +127,7 @@ public class ClientBackingBean implements Serializable
     }
     
     /**
-     * Getter method
+     * Getter method. Returns 'is manager' drop-down list options.
      * @return isManagerOptions
      */
     public Collection<SelectItem> getIsManagerOptions() {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.backingbeans;
 
 import com.g4w18.custombeans.AuthorWithTotalSales;
@@ -24,25 +19,35 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
+ * A backing bean that is used to interact with the pages and forms relating to the reports feature of the manager site.
+ * 
  * @author Marc-Daniel
  */
 @Named
 @ViewScoped
 public class ReportsBackingBean implements Serializable
 {
-    
+    // Used to query the total sales by book, client, author, publisher.
     @Inject
     private ReportQueries reportQueries;
     
+    // List of total sales beans which contain the information that the selected report will display.
     private List<BookWithTotalSales> booksWithTotalSales;
     private List<ClientWithTotalSales> clientsWithTotalSales;
     private List<AuthorWithTotalSales> authorsWithTotalSales;
     private List<PublisherWithTotalSales> publishersWithTotalSales;
     
+    // Contains the type of report that the user wants to request, as well as the dates of the sales for the requested report.
     @Inject
     private ReportSelector reportSelector;
     
+    // Provides report type options for the report type drop-down list, for when the user wishes to request a report.
+    private static Collection<SelectItem> reportOptions;
+    
+    /**
+     * Getter method. Returns a bean that contains the type of report + dates that the user wants to request.
+     * @return 
+     */
     public ReportSelector getReportSelector()
     {
         if(reportSelector == null)
@@ -50,11 +55,19 @@ public class ReportsBackingBean implements Serializable
         return reportSelector;
     }
     
+    /**
+     * Setter method for the report selector.
+     * @param reportSelector 
+     */
     public void setReportSelector(ReportSelector reportSelector)
     {
         this.reportSelector = reportSelector;
     }
     
+    /**
+     * Navigates to the appropriate report page, depending on the type of report that the user wants to see.
+     * @return 
+     */
     public String goToReportPage()
     {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("reportTypeAndDates", reportSelector);
@@ -76,6 +89,10 @@ public class ReportsBackingBean implements Serializable
         return "";
     }
     
+    /**
+     * Retrieves in a list, the total sales per book information between the dates that the user has specified.
+     * @return 
+     */
     public List<BookWithTotalSales> getBooksWithTotalSales()
     {
         if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
@@ -89,6 +106,10 @@ public class ReportsBackingBean implements Serializable
         return booksWithTotalSales;
     }
     
+    /**
+     * Retrieves in a list, the total sales per client information between the dates that the user has specified.
+     * @return 
+     */
     public List<ClientWithTotalSales> getClientsWithTotalSales()
     {
         if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
@@ -102,6 +123,10 @@ public class ReportsBackingBean implements Serializable
         return clientsWithTotalSales;
     }
     
+    /**
+     * Retrieves in a list, the total sales per author information between the dates that the user has specified.
+     * @return 
+     */
     public List<AuthorWithTotalSales> getAuthorsWithTotalSales()
     {
         if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
@@ -115,6 +140,10 @@ public class ReportsBackingBean implements Serializable
         return authorsWithTotalSales;
     }
     
+    /**
+     * Retrieves in a list, the total sales per publisher information between the dates that the user has specified.
+     * @return 
+     */
     public List<PublisherWithTotalSales> getPublishersWithTotalSales()
     {
         if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
@@ -128,6 +157,10 @@ public class ReportsBackingBean implements Serializable
         return publishersWithTotalSales;
     }
     
+    /**
+     * Given a list of total sales beans, return the summed up total sales.
+     * @return 
+     */
     public BigDecimal getTotalSales(List<TotalSalesBean> totalSalesList)
     {
         BigDecimal totalSales = BigDecimal.ZERO;
@@ -139,8 +172,16 @@ public class ReportsBackingBean implements Serializable
         return totalSales;
     }
     
-    
-    private static Collection<SelectItem> reportOptions;
+    /**
+     * Getter method. Returns the report type options for the report type drop-down list.
+     * @return 
+     */
+    public Collection<SelectItem> getReportOptions() 
+    {
+        return reportOptions;
+    }
+
+    // Contains the possible report types that the user may request.
     static 
     {
         reportOptions = new ArrayList<>();
@@ -148,10 +189,5 @@ public class ReportsBackingBean implements Serializable
         reportOptions.add(new SelectItem("Sales by Client"));
         reportOptions.add(new SelectItem("Sales by Author"));
         reportOptions.add(new SelectItem("Sales by Publisher"));
-    }
-    
-    public Collection<SelectItem> getReportOptions() 
-    {
-        return reportOptions;
     }
 }
