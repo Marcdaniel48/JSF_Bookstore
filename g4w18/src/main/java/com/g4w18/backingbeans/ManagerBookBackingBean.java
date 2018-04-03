@@ -64,8 +64,9 @@ public class ManagerBookBackingBean implements Serializable {
     
     
     private Book book;
-    List<String>  authorList;
-    List<Author> existingBookAuthors;
+    private List<String>  authorList;
+    
+    private List<Author> newBookAuthors;
     
     private List<Book> books;
     
@@ -131,13 +132,16 @@ public class ManagerBookBackingBean implements Serializable {
         if(bookResult.size() == 0)
         {
             
-            
-            existingBookAuthors = prepareAuthors();
+             
+            List<Author> existingBookAuthors = prepareAuthors();
             List<Author> exist = checkIfAuthorExists(existingBookAuthors);
             book.setAuthorList(exist);
             
+            
+            
             message="The book was created!";
             bookJpaController.create(book);
+            createAuthors(newBookAuthors,book);
             return "managerBookHandler.xhtml";
         }
         else
@@ -146,7 +150,27 @@ public class ManagerBookBackingBean implements Serializable {
             message="Book already exists!";
             return "managerBookHandler.xhtml";
         }
+         
+    }
+    
+    /**
+     * Create new authors and assign the new book to them.
+     * @param newAuthors
+     * @param book
+     * @throws Exception 
+     */
+    public void createAuthors(List<Author> newAuthors,Book book) throws Exception
+    {
+        int size = newAuthors.size();
+        List<Book> bookForAuthors = new ArrayList();
         
+        bookForAuthors.add(book);
+        
+        for(int i = 0 ; i < size; i++)
+        {
+            newAuthors.get(i).setBookList(bookForAuthors);
+            authorJPAController.create(newAuthors.get(i));  
+        }
         
     }
     
@@ -245,21 +269,6 @@ public class ManagerBookBackingBean implements Serializable {
                 throw new ValidatorException(new FacesMessage(validationMessage));
             }
         }
-        
-        
-//        prepareAuthors();
-//        int test = authorObjects.size();
-//        boolean truth;
-//        logger.log(Level.INFO, "SIZE OF AUTHOR LIST OBBBJECCCTS=== " + test);
-//        if(test > 0)
-//        {
-//            for(int i = 0 ;i<test;i++)
-//            {
-//                truth = checkIfAuthorExists(authorObjects.get(i));
-//                logger.log(Level.INFO, "EXIST OR NOT " + truth);
-//                logger.log(Level.INFO, "CHECK AUTHOR LIST CREATED GOOOD?: " + authorObjects.get(i).getFirstName() + "   " + authorObjects.get(i).getLastName());
-//            }
-//        }
     }
     
     /**
@@ -269,8 +278,15 @@ public class ManagerBookBackingBean implements Serializable {
     {
         
         List<Author> authorObjects = new ArrayList();
-        int size = authorList.size();
+        int size = this.authorList.size();
         Author author = null;
+        
+        
+        for(int j = 0; j<authorList.size();j++)
+        {
+           logger.log(Level.INFO, "CHECK WHATS INSIDE OF AUTHORS LISDT PLS: " + authorList.get(j));
+        }
+        
         for(int i = 0 ;i<size;i++)
         {
             logger.log(Level.INFO, "INDEX OF FOR " + i);
@@ -278,13 +294,13 @@ public class ManagerBookBackingBean implements Serializable {
             {
                 author = new Author();
                 author.setFirstName(authorList.get(i));
-                logger.log(Level.INFO, "IN FIRST NAME ADD");
+                logger.log(Level.INFO, "IN FIRST NAME ADD   " +authorList.get(i));
             }
             else
             {
                 author.setLastName(authorList.get(i));
                 authorObjects.add(author);
-                logger.log(Level.INFO, "IN LAST NAME ADD");
+                logger.log(Level.INFO, "IN LAST NAME ADD     "+authorList.get(i));
             }
             
         }
@@ -299,18 +315,38 @@ public class ManagerBookBackingBean implements Serializable {
     {
         List<Author> existence = new ArrayList();
         List<Author> check = new ArrayList();
+        newBookAuthors = new ArrayList();
+        for(int j = 0; j<authorsToCheck.size();j++)
+        {
+           logger.log(Level.INFO, "CHECK WHATS INSIDE OF AUTHORS TOCHECK: " + authorsToCheck.get(j).getFirstName() + " " + authorsToCheck.get(j).getLastName());
+        }
         
         int size = authorsToCheck.size();
-        
+        logger.log(Level.INFO, "CHECK SIZE OF AUTHORS TO CHECK : " + size);
         for(int i = 0; i<size;i++)
         {
+           logger.log(Level.INFO, "CHECK EXISITING AUTHORS ADD : " + authorsToCheck.get(i).getFirstName());
            check  = authorJPAController.findAuthor(authorsToCheck.get(i).getFirstName()+ " " + authorsToCheck.get(i).getLastName());
+           
            if(check.size()==1)
            {
-               existence.add(check.remove(i));
+               logger.log(Level.INFO, "CHECK WHATS INSIDE OF CHECCKKKK : " + check.get(0).getFirstName()+ check.get(0).getLastName());
+               existence.add(check.get(0));    
+           }
+           else
+           {
+               newBookAuthors.add(authorsToCheck.get(i));
+               for(int y = 0; y<newBookAuthors.size();y++)
+               {
+                    logger.log(Level.INFO, "CHECK WHATS INSIDE OF NEW AUTHORS PLS: " + newBookAuthors.get(y).getFirstName() + " " + newBookAuthors.get(y).getLastName());
+               }
            }
         }
         
+        for(int k = 0; k<existence.size();k++)
+        {
+           logger.log(Level.INFO, "CHECK WHATS INSIDE OF EXISTENCE: " + existence.get(k).getFirstName() + " " + existence.get(k).getLastName() + " " + existence.get(k).getAuthorId());
+        }
         
         return existence;
     }
