@@ -97,10 +97,11 @@ public class OrderManagerBackingBean implements Serializable {
      * @param key The string key in the messages bundle.
      */
     private void addMessage(String key) {
+        FacesMessage message = com.g4w18.util.Messages.getMessage(
+                "com.g4w18.bundles.messages", key, null);
+        message.setSeverity(FacesMessage.SEVERITY_INFO);
         FacesContext context = FacesContext.getCurrentInstance();
-        String message = context.getApplication().getResourceBundle(context, "msgs").getString(key);
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
-        context.addMessage(null, msg);
+        context.addMessage(null, message);
     }
 
 }

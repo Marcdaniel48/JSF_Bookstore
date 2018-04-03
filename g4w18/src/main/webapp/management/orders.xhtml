@@ -94,23 +94,26 @@ and open the template in the editor.
         <h:form>
             <p:dialog widgetVar="detailsDialog" modal="true" dynamic="true" onShow="PF('detailsTable').filter();">
                 <p:dataTable var="detail" value="#{orderManagerBackingBean.selectedInvoice.invoiceDetailList}" 
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             paginator="true" rows="5"
+                             emptyMessage="#{msgs.managerOrdersNoDetails}"
                              editable="true"
                              widgetVar="detailsTable">
                     <f:facet name="header">
                         <h:outputText value="#{msgs.managerOrdersDetailsFor}#{orderManagerBackingBean.selectedInvoice.invoiceId}"></h:outputText>
                     </f:facet>
-                    
+
                     <p:ajax event="rowEdit" listener="#{orderManagerBackingBean.onRowEditInvoiceDetail}" update=":form:growl" oncomplete="PF('ordersTable').filter();"/>
 
-                    <p:column headerText="#{msgs.managerDetailId}">
+                    <p:column headerText="#{msgs.managerDetailId}" filterBy="#{detail.detailId}" filterMatchMode="contains">
                         <h:outputText value="#{detail.detailId}"></h:outputText>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerDetailBook}">
+                    <p:column headerText="#{msgs.managerDetailBook}" filterBy="#{detail.bookId.title}" filterMatchMode="contains">
                         <h:outputText value="#{detail.bookId.title}"></h:outputText>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerDetailPrice}">
+                    <p:column headerText="#{msgs.managerDetailPrice}" filterBy="#{detail.bookPrice}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{detail.bookPrice}"></h:outputText>
@@ -121,7 +124,7 @@ and open the template in the editor.
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerDetailGST}">
+                    <p:column headerText="#{msgs.managerDetailGST}" filterBy="#{detail.gstRate}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{detail.gstRate}"></h:outputText>
@@ -132,7 +135,7 @@ and open the template in the editor.
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerDetailPST}">
+                    <p:column headerText="#{msgs.managerDetailPST}" filterBy="#{detail.pstRate}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{detail.pstRate}"></h:outputText>
@@ -143,7 +146,7 @@ and open the template in the editor.
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerDetailHST}">
+                    <p:column headerText="#{msgs.managerDetailHST}" filterBy="#{detail.hstRate}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{detail.hstRate}"></h:outputText>
