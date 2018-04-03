@@ -99,6 +99,9 @@ and open the template in the editor.
                     <f:facet name="header">
                         <h:outputText value="#{msgs.managerOrdersDetailsFor}#{orderManagerBackingBean.selectedInvoice.invoiceId}"></h:outputText>
                     </f:facet>
+                    
+                    <p:ajax event="rowEdit" listener="#{orderManagerBackingBean.onRowEditInvoiceDetail}" update=":form:growl" oncomplete="PF('ordersTable').filter();"/>
+
                     <p:column headerText="#{msgs.managerDetailId}">
                         <h:outputText value="#{detail.detailId}"></h:outputText>
                     </p:column>
@@ -147,6 +150,22 @@ and open the template in the editor.
                             </f:facet>
                             <f:facet name="input">
                                 <p:inputText value="#{detail.hstRate}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="#{msgs.managerOrdersAvailable}" filterBy="#{detail.available}" filterMatchMode="equals">
+                        <f:facet name="filter">
+                            <p:selectOneButton onchange="PF('detailsTable').filter()">
+                                <f:converter converterId="javax.faces.Boolean" />
+                                <f:selectItem itemLabel="#{msgs.managerRSSAll}" itemValue="" />
+                                <f:selectItem itemLabel="#{msgs.managerRSSActive}" itemValue="true" />
+                                <f:selectItem itemLabel="#{msgs.managerRSSInactive}" itemValue="false" />
+                            </p:selectOneButton>
+                        </f:facet>
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{detail.available}"/></f:facet>
+                            <f:facet name="input">
+                                <p:selectBooleanCheckbox value="#{detail.available}"></p:selectBooleanCheckbox>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>

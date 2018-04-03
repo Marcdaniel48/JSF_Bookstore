@@ -3,6 +3,7 @@ package com.g4w18.customcontrollers;
 import com.g4w18.controllers.MasterInvoiceJpaController;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
+import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
 import java.util.List;
@@ -18,6 +19,9 @@ public class CustomMasterInvoiceController implements Serializable {
 
     @Inject
     private MasterInvoiceJpaController masterInvoiceController;
+
+    @Inject
+    private CustomInvoiceDetailController invoiceDetailController;
 
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
@@ -49,5 +53,4 @@ public class CustomMasterInvoiceController implements Serializable {
     public int getMasterInvoiceCount() {
         return masterInvoiceController.getMasterInvoiceCount();
     }
-
 }

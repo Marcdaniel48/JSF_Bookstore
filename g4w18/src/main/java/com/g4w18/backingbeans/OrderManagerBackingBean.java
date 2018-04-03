@@ -65,8 +65,27 @@ public class OrderManagerBackingBean implements Serializable {
      * @throws Exception
      */
     public String onRowEditMasterInvoice(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
+        LOGGER.log(Level.INFO, "onRowEditMasterInvoice called");
         MasterInvoice editedMasterInvoice = (MasterInvoice) event.getObject();
+        setInvoiceDetailsStatus(editedMasterInvoice);
         masterInvoiceController.edit(editedMasterInvoice);
+        addMessage("managerRSSEdit");
+        return null;
+    }
+
+    private void setInvoiceDetailsStatus(MasterInvoice masterInvoice) throws Exception {
+        if (!masterInvoice.getAvailable()) {
+            for (InvoiceDetail invoiceDetail : masterInvoice.getInvoiceDetailList()) {
+                invoiceDetail.setAvailable(masterInvoice.getAvailable());
+                invoiceDetailController.edit(invoiceDetail);
+            }
+        }
+    }
+
+    public String onRowEditInvoiceDetail(RowEditEvent event) throws Exception {
+        LOGGER.log(Level.INFO, "onRowEditInvoiceDetail called");
+        InvoiceDetail editedDetail = (InvoiceDetail) event.getObject();
+        invoiceDetailController.edit(editedDetail);
         addMessage("managerRSSEdit");
         return null;
     }
