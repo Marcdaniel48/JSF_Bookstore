@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.customcontrollers;
 
 import com.g4w18.controllers.InvoiceDetailJpaController;
@@ -17,7 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
+ * Custom InvoiceDetail JPA controller used to access and manipulate the InvoiceDetail records of the database.
+ * 
  * @author Marc-Daniel
  */
 public class CustomInvoiceDetailJpaController implements Serializable
@@ -56,6 +52,11 @@ public class CustomInvoiceDetailJpaController implements Serializable
         return invoiceJpaController.getInvoiceDetailCount();
     }
     
+    /**
+     * Returns the invoice details for the given master invoice ID.
+     * @param masterInvoice
+     * @return 
+     */
     public List<InvoiceDetail> findInvoicesByMasterInvoice(MasterInvoice masterInvoice)
     {
         List<InvoiceDetail> invoices = em.createQuery("Select i from InvoiceDetail i where i.invoiceId = ?1").setParameter(1, masterInvoice).getResultList();

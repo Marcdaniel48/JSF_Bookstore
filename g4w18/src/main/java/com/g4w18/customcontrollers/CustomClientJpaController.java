@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.customcontrollers;
 
 import com.g4w18.controllers.ClientJpaController;
@@ -18,7 +13,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
- *
+ * Custom JPA controller used to access and manipulate the Client records of the database.
+ * 
  * @author Marc-Daniel
  */
 public class CustomClientJpaController implements Serializable
@@ -64,7 +60,13 @@ public class CustomClientJpaController implements Serializable
         return clientController.getClientCount();
     }
     
-        public Client findClientByUsername(String username)
+    /**
+     * Returns a Client with the given username. If no client has been found, return null.
+     * 
+     * @param username
+     * @return 
+     */
+    public Client findClientByUsername(String username)
     {
         TypedQuery<Client> query = em.createNamedQuery("Client.findByUsername", Client.class);
         query.setParameter("username", username);
@@ -75,6 +77,12 @@ public class CustomClientJpaController implements Serializable
         return null;
     }
 
+    /**
+     * Returns a Client with the given email address. If no client has been found, return null.
+     * 
+     * @param email
+     * @return 
+     */
     public Client findClientByEmail(String email)
     {
         TypedQuery<Client> query = em.createNamedQuery("Client.findByEmail", Client.class);
@@ -86,6 +94,14 @@ public class CustomClientJpaController implements Serializable
         return null;
     }
 
+    /**
+     * Returns a Client with the given username and password combination.
+     * If no client with the matching username and password has been found, return null.
+     * 
+     * @param username
+     * @param password
+     * @return 
+     */
     public Client findClientByCredentials(String username, String password)
     {
         TypedQuery<Client> query = em.createNamedQuery("Client.findByCredentials", Client.class);

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.customcontrollers;
 
 import com.g4w18.controllers.MasterInvoiceJpaController;
@@ -12,12 +7,6 @@ import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -25,7 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
- *
+ * Custom JPA controller used to access and manipulate the MasterInvoice records of the database.
  * @author Marc-Daniel
  */
 public class CustomMasterInvoiceJpaController implements Serializable
@@ -67,6 +56,11 @@ public class CustomMasterInvoiceJpaController implements Serializable
         return masterInvoiceJpaController.getMasterInvoiceCount();
     }
     
+    /**
+     * Returns a master invoice with the given client ID.
+     * @param clientId
+     * @return 
+     */
     public List<MasterInvoice> findMasterInvoicesByClientId(int clientId)
     {
         TypedQuery<MasterInvoice> query = em.createNamedQuery("MasterInvoice.findByClientId", MasterInvoice.class);
