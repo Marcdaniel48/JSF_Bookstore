@@ -22,15 +22,14 @@ import org.primefaces.event.RowEditEvent;
  * @author Juan Sebastian Ramirez
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class OrderManagerBackingBean implements Serializable {
 
     @Inject
     private CustomMasterInvoiceController masterInvoiceController;
 
     private List<MasterInvoice> allMasterInvoices;
-    private MasterInvoice masterInvoice;
-    private List<InvoiceDetail> details;
+    private MasterInvoice selectedInvoice;
     private final FacesContext context = FacesContext.getCurrentInstance();
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
@@ -41,44 +40,17 @@ public class OrderManagerBackingBean implements Serializable {
         return allMasterInvoices;
     }
 
-    public MasterInvoice getMasterInvoice() {
-
-        return masterInvoice;
-    }
-
-    /**
-     * Setter method for the toDelete variable. It is needed for the
-     * setPropertyActionListener tag in the view to pass the attribute to be
-     * handled to the backing bean.
-     *
-     * @param masterInvoice The RSS entry to be deleted.
-     */
-    public void setMasterInvoice(MasterInvoice masterInvoice) {
-        LOGGER.log(Level.INFO, "masterInvoice setter called");
-        LOGGER.log(Level.INFO, "masterInvoice ID {0}", masterInvoice.getInvoiceId());
-        this.masterInvoice = masterInvoice;
-    }
-
-    public List<InvoiceDetail> getDetails() {
+    public MasterInvoice getSelectedInvoice() {
 //        LOGGER.log(Level.INFO, "getDetails called");
 //        for (InvoiceDetail id : details) {
 //            LOGGER.log(Level.INFO, "detail: {0}", id.getDetailId());
 //        }
-        if(details == null){
-            LOGGER.log(Level.INFO, "mf details is null");
-        }
-        return details;
+        return selectedInvoice;
     }
 
-    public void setDetails(List<InvoiceDetail> invoiceDetails) {
-        LOGGER.log(Level.INFO, "setDetails called");
-        for (InvoiceDetail id : invoiceDetails) {
-            LOGGER.log(Level.INFO, "incoming details: {0}", id.getDetailId());
-        }
-        this.details = invoiceDetails;
-        for (InvoiceDetail id : details) {
-            LOGGER.log(Level.INFO, "set details: {0}", id.getDetailId());
-        }
+    public void setSelectedInvoice(MasterInvoice selectedInvoice) {
+        LOGGER.log(Level.INFO, "setSelectedInvoice called");
+        this.selectedInvoice = selectedInvoice;
     }
 
     /**
@@ -91,7 +63,7 @@ public class OrderManagerBackingBean implements Serializable {
      * @throws RollbackFailureException
      * @throws Exception
      */
-    public String onRowEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public String onRowEditMasterInvoice(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
         MasterInvoice editedMasterInvoice = (MasterInvoice) event.getObject();
         masterInvoiceController.edit(editedMasterInvoice);
         addMessage("managerRSSEdit");

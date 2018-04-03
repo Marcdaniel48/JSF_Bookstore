@@ -32,8 +32,7 @@ and open the template in the editor.
                     #{msgs.managerOrdersTitle}
                 </f:facet>
 
-                <p:ajax event="rowEdit" listener="#{orderManagerBackingBean.onRowEdit}" update=":form:growl" oncomplete="PF('ordersTable').filter()"/>
-
+                <p:ajax event="rowEdit" listener="#{orderManagerBackingBean.onRowEditMasterInvoice}" update=":form:growl" oncomplete="PF('ordersTable').filter();"/>
                 <p:column headerText="#{msgs.managerOrdersId}" filterBy="#{order.invoiceId}" filterMatchMode="contains">
                     <h:outputText value="#{order.invoiceId}"></h:outputText>
                 </p:column>
@@ -85,18 +84,21 @@ and open the template in the editor.
                 <p:column headerText="#{msgs.managerEdit}">
                     <p:rowEditor />
                 </p:column>
-                <p:column headerText="#{msgs.managerOrdersSeeDetails}">
+                <p:column headerText="#{msgs.managerOrdersDetails}">
                     <p:commandButton value="#{msgs.managerOrdersSeeDetails}" oncomplete="PF('detailsDialog').show();">
-                        <f:setPropertyActionListener value="#{order.invoiceDetailList}" target="#{orderManagerBackingBean.details}" ></f:setPropertyActionListener>
+                        <f:setPropertyActionListener value="#{order}" target="#{orderManagerBackingBean.selectedInvoice}" ></f:setPropertyActionListener>
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
         </h:form>
         <h:form>
-            <p:dialog header="#{msgs.managerOrdersSeeDetails}" widgetVar="detailsDialog" modal="true" dynamic="true" onShow="PF('detailsTable').filter();">
-                <p:dataTable var="detail" value="#{orderManagerBackingBean.details}" 
+            <p:dialog widgetVar="detailsDialog" modal="true" dynamic="true" onShow="PF('detailsTable').filter();">
+                <p:dataTable var="detail" value="#{orderManagerBackingBean.selectedInvoice.invoiceDetailList}" 
                              editable="true"
                              widgetVar="detailsTable">
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.managerOrdersDetailsFor}#{orderManagerBackingBean.selectedInvoice.invoiceId}"></h:outputText>
+                    </f:facet>
                     <p:column headerText="#{msgs.managerDetailId}">
                         <h:outputText value="#{detail.detailId}"></h:outputText>
                     </p:column>
