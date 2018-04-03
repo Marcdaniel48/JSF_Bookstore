@@ -65,6 +65,7 @@ public class ManagerBookBackingBean implements Serializable {
     
     private Book book;
     List<String>  authorList;
+    List<Author> existingBookAuthors;
     
     private List<Book> books;
     
@@ -131,8 +132,9 @@ public class ManagerBookBackingBean implements Serializable {
         {
             
             
-            List<Author> bookAuthors = prepareAuthors();
-            book.setAuthorList(bookAuthors);
+            existingBookAuthors = prepareAuthors();
+            List<Author> exist = checkIfAuthorExists(existingBookAuthors);
+            book.setAuthorList(exist);
             
             message="The book was created!";
             bookJpaController.create(book);
@@ -293,11 +295,24 @@ public class ManagerBookBackingBean implements Serializable {
      * Check if the supplied author exists already in the database.
      * @param author 
      */
-    public boolean checkIfAuthorExists(Author author)
+    public List<Author> checkIfAuthorExists(List<Author> authorsToCheck)
     {
-        List<Author> existence = authorJPAController.findAuthor(author.getFirstName()+ " " + author.getLastName());
-
-        return existence.size() == 1;
+        List<Author> existence = new ArrayList();
+        List<Author> check = new ArrayList();
+        
+        int size = authorsToCheck.size();
+        
+        for(int i = 0; i<size;i++)
+        {
+           check  = authorJPAController.findAuthor(authorsToCheck.get(i).getFirstName()+ " " + authorsToCheck.get(i).getLastName());
+           if(check.size()==1)
+           {
+               existence.add(check.remove(i));
+           }
+        }
+        
+        
+        return existence;
     }
     
     //Getters and setters to get information from user
