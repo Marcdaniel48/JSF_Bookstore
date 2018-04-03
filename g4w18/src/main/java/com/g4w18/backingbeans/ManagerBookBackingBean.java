@@ -3,7 +3,9 @@ package com.g4w18.backingbeans;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
+import com.g4w18.customcontrollers.CustomAuthorController;
 import com.g4w18.customcontrollers.CustomBookController;
+import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import java.io.File;
@@ -15,16 +17,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -46,18 +52,23 @@ public class ManagerBookBackingBean implements Serializable {
     
     @Inject
     private CustomBookController bookJpaController;
+    
+    @Inject
+    private CustomAuthorController authorJPAController;
+    
     private Logger logger = Logger.getLogger(SearchBackingBean.class.getName());
     //Manager's search term
     private String searchBook;
     
     private String message=null;
     
+    
     private Book book;
+    List<String>  authorList;
     
     private List<Book> books;
     
-    private boolean render=true;
-    private boolean renderEdit=false;
+    private String authors;
     private List<String> formats;
     
     private UploadedFile uploadedImage;
@@ -119,6 +130,10 @@ public class ManagerBookBackingBean implements Serializable {
         if(bookResult.size() == 0)
         {
             
+            
+            List<Author> bookAuthors = prepareAuthors();
+            book.setAuthorList(bookAuthors);
+            
             message="The book was created!";
             bookJpaController.create(book);
             return "managerBookHandler.xhtml";
@@ -146,30 +161,6 @@ public class ManagerBookBackingBean implements Serializable {
         return books;
     }
     
-    public void setSearchBook(String searchBook)
-    {
-        this.searchBook = searchBook;
-    }
-    
-    public String getSearchBook()
-    {
-        return searchBook;
-    }
-    
-    public void setMessage(String message)
-    {
-        this.message = message;
-    }
-    
-    public String getMessage()
-    {
-        return message;
-    }
-    
-    public Map<String,Object> getGenreOptionValue() {
-	
-        return genreOptions;
-    }
     /**
      * Add book cover to resources image folder.
      * @param event Image to be added.
@@ -211,9 +202,7 @@ public class ManagerBookBackingBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
         Book updatedBook = (Book)(event.getObject());
-        bookJpaController.edit(updatedBook);
-        
-        
+        bookJpaController.edit(updatedBook); 
     }
     
     /**
@@ -225,8 +214,132 @@ public class ManagerBookBackingBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
+    /**
+     * Check that the authors provided follow the proper format and are validly written.
+     * @param fc
+     * @param uic
+     * @param value 
+     */
+    public void validateAuthors(FacesContext fc, UIComponent uic, Object value)
+    {
+        this.authors = (String)value;
+        authorList = Arrays.asList(authors.split(","));
+        
+        int size = authorList.size();
+        
+        logger.log(Level.INFO, "SIZE OF AUTHOR LIST=== " + size);
+        
+        if(size%2!=0)
+        {
+            String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidBookAuthorFormat");
+            throw new ValidatorException(new FacesMessage(validationMessage));
+        }
+        
+        for(int i = 0;i<size;i++)
+        {
+            if(authorList.get(i) == "" || !authorList.get(i).matches("^[a-zA-Z,.' ]*$"))
+            {
+                String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidBookAuthorFormatOfNames");
+                throw new ValidatorException(new FacesMessage(validationMessage));
+            }
+        }
+        
+        
+//        prepareAuthors();
+//        int test = authorObjects.size();
+//        boolean truth;
+//        logger.log(Level.INFO, "SIZE OF AUTHOR LIST OBBBJECCCTS=== " + test);
+//        if(test > 0)
+//        {
+//            for(int i = 0 ;i<test;i++)
+//            {
+//                truth = checkIfAuthorExists(authorObjects.get(i));
+//                logger.log(Level.INFO, "EXIST OR NOT " + truth);
+//                logger.log(Level.INFO, "CHECK AUTHOR LIST CREATED GOOOD?: " + authorObjects.get(i).getFirstName() + "   " + authorObjects.get(i).getLastName());
+//            }
+//        }
+    }
+    
+    /**
+     * Create a list of authors and check if they exist already or not.
+     */
+    public List<Author> prepareAuthors()
+    {
+        
+        List<Author> authorObjects = new ArrayList();
+        int size = authorList.size();
+        Author author = null;
+        for(int i = 0 ;i<size;i++)
+        {
+            logger.log(Level.INFO, "INDEX OF FOR " + i);
+            if(i%2==0)
+            {
+                author = new Author();
+                author.setFirstName(authorList.get(i));
+                logger.log(Level.INFO, "IN FIRST NAME ADD");
+            }
+            else
+            {
+                author.setLastName(authorList.get(i));
+                authorObjects.add(author);
+                logger.log(Level.INFO, "IN LAST NAME ADD");
+            }
+            
+        }
+        return authorObjects;
+    }
+    
+    /**
+     * Check if the supplied author exists already in the database.
+     * @param author 
+     */
+    public boolean checkIfAuthorExists(Author author)
+    {
+        List<Author> existence = authorJPAController.findAuthor(author.getFirstName()+ " " + author.getLastName());
+
+        return existence.size() == 1;
+    }
+    
+    //Getters and setters to get information from user
+    public void setSearchBook(String searchBook)
+    {
+        this.searchBook = searchBook;
+    }
+    
+    public String getSearchBook()
+    {
+        return searchBook;
+    }
+    
+    public void setMessage(String message)
+    {
+        this.message = message;
+    }
+    
+    public String getMessage()
+    {
+        return message;
+    }
+    
+    public Map<String,Object> getGenreOptionValue() {
+	
+        return genreOptions;
+    }
+    
     public List<String> getFormats()
     {
         return formats;
     }
+
+    public String getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(String authors) {
+        this.authors = authors;
+    }
+    
+    
+    
+    
 }

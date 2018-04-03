@@ -15,21 +15,21 @@
                         <h:outputText value="Sale date"></h:outputText>
                         <h:outputText value="#{client.saleDate}"></h:outputText>
                     </b:column>
-                    
+
                     <b:column>
                         <h:outputText value="You paid: "></h:outputText>
                         <h:outputText value="#{client.netValue}"></h:outputText>
                     </b:column>
-                    
-                    
+
+                    <h1>#{download.message}</h1>
                     <ui:repeat var="invoice" value="#{client.invoiceDetailList}">
                         <b:panel style="background: #00ff00;">
-                            
+
                             <b:column col-md="8">
                                 <h:outputText value="Price"></h:outputText>
                                 <h:outputText value="#{invoice.bookPrice}" styleClass="list-group-item-heading"></h:outputText>
                             </b:column>
-                            
+
                             <ui:repeat var="book" value="#{download.getBookInvoice(invoice.bookId.bookId)}" >
                                 <b:panel style="background: green;">
                                     <b:column col-md="8">
@@ -49,17 +49,26 @@
                                     </b:column>
                                     <b:column col-md="8">
                                         <h:form>
-                                            <p:commandButton style="background: aqua" value="#{msgs.managerDownload}" ajax="false"  icon="ui-icon-arrowthick-1-s">
+                                            <p:commandButton style="background: aqua" value="#{msgs.managerDownload}" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"  icon="ui-icon-arrowthick-1-s">
                                                 <p:fileDownload value="#{download.file}" />
                                             </p:commandButton>
-                                            
+
+                                            <script type="text/javascript">
+                                                function start() {
+                                                    PF('statusDialog').show();
+                                                }
+
+                                                function stop() {
+                                                    PF('statusDialog').hide();
+                                                }
+                                            </script> 
                                         </h:form>
                                     </b:column>
-                                    
-                                    
+
+
                                 </b:panel>
                             </ui:repeat>
-                            
+
                         </b:panel>
                     </ui:repeat>
 

@@ -39,6 +39,16 @@ public class DownloadBackingBean {
     private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
     private StreamedContent file;
     
+    //Display in the next page a message if there are no downloads to show.
+    private String message="";
+    
+    public DownloadBackingBean()
+    {
+        log.log(Level.INFO, "CREATED???");
+        InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/resources/book/aliceWonderLand.pdf");
+        file = new DefaultStreamedContent(stream, "application/pdf", "aliceWonderland.pdf");
+    }
+    
     /**
      * Get client information from DB.
      * @return client info
@@ -54,7 +64,17 @@ public class DownloadBackingBean {
         
         List<MasterInvoice> masterInvoices = masterInvoiceController.getMasterInvoiceByClientId(client.get(0).getClientId());
         
-        return masterInvoices;
+        if(masterInvoices.size()== 0)
+        {
+            message="You have nothing to download, please start buying books!";
+            return masterInvoices;
+        }
+        else
+        {
+           return masterInvoices; 
+        }
+        
+        
     }
     
     /**
@@ -75,10 +95,17 @@ public class DownloadBackingBean {
      */
     public StreamedContent getFile()
     {
-        InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/resources/book//aliceWonderLand.pdf");
-        file = new DefaultStreamedContent(stream, "file/pdf", "aliceWonderland.pdf");
+        log.log(Level.INFO, "GET FILE PLS: "+file.getName());
         
         return file;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
     
     

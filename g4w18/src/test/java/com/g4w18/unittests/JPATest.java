@@ -45,6 +45,7 @@ import org.junit.Ignore;
  * 
  * @author Salman Haidar
  */
+@Ignore
 @RunWith(Arquillian.class)
 public class JPATest {
 
@@ -120,10 +121,32 @@ public class JPATest {
     @Test
     public void find_author_with_general_name() throws SQLException{
         
-        List<Author> findAuthorByName = aJc.findAuthor("C.S.%");
+        List<Author> findAuthorByName = aJc.findAuthor("C.S.");
         
         
-        logger.log(Level.INFO,"AUTHORNAME Data>>>{0}"+ findAuthorByName.get(0).getFirstName());
+        logger.log(Level.INFO,"AUTHORNAME FIND AUTHOR Data>>>{0}"+ findAuthorByName.get(0).getFirstName() + "  how many  " + findAuthorByName.size());
+        
+        assertThat(findAuthorByName).hasSize(1);
+    } 
+    
+    @Test
+    public void find_author_with_general_name_another_one() throws SQLException{
+        
+        List<Author> findAuthorByName = aJc.findAuthor("J.R.");
+        
+        
+        logger.log(Level.INFO,"AUTHORNAME FIND AUTHOR Data>>>{0}"+ findAuthorByName.get(0).getFirstName() + "  how many  " + findAuthorByName.size());
+        
+        assertThat(findAuthorByName).hasSize(1);
+    } 
+    
+    @Test
+    public void find_author_with_general_name_another_one_full() throws SQLException{
+        
+        List<Author> findAuthorByName = aJc.findAuthor("J.R.R. Tolkien");
+        
+        
+        logger.log(Level.INFO,"AUTHORNAME FIND AUTHOR FULLLL NAME Data>>>{0}"+ findAuthorByName.get(0).getFirstName() + "  how many  " + findAuthorByName.size());
         
         assertThat(findAuthorByName).hasSize(1);
     } 

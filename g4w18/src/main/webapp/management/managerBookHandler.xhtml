@@ -28,53 +28,73 @@
                 <p:growl id="growl" showDetail="true" sticky="true"/>
                 <h:panelGrid columns="2" cellpadding="10">
                     <p:outputLabel>#{msgs.managerAddIsbn}</p:outputLabel>
-                    <p:inputText required="true" value="#{managerBookHandling.book.isbnNumber}" ></p:inputText>
-
+                    <p:inputText id="mIsbn" validatorMessage="Isbn must be 13 valid characters.(ex:978-1788541602)" required="true" requiredMessage="#{msgs.invalidBookIsbn}" value="#{managerBookHandling.book.isbnNumber}" >
+                        <f:validateLength minimum="14" maximum="14"/>
+                        <f:validateRegex  pattern="[0-9]{3}-[0-9]{10}$"></f:validateRegex>
+                    </p:inputText>
+                    
+                    <p:outputLabel>#{msgs.managerAddAuthor}</p:outputLabel>
+                    <p:inputText required="true" requiredMessage="#{msgs.invalidBookAuthor}" value="#{managerBookHandling.authors}" validator="#{managerBookHandling.validateAuthors}" >
+                       
+                    </p:inputText>
+                    
                     <p:outputLabel>#{msgs.managerAddTitle}</p:outputLabel>
-                    <p:inputText required="true" value="#{managerBookHandling.book.title}" ></p:inputText>
+                    <p:inputText id="mTitle" required="true" requiredMessage="#{msgs.invalidBookTitle}" value="#{managerBookHandling.book.title}" >
+                        <f:validateLength maximum="100"></f:validateLength>
+                    </p:inputText>
 
                     <p:outputLabel>#{msgs.managerAddPublisher}</p:outputLabel>
-                    <p:inputText required="true" value="#{managerBookHandling.book.publisher}" ></p:inputText>
-
+                    <p:inputText id="mPublisher" required="true" requiredMessage="#{msgs.invalidBookPublisher}" value="#{managerBookHandling.book.publisher}" >
+                        <f:validateLength maximum="50"></f:validateLength>
+                    </p:inputText>
+                    
                     <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
-                    <p:inputText required="true" value="#{managerBookHandling.book.publicationDate}">
-                        <f:convertDateTime pattern="dd/mm/yyyy" />
+                    <p:inputText id="mPublisherDate" required="true" requiredMessage="#{msgs.invalidBookPublisherDate}" value="#{managerBookHandling.book.publicationDate}">
+                        <f:convertDateTime pattern="yyyy/mm/dd" />
                     </p:inputText>
 
                     <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
-                    <p:inputNumber   value="#{managerBookHandling.book.pageNumber}" required="true" ></p:inputNumber>
-
+                    <p:inputNumber id="mPageNum" value="#{managerBookHandling.book.pageNumber}" required="true" requiredMessage="#{msgs.invalidBookPageNumber}" decimalPlaces="0" ></p:inputNumber>
+                    
+                    
                     <p:outputLabel>#{msgs.managerAddGenre}</p:outputLabel>
-                    <p:selectOneMenu required="true" value="#{managerBookHandling.book.genre}" >
+                    <p:selectOneMenu required="true"  value="#{managerBookHandling.book.genre}" >
                         <f:selectItems value="#{managerBookHandling.genreOptionValue}"/>
                     </p:selectOneMenu>
 
                     <p:outputLabel>#{msgs.managerAddDescription}</p:outputLabel>
-                    <p:inputTextarea rows="6" cols="50" value="#{managerBookHandling.book.description}"  required="true" />
-
+                    <p:inputTextarea id="mDescription" rows="6" cols="50" value="#{managerBookHandling.book.description}"  required="true" requiredMessage="#{msgs.invalidBookDescription}"></p:inputTextarea> 
+                    
+                    
                     <p:outputLabel>#{msgs.managerAddFormat}</p:outputLabel>
-                    <p:selectOneRadio id="format" value="#{managerBookHandling.book.format}" required="true" >
+                    <p:selectOneRadio id="format" value="#{managerBookHandling.book.format}" required="true" requiredMessage="#{msgs.invalidBookFormat}" >
                         <f:selectItems value="#{managerBookHandling.formats}" var="f" itemLabel="#{managerBookHandling.book.format}" itemValue="#{managerBookHandling.book.format}"></f:selectItems>
                     </p:selectOneRadio>
 
                     <p:outputLabel>#{msgs.managerAddWholePrice}</p:outputLabel>
-                    <p:inputNumber  value="#{managerBookHandling.book.wholesalePrice}" required="true"  ></p:inputNumber>
-
+                    <p:inputNumber id="mWPrice" value="#{managerBookHandling.book.wholesalePrice}" required="true" requiredMessage="#{msgs.invalidBookWholeSalePrice}" decimalPlaces="2" maxValue="99999.99"  ></p:inputNumber>
+                    
+                    
                     <p:outputLabel>#{msgs.managerAddListPrice}</p:outputLabel>
-                    <p:inputNumber  value="#{managerBookHandling.book.listPrice}" required="true"  ></p:inputNumber>
-
+                    <p:inputNumber id="mLPrice" value="#{managerBookHandling.book.listPrice}" required="true" requiredMessage="#{msgs.invalidBookListSalePrice}" decimalPlaces="2" maxValue="99999.99" ></p:inputNumber>
+                    
+                    
                     <p:outputLabel>#{msgs.managerAddSalePrice}</p:outputLabel>
-                    <p:inputNumber  value="#{managerBookHandling.book.salePrice}" required="true"  ></p:inputNumber>
-
+                    <p:inputNumber id="mSPrice" value="#{managerBookHandling.book.salePrice}" required="true" requiredMessage="#{msgs.invalidBookSalePrice}" decimalPlaces="2" maxValue="99999.99"  ></p:inputNumber>
+                    
+                    
                     <p:outputLabel>#{msgs.managerAddInventoryDate}</p:outputLabel>
-                    <p:calendar id="restricted"  value="#{managerBookHandling.book.inventoryDate}" mindate="0" maxdate="0" />
-
+                    <p:calendar id="mDateInventory"  value="#{managerBookHandling.book.inventoryDate}" mindate="0" maxdate="0" required="true" requiredMessage="#{msgs.invalidBookInventoryDate}" />
+                    
+                    
                     <p:outputLabel>#{msgs.managerAddRemovalStatus}</p:outputLabel>
                     <p:selectBooleanButton value="#{managerBookHandling.book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
-
+                    
+                    
                     <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
-                    <p:fileUpload fileLimit="1" required="true" mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{managerBookHandling.fileUploadHandler}" />
-
+                    <p:fileUpload requiredMessage="#{msgs.invalidBookImageRequired}" fileLimit="1" required="true"   mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{managerBookHandling.fileUploadHandler}" />
+                    
+                    
                     <p:commandButton value="#{msgs.submitButton}" action="#{managerBookHandling.createBook()}" update="growl"/>
                     <h:outputLabel>#{managerBookHandling.message}</h:outputLabel>
 
@@ -99,7 +119,7 @@
                     <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{book.title}" filterBy="#{book.title}" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.title}"/></f:facet>
-                            <f:facet name="input"><p:inputText value="#{book.title}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.title}" required="true" requiredMessage="#{msgs.invalidBookTitle}"/></f:facet>
                         </p:cellEditor>
                     </p:column>
 
@@ -114,7 +134,7 @@
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.publicationDate}"/></f:facet>
                             <f:facet name="input"><p:inputText value="#{book.publicationDate}" required="true" >
-                                    <f:convertDateTime pattern="dd/mm/yyyy" />
+                                    <f:convertDateTime pattern="yyyy/mm/dd" />
                                 </p:inputText>
                             </f:facet>
                         </p:cellEditor>
