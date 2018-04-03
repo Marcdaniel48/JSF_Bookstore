@@ -8,6 +8,7 @@ package com.g4w18.backingbeans;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.customcontrollers.CustomRssController;
+import com.g4w18.util.Messages;
 import com.g4w18.entities.Rss;
 import java.io.Serializable;
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
+
 
 /**
  *

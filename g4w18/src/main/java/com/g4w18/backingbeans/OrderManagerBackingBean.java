@@ -2,6 +2,7 @@ package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
+import com.g4w18.customcontrollers.CustomInvoiceDetailController;
 import com.g4w18.customcontrollers.CustomMasterInvoiceController;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
@@ -9,7 +10,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -22,15 +22,16 @@ import org.primefaces.event.RowEditEvent;
  * @author Juan Sebastian Ramirez
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class OrderManagerBackingBean implements Serializable {
 
     @Inject
     private CustomMasterInvoiceController masterInvoiceController;
+    @Inject
+    private CustomInvoiceDetailController invoiceDetailController;
 
     private List<MasterInvoice> allMasterInvoices;
     private MasterInvoice selectedInvoice;
-    private final FacesContext context = FacesContext.getCurrentInstance();
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
     public List<MasterInvoice> getAllMasterInvoices() {
@@ -77,6 +78,7 @@ public class OrderManagerBackingBean implements Serializable {
      * @param key The string key in the messages bundle.
      */
     private void addMessage(String key) {
+        FacesContext context = FacesContext.getCurrentInstance();
         String message = context.getApplication().getResourceBundle(context, "msgs").getString(key);
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
         context.addMessage(null, msg);

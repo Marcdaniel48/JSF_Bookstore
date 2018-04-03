@@ -121,7 +121,7 @@ and open the template in the editor.
                     <p:column headerText="#{msgs.managerDetailGST}">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{detail.bookPrice}"></h:outputText>
+                                <h:outputText value="#{detail.gstRate}"></h:outputText>
                             </f:facet>
                             <f:facet name="input">
                                 <p:inputText value="#{detail.gstRate}"></p:inputText>
@@ -132,7 +132,7 @@ and open the template in the editor.
                     <p:column headerText="#{msgs.managerDetailPST}">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{detail.bookPrice}"></h:outputText>
+                                <h:outputText value="#{detail.pstRate}"></h:outputText>
                             </f:facet>
                             <f:facet name="input">
                                 <p:inputText value="#{detail.pstRate}"></p:inputText>
@@ -143,7 +143,7 @@ and open the template in the editor.
                     <p:column headerText="#{msgs.managerDetailHST}">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{detail.bookPrice}"></h:outputText>
+                                <h:outputText value="#{detail.hstRate}"></h:outputText>
                             </f:facet>
                             <f:facet name="input">
                                 <p:inputText value="#{detail.hstRate}"></p:inputText>
