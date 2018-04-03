@@ -7,11 +7,15 @@ import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.MasterInvoice;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -22,82 +26,80 @@ import org.primefaces.model.StreamedContent;
  *
  * @author salma
  */
-
-@Named("download")
+@Named("downloadx")
 @RequestScoped
-public class DownloadBackingBean {
-    
+public class DownloadBackingBean implements Serializable {
+
     @Inject
     private CustomMasterInvoiceJpaController masterInvoiceController;
-    
+
     @Inject
     private CustomClientController clientController;
-    
+
     @Inject
     private CustomBookController bookController;
-    
+
     private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
     private StreamedContent file;
-    
+
     //Display in the next page a message if there are no downloads to show.
-    private String message="";
-    
-    public DownloadBackingBean()
-    {
-        log.log(Level.INFO, "CREATED???");
-        InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/resources/book/aliceWonderLand.pdf");
-        file = new DefaultStreamedContent(stream, "application/pdf", "aliceWonderland.pdf");
-    }
-    
+    private String message = "";
+
     /**
      * Get client information from DB.
+     *
      * @return client info
      */
-    public List<MasterInvoice> getClientInfo()
-    {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        String username = (String)session.getAttribute("username");
-        
-        List<Client> client = clientController.findClientByUsername(username);
-        
-        log.log(Level.INFO, "USERNAME OF CURRENT USER: "+username);
-        
-        List<MasterInvoice> masterInvoices = masterInvoiceController.getMasterInvoiceByClientId(client.get(0).getClientId());
-        
-        if(masterInvoices.size()== 0)
-        {
-            message="You have nothing to download, please start buying books!";
+    public List<MasterInvoice> getClientInfo() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        String username = (String) session.getAttribute("username");
+
+        Client client = clientController.findClientByUsername(username).get(0);
+
+        log.log(Level.INFO, "USERNAME OF CURRENT USER: " + username);
+
+        List<MasterInvoice> masterInvoices = client.getMasterInvoiceList();
+
+        log.log(Level.INFO, "After masterInvoices Retrieved");
+
+        if (masterInvoices.size() == 0) {
+            message = "You have nothing to download, please start buying books!";
+            return masterInvoices;
+        } else {
             return masterInvoices;
         }
-        else
-        {
-           return masterInvoices; 
-        }
-        
-        
+
     }
-    
+
     /**
      * Get the book specified from the invoice id.
+     *
      * @param bookId
-     * @return 
+     * @return
      */
-    public Book getBookInvoice(int bookId)
-    {
+    public Book getBookInvoice(int bookId) {
         Book book = bookController.findBook(bookId);
-        
+
         return book;
     }
-    
+
     /**
      * Return file when user clicks download button.
-     * @return 
+     *
+     * @return
      */
-    public StreamedContent getFile()
-    {
-        log.log(Level.INFO, "GET FILE PLS: "+file.getName());
-        
+    public StreamedContent getFile() {
+//        log.log(Level.INFO, "CREATED???");
+//
+//        log.log(Level.INFO, "GET FILE INFO: " + file.getContentType());
+//        log.log(Level.INFO, "GET FILE INFO: " + file.getName());
         return file;
+    }
+
+    @PostConstruct
+    public void init() {
+        InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/resources/book/aliceWonderland.pdf");
+        file = new DefaultStreamedContent(stream, "application/pdf", "aliceWonderland.pdf");
     }
 
     public String getMessage() {
@@ -107,7 +109,5 @@ public class DownloadBackingBean {
     public void setMessage(String message) {
         this.message = message;
     }
-    
-    
-    
+
 }

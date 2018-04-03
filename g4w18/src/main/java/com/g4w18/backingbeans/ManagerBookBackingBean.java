@@ -29,13 +29,16 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.component.datatable.DataTable;
+import static org.primefaces.component.focus.Focus.PropertyKeys.context;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.UploadedFile;
@@ -142,12 +145,17 @@ public class ManagerBookBackingBean implements Serializable {
             message="The book was created!";
             bookJpaController.create(book);
             createAuthors(newBookAuthors,book);
-            return "managerBookHandler.xhtml";
+//            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+//            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+            addMessage("managerCreateBook");
+            return null;
+            
         }
         else
         {
-            logger.log(Level.INFO, "INSIDE OF BOOK CREATE IF 0----");
+            logger.log(Level.INFO, "INSIDE OF BOOK CREATE IF 0 NOT CREATE BOOK----");
             message="Book already exists!";
+            addMessage("managerIsbnExist");
             return "managerBookHandler.xhtml";
         }
          
@@ -350,6 +358,22 @@ public class ManagerBookBackingBean implements Serializable {
         
         return existence;
     }
+    
+    /**
+     * The addMessage method simplifies and reduces redundancy of code when
+     * displaying a message is necessary.
+     *
+     * @param key The string key in the messages bundle.
+     */
+    private void addMessage(String key) {
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        String message = context.getApplication().getResourceBundle(context, "msgs").getString(key);
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
+        context.addMessage(null, msg);
+    }
+
     
     //Getters and setters to get information from user
     public void setSearchBook(String searchBook)

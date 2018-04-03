@@ -45,7 +45,7 @@ import org.junit.Ignore;
  * 
  * @author Salman Haidar
  */
-@Ignore
+
 @RunWith(Arquillian.class)
 public class JPATest {
 
@@ -128,7 +128,7 @@ public class JPATest {
         
         assertThat(findAuthorByName).hasSize(1);
     } 
-    
+    @Ignore
     @Test
     public void find_author_with_general_name_another_one() throws SQLException{
         
@@ -139,7 +139,7 @@ public class JPATest {
         
         assertThat(findAuthorByName).hasSize(1);
     } 
-    
+    @Ignore
     @Test
     public void find_author_with_general_name_another_one_full() throws SQLException{
         
@@ -196,16 +196,47 @@ public class JPATest {
         
         
         for(int i=0;i< authorCount;i++)
-        {
             allBooks.addAll(authorList.get(i).getBookList());
+        
+        for(int j = 0;j<allBooks.size();j++)
+        {
+            logger.log(Level.INFO,"---------==BOOOKS FOR C TEST======-----"+  allBooks.get(j).getTitle());
         }
         
+        
         assertThat(allBooks).hasSize(7);
+    }
+    /**
+     * Testing another author options for search.
+     */
+    @Test
+    public void get_author_3_options_1Result()
+    {
+        List<Author> authorList = aJc.findAuthor3Options("khan%");
+        
+        logger.log(Level.INFO,"---------==HOW MANY AUTHORS WITH KHAN======-----"+  authorList.get(0).getFirstName());
+        
+        assertThat(authorList).hasSize(1);
+    }
+    
+    
+    /**
+     * Testing another author options for search. get 6 result
+     */
+    @Test
+    public void get_author_3_options_6Result()
+    {
+        List<Author> authorList = aJc.findAuthor3Options("p%");
+        
+        logger.log(Level.INFO,"---------==HOW MANY AUTHORS WITH p%======-----"+  authorList.get(0).getFirstName());
+        
+        assertThat(authorList).hasSize(6);
     }
     
     /**
      * Test top sellers method without any purchases
      */
+    @Ignore
     @Test
     public void get_top_sellers_between_two_good_dates_but_no_purchase() throws SQLException
     {
@@ -220,6 +251,7 @@ public class JPATest {
     /**
      * Test top sellers method purchases with 2 results
      */
+    @Ignore
     @Test
     public void get_top_sellers_between_two_good_dates_with_2_purchases() throws SQLException
     {
@@ -239,6 +271,7 @@ public class JPATest {
     /**
      * Test top sellers method purchases with 4 result
      */
+    @Ignore
     @Test
     public void get_top_sellers_between_two_good_dates_with_4_purchases() throws SQLException
     {
@@ -256,6 +289,7 @@ public class JPATest {
     /**
      * Test top sellers method purchases with 4 result but with calculations
      */
+    @Ignore
     @Test
     public void get_top_sellers_between_two_good_dates_with_4_purchases_but_calculations() throws SQLException
     {
@@ -273,6 +307,7 @@ public class JPATest {
     /**
      * Test top sellers method purchases with 6 result but with calculations
      */
+    @Ignore
     @Test
     public void get_top_sellers_between_two_good_dates_with_6_purchases_but_calculations() throws SQLException
     {
@@ -293,6 +328,7 @@ public class JPATest {
     /**
      * Test top client method purchases with 1 results
      */
+    @Ignore
     @Test
     public void get_top_client_between_two_good_dates_with_1_purchase() throws SQLException
     {
@@ -312,6 +348,7 @@ public class JPATest {
     /**
      * Test top client method purchases with 2 results
      */
+    @Ignore
     @Test
     public void get_top_client_between_two_good_dates_with_2_purchase() throws SQLException
     {
@@ -331,6 +368,7 @@ public class JPATest {
     /**
      * Test top client method purchases with 3 results
      */
+    @Ignore
     @Test
     public void get_top_client_between_two_good_dates_with_3_purchase() throws SQLException
     {
@@ -350,6 +388,7 @@ public class JPATest {
     /**
      * Test top client method purchases with 0 results
      */
+    @Ignore
     @Test
     public void get_top_client_between_two_good_dates_with_0_purchase() throws SQLException
     {

@@ -85,11 +85,4 @@
         </navigation-case>
     </navigation-rule>
     
-    <navigation-rule>
-        <navigation-case>
-            <from-outcome>download</from-outcome>
-            <to-view-id>download.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
 </faces-config>

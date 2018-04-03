@@ -103,11 +103,10 @@ public class SearchBackingBean implements Serializable {
        {
             try {
                 
-//                Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-//                params.put("id", "1");
+                
                 
                 ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-                context.redirect(context.getRequestContextPath() + "/bookDetail.xhtml?id=1");
+                //context.redirect(context.getRequestContextPath() + "/bookDetail.xhtml?id="+getBooksByAuthor().get(0).);
                 
                 
             } catch (IOException ex) {
@@ -166,7 +165,7 @@ public class SearchBackingBean implements Serializable {
     
     public List<Book> getBooksByAuthor()
     {
-        List<Author> authors = authorJpaController.findAuthor(searchTerm);
+        List<Author> authors = authorJpaController.findAuthor3Options(searchTerm);
         
         List<Book> allBooks = new ArrayList<Book>();
         
@@ -179,6 +178,11 @@ public class SearchBackingBean implements Serializable {
         {
             allBooks.addAll(authors.get(i).getBookList());
         }
+        for(int j = 0;j<allBooks.size();j++)
+        {
+            logger.log(Level.INFO,"BOOKS INSIDE OF AUTHOR LIST: "+ allBooks.get(j).getTitle());
+        }
+        
         return allBooks;
     }
     

@@ -49,9 +49,7 @@
                     </p:inputText>
                     
                     <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
-                    <p:inputText id="mPublisherDate" required="true" requiredMessage="#{msgs.invalidBookPublisherDate}" value="#{managerBookHandling.book.publicationDate}">
-                        <f:convertDateTime pattern="yyyy/mm/dd" />
-                    </p:inputText>
+                    <p:calendar id="datetime" value="#{managerBookHandling.book.publicationDate}" pattern="MM/dd/yyyy HH:mm:ss" />
 
                     <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
                     <p:inputNumber id="mPageNum" value="#{managerBookHandling.book.pageNumber}" required="true" requiredMessage="#{msgs.invalidBookPageNumber}" decimalPlaces="0" ></p:inputNumber>
