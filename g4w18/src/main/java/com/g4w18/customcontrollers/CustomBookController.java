@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
 
 /**
  * Custom JPA controller used to access and manipulate the Book records of the database.
- * @author Jephtia, Salman, Sebastian, Marc-Daniel
+ * @author Jephtia, Salman, Sebastian
  */
 public class CustomBookController implements Serializable {
 
@@ -242,21 +242,5 @@ public class CustomBookController implements Serializable {
         List<Book> books = (List<Book>)query.getResultList();
         
         return books;
-    }
-    
-    /**
-     * Finds a book record with the given invoice ID and returns it
-     * 
-     * @author Marc-Daniel
-     * @param invoiceId
-     * @return 
-     */
-    public Book findBookByInvoice(int invoiceId)
-    {
-        List<Book> books = em.createNativeQuery("Select b from book b right join InvoiceDetail i on b.bookId = i.bookId where i.bookId = ?1").setParameter(1, invoiceId).getResultList();
-        if (!books.isEmpty()) {
-            return books.get(0);
-        }
-        return null;
     }
 }
