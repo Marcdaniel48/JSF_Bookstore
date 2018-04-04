@@ -33,10 +33,10 @@
                                                     <h4>$#{book.listPrice} CAD</h4>
                                                 </ui:fragment>
                                                 <ui:fragment rendered="#{book.salePrice gt 0}">
-                                                    <h4>
+                                                    <h5>
                                                         <span><s>$#{book.listPrice} CAD</s></span>
                                                         <span class="sale-price">$#{book.salePrice} CAD</span>
-                                                    </h4>
+                                                    </h5>
                                                 </ui:fragment>
                                             </f:facet>
                                         </b:thumbnail>
@@ -45,6 +45,7 @@
                             </b:row>
                         </b:container>
                         <hr/>
+                        <h1 style="text-align: center;">Other Books In This Genre</h1>
                     </ui:fragment>
 
                     <b:row class="text-center">

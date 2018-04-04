@@ -19,7 +19,7 @@
 {
     background-image: url("#{resource['images/b2.jpeg']}");
 }
-#book-sales a:hover
+#book-sales a:hover:not(.disabled)
 {
     opacity: 1;
 }

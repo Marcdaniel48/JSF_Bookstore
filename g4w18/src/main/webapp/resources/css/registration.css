@@ -9,22 +9,23 @@
 .registration .bg-img
 {
     width: 100%;
-    height: 100%;
+    height: auto;
     position: absolute;
     background-image: url("#{resource['images/bg1.jpg']}");
     background-size: cover;
     background-position: center;
-    filter: brightness(30%);
+    /*filter: brightness(30%);*/
 }
 .registration .container
 {
-    position: absolute;
-    right: 10%;
+    /*position: absolute;*/
+    /*right: 10%;*/
     height: 100%;
     text-align: right;
     background-size: cover;
     background-position: center;
     background-color: rgba(0, 0, 0, 0.9);
+    transform: translateX(120%);
     padding: 10px 30px;
     display: inline-block;
     opacity: 0;
@@ -64,6 +65,11 @@
 .registration option
 {
     background-color: black;
+}
+.registration .error
+{
+    color: red;
+    display: block;
 }
 @media only screen and (max-width: 800px)
 {

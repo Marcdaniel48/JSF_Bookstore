@@ -6,7 +6,7 @@
     /*margin-right: 10px;*/
     /*margin-bottom: 5px;*/
     text-align: center;
-    background-image: url("#{resource['images/b3.jpeg']}");
+    background-image: url("#{resource['images/backg1.jpeg']}");
     background-size: cover;
     background-position: center;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
@@ -18,7 +18,7 @@
 }
 #recent-books .section-title-img
 {
-    background-image: url("#{resource['images/b3.jpeg']}");
+    /*background-image: url("#{resource['images/b3.jpeg']}");*/
 }
 #recent-books a:hover
 {
@@ -57,9 +57,9 @@
 }
 .book
 {
-    width: 33.3%;
+    width: 25%;
     height: auto;
-    padding: 10px 5%;
+    padding: 10px 2%;
     margin-bottom: 10px;
     cursor: default;
     display: inline-block;
@@ -83,8 +83,7 @@
     width: 100%;
     height: 100%;
     cursor: pointer;
-    filter: drop-shadow(0 0 10px black);
-    filter: sepia(0%);
+    filter: sepia(0%) drop-shadow(0 0 4px rgba(0, 0, 0, 0.8));
     transition: .6s ease-in;
 }
 .book-thumbnail:hover
@@ -95,8 +94,8 @@
 .book-thumbnail:hover + .book-price
 {
     transform: translateY(10px);
-    margin-top: 0;
-    padding-top: 0;
+    /*margin-top: 0;*/
+    /*padding-top: 0;*/
 }
 .book-title
 {
@@ -111,12 +110,12 @@
 .book-price
 {
     display: inline-block;
-    padding-top: 10px;
-    margin-top: -10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    /*padding-top: 10px;*/
+    margin-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
     z-index: -1;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: bolder;
     color: #F2BFA0;
     background-color: rgba(0, 0, 0, 0.8);

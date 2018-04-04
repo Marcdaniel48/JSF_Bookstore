@@ -15,7 +15,7 @@
 {
     background-image: url("#{resource['images/b5.jpg']}");
 }
-.recommendations a:hover
+.recommendations a:hover:not(.disabled)
 {
     opacity: 1;
 }

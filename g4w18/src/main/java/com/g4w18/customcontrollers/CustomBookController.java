@@ -92,7 +92,7 @@ public class CustomBookController implements Serializable {
         cq.select(root);
         cq.orderBy(cb.asc(root.get("inventoryDate")));
         Query q = em.createQuery(cq);
-        q.setMaxResults(3);
+        q.setMaxResults(4);
 
         List<Book> books = q.getResultList();
         return books;
