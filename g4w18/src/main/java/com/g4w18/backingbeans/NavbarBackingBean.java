@@ -66,7 +66,7 @@ public class NavbarBackingBean implements Serializable
     {
         logger.log(Level.INFO, LocalDateTime.now() + " isManager() {0}", getUsername());
         
-        Client client = clientJpaController.findClientByUsername(getUsername()).get(0);
+        Client client = clientJpaController.findClientByUsername(getUsername());
         
         return client.getIsManager();
     }
