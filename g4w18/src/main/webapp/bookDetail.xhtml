@@ -29,7 +29,7 @@
             <b:row>
                 <b:column col-md="4" col-lg="3">
                     <b:container>
-                        <b:image library="images" name="#{bookDetailsBackingBean.book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
+                        <b:image library="images" name="#{bookDetailsBackingBean.book.isbnNumber}hi.png" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
                     </b:container>
                 </b:column>
                 <b:column col-md="5" col-lg="5">
@@ -147,7 +147,7 @@
                     <ui:repeat var="recommended" value="#{bookDetailsBackingBean.recommendedBooks}">
                         <b:column col-sm="6" col-md="2" col-xs="12">
                             <b:thumbnail>
-                                <b:image library="images" name="#{recommended.isbnNumber}low.jpg" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
+                                <b:image library="images" name="#{recommended.isbnNumber}low.png" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
                                 <f:facet name="caption">
                                     <b:commandLink outcome="bookDetail">
                                         <h:outputText value="#{recommended.title}" styleClass="list-group-item-heading"></h:outputText>

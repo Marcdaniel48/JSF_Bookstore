@@ -143,37 +143,37 @@ insert into banner values
 INSERT INTO BOOK values
 (null, "978-1408855652", "Harry Potter and the Philosopher's Stone", "Bloomsbury Children's Books", "2014-09-01 00:00:00", 352, "Fantasy",
 "Harry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive. Addressed in green ink on yellowish parchment with a purple seal, they are swiftly confiscated by his grisly aunt and uncle. Then, on Harry's eleventh birthday, a great beetle-eyed giant of a man called Rubeus Hagrid bursts in with some astonishing news: Harry Potter is a wizard, and he has a place at Hogwarts School of Witchcraft and Wizardry. An incredible adventure is about to begin! These new editions of the classic and internationally bestselling, multi-award-winning series feature instantly pick-up-able new jackets by Jonny Duddle, with huge child appeal, to bring Harry Potter to the next generation of readers. It's time to PASS THE MAGIC ON ...",
-"PDF", 6.99, 10.99, 8.99, null,true),
+"PDF", 6.99, 10.99, 8.99, null,false),
 (null, "978-0553573404", "A Game of Thrones: A Song of Ice and Fire: Book One", "Bantam", "1997-08-04 00:00:00", 864, "Fantasy",
 "Long ago, in a time forgotten, a preternatural event threw the seasons out of balance. In a land where summers can last decades and winters a lifetime, trouble is brewing. The cold is returning, and in the frozen wastes to the north of Winterfell, sinister forces are massing beyond the kingdomâ€™s protective Wall. To the south, the kingâ€™s powers are failingâ€?his most trusted adviser dead under mysterious circumstances and his enemies emerging from the shadows of the throne. At the center of the conflict lie the Starks of Winterfell, a family as harsh and unyielding as the frozen land they were born to. Now Lord Eddard Stark is reluctantly summoned to serve as the kingâ€™s new Hand, an appointment that threatens to sunder not only his family but the kingdom itself.
 
 Sweeping from a harsh land of cold to a summertime kingdom of epicurean plenty, A Game of Thrones tells a tale of lords and ladies, soldiers and sorcerers, assassins and bastards, who come together in a time of grim omens. Here an enigmatic band of warriors bear swords of no human metal; a tribe of fierce wildlings carry men off into madness; a cruel young dragon prince barters his sister to win back his throne; a child is lost in the twilight between life and death; and a determined woman undertakes a treacherous journey to protect all she holds dear. Amid plots and counter-plots, tragedy and betrayal, victory and terror, allies and enemies, the fate of the Starks hangs perilously in the balance, as each side endeavors to win that deadliest of conflicts: the game of thrones.
 
 Unparalleled in scope and execution, A Game of Thrones is one of those rare reading experiences that catch you up from the opening pages, wonâ€™t let you go until the end, and leave you yearning for more.",
-"PDF", 4.99, 6.99, 5.99, null,true),
+"PDF", 4.99, 6.99, 5.99, null,false),
 (null, "978-0316029186", "The Last Wish", "Orbit", "2008-05-01 00:00:00", 384, "Fantasy",
 "Geralt of Rivia is a witcher. A cunning sorcerer. A merciless assassin.And a cold-blooded killer.His sole purpose: to destroy the monsters that plague the world.But not everything monstrous-looking is evil and not everything fair is good. . . and in every fairy tale there is a grain of truth.",
-"PDF", 3.99, 8.99, 5.99, null,true),
+"PDF", 3.99, 8.99, 5.99, null,false),
 (null, "978-0261102217", "The Hobbit", "HarperCollins", "2011-10-27 00:00:00", 400, "Fantasy",
 "Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely travelling further than the pantry of his hobbit-hole in Bag End. But his contentment is disturbed when the wizard, Gandalf, and a company of thirteen dwarves arrive on his doorstep one day to whisk him away on an unexpected journey â€˜there and back againâ€™. They have a plot to raid the treasure hoard of Smaug the Magnificent, a large and very dangerous dragon",
-"PDF", 5.99, 11.99, 7.99, null,true),
+"PDF", 5.99, 11.99, 7.99, null,false),
 (null, "978-0007322596", "The Lord of the Rings: The Fellowship of the Ring, The Two Towers, The Return of the King", "HarperCollins", "2009-04-20 00:00:00", 1209, "Fantasy",
 "All three parts of the epic masterpiece The Lord of the Rings â€“ The Fellowship of the Ring, The Two Towers & The Return of the King â€“ available as one download, featuring the definitive edition of the text, hyperlinked footnotes and page references, and 3 maps including a detailed map of Middle-earth.Sauron, the Dark Lord, has gathered to him all the Rings of Power â€“ the means by which he intends to rule Middle-earth. All he lacks in his plans for dominion is the One Ring â€“ the ring that rules them all â€“ which has fallen into the hands of the hobbit, Bilbo Baggins.In a sleepy village in the Shire, young Frodo Baggins finds himself faced with an immense task, as the Ring is entrusted to his care. He must leave his home and make a perilous journey across the realms of Middle-earth to the Crack of Doom, deep inside the territories of the Dark Lord. There he must destroy the Ring forever and foil the Dark Lord in his evil purpose.",
-"PDF", 12.99, 18.99, 15.99, null,true),
+"PDF", 12.99, 18.99, 15.99, null,false),
 (null, "978-0261102736", "The Silmarillion", "HarperCollins", "2011-02-03 00:00:00", 357, "Fantasy",
 "The Silmarillion is an account of the Elder Days, of the First Age of Tolkienâ€™s world. It is the ancient drama to which the characters in The Lord of the Rings look back, and in whose events some of them such as Elrond and Galadriel took part. The tales of The Silmarillion are set in an age when Morgoth, the first Dark Lord, dwelt in Middle-Earth, and the High Elves made war upon him for the recovery of the Silmarils, the jewels containing the pure light of Valinor.Included in the book are several shorter works. The Ainulindale is a myth of the Creation and in the Valaquenta the nature and powers of each of the gods is described. The Akallabeth recounts the downfall of the great island kingdom of NÃºmenor at the end of the Second Age and Of the Rings of Power tells of the great events at the end of the Third Age, as narrated in The Lord of the Rings.",
-"PDF", 5.99, 9.99, 6.99, null,true),
+"PDF", 5.99, 9.99, 6.99, null,false),
 (null, "978-0060598242", "The Chronicles of Narnia", "HarperCollins", "2004-10-26 00:00:00", 784, "Fantasy",
 "Fantastic creatures, heroic deeds, epic battles in the war between good and evil, and unforgettable adventures come together in this world where magic meets reality, which has been enchanting readers of all ages for over sixty years. The Chronicles of Narnia has transcended the fantasy genre to become a part of the canon of classic literature.",
-"PDF", 9.99, 15.99, 12.99, null,true),
+"PDF", 9.99, 15.99, 12.99, null,false),
 (null, "978-2895490845", "Amos Daragon, The Mask Wearer", "Bluefire", "2012-03-13 00:00:00", 176, "Fantasy",
 "Amos Daragon's life changes forever the day a mermaid gives him a mask capable of harnessing the strength of the windâ€?and appoints Amos as the new Mask Wearer. His task: to find the masks for the other elements, earth, fire, and water. Only then will Amos be fully empowered to battle the evil forces that threaten to destroy the balance of nature and plunge the world into darkness.To fulfill his destiny, Amos must make his way to the mysterious woods of Tarkasis. But a wicked sorcerer is terrorizing the land, searching for a skull pendant that was stolen from himâ€?a pendant that conceals a secret weapon. What will Amos do when the pendant falls into his hands? Will Beorf, a boy who can morph into a bear, and Medusa, a snake-haired gorgon, turn out to be friend or foe? And will Amos master any of his newfound skills as Mask Wearer in time to face a formidable enemy? His chanllenges are great . . .  and they're just beginning.",
-"PDF", 3.99, 7.99, 5.99, null,true),
+"PDF", 3.99, 7.99, 5.99, null,false),
 (null, "978-1503951198", "The Jekyll Revelation", "47 North", "2016-11-08 00:00:00", 493, "Fantasy",
 "A chilling curse is transported from 1880s London to present-day California, awakening a long-dormant fiend.
 While on routine patrol in the tinder-dry Topanga Canyon, environmental scientist Rafael Salazar expects to find animal poachers, not a dilapidated antique steamer trunk. Inside the peculiar case, he discovers a journal, written by the renowned Robert Louis Stevenson, which divulges ominous particulars about his creation of The Strange Case of Dr. Jekyll and Mr. Hyde. It also promises to reveal a terrible secretâ€?the identity of Jack the Ripper.
 Unfortunately, the journalâ€?whose macabre tale unfolds in an alternating narrative with Rafeâ€™sâ€?isnâ€™t the only relic in the trunk, and Rafe isnâ€™t the only one to purloin a souvenir. A mysterious flask containing the last drops of the grisly potion that inspired Jekyll and Hyde and spawned Londonâ€™s most infamous killer has gone missing. And it has definitely fallen into the wrong hands.",
-"PDF", 4.99, 14.95, 9.5, null,true),
+"PDF", 4.99, 14.95, 9.5, null,false),
 (null, "978-1250122957", "Year One: Chronicles of The One", "St. Martin's Press", "2017-12-05 00:00:00", 419, "Fantasy",
 "It began on New Yearâ€™s Eve.
 
@@ -186,7 +186,7 @@ As word spreads that neither the immune nor the gifted are safe from the authori
 In a world of survivors where every stranger encountered could be either a savage or a savior, none of them knows exactly where they are heading, or why. But a purpose awaits them that will shape their lives and the lives of all those who remain.
 
 The end has come. The beginning comes next.",
-"PDF", 15.99, 36, 15.99, null,true),
+"PDF", 15.99, 36, 15.99, null,false),
 (null, "978-0316399746", "Valor", "Orbit", "2014-07-22 00:00:00", 688, "Fantasy",
 "Corban flees his homeland searching for peace, but he soon discovers that there is no haven in the west as the agents of Rhin and roaming bands of giants hound his every step.
 
@@ -195,29 +195,29 @@ Veradis leaves the battleground and rushes to his King's side. But he has witnes
 Maquin seeks only revenge, but pirate slavers and the brutal world of pit-fighting stand in his way.
 
 Nathair becomes embroiled in the wars of the west as Queen Rhin marches against King Owain. The need to find the cauldron of the giants drives him on.",
-"PDF", 7.99, 12.99, 9.99, null,true),
+"PDF", 7.99, 12.99, 9.99, null,false),
 (null, "978-1250169495", "Oathbringer: Book Three of the Stormlight Archive", "Tor Books", "2017-11-14 00:00:00", 1220, "Fantasy",
 "In Oathbringer, the third volume of the New York Times bestselling Stormlight Archive, humanity faces a new Desolation with the return of the Voidbringers, a foe with numbers as great as their thirst for vengeance.
 
 Dalinar Kholinâ€™s Alethi armies won a fleeting victory at a terrible cost: The enemy Parshendi summoned the violent Everstorm, which now sweeps the world with destruction, and in its passing awakens the once peaceful and subservient parshmen to the horror of their millennia-long enslavement by humans. While on a desperate flight to warn his family of the threat, Kaladin Stormblessed must come to grips with the fact that the newly kindled anger of the parshmen may be wholly justified.
 
 Nestled in the mountains high above the storms, in the tower city of Urithiru, Shallan Davar investigates the wonders of the ancient stronghold of the Knights Radiant and unearths dark secrets lurking in its depths. And Dalinar realizes that his holy mission to unite his homeland of Alethkar was too narrow in scope. Unless all the nations of Roshar can put aside Dalinarâ€™s blood-soaked past and stand togetherâ€?and unless Dalinar himself can confront that pastâ€?even the restoration of the Knights Radiant will not prevent the end of civilization.",
-"PDF", 17.91, 22.41, 11.91, null,true),
+"PDF", 17.91, 22.41, 11.91, null,false),
 (null, "978-0316389709", "Swords of Destiny", "Orbit", "2015-12-05 00:00:00", 400, "Fantasy",
 "Geralt is a witcher, a man whose magic powers, enhanced by long training and a mysterious elixir, have made him a brilliant fighter and a merciless assassin. Yet he is no ordinary murderer: his targets are the multifarious monsters and vile fiends that ravage the land and attack the innocent.
 
 This is a collection of short stories, following the adventures of the hit collection THE LAST WISH. Join Geralt as he battles monsters, demons and prejudices alike...",
-"PDF", 12.99, 20.99, 15.36, null,true),
+"PDF", 12.99, 20.99, 15.36, null,false),
 (null, "978-0770428778", "Dragonfly in Amber", "Seal Books", "2001-10-09 00:00:00", 976, "Fantasy",
 "From the author of Outlander... a magnificent epic that once again sweeps us back in time to the drama and passion of 18th-century Scotland...
 
 For twenty years Claire Randall has kept her secrets. But now she is returning with her grown daughter to Scotland's majestic mist-shrouded hills. Here Claire plans to reveal a truth as stunning as the events that gave it birth: about the mystery of an ancient circle of standing stones ...about a love that transcends the boundaries of time ...and about James Fraser, a Scottish warrior whose gallantry once drew a young Claire from the security of her century to the dangers of his ....
 
 Now a legacy of blood and desire will test her beautiful copper-haired daughter, Brianna, as Claire's spellbinding journey of self-discovery continues in the intrigue-ridden Paris court of Charles Stuart ...in a race to thwart a doomed Highlands uprising ...and in a desperate fight to save both the child and the man she loves....",
-"PDF", 10.99, 20.66, 11.69, null,true),
+"PDF", 10.99, 20.66, 11.69, null,false),
 (null, "978-0330492041", "The Hitchhiker's Guide To The Galaxy: The Trilogy Of Four", "PAN Macmillan Adult", "2002-03-08 00:00:00", 720, "Fantasy",
 "THE HITCHIKER'S GUIDE TO THE GALAXY: One Thursday lunchtime the Earth gets demolished to make way for a hyperspace bypass. For Arthur, who has just had his house demolished, this is too much. Sadly, the weekend's just begun. THE RESTAURANT AT THE END OF THE UNIVERSE: When all issues of space, time, matter and the nature of being are resolved, only one question remains: Where shall we have dinner? The Restaurant at the End of the Universe provides the ultimate gastronomic experience and, for once, there is no morning after. LIFE, THE UNIVERSE AND EVERYTHING: In consequence of a number of stunning catastrophes, Arthur Dent is surprised to find himself living in a hideously miserable cave on prehistoric Earth. And then, just as he thinks that things cannot possibly get any worse, they suddenly do. SO LONG, AND THANKS FOR ALL THE FISH: Arthur Dent's sense of reality is in its dickiest state when he suddenly finds the girl of his dreams. They go in search of God's Final Message and, in a dramatic break with tradition, actually find it.",
-"PDF", 5.99, 48.81, 20.99, null,true),
+"PDF", 5.99, 48.81, 20.99, null,false),
 (null, "978-0765376671", "The Way of Kings (The Stormlight Archive, Book 1)", "Tor Books", "2014-03-04 00:00:00", 1008, "Fantasy",
 "Roshar is a world of stone and storms. Uncanny tempests of incredible power sweep across the rocky terrain so frequently that they have shaped ecology and civilization alike. Animals hide in shells, trees pull in branches, and grass retracts into the soilless ground. Cities are built only where the topography offers shelter.
 
@@ -230,10 +230,10 @@ Brightlord Dalinar Kholin commands one of those other armies. Like his brother, 
 Across the ocean, an untried young woman named Shallan seeks to train under an eminent scholar and notorious heretic, Dalinar's niece, Jasnah. Though she genuinely loves learning, Shallan's motives are less than pure. As she plans a daring theft, her research for Jasnah hints at secrets of the Knights Radiant and the true cause of the war.
 
 The result of over ten years of planning, writing, and world-building, The Way of Kings is but the opening movement of the Stormlight Archive, a bold masterpiece in the making.",
-"PDF", 10.99, 26.99, 16.03, null,true),
+"PDF", 10.99, 26.99, 16.03, null,false),
 (null, "978-0316437226", "Spice and Wolf Anniversary Collector's Edition", "Yen On", "2017-02-27 00:00:00", 944, "Fantasy",
 "Spice and Wolf is ten years old! To commemorate this anniversary, Yen Press is producing a lavish tome collecting all seventeen original volumes of Spice and Wolf. Beautifully bound and impressively designed to give the impression of a medieval manuscript, the book will also include all of illustrator Jyuu Ayakura's original illustrations. This book will be the crown jewel in any collector's library! The light novel series' story centers around the travels of the merchant Kraft Lawrence, who strikes a deal with the wolf god Holo that sees him transporting the homesick goddess back to her remote northern homeland. Uniquely exploring medieval trade, commerce, and religion, Lawrence plies his trade with Holo (in both human and wolf form) often becoming a decisive factor in his endeavors, but in the end, it is the story of these two memorable characters and their relationship to one another.",
-"PDF", 219.99, 399.99, 249.99, null,true),
+"PDF", 219.99, 399.99, 249.99, null,false),
 (null, "978-0316229296", "The Fifth Season", "Orbit", "2015-07-04 00:00:00", 512, "Fantasy",
 "A season of endings has begun.
 
@@ -244,43 +244,43 @@ It starts with death, with a murdered son and a missing daughter.
 It starts with betrayal, and long dormant wounds rising up to fester.
 
 This is the Stillness, a land long familiar with catastrophe, where the power of the earth is wielded as a weapon. And where there is no mercy. ",
-"PDF", 12.99, 20.99, 18.89, null,true),
+"PDF", 12.99, 20.99, 18.89, null,false),
 (null, "978-0765388247", "Shroud of Eternity: Sister of Darkness: The Nicci Chronicles, Volume II", "Tor Books", "2018-01-09 00:00:00", 528, "Fantasy",
 "The formidable sorceress Nicci and her companions?the newly powerless Nathan and the youthful Bannon?set out on another quest after driving ruthless Norukai slavers out of Renda Bay. Their mission: restore Nathanâ€™s magic and, for Nicci, save the world.
 
 Guided by the witch-woman Red's mysterious prophecy, the trio makes their way south of Kol Adair towards a wondrous city shrouded behind time, Ildakar. But the grotesque omens on their path to Nathan's salvation?severed Norukai heads on pikes, a genetically modified monster, and a petrified army of half a million?are just a taste of the unimaginable horrors that await within the Shroud of Eternity.",
-"PDF", 15.99, 30.69, 34.99, null,true),
+"PDF", 15.99, 30.69, 34.99, null,false),
 (null, "978-0786965984", "Curse of Strahd: A Dungeons & Dragons Sourcebook", "Wizards of The Coast", "2016-03-15 00:00:00", 256, "Fantasy",
 "Under raging storm clouds, the vampire Count Strahd von Zarovich stands silhouetted against the ancient walls of Castle Ravenloft. Rumbling thunder pounds the castle spires. The windâ€™s howling increases as he turns his gaze down toward the village of Barovia. Far below, yet not beyond his keen eyesight, a party of adventurers has just entered his domain. Strahdâ€™s face forms the barest hint of a smile as his dark plan unfolds. He knew they were coming, and he knows why they came â€? all according to his plan. A lightning flash rips through the darkness, but Strahd is gone. Only the howling of the wind fills the midnight air. The master of Castle Ravenloft is having guests for dinner. And you are invited.",
-"PDF", 43.7, 63.95, 51.71, null,true),
+"PDF", 43.7, 63.95, 51.71, null,false),
 (null, "978-0241952894", "A Study in Scarlet", "Viking", "2011-09-27 00:00:00", 144, "Mystery",
 "There's a scarlet thread of murder running through the colourless skein of life, and our duty is to unravel it, and isolate it, and expose every inch of it.' From the moment Dr John Watson takes lodgings in Baker Street with the consulting detective Sherlock Holmes, he becomes intimately acquainted with the bloody violence and frightening ingenuity of the criminal mind. In A Study in Scarlet , Holmes and Watson's first mystery, the pair are summoned to a south London house where they find a dead man whose contorted face is a twisted mask of horror. The body is unmarked by violence but on the wall a mysterious word has been written in blood. The police are baffled by the crime and its circumstances. But when Sherlock Holmes applies his brilliantly logical mind to the problem he uncovers a tragic tale of love and deadly revenge . . .",
-"PDF", 5.99, 10.99, 6.99, null,true),
+"PDF", 5.99, 10.99, 6.99, null,false),
 (null, "978-0425169209", "The ABC Murders: A Hercule Poirot Mystery", "William Morrow Paperbacks", "2003-12-15 00:00:00", 240, "Mystery",
 "There's a serial killer on the loose, bent on working his way though the alphabet. There seems little chance of the murderer being caught -- until her makes the crucial and vain mistake of challenging Hercule Poirot to frustrate his plans ...",
-"PDF", 5.99, 11.99, 7.99, null,true),
+"PDF", 5.99, 11.99, 7.99, null,false),
 (null, "978-0425173732", "Death on the Nile: Hercule Poirot investigates", "William Morrow Paperbacks", "2005-07-05 00:00:00", 320, "Mystery",
 "When a murder occurs aboard a Nile steamer, the passengers find themselves in a state of panic and emotional conflict.",
-"PDF", 5.99, 11.99, 7.99, null,true),
+"PDF", 5.99, 11.99, 7.99, null,false),
 (null, "978-1501163401", "Sleeping Beauties", "Scribner", "2017-09-26 00:00:00", 720, "Mystery",
 "In a future so real and near it might be now, something happens when women go to sleep: they become shrouded in a cocoon-like gauze. If they are awakened, if the gauze wrapping their bodies is disturbed or violated, the women become feral and spectacularly violent. And while they sleep they go to another place, a better place, where harmony prevails and conflict is rare.One woman, the mysterious â€œEve Black,ï¿½? is immune to the blessing or curse of the sleeping disease. Is Eve a medical anomaly to be studied? Or is she a demon who must be slain? Abandoned, left to their increasingly primal urges, the men divide into warring factions, some wanting to kill Eve, some to save her. Others exploit the chaos to wreak their own vengeance on new enemies. All turn to violence in a suddenly all-male world.Set in a small Appalachian town whose primary employer is a womenâ€™s prison, Sleeping Beauties is a wildly provocative, gloriously dramatic father-son collaboration that feels particularly urgent and relevant today.",
-"PDF", 8.99, 14.99, 10.99, null,true),
+"PDF", 8.99, 14.99, 10.99, null,false),
 (null, "978-0525954347", "The Punishment She Deserves", "Viking", "2017-03-20", 704, "Mystery",
 "The cozy, bucolic town of Ludlow is stunned when one of its most revered and respected citizens--Ian Druitt, the local deacon--is accused of a serious crime. Then, while in police custody, Ian is found dead. Did he kill himself? Or was he murdered?When Barbara Havers is sent to Ludlow to investigate the chain of events that led to Ian's death, all the evidence points to suicide. But Barbara can't shake the feeling that she's missing something. She decides to take a closer look at the seemingly ordinary inhabitants of Ludlow--mainly elderly retirees and college students--and discovers that almost everyone in town has something to hide.A masterful work of suspense, The Punishment She Deserves sets Detective Sergeant Barbara Havers and Inspector Thomas Lynley against one of their most intricate cases. Fans of the longtime series will love the many characters from Elizabeth George's previous novels who join Lynley and Havers, and readers new to the series will quickly see why she is one of the most popular and critically acclaimed writers of our time. Both a page-turner and a deeply complex story about the lies we tell, the lies we believe, and the redemption we need, this novel will be remembered as one of George's best.",
-"PDF", 10.99, 15.99, 12.99, null,true),
+"PDF", 10.99, 15.99, 12.99, null,false),
 (null, "978-0385659802", "The Curious Incident of the Dog in the Night-Time", "Anchor Canada", "2014-05-18 00:00:00", 240, "Mystery",
 "Christopher John Francis Boone knows all the countries of the world and their capitals and every prime number up to 7,057. Although gifted with a superbly logical brain, Christopher is autistic. Everyday interactions and admonishments have little meaning for him. At fifteen, Christopherâ€™s carefully constructed world falls apart when he finds his neighbourâ€™s dog Wellington impaled on a garden fork, and he is initially blamed for the killing.
 
 Christopher decides that he will track down the real killer, and turns to his favourite fictional character, the impeccably logical Sherlock Holmes, for inspiration. But the investigation leads him down some unexpected paths and ultimately brings him face to face with the dissolution of his parentsâ€™ marriage. As Christopher tries to deal with the crisis within his own family, the narrative draws readers into the workings of Christopherâ€™s mind.
 
 And herein lies the key to the brilliance of Mark Haddonâ€™s choice of narrator: The most wrenching of emotional moments are chronicled by a boy who cannot fathom emotions. The effect is dazzling, making for one of the freshest debut in years: a comedy, a tearjerker, a mystery story, a novel of exceptional literary merit that is great fun to read.",
-"PDF", 7.99, 12.99, 10.99, null,true),
+"PDF", 7.99, 12.99, 10.99, null,false),
 (null, "978-0762188598", "Postmortem", "Impress Pubns Ltd", "2000-11-01 00:00:00", 333, "Mystery",
 "A serial killer is on the loose in Richmond. Three women have died, brutalized and strangled in their own bedrooms. Kay Scarpetta, investigating the case, knows she must find some forensic evidence before the next killing. The author was previously an award-winning crime reporter.",
-"PDF", 6.99, 10.99, 8.99, null,true),
+"PDF", 6.99, 10.99, 8.99, null,false),
 (null, "978-0446696616", "1st to Die", "Grand Central Publishing", "2005-05-20 00:00:00", 432, "Mystery",
 "Imagine a killer who thinks, 'What is the worst thing anyone has ever done?--and then goes far beyond it. Now imagine four women --a police detective, an assistant DA, a reporter, and a medical examiner --who join forces as they sidestep their bosses to track down criminals. Known as the Women's Murder Club, they are pursuing a murderer whose twisted imagination has stunned an entire city. Their chief suspect is a socially prominent writer, but the men in charge won't touch him. On the trail of the most terrifying and unexpected killer ever, they discover a shocking surprise that turns everything about the case upside down.",
-"PDF", 4.99, 9.99, 7.99, null,true),
+"PDF", 4.99, 9.99, 7.99, null,false),
 (null, "978-0312353810", '"A" is for Alibi: A Kinsey Millhone Mystery', "St. Martin's Griffin", "2005-11-29 00:00:00", 320, "Mystery",
 "A IS FOR AVENGER
 A tough-talking former cop, private investigator Kinsey Millhone has set up a modest detective agency in a quiet corner of Santa Teresa, California. A twice-divorced loner with few personal possessions and fewer personal attachments, she's got a soft spot for underdogs and lost causes.
@@ -290,22 +290,22 @@ That's why she draws desperate clients like Nikki Fife. Eight years ago, she was
 
 A IS FOR ALIBI
 If there's one thing that makes Kinsey Millhone feel alive, it's playing on the edge. When her investigation turns up a second corpse, more suspects, and a new reason to kill, Kinsey discovers that the edge is closer?and sharper?than she imagined.",
-"PDF", 0.99, 2.99, 1.99, null,true),
+"PDF", 0.99, 2.99, 1.99, null,false),
 (null, "978-1983639340", "The Mysterious Affair at Styles", "CreateSpace Independent Publishing Platform", "2018-01-07 00:00:00", 120, "Mystery",
 "Who poisoned the wealthy Emily Inglethorp and how did the murderer penetrate and escape from her locked bedroom? Suspects abound in the quaint village of Styles St. Maryâ€?from the heiress's fawning new husband to her two stepsons, her volatile housekeeper, and a pretty nurse who works in a hospital dispensary.
 
 With impeccable timing, and making his unforgettable debut, the brilliant Belgian detective Hercule Poirot is on the case.",
-"PDF", 0.2, 0.99, 0.5, null,true),
+"PDF", 0.2, 0.99, 0.5, null,false),
 (null, "978-0385680400", "The Thirteenth Tale", "Anchor Canada", "2013-06-18 00:00:00", 416, "Mystery",
 "Biographer Margaret Lea returns one night to her apartment above her father's antiquarian bookshop. On her steps she finds a letter. It is a hand-written request from one of Britainâ€™s most prolific and well-loved novelists. Vida Winter, gravely ill, wants to recount her life story before it is too late, and she wants Margaret to be the one to capture her history. The request takes Margaret by surpriseâ€“she doesnâ€™t know the author, nor has she read any of Miss Winterâ€™s dozens of novels.
 
 Late one night, while pondering whether to accept the task of recording Miss Winterâ€™s personal story, Margaret begins to read her fatherâ€™s rare copy of Miss Winterâ€™s Thirteen Tales of Change and Desperation. She is spellbound by the stories and confused when she realizes the book only contains twelve stories. Where is the thirteenth tale? Intrigued, Margaret agrees to meet Miss Winter and act as her biographer.
 
 As Vida Winter unfolds her story, she shares with Margaret the dark family secrets that she has long kept hidden as she remembers her days at Angelfield, the now burnt-out estate that was her childhood home. Margaret carefully records Miss Winterâ€™s account and finds herself more and more deeply immersed in the strange and troubling story. In the end, both women have to confront their pasts and the weight of family secrets. As well as the ghosts that haunt them still.",
-"PDF", 3.99, 9.99, 5.99, null,true),
+"PDF", 3.99, 9.99, 5.99, null,false),
 (null, "978-0425228227", "Red Dragon", "Berkley", "2009-01-06 00:00:00", 464, "Mystery",
 "A second family has been massacred by the terrifying serial killer the press has christened ?The Tooth Fairy.? Special Agent Jack Crawford turns to the one man who can help restart a failed investigation?Will Graham. Graham is the greatest profiler the FBI ever had, but the physical and mental scars of capturing Hannibal Lecter have caused Graham to go into early retirement. Now, Graham must turn to Lecter for help.",
-"PDF", 3.99, 9.99, 5.99, null,true),
+"PDF", 3.99, 9.99, 5.99, null,false),
 (null, "978-0947533175", "Sherlock Holmes and the Circus of Fear", "Breese Books Ltd", "1999-05-01 00:00:00", 112, "Mystery",
 "After he learns of the tragic murder of the cunning and brilliant master of the most famous travelling circus in Europe, Lord George Sanger, Dr Watson recalls some escapades from the start of the 20th Century
 
@@ -324,7 +324,7 @@ Who is the mysterious murderer and why did he do it?
 And what could Sanger have been hiding?
 
 Not everything is as it seems; you shouldnâ€™t always believe what you read in the papers.",
-"MOBI", 0.2, 0.99, 0.5, null,true),
+"MOBI", 0.2, 0.99, 0.5, null,false),
 (null, "978-1542046596", "I Am Watching You", "Thomas & Mercer", "2017-10-01 00:00:00", 300, "Mystery",
 "When Ella Longfield overhears two attractive young men flirting with teenage girls on a train, she thinks nothing of itâ€?until she realises they are fresh out of prison and her maternal instinct is put on high alert. But just as sheâ€™s decided to call for help, something stops her. The next day, she wakes up to the news that one of the girlsâ€?beautiful, green-eyed Anna Ballardâ€?has disappeared.
 
@@ -333,26 +333,26 @@ A year later, Anna is still missing. Ella is wracked with guilt over what she fa
 Then an anniversary appeal reveals that Annaâ€™s friends and family might have something to hide. Annaâ€™s best friend, Sarah, hasnâ€™t been telling the whole truth about what really happened that nightâ€?and her parents have been keeping secrets of their own.
 
 Someone knows where Anna isâ€?and theyâ€™re not telling. But they are watching Ella.",
-"MOBI", 0.5, 1.99, 0.99, null,true),
+"MOBI", 0.5, 1.99, 0.99, null,false),
 (null, "978-0307588371", "Gone Girl", "Broadway Books", "2014-04-22 00:00:00", 432, "Mystery",
 "On a warm summer morning in North Carthage, Missouri, it is Nick and Amy Dunneâ€™s fifth wedding anniversary. Presents are being wrapped and reservations are being made when Nickâ€™s clever and beautiful wife disappears. Husband-of-the-Year Nick isnâ€™t doing himself any favors with cringe-worthy daydreams about the slope and shape of his wifeâ€™s head, but passages from Amy's diary reveal the alpha-girl perfectionist could have put anyone dangerously on edge. Under mounting pressure from the police and the mediaâ€?as well as Amyâ€™s fiercely doting parentsâ€?the town golden boy parades an endless series of lies, deceits, and inappropriate behavior. Nick is oddly evasive, and heâ€™s definitely bitterâ€?but is he really a killer? ",
-"MOBI", 4.99, 10.99, 7.99, null,true),
+"MOBI", 4.99, 10.99, 7.99, null,false),
 (null, "978-0812976144", "The Alienist", "Random House Trade Paperbacks", "2006-10-24 00:00:00", 512, "Mystery",
 "The year is 1896. The city is New York. Newspaper reporter John Schuyler Moore is summoned by his friend Dr. Laszlo Kreizlerâ€?a psychologist, or â€œalienistï¿½?â€?to view the horribly mutilated body of an adolescent boy abandoned on the unfinished Williamsburg Bridge. From there the two embark on a revolutionary effort in criminology: creating a psychological profile of the perpetrator based on the details of his crimes. Their dangerous quest takes them into the tortured past and twisted mind of a murderer who will kill again before their hunt is over.",
-"MOBI", 4.99, 9.99, 7.99, null,true),
+"MOBI", 4.99, 9.99, 7.99, null,false),
 (null, "978-0143034902", "The Shadow of the Wind", "Penguin Books", "2005-01-25 00:00:00", 512, "Mystery",
 "Barcelona, 1945: A city slowly heals in the aftermath of the Spanish Civil War, and Daniel, an antiquarian book dealerâ€™s son who mourns the loss of his mother, finds solace in a mysterious book entitled The Shadow of the Wind, by one JuliÃ¡n Carax. But when he sets out to find the authorâ€™s other works, he makes a shocking discovery: someone has been systematically destroying every copy of every book Carax has written. In fact, Daniel may have the last of Caraxâ€™s books in existence. Soon Danielâ€™s seemingly innocent quest opens a door into one of Barcelonaâ€™s darkest secrets--an epic story of murder, madness, and doomed love.",
-"MOBI", 9.99, 13.99, 11.99, null,true),
+"MOBI", 9.99, 13.99, 11.99, null,false),
 (null, "978-0544176560", "The Name of the Rose", "Mariner Books", "2014-04-22 00:00:00", 592, "Mystery",
 "The year is 1327. Franciscans in a wealthy Italian abbey are suspected of heresy, and Brother William of Baskerville arrives to investigate. When his delicate mission is suddenly overshadowed by seven bizarre deaths, Brother William turns detective. His tools are the logic of Aristotle, the theology of Aquinas, the empirical insights of Roger Bacon-all sharpened to a glistening edge by wry humor and a ferocious curiosity. He collects evidence, deciphers secret symbols and coded manuscripts,and digs into the eerie labyrinth of the abbey, where 'the most interesting things happen at night.'",
-"MOBI", 7.99, 11.99, 9.99, null,true),
+"MOBI", 7.99, 11.99, 9.99, null,false),
 (null, "978-0743493468", "Angels & Demons", "Washington Square Press", "2006-05-23 00:00:00", 496, "Mystery",
 "An ancient secret brotherhood. A devastating new weapon of destruction. An unthinkable target. When world-renowned Harvard symbologist Robert Langdon is summoned to his first assignment to a Swiss research facility to analyze a mysterious symbolâ€?seared into the chest of a murdered physicistâ€?he discovers evidence of the unimaginable: the resurgence of an ancient secret brotherhood known as the Illuminati...the most powerful underground organization ever to walk the earth. The Illuminati has now surfaced to carry out the final phase of its legendary vendetta against its most hated enemyâ€?the Catholic Church.
 
 Langdonâ€™s worst fears are confirmed on the eve of the Vaticanâ€™s holy conclave, when a messenger of the Illuminati announces they have hidden an unstoppable time bomb at the very heart of Vatican City. With the countdown under way, Langdon jets to Rome to join forces with Vittoria Vetra, a beautiful and mysterious Italian scientist, to assist the Vatican in a desperate bid for survival.
 
 Embarking on a frantic hunt through sealed crypts, dangerous catacombs, deserted cathedrals, and the most secretive vault on earth, Langdon and Vetra follow a 400-year-old trail of ancient symbols that snakes across Rome toward the long-forgotten Illuminati lair...a clandestine location that contains the only hope for Vatican salvation.",
-"MOBI", 7.99, 10.99, 8.99, null,true),
+"MOBI", 7.99, 10.99, 8.99, null,false),
 (null, "978-0062490377", "And Then There Were None", "William Morrow Paperbacks", "2016-02-23 00:00:00", 272, "Mystery",
 "One of the most famous and beloved mysteries from The Queen of Suspenseâ€?Agatha Christieâ€?now a Lifetime TV movie.
 
@@ -367,28 +367,28 @@ Stranded by a violent storm, and haunted by a nursery rhyme counting down one by
 
 ""Seven . . .""
 Which among them is the killer and will any of them survive?",
-"MOBI", 6.99, 9.99, 7.99, null,true),
+"MOBI", 6.99, 9.99, 7.99, null,false),
 (null, "978-0857665508", "Nexus", "Angry Robot", "2015-03-03 00:00:00", 528, "Science Fiction",
 "In the near future, the experimental nano-drug Nexus can link humans together, mind to mind. There are some who want to improve it. There are some who want to eradicate it. And there are others who just want to exploit it.When a young scientist is caught improving Nexus, heâ€™s thrust over his head into a world of danger and international espionage â€“ for there is far more at stake than anyone realizes.From the halls of academe to the halls of power, from the headquarters of an elite US agency in Washington DC to a secret lab beneath a top university in Shanghai, from the underground parties of San Francisco to the illegal biotech markets of Bangkok, from an international neuroscience conference to a remote monastery in the mountains of Thailand â€“ Nexus is a thrill ride through a future on the brink of explosion.",
-"MOBI", 3.99, 8.99, 6.99, null,true),
+"MOBI", 3.99, 8.99, 6.99, null,false),
 (null, "978-0099560432", "Ready Player One", "Arrow", "2012-04-01 00:00:00", 384, "Science Fiction",
 "It's the year 2044, and the real world has become an ugly place. We're out of oil. We've wrecked the climate. Famine, poverty, and disease are widespread. Like most of humanity, Wade Watts escapes this depressing reality by spending his waking hours jacked into the OASIS, a sprawling virtual utopia where you can be anything you want to be, where you can live and play and fall in love on any of ten thousand planets. And like most of humanity, Wade is obsessed by the ultimate lottery ticket that lies concealed within this alternate reality: OASIS founder James Halliday, who dies with no heir, has promised that control of the OASIS - and his massive fortune - will go to the person who can solve the riddles he has left scattered throughout his creation. For years, millions have struggled fruitlessly to attain this prize, knowing only that the riddles are based in the culture of the late twentieth century. And then Wade stumbles onto the key to the first puzzle. Suddenly, he finds himself pitted against thousands of competitors in a desperate race to claim the ultimate prize, a chase that soon takes on terrifying real-world dimensions - and that will leave both Wade and his world profoundly changed.",
-"MOBI", 4.99, 9.99, 7.99,  null,true),
+"MOBI", 4.99, 9.99, 7.99,  null,false),
 (null, "978-0553380958", "Snow Crash", "Del Rey", "2000-05-02 00:00:00", 576, "Science Fiction",
 "In reality, Hiro Protagonist delivers pizza for Uncle Enzoâ€™s CosoNostra Pizza Inc., but in the Metaverse heâ€™s a warrior prince. Plunging headlong into the enigma of a new computer virus thatâ€™s striking down hackers everywhere, he races along the neon-lit streets on a search-and-destroy mission for the shadowy virtual villain threatening to bring about infocalypse.",
-"MOBI", 6.99, 10.99, 9.99, null,true),
+"MOBI", 6.99, 10.99, 9.99, null,false),
 (null, "978-0553566062", "Virtual Light", "Spectra", "1994-07-01 00:00:00", 368, "Science Fiction",
 "2005: Welcome to NoCal and SoCal, the uneasy sister-states of what used to be California. Here the millenium has come and gone, leaving in its wake only stunned survivors. In Los Angeles, Berry Rydell is a former armed-response rentacop now working for a bounty hunter. Chevette Washington is a bicycle messenger turned pickpocket who impulsively snatches a pair of innocent-looking sunglasses. But these are no ordinary shades. What you can see through these high-tech specs can make you rich--or get you killed. Now Berry and Chevette are on the run, zeroing in on the digitalized heart of DatAmerica, where pure information is the greatest high. And a mind can be a terrible thing to crash...",
-"MOBI", 2.99, 8.99, 6.99, null,true),
+"MOBI", 2.99, 8.99, 6.99, null,false),
 (null, "978-1534303492", "Saga Volume 8", "Image Comics", "2018-01-02 00:00:00", 152, "Science Fiction",
 "After the traumatic events of the War for Phang, Hazel, her parents, and their surviving companions embark on a life-changing adventure at the westernmost edge of the universe.",
-"MOBI", 9.99, 19.99, 13.99, null,true),
+"MOBI", 9.99, 19.99, 13.99, null,false),
 (null, "978-0141036144", "Ninteneen Eighty Four", "Penguin UK", "2008-07-29 00:00:00", 336, "Science Fiction",
 "Winston Smith works for the Ministry of Truth in London, chief city of Airstrip One. Big Brother stares out from every poster, the Thought Police uncover every act of betrayal. When Winston finds love with Julia, he discovers that life does not have to be dull and deadening, and awakens to new possibilities.",
 "MOBI", 10.79, 25.82, 22.82, null,true),
 (null, "978-0771008795", "The Handmaid's Tale", "Emblem Editions", "2011-09-06 00:00:00", 368, "Science Fiction",
 "In this multi-award-winning, bestselling novel, Margaret Atwood has created a stunning Orwellian vision of the near future. This is the story of Offred, one of the unfortunate â€œHandmaidsï¿½? under the new social order who have only one purpose: to breed. In Gilead, where women are prohibited from holding jobs, reading, and forming friendships, Offredâ€™s persistent memories of life in the â€œtime beforeï¿½? and her will to survive are acts of rebellion. Provocative, startling, prophetic, and with Margaret Atwoodâ€™s devastating irony, wit, and acute perceptive powers in full force, The Handmaidâ€™s Tale is at once a mordant satire and a dire warning.",
-"MOBI", 11.99, 17.95, 12.37, null,true),
+"MOBI", 11.99, 17.95, 12.37, null,false),
 (null, "978-0553448122", "Artemis: A Novel", "Crown", "2017-11-14 00:00:00", 320, "Science Fiction",
 "Jasmine Bashara never signed up to be a hero. She just wanted to get rich.
 
@@ -463,15 +463,15 @@ Cambridge University, the visitor is eager to complete the gruesome task assigne
 He is disgusted by the way humans look, what they eat, and their capacity for murder and war, and he is equally baffled by the concepts of love and family. But as time goes on, he starts to realize there may be more to this weird species than he has been led to believe. Disguised as Martin, he drinks wine, reads poetry, and develops an ear for rock music and a taste for peanut butter. Slowly, unexpectedly, he forges bonds with Martinâ€™s family, and in picking up the pieces of the professorâ€™s shattered personal life, he begins to see hope and beauty in the humansâ€™ imperfections and to question the mission that brought him here.
 
 Praised by The New York Times as a â€œnovelist of great seriousness and talent,ï¿½? Matt Haig delivers an unlikely story about human nature and the joy found in the messiness of life on Earth. The Humans is a funny, compulsively readable tale that playfully and movingly explores the ultimate subjectâ€?ourselves.",
-"MOBI", 11.99, 16.99, 13.99, null,true),
+"MOBI", 11.99, 16.99, 13.99, null,false),
 (null, "978-0441478125", "The Left Hand of Darkness", "Ace", "2000-07-01", 352, "Science Fiction",
 "A lone human ambassador is sent to Winter, an alien world without sexual prejudice, where the inhabitants can change their gender whenever they choose. His goal is to facilitate Winter's inclusion in a growing intergalactic civilization. But to do so he must bridge the gulf between his own views and those of the strange, intriguing culture he encounters...
 
 Embracing the aspects of psychology, society, and human emotion on an alien world, The Left Hand of Darkness stands as a landmark achievement in the annals of intellectual science fiction.",
-"MOBI", 10.99, 17, 15.36, null,true),
+"MOBI", 10.99, 17, 15.36, null,false),
 (null, "978-0441783588", "Starship Troopers", "Ace", "1987-05-15", 352, "Science Fiction",
 "In one of Robert Heinlein's most controversial bestsellers, a recruit of the future goes through the toughest boot camp in the Universe--and into battle with the Terran Mobile Infantry against mankind's most frightening enemy.",
-"MOBI", 10.99, 26.21, 20.52, null,true),
+"MOBI", 10.99, 26.21, 20.52, null,false),
 (null, "978-1400025688", "Written in My Own Heart's Blood", "Seal Books","2016-05-31", 1152, "Romance",
 "1778: France declares war on Great Britain, the British army leaves Philadelphia, and George Washingtonâ€™s troops leave Valley Forge in pursuit. At this moment, Jamie Fraser returns from a presumed watery grave to discover that his best friend has married his wife, his illegitimate son has discovered (to his horror) who his father really is, and his beloved nephew, Ian, wants to marry a Quaker. Meanwhile, Jamieâ€™s wife, Claire, and his sister, Jenny, are busy picking up the pieces.The Frasers can only be thankful that their daughter Brianna and her family are safe in twentieth-century Scotland. Or not. In fact, Brianna is  searching for her own son, who was kidnapped by a man determined to learn her familyâ€™s secrets. Her husband, Roger, has ventured into the past in search of the missing boy . . . never suspecting that the object of his quest has not left the present. Now, with Roger out of the way, the kidnapper can focus on his true target: Brianna herself.",
 "MOBI", 6.99, 13.99, 8.99, null,true),
@@ -483,10 +483,10 @@ Embracing the aspects of psychology, society, and human emotion on an alien worl
 "PDF", 5.99, 15.99, 10.99, null,true),
 (null, "978-0749020002", "The Honeyfield Bequest", "Allison & Busby", "2016-11-21", 320, "Romance",
 "1901, Wiltshire: Kathleen's family are determined to force her into marriage with a violent man. In desperation she runs away and finds what consolation she can for her lost dreams. Then tragedy strikes and Kathleen seeks refuge at Honeyfield House, where a charitable bequest has created a hiding place for families in trouble. Nathan is attracted to Kathleen, but when his father dies suddenly, leaving the business in chaos, he can't court anyone. Godfrey Seaton is still following her and she isn't sure whose side her father is on. When Godfrey strikes, Nathan can't stand back when she needs help. Can the two of them defeat him and make a new life together?",
-"PDF", 1.99, 4.99, 3.99, null,true),
+"PDF", 1.99, 4.99, 3.99, null,false),
 (null, "978-1410493309", "Island of Glass", "Thorndike Press", "2016-12-07", 488, "Romance",
 "As the hunt for the Star of Ice leads the six guardians to Ireland, Doyle, the immortal, must face his tragic past. Three centuries ago, he closed off his heart, yet his warrior spirit is still drawn to the wild. And thereâ€™s no one more familiar with the wild than Riley ? and the wolf within her . . .",
-"PDF", 6.99, 13.99, 10.99, null,true),
+"PDF", 6.99, 13.99, 10.99, null,false),
 (null, "978-1540462497", "The Gender Game 3: The Gender Lie (Volume 3)", "CreateSpace Independent Publishing Platform", "2016-12-31", 408, "Romance",
 "I'd want you to help me win a war...
 
@@ -501,7 +501,7 @@ But what neither she, nor any of her new Liberator comrades can prepare for, is 
 "PDF", 0.45, 1.6, 1.25, null,false),
 (null, "978-0996135696", "Midnight Blue", " LJ Shen", "2018-01-16", 338, "Romance",
 "It should have been easy. I needed the money. He needed a babysitter to keep him from snorting himself to death. I was cherry-picked especially for him. Responsible. Optimistic. Warm. Innocent. The worst part is that I should have known better. Alex Winslow. British rock star. Serial heartbreaker. Casanova with whiskey eyes. â€œDonâ€™t get near the devil in a leather jacket. Heâ€™ll chew you up and spit you out.ï¿½? Guess what? I didnâ€™t listen. I signed the contract. World tour. Three months. Four Continents. One hundred shows. My name is Indigo Bellamy, and I sold my soul to a tattooed god. Problem was, my soul wasnâ€™t enough for Alex Winslow. He ended up taking my body, too. Then he took my heart. Then he took my all.",
-"PDF", 0.75, 2.98, 1.85, null,true),
+"PDF", 0.75, 2.98, 1.85, null,false),
 (null, "978-1942215707", "Sex, Not Love", "Vi Keeland", "2018-01-15", 300, "Romance",
 "My relationship with Hunter Delucia started backwards.
 
@@ -527,10 +527,10 @@ But you know what they say about the best laid plansâ€¦",
 "PDF", 0.18, 1.01, 0.75, null,false),
 (null, "978-1545459522", "Mixed Up", "CreateSpace Independent Publishing Platform", "2017-04-19", 270, "Romance",
 "Dirty cocktails, deadly enemies with a red-hot attraction, and one big, crazy, Greek family--what could possibly go wrong? Hiring my brother's best friend was not on my to-do list. Neither was he. Expanding my dirty cocktail bar into food was supposed to be easy, except finding a chef in my little town of Whiskey Key is anything but. Until Parker Hamilton comes home--bringing his Michelin starred chef's hat with him. He has no work. I need someone like him in my new kitchen. There's just one problem: I hate his cocky, filthy-mouthed, sexy-as-hell guts. Even if I might want him. Just a little... Working for my best friend's sister? Not on my to-do list. She's another story. Whiskey Key was supposed to be a relaxing vacation, except I haven't reached the heights I have by lying in a hammock drinking cocktails. So when Raven Archer is desperate for a chef, I offer up my skills. I'm bored. She needs what I can give her. Except there's a problem: I've always hated her. Her and her big, blue eyes, sassy mouth, and killer curves. If only I didn't want her.",
-"PDF", 1.25, 5.09, 4.5, null,true),
+"PDF", 1.25, 5.09, 4.5, null,false),
 (null, "978-1544237329", "The Low of Love (Wayward Love) (Volume 2)", "CreateSpace Independent Publishing Platform", "2017-04-19", 270, "Romance",
 "Dirty cocktails, deadly enemies with a red-hot attraction, and one big, crazy, Greek family--what could possibly go wrong? Hiring my brother's best friend was not on my to-do list. Neither was he. Expanding my dirty cocktail bar into food was supposed to be easy, except finding a chef in my little town of Whiskey Key is anything but. Until Parker Hamilton comes home--bringing his Michelin starred chef's hat with him. He has no work. I need someone like him in my new kitchen. There's just one problem: I hate his cocky, filthy-mouthed, sexy-as-hell guts. Even if I might want him. Just a little... Working for my best friend's sister? Not on my to-do list. She's another story. Whiskey Key was supposed to be a relaxing vacation, except I haven't reached the heights I have by lying in a hammock drinking cocktails. So when Raven Archer is desperate for a chef, I offer up my skills. I'm bored. She needs what I can give her. Except there's a problem: I've always hated her. Her and her big, blue eyes, sassy mouth, and killer curves. If only I didn't want her.",
-"PDF", 1.21, 6.24, 4.75, null,true),
+"PDF", 1.21, 6.24, 4.75, null,false),
 (null, "978-1981681419", "Exposed: A Bad Boy Contemporary Romance", "CreateSpace Independent Publishing Platform", "2017-12-12", 260, "Romance",
 "Wanna know a secret? Iâ€™ve never had an orga*m. One night, everything changes. I lose my innocence, and I have my first O. With a man who probably doesnâ€™t care. Maxwell Brideau. Ruthless. Billionaire. Single father. Heâ€™s my bossâ€™s brother and he doesnâ€™t date. Heâ€™s never been seen with the same woman twice. Iâ€™d be foolish to get my hopes up. Iâ€™m crazy about his little girl. Bella desperately needs a mother-figure. What does Maxwell need? A marriage of convenience. He wants me to marry him and take care of his daughter. I watch over Bella during the day. My nights belong to Maxwell. Itâ€™s an arrangement, nothing more. An arrangement with benefits. Iâ€™m helpless beneath his touch. He owns me, body and soul, and is going to show me many more filthy firsts... Exposed is a STAND-ALONE, full-length contemporary romance. There are no cliffhangers, and a happy ending is guaranteed!",
 "PDF", 0.23, 1, 0.75, null,true),
@@ -992,14 +992,22 @@ insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_
 ('How many books have you read in your life?', 'Less than 1', 'Between 1 and 10', 'Between 11 and 50', 'More than 50', 0, 0, 0, 0, false);
 
 INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE) VALUES
-(10, '2018-02-01', 28.96, 33.29676);
+(10, CURRENT_TIME, 28.96, 33.29676),
+(6,'2018-02-18 02:19:53',28.96,33.29676),
+(7,'2018-02-12 02:19:53',13.98,16.07),
+(7,'2017-12-01 02:19:53',28.94,33.26);
 
 INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE, HST_RATE) VALUES
 (1, 1, 8.99, 9.975, 5, 0),
 (1, 2, 5.99, 9.975, 5, 0),
 (1, 3, 5.99, 9.975, 5, 0),
-(1, 4, 7.99, 9.975, 5, 0)
+(1, 4, 7.99, 9.975, 5, 0),
+(2, 1, 8.99, 9.975, 5, 0),
+(2, 2, 5.99, 9.975, 5, 0),
+(2, 3, 5.99, 9.975, 5, 0),
+(2, 4, 7.99, 9.975, 5, 0),
+(3, 3, 5.99, 9.975, 5, 0),
+(3, 4, 7.99, 9.975, 5, 0),
+(4, 9, 14.95, 9.975, 5, 0),
+(4, 37, 13.99, 9.975, 5, 0)
 ;
-
-
-
