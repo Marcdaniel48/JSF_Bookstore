@@ -5,7 +5,7 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:p="http://primefaces.org/ui"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-
+    
     <nav class="navbar">
         <h:link id="homeLink" outcome="index">
             <div class="logo"></div>
@@ -20,7 +20,9 @@
         <div class="right">
             
             <h:form id="searchForm" class="search-icon-container">
-
+                
+            
+                
                 <h:selectOneMenu styleClass="search-dropdown" id="searchOption" value="#{searchBackingBean.searchOption}">
                     <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
                 </h:selectOneMenu>
@@ -30,6 +32,7 @@
                 <h:commandLink action="#{searchBackingBean.search}">
                     <h:graphicImage id="t1" class="navbar-icon" library="images" name="search.png" alt="Search Icon" />
                 </h:commandLink>
+                
 
             </h:form>
 
@@ -53,7 +56,21 @@
             <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
                 <a id="navbarUsername" class="navbar-link">#{navbarBackingBean.username}</a>
             </ui:fragment>
-
+            
+            <h:link outcome="shopping_cart">
+                <h:graphicImage class="navbar-icon" library="images" name="shopping-cart.png" alt="Shoppping Cart Icon" />
+            </h:link>
+            
+            <h:form>
+                
+                <h:commandButton value="#{msgs.english}" action="#{localeBean.setLanguage('en', 'CA')}"></h:commandButton>
+                <h:commandButton value="#{msgs.francais}" action="#{localeBean.setLanguage('fr', 'CA')}"></h:commandButton>
+            </h:form>
+            
+            <h:link class="navbar-login" value="#{msgs.loginbutton}" outcome="login" />
+            
+            <h:link class="navbar-login" value="#{msgs.managerDownload}" outcome="download" />
+            
             <script>
                 
                 var $searchInput = $(".search-input").first();
@@ -123,5 +140,5 @@
             </h:form>
         </div>
     </ui:fragment>
-    
+
 </ui:composition>

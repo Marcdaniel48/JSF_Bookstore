@@ -5,6 +5,7 @@
  */
 package com.g4w18.controllers;
 
+import com.g4w18.backingbeans.SearchBackingBean;
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.Review;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -36,7 +39,9 @@ public class BookJpaController implements Serializable {
 
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
-
+    
+    private Logger logger = Logger.getLogger(BookJpaController.class.getName());
+    
     public void create(Book book) throws RollbackFailureException, Exception {
         if (book.getAuthorList() == null) {
             book.setAuthorList(new ArrayList<Author>());
@@ -102,6 +107,7 @@ public class BookJpaController implements Serializable {
     }
 
     public void edit(Book book) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+        logger.log(Level.INFO, "edit JPA Called");
         try {
             utx.begin();
             Book persistentBook = em.find(Book.class, book.getBookId());
@@ -188,7 +194,9 @@ public class BookJpaController implements Serializable {
                 }
             }
             utx.commit();
+            logger.log(Level.INFO, "after commit JPA Called");
         } catch (Exception ex) {
+            logger.log(Level.INFO, "Exception CAUGHT");
             try {
                 utx.rollback();
             } catch (Exception re) {

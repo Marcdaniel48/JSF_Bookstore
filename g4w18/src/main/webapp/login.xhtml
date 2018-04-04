@@ -11,37 +11,38 @@
     <ui:define name="windowTitle">
         #{msgs.loginWindowTitle}
     </ui:define>
-    
+
     <ui:define name="content">
         
         <h:outputStylesheet library="css" name="login.css" />
 
 
-                <div class="page_container">
-                    <div class="login-parent">
-                        <div class="bg-img"></div>
-                        <div class="login">
+            <div class="page_container">
+                <div class="login-parent">
+                    <div class="bg-img"></div>
+                    <div class="login">
 
-                            <div class="container">
+                        <div class="container">
 
-                                <h:form id="loginForm">
-                                    <h:outputLabel class="label" for="username" value="#{msgs.username}"/>
-                                    <h:inputText id="username" value="#{loginController.username}" label="#{msgs.username}" />
+                            <h:form id="loginForm">
+                                <h:outputLabel class="label" for="username" value="#{msgs.username}"/>
+                                <h:inputText id="username" value="#{loginController.username}" label="#{msgs.username}" />
 
-                                    <h:outputLabel class="label" for="password" value="#{msgs.password}"/>
-                                    <h:inputSecret id="password" value="#{loginController.password}" label="#{msgs.password}"/>
+                                <h:outputLabel class="label" for="password" value="#{msgs.password}"/>
+                                <h:inputSecret id="password" value="#{loginController.password}" label="#{msgs.password}"/>
 
-                                    <h:commandButton id="submit" value="#{msgs.loginbutton}" action="#{loginController.login()}"/>
-                                </h:form>
+                                <h:commandButton id="submit" value="#{msgs.loginbutton}" action="#{loginController.login()}"/>
+                            </h:form>
 
-                                <h:outputLabel value="Login status: "/>
-                                <h:outputText value="#{session.getAttribute('loggedIn')}"/>
-
-                            </div>
+                            <h:outputLabel value="Login status: "/>
+                            <h:outputText value="#{session.getAttribute('loggedIn')}"/>
 
                         </div>
+
+
                     </div>
                 </div>
+            </div>
             
             
     </ui:define>

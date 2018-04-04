@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.g4w18.backingbeans;
+package com.g4w18.validators;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -21,6 +16,15 @@ import javax.faces.validator.ValidatorException;
 public class CreditCardValidator implements Validator
 {
 
+    /**
+     * Checks to see if an entered credit card number is actually a valid credit card number.
+     * If the entered credit card number is invalid, then throw a ValidatorException with an appropriate message.
+     * 
+     * @param context
+     * @param component
+     * @param value
+     * @throws ValidatorException 
+     */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException 
     {

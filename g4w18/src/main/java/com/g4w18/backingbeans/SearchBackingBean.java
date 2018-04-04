@@ -11,6 +11,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.g4w18.entities.Book;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.validation.constraints.Size;
 
 
@@ -71,7 +75,7 @@ public class SearchBackingBean implements Serializable {
                 break;
                 
             case "Author":
-                //author method goes here
+                result = getBooksByAuthor().size();
                 break;
                 
             case "ISBN":
@@ -80,12 +84,8 @@ public class SearchBackingBean implements Serializable {
                 
             case "Publisher":
                 result = getBooksByPublisher().size();
-//                List<Book> publishers = getPublishers();
-//                List<Book> allBooksFromPublishers = getBooksForPublishers(publishers);
-//                result = allBooksFromPublishers.size();
-                
                 break;
-                default:
+            default:
                 //nothing to display so stay on same page
                 result = 0;
                 break;
@@ -100,7 +100,20 @@ public class SearchBackingBean implements Serializable {
            return "resultPlus";
        }
        else if(result == 1)
-           return "resultOne";
+       {
+            try {
+                
+                int bookId = getSingleBookId();
+                
+                ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+                context.redirect(context.getRequestContextPath() + "/bookDetail.xhtml?id="+bookId);
+                
+                
+            } catch (IOException ex) {
+                Logger.getLogger(SearchBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return "";
+       }
        else
        {    
            message="We have found nothing for you ! You searched for: " + searchTerm;
@@ -124,7 +137,7 @@ public class SearchBackingBean implements Serializable {
                 break;
                 
             case "Author":
-                //author method goes here
+                userBooks = getBooksByAuthor();
                 break;
                 
             case "ISBN":
@@ -133,11 +146,40 @@ public class SearchBackingBean implements Serializable {
                 
             case "Publisher":
                userBooks = getBooksByPublisher();
-//                List<Book> publishers = getPublishers();
-//                userBooks = getBooksForPublishers(publishers);
                 break;
         }
         return userBooks;
+    }
+    
+    /**
+     * Get id of a single book so you can navigate to that page right away.
+     * @return BookId
+     */
+    public int getSingleBookId()
+    {
+        int bookId;
+        switch(searchOption)
+        {
+            case "Title":
+               bookId = getBooksByTitle().get(0).getBookId();
+                break;
+                
+            case "Author":
+                bookId = getBooksByAuthor().get(0).getBookId();
+                break;
+                
+            case "ISBN":
+               bookId = getBookByIsbn().get(0).getBookId();
+                break;
+                
+            case "Publisher":
+                bookId = getBooksByPublisher().get(0).getBookId();
+                break;
+            default:
+                bookId = 0;
+                break;
+        }
+        return bookId;
     }
     
     /**
@@ -152,13 +194,42 @@ public class SearchBackingBean implements Serializable {
         return books;
     }
     
+    /**
+     * Get books for authors found.
+     * @return 
+     */
     public List<Book> getBooksByAuthor()
     {
-        List<Author> authors = authorJpaController.findAuthor(searchTerm);
+        List<Author> authors = authorJpaController.findAuthor3Options(searchTerm);
         
-        List<Book> books = authors.get(0).getBookList();
-       
-        return books;
+        List<Book> allBooks = new ArrayList<Book>();
+        
+        int authorCount = authors.size();
+        
+        logger.log(Level.INFO,"---------==HOW MANY AUTHORS WITH ======-----"+  authorCount);
+        
+        for(int k=0;k<authorCount;k++)
+        {
+            List<Book> checkBooks = authors.get(k).getBookList();
+            for(int l=0;l<checkBooks.size();l++)
+            {
+                if(checkBooks.get(l).getRemovalStatus()==false)
+                {
+                    allBooks.add(checkBooks.get(l));
+                }
+            }
+        }
+        
+//        for(int i=0;i< authorCount;i++)
+//        {
+//            allBooks.addAll(authors.get(i).getBookList());
+//        }
+        for(int j = 0;j<allBooks.size();j++)
+        {
+            logger.log(Level.INFO,"BOOKS INSIDE OF AUTHOR LIST: "+ allBooks.get(j).getTitle());
+        }
+        
+        return allBooks;
     }
     
     /**
@@ -179,40 +250,12 @@ public class SearchBackingBean implements Serializable {
      */
     public List<Book> getBooksByPublisher()
     {
-        List<Book> books = bookJpaController.findBooksByPublisher(searchTerm);
+        List<Book> books = bookJpaController.findLikePublisher(searchTerm);
         
         return books;
     }
     
-    /**
-     * Get list of publisher with the specific term provided by the user.
-     * @return List of publishers found
-     */
-    public List<Book> getPublishers(String searchTxt)
-    {
-        
-        List<Book> publishers = bookJpaController.findDistinctPublisher(searchTerm);
-        
-        return  publishers;
-    }
-    
-    /**
-     * Get the list of books for all the publishers in the list.
-     * @param publishers The publishers we want books from
-     * @return List of books from publishers
-     */
-    public List<Book> getBooksForPublishers(List<Book> publishers)
-    {
-        int publisherCount = publishers.size();
-        List<Book> allBooksFromPublishers = null;
-        
-        for(int i=0;i<publisherCount;i++)
-        {
-            allBooksFromPublishers.addAll(bookJpaController.findBooksByPublisher(publishers.get(i).getPublisher()));
-        }
-        return allBooksFromPublishers;
-    }
-    
+    //All methods for getting and setting information in JSF page
     public void setSearchTerm(String searchTerm){
         this.searchTerm = searchTerm;
     }
