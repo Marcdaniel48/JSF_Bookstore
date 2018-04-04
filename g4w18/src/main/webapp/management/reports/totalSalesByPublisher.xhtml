@@ -17,8 +17,7 @@ and open the template in the editor.
         
         <h:form>
             <p:dataTable value="#{reportsBackingBean.publishersWithTotalSales}" var="sale" paginator="true" rows="25" 
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                         tableStyle="width:auto">
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
                 
                 <p:column headerText="#{msgs.reportsPublisher}" sortBy="#{sale.publisher}" filterBy="#{sale.publisher}" filterMatchMode="contains">
                     <h:outputText value="#{sale.publisher}"/>
