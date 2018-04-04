@@ -140,7 +140,7 @@ public class CustomBookController implements Serializable {
      */
     //Author: Salman
     public List<Book> findBooksByTitle(String title) {
-        List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title LIKE ?1 order by b.title asc")
+        List<Book> findBookByTitle = em.createQuery("Select b from Book b where (b.title LIKE ?1) AND (b.removalStatus=0) order by b.title asc")
                 .setParameter(1,"%"+ title + "%")
                 .getResultList();
 
@@ -156,8 +156,8 @@ public class CustomBookController implements Serializable {
      */
     //Author: Salman
     public List<Book> findLikePublisher(String publisher) {
-        List<Book> findPublisher = em.createQuery("Select b from Book b where b.publisher LIKE ?1 order by b.publisher asc")
-                .setParameter(1, publisher + "%")
+        List<Book> findPublisher = em.createQuery("Select b from Book b where (b.publisher LIKE ?1) AND (b.removalStatus=0) order by b.publisher asc")
+                .setParameter(1,"%"+ publisher + "%")
                 .getResultList();
 
         return findPublisher;
@@ -170,7 +170,7 @@ public class CustomBookController implements Serializable {
      */
     //Author: Salman
     public List<Book> findBookByIsbn(String isbn) {
-        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where b.isbnNumber LIKE ?1 order by b.pageNumber asc")
+        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where (b.isbnNumber LIKE ?1) AND (b.removalStatus=0) order by b.pageNumber asc")
                 .setParameter(1, isbn + "%")
                 .getResultList();
 

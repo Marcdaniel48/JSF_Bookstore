@@ -220,5 +220,95 @@
 
         </p:panel>
 
+        
+        <p:panel header="#{msgs.managerEditRemoveAuthorTitle}" widgetVar="panelEditAuthor" toggleable="true"  toggleSpeed="500" closeSpeed="500" style="margin-bottom:100px ">
+
+            <h:form>
+                <p:growl id="msgs" showDetail="true"/>
+                <p:dataTable value="#{managerBookHandling.books}" var="book" paginator="true" rows="25" 
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             editable="true">
+                    <p:ajax event="rowEdit" listener="#{managerBookHandling.onBookEdit}" />
+                    <p:ajax event="rowEditCancel" listener="#{managerBookHandling.onBookEditCancel}" />
+
+                    <p:column headerText="#{msgs.managerAddIsbn}" sortBy="#{book.isbnNumber}" filterBy="#{book.isbnNumber}" >
+                        <h:outputText value="#{book.isbnNumber}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{book.title}" filterBy="#{book.title}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.title}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.title}" required="true" requiredMessage="#{msgs.invalidBookTitle}"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddPublisher}" sortBy="#{book.publisher}" filterBy="#{book.publisher}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.publisher}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.publisher}"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddPublisherDate}" sortBy="#{book.publicationDate}" filterBy="#{book.publicationDate}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.publicationDate}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.publicationDate}" required="true" >
+                                    <f:convertDateTime pattern="yyyy/mm/dd" />
+                                </p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddPageNumber}" sortBy="#{book.pageNumber}" filterBy="#{book.pageNumber}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.pageNumber}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.pageNumber}" required="true" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddGenre}" sortBy="#{book.genre}" filterBy="#{book.genre}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.genre}"/></f:facet>
+                            <f:facet name="input"><h:selectOneMenu value="#{book.genre}" required="true" >
+                                    <f:selectItems value="#{managerBookHandling.genreOptionValue}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddDescription}" sortBy="#{book.description}" filterBy="#{book.description}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.description}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.description}" required="true" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddFormat}" sortBy="#{book.format}" filterBy="#{book.format}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.format}"/></f:facet>
+                            <f:facet name="input"><h:selectOneMenu value="#{book.format}" required="true" >
+                                    <f:selectItems value="#{managerBookHandling.formats}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    
+
+
+
+                    <p:column>
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+
+
+
+
+        </p:panel>
+        
+        
     </h:body>
 </html>

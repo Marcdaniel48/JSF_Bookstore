@@ -208,11 +208,22 @@ public class SearchBackingBean implements Serializable {
         
         logger.log(Level.INFO,"---------==HOW MANY AUTHORS WITH ======-----"+  authorCount);
         
-        
-        for(int i=0;i< authorCount;i++)
+        for(int k=0;k<authorCount;k++)
         {
-            allBooks.addAll(authors.get(i).getBookList());
+            List<Book> checkBooks = authors.get(k).getBookList();
+            for(int l=0;l<checkBooks.size();l++)
+            {
+                if(checkBooks.get(l).getRemovalStatus()==false)
+                {
+                    allBooks.add(checkBooks.get(l));
+                }
+            }
         }
+        
+//        for(int i=0;i< authorCount;i++)
+//        {
+//            allBooks.addAll(authors.get(i).getBookList());
+//        }
         for(int j = 0;j<allBooks.size();j++)
         {
             logger.log(Level.INFO,"BOOKS INSIDE OF AUTHOR LIST: "+ allBooks.get(j).getTitle());
