@@ -161,6 +161,16 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- January 2018 Discovered that there is a guava conflict that 
+        prevents Selenium from functioning unless this explicit dependency is 
+        included for testing -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>24.1-jre</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- A better way to write assertions -->
         <dependency>
             <groupId>org.assertj</groupId>

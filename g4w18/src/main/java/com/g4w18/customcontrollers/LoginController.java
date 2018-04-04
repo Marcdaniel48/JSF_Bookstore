@@ -146,7 +146,7 @@ public class LoginController implements Serializable
             }
         }
         
-        return "bookList.xhtml";
+        return "index";
     }
 
     /**

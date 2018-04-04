@@ -52,6 +52,13 @@
     
     <navigation-rule>
         <navigation-case>
+            <from-outcome>registration</from-outcome>
+            <to-view-id>/registration.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
             <from-outcome>shopping_cart</from-outcome>
             <to-view-id>/shopping_cart.xhtml</to-view-id>
         </navigation-case>

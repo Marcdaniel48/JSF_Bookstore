@@ -7,7 +7,8 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-
+    
+    <ui:define name="title">#{msgs.loginPageTitle}</ui:define>
     <ui:define name="content">
         
         <h:outputStylesheet library="css" name="login.css" />
@@ -22,15 +23,15 @@
                         
                         <div class="container">
                     
-                            <h:form>
+                            <h:form id="login_form">
                                 <h:outputLabel class="label" for="username" value="#{msgs.username}"/>
                                 <h:inputText id="username" value="#{loginController.username}" label="#{msgs.username}" />
 
                                 <h:outputLabel class="label" for="password" value="#{msgs.password}"/>
                                 <h:inputSecret id="password" value="#{loginController.password}" label="#{msgs.password}"/>
 
-                                <h:commandButton value="#{msgs.loginbutton}" action="#{loginController.login()}"/>
-                                <h:commandButton value="#{msgs.registerbutton}" action="registration.xhtml"/>
+                                <h:commandButton id="login_button" value="#{msgs.loginbutton}" action="#{loginController.login()}"/>
+                                <h:commandButton id="go_to_registration_button" value="#{msgs.registerbutton}" action="registration"/>
                             </h:form>
                             
                             <h:outputLabel value="Login status: "/>
