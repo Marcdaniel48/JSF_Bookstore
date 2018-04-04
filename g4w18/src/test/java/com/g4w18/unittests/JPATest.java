@@ -219,6 +219,19 @@ public class JPATest {
         assertThat(authorList).hasSize(1);
     }
     
+    /**
+     * Testing another author options for search.
+     */
+    @Test
+    public void get_author_3_options_1ResultSapkowski()
+    {
+        List<Author> authorList = aJc.findAuthor3Options("Sapkowski%");
+        
+        logger.log(Level.INFO,"---------==HOW MANY AUTHORS WITH Sapkowski======-----"+  authorList.get(0).getFirstName());
+        
+        assertThat(authorList).hasSize(1);
+    }
+    
     
     /**
      * Testing another author options for search. get 6 result
@@ -259,8 +272,6 @@ public class JPATest {
         Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 13, 0, 0, 0));;
         
         List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
-        
-       
         
            for(int i = 0;i<topSellers.size();i++)
             logger.log(Level.INFO,"RESULTS FOR 2  : "+topSellers.get(i).getTitle() + "---------" + "MONEEEEEEy       " + topSellers.get(i).getTotalSales());

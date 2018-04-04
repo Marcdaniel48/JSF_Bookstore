@@ -103,10 +103,10 @@ public class SearchBackingBean implements Serializable {
        {
             try {
                 
-                
+                int bookId = getSingleBookId();
                 
                 ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-                //context.redirect(context.getRequestContextPath() + "/bookDetail.xhtml?id="+getBooksByAuthor().get(0).);
+                context.redirect(context.getRequestContextPath() + "/bookDetail.xhtml?id="+bookId);
                 
                 
             } catch (IOException ex) {
@@ -152,6 +152,37 @@ public class SearchBackingBean implements Serializable {
     }
     
     /**
+     * Get id of a single book so you can navigate to that page right away.
+     * @return BookId
+     */
+    public int getSingleBookId()
+    {
+        int bookId;
+        switch(searchOption)
+        {
+            case "Title":
+               bookId = getBooksByTitle().get(0).getBookId();
+                break;
+                
+            case "Author":
+                bookId = getBooksByAuthor().get(0).getBookId();
+                break;
+                
+            case "ISBN":
+               bookId = getBookByIsbn().get(0).getBookId();
+                break;
+                
+            case "Publisher":
+                bookId = getBooksByPublisher().get(0).getBookId();
+                break;
+            default:
+                bookId = 0;
+                break;
+        }
+        return bookId;
+    }
+    
+    /**
      * Get books with the title provided by the user.
      * 
      * @return List of books found
@@ -163,6 +194,10 @@ public class SearchBackingBean implements Serializable {
         return books;
     }
     
+    /**
+     * Get books for authors found.
+     * @return 
+     */
     public List<Book> getBooksByAuthor()
     {
         List<Author> authors = authorJpaController.findAuthor3Options(searchTerm);

@@ -122,6 +122,7 @@ public class CustomBookController implements Serializable {
      * @param title name of the book that is being searched
      * @return List of books found with the title
      */
+    //Author: Salman
     public List<Book> findBooksByTitleSpecific(String title) {
         List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title =?1")
                 .setParameter(1, title)
@@ -137,9 +138,10 @@ public class CustomBookController implements Serializable {
      * @param title name of the book that is being searched
      * @return List of books found with the title
      */
+    //Author: Salman
     public List<Book> findBooksByTitle(String title) {
         List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title LIKE ?1 order by b.title asc")
-                .setParameter(1, title + "%")
+                .setParameter(1,"%"+ title + "%")
                 .getResultList();
 
         return findBookByTitle;
@@ -152,6 +154,7 @@ public class CustomBookController implements Serializable {
      * @param title publisher that is being searched
      * @return List of books found with the publisher
      */
+    //Author: Salman
     public List<Book> findLikePublisher(String publisher) {
         List<Book> findPublisher = em.createQuery("Select b from Book b where b.publisher LIKE ?1 order by b.publisher asc")
                 .setParameter(1, publisher + "%")
@@ -159,31 +162,16 @@ public class CustomBookController implements Serializable {
 
         return findPublisher;
     }
-
-    
     /**
-     * Get books from the database with the isbn provided(must match whole)
+     * Get books from the database with the isbn provided
      *
      * @param isbn number of the book the user is searching for
      * @return Book found with the isbn
      */
-    public List<Book> findBookByAuthor(String author) {
-        List<Book> findBookByAuthor = em.createQuery("Select b from Book b where b.isbnNumber = ?1")
-                .setParameter(1, author)
-                .getResultList();
-
-        return findBookByAuthor;
-    }
-
-    /**
-     * Get books from the database with the isbn provided(must match whole)
-     *
-     * @param isbn number of the book the user is searching for
-     * @return Book found with the isbn
-     */
+    //Author: Salman
     public List<Book> findBookByIsbn(String isbn) {
-        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where b.isbnNumber = ?1")
-                .setParameter(1, isbn)
+        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where b.isbnNumber LIKE ?1 order by b.pageNumber asc")
+                .setParameter(1, isbn + "%")
                 .getResultList();
 
         return findBookByIsbn;
