@@ -25,7 +25,7 @@
                     
                             <h:form>
                                 <h:outputLabel value="#{msgs.username}"/>
-                                <h:inputText id="username" value="#{clientBacking.client.username}" required="true" requiredMessage="#{msgs.invalidEmptyUsername}" validator="#{clientBacking.validateExistingUsername}"/>
+                                <h:inputText id="username" value="#{clientBacking.client.username}" required="true" requiredMessage="#{msgs.invalidEmptyUsername}"/>
                                 <h:message for="username" style="color:red" />
                                 <br/>
                                 <h:outputLabel value="#{msgs.password}"/>
