@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui">
     <h:head>
-        <title>Shopping Cart</title>
+        <title>#{msgs.shoppingCartPageTitle}</title>
         <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
         <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
@@ -24,7 +24,7 @@
            </b:navbarLinks>
        </b:navBar>
         <b:container fluid="false">
-            <b:form>
+            <b:form id="shopping_cart_form">
                 <b:panel title="#{msgs.shoppingCart}" collapsible="false">
                     <b:row styleClass="show-grid">
                             <b:column col-md="3">
@@ -50,14 +50,18 @@
                                 </b:container>
                             </b:column>
                             <b:column col-md="3">
-                                <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
+                                <div class="book_title">
+                                    <h:outputText value="#{book.title}" styleClass="list-group-item-heading">
+                                </h:outputText></div>
                                 <f:param name="id" value="#{book.bookId}" />
                             </b:column>
                             <b:column col-md="3">
                                 <h:outputText value="#{shoppingCartBackingBean.getPrice(book)} CAD"></h:outputText>
                             </b:column>
                             <b:column col-md="3">
-                                <b:commandButton value="#{msgs.remove}" action="#{shoppingCartBackingBean.shoppingCart.removeFromCart(book)}" />
+                                <div class="remove_from_cart_buttons">
+                                    <b:commandButton value="#{msgs.remove}" action="#{shoppingCartBackingBean.shoppingCart.removeFromCart(book)}"/>
+                                </div>
                             </b:column>
                         </b:row>
                     </ui:repeat>

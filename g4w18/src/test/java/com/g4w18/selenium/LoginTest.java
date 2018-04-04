@@ -32,7 +32,6 @@ public class LoginTest
         // not the implementation.
         driver = new ChromeDriver();
         //driver = new FirefoxDriver();
-
     }
     
     /**
