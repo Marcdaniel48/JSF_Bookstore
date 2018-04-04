@@ -26,17 +26,17 @@ and open the template in the editor.
            </b:navbarLinks>
            <b:navbarLinks pull="right" styleClass="hidden-xs">
            </b:navbarLinks>
-       </b:navBar>
+        </b:navBar>
         
         <b:container fluid="true">
             <h3>#{msgs.payment}</h3>
             <b:column col-md="6">
                 <b:panel title="#{msgs.finalCreditCardInformation}" collapsible="false">
                     <h:form>
-                        <b:inputText label="#{msgs.finalCardName}" id="cardname" value="#{finalizationBacking.creditCard.name}" required="true"/>
+                        <b:inputText label="#{msgs.finalCardName}" id="cardname" value="#{checkoutBacking.creditCard.name}" required="true"/>
                         <b:message for="cardname" style="color:red" />
 
-                        <b:inputText label="#{msgs.finalCardNumber}" id="cardnumber" value="#{finalizationBacking.creditCard.number}" required="true">
+                        <b:inputText label="#{msgs.finalCardNumber}" id="cardnumber" value="#{checkoutBacking.creditCard.number}" required="true">
                             <f:validator validatorId="creditCardValidator" />
                         </b:inputText>
                         <b:message for="cardnumber" style="color:red" />
@@ -44,20 +44,20 @@ and open the template in the editor.
 
                         <b:panel title="#{msgs.finalExpiration}" collapsible="false" col-md="2">
                             <b:column col-md="6">
-                                <b:selectOneMenu label="#{msgs.month}" id="monthOptions" value="#{finalizationBacking.creditCard.month}">
-                                    <f:selectItems value="#{finalizationBacking.monthOptions}"/>
+                                <b:selectOneMenu label="#{msgs.month}" id="monthOptions" value="#{checkoutBacking.creditCard.month}">
+                                    <f:selectItems value="#{checkoutBacking.monthOptions}"/>
                                 </b:selectOneMenu>
                             </b:column>
 
                             <b:column col-md="6">
-                                <b:selectOneMenu label="#{msgs.year}" id="cardexpirationyear" value="#{finalizationBacking.creditCard.year}">
-                                    <f:selectItems value="#{finalizationBacking.yearOptions}"/>
+                                <b:selectOneMenu label="#{msgs.year}" id="cardexpirationyear" value="#{checkoutBacking.creditCard.year}">
+                                    <f:selectItems value="#{checkoutBacking.yearOptions}"/>
                                 </b:selectOneMenu>
                             </b:column>
                             <b:message for="cardexpirationyear" style="color:red" />
                         </b:panel>
 
-                        <b:inputText label="#{msgs.finalShipping}" id="shippingAddress" value="#{finalizationBacking.shippingAddress}" required="true"/>
+                        <b:inputText label="#{msgs.finalShipping}" id="shippingAddress" value="#{checkoutBacking.shippingAddress}" required="true"/>
                         <b:message for="shippingAddress" style="color:red" />
 
                         <b:commandButton value="#{msgs.continue}" action="place_order.xhtml" style="float: right"/>
@@ -68,6 +68,6 @@ and open the template in the editor.
         </b:container>
         
         <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
-       <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
+        <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
     </h:body>
 </html>

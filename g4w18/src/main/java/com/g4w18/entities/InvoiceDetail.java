@@ -161,4 +161,15 @@ public class InvoiceDetail implements Serializable {
         return "com.g4w18.entities.InvoiceDetail[ detailId=" + detailId + " ]";
     }
     
+    /**
+     * Returns the price of the purchased book including the taxes.
+     * 
+     * @author Marc-Daniel
+     * @return 
+     */
+    public BigDecimal getSoldPrice()
+    {
+        return bookPrice.multiply(BigDecimal.ONE.add(gstRate).add(hstRate).add(pstRate));
+    }
+    
 }

@@ -71,6 +71,7 @@
                         <b:column col-md="3">
                         </b:column>
                         <b:column col-md="3">
+                            <h:outputText value="#{msgs.shoppingCartSubtotal}: CDN$ #{shoppingCartBackingBean.shoppingCart.subtotal}"></h:outputText>
                         </b:column>
                         <b:column col-md="3">
                             <b:commandButton id="checkoutButton" value="#{msgs.checkout}" action="#{shoppingCartBackingBean.proceedToCheckout()}"/>

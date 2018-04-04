@@ -33,13 +33,13 @@ and open the template in the editor.
                 <b:panel collapsible="false">
                     <b:column col-md="6">
                         <h4>#{msgs.finalShipping}</h4>
-                        #{orderBacking.currentClient.firstName} #{orderBacking.currentClient.lastName}
+                        #{checkoutBacking.currentClient.firstName} #{checkoutBacking.currentClient.lastName}
                         <br/>
-                        #{finalizationBacking.shippingAddress}
+                        #{checkoutBacking.shippingAddress}
                         <br/>
-                        #{orderBacking.currentClient.country}
+                        #{checkoutBacking.currentClient.country}
                         <br/>
-                        #{msgs.phone}: #{orderBacking.currentClient.homeTelephone}
+                        #{msgs.phone}: #{checkoutBacking.currentClient.homeTelephone}
                         <br/><br/>
                                 
                         <h4>#{msgs.billingAddress}</h4>
@@ -48,7 +48,7 @@ and open the template in the editor.
                     
                     <b:column col-md="6">
                         <h4>#{msgs.paymentMethod}</h4>
-                        #{msgs.creditCardEnding} #{orderBacking.last4Characters(finalizationBacking.creditCard.number)}
+                        #{msgs.creditCardEnding} #{checkoutBacking.last4Characters(checkoutBacking.creditCard.number)}
                     </b:column>
                 </b:panel>
             </b:column>
@@ -59,12 +59,12 @@ and open the template in the editor.
                         <h4>#{msgs.orderSummary}</h4>
                         #{msgs.totalBeforeTax}: #{shoppingCartBackingBean.shoppingCart.subtotal}
                         <hr/>
-                        #{msgs.estimatedTax}: #{orderBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * orderBacking.taxRate)}
+                        #{msgs.estimatedTax}: #{checkoutBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * checkoutBacking.taxRate)}
                         <br/>
-                        <b>#{msgs.orderTotal}: #{orderBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * (1 + orderBacking.taxRate))}</b>
+                        <b>#{msgs.orderTotal}: #{checkoutBacking.roundDouble(shoppingCartBackingBean.shoppingCart.subtotal * (1 + checkoutBacking.taxRate))}</b>
                         <br/><br/>
                         
-                        <b:commandButton value="#{msgs.placeOrder}" action="#{orderBacking.createInvoice}"/>
+                        <b:commandButton value="#{msgs.placeOrder}" action="#{checkoutBacking.createInvoice}"/>
                     </h:form>
                 </b:panel>
             </b:column>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.customcontrollers;
 
 import com.g4w18.controllers.ClientJpaController;
@@ -16,15 +11,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 /**
- *
+ * Custom JPA controller used to access and manipulate the Client records of the database.
+ * 
  * @author Marc-Daniel
  */
-public class CustomClientController implements Serializable
+public class CustomClientJpaController implements Serializable
 {
     @Inject
     private ClientJpaController clientController;
@@ -67,30 +60,48 @@ public class CustomClientController implements Serializable
         return clientController.getClientCount();
     }
     
-    public List<Client> findClientByUsername(String username)
+    /**
+     * Returns a Client with the given username. If no client has been found, return null.
+     * 
+     * @param username
+     * @return 
+     */
+    public Client findClientByUsername(String username)
     {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
-        Root<Client> clientRoot = cq.from(Client.class);
-        cq.select(clientRoot).where(cb.equal(clientRoot.get("username"), username));
-        TypedQuery<Client> query = em.createQuery(cq);
-        List<Client> existingClients = query.getResultList();
-
-        return existingClients;
+        TypedQuery<Client> query = em.createNamedQuery("Client.findByUsername", Client.class);
+        query.setParameter("username", username);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
     }
 
-    public List<Client> findClientByEmail(String email)
+    /**
+     * Returns a Client with the given email address. If no client has been found, return null.
+     * 
+     * @param email
+     * @return 
+     */
+    public Client findClientByEmail(String email)
     {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Client> cq = cb.createQuery(Client.class);
-        Root<Client> clientRoot = cq.from(Client.class);
-        cq.select(clientRoot).where(cb.equal(clientRoot.get("email"), email));
-        TypedQuery<Client> query = em.createQuery(cq);
-        List<Client> existingClients = query.getResultList();
-
-        return existingClients;
+        TypedQuery<Client> query = em.createNamedQuery("Client.findByEmail", Client.class);
+        query.setParameter("email", email);
+        List<Client> clients = query.getResultList();
+        if (!clients.isEmpty()) {
+            return clients.get(0);
+        }
+        return null;
     }
 
+    /**
+     * Returns a Client with the given username and password combination.
+     * If no client with the matching username and password has been found, return null.
+     * 
+     * @param username
+     * @param password
+     * @return 
+     */
     public Client findClientByCredentials(String username, String password)
     {
         TypedQuery<Client> query = em.createNamedQuery("Client.findByCredentials", Client.class);

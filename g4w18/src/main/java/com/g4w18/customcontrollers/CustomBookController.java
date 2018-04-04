@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.customcontrollers;
 
 import com.g4w18.backingbeans.SearchBackingBean;
@@ -24,7 +19,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- *
+ * Custom JPA controller used to access and manipulate the Book records of the database.
  * @author Jephtia, Salman, Sebastian
  */
 public class CustomBookController implements Serializable {

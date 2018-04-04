@@ -85,4 +85,43 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>totalSales</from-outcome>
+            <to-view-id>/management/reports/totalSales.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>totalSalesByClient</from-outcome>
+            <to-view-id>/management/reports/totalSalesByClient.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>totalSalesByAuthor</from-outcome>
+            <to-view-id>/management/reports/totalSalesByAuthor.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>totalSalesByPublisher</from-outcome>
+            <to-view-id>/management/reports/totalSalesByPublisher.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>proceedToCheckout</from-outcome>
+            <to-view-id>/checkout/payment_information.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
