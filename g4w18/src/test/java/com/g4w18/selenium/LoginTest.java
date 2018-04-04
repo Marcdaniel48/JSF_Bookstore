@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Tests the login page with Selenium testing.
+ * Tests the login page with Selenium.
  * 
  * @author Marc-Daniel
  */

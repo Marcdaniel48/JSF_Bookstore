@@ -32,35 +32,34 @@ and open the template in the editor.
             <h3>#{msgs.payment}</h3>
             <b:column col-md="6">
                 <b:panel title="#{msgs.finalCreditCardInformation}" collapsible="false">
-                    <h:form>
-                        <b:inputText label="#{msgs.finalCardName}" id="cardname" value="#{checkoutBacking.creditCard.name}" required="true"/>
-                        <b:message for="cardname" style="color:red" />
+                    <h:form id="payment_information_form">
+                        <b:inputText id="card_name" label="#{msgs.finalCardName}" value="#{checkoutBacking.creditCard.name}" required="true"/>
+                        <b:message for="card_name" style="color:red" />
 
-                        <b:inputText label="#{msgs.finalCardNumber}" id="cardnumber" value="#{checkoutBacking.creditCard.number}" required="true">
+                        <b:inputText id="card_number" label="#{msgs.finalCardNumber}" value="#{checkoutBacking.creditCard.number}" required="true">
                             <f:validator validatorId="creditCardValidator" />
                         </b:inputText>
-                        <b:message for="cardnumber" style="color:red" />
+                        <b:message for="card_number" style="color:red" />
 
 
                         <b:panel title="#{msgs.finalExpiration}" collapsible="false" col-md="2">
                             <b:column col-md="6">
-                                <b:selectOneMenu label="#{msgs.month}" id="monthOptions" value="#{checkoutBacking.creditCard.month}">
+                                <b:selectOneMenu id="expiration_month" label="#{msgs.month}" value="#{checkoutBacking.creditCard.month}">
                                     <f:selectItems value="#{checkoutBacking.monthOptions}"/>
                                 </b:selectOneMenu>
                             </b:column>
 
                             <b:column col-md="6">
-                                <b:selectOneMenu label="#{msgs.year}" id="cardexpirationyear" value="#{checkoutBacking.creditCard.year}">
+                                <b:selectOneMenu id="expiration_year" label="#{msgs.year}" value="#{checkoutBacking.creditCard.year}">
                                     <f:selectItems value="#{checkoutBacking.yearOptions}"/>
                                 </b:selectOneMenu>
                             </b:column>
-                            <b:message for="cardexpirationyear" style="color:red" />
                         </b:panel>
 
-                        <b:inputText label="#{msgs.finalShipping}" id="shippingAddress" value="#{checkoutBacking.shippingAddress}" required="true"/>
-                        <b:message for="shippingAddress" style="color:red" />
+                        <b:inputText id="shipping_address" label="#{msgs.finalShipping}" value="#{checkoutBacking.shippingAddress}" required="true"/>
+                        <b:message for="shipping_address" style="color:red" />
 
-                        <b:commandButton value="#{msgs.continue}" action="place_order.xhtml" style="float: right"/>
+                        <b:commandButton id="place_order_page_button" value="#{msgs.continue}" action="place_order.xhtml" style="float: right"/>
                     </h:form>
                 </b:panel>
             </b:column>
