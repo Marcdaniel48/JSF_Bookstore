@@ -17,13 +17,13 @@ import javax.persistence.TypedQuery;
  * Custom JPA controller used to access and manipulate the MasterInvoice records of the database.
  * @author Marc-Daniel
  */
-public class CustomMasterInvoiceJpaController implements Serializable
+public class CustomMasterInvoiceController implements Serializable
 {
     @Inject
     private MasterInvoiceJpaController masterInvoiceJpaController;
     
     @Inject
-    private CustomClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
     
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;

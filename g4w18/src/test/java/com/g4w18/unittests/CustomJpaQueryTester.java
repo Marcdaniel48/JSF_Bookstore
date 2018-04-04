@@ -6,9 +6,9 @@ import com.g4w18.custombeans.AuthorWithTotalSales;
 import com.g4w18.custombeans.BookWithTotalSales;
 import com.g4w18.custombeans.ClientWithTotalSales;
 import com.g4w18.custombeans.PublisherWithTotalSales;
-import com.g4w18.customcontrollers.CustomClientJpaController;
-import com.g4w18.customcontrollers.CustomInvoiceDetailJpaController;
-import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
+import com.g4w18.customcontrollers.CustomClientController;
+import com.g4w18.customcontrollers.CustomInvoiceDetailController;
+import com.g4w18.customcontrollers.CustomMasterInvoiceController;
 import com.g4w18.customcontrollers.ReportQueries;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.InvoiceDetail;
@@ -47,10 +47,10 @@ import org.junit.runner.RunWith;
 /**
  * Tests the custom query methods of several JPA controller classes.
  * The custom query methods that will be tested come from the following JPA controller classes:
- * - CustomClientJpaController
- * - CustomInvoiceDetailJpaController
- * - CustomMasterInvoiceJpaController
- * - ReportQueries
+ - CustomClientController
+ - CustomInvoiceDetailController
+ - CustomMasterInvoiceController
+ - ReportQueries
  * 
  * @author Marc-Daniel
  */
@@ -62,9 +62,9 @@ public class CustomJpaQueryTester
     @Resource(name = "java:app/jdbc/TheBooktopia")
     private DataSource dataStore;
     
-    @Inject private CustomClientJpaController clientJpaController;
-    @Inject private CustomInvoiceDetailJpaController invoiceDetailJpaController;
-    @Inject private CustomMasterInvoiceJpaController masterInvoiceJpaController;
+    @Inject private CustomClientController clientJpaController;
+    @Inject private CustomInvoiceDetailController invoiceDetailJpaController;
+    @Inject private CustomMasterInvoiceController masterInvoiceJpaController;
     @Inject private ReportQueries reportQueries;
     
     @Deployment
@@ -81,7 +81,7 @@ public class CustomJpaQueryTester
         // container
         final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
             .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-            .addPackage(CustomClientJpaController.class.getPackage()).addPackage(ClientJpaController.class.getPackage())
+            .addPackage(CustomClientController.class.getPackage()).addPackage(ClientJpaController.class.getPackage())
             .addPackage(RollbackFailureException.class.getPackage())
             .addPackage(Client.class.getPackage())
             .addPackage(AuthorWithTotalSales.class.getPackage())

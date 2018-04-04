@@ -1,6 +1,6 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.customcontrollers.CustomClientJpaController;
+import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.entities.Client;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class ClientBackingBean implements Serializable
 {
     // This backing bean will mainly use the following Client JPA controller in order to register a new client.
     @Inject
-    private CustomClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
     
     // Logger
     private Logger log = Logger.getLogger(getClass().getName());

@@ -7,8 +7,8 @@ package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
-import com.g4w18.customcontrollers.CustomClientJpaController;
-import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
+import com.g4w18.customcontrollers.CustomClientController;
+import com.g4w18.customcontrollers.CustomMasterInvoiceController;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
@@ -30,11 +30,11 @@ public class ManageClientsBackingBean implements Serializable
 {
     // Used to retrieve and edit Client records from the Client table of the bookstore database.
     @Inject
-    private CustomClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
     
     // Used to retrieve the total gross value of the purchases of each client.
     @Inject
-    private CustomMasterInvoiceJpaController masterInvoiceJpaController;
+    private CustomMasterInvoiceController masterInvoiceJpaController;
     
     // Used to contain all Client records in a List.
     private List<Client> clients;
@@ -43,7 +43,7 @@ public class ManageClientsBackingBean implements Serializable
      * Getter method. Returns a Client JPA controller.
      * @return clientJpaController
      */
-    public CustomClientJpaController getClientJpaController()
+    public CustomClientController getClientJpaController()
     {
         return clientJpaController;
     }
@@ -52,7 +52,7 @@ public class ManageClientsBackingBean implements Serializable
      * Getter method. Returns a Master Invoice JPA controller.
      * @return 
      */
-    public CustomMasterInvoiceJpaController getMasterInvoiceJpaController()
+    public CustomMasterInvoiceController getMasterInvoiceJpaController()
     {
         return masterInvoiceJpaController;
     }

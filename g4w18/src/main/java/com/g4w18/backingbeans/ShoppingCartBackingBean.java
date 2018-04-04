@@ -1,8 +1,8 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.customcontrollers.CustomClientJpaController;
-import com.g4w18.customcontrollers.CustomInvoiceDetailJpaController;
-import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
+import com.g4w18.customcontrollers.CustomClientController;
+import com.g4w18.customcontrollers.CustomInvoiceDetailController;
+import com.g4w18.customcontrollers.CustomMasterInvoiceController;
 import com.g4w18.customcontrollers.LoginController;
 import com.g4w18.customcontrollers.ShoppingCart;
 import com.g4w18.entities.Book;
@@ -36,15 +36,15 @@ public class ShoppingCartBackingBean implements Serializable
     
     // Used to allow accessing of the current user's client information (assuming that the user is logged in).
     @Inject
-    private CustomClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
     
     // Used to allow accessing of the current user's master invoices.
     @Inject
-    private CustomMasterInvoiceJpaController masterInvoiceJpaController;
+    private CustomMasterInvoiceController masterInvoiceJpaController;
     
     // Used to allow accessing of the current user's invoice details.
     @Inject
-    private CustomInvoiceDetailJpaController invoiceDetailJpaController;
+    private CustomInvoiceDetailController invoiceDetailJpaController;
     
     /**
      * Getter method. Returns the shopping cart.
@@ -87,13 +87,13 @@ public class ShoppingCartBackingBean implements Serializable
     }
     
     /**
-     * Takes in a Book object and checks to see if the user has already bought said book, and returns an appropriate boolean.
-     * Used in the book details page to determine if the "Add to cart" button should be disabled or not.
+     * Takes in a Book object and checks to see if the user has already bought said book or if said book is in shopping cart, and returns an appropriate boolean.
+     * Used in the book details page to determine if the "Add to cart" button should be displayed or not..
      * 
      * @param book
      * @return 
      */
-    public boolean isBookBoughtAlready(Book book)
+    public boolean isBookBoughtOrInCartAlready(Book book)
     {
         if(login.getLoggedIn())
         {
@@ -110,6 +110,12 @@ public class ShoppingCartBackingBean implements Serializable
                         return true;
                 }
             }
+        }
+        
+        if(!cart.getShoppingCartBooks().isEmpty())
+        {
+            if(cart.getShoppingCartBooks().contains(book))
+                return true;
         }
         
         return false;

@@ -1,6 +1,6 @@
 package com.g4w18.filters;
 
-import com.g4w18.customcontrollers.CustomClientJpaController;
+import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.customcontrollers.LoginController;
 import com.g4w18.customcontrollers.ShoppingCart;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class IndexFilter implements Filter
     
     // Used to check if the user is logged in with a correct username and password combination.
     @Inject
-    private CustomClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException 
