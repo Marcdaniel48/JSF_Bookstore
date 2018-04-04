@@ -5,6 +5,9 @@ import com.g4w18.controllers.BookJpaController;
 import com.g4w18.customcontrollers.CustomAuthorController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
+import com.g4w18.custombeans.TopClientsResultBean;
+import com.g4w18.custombeans.TopSellersResultBean;
+import com.g4w18.customcontrollers.CustomReportQueries;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -23,6 +26,10 @@ import javax.sql.DataSource;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -61,7 +68,9 @@ public class JPATest {
         // container
         final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
+                .addPackage(CustomBookController.class.getPackage())
                 .addPackage(AuthorJpaController.class.getPackage())
+                .addPackage(TopSellersResultBean.class.getPackage())
                 .addPackage(IllegalOrphanException.class.getPackage())
                 .addPackage(Book.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
@@ -82,26 +91,19 @@ public class JPATest {
     @Inject
     private CustomAuthorController aJc;
     
+    @Inject
+    private CustomReportQueries reportQueries;
+    
     @Resource(name = "java:app/jdbc/TheBooktopia")
     private DataSource ds;
     
-    /**
-     * Find all books in DB.
-     */
-    @Test
-    public void should_find_all_books() throws SQLException{
-        List<Book> lb = bookJpaController.findBookEntities();
-        
-        logger.log(Level.INFO,"Data>>>{0}",lb.get(0).getTitle());
-        
-        assertThat(lb).hasSize(100);
-        
-    }
+    
     
     /**
      * Find a book with its title provided.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_specific_name() throws SQLException{
         
@@ -118,10 +120,34 @@ public class JPATest {
     @Test
     public void find_author_with_general_name() throws SQLException{
         
-        List<Author> findAuthorByName = aJc.findAuthor("C.S.%");
+        List<Author> findAuthorByName = aJc.findAuthor("C.S.");
         
         
-        logger.log(Level.INFO,"AUTHORNAME Data>>>{0}"+ findAuthorByName.get(0).getFirstName());
+        logger.log(Level.INFO,"AUTHORNAME FIND AUTHOR Data>>>{0}"+ findAuthorByName.get(0).getFirstName() + "  how many  " + findAuthorByName.size());
+        
+        assertThat(findAuthorByName).hasSize(1);
+    } 
+    @Test
+    public void find_author_with_general_name_another_one() throws SQLException{
+        
+        List<Author> findAuthorByName = aJc.findAuthor("J.R.");
+        
+        
+        logger.log(Level.INFO,"AUTHORNAME FIND AUTHOR Data>>>{0}"+ findAuthorByName.get(0).getFirstName() + "  how many  " + findAuthorByName.size());
+        
+        assertThat(findAuthorByName).hasSize(1);
+    }
+    /**
+     * Test a full name to see if it matches
+     * @throws SQLException 
+     */
+    @Test
+    public void find_author_with_general_name_another_one_full() throws SQLException{
+        
+        List<Author> findAuthorByName = aJc.findAuthor("J.R.R. Tolkien");
+        
+        
+        logger.log(Level.INFO,"AUTHORNAME FIND AUTHOR FULLLL NAME Data>>>{0}"+ findAuthorByName.get(0).getFirstName() + "  how many  " + findAuthorByName.size());
         
         assertThat(findAuthorByName).hasSize(1);
     } 
@@ -133,13 +159,13 @@ public class JPATest {
     @Test
     public void find_book_with_general_title_by_ascending() throws SQLException{
         
-        List<Book> specificBook = bookJpaController.findBooksByTitle("c%");
+        List<Book> specificBook = bookJpaController.findBooksByTitle("c");
         
         
         for(int i = 0;i<specificBook.size();i++)
             logger.log(Level.INFO,"Data>>>{0}"+specificBook.get(i).getTitle() + "---------");
           
-        assertThat(specificBook).hasSize(4);
+        assertThat(specificBook).hasSize(17);
     } 
     
     /**
@@ -149,43 +175,10 @@ public class JPATest {
     @Test
     public void find_book_with_general_publisher_by_ascending() throws SQLException{
         
-        List<Book> specificBook = bookJpaController.findDistinctPublisher("v%"); 
+        List<Book> specificBook = bookJpaController.findLikePublisher("v"); 
                  
-        assertThat(specificBook).hasSize(3);
+        assertThat(specificBook).hasSize(5);
     } 
-    
-    /**
-     * Get all books from each publisher found from the search term.
-     * @throws SQLException 
-     */
-    @Ignore
-    @Test
-    public void get_books_for_all_publishers() throws SQLException{
-        
-        List<Book> specificBook = bookJpaController.findDistinctPublisher("v%");
-        
-        logger.log(Level.INFO,"GET ALL PUBLISHERS BOOKS TEST: "+ specificBook.size());
-        
-        int publisherCount = specificBook.size();
-        List<Book> allBooksFromPublishers = null;
-        
-       for(int i = 0;i<specificBook.size();i++) {
-           String s = specificBook.get(i).getPublisher();
-           
-           logger.log(Level.INFO,  s);
-       }
-        for(int i=0;i<publisherCount;i++)
-        {
-            allBooksFromPublishers.addAll(bookJpaController.findBooksByPublisher(specificBook.get(i).getPublisher()));
-        }
-        
-//        for(int i = 0;i<books.size();i++)
-//            logger.log(Level.INFO,"Data>>>{0}"+allBooksFromPublishers.get(i).getTitle() + "---------");
-//        
-//       
-        
-        assertThat(allBooksFromPublishers).hasSize(4);
-    }
     /**
      * Get all books from each author found from the query
      * @throws SQLException 
@@ -193,34 +186,234 @@ public class JPATest {
     @Test
     public void get_author_books() throws SQLException
     {
-        List<Author> authorList = aJc.findAuthor("c%");
-        List<Book> allDemBooks = null;
+        List<Author> authorList = aJc.findAuthor("c");
+        List<Book> allBooks = new ArrayList<Book>();
         
         int authorCount = authorList.size();
         
-        List<Book> books = authorList.get(3).getBookList();
-        
-        for(int j=0;j<books.size();j++)
-        {
-            logger.log(Level.INFO,"---------========-----"+  books.get(j).getTitle());
-        }
-        
-        for(int k=0;k<books.size();k++)
-        {
-            logger.log(Level.INFO,"---------========-----"+  authorList.get(k).getFirstName());
-        }
+        logger.log(Level.INFO,"---------==HOW MANY AUTHORS WITH c======-----"+  authorCount);
         
         
         for(int i=0;i< authorCount;i++)
+            allBooks.addAll(authorList.get(i).getBookList());
+        
+        for(int j = 0;j<allBooks.size();j++)
         {
-            allDemBooks.addAll(authorList.get(i).getBookList());
+            logger.log(Level.INFO,"---------==BOOOKS FOR C TEST======-----"+  allBooks.get(j).getTitle());
         }
         
-        assertThat(allDemBooks).hasSize(1);
+        
+        assertThat(allBooks).hasSize(7);
+    }
+    /**
+     * Testing another author options for search.
+     */
+    @Test
+    public void get_author_3_options_1Result()
+    {
+        List<Author> authorList = aJc.findAuthor3Options("khan");
+        
+        logger.log(Level.INFO,"---------==HOW MANY AUTHORS WITH KHAN======-----"+  authorList.get(0).getFirstName());
+        
+        assertThat(authorList).hasSize(1);
+    }
+    
+    /**
+     * Testing another author options for search.
+     */
+    @Test
+    public void get_author_3_options_1ResultSapkowski()
+    {
+        List<Author> authorList = aJc.findAuthor3Options("Sapkowski");
+        
+        logger.log(Level.INFO,"---------==HOW MANY AUTHORS WITH Sapkowski======-----"+  authorList.get(0).getFirstName());
+        
+        assertThat(authorList).hasSize(1);
     }
     
     
+    /**
+     * Testing another author options for search. get 6 result
+     */
+    @Test
+    public void get_author_3_options_6Result()
+    {
+        List<Author> authorList = aJc.findAuthor3Options("p");
+        
+        logger.log(Level.INFO,"---------==HOW MANY AUTHORS WITH p%======-----"+  authorList.get(0).getFirstName());
+        
+        assertThat(authorList).hasSize(6);
+    }
     
+    /**
+     * Test top sellers method without any purchases
+     */
+    @Ignore
+    @Test
+    public void get_top_sellers_between_two_good_dates_but_no_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.MARCH, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.MARCH, 31, 0, 0, 0));;
+        
+        List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
+        
+        assertThat(topSellers).hasSize(0);
+    }
+    
+    /**
+     * Test top sellers method purchases with 2 results
+     */
+    @Ignore
+    @Test
+    public void get_top_sellers_between_two_good_dates_with_2_purchases() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 13, 0, 0, 0));;
+        
+        List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
+        
+           for(int i = 0;i<topSellers.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 2  : "+topSellers.get(i).getTitle() + "---------" + "MONEEEEEEy       " + topSellers.get(i).getTotalSales());
+        
+        assertThat(topSellers).hasSize(2);
+    }
+    
+    /**
+     * Test top sellers method purchases with 4 result
+     */
+    @Ignore
+    @Test
+    public void get_top_sellers_between_two_good_dates_with_4_purchases() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 15, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 19, 0, 0, 0));;
+        
+        List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
+        
+        for(int i = 0;i<topSellers.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 4 (4 days) : "+topSellers.get(i).getTitle() + "---------" + "MONEEEEEEy       " + topSellers.get(i).getTotalSales());
+        
+        assertThat(topSellers).hasSize(4);
+    }
+    
+    /**
+     * Test top sellers method purchases with 4 result but with calculations
+     */
+    @Ignore
+    @Test
+    public void get_top_sellers_between_two_good_dates_with_4_purchases_but_calculations() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 27, 0, 0, 0));;
+        
+        List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
+        
+        for(int i = 0;i<topSellers.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 4 (whole feb): "+topSellers.get(i).getTitle() + "---------" + "MONEEEEEEy      " + topSellers.get(i).getTotalSales());
+        
+        assertThat(topSellers).hasSize(4);
+    }
+    
+    /**
+     * Test top sellers method purchases with 6 result but with calculations
+     */
+    @Ignore
+    @Test
+    public void get_top_sellers_between_two_good_dates_with_6_purchases_but_calculations() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2017, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 27, 0, 0, 0));;
+        
+        List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
+        
+        for(int i = 0;i<topSellers.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 6 : "+topSellers.get(i).getTitle() + "---------" + "MONEEEEEEy      "  + topSellers.get(i).getTotalSales());
+        
+        
+        logger.log(Level.INFO,"==================================================");
+        
+        assertThat(topSellers).hasSize(6);
+    }
+    
+    /**
+     * Test top client method purchases with 1 results
+     */
+    @Ignore
+    @Test
+    public void get_top_client_between_two_good_dates_with_1_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 13, 0, 0, 0));;
+        
+        List<TopClientsResultBean> topClients = reportQueries.getTopClientsBetween2Dates(begin, end);
+        
+       
+        
+           for(int i = 0;i<topClients.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 2  : "+topClients.get(i).getUsername() + "---------" + "MONEEEEEEy     " + topClients.get(i).getGrossValue().toString());
+        
+        assertThat(topClients).hasSize(1);
+    }
+    
+    /**
+     * Test top client method purchases with 2 results
+     */
+    @Ignore
+    @Test
+    public void get_top_client_between_two_good_dates_with_2_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 19, 0, 0, 0));;
+        
+        List<TopClientsResultBean> topClients = reportQueries.getTopClientsBetween2Dates(begin, end);
+        
+       
+        
+           for(int i = 0;i<topClients.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 2  : "+topClients.get(i).getUsername() + "---------" + "MONEEEEEEy     " + topClients.get(i).getGrossValue().toString());
+        
+        assertThat(topClients).hasSize(2);
+    }
+    
+    /**
+     * Test top client method purchases with 3 results
+     */
+    @Ignore
+    @Test
+    public void get_top_client_between_two_good_dates_with_3_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2017, Month.FEBRUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.MAY, 19, 0, 0, 0));;
+        
+        List<TopClientsResultBean> topClients = reportQueries.getTopClientsBetween2Dates(begin, end);
+        
+       
+        
+           for(int i = 0;i<topClients.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 2  : "+topClients.get(i).getUsername() + "---------" + "MONEEEEEEy     " + topClients.get(i).getGrossValue().toString());
+        
+        assertThat(topClients).hasSize(3);
+    }
+    
+    /**
+     * Test top client method purchases with 0 results
+     */
+    @Ignore
+    @Test
+    public void get_top_client_between_two_good_dates_with_0_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 14, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 15, 0, 0, 0));;
+        
+        List<TopClientsResultBean> topClients = reportQueries.getTopClientsBetween2Dates(begin, end);
+        
+       
+        
+           for(int i = 0;i<topClients.size();i++)
+            logger.log(Level.INFO,"RESULTS FOR 2  : "+topClients.get(i).getUsername() + "---------" + "MONEEEEEEy     " + topClients.get(i).getGrossValue().toString());
+        
+        assertThat(topClients).hasSize(0);
+    }
     
     
     

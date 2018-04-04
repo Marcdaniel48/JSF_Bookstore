@@ -69,4 +69,19 @@ public class CustomMasterInvoiceController implements Serializable
         List<MasterInvoice> masterInvoices = query.getResultList();
         return masterInvoices;
     }
+    
+    /**
+     * Get all master invoices for the specific client id.
+     * @param clientId
+     * @return 
+     */
+    public List<MasterInvoice> getMasterInvoiceByClientId(int clientId)
+    {
+        TypedQuery<MasterInvoice> query = em.createNamedQuery("MasterInvoice.findByClientId", MasterInvoice.class);
+        Client client = clientJpaController.findClient(clientId);
+        query.setParameter("clientId", client);
+        List<MasterInvoice> masterInvoices = query.getResultList();
+        
+        return masterInvoices;
+    }
 }
