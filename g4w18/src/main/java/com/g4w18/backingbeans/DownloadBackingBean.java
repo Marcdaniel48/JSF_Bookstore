@@ -2,7 +2,7 @@ package com.g4w18.backingbeans;
 
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.customcontrollers.CustomClientController;
-import com.g4w18.customcontrollers.CustomMasterInvoiceJpaController;
+import com.g4w18.customcontrollers.CustomMasterInvoiceController;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.MasterInvoice;
@@ -31,7 +31,7 @@ import org.primefaces.model.StreamedContent;
 public class DownloadBackingBean implements Serializable {
 
     @Inject
-    private CustomMasterInvoiceJpaController masterInvoiceController;
+    private CustomMasterInvoiceController masterInvoiceController;
 
     @Inject
     private CustomClientController clientController;
@@ -54,7 +54,7 @@ public class DownloadBackingBean implements Serializable {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         String username = (String) session.getAttribute("username");
 
-        Client client = clientController.findClientByUsername(username).get(0);
+        Client client = clientController.findClientByUsername(username);
 
         log.log(Level.INFO, "USERNAME OF CURRENT USER: " + username);
 
@@ -89,10 +89,6 @@ public class DownloadBackingBean implements Serializable {
      * @return
      */
     public StreamedContent getFile() {
-//        log.log(Level.INFO, "CREATED???");
-//
-//        log.log(Level.INFO, "GET FILE INFO: " + file.getContentType());
-//        log.log(Level.INFO, "GET FILE INFO: " + file.getName());
         return file;
     }
 
