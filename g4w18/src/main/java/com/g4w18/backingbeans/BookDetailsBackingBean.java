@@ -3,7 +3,7 @@ package com.g4w18.backingbeans;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.customcontrollers.CustomBookController;
-import com.g4w18.customcontrollers.CustomClientJpaController;
+import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.controllers.ReviewJpaController;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
@@ -40,7 +40,7 @@ public class BookDetailsBackingBean implements Serializable {
     @Inject
     private ReviewJpaController reviewJpaController;
     @Inject
-    private CustomClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
 
     private Book book;
     private Review review;

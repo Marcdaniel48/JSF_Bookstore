@@ -132,12 +132,13 @@
                             <span>#{msgs.bookDetailsSalePrice}: </span>
                             <h:outputText value="#{bookDetailsBackingBean.book.salePrice}"></h:outputText>
                         </h4>
-                        <b:form id="add_to_cart_form">
+                        <b:form id="add_to_cart_form" rendered="#{!shoppingCartBackingBean.isBookBoughtOrInCartAlready(bookDetailsBackingBean.book)}">
                             <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.shoppingCart.addToCart(bookDetailsBackingBean.book)}"
-                                             disabled="#{shoppingCartBackingBean.isBookBoughtAlready(bookDetailsBackingBean.book)}" id="add_to_cart_button">
+                                             id="add_to_cart_button">
                                 <f:param name="id" value="#{bookBackingBean.book.bookId}"></f:param>
                             </b:commandButton>
                         </b:form>
+                        <h:outputText value="#{msgs.shoppingCartAlreadyBoughtOrInCart}" rendered="#{shoppingCartBackingBean.isBookBoughtOrInCartAlready(bookDetailsBackingBean.book)}"></h:outputText>
                     </b:panel>
                 </b:column>
             </b:row>

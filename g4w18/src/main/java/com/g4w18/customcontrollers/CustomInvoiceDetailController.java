@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * 
  * @author Marc-Daniel
  */
-public class CustomInvoiceDetailJpaController implements Serializable
+public class CustomInvoiceDetailController implements Serializable
 {
     @Inject
     private InvoiceDetailJpaController invoiceJpaController;

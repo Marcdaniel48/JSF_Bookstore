@@ -25,7 +25,7 @@ public class LoginController implements Serializable
 {
     // Used to retrieve the Client record with the given username and password combination.
     @Inject
-    private CustomClientJpaController clientJpaController;
+    private CustomClientController clientJpaController;
     
     // Once the user has logged in, used to check if the shopping cart contains any books that the user has already purchased.
     @Inject
@@ -33,14 +33,14 @@ public class LoginController implements Serializable
     
     // Used to find all purchases of the user. Works with the injected shopping cart to remove any books that the user has already purchased.
     @Inject
-    private CustomMasterInvoiceJpaController masterInvoiceJpaController;
+    private CustomMasterInvoiceController masterInvoiceJpaController;
     
     /* 
         Used to find all the purchased books of the user. 
         Works with the injected shopping cart and master invoice JPA controller to remove any books that the user has already purchased.
     */
     @Inject
-    private CustomInvoiceDetailJpaController invoiceDetailJpaController;
+    private CustomInvoiceDetailController invoiceDetailJpaController;
 
     private String username;
     private String password;
