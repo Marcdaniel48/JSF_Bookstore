@@ -17,6 +17,7 @@
         
         <h:outputStylesheet library="css" name="registration.css" />
 
+<<<<<<< HEAD
         <div class="page_container">
             <div class="registration">
                 <div class="bg-img">
@@ -102,7 +103,8 @@
                                     <h:inputText id="email" value="#{clientBacking.client.email}" validator="#{clientBacking.validateExistingEmail}"/>
                                     <h:message for="email" class="error" />
                             </div>
-                                <h:commandButton value="#{msgs.registerbutton}" action="#{clientBacking.createClient()}"/>
+                            
+                            <h:commandButton value="#{msgs.registerbutton}" action="#{clientBacking.createClient()}"/>
 
                         </h:form>
                     </div>
