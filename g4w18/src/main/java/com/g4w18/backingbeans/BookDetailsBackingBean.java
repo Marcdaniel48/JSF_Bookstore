@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -32,7 +33,7 @@ import javax.servlet.http.HttpSession;
  * @author Sebastian Ramirez
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class BookDetailsBackingBean implements Serializable {
 
     @Inject
@@ -51,13 +52,12 @@ public class BookDetailsBackingBean implements Serializable {
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
     public Book getBook() {
+        Map<String, String> params
+                = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         if (book == null) {
-            Map<String, String> params
-                    = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-            int id = Integer.parseInt(params.get("id"));
-            book = customBookController.findBook(id);
-
-            storeBookCookie(book);
+                int id = Integer.parseInt(params.get("id"));
+                book = customBookController.findBook(id);
+                storeBookCookie(book);
         }
         return book;
     }
@@ -97,14 +97,14 @@ public class BookDetailsBackingBean implements Serializable {
         }
         return recommendedBooks;
     }
-    
-    public List<Review> getApprovedReviews(){
+
+    public List<Review> getApprovedReviews() {
         if (approvedReviews == null) {
             List<Review> bookReviews = new ArrayList<>();
             book.getReviewList().stream().filter((r) -> (r.getApprovalStatus()))
                     .forEachOrdered((r) -> {
-                bookReviews.add(r);
-            });
+                        bookReviews.add(r);
+                    });
             approvedReviews = bookReviews;
         }
         return approvedReviews;
@@ -140,7 +140,7 @@ public class BookDetailsBackingBean implements Serializable {
             String username = (String) session.getAttribute("username");
             if (username != null) {
                 client = clientJpaController.findClientByUsername(username);
-                LOGGER.log(Level.INFO, "Client found, name: {0}", 
+                LOGGER.log(Level.INFO, "Client found, name: {0}",
                         client.getFirstName() + "");
             } else {
                 client = new Client();
@@ -156,22 +156,26 @@ public class BookDetailsBackingBean implements Serializable {
 //            loginMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 //            FacesContext.getCurrentInstance().addMessage("", loginMessage);
             Messages.addMessage("pleaseLoginBeforeReviewin");
-            return "login.xhtml";
+            return null;
         }
         for (Review r : client.getReviewList()) {
             if (Objects.equals(r.getBookId().getBookId(), book.getBookId())) {
 //                FacesMessage loginMessage = new FacesMessage("You already reviewed this book");
 //                loginMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 //                FacesContext.getCurrentInstance().addMessage("", loginMessage);
+                Messages.addMessage("existingReview");
                 return null;
             }
         }
 //        LOGGER.log(Level.INFO, "Book is: {0}", book.getBookId() + "");
 //        LOGGER.log(Level.INFO, "Review is: {0}", review);
+        Date currentDate = new Date();
+        review.setReviewDate(currentDate);
         review.setBookId(book);
         review.setClientId(client);
         review.setApprovalStatus(false);
         reviewController.create(review);
+        Messages.addMessage("reviewSuccesful");
         return null;
     }
 }

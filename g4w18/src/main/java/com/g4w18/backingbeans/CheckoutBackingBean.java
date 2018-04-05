@@ -205,7 +205,7 @@ public class CheckoutBackingBean implements Serializable
         // Once the purchase has been complete, empty the user's shopping cart
         shoppingCart.emptyShoppingCart();
         
-        return "/index";
+        return "invoice";
     }
     
     // Contains the possible values of the user's credit card's expiration month and year.
