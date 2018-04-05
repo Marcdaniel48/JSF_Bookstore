@@ -1,7 +1,5 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.controllers.BookJpaController;
-import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.controllers.ReviewJpaController;
@@ -16,7 +14,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -29,7 +26,7 @@ import javax.servlet.http.HttpSession;
  * beans that are not managed such as entity beans. In this example the entity
  * bean for Inventory will be manually loaded with data for the example page.
  *
- * @author Ken
+ * @author Sebastian Ramirez
  */
 @Named
 @ViewScoped
@@ -46,7 +43,7 @@ public class BookDetailsBackingBean implements Serializable {
     private Review review;
     private Client client;
     private List<Book> recommendedBooks;
-    private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
     public Book getBook() {
         if (book == null) {
@@ -54,12 +51,12 @@ public class BookDetailsBackingBean implements Serializable {
                     = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             int id = Integer.parseInt(params.get("id"));
             book = customBookController.findBook(id);
-            
+
             storeBookCookie(book);
         }
         return book;
     }
-    
+
     /**
      * @author Jephthia
      * Saves the genre of the book that was viewed by the user
@@ -71,18 +68,18 @@ public class BookDetailsBackingBean implements Serializable {
     {
         FacesContext context = FacesContext.getCurrentInstance();
         Map<String, Object> cookies = context.getExternalContext().getRequestCookieMap();
-        
+
         Cookie genresCookie = (Cookie)cookies.get("VisitedGenres");
-        
+
         String genres = "";
-        
+
         if(genresCookie != null)
             genres = genresCookie.getValue();
 
         //if this book's genre isn't already there, add it
         if(!genres.contains(book.getGenre()))
             genres += book.getGenre() + ",";
-        
+
         context.getExternalContext().addResponseCookie("VisitedGenres", genres, null);
     }
 
@@ -100,19 +97,19 @@ public class BookDetailsBackingBean implements Serializable {
         int averageRating = 0;
         Collection<Review> reviews = book.getReviewList();
         int size = reviews.size();
-        log.log(Level.INFO, "Reviews size: {0}", reviews.size());
+        LOGGER.log(Level.INFO, "Reviews size: {0}", reviews.size());
         if (size > 0) {
             for (Review r : reviews) {
                 averageRating = averageRating + r.getRating();
             }
             return averageRating / size;
         }
-        log.log(Level.INFO, "Rating: {0}", averageRating);
+        LOGGER.log(Level.INFO, "Rating: {0}", averageRating);
         return averageRating;
     }
 
     public Review getReview() {
-        log.log(Level.INFO, "getReview() called");
+        LOGGER.log(Level.INFO, "getReview() called");
         if (review == null) {
             review = new Review();
         }
@@ -125,7 +122,7 @@ public class BookDetailsBackingBean implements Serializable {
             String username = (String) session.getAttribute("username");
             if (username != null) {
                 client = clientJpaController.findClientByUsername(username);
-                log.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
+                LOGGER.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
             } else {
                 client = new Client();
                 client.setFirstName("Guest");
@@ -149,8 +146,8 @@ public class BookDetailsBackingBean implements Serializable {
                 return null;
             }
         }
-        log.log(Level.INFO, "Book is: {0}", book.getBookId() + "");
-        log.log(Level.INFO, "Review is: {0}", review);
+        LOGGER.log(Level.INFO, "Book is: {0}", book.getBookId() + "");
+        LOGGER.log(Level.INFO, "Review is: {0}", review);
         review.setBookId(book);
         review.setClientId(client);
         review.setApprovalStatus(false);

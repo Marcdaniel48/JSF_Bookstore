@@ -41,7 +41,7 @@ public class ReportQueries implements Serializable {
     private Logger logger = Logger.getLogger(ReportQueries.class.getName());
     
     /**
-     * Given a range of dates, returns a list of books alongside their total sales and last recorded sale dates.
+     * Given a range of dates, returns a list of books alongside their total sales, total cost, and last recorded sale dates.
      * 
      * @param date1
      * @param date2
@@ -74,6 +74,11 @@ public class ReportQueries implements Serializable {
                 BigDecimal totalSalesForBook = (BigDecimal) query.getSingleResult();
                 bookWithTotalSales.setTotalSales(totalSalesForBook);
                 
+                query = em.createNativeQuery("Select (b.wholesale_price * count(i.book_id)) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+                    + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.book_id = ?1 group by b.isbn_number").setParameter(1, book.getBookId());
+                BigDecimal totalCostForBook = (BigDecimal) query.getSingleResult();
+                bookWithTotalSales.setTotalCost(totalCostForBook);
+                
                 booksWithTotalSales.add(bookWithTotalSales);
             }
         }
@@ -81,7 +86,7 @@ public class ReportQueries implements Serializable {
     }
     
     /**
-     * Given a range of dates, returns a list of clients alongside their total sales and last recorded sale dates.
+     * Given a range of dates, returns a list of clients alongside their total sales, total cost, and last recorded sale dates.
      * 
      * @param date1
      * @param date2
@@ -114,6 +119,13 @@ public class ReportQueries implements Serializable {
                 BigDecimal totalSalesForClient = (BigDecimal) query.getSingleResult();
                 clientWithTotalSales.setTotalSales(totalSalesForClient);
                 
+                query = em.createNativeQuery("Select (b.wholesale_price * count(i.book_id)) from Invoice_Detail i "
+                        + "right join Master_Invoice m on i.invoice_Id = m.invoice_Id right join Client c on m.client_id = c.client_id inner join "
+                        + "book b on b.book_Id = i.book_Id where c.client_id = ?1 group by c.client_id")
+                        .setParameter(1, client.getClientId());
+                BigDecimal totalCostForClient = (BigDecimal) query.getSingleResult();
+                clientWithTotalSales.setTotalCost(totalCostForClient);
+                
                 clientsWithTotalSales.add(clientWithTotalSales);
             }
         }
@@ -121,7 +133,7 @@ public class ReportQueries implements Serializable {
     }
     
     /**
-     * Given a range of dates, returns a list of authors alongside their total sales and last recorded sale dates.
+     * Given a range of dates, returns a list of authors alongside their total sales, total cost, and last recorded sale dates.
      * 
      * @param date1
      * @param date2
@@ -152,8 +164,15 @@ public class ReportQueries implements Serializable {
                 query = em.createNativeQuery("Select sum(i.book_price * (1 + gst_rate/100.0 + pst_rate/100.0 + hst_rate/100.0)) from Master_Invoice m "
                         + "right join Invoice_Detail i on m.invoice_Id = i.invoice_Id right join book_author ba on i.book_id = ba.book_id "
                         + "where ba.author_id = ?1 group by ba.author_id").setParameter(1, author.getAuthorId());
-                BigDecimal totalSalesForBook = (BigDecimal) query.getSingleResult();
-                authorWithTotalSales.setTotalSales(totalSalesForBook);
+                BigDecimal totalSalesForAuthor = (BigDecimal) query.getSingleResult();
+                authorWithTotalSales.setTotalSales(totalSalesForAuthor);
+                
+                query = em.createNativeQuery("Select (b.wholesale_price * count(i.book_id)) from Master_Invoice m "
+                        + "right join Invoice_Detail i on m.invoice_Id = i.invoice_Id right join book_author ba on i.book_id = ba.book_id "
+                        + "inner join book b on ba.book_id = b.book_id "
+                        + "where ba.author_id = ?1 group by ba.author_id").setParameter(1, author.getAuthorId());
+                BigDecimal totalCostForAuthor = (BigDecimal) query.getSingleResult();
+                authorWithTotalSales.setTotalCost(totalCostForAuthor);
                 
                 authorsWithTotalSales.add(authorWithTotalSales);
             }
@@ -162,7 +181,7 @@ public class ReportQueries implements Serializable {
     }
     
     /**
-     * Given a range of dates, returns a list of publishers alongside their total sales and last recorded sale dates.
+     * Given a range of dates, returns a list of publishers alongside their total sales, total cost, and last recorded sale dates.
      * 
      * @param date1
      * @param date2
@@ -194,6 +213,11 @@ public class ReportQueries implements Serializable {
                     + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.publisher = ?1 group by b.publisher").setParameter(1, publisher);
                 BigDecimal totalSalesForPublisher = (BigDecimal) query.getSingleResult();
                 publisherWithTotalSales.setTotalSales(totalSalesForPublisher);
+                
+                query = em.createNativeQuery("Select sum(b.wholesale_price) from book b right join Invoice_Detail i on b.book_Id = i.book_Id"
+                    + " right join Master_Invoice m on i.invoice_Id = m.invoice_Id where b.publisher = ?1 group by b.publisher").setParameter(1, publisher);
+                BigDecimal totalCostForPublisher = (BigDecimal) query.getSingleResult();
+                publisherWithTotalSales.setTotalCost(totalCostForPublisher);
                 
                 publishersWithTotalSales.add(publisherWithTotalSales);
             }

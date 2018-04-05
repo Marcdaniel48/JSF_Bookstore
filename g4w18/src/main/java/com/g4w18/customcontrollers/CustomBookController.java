@@ -23,9 +23,9 @@ import javax.persistence.criteria.Root;
  * @author Jephtia, Salman, Sebastian
  */
 public class CustomBookController implements Serializable {
-    
+
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    
+
     @Inject
     private BookJpaController bookController;
 
@@ -71,7 +71,7 @@ public class CustomBookController implements Serializable {
         Root<Book> root = cq.from(Book.class);
         cq.select(root);
         cq.where(cb.gt(root.get("salePrice"), 0));
-        
+
         Query q = em.createQuery(cq);
         q.setMaxResults(10);
 
@@ -188,7 +188,7 @@ public class CustomBookController implements Serializable {
 
         return findBookByIsbn;
     }
-    
+
     /**
      * Get books from the database with the isbn provided
      *
@@ -205,7 +205,7 @@ public class CustomBookController implements Serializable {
     }
 
 
-   
+
     /**
      * @author Sebastian
      * Get a List of Book objects comprised only of Books which their Sale Price
@@ -239,26 +239,26 @@ public class CustomBookController implements Serializable {
         List<Book> toReturn = query.getResultList();
         return toReturn;
     }
-    
+
     /**
      * @author Jephthia
      * @param genres The genres from which to get the recommended books
      * @return A list of recommended books based on the given genres
      */
     public List<Book> getRecommendedBooks(String[] genres)
-    {   
+    {
         String whereIN = "";
-        
+
         for(String genre : genres)
             whereIN += "'" + genre + "',";
-        
+
         //Remove last comma
         whereIN = whereIN.substring(0, whereIN.length() - 1);
-        
+
         Query query = em.createNativeQuery("select * from book where genre in (" + whereIN + ") order by rand() limit 10", Book.class);
-        
+
         List<Book> books = (List<Book>)query.getResultList();
-        
+
         return books;
     }
 }

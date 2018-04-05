@@ -1,4 +1,4 @@
-package rss;
+package com.g4w18.util;
 
 import java.util.ArrayList;
 import java.util.List;
