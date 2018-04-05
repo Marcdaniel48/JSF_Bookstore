@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * @author Jephthia
  */
+@Ignore
 public class HomepageTest
 {
     private static Logger logger = Logger.getLogger(HomepageTest.class.getName());
