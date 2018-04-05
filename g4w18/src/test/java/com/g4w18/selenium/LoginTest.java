@@ -3,7 +3,6 @@ package com.g4w18.selenium;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +16,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * 
  * @author Marc-Daniel
  */
-@Ignore
 public class LoginTest 
 {
     private WebDriver driver;
@@ -113,7 +111,7 @@ public class LoginTest
         wait.until(ExpectedConditions.titleIs("Sign into your account"));  
         
         Thread.sleep(1500);
-        driver.findElement(By.id("login_form:go_to_registration_button")).click();
+        driver.findElement(By.id("go_to_registration_form:go_to_registration_button")).click();
 
         Thread.sleep(1500);
         // If the sucessfully clicks on the working registration button, then he will be navigated to the registration page.

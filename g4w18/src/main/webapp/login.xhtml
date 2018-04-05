@@ -10,7 +10,7 @@
     <ui:define name="windowTitle">
         #{msgs.loginWindowTitle}
     </ui:define>
-
+    
     <ui:define name="content">
         
         <h:outputStylesheet library="css" name="login.css" />
@@ -34,16 +34,11 @@
                                                requiredMessage="#{msgs.invalidEmptyPassword}"/>
                                 <h:message for="password" style="color:red" />
                                 <h:commandButton id="login_button" value="#{msgs.loginbutton}" action="#{loginController.login}"/>
-                                <h:commandButton id="go_to_registration_button" value="#{msgs.registerbutton}" action="registration"/>
-                            </h:form>
-
+                            </h:form>  
+                            <h:form id="go_to_registration_form"><h:commandButton id="go_to_registration_button" value="#{msgs.registerbutton}" action="registration"/></h:form>
                         </div>
-
-
                     </div>
                 </div>
             </div>
-            
-            
     </ui:define>
 </ui:composition>
