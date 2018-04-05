@@ -52,8 +52,22 @@
     
     <navigation-rule>
         <navigation-case>
+            <from-outcome>registration</from-outcome>
+            <to-view-id>/registration.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
             <from-outcome>shopping_cart</from-outcome>
             <to-view-id>/shopping_cart.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>management_home</from-outcome>
+            <to-view-id>/management/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
@@ -70,5 +84,65 @@
             <to-view-id>/management/reviews.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>banners</from-outcome>
+            <to-view-id>/management/banners.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>survey</from-outcome>
+            <to-view-id>/management/survey.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>resultEdit</from-outcome>
+            <to-view-id>/management/managerBookEnRHandler.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>totalSales</from-outcome>
+            <to-view-id>/management/reports/totalSales.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>totalSalesByClient</from-outcome>
+            <to-view-id>/management/reports/totalSalesByClient.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>totalSalesByAuthor</from-outcome>
+            <to-view-id>/management/reports/totalSalesByAuthor.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>totalSalesByPublisher</from-outcome>
+            <to-view-id>/management/reports/totalSalesByPublisher.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>proceedToCheckout</from-outcome>
+            <to-view-id>/checkout/payment_information.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

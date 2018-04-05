@@ -123,11 +123,11 @@ public class InvoiceDetail implements Serializable {
     public void setHstRate(BigDecimal hstRate) {
         this.hstRate = hstRate;
     }
-    
+
     public boolean getAvailable(){
         return available;
     }
-    
+
     public void setAvailable(boolean available){
         this.available = available;
     }
@@ -171,6 +171,17 @@ public class InvoiceDetail implements Serializable {
     @Override
     public String toString() {
         return "com.g4w18.entities.InvoiceDetail[ detailId=" + detailId + " ]";
+    }
+
+    /**
+     * Returns the price of the purchased book including the taxes.
+     *
+     * @author Marc-Daniel
+     * @return
+     */
+    public BigDecimal getSoldPrice()
+    {
+        return bookPrice.multiply(BigDecimal.ONE.add(gstRate).add(hstRate).add(pstRate));
     }
 
 }

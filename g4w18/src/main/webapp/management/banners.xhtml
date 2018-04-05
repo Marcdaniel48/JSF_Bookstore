@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        
+        <h:outputStylesheet library="css" name="banner_page.css" />
+        
+        <div class="parallax">
+
+            <div class="parallax-layer background">
+                <div class="content">
+                    
+                    <div>
+                        <h1>Add New Ad</h1>
+                        <h:form enctype="multipart/form-data">
+                            <f:passThroughAttribute name="autocomplete" value="off" />
+                            
+                            <h:message for="bannerFile" styleClass="error" />
+                            <h:inputFile id="bannerFile" value="#{bannerBackingBean.uploadedBannerFile}"
+                                         required="true" requiredMessage="Please provide the banner image" />
+                            <!--<input required="true" type="file" accept="image/*" value="#{bannerBackingBean.uploadedBannerFile}" />-->
+                            <h:outputLabel for="newBannerLink" value="Banner Link"/>
+                            <h:inputText id="newBannerLink" value="#{bannerBackingBean.uploadedBannerLink}"
+                                        validator="#{bannerBackingBean.validateLink}" a:placeholder="e.g https://google.ca"
+                                        required="true" requiredMessage="Please provide a url"/>
+                            <h:message for="newBannerLink" styleClass="error"/>
+                            
+                            <h:outputLabel styleClass="switch">
+                                <h:selectBooleanCheckbox  value="#{bannerBackingBean.uploadedBannerStatus}" />
+                                <span class="slider round"></span>
+                            </h:outputLabel>
+                            
+                            <h:commandButton value="Add New Banner" action="#{bannerBackingBean.addNewBanner}">
+                                <f:ajax execute="@form" render="@form :allBannersForm" />
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+                    
+                    <h:form id="allBannersForm">
+                        <f:passThroughAttribute name="autocomplete" value="off" />
+
+                        <h:dataTable value="#{bannerBackingBean.allBanners}" var="banner">
+
+                            <h:column>
+                                <f:facet name="header">Ad</f:facet>
+                                <h:graphicImage library="images" name="#{banner.bannerName}" style="max-width: 80%;" />
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">Link</f:facet>
+                                <h:outputText value="#{banner.bannerLink}" />
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                <h:outputLabel styleClass="switch">
+                                    <h:selectBooleanCheckbox  value="#{banner.isActive}"
+                                                              valueChangeListener="#{bannerBackingBean.listen}">
+                                        <f:attribute name="banner" value="#{banner}" />
+                                        <f:ajax/>
+                                    </h:selectBooleanCheckbox>
+                                    <span class="slider round"></span>
+                                </h:outputLabel>
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:form>
+                </div>
+            </div>
+        
+        </div>
+            
+    </ui:define>
+</ui:composition>

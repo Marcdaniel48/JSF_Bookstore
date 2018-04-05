@@ -1,14 +1,104 @@
 #survey
 {
-    position: absolute;
-    left: 58%;
-    right: 0;
-    top: 69%;
-    bottom: 0;
+    width: 46%;
+    position: relative;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
-    opacity: 0;
-    transform: translateX(100%);
-    animation: 1s ease-out 2.3s 1 slideInFromRight;
-    animation-fill-mode: forwards;
+    padding: 10px;
+    margin: 50px 2%;
+    /*opacity: 0;*/
+    /*transform: translateX(100%);*/
+    /*animation: 1s ease-out 2.3s 1 slideInFromRight;*/
+    /*animation-fill-mode: forwards;*/
+    float: left;
+}
+#survey .section-title
+{
+    font-size: 2.3em;
+    font-weight: bolder;
+}
+.surveyChoices
+{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+#surveyForm input[type="submit"]
+{
+    font-size: 1.4em;
+}
+.surveyChoices td label
+{
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: 600;
+    background-color: black;
+    display: block;
+    margin: 0 5px;
+    color: white;
+    border-radius: 15px 15px;
+    padding: 5px;
+    transition: .6s ease-in;
+}
+.surveyChoices td:hover label
+{
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+}
+
+@media only screen and (max-width: 800px)
+{
+    #survey
+    {
+        width: 100%;
+        position: relative;
+        margin: 5px 0px;
+        padding: 10px 0px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.4);
+        opacity: 1;
+        transform: none;
+        animation: none;
+        animation-fill-mode: none;
+        border: 1px solid black;
+        float: none;
+    }
+    #survey .section-title
+    {
+        font-size: initial;
+    }
+    .surveyChoices
+    {
+        width: 100%;
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+    #surveyForm input[type="submit"]
+    {
+        font-size: initial;
+    }
+    .surveyChoices td
+    {
+        display: block;
+        padding: 5px;
+    }
+    .surveyChoices td label
+    {
+        cursor: pointer;
+        font-size: initial;
+        font-weight: normal;
+        background-color: transparent;
+        display: inline;
+        margin: 0 5px;
+        color: black;
+        border-radius: initial;
+        padding: px;
+        transition: .6s ease-in;
+    }
+    .surveyChoices td:hover label
+    {
+        border: none;
+        background-color: transparent;
+        color: black;
+    }
 }

@@ -1,176 +1,143 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <title>#{msgs.bookDetailsPageTitle}</title>
-        <h:outputStylesheet library="css" name="styles.css"/>
-        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
-        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
-        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
-    </h:head>
+    <ui:define name="windowTitle">
+        #{msgs.bookDetailsPageTitle}
+    </ui:define>
 
-    <h:body>
-        <b:navBar brand="Booktopia" brandHref="bookList.xhtml" fluid="true">
-            <b:navbarLinks>
-                <b:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs">
-                    <b:inputText placeholder="#{msgs.navBarSearchHint}"></b:inputText>
-                    <b:commandButton value="Search" iconAwesome="search" action="bookList"></b:commandButton>
-                </b:form>
-            </b:navbarLinks>
-            <b:navbarLinks pull="right" styleClass="hidden-xs">
-            </b:navbarLinks>
-        </b:navBar>
-        <b:container fluid="true">
-            <b:row>
-                <b:column col-md="4" col-lg="3">
-                    <b:container>
-                        <b:image library="images" name="#{bookDetailsBackingBean.book.isbnNumber}hi.jpg" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
-                    </b:container>
-                </b:column>
-                <b:column col-md="5" col-lg="5">
-                    <b:container>
-                        <b:row>
-                            <b:column col-md="11">
-                                <h1 class="booktitle">
-                                    <h:outputText value="#{bookDetailsBackingBean.book.title}"></h:outputText>
-                                </h1>
-                            </b:column>
-                        </b:row>
-                        <b:row>
-                            <b:column col-md="3">
-                                <h4>
-                                    by
-                                    <b:form>
-                                        <ui:repeat var="author" value="#{bookDetailsBackingBean.book.authorList}">
-                                            <b:commandLink outcome="bookList">
-                                                <h:outputText value="#{author.firstName} #{author.lastName}" styleClass="list-group-item-heading"></h:outputText>
-                                                <f:param name="authorId" value="#{author.authorId}"></f:param>
-                                            </b:commandLink>
-                                        </ui:repeat>
-                                    </b:form>
-                                </h4>
-                            </b:column>
-                        </b:row>
-                        <b:row>
-                            <b:column col-md="3">
-                                <h:form>
-                                    <p:rating value="#{bookDetailsBackingBean.rating}" readonly="true" />
-                                </h:form>
-                            </b:column>
-                        </b:row>
-                        <hr align="left" width="90%"/>
-                        <b:row>
-                            <b:column col-md="3">
-                                <h4>
-                                    <span>Format: </span>
-                                    <h:outputText value="#{bookDetailsBackingBean.book.format}"></h:outputText>
-                                </h4>
-                            </b:column>
-                        </b:row>
-                        <b:row>
-                            <b:column col-md="10">
-                                <h:outputText value="#{bookDetailsBackingBean.book.description}"></h:outputText>
-                            </b:column>
-                        </b:row>
-                        <hr align="left" width="90%"/>
-                        <b:row>
-                            <b:column col-md="3">
-                                <h4>
-                                    <span>#{msgs.bookDetailsISBN}: </span>
-                                    <h:outputText value="#{bookDetailsBackingBean.book.isbnNumber}"></h:outputText>
-                                </h4>
-                            </b:column>
-                            <b:column col-md="3">
-                                <h4>
-                                    <span>#{msgs.bookDetailsPublisher}: </span>
-                                    <h:outputText value="#{bookDetailsBackingBean.book.publisher}"></h:outputText>
-                                </h4>
-                            </b:column>
-                        </b:row>
-                        <b:row>
-                            <b:column col-md="3">
-                                <h4>
-                                    <span>#{msgs.bookDetailsGenre}: </span>
-                                    <h:outputText value="#{bookDetailsBackingBean.book.genre}"></h:outputText>
-                                </h4>
-                            </b:column>
-                            <b:column col-md="3">
-                                <h4>
-                                    <span>#{msgs.bookDetailsPageNumber}: </span>
-                                    <h:outputText value="#{bookDetailsBackingBean.book.pageNumber}"></h:outputText>
-                                </h4>
-                            </b:column>
-                        </b:row>
-                        <b:row>
-                            <b:column col-md="3">
-                                <h4>
-                                    <span>#{msgs.bookDetailsPublicationDate}: </span>
-                                    <h:outputText value="#{bookDetailsBackingBean.book.publicationDate}"></h:outputText>
-                                </h4>
-                            </b:column>
-                            <b:column col-md="3">
-                                <h4>
-                                    <span>#{msgs.bookDetailsInventoryDate}: </span>
-                                    <h:outputText value="#{bookDetailsBackingBean.book.inventoryDate}"></h:outputText>
-                                </h4>
-                            </b:column>
-                        </b:row>
-                    </b:container>
-                </b:column>
-                <b:column col-md="12" offset-lg="2" col-lg="2">
-                    <b:panel  collapsible="false" title="#{msgs.bookDetailsCartPanelTitle}">
-                        <h4>
-                            <span>#{msgs.bookDetailsListPrice}: </span>
-                            <h:outputText value="#{bookDetailsBackingBean.book.listPrice}"></h:outputText>
-                        </h4>
-                        <h4>
-                            <span>#{msgs.bookDetailsSalePrice}: </span>
-                            <h:outputText value="#{bookDetailsBackingBean.book.salePrice}"></h:outputText>
-                        </h4>
-                        <b:form>
-                            <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.shoppingCart.addToCart(bookDetailsBackingBean.book)}">
-                                <f:param name="id" value="#{bookBackingBean.book.bookId}"></f:param>
-                            </b:commandButton>
-                        </b:form>
-                    </b:panel>
-                </b:column>
-            </b:row>
-            <br/>
-            <b:panel  collapsible="false" title="#{msgs.bookDetailsRecommendedBooks}">
-                <h:form>
-                    <ui:repeat var="recommended" value="#{bookDetailsBackingBean.recommendedBooks}">
-                        <b:column col-sm="6" col-md="2" col-xs="12">
-                            <b:thumbnail>
-                                <b:image library="images" name="#{recommended.isbnNumber}low.jpg" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
-                                <f:facet name="caption">
-                                    <b:commandLink outcome="bookDetail">
-                                        <h:outputText value="#{recommended.title}" styleClass="list-group-item-heading"></h:outputText>
-                                        <f:param name="id" value="#{recommended.bookId}"></f:param>
-                                    </b:commandLink>
-                                </f:facet>
-                            </b:thumbnail>
-                        </b:column>
-                    </ui:repeat>
-                </h:form>
-            </b:panel>
-            <b:panel collapsible="false" title="#{msgs.bookDetailsReviews}">
-                <h:form>
-                    <ui:repeat var="existingReview" value="#{bookDetailsBackingBean.book.reviewList}">
+    <ui:define name="content">
+        <div class="page_container">
+
+            <!--<h:outputStylesheet library="css" name="styles.css"/>-->
+            <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
+            <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
+            <!--<h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />-->
+
+
+            <b:container fluid="true">
+                <b:row>
+                    <!--<b:column col-md="4" col-lg="3">-->
+                    <b:column col-md="3" col-lg="3" class="no-padding-left">
+                        <!--<b:container fluid="true">-->
+                        <b:image library="images" name="#{bookDetailsBackingBean.book.isbnNumber}hi.png" tooltip="#{book.title}" style="padding-top: 20px" styleClass="img-responsive"></b:image>
+                        <!--</b:container>-->
+                    </b:column>
+                    <!--<b:column col-md="5" col-lg="5">-->
+                    <b:column col-md="9" col-lg="9">
+
                         <b:container fluid="true">
                             <b:row>
-                                <b:column col-md="3">
-                                    <h:outputText value="#{existingReview.clientId.firstName} #{existingReview.clientId.lastName}"></h:outputText>
+                                <b:column col-md="11">
+                                    <h1 class="booktitle">
+                                        <h:outputText value="#{bookDetailsBackingBean.book.title}"></h:outputText>
+                                    </h1>
                                 </b:column>
-                                <b:column col-md="6">
-                                    <h:outputText value="#{existingReview.review}"></h:outputText>
-                                </b:column>
+                            </b:row>
+                            <b:row>
                                 <b:column col-md="3">
-                                    <p:rating value="#{existingReview.rating}" readonly="true" />
+                                    <h4>
+                                        by
+                                        <b:form>
+                                            <ui:repeat var="author" value="#{bookDetailsBackingBean.book.authorList}">
+                                                <b:commandLink outcome="bookList">
+                                                    <h:outputText value="#{author.firstName} #{author.lastName}" styleClass="list-group-item-heading"></h:outputText>
+                                                    <f:param name="authorId" value="#{author.authorId}"></f:param>
+                                                </b:commandLink>
+                                            </ui:repeat>
+                                        </b:form>
+                                    </h4>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="3">
+                                    <h:form>
+                                        <p:rating value="#{bookDetailsBackingBean.rating}" readonly="true" />
+                                    </h:form>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column>
+                                    <ui:fragment rendered="#{bookDetailsBackingBean.book.salePrice le 0}">
+                                        <h4>$#{bookDetailsBackingBean.book.listPrice} CAD</h4>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{bookDetailsBackingBean.book.salePrice gt 0}">
+                                        <h4>
+                                            <span><s>$#{bookDetailsBackingBean.book.listPrice} CAD</s></span>
+                                            <span class="sale-price">$#{bookDetailsBackingBean.book.salePrice} CAD</span>
+                                        </h4>
+                                    </ui:fragment>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column>
+                                <b:form id="add_to_cart_form" rendered="#{!shoppingCartBackingBean.isBookBoughtOrInCartAlready(bookDetailsBackingBean.book)}">
+                                    <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.shoppingCart.addToCart(bookDetailsBackingBean.book)}"
+                                                     id="add_to_cart_button">
+                                        <f:param name="id" value="#{bookBackingBean.book.bookId}"></f:param>
+                                    </b:commandButton>
+                                </b:form>
+                                    <h:outputText value="#{msgs.shoppingCartAlreadyBoughtOrInCart}" rendered="#{shoppingCartBackingBean.isBookBoughtOrInCartAlready(bookDetailsBackingBean.book)}"></h:outputText>
+                                </b:column>
+                            </b:row>
+                            <hr/>
+                            <b:row>
+                                <b:column col-md="3">
+                                    <h4>
+                                        <span>Format: </span>
+                                        <h:outputText value="#{bookDetailsBackingBean.book.format}"></h:outputText>
+                                    </h4>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="12">
+                                    <h:outputText value="#{bookDetailsBackingBean.book.description}"></h:outputText>
+                                </b:column>
+                            </b:row>
+                            <hr/>
+                            <b:row>
+                                <b:column col-md="4">
+                                    <h4>
+                                        <span>#{msgs.bookDetailsISBN}: </span>
+                                        <h:outputText value="#{bookDetailsBackingBean.book.isbnNumber}"></h:outputText>
+                                    </h4>
+                                </b:column>
+                                <b:column col-md="4">
+                                    <h4>
+                                        <span>#{msgs.bookDetailsPublisher}: </span>
+                                        <h:outputText value="#{bookDetailsBackingBean.book.publisher}"></h:outputText>
+                                    </h4>
+                                </b:column>
+                                <b:column col-md="4">
+                                    <h4>
+                                        <span>#{msgs.bookDetailsGenre}: </span>
+                                        <h:outputText value="#{bookDetailsBackingBean.book.genre}"></h:outputText>
+                                    </h4>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column col-md="4">
+                                    <h4>
+                                        <span>#{msgs.bookDetailsPageNumber}: </span>
+                                        <h:outputText value="#{bookDetailsBackingBean.book.pageNumber}"></h:outputText>
+                                    </h4>
+                                </b:column>
+                                <b:column col-md="4">
+                                    <h4>
+                                        <span>#{msgs.bookDetailsPublicationDate}: </span>
+                                        <h:outputText value="#{bookDetailsBackingBean.book.publicationDate}"></h:outputText>
+                                    </h4>
+                                </b:column>
+                                <b:column col-md="4">
+                                    <h4>
+                                        <span>#{msgs.bookDetailsInventoryDate}: </span>
+                                        <h:outputText value="#{bookDetailsBackingBean.book.inventoryDate}"></h:outputText>
+                                    </h4>
                                 </b:column>
                             </b:row>
                         </b:container>
@@ -195,14 +162,55 @@
                                     <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
                                 </p:commandButton>
                             </b:column>
-                        </b:row>
-                    </b:container>
-                </h:form>
-            </b:panel>
-        </b:container>
+                        </ui:repeat>
+                    </h:form>
+                </b:panel>
+                <b:panel collapsible="false" title="#{msgs.bookDetailsReviews}">
+                    <h:form>
+                        <ui:repeat var="existingReview" value="#{bookDetailsBackingBean.book.reviewList}">
+                            <b:container fluid="true">
+                                <b:row>
+                                    <b:column col-md="3">
+                                        <h:outputText value="#{existingReview.clientId.firstName} #{existingReview.clientId.lastName}"></h:outputText>
+                                    </b:column>
+                                    <b:column col-md="6">
+                                        <h:outputText value="#{existingReview.review}"></h:outputText>
+                                    </b:column>
+                                    <b:column col-md="3">
+                                        <p:rating value="#{existingReview.rating}" readonly="true" />
+                                    </b:column>
+                                </b:row>
+                            </b:container>
+                            <hr/>
+                        </ui:repeat>
+                    </h:form>
+                    <h:form>
+                        <p:growl id="growl" sticky="true"></p:growl>
+                        <b:container fluid="true">
+                            <b:row>
+                                <b:column col-md="11">
+                                    <b:inputTextarea placeholder="#{msgs.bookDetailsLeaveReview}" value="#{bookDetailsBackingBean.review.review}" id="reviewInputTextArea">
+                                    </b:inputTextarea>
+                                </b:column>
+                                <b:column col-md="1" class="text-center no-padding-left no-padding-right">
+                                    <h:outputText value="#{bookDetailsBackingBean.client.firstName} #{bookDetailsBackingBean.client.lastName}"></h:outputText>
+                                    <p:rating value="#{bookDetailsBackingBean.review.rating}" id="reviewRating">
+                                    </p:rating>
+                                    <p:commandButton id="primebutton" class="mButton" value="#{msgs.bookDetailsSubmitReview}"
+                                                     action="#{bookDetailsBackingBean.createReview}" ajax="false" update="growl">
+                                        <f:param name="bookId" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
+                                        <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
+                                    </p:commandButton>
+                                </b:column>
+                            </b:row>
+                        </b:container>
+                    </h:form>
+                </b:panel>
+            </b:container>
 
-        <!-- load js at bottom for faster loading-->
-        <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
-        <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
-    </h:body>
-</html>
+            <!-- load js at bottom for faster loading-->
+            <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
+        </div>
+    </ui:define>
+
+</ui:composition>

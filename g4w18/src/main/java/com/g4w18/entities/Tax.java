@@ -139,6 +139,12 @@ public class Tax implements Serializable {
         return "com.g4w18.entities.Tax[ taxId=" + taxId + " ]";
     }
 
+    /**
+     * Sums up the GST, HST, and PST rates and returns that sum.
+     * 
+     * @author Marc-Daniel
+     * @return 
+     */
     public BigDecimal getOverallTaxRate()
     {
         BigDecimal taxRate = gstRate.add(hstRate).add(pstRate);

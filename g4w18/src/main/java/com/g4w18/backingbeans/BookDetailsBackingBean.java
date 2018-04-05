@@ -21,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -53,8 +54,36 @@ public class BookDetailsBackingBean implements Serializable {
                     = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             int id = Integer.parseInt(params.get("id"));
             book = customBookController.findBook(id);
+
+            storeBookCookie(book);
         }
         return book;
+    }
+
+    /**
+     * @author Jephthia
+     * Saves the genre of the book that was viewed by the user
+     * in a cookie so that we are able to give recommended
+     * books to the user based on what they've looked at.
+     * @param book
+     */
+    private void storeBookCookie(Book book)
+    {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Map<String, Object> cookies = context.getExternalContext().getRequestCookieMap();
+
+        Cookie genresCookie = (Cookie)cookies.get("VisitedGenres");
+
+        String genres = "";
+
+        if(genresCookie != null)
+            genres = genresCookie.getValue();
+
+        //if this book's genre isn't already there, add it
+        if(!genres.contains(book.getGenre()))
+            genres += book.getGenre() + ",";
+
+        context.getExternalContext().addResponseCookie("VisitedGenres", genres, null);
     }
 
     public List<Book> getRecommendedBooks() {
@@ -95,8 +124,8 @@ public class BookDetailsBackingBean implements Serializable {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             String username = (String) session.getAttribute("username");
             if (username != null) {
-                client = clientJpaController.findClientByUsername(username).get(0x0);
-                LOGGER.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
+                client = clientJpaController.findClientByUsername(username);
+                log.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
             } else {
                 client = new Client();
                 client.setFirstName("Guest");

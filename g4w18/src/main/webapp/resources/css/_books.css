@@ -1,26 +1,28 @@
 #recent-books
 {
-    position: absolute;
-    left: 20%;
-    right: 42%;
-    top: 0;
-    bottom: 50%;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    font-size: 0;
-    letter-spacing: 0px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
-    opacity: 0;
-    transform: translateY(-100%);
-    animation: 1s ease-out 2.2s 1 slideInFromTop;
-    animation-fill-mode: forwards;
-    /* border: 3px solid yellow; */
-}
-.book-thumbnail-container
-{
+    cursor: default;
     position: relative;
+    /*margin-left: 10px;*/
+    /*margin-right: 10px;*/
+    /*margin-bottom: 5px;*/
+    text-align: center;
+    background-image: url("#{resource['images/backg1.jpeg']}");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
+    /*opacity: 0;*/
+    /*transform: translateY(-100%);*/
+    /*animation: 1s ease-out 2.2s 1 slideInFromTop;*/
+    /*animation-fill-mode: forwards;*/
+    z-index: 0;
+}
+#recent-books .section-title-img
+{
+    /*background-image: url("#{resource['images/b3.jpeg']}");*/
+}
+#recent-books a:hover
+{
+    opacity: 1;
 }
 .overlay
 {
@@ -33,11 +35,6 @@
     transform: scale(1);
     transition: opacity .6s ease, transform .6s ease;
     background-color: black;
-}
-.book:hover
-{
-    cursor: pointer;
-    transform: scale(1.2);
 }
 .book:hover .overlay,
 #rss-feed:hover .overlay,
@@ -60,9 +57,11 @@
 }
 .book
 {
-    width: 33.3%;
+    width: 25%;
     height: auto;
-    padding: 5%;
+    padding: 10px 2%;
+    margin-bottom: 10px;
+    cursor: default;
     display: inline-block;
     position: relative;
     vertical-align: top;
@@ -83,7 +82,20 @@
 {
     width: 100%;
     height: 100%;
-    border: 2px solid #F2BFA0;
+    cursor: pointer;
+    filter: sepia(0%) drop-shadow(0 0 4px rgba(0, 0, 0, 0.8));
+    transition: .6s ease-in;
+}
+.book-thumbnail:hover
+{
+    transform: scale(1.05);
+    filter: sepia(100%);
+}
+.book-thumbnail:hover + .book-price
+{
+    transform: translateY(10px);
+    /*margin-top: 0;*/
+    /*padding-top: 0;*/
 }
 .book-title
 {
@@ -91,9 +103,56 @@
     font-size: initial;
 /*     border: 3px solid antiquewhite; */
 }
+.sale-price
+{
+    color: red;
+}
 .book-price
 {
-    display: block;
-    font-size: initial;
+    display: inline-block;
+    /*padding-top: 10px;*/
+    margin-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    z-index: -1;
+    font-size: 22px;
+    font-weight: bolder;
+    color: #F2BFA0;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    transition: .6s ease-in;
 /*     border: 3px solid green; */
+}
+
+@media only screen and (max-width: 800px)
+{
+    #recent-books
+    {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        margin: 5px 0px;
+        padding-top: 10px;
+        font-size: 0;
+        letter-spacing: 0px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.4);
+        background-image: none;
+        box-shadow: none;
+        opacity: 1;
+        transform: none;
+        animation: none;
+        animation-fill-mode: none;
+        border: 1px solid black;
+    }
+    .book
+    {
+        margin-bottom: 0;
+    }
+    .book-price
+    {
+        display: none;
+    }
 }

@@ -12,7 +12,9 @@ import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -43,6 +45,8 @@ public class BookListBackingBean implements Serializable {
     private List<Book> allBooks;
     private List<Book> authorBooks;
     private Logger log = Logger.getLogger(getClass().getName());
+    
+    private String genre;
 
     /**
      * Client created if it does not exist.
@@ -65,16 +69,56 @@ public class BookListBackingBean implements Serializable {
         }
         return authorBooks;
     }
-
-    public List<Book> getAllBooks() {
-
+    
+    /**
+     * @author Jephthia
+     * @return true if this page is supposed to display the books in the
+     * specified genre, false otherwise.
+     */
+    public boolean byGenre()
+    {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String genre = params.get("genre");
+        genre = params.get("genre");
         
-        if(genre != null && !"".equals(genre))
-            return bookController.findBooksByGenre(genre);
+        return genre != null && !"".equals(genre);
+    }
+    
+    /**
+     * @author Jephthia
+     * @return Get the top 5 selling books
+     */
+    public List<Book> getTopSellers()
+    {
+        List<Book> books = bookController.findBooksByGenre(genre);
         
-        log.log(Level.INFO, genre);
+        books.sort((a, b) -> Integer.compare(b.getInvoiceDetailList().size(), a.getInvoiceDetailList().size()));
+        
+        if(books.size() < 5)
+            return books;
+        
+        return books.subList(0, 5);
+    }
+    
+    /**
+     * @author Jephthia
+     * @return The books in that genre excluding the top 5 selling books
+     */
+    private List<Book> getRemainingBooks()
+    {
+        List<Book> books = bookController.findBooksByGenre(genre);
+        
+        books.sort((a, b) -> Integer.compare(b.getInvoiceDetailList().size(), a.getInvoiceDetailList().size()));
+        
+        if(books.size() <= 5)
+            return new ArrayList<Book>();
+        
+        return books.subList(5, books.size());
+    }
+
+    public List<Book> getAllBooks()
+    {
+        if(byGenre())
+            return getRemainingBooks();
         
         if (allBooks == null) {
             allBooks = bookController.findBookEntities();

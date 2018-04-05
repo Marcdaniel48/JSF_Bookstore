@@ -1,0 +1,36 @@
+.recommendations
+{
+    position: relative;
+    text-align: center;
+    /*margin: 5px 0px;*/
+    /*padding-top: 10px;*/
+    background-image: url("#{resource['images/b5.jpg']}");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
+    clear: both;
+    z-index: 0;
+}
+.recommendations .section-title-img
+{
+    background-image: url("#{resource['images/b5.jpg']}");
+}
+.recommendations a:hover:not(.disabled)
+{
+    opacity: 1;
+}
+
+@media only screen and (max-width: 800px)
+{
+    .recommendations
+    {
+        position: relative;
+        text-align: center;
+        margin: 5px 0px;
+        padding-top: 10px;
+        background-color: rgba(255, 255, 255, 0.4);
+        background-image: none;
+        box-shadow: none;
+        border: 1px solid black;
+    }
+}

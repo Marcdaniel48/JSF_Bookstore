@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msgs.clientManagementTitle}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+            <p:dataTable value="#{manageClientsBackingBean.clients}" var="client" paginator="true" rows="25" 
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                         editable="true" tableStyle="width:auto">
+                <p:ajax event="rowEdit" listener="#{manageClientsBackingBean.onEditClient}" />
+                
+                <p:column headerText="Id" sortBy="#{client.clientId}" filterBy="#{client.clientId}">
+                    <h:outputText value="#{client.clientId}"/>
+                </p:column>
+                <p:column headerText="#{msgs.username}" sortBy="#{client.username}" filterBy="#{client.username}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.username}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.username}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.email}" sortBy="#{client.email}" filterBy="#{client.email}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.email}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.email}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.title}" sortBy="#{client.title}" filterBy="#{client.title}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.title}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.title}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.firstname}" sortBy="#{client.firstName}" filterBy="#{client.firstName}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.firstName}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.firstName}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.lastname}" sortBy="#{client.lastName}" filterBy="#{client.lastName}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.lastName}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.lastName}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.companyname}" sortBy="#{client.companyName}" filterBy="#{client.companyName}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.companyName}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.companyName}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.address1}" sortBy="#{client.address1}" filterBy="#{client.address1}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.address1}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.address1}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.address2}" sortBy="#{client.address2}" filterBy="#{client.address2}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.address2}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.address2}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.postalcode}" sortBy="#{client.postalCode}" filterBy="#{client.postalCode}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.postalCode}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.postalCode}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.city}" sortBy="#{client.city}" filterBy="#{client.city}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.city}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.city}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.province}" sortBy="#{client.province}" filterBy="#{client.province}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.province}" /></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{client.province}">
+                                <f:selectItems value="#{clientBacking.provinceOptions}"/>
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.country}" sortBy="#{client.country}" filterBy="#{client.country}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.country}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.country}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.hometelephone}" sortBy="#{client.homeTelephone}" filterBy="#{client.homeTelephone}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.homeTelephone}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.homeTelephone}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.cellphone}" sortBy="#{client.cellPhone}" filterBy="#{client.cellphone}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.cellphone}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{client.cellphone}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="#{msgs.manager}" sortBy="#{client.isManager}" filterBy="#{client.isManager}" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{client.isManager}" /></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{client.isManager}">
+                                <f:selectItems value="#{clientBacking.isManagerOptions}"/>
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="#{msgs.totalOfPurchases}">
+                    <h:outputText value="#{manageClientsBackingBean.getTotalValueOfPurchases(client.clientId)}"/>
+                </p:column>
+                
+                <p:column>
+                    <p:rowEditor />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
