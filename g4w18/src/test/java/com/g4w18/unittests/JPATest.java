@@ -7,6 +7,7 @@ import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.custombeans.TopClientsResultBean;
 import com.g4w18.custombeans.TopSellersResultBean;
+import com.g4w18.custombeans.ZeroReportBean;
 import com.g4w18.customcontrollers.CustomReportQueries;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
@@ -45,7 +46,6 @@ import org.junit.Ignore;
  * 
  * @author Salman Haidar
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class JPATest {
 
@@ -117,6 +117,7 @@ public class JPATest {
      * Find author with general term.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_author_with_general_name() throws SQLException{
         
@@ -127,6 +128,7 @@ public class JPATest {
         
         assertThat(findAuthorByName).hasSize(1);
     } 
+    @Ignore
     @Test
     public void find_author_with_general_name_another_one() throws SQLException{
         
@@ -141,6 +143,7 @@ public class JPATest {
      * Test a full name to see if it matches
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_author_with_general_name_another_one_full() throws SQLException{
         
@@ -156,6 +159,7 @@ public class JPATest {
      * Find books with title with one letter provided by asc ordering.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_general_title_by_ascending() throws SQLException{
         
@@ -172,6 +176,7 @@ public class JPATest {
      * Find publisher with with one letter provided by asc ordering.
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void find_book_with_general_publisher_by_ascending() throws SQLException{
         
@@ -183,6 +188,7 @@ public class JPATest {
      * Get all books from each author found from the query
      * @throws SQLException 
      */
+    @Ignore
     @Test
     public void get_author_books() throws SQLException
     {
@@ -208,6 +214,7 @@ public class JPATest {
     /**
      * Testing another author options for search.
      */
+    @Ignore
     @Test
     public void get_author_3_options_1Result()
     {
@@ -221,6 +228,7 @@ public class JPATest {
     /**
      * Testing another author options for search.
      */
+    @Ignore
     @Test
     public void get_author_3_options_1ResultSapkowski()
     {
@@ -235,6 +243,7 @@ public class JPATest {
     /**
      * Testing another author options for search. get 6 result
      */
+    @Ignore
     @Test
     public void get_author_3_options_6Result()
     {
@@ -258,6 +267,20 @@ public class JPATest {
         List<TopSellersResultBean> topSellers = reportQueries.getTopSellersBetween2Dates(begin, end);
         
         assertThat(topSellers).hasSize(0);
+    }
+    
+    /**
+     * Test zero report method without any purchases
+     */
+    @Test
+    public void get_zero_report_between_two_good_dates_but_no_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.JANUARY, 01, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.JANUARY, 31, 0, 0, 0));;
+        
+        List<ZeroReportBean> zeroReports = reportQueries.getZeroSalesBetween2Dates(begin, end);
+        
+        assertThat(zeroReports).hasSize(100);
     }
     
     /**
