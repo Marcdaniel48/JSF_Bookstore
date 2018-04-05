@@ -93,26 +93,25 @@ public class CustomReportQueries {
        
         return selling;
     }
-    
+ /*   
     /**
-     * Get the top clients between two dates, must not include clients that haven't bought anything.
+     * Get books that haven't sold between two dates.
      * @param begin
      * @param end
      * @return 
-     */
+     *
     public List<TopClientsResultBean> getZeroSalesBetween2Dates(Timestamp begin, Timestamp end)
-    {      
-        Collection<Object[]> topSellers = entityManager.createNativeQuery("SELECT c.USERNAME, sum(m.GROSS_VALUE) AS TOTAL_SALES FROM client c "
-                + "INNER JOIN master_invoice m on c.CLIENT_ID = m.CLIENT_ID "
-                + "WHERE m.SALE_DATE BETWEEN ?1 AND ?2 GROUP BY c.USERNAME ORDER BY TOTAL_SALES desc")
-                .setParameter(1, begin)
-                .setParameter(2, end)
-                .getResultList();
+    {     
+//        Collection<Object[]> topSellers = entityManager.createNativeQuery("SELECT c.USERNAME, sum(m.GROSS_VALUE) AS TOTAL_SALES FROM client c "
+//                + "INNER JOIN master_invoice m on c.CLIENT_ID = m.CLIENT_ID "
+//                + "WHERE m.SALE_DATE BETWEEN ?1 AND ?2 GROUP BY c.USERNAME ORDER BY TOTAL_SALES desc")
         
-        List<TopClientsResultBean> selling = new ArrayList<>(topSellers.size());
-        TopClientsResultBean containerTopClient;
+        //select title,isbn_number from book where book_id NOT IN (select book.book_id from book left join invoice_detail on book.book_id = invoice_detail.book_id left join master_invoice on invoice_detail.invoice_id = master_invoice.invoice_id WHERE SALE_DATE BETWEEN "2018-02-01" AND "2018-04-19" );
+        Collection<Object[]> zeroSellers = entityManager.createNativeQuery("SELECT b.TITLE,b.ISBN_NUMBER FROM book b "
+                + "WHERE b.book_id NOT IN (select b.book_id from book b left join invoice_detail i on b.book_id = i.book_id "
+                + "left join master_invoice m on m.invoice_id = i.invoice_id WHERE m.SALE_DATE BETWEEN ?1 AND ?2");
         
-        Iterator<Object[]> iterator = topSellers.iterator();
+        Iterator<Object[]> iterator = zeroSellers.iterator();
         while(iterator.hasNext()){
             Object[] topClient = iterator.next();
             containerTopClient = new TopClientsResultBean((String)topClient[0],(BigDecimal)topClient[1]);
@@ -125,6 +124,6 @@ public class CustomReportQueries {
         logger.log(Level.INFO, "INSIDE OF TOP SELLERS BETWEEN 2 DATES GET RESULT LIST SIZE: " + selling.size());
        
         return selling;
-    }
+    }*/
     
 }

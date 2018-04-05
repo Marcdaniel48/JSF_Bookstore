@@ -21,7 +21,9 @@ public class RssBackingBean
 {
    public List<FeedMessage> getArticles()
    {
-       RSSFeedParser parser = new RSSFeedParser("http://www.cbc.ca/cmlink/rss-sports");
+       //RSSFeedParser parser = new RSSFeedParser("http://www.cbc.ca/cmlink/rss-sports");
+       RSSFeedParser parser = new RSSFeedParser("https://www.nasa.gov/rss/dyn/educationnews.rss");
+      
        Feed feed = parser.readFeed();
        return feed.getMessages();
    }

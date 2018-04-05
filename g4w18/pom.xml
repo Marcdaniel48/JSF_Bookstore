@@ -15,6 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <skipTests>true</skipTests>
     </properties>
 
     <!-- Dependencies listed here are usually bom or bill of materials-->
@@ -48,6 +49,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
+            <!--<version>4.0.0-2</version>-->
             <version>3.3.7-1</version>
         </dependency>
         <dependency>
@@ -143,17 +145,17 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
-            <version>2.29.0</version>
+            <version>2.29.2</version>
             <scope>test</scope>
-        </dependency>  
-        
+        </dependency>
+
         <!-- You will need a driver dependency for every browser you use in
         testing. You can find the maven dependencies at
         https://mvnrepository.com/artifact/org.seleniumhq.selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.8.1</version>
+            <version>3.11.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -221,6 +223,13 @@
             <groupId>org.jodd</groupId>
             <artifactId>jodd-mail</artifactId>
             <version>3.8.6</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.6</version>
         </dependency>
 
     </dependencies>

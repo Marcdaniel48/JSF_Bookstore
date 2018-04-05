@@ -1,16 +1,86 @@
 #rss-feed
 {
-    position: absolute;
-    left: 58%;
-    right: 0;
-    top: 31%;
-    bottom: 31%;
-    margin: 10px 0;
+    position: relative;
+    margin-top: 50px;
+    margin-bottom: 10px;
     padding: 10px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
-    opacity: 0;
-    transform: translateX(100%);
-    animation: 1s ease-out 2.2s 1 slideInFromRight;
-    animation-fill-mode: forwards;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
+    /*opacity: 0;*/
+    /*transform: translateX(100%);*/
+    /*animation: 1s ease-out 2.2s 1 slideInFromRight;*/
+    /*animation-fill-mode: forwards;*/
+    font-weight: bolder;
+    clear: both;
+}
+#rss-feed a:hover
+{
+    opacity: 1;
+}
+#rss-feed.mobile
+{
+    display: none;
+}
+#rss-feed .article
+{
+    width: 33.3%;
+    padding: 0 10px;
+    vertical-align: middle;
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+}
+#rss-feed a
+{
+    filter: drop-shadow(0 0 10px black);
+}
+
+@media only screen and (max-width: 800px)
+{
+    #rss-feed
+    {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        margin: 10px 0;
+        margin-bottom: 0px;
+        padding: 10px 20px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: none;
+        opacity: 1;
+        transform: none;
+        animation: none;
+        animation-fill-mode: none;
+        border: 1px solid black;
+        font-weight: normal;
+    }
+    #rss-feed.desktop
+    {
+        display: none;
+    }
+    #rss-feed.mobile
+    {
+        display: block;
+    }
+    #rss-feed.mobile .article
+    {
+        display: none;
+    }
+    #rss-feed .article
+    {
+        width: 100%;
+        padding: 0;
+        vertical-align: initial;
+        display: initial;
+        zoom: 1;
+        *display: inherit;
+    }
+    #rss-feed a
+    {
+        filter: none;
+    }
 }

@@ -22,8 +22,7 @@ import javax.servlet.http.HttpSession;
  */
 @Named
 @SessionScoped
-public class LoginController implements Serializable
-{
+public class LoginController implements Serializable{
     // Used to retrieve the Client record with the given username and password combination.
     @Inject
     private CustomClientController clientJpaController;

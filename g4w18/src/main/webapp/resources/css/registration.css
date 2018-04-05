@@ -1,4 +1,88 @@
+.registration
+{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: #F2BFA0;
+    font-weight: initial;
+}
+.registration .bg-img
+{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    background-image: url("#{resource['images/bg1.jpg']}");
+    background-size: cover;
+    background-position: center;
+    /*filter: brightness(30%);*/
+}
+.registration .container
+{
+    /*position: absolute;*/
+    /*right: 10%;*/
+    height: 100%;
+    text-align: right;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    transform: translateX(120%);
+    padding: 10px 30px;
+    display: inline-block;
+    opacity: 0;
+    animation: 1s ease-out 1.5s 1 fadeIn;
+    animation-fill-mode: forwards;
+}
+.register-title
+{
+    text-align: left;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #F2BFA0;
+}
+.registration label
+{
+    margin: 5px;
+}
 .registration input
 {
-    
+    color: #F2BFA0;
+    margin: 5px;
+    padding: 3px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #F2BFA0;
+}
+.registration select
+{
+    color: #F2BFA0;
+    padding: 5px;
+    margin: 5px;
+    background-color: transparent;
+    border: 1px solid #F2BFA0;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+.registration option
+{
+    background-color: black;
+}
+.registration .error
+{
+    color: red;
+    display: block;
+}
+@media only screen and (max-width: 800px)
+{
+    .registration .container
+    {
+        width: 100%;
+        height: auto;
+        position: relative;
+        right: auto;
+        background-color: black;
+    }
+    .registration .bg-img
+    {
+        display: none;
+    }
 }

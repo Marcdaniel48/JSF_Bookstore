@@ -1,5 +1,6 @@
 (function(){
 
+var $banner = null;
 var $slides = null;
 var $dots = null;
 var slideIndex = 0;
@@ -66,12 +67,7 @@ function showSlide($currentSlide, $nextSlide)
 
     $currentSlide.css("transform", "scale(2)");
 
-    $currentSlide.animate({opacity: "0"}, 500, 'linear', function()
-    {
-        $currentSlide.hide();
-        $currentSlide.css("style", "");
-        inAnimation = false;
-    });
+    $currentSlide.animate({opacity: "0"}, 500, 'linear');
 
     $nextSlide.css({
         "opacity": 0,
@@ -88,13 +84,24 @@ function showSlide($currentSlide, $nextSlide)
     setTimeout(function()
     {
         $nextSlide.css("transform", "scale(1)");
-        $nextSlide.animate({opacity: "1"}, 500, 'linear');
-        $nextSlide.css("style", "");
+        $nextSlide.animate({opacity: "1"}, 500, 'linear', function()
+        {
+            var currHeight = $banner.height();
+            $banner.css("height", currHeight+"");
+            $currentSlide.removeAttr("style");
+
+            $nextSlide.attr("style", "display: inline");
+            $banner.removeAttr("style");
+
+            inAnimation = false;
+        });
     }, 100);
 }
 
 function init()
 {
+    $banner = $("#banner");
+    
     $slides = $(".slide-img");
     totalSlides = $slides.length;
 
