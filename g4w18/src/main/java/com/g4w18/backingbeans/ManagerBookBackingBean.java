@@ -137,6 +137,8 @@ public class ManagerBookBackingBean implements Serializable {
     public String createBook() throws Exception
     {
         logger.log(Level.INFO, "INSIDE OF CREATE BOOK");
+        if()
+        addMessageError();
         List<Book> bookResult = bookJpaController.findBookByIsbnSpecific(book.getIsbnNumber());
         logger.log(Level.INFO,"BOOK ISBN THAT WILL BE ADDED TO DB "+ book.getIsbnNumber());
         logger.log(Level.INFO, "RESULTS OF BOOKS FOUND WITH THEW ISBN"+ bookResult.size());
@@ -153,8 +155,6 @@ public class ManagerBookBackingBean implements Serializable {
             message="The book was created!";
             bookJpaController.create(book);
             createAuthors(newBookAuthors,book);
-//            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-//            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
             addMessage("managerCreateBook");
             clear();
             return null;
@@ -382,7 +382,17 @@ public class ManagerBookBackingBean implements Serializable {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
         context.addMessage(null, msg);
     }
+    
+    private void addMessageError(String key) {
+        
+        FacesContext context = FacesContext.getCurrentInstance();
 
+        String message = context.getApplication().getResourceBundle(context, "msgs").getString(key);
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_FATAL, message, null);
+        context.addMessage(null, msg);
+    }
+
+    
     
     //Getters and setters to get information from user
     public void setSearchBook(String searchBook)
