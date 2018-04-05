@@ -1,13 +1,9 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.controllers.AuthorJpaController;
-import com.g4w18.controllers.BookJpaController;
 import com.g4w18.customcontrollers.CustomAuthorController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Author;
-
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.g4w18.entities.Book;
@@ -22,7 +18,6 @@ import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.validation.constraints.Size;
 
 
 /**

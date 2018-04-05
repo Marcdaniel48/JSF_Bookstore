@@ -9,7 +9,6 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>#{msgs.managerTitle}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
 
@@ -23,7 +22,7 @@
         <p:panel id="toggleable" header="#{msgs.managerAddSousTitre}" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
 
 
-            <h:form enctype="multipart/form-data"  >
+            <h:form >
 
                 <p:growl id="growl" showDetail="true" sticky="true"/>
                 <h:panelGrid columns="2" cellpadding="10">
@@ -89,13 +88,13 @@
                     <p:selectBooleanButton value="#{managerBookHandling.book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
                     
                     
-                    <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
+<!--                    <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
                     <h:inputFile value="#{managerBookHandling.file}" required="true" requiredMessage="#{msgs.managerFileError}" />
-                   
+                   actionListener="#{managerBookHandling.fileUploadHandler}"
+                    -->
                     
                     
-                    
-                    <p:commandButton value="#{msgs.submitButton}"  action="#{managerBookHandling.createBook()}" actionListener="#{managerBookHandling.fileUploadHandler}" update="growl"/>
+                    <p:commandButton value="#{msgs.submitButton}"  action="#{managerBookHandling.createBook()}"  update="growl"/>
                     <h:outputLabel>#{managerBookHandling.message}</h:outputLabel>
 
                 </h:panelGrid>
@@ -207,12 +206,12 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="#{msgs.managerEditAuhtors}" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" >
+<!--                    <p:column headerText="#{msgs.managerEditAuhtors}" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" >
                         <p:cellEditor>
                             <f:facet name="output"><p:selectBooleanButton value="#{book.authorList}" disabled="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
                             <f:facet name="input"><p:selectBooleanButton value="#{book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
                         </p:cellEditor>
-                    </p:column>
+                    </p:column>-->
 
 
 

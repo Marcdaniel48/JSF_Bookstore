@@ -1,11 +1,9 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.backingbeans.BookBackingBean;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.customcontrollers.CustomReviewController;
 import com.g4w18.controllers.ReviewJpaController;
-import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.Review;

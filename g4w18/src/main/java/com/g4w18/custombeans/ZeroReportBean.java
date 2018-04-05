@@ -1,8 +1,5 @@
 package com.g4w18.custombeans;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 /**
  *
  * @author Salman Haidar

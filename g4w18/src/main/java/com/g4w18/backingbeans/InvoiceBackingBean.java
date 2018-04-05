@@ -1,6 +1,5 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.controllers.MasterInvoiceJpaController;
 import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.customcontrollers.CustomMasterInvoiceController;
 import com.g4w18.entities.Client;
