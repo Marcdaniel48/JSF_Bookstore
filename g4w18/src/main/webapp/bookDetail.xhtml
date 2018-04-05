@@ -194,8 +194,6 @@
                                     </p:rating>
                                     <p:commandButton id="primebutton" class="mButton" value="#{msgs.bookDetailsSubmitReview}"
                                                      action="#{bookDetailsBackingBean.createReview}" ajax="false" update="growl">
-                                        <f:param name="bookId" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
-                                        <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
                                     </p:commandButton>
                                 </b:column>
                             </b:row>

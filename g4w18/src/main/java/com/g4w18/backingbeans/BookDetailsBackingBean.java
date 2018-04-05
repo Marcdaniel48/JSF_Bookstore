@@ -2,7 +2,7 @@ package com.g4w18.backingbeans;
 
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.customcontrollers.CustomClientController;
-import com.g4w18.controllers.ReviewJpaController;
+import com.g4w18.customcontrollers.CustomReviewController;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.Review;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -36,13 +36,14 @@ public class BookDetailsBackingBean implements Serializable {
     @Inject
     private CustomBookController customBookController;
     @Inject
-    private ReviewJpaController reviewJpaController;
+    private CustomReviewController reviewController;
     @Inject
     private CustomClientController clientJpaController;
 
     private Book book;
     private Review review;
     private Client client;
+    private int averageRating;
     private List<Book> recommendedBooks;
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
@@ -59,27 +60,27 @@ public class BookDetailsBackingBean implements Serializable {
     }
 
     /**
-     * @author Jephthia
-     * Saves the genre of the book that was viewed by the user
-     * in a cookie so that we are able to give recommended
-     * books to the user based on what they've looked at.
+     * @author Jephthia Saves the genre of the book that was viewed by the user
+     * in a cookie so that we are able to give recommended books to the user
+     * based on what they've looked at.
      * @param book
      */
-    private void storeBookCookie(Book book)
-    {
+    private void storeBookCookie(Book book) {
         FacesContext context = FacesContext.getCurrentInstance();
         Map<String, Object> cookies = context.getExternalContext().getRequestCookieMap();
 
-        Cookie genresCookie = (Cookie)cookies.get("VisitedGenres");
+        Cookie genresCookie = (Cookie) cookies.get("VisitedGenres");
 
         String genres = "";
 
-        if(genresCookie != null)
+        if (genresCookie != null) {
             genres = genresCookie.getValue();
+        }
 
         //if this book's genre isn't already there, add it
-        if(!genres.contains(book.getGenre()))
+        if (!genres.contains(book.getGenre())) {
             genres += book.getGenre() + ",";
+        }
 
         context.getExternalContext().addResponseCookie("VisitedGenres", genres, null);
     }
@@ -95,7 +96,7 @@ public class BookDetailsBackingBean implements Serializable {
     }
 
     public int getRating() {
-        int averageRating = 0;
+        averageRating = 0;
         Collection<Review> reviews = book.getReviewList();
         int size = reviews.size();
         LOGGER.log(Level.INFO, "Reviews size: {0}", reviews.size());
@@ -147,12 +148,12 @@ public class BookDetailsBackingBean implements Serializable {
                 return null;
             }
         }
-        LOGGER.log(Level.INFO, "Book is: {0}", book.getBookId() + "");
-        LOGGER.log(Level.INFO, "Review is: {0}", review);
+//        LOGGER.log(Level.INFO, "Book is: {0}", book.getBookId() + "");
+//        LOGGER.log(Level.INFO, "Review is: {0}", review);
         review.setBookId(book);
         review.setClientId(client);
         review.setApprovalStatus(false);
-        reviewJpaController.create(review);
+        reviewController.create(review);
         return null;
     }
 }
