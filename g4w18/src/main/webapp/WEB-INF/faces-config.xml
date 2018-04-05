@@ -140,6 +140,38 @@
     
     <navigation-rule>
         <navigation-case>
+            <from-outcome>topSellers</from-outcome>
+            <to-view-id>/management/reports/topSellers.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>topClients</from-outcome>
+            <to-view-id>/management/reports/topClients</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>zeroReports</from-outcome>
+            <to-view-id>/management/reports/zeroReports.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+<navigation-rule>
+        <navigation-case>
+            <from-outcome>stockReport</from-outcome>
+            <to-view-id>/management/reports/stockReport.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
             <from-outcome>proceedToCheckout</from-outcome>
             <to-view-id>/checkout/payment_information.xhtml</to-view-id>
             <redirect/>

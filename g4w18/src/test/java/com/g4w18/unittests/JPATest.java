@@ -8,7 +8,7 @@ import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.custombeans.TopClientsResultBean;
 import com.g4w18.custombeans.TopSellersResultBean;
 import com.g4w18.custombeans.ZeroReportBean;
-import com.g4w18.customcontrollers.CustomReportQueries;
+import com.g4w18.customcontrollers.ReportQueries;
 import com.g4w18.entities.Author;
 import com.g4w18.entities.Book;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -92,7 +92,7 @@ public class JPATest {
     private CustomAuthorController aJc;
     
     @Inject
-    private CustomReportQueries reportQueries;
+    private ReportQueries reportQueries;
     
     @Resource(name = "java:app/jdbc/TheBooktopia")
     private DataSource ds;
@@ -281,6 +281,48 @@ public class JPATest {
         List<ZeroReportBean> zeroReports = reportQueries.getZeroSalesBetween2Dates(begin, end);
         
         assertThat(zeroReports).hasSize(100);
+    }
+    
+    /**
+     * Test zero report method 2 purchases
+     */
+    @Test
+    public void get_zero_report_between_two_good_dates__2_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 12, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 18, 0, 0, 0));;
+        
+        List<ZeroReportBean> zeroReports = reportQueries.getZeroSalesBetween2Dates(begin, end);
+        
+        assertThat(zeroReports).hasSize(98);
+    }
+    
+    /**
+     * Test zero report method 4 purchases
+     */
+    @Test
+    public void get_zero_report_between_two_good_dates__4_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 12, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 19, 0, 0, 0));;
+        
+        List<ZeroReportBean> zeroReports = reportQueries.getZeroSalesBetween2Dates(begin, end);
+        
+        assertThat(zeroReports).hasSize(96);
+    }
+    
+    /**
+     * Test zero report method 6 purchases
+     */
+    @Test
+    public void get_zero_report_between_two_good_dates__6_purchase() throws SQLException
+    {
+        Timestamp begin = Timestamp.valueOf(LocalDateTime.of(2017, Month.FEBRUARY, 12, 0, 0, 0));
+        Timestamp end = Timestamp.valueOf(LocalDateTime.of(2018, Month.FEBRUARY, 19, 0, 0, 0));;
+        
+        List<ZeroReportBean> zeroReports = reportQueries.getZeroSalesBetween2Dates(begin, end);
+        
+        assertThat(zeroReports).hasSize(94);
     }
     
     /**

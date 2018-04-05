@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msgs.reportTopSellersTitle}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+            <p:dataTable value="#{reportsBackingBean.topSellers}" var="topBook" paginator="true" rows="25" 
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                
+                <p:column headerText="#{msgs.managerAddIsbn}" sortBy="#{topBook.isbn}" filterBy="#{topBook.isbn}">
+                    <h:outputText value="#{topBook.isbn}"/>
+                </p:column>
+                <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{topBook.title}" filterBy="#{topBook.title}" filterMatchMode="contains">
+                    <h:outputText value="#{topBook.title}"/>
+                </p:column>
+                <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{topBook.totalSales}" filterBy="#{topBook.totalSales}">
+                    <h:outputText value="#{topBook.totalSales}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

@@ -16,7 +16,7 @@ public class ZeroReportBean {
         this.isbn = isbn;
     }
 
-    public String getTitlee() {
+    public String getTitle() {
         return title;
     }
 
