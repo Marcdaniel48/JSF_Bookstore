@@ -14,8 +14,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Cookie;
@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
  * @author Sebastian Ramirez
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class BookDetailsBackingBean implements Serializable {
 
     @Inject
