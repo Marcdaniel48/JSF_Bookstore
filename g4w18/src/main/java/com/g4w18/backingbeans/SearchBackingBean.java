@@ -68,6 +68,9 @@ public class SearchBackingBean implements Serializable {
        
         int result = 0;
         
+        FacesContext contextBundle = FacesContext.getCurrentInstance();
+        ResourceBundle bundle = contextBundle.getApplication().getResourceBundle(contextBundle, "msgs");
+        
         switch(searchOption)
         {
             case "Title":
@@ -96,7 +99,9 @@ public class SearchBackingBean implements Serializable {
       
        if(result > 1)
        {
-           message ="We have found " + result + " books for you! You searched for: " + searchTerm;
+           String found = bundle.getString("searchMessageFound");
+           String foundDetail = bundle.getString("searchMessageDetail");
+           message =found +" "+ result +" " +foundDetail + searchTerm;
            return "resultPlus";
        }
        else if(result == 1)
@@ -116,7 +121,8 @@ public class SearchBackingBean implements Serializable {
        }
        else
        {    
-           message="We have found nothing for you ! You searched for: " + searchTerm;
+            String messageFail = bundle.getString("searchMessageFail");
+           message=messageFail +" " + searchTerm;
            return "resultPlus";
        }
     }

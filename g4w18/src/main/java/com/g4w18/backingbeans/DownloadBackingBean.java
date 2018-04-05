@@ -89,10 +89,6 @@ public class DownloadBackingBean implements Serializable {
      * @return
      */
     public StreamedContent getFile() {
-//        log.log(Level.INFO, "CREATED???");
-//
-//        log.log(Level.INFO, "GET FILE INFO: " + file.getContentType());
-//        log.log(Level.INFO, "GET FILE INFO: " + file.getName());
         return file;
     }
 

@@ -3,6 +3,7 @@ package com.g4w18.selenium;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * 
  * @author Marc-Daniel
  */
+@Ignore
 public class LoginTest 
 {
     private WebDriver driver;
