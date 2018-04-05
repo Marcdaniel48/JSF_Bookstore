@@ -1,7 +1,5 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.controllers.BookJpaController;
-import com.g4w18.controllers.ClientJpaController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.customcontrollers.CustomClientController;
 import com.g4w18.controllers.ReviewJpaController;
@@ -16,7 +14,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.application.FacesMessage;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -29,10 +27,10 @@ import javax.servlet.http.HttpSession;
  * beans that are not managed such as entity beans. In this example the entity
  * bean for Inventory will be manually loaded with data for the example page.
  *
- * @author Ken
+ * @author Sebastian Ramirez
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class BookDetailsBackingBean implements Serializable {
 
     @Inject
