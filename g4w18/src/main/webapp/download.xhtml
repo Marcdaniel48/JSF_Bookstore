@@ -7,65 +7,43 @@
     xmlns:b="http://bootsfaces.net/ui">
 
     <ui:define name="content">
-        <h:form>
-            <ui:repeat var="client" value="#{downloadx.clientInfo}" varStatus="counter"  >
-                <b:panel style="background:  purple;">
-                    <b:row styleClass="show-grid"> 
-                        <b:column col-md="2">
-                            <h:outputText value="Sale date"></h:outputText>
-                            <h:outputText value="#{client.saleDate}"></h:outputText>
-                        </b:column>
+        <div class="page_container">
+            <div class="img-bg"></div>
+            <b:container fluid="false">
+                <b:row>
+                    <h1 style="text-align: center;">Your Downloads</h1>
+                    <b:form>
+                        <ui:repeat var="client" value="#{downloadx.clientInfo}" varStatus="counter"  >
+                            <b:row>
+                                <h3>Bought on #{client.saleDate}</h3>
+                            </b:row>
+                                <b:row>
+                                    <ui:repeat var="invoice" value="#{client.invoiceDetailList}">
 
-                        <b:column>
-                            <h:outputText value="You paid: "></h:outputText>
-                            <h:outputText value="#{client.netValue}"></h:outputText>
-                        </b:column>
+                                        <b:column col-md="3">
+                                            <b:thumbnail>
+                                                <b:image library="images" name="#{invoice.bookId.isbnNumber}hi.png" tooltip="#{invoice.bookId.title}" width="100%"></b:image>
+                                                <f:facet name="caption">
+                                                    <h4>$#{invoice.bookPrice} CAD</h4>
+                                                    <h:commandLink style="color: blue;" value="#{msgs.managerDownload}">
+                                                        <p:fileDownload value="#{downloadx.file}" />
+                                                    </h:commandLink>
+                                                </f:facet>
+                                            </b:thumbnail>
 
-                        <h1>#{downloadx.message}</h1>
-                        <ui:repeat var="invoice" value="#{client.invoiceDetailList}">
-                            <b:panel style="background: #00ff00;">
+                                        </b:column>
 
-                                <b:column col-md="8">
-                                    <h:outputText value="Price"></h:outputText>
-                                    <h:outputText value="#{invoice.bookPrice}" styleClass="list-group-item-heading"></h:outputText>
-                                </b:column>
-                                <b:panel style="background: green;">
-                                    <b:column col-md="8">
-                                        <b:image  library="images" name="#{invoice.bookId.isbnNumber}hi.png" tooltip="#{book.title}" height="50%" width="50%"></b:image>
-                                    </b:column>
-                                    <b:column col-md="8">
-                                        <h:outputText value="#{msgs.managerAddTitle}" styleClass="list-group-item-heading"></h:outputText>
-                                        <h:outputText value="#{invoice.bookId.title}" styleClass="list-group-item-heading"></h:outputText>
-                                    </b:column>
-                                    <b:column col-md="8">
-                                        <h:outputText value="#{msgs.managerAddGenre}" styleClass="list-group-item-heading"></h:outputText>
-                                        <h:outputText value="#{invoice.bookId.genre}" styleClass="list-group-item-heading"></h:outputText>
-                                    </b:column>
-                                    <b:column col-md="8">
-                                        <h:outputText value="#{msgs.managerAddPageNumber}" styleClass="list-group-item-heading"></h:outputText>
-                                        <h:outputText value="#{invoice.bookId.pageNumber}" styleClass="list-group-item-heading"></h:outputText>
-                                    </b:column>
-                                    <b:column col-md="8">
+                                    </ui:repeat>
 
-                                        <p:commandButton value="#{msgs.managerDownload}" ajax="false" icon="ui-icon-arrowthick-1-s">
-                                            <p:fileDownload value="#{downloadx.file}" />
-                                        </p:commandButton>
-
-                                    </b:column>
-
-
-                                </b:panel>
-
-                            </b:panel>
+                                </b:row>
+                            <hr/>
                         </ui:repeat>
 
 
-                    </b:row>
-                </b:panel>
-            </ui:repeat>
-
-
-        </h:form>
+                    </b:form>
+                </b:row>
+            </b:container>
+        </div>
     </ui:define>
 
 </ui:composition>
