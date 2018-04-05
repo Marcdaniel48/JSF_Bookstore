@@ -24,7 +24,6 @@ public class RssBackingBean implements Serializable {
     private CustomRssController rssController;
 
     private List<FeedMessage> articles;
-    private Rss rss;
 
     /**
      * Getter for the Feed Messages. If it is null, it will generate a new list
@@ -35,24 +34,11 @@ public class RssBackingBean implements Serializable {
     public List<FeedMessage> getArticles() {
         //Sebastian: added the if null check
         if (articles == null) {
+            Rss rss = rssController.findActiveRss();
             RSSFeedParser parser = new RSSFeedParser(rss.getRssLink());
             Feed feed = parser.readFeed();
             articles = feed.getMessages();
         }
         return articles;
-    }
-
-    /**
-     * Getter for the Rss object. If it is null, it will retrieve the current
-     * active RSS entry from the database.
-     *
-     * @return The RSS object.
-     */
-    //autor: Sebastian
-    public Rss getRss() {
-        if (rss == null) {
-            rss = rssController.findActiveRss();
-        }
-        return rss;
     }
 }

@@ -135,21 +135,19 @@ CREATE TABLE BANNER(
     PRIMARY KEY (BANNER_ID)
 ) ENGINE=InnoDB;
 
-<<<<<<< HEAD
 CREATE TABLE RSS(
     RSS_ID int NOT NULL AUTO_INCREMENT,
     RSS_LINK varchar(100) NOT NULL default '',
     IS_ACTIVE boolean NOT NULL default false,
     PRIMARY KEY (RSS_ID)
 ) engine=InnoDB;
-=======
+
 insert into banner values
-(null, "ad1.png", "https://google.ca", true),
+(null, "sl1.png", "https://kimgarts.com", true),
 -- (null, "slide1.jpg", "https://google.ca", true),
-(null, "ad2.png", "https://google.ca", true),
+(null, "sl2.png", "http://www.techjini.com/", true),
 (null, "slide3.jpg", "https://google.ca", false),
 (null, "slide4.jpg", "https://google.ca", false);
->>>>>>> cf445d40ad694170f69896d7740d417ce741baa2
 
 INSERT INTO BOOK values
 (null, "978-1408855652", "Harry Potter and the Philosopher's Stone", "Bloomsbury Children's Books", "2014-09-01 00:00:00", 352, "Fantasy",
@@ -1002,7 +1000,6 @@ insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_
 ('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0, false),
 ('How many books have you read in your life?', 'Less than 1', 'Between 1 and 10', 'Between 11 and 50', 'More than 50', 0, 0, 0, 0, false);
 
-<<<<<<< HEAD
 INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE, AVAILABLE) VALUES
 (10, CURRENT_TIME, 28.96, 33.29676, true),
 (20, CURRENT_TIME, 29.07, 33.42, true),
@@ -1022,11 +1019,12 @@ INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE,
 (4, 67, 1.85, 9.975, 5, 0, false);
 
 INSERT INTO RSS (RSS_LINK, IS_ACTIVE) values
-('http://www.cbc.ca/cmlink/rss-sports', true),
+('https://www.nasa.gov/rss/dyn/educationnews.rss', true),
+('http://www.cbc.ca/cmlink/rss-sports', false),
 ('http://feeds.reuters.com/reuters/topNews', false),
 ('http://rss.cnn.com/rss/cnn_topstories.rss', false),
 ('http://abcnews.go.com/abcnews/topstories', false);
-=======
+
 INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE) VALUES
 (10, CURRENT_TIME, 28.96, 33.29676),
 (6,'2018-02-18 02:19:53',28.96,33.29676),
@@ -1047,4 +1045,3 @@ INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE,
 (4, 9, 14.95, 9.975, 5, 0),
 (4, 37, 13.99, 9.975, 5, 0)
 ;
->>>>>>> cf445d40ad694170f69896d7740d417ce741baa2

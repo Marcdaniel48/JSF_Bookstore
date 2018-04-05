@@ -6,14 +6,14 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:b="http://bootsfaces.net/ui"
     xmlns:p="http://primefaces.org/ui">
-
+    
     <ui:define name="windowTitle">
         #{msgs.bookDetailsPageTitle}
     </ui:define>
-
+    
     <ui:define name="content">
         <div class="page_container">
-
+        
             <!--<h:outputStylesheet library="css" name="styles.css"/>-->
             <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
             <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
@@ -141,26 +141,22 @@
                                 </b:column>
                             </b:row>
                         </b:container>
-                        <hr/>
-                    </ui:repeat>
-                </h:form>
-                <h:form>
-                    <p:growl id="growl" sticky="true"></p:growl>
-                    <b:container fluid="true">
-                        <b:row>
-                            <b:column col-md="11">
-                                <b:inputTextarea placeholder="#{msgs.bookDetailsLeaveReview}" value="#{bookDetailsBackingBean.review.review}" id="reviewInputTextArea">
-                                </b:inputTextarea>
-                            </b:column>
-                            <b:column col-md="1">
-                                <h:outputText value="#{bookDetailsBackingBean.client.firstName} #{bookDetailsBackingBean.client.lastName}"></h:outputText>
-                                <p:rating value="#{bookDetailsBackingBean.review.rating}" id="reviewRating" >
-                                </p:rating>
-                                <p:commandButton id="primebutton" value="#{msgs.bookDetailsSubmitReview}"
-                                                 action="#{bookDetailsBackingBean.createReview}" ajax="false" update="growl">
-                                    <f:param name="bookId" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
-                                    <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
-                                </p:commandButton>
+                    </b:column>
+                </b:row>
+                <br/>
+                <b:panel collapsible="false" title="#{msgs.bookDetailsRecommendedBooks}">
+                    <h:form>
+                        <ui:repeat var="recommended" value="#{bookDetailsBackingBean.recommendedBooks}">
+                            <b:column col-sm="6" col-md="2" col-xs="12">
+                                <b:thumbnail>
+                                    <b:image library="images" name="#{recommended.isbnNumber}hi.png" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
+                                    <f:facet name="caption">
+                                        <b:commandLink outcome="bookDetail">
+                                            <h:outputText value="#{recommended.title}" styleClass="list-group-item-heading"></h:outputText>
+                                            <f:param name="id" value="#{recommended.bookId}"></f:param>
+                                        </b:commandLink>
+                                    </f:facet>
+                                </b:thumbnail>
                             </b:column>
                         </ui:repeat>
                     </h:form>
@@ -212,5 +208,5 @@
             <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
         </div>
     </ui:define>
-
+        
 </ui:composition>

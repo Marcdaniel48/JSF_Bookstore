@@ -125,7 +125,7 @@ public class BookDetailsBackingBean implements Serializable {
             String username = (String) session.getAttribute("username");
             if (username != null) {
                 client = clientJpaController.findClientByUsername(username);
-                log.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
+                LOGGER.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
             } else {
                 client = new Client();
                 client.setFirstName("Guest");
