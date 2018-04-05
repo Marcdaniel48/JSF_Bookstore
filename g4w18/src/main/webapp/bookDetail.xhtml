@@ -76,11 +76,13 @@
                             </b:row>
                             <b:row>
                                 <b:column>
-                                <b:form>
-                                    <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.shoppingCart.addToCart(bookDetailsBackingBean.book)}">
+                                <b:form id="add_to_cart_form" rendered="#{!shoppingCartBackingBean.isBookBoughtOrInCartAlready(bookDetailsBackingBean.book)}">
+                                    <b:commandButton value="#{msgs.bookDetailsCartPanelButton}" look="info" action="#{shoppingCartBackingBean.shoppingCart.addToCart(bookDetailsBackingBean.book)}"
+                                                     id="add_to_cart_button">
                                         <f:param name="id" value="#{bookBackingBean.book.bookId}"></f:param>
                                     </b:commandButton>
                                 </b:form>
+                                    <h:outputText value="#{msgs.shoppingCartAlreadyBoughtOrInCart}" rendered="#{shoppingCartBackingBean.isBookBoughtOrInCartAlready(bookDetailsBackingBean.book)}"></h:outputText>
                                 </b:column>
                             </b:row>
                             <hr/>

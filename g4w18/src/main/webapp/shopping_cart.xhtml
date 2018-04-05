@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <ui:composition
     xmlns="http://www.w3.org/1999/xhtml"
     template="/WEB-INF/layouts/master.xhtml"
@@ -20,7 +19,7 @@
                 <div class="img-bg"></div>
                 <b:container fluid="false">
                     <b:row styleClass="show-grid">
-                        <ui:fragment rendered="#{not empty shoppingCartBackingBean.shoppingCartBooks}">
+                        <ui:fragment rendered="#{not empty shoppingCartBackingBean.shoppingCart.shoppingCartBooks}">
                             <h1 style="text-align: center;">Your Shopping Cart</h1>
                             <b:form styleClass="col-xs-12 ">
                                 <!--<b:panel>-->
@@ -43,7 +42,7 @@
                                 <!--</b:panel>-->
                             </b:form>
                         </ui:fragment>
-                        <ui:fragment rendered="#{empty shoppingCartBackingBean.shoppingCartBooks}">
+                        <ui:fragment rendered="#{empty shoppingCartBackingBean.shoppingCart.shoppingCartBooks}">
                             <h1>Your cart is empty</h1>
                         </ui:fragment>
                     </b:row>
