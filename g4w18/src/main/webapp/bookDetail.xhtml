@@ -163,7 +163,7 @@
                 </b:panel>
                 <b:panel collapsible="false" title="#{msgs.bookDetailsReviews}">
                     <h:form>
-                        <ui:repeat var="existingReview" value="#{bookDetailsBackingBean.book.reviewList}">
+                        <ui:repeat var="existingReview" value="#{bookDetailsBackingBean.approvedReviews}">
                             <b:container fluid="true">
                                 <b:row>
                                     <b:column col-md="3">

@@ -6,7 +6,9 @@ import com.g4w18.customcontrollers.CustomReviewController;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.Review;
+import com.g4w18.util.Messages;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +44,7 @@ public class BookDetailsBackingBean implements Serializable {
 
     private Book book;
     private Review review;
+    private List<Review> approvedReviews;
     private Client client;
     private int averageRating;
     private List<Book> recommendedBooks;
@@ -94,6 +97,18 @@ public class BookDetailsBackingBean implements Serializable {
         }
         return recommendedBooks;
     }
+    
+    public List<Review> getApprovedReviews(){
+        if (approvedReviews == null) {
+            List<Review> bookReviews = new ArrayList<>();
+            book.getReviewList().stream().filter((r) -> (r.getApprovalStatus()))
+                    .forEachOrdered((r) -> {
+                bookReviews.add(r);
+            });
+            approvedReviews = bookReviews;
+        }
+        return approvedReviews;
+    }
 
     public int getRating() {
         averageRating = 0;
@@ -120,11 +135,13 @@ public class BookDetailsBackingBean implements Serializable {
 
     public Client getClient() {
         if (client == null) {
-            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
             String username = (String) session.getAttribute("username");
             if (username != null) {
                 client = clientJpaController.findClientByUsername(username);
-                LOGGER.log(Level.INFO, "Client found, name: {0}", client.getFirstName() + "");
+                LOGGER.log(Level.INFO, "Client found, name: {0}", 
+                        client.getFirstName() + "");
             } else {
                 client = new Client();
                 client.setFirstName("Guest");
@@ -138,6 +155,7 @@ public class BookDetailsBackingBean implements Serializable {
 //            FacesMessage loginMessage = new FacesMessage("Please login before leaving a review");
 //            loginMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 //            FacesContext.getCurrentInstance().addMessage("", loginMessage);
+            Messages.addMessage("pleaseLoginBeforeReviewin");
             return "login.xhtml";
         }
         for (Review r : client.getReviewList()) {

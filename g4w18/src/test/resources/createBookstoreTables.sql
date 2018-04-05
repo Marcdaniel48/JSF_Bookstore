@@ -71,7 +71,7 @@ CREATE TABLE REVIEW (
     CLIENT_ID int NOT NULL,
     REVIEW_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
     RATING int(1) NOT NULL default 1,
-    REVIEW varchar(255) NOT NULL default '',
+    REVIEW varchar(500) NOT NULL default '',
     APPROVAL_STATUS boolean NOT NULL default FALSE,
     PRIMARY KEY (REVIEW_ID),
     FOREIGN KEY (BOOK_ID) REFERENCES BOOK(BOOK_ID),
@@ -781,12 +781,12 @@ insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_ST
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (43, 25, '2017-04-15 11:14:14', 5, 'tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae', true);
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (100, 25, '2017-05-17 23:43:04', 4, 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet', false);
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (55, 20, '2017-07-08 11:09:01', 3, 'amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies', false);
-insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 3, CURRENT_TIME, 3, 'Test review 1', false);
-insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 4, CURRENT_TIME, 1, 'Test review 2', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 3, CURRENT_TIME, 3, 'Test review 1', true);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 4, CURRENT_TIME, 1, 'Test review 2', true);
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 5, CURRENT_TIME, 4, 'Test review 3', false);
-insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 6, CURRENT_TIME, 5, 'Test review 4', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 6, CURRENT_TIME, 5, 'Test review 4', true);
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 7, CURRENT_TIME, 2, 'Test review 5', false);
-insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 8, CURRENT_TIME, 1, 'Test review 6', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 8, CURRENT_TIME, 1, 'Test review 6', true);
 
 
 --TAXES--
