@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -84,7 +83,7 @@ public class RssManagerBackingBean implements Serializable {
     public String onRowEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
         Rss editedRss = (Rss) event.getObject();
         rssController.edit(editedRss);
-        addMessage("managerRSSEdit");
+        Messages.addMessage("managerRSSEdit");
         return null;
     }
 
@@ -102,23 +101,11 @@ public class RssManagerBackingBean implements Serializable {
     public String delete() throws Exception {
         if (rssController.getRssCount() > 1) {
             rssController.destroy(toDelete.getRssId());
-            addMessage("managerDeleteSuccessful");
+            Messages.addMessage("managerDeleteSuccessful");
         } else {
-            addMessage("managerCantDelete");
+            Messages.addMessage("managerCantDelete");
         }
         return null;
-    }
-
-    /**
-     * The addMessage method simplifies and reduces redundancy of code when
-     * displaying a message is necessary.
-     *
-     * @param key The string key in the messages bundle.
-     */
-    private void addMessage(String key) {
-        String message = context.getApplication().getResourceBundle(context, "msgs").getString(key);
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
-        context.addMessage(null, msg);
     }
 
     /**
@@ -139,7 +126,7 @@ public class RssManagerBackingBean implements Serializable {
 
     public String createRss() throws Exception {
         rssController.create(newRss);
-        addMessage("managerRSSNewSuccess");
+        Messages.addMessage("managerRSSNewSuccess");
         return null;
     }
 

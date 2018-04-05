@@ -23,7 +23,7 @@
         <p:panel id="toggleable" header="#{msgs.managerAddSousTitre}" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
 
 
-            <h:form>
+            <h:form enctype="multipart/form-data"  >
 
                 <p:growl id="growl" showDetail="true" sticky="true"/>
                 <h:panelGrid columns="2" cellpadding="10">
@@ -49,7 +49,7 @@
                     </p:inputText>
                     
                     <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
-                    <p:calendar id="datetime" value="#{managerBookHandling.book.publicationDate}" pattern="MM/dd/yyyy HH:mm:ss" />
+                    <p:calendar id="datetime" value="#{managerBookHandling.book.publicationDate}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="#{msgs.invalidBookPublisherDate}" />
 
                     <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
                     <p:inputNumber id="mPageNum" value="#{managerBookHandling.book.pageNumber}" required="true" requiredMessage="#{msgs.invalidBookPageNumber}" decimalPlaces="0" ></p:inputNumber>
@@ -90,10 +90,12 @@
                     
                     
                     <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
-                    <p:fileUpload requiredMessage="#{msgs.invalidBookImageRequired}" fileLimit="1" required="true"   mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{managerBookHandling.fileUploadHandler}" />
+                    <h:inputFile value="#{managerBookHandling.file}" required="true" requiredMessage="#{msgs.managerFileError}" />
+                   
                     
                     
-                    <p:commandButton value="#{msgs.submitButton}" action="#{managerBookHandling.createBook()}" update="growl"/>
+                    
+                    <p:commandButton value="#{msgs.submitButton}"  action="#{managerBookHandling.createBook()}" actionListener="#{managerBookHandling.fileUploadHandler}" update="growl"/>
                     <h:outputLabel>#{managerBookHandling.message}</h:outputLabel>
 
                 </h:panelGrid>
@@ -201,6 +203,13 @@
                     <p:column headerText="#{msgs.managerRemovalStatus}" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" >
                         <p:cellEditor>
                             <f:facet name="output"><p:selectBooleanButton value="#{book.removalStatus}" disabled="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
+                            <f:facet name="input"><p:selectBooleanButton value="#{book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="#{msgs.managerEditAuhtors}" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><p:selectBooleanButton value="#{book.authorList}" disabled="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
                             <f:facet name="input"><p:selectBooleanButton value="#{book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
                         </p:cellEditor>
                     </p:column>

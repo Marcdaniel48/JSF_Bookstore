@@ -8,12 +8,11 @@ import com.g4w18.customcontrollers.CustomMasterInvoiceController;
 import com.g4w18.entities.Book;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
+import com.g4w18.util.Messages;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -73,7 +72,7 @@ public class OrderManagerBackingBean implements Serializable {
         MasterInvoice editedMasterInvoice = (MasterInvoice) event.getObject();
         setInvoiceDetailsStatus(editedMasterInvoice);
         masterInvoiceController.edit(editedMasterInvoice);
-        addMessage("managerRSSEdit");
+        Messages.addMessage("managerRSSEdit");
         return null;
     }
 
@@ -92,22 +91,8 @@ public class OrderManagerBackingBean implements Serializable {
         Book newBook = bookController.findUniqueBookByISBN(editedDetail.getBookId().getIsbnNumber());
         editedDetail.setBookId(newBook);
         invoiceDetailController.edit(editedDetail);
-        addMessage("managerRSSEdit");
+        Messages.addMessage("managerRSSEdit");
         return null;
-    }
-
-    /**
-     * The addMessage method simplifies and reduces redundancy of code when
-     * displaying a message is necessary.
-     *
-     * @param key The string key in the messages bundle.
-     */
-    private void addMessage(String key) {
-        FacesMessage message = com.g4w18.util.Messages.getMessage(
-                "com.g4w18.bundles.messages", key, null);
-        message.setSeverity(FacesMessage.SEVERITY_INFO);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, message);
     }
 
 }

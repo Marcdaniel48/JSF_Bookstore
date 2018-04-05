@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msgs.reportZeroSalesTitle}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+            <p:dataTable value="#{reportsBackingBean.zeroSales}" var="zeroSale" paginator="true" rows="25" 
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                
+                <p:column headerText="#{msgs.managerAddIsbn}" sortBy="#{zeroSale.isbn}" filterBy="#{zeroSale.isbn}">
+                    <h:outputText value="#{zeroSale.isbn}"/>
+                </p:column>
+                <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{zeroSale.title}" filterBy="#{zeroSale.title}" filterMatchMode="contains">
+                    <h:outputText value="#{zeroSale.title}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

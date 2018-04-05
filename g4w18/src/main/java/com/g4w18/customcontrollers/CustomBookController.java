@@ -128,16 +128,6 @@ public class CustomBookController implements Serializable {
         return toReturn;
     }
 
-    public Book findUniqueBookByISBN(String isbn) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
-        Root<Book> book = cq.from(Book.class);
-        cq.select(book).where(cb.equal(book.get("isbnNumber"), isbn));
-        TypedQuery<Book> query = em.createQuery(cq);
-        Book toReturn = query.getSingleResult();
-        return toReturn;
-    }
-
     /**
      * Get books from the database with the title provided
      *
@@ -185,15 +175,30 @@ public class CustomBookController implements Serializable {
         return findPublisher;
     }
     /**
-     * Get books from the database with the isbn provided
+     * Get books from the database with the isbn provided and can use it
      *
      * @param isbn number of the book the user is searching for
      * @return Book found with the isbn
      */
     //Author: Salman
     public List<Book> findBookByIsbn(String isbn) {
-        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where (b.isbnNumber LIKE ?1) AND (b.removalStatus=0) order by b.pageNumber asc")
+        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where (b.isbnNumber LIKE ?1) AND (b.removalStatus=0) order by b.isbnNumber asc")
                 .setParameter(1, isbn + "%")
+                .getResultList();
+
+        return findBookByIsbn;
+    }
+
+    /**
+     * Get books from the database with the isbn provided
+     *
+     * @param isbn number of the book the user is searching for
+     * @return Book found with the isbn
+     */
+    //Author: Salman
+    public List<Book> findBookByIsbnSpecific(String isbn) {
+        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where b.isbnNumber LIKE ?1 order by b.isbnNumber asc")
+                .setParameter(1, isbn)
                 .getResultList();
 
         return findBookByIsbn;
