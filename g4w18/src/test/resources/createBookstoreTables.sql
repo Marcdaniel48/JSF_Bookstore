@@ -1004,18 +1004,29 @@ INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE, AVAILA
 (10, CURRENT_TIME, 28.96, 33.29676, true),
 (20, CURRENT_TIME, 29.07, 33.42, true),
 (15, CURRENT_TIME, 37.68, 43.32, true),
-(25, CURRENT_TIME, 1.85, 2.13, false);
+(25, CURRENT_TIME, 1.85, 2.13, false),
+(6,'2018-02-18 02:19:53',28.96,33.29676, true),
+(7,'2018-02-12 02:19:53',13.98,16.07, true),
+(7,'2017-12-01 02:19:53',28.94,33.26, true);
 
 INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE, HST_RATE, AVAILABLE) VALUES
 (1, 1, 8.99, 9.975, 5, 0, true),
 (1, 2, 5.99, 9.975, 5, 0, true),
 (1, 3, 5.99, 9.975, 5, 0, true),
 (1, 4, 7.99, 9.975, 5, 0, false),
+(2, 1, 8.99, 9.975, 5, 0, true),
+(2, 2, 5.99, 9.975, 5, 0, true),
+(2, 3, 5.99, 9.975, 5, 0, true),
+(2, 4, 7.99, 9.975, 5, 0, true),
 (2, 22, 7.99, 9.975, 5, 0, true),
 (2, 54, 20.25, 9.975, 5, 0, false),
 (2, 79, 0.83, 9.975, 5, 0, true),
+(3, 3, 5.99, 9.975, 5, 0, true),
+(3, 4, 7.99, 9.975, 5, 0, true),
 (3, 55, 30.69, 9.975, 5, 0, true),
 (3, 44, 6.99, 9.975, 5, 0, true),
+(4, 9, 14.95, 9.975, 5, 0, true),
+(4, 37, 13.99, 9.975, 5, 0, true),
 (4, 67, 1.85, 9.975, 5, 0, false);
 
 INSERT INTO RSS (RSS_LINK, IS_ACTIVE) values
@@ -1025,23 +1036,4 @@ INSERT INTO RSS (RSS_LINK, IS_ACTIVE) values
 ('http://rss.cnn.com/rss/cnn_topstories.rss', false),
 ('http://abcnews.go.com/abcnews/topstories', false);
 
-INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE) VALUES
-(10, CURRENT_TIME, 28.96, 33.29676),
-(6,'2018-02-18 02:19:53',28.96,33.29676),
-(7,'2018-02-12 02:19:53',13.98,16.07),
-(7,'2017-12-01 02:19:53',28.94,33.26);
 
-INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE, HST_RATE) VALUES
-(1, 1, 8.99, 9.975, 5, 0),
-(1, 2, 5.99, 9.975, 5, 0),
-(1, 3, 5.99, 9.975, 5, 0),
-(1, 4, 7.99, 9.975, 5, 0),
-(2, 1, 8.99, 9.975, 5, 0),
-(2, 2, 5.99, 9.975, 5, 0),
-(2, 3, 5.99, 9.975, 5, 0),
-(2, 4, 7.99, 9.975, 5, 0),
-(3, 3, 5.99, 9.975, 5, 0),
-(3, 4, 7.99, 9.975, 5, 0),
-(4, 9, 14.95, 9.975, 5, 0),
-(4, 37, 13.99, 9.975, 5, 0)
-;
