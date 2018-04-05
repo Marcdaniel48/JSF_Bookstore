@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -109,6 +110,13 @@ public class ManagerBookBackingBean implements Serializable {
         return book;
     }
     
+    public void clear(){
+    book.setIsbnNumber("");
+    book.setTitle("");
+    book.setGenre("");
+    book.setListPrice(BigDecimal.ZERO);
+}
+    
     /**
      * Edit book.
      * @return Return to the same page.
@@ -129,7 +137,7 @@ public class ManagerBookBackingBean implements Serializable {
     public String createBook() throws Exception
     {
         logger.log(Level.INFO, "INSIDE OF CREATE BOOK");
-        List<Book> bookResult = bookJpaController.findBookByIsbn(book.getIsbnNumber());
+        List<Book> bookResult = bookJpaController.findBookByIsbnSpecific(book.getIsbnNumber());
         logger.log(Level.INFO,"BOOK ISBN THAT WILL BE ADDED TO DB "+ book.getIsbnNumber());
         logger.log(Level.INFO, "RESULTS OF BOOKS FOUND WITH THEW ISBN"+ bookResult.size());
         if(bookResult.size() == 0)
@@ -148,6 +156,7 @@ public class ManagerBookBackingBean implements Serializable {
 //            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 //            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
             addMessage("managerCreateBook");
+            clear();
             return null;
             
         }

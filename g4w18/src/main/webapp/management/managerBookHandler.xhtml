@@ -23,7 +23,7 @@
         <p:panel id="toggleable" header="#{msgs.managerAddSousTitre}" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
 
 
-            <h:form>
+            <h:form enctype="multipart/form-data"  >
 
                 <p:growl id="growl" showDetail="true" sticky="true"/>
                 <h:panelGrid columns="2" cellpadding="10">
@@ -49,7 +49,7 @@
                     </p:inputText>
                     
                     <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
-                    <p:calendar id="datetime" value="#{managerBookHandling.book.publicationDate}" pattern="MM/dd/yyyy HH:mm:ss" />
+                    <p:calendar id="datetime" value="#{managerBookHandling.book.publicationDate}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="#{msgs.invalidBookPublisherDate}" />
 
                     <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
                     <p:inputNumber id="mPageNum" value="#{managerBookHandling.book.pageNumber}" required="true" requiredMessage="#{msgs.invalidBookPageNumber}" decimalPlaces="0" ></p:inputNumber>
@@ -90,7 +90,8 @@
                     
                     
                     <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
-                    <p:fileUpload requiredMessage="#{msgs.invalidBookImageRequired}" fileLimit="1" required="true"   mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{managerBookHandling.fileUploadHandler}" />
+                    <p:fileUpload required="true" requiredMessage="#{msgs.invalidBookImageRequired}" fileLimit="1" mode="advanced" allowTypes="/(\.|\/)(jpe?g|png)$/" fileUploadListener="#{managerBookHandling.fileUploadHandler}" />
+                    
                     
                     
                     <p:commandButton value="#{msgs.submitButton}" action="#{managerBookHandling.createBook()}" update="growl"/>
