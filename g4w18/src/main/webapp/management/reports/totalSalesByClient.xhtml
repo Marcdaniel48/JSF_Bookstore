@@ -25,11 +25,20 @@ and open the template in the editor.
                 <p:column headerText="#{msgs.reportsClientName}" sortBy="#{sale.client.firstName} #{sale.client.lastName}" filterBy="#{sale.client.firstName} #{sale.client.lastName}" filterMatchMode="contains">
                     <h:outputText value="#{sale.client.firstName} #{sale.client.lastName}"/>
                 </p:column>
-                <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{sale.totalSalesRounded}" filterBy="#{sale.totalSalesRounded}">
-                    <h:outputText value="#{sale.totalSalesRounded}"/>
+                <p:column headerText="#{msgs.reportsClientEmail}" sortBy="#{sale.client.email}" filterBy="#{sale.client.email}" filterMatchMode="contains">
+                    <h:outputText value="#{sale.client.email}"/>
                 </p:column>
                 <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastRecordedSale}" filterBy="#{sale.lastRecordedSale}" filterMatchMode="contains">
                     <h:outputText value="#{sale.lastRecordedSale}"/>
+                </p:column>
+                <p:column headerText="#{msgs.reportsTotalCost}" sortBy="#{sale.totalCostRounded}" filterBy="#{sale.totalCostRounded}">
+                    <h:outputText value="#{sale.totalCostRounded}"/>
+                </p:column>
+                <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{sale.totalSalesRounded}" filterBy="#{sale.totalSalesRounded}">
+                    <h:outputText value="#{sale.totalSalesRounded}"/>
+                </p:column>
+                <p:column headerText="#{msgs.reportsTotalProfit}" sortBy="#{sale.totalProfitRounded}" filterBy="#{sale.totalProfitRounded}">
+                    <h:outputText value="#{sale.totalProfitRounded}"/>
                 </p:column>
             </p:dataTable>
         </h:form>
