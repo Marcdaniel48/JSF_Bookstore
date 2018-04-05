@@ -110,7 +110,16 @@ and open the template in the editor.
                     </p:column>
 
                     <p:column headerText="#{msgs.managerDetailBook}" filterBy="#{detail.bookId.title}" filterMatchMode="contains">
-                        <h:outputText value="#{detail.bookId.title}"></h:outputText>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{detail.bookId.isbnNumber}"></h:outputText>
+                                <br/>
+                                <h:outputText value="#{detail.bookId.title}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{detail.bookId.isbnNumber}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="#{msgs.managerDetailPrice}" filterBy="#{detail.bookPrice}" filterMatchMode="contains">

@@ -2,8 +2,10 @@ package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
+import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.customcontrollers.CustomInvoiceDetailController;
 import com.g4w18.customcontrollers.CustomMasterInvoiceController;
+import com.g4w18.entities.Book;
 import com.g4w18.entities.InvoiceDetail;
 import com.g4w18.entities.MasterInvoice;
 import java.io.Serializable;
@@ -29,6 +31,8 @@ public class OrderManagerBackingBean implements Serializable {
     private CustomMasterInvoiceController masterInvoiceController;
     @Inject
     private CustomInvoiceDetailController invoiceDetailController;
+    @Inject
+    private CustomBookController bookController;
 
     private List<MasterInvoice> allMasterInvoices;
     private MasterInvoice selectedInvoice;
@@ -85,6 +89,8 @@ public class OrderManagerBackingBean implements Serializable {
     public String onRowEditInvoiceDetail(RowEditEvent event) throws Exception {
         LOGGER.log(Level.INFO, "onRowEditInvoiceDetail called");
         InvoiceDetail editedDetail = (InvoiceDetail) event.getObject();
+        Book newBook = bookController.findUniqueBookByISBN(editedDetail.getBookId().getIsbnNumber());
+        editedDetail.setBookId(newBook);
         invoiceDetailController.edit(editedDetail);
         addMessage("managerRSSEdit");
         return null;

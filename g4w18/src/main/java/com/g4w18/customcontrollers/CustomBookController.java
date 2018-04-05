@@ -62,14 +62,13 @@ public class CustomBookController implements Serializable {
         return bookController.getBookCount();
     }
 
-    public List<Book> getBooksOnSale()
-    {
+    public List<Book> getBooksOnSale() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> root = cq.from(Book.class);
         cq.select(root);
         cq.where(cb.gt(root.get("saleDate"), 0));
-        
+
         Query q = em.createQuery(cq);
         q.setMaxResults(10);
 
@@ -77,8 +76,7 @@ public class CustomBookController implements Serializable {
         return books;
     }
 
-    public List<Book> getMostRecentBooks()
-    {
+    public List<Book> getMostRecentBooks() {
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
@@ -113,12 +111,23 @@ public class CustomBookController implements Serializable {
         return toReturn;
     }
 
+    public Book findUniqueBookByISBN(String isbn) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+        Root<Book> book = cq.from(Book.class);
+        cq.select(book).where(cb.equal(book.get("isbnNumber"), isbn));
+        TypedQuery<Book> query = em.createQuery(cq);
+        Book toReturn = query.getSingleResult();
+        return toReturn;
+    }
+
     /**
      * Get books from the database with the title provided
      *
      * @param title name of the book that is being searched
      * @return List of books found with the title
      */
+
     public List<Book> findBooksByTitleSpecific(String title) {
         List<Book> findBookByTitle = em.createQuery("Select b from Book b where b.title =?1")
                 .setParameter(1, title)
