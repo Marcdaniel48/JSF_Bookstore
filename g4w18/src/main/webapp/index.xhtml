@@ -110,6 +110,7 @@
 
                         <ui:repeat value="#{bannerBackingBean.activeBanners}" var="banner">
                             <h:outputLink styleClass="slide-link" target="_blank" value="#{banner.bannerLink}">
+                                <!--<p:graphicImage name="#{banner.bannerName}"--> 
                                 <h:graphicImage class="slide-img" library="images" name="#{banner.bannerName}" alt="#{banner.bannerName}" />
                             </h:outputLink>
                         </ui:repeat>

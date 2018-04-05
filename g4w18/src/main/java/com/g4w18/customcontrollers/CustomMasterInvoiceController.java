@@ -21,13 +21,13 @@ public class CustomMasterInvoiceController implements Serializable
 {
     @Inject
     private MasterInvoiceJpaController masterInvoiceJpaController;
-    
+
     @Inject
     private CustomClientController clientJpaController;
-    
+
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
-    
+
     public void create(MasterInvoice masterInvoice) throws RollbackFailureException, Exception {
         masterInvoiceJpaController.create(masterInvoice);
     }
@@ -55,11 +55,11 @@ public class CustomMasterInvoiceController implements Serializable
     public int getMasterInvoiceCount() {
         return masterInvoiceJpaController.getMasterInvoiceCount();
     }
-    
+
     /**
      * Returns a master invoice with the given client ID.
      * @param clientId
-     * @return 
+     * @return
      */
     public List<MasterInvoice> findMasterInvoicesByClientId(int clientId)
     {
@@ -69,11 +69,11 @@ public class CustomMasterInvoiceController implements Serializable
         List<MasterInvoice> masterInvoices = query.getResultList();
         return masterInvoices;
     }
-    
+
     /**
      * Get all master invoices for the specific client id.
      * @param clientId
-     * @return 
+     * @return
      */
     public List<MasterInvoice> getMasterInvoiceByClientId(int clientId)
     {
@@ -81,7 +81,7 @@ public class CustomMasterInvoiceController implements Serializable
         Client client = clientJpaController.findClient(clientId);
         query.setParameter("clientId", client);
         List<MasterInvoice> masterInvoices = query.getResultList();
-        
+
         return masterInvoices;
     }
 }
