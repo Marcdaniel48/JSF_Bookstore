@@ -36,6 +36,7 @@ import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.component.datatable.DataTable;
@@ -50,7 +51,7 @@ import org.primefaces.model.UploadedFile;
  * @author Salman Haidar
  */
 @Named("managerBookHandling")
-@SessionScoped
+@RequestScoped
 public class ManagerBookBackingBean implements Serializable {
     
     
@@ -137,8 +138,12 @@ public class ManagerBookBackingBean implements Serializable {
     public String createBook() throws Exception
     {
         logger.log(Level.INFO, "INSIDE OF CREATE BOOK");
-        if()
-        addMessageError();
+        if(getFile()==null)
+        {
+            logger.log(Level.INFO,"CHECKING IF FILE WAS UPLOADED NULL");
+            addMessageError("managerFileError");
+            return null;
+        }
         List<Book> bookResult = bookJpaController.findBookByIsbnSpecific(book.getIsbnNumber());
         logger.log(Level.INFO,"BOOK ISBN THAT WILL BE ADDED TO DB "+ book.getIsbnNumber());
         logger.log(Level.INFO, "RESULTS OF BOOKS FOUND WITH THEW ISBN"+ bookResult.size());
@@ -209,27 +214,80 @@ public class ManagerBookBackingBean implements Serializable {
      * @param event Image to be added.
      * @throws IOException 
      */
-    public void fileUploadHandler(FileUploadEvent event) throws IOException
+    public void fileUploadHandler() throws IOException
     {
-        logger.log(Level.INFO, "INSIDE OF FILE UPLOAD HANDLER");
+          try(InputStream input = uploadedImage.getInputstream())
+          {
+              String filename = uploadedImage.getFileName();
+              
+              ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+              ServletContext sc = (ServletContext)context.getContext();
+              String path = sc.getRealPath("/resources/images/");
+              
+              Files.copy(input, new File(path, filename).toPath());
+              
+          }
+          
+//        Path folder = Paths.get("/resources/images/");
+//        
+//        String filename = book.getIsbnNumber() + "hi";
+//        String extension = FilenameUtils.getExtension(file.getFileName());
+//        Path file = Files.createFile(folder);
+           
+//        logger.log(Level.INFO, "INSIDE OF FILE UPLOAD HANDLER");
+//        
+//        uploadedImage = file.getFile();
+//        Path folder = Paths.get("/resources/images");
+//        String filename = book.getIsbnNumber();
+//        String extension = FilenameUtils.getExtension(uploadedImage.getFileName());
+//        logger.log(Level.INFO, "EXTENSION SHOW PLS " + extension + "   -----FOLDER PATHG::::" + folder.toString());
+//        Path file = Files.createTempFile(folder, filename +"hi.", extension);
+//        
+//        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+//        String folder = ec.getInitParameter("/resources/images/");
+//        String realP = ec.getRealPath("/");
+//        
+//        File imageFile = new File(realP+"/resources/images/"+book.getIsbnNumber()+".png");
+//        
+//        try{
+//            FileOutputStream out;
+//            try(FileInputStream in = (FileInputStream)up)
+//        }
         
-        uploadedImage = event.getFile();
-        Path folder = Paths.get("/resources/images");
-        String filename = book.getIsbnNumber();
-        String extension = FilenameUtils.getExtension(uploadedImage.getFileName());
-        logger.log(Level.INFO, "EXTENSION SHOW PLS " + extension + "   -----FOLDER PATHG::::" + folder.toString());
-        Path file = Files.createTempFile(folder, filename +"hi.", extension);
+//        if(getFile()==null)
+//        {
+//            logger.log(Level.INFO,"CHECKING IF FILE WAS UPLOADED NULL INSIDE OF UPLOADHANDLER");
+//            addMessageError("managerFileError");
+//            
+//        }
+//        else
+//        {
+//            
+//            
+//        File imageFile = new File("/resources/images/"+book.getIsbnNumber()+".png");
         
-        //File imageFile = new File("/resources/images/"+book.getIsbnNumber());
         
-        
-        
-        //logger.log(Level.INFO, "PATH FILEEEEEEEEEEEEE" + file.toString());
-        
-        try(InputStream input = uploadedImage.getInputstream())
-        {
-            Files.copy(input, file);
-        }
+//        logger.log(Level.INFO, "PATH FILEEEEEEEEEEEEE" + imageFile.getPath());
+//        
+//        try(InputStream input = uploadedImage.getInputstream())
+//        {
+//            Files.copy(input, imageFile.toPath());
+//        }
+//        addMessage("managerFileSuccess");
+//        }
+    }
+    
+    //Get and set files
+    public UploadedFile getFile()
+    {
+        logger.log(Level.INFO, "GETTING FILE?");
+        return uploadedImage;
+    }
+    
+    public void setFile(UploadedFile uploadedImage)
+    {
+        logger.log(Level.INFO, "SETTING FILE?");
+        this.uploadedImage = uploadedImage;
     }
     
     /**
