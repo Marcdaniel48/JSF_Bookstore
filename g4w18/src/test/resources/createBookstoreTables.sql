@@ -9,7 +9,6 @@ DROP TABLE IF EXISTS BOOK;
 DROP TABLE IF EXISTS AUTHOR;
 DROP TABLE IF EXISTS TAX;
 DROP TABLE IF EXISTS QUESTION;
-DROP TABLE IF EXISTS QUESTION_OPTION;
 DROP TABLE IF EXISTS BANNER;
 
 CREATE TABLE BOOK (
@@ -133,12 +132,12 @@ CREATE TABLE BANNER(
     PRIMARY KEY (BANNER_ID)
 ) ENGINE=InnoDB;
 
---TEMPORARY
 insert into banner values
-(null, "slide1.jpg", "https://google.com", true),
-(null, "slide2.jpg", "https://google.com", false),
-(null, "slide3.jpg", "https://google.com", true),
-(null, "slide4.jpg", "https://google.com", true);
+(null, "ad1.png", "https://google.ca", true),
+-- (null, "slide1.jpg", "https://google.ca", true),
+(null, "ad2.png", "https://google.ca", true),
+(null, "slide3.jpg", "https://google.ca", false),
+(null, "slide4.jpg", "https://google.ca", false);
 
 INSERT INTO BOOK values
 (null, "978-1408855652", "Harry Potter and the Philosopher's Stone", "Bloomsbury Children's Books", "2014-09-01 00:00:00", 352, "Fantasy",
@@ -987,8 +986,8 @@ insert into BOOK_AUTHOR (BOOK_ID, AUTHOR_ID) values
 
 insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_FOUR, VOTE_ONE, VOTE_TWO, VOTE_THREE, VOTE_FOUR, IS_ACTIVE) values
 ('At what time of the day do you prefer to read?', 'Morning', 'Noon', 'Afternoon', 'Evening', 0, 0, 0, 0, false),
-('What is your favorite genre?', 'SciFi', 'Biography', 'Romance', 'Mystery', 0, 0, 0, 0, false),
-('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0, true),
+('What is your favorite genre?', 'SciFi', 'Biography', 'Romance', 'Mystery', 0, 0, 0, 0, true),
+('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0, false),
 ('How many books have you read in your life?', 'Less than 1', 'Between 1 and 10', 'Between 11 and 50', 'More than 50', 0, 0, 0, 0, false);
 
 INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE) VALUES

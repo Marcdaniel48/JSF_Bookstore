@@ -1,36 +1,55 @@
 #genres
 {
-    position: absolute;
-    left: 0;
-    right: 80%;
-    top: 0;
-    bottom: 0;
+    position: relative;
     text-align: center;
-    font-size: 1.9em;
-    opacity: 0;
-    transform: translateX(-100%);
-    animation: 1s ease-out 1.98s 1 slideInFromLeft;
-    animation-fill-mode: forwards;
-    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 1.2em;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    /*opacity: 0;*/
+    /*transform: translateX(-100%);*/
+    /*animation: 1s ease-out 1.98s 1 slideInFromLeft;*/
+    /*animation-fill-mode: forwards;*/
+}
+#genres a:hover
+{
+    opacity: 1;
 }
 .outer
 {
-    margin: auto;
-    top: 50%;
+/*    margin: auto;
+    top: 50%;*/
     position: relative;
-    -webkit-transform: translateY(-50%);
+/*    -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    transform: translateY(-50%);*/
 }
 .genre-title
 {
-    display: block;
+    /*display: block;*/
     margin: 20px 0px 20px 0px;
+    font-weight: bolder;
     transition: font-size .2s ease;
 }
-.genre-title:hover
+.genre-item:hover .genre-title
 {
     font-size: 1.2em;
+}
+.genre-item
+{
+    width: 150px;
+    cursor: pointer;
+    margin: 0 3%;
+    display: inline-block;
+    vertical-align: top;
+}
+.genre-item img
+{
+    width: 100%;
+    transition: .3s ease-in;
+}
+.genre-item:hover img
+{
+    filter: drop-shadow(0 0 10px black);
 }
 .view-more
 {
@@ -42,19 +61,11 @@
     #genres
     {
         position: relative;
-        left: auto;
-        right: auto;
-        top: auto;
-        bottom: auto;
         text-align: center;
         font-size: 1em;
         margin: 5px 0px;
         padding-top: 10px;
-        opacity: 1;
-        transform: none;
-        animation: none;
-        animation-fill-mode: none;
-        background-color: initial;
+        background-color: rgba(255, 255, 255, 0.4);
         border: 1px solid black;
     }
     .outer
@@ -66,11 +77,22 @@
         -ms-transform: none;
         transform: none;
     }
-    .genre-title
+    .genre-item
     {
+        width: auto;
+        margin: auto;
+        display: initial;
+        vertical-align: initial;
+    }
+    .genre-item img
+    {
+        display: none;
+    }
+    .genre-title
+    {   
         display: inline-block;
         margin: 5px 5px;
         padding: 5px;
-        /*border: 1px solid black;*/
+        font-weight: 300;
     }
 }

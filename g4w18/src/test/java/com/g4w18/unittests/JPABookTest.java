@@ -1,6 +1,7 @@
 package com.g4w18.unittests;
 
 
+import com.g4w18.controllers.BookJpaController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Book;
@@ -32,13 +33,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.Ignore;
 
 /**
- *
- * @author 1430047
+ * @author Jephthia
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class JPABookTest
 {
@@ -62,6 +60,7 @@ public class JPABookTest
         // container
         final WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
+                .addPackage(BookJpaController.class.getPackage())
                 .addPackage(CustomBookController.class.getPackage())
                 .addPackage(RollbackFailureException.class.getPackage())
                 .addPackage(Book.class.getPackage())
@@ -82,25 +81,34 @@ public class JPABookTest
     private DataSource ds;
     
     @Test
+    /**
+     * @author Jephthia
+     */
     public void testFindBooksOnSale()
     {
         List<Book> booksOnSale = bookController.getBooksOnSale();
         logger.log(Level.INFO, "Data>>>{0}", booksOnSale.get(0));
+        
         assertThat(booksOnSale).hasSize(10);
     }
     
     @Test
+    /**
+     * @author Jephthia
+     */
     public void testFindMostRecentBooks()
     {
         logger.log(Level.INFO, "testFindMostRecentBooks");
         
         List<Book> recentBooks = bookController.getMostRecentBooks();
         
-        //TODO
         assertThat(recentBooks).hasSize(3);
     }
     
     @Test
+    /**
+     * @author Jephthia
+     */
     public void testFindGenres()
     {
         logger.log(Level.INFO, "testFindGenres");
@@ -110,6 +118,19 @@ public class JPABookTest
         String[] expectedGenres = {"Biographies", "Fantasy", "Mystery", "Romance", "Science Fiction"};
 
         assertThat(genres).contains(expectedGenres);
+    }
+    
+    @Test
+    /**
+     * @author Jephthia
+     */
+    public void testFindBooksByGenre()
+    {
+        String genre = "Fantasy";
+        
+        List<Book> results = bookController.findBooksByGenre(genre);
+        
+        assertThat(results).hasSize(20);
     }
     
     /**

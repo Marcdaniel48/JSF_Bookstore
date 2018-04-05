@@ -1,50 +1,84 @@
 (function(){
-    
-    var articles = [];
-    var currentArticle = null;
-    var currentIndex = 0;
-    
-    function nextArticle()
+    var $articles = null;
+
+    var $prev = null;
+    var $next = null;
+
+    var leftIndex = 0;
+    var rightIndex = 1;
+
+    var inAnimation = false;
+
+    function prevItem()
     {
-        if(currentIndex >= articles.length - 1)
+        if (inAnimation)
             return;
-                
-        currentArticle = articles[currentIndex++];
-        
-        
-        
-        
-        
-        if(currentIndex === articles.length - 1)
-        {
-            //disable next button
-        }
+        if (leftIndex === 0)
+            return;
+
+        //inAnimation = true;
+        leftIndex--;
+        rightIndex--;
+
+        if (leftIndex === 0)
+            $prev.toggleClass("disabled");
+
+        if (rightIndex === ($articles.length - 2))
+            $next.toggleClass("disabled");
+
+        var $current = $articles.eq(rightIndex);
+
+        var $nextArticle = $articles.eq(leftIndex);
+
+        $current.hide();
+        $nextArticle.show();
+
+        //leftindex = 1
+        //rightindex = 2
     }
-    
+
+    function nextItem()
+    {
+        if (inAnimation)
+            return;
+        if (rightIndex === ($articles.length - 1))
+            return;
+
+        var $first = $articles.eq(leftIndex);
+
+        var $last = $articles.eq(rightIndex);
+
+        //inAnimation = true;
+        leftIndex++;
+        rightIndex++;
+
+        if (leftIndex === 1)
+            $prev.toggleClass("disabled");
+
+        if (rightIndex === ($articles.length - 1))
+            $next.toggleClass("disabled");
+
+        $first.hide();
+        $last.show();
+    }
+
     function init()
     {
-        // $.getJSON("https://www.bookbrowse.com/blogs/editor/rss.cfm"+"&callback=?").done(function (data) {
-        //     console.log(data);
-        // });
-        // return;
-        var feed = "https://www.bookbrowse.com/blogs/editor/rss.cfm";
-        $.ajax({
-            type: "get",
-            url: "https://api.rss2json.com/v1/api.json?rss_url="+feed,
-            dataType: "jsonp",
-            success: function(_data)
-            {
-                var items = _data.items;
-                for(var i = 0; i < items.length; i++)
-                {
-                    var item = items[i];
-//                    console.log("------------------------");
-//                    console.log("title      : " + item.title);
-//                    console.log("link       : " + item.link);
-//                    console.log("description: " + item.description);
-                }
-            }
-        });
+        $prev = $("#rss-feed .prev");
+        $next = $("#rss-feed .next");
+
+        $prev.on("click", prevItem);
+        $next.on("click", nextItem);
+
+        $articles = $("#rss-feed .article");
+
+        if ($articles.length < 2)
+        {
+            rightIndex = $articles.length;
+        }
+
+        $articles.eq(0).css("display", "inline-block");
     }
+
     window.addEventListener("load", init);
 })();

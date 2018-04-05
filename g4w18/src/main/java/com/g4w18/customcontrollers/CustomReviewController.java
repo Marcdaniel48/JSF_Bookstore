@@ -64,6 +64,10 @@ public class CustomReviewController implements Serializable
         return reviewController.getReviewCount();
     }
     
+    /**
+     * @author Jephthia
+     * @return A list of all the approved reviews
+     */
     public List<Review> getApprovedReviews()
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -76,6 +80,10 @@ public class CustomReviewController implements Serializable
         return genres.getResultList();
     }
     
+    /**
+     * @author Jephthia
+     * @return A list of all the reviews that have yet to be approved
+     */
     public List<Review> getNotApprovedReviews()
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();

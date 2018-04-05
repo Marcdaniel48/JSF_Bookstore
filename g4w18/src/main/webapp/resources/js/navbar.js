@@ -1,7 +1,9 @@
 (function()
 {
     var opened = false;
+    var usernameDropdownOpened = false;
     var $navbarMenu = null;
+    var $navbarUsernameDropdown = null;
     
     function toggleMenu()
     {
@@ -31,10 +33,39 @@
         }
     }
     
+    function toggleUsernameDropdown()
+    {
+        usernameDropdownOpened = !usernameDropdownOpened;
+        
+        if(usernameDropdownOpened)
+        {//Open Menu
+            var autoHeight = $navbarUsernameDropdown.height();
+
+            $navbarUsernameDropdown.stop();
+            $navbarUsernameDropdown.css({height: "0px"});
+            $navbarUsernameDropdown.show();
+
+            $navbarUsernameDropdown.animate({height: autoHeight+"px"}, 400);
+        }
+        else
+        {//Close Menu
+            $navbarUsernameDropdown.stop();
+            
+            $navbarUsernameDropdown.animate({height: 0}, 400, function()
+            {
+                $navbarUsernameDropdown.hide();
+                $navbarUsernameDropdown.css({height: "auto"});
+            });
+        }
+    }
+    
     function init()
     {
         $("#hamburger-icon").on("click", toggleMenu);
         $navbarMenu = $("#navbar-menu");
+        
+        $navbarUsernameDropdown = $(".navbar-user-menu").eq(0);
+        $("#navbarUsername").on("click", toggleUsernameDropdown);
     }
     
 window.addEventListener("load", init);

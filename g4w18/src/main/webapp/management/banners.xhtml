@@ -21,10 +21,16 @@
                         <h1>Add New Ad</h1>
                         <h:form enctype="multipart/form-data">
                             <f:passThroughAttribute name="autocomplete" value="off" />
-                            <h:inputFile value="#{bannerBackingBean.uploadedBannerFile}" required="true" />
+                            
+                            <h:message for="bannerFile" styleClass="error" />
+                            <h:inputFile id="bannerFile" value="#{bannerBackingBean.uploadedBannerFile}"
+                                         required="true" requiredMessage="Please provide the banner image" />
                             <!--<input required="true" type="file" accept="image/*" value="#{bannerBackingBean.uploadedBannerFile}" />-->
                             <h:outputLabel for="newBannerLink" value="Banner Link"/>
-                            <h:inputText id="newBannerLink" value="#{bannerBackingBean.uploadedBannerLink}" />
+                            <h:inputText id="newBannerLink" value="#{bannerBackingBean.uploadedBannerLink}"
+                                        validator="#{bannerBackingBean.validateLink}" a:placeholder="e.g https://google.ca"
+                                        required="true" requiredMessage="Please provide a url"/>
+                            <h:message for="newBannerLink" styleClass="error"/>
                             
                             <h:outputLabel styleClass="switch">
                                 <h:selectBooleanCheckbox  value="#{bannerBackingBean.uploadedBannerStatus}" />
@@ -44,7 +50,7 @@
 
                             <h:column>
                                 <f:facet name="header">Ad</f:facet>
-                                <h:graphicImage library="images" name="#{banner.bannerName}" />
+                                <h:graphicImage library="images" name="#{banner.bannerName}" style="max-width: 80%;" />
                             </h:column>
                             
                             <h:column>

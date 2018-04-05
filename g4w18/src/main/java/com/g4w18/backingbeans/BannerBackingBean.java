@@ -13,14 +13,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
+import org.apache.commons.validator.routines.UrlValidator;
 
 @Named
 @RequestScoped
@@ -162,5 +166,24 @@ public class BannerBackingBean implements Serializable
         uploadedBannerFile = null;
         uploadedBannerLink = null;
         uploadedBannerStatus = false;
+    }
+    
+    public void validateLink(FacesContext context, UIComponent component, Object value)
+    {   
+        String url = (String)value;
+        
+        logger.log(Level.INFO, LocalDateTime.now() + " >>> URL: {0}", url);
+        
+        String[] schemes = {"http","https"};
+        UrlValidator validator = new UrlValidator(schemes);
+        
+        if(!validator.isValid(url))
+        {     
+            FacesMessage message = com.g4w18.util.Messages.getMessage(
+                    "com.g4w18.bundles.messages", "invalidUrl", null);
+
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(message);
+        }
     }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="windowTitle">
+        Management Home
+    </ui:define>
+    
+    
+    <ui:define name="content">
+        <h:outputStylesheet library="css" name="management_navbar.css" />
+    
+        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
+        
+        <h:outputStylesheet library="css" name="banner_page.css" />
+        
+        <div class="management-content">
+
+            <h1 class="welcome-back-title">Welcome Back, #{navbarBackingBean.username}!</h1>
+
+        </div>
+            
+    </ui:define>
+</ui:composition>

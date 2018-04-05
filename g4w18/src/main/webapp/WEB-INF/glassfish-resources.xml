@@ -7,7 +7,7 @@
         <property name="databaseName" value="bookstore"/>
         <property name="User" value="booktopia"/>
         <property name="Password" value="g4w18booktopia"/>
-        <property name="URL" value="jdbc:mysql://localhost:3306/bookstore?zeroDateTimeBehavior=convertToNull"/>
+        <property name="URL" value="jdbc:mysql://localhost:3307/bookstore?zeroDateTimeBehavior=convertToNull"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
 
