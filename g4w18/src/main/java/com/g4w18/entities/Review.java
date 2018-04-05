@@ -59,8 +59,7 @@ public class Review implements Serializable {
     private int rating;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 16777215)
+    @Size(min = 1, max = 255)
     @Column(name = "REVIEW")
     private String review;
     @Basic(optional = false)

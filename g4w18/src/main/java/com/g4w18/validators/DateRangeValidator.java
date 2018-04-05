@@ -1,4 +1,4 @@
-package com.g4w18.customvalidators;
+package com.g4w18.validators;
 
 import com.g4w18.backingbeans.BookDetailsBackingBean;
 import java.util.Date;

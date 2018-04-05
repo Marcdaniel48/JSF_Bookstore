@@ -7,9 +7,9 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import rss.Feed;
-import rss.FeedMessage;
-import rss.RSSFeedParser;
+import com.g4w18.util.Feed;
+import com.g4w18.util.FeedMessage;
+import com.g4w18.util.RSSFeedParser;
 
 /**
  * @author Jephthia Louis
