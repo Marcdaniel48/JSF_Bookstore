@@ -5,9 +5,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:f="http://java.sun.com/jsf/core">
     
     <ui:define name="title">#{msgs.loginPageTitle}</ui:define>
     <ui:define name="content">
@@ -34,8 +32,9 @@
                                                requiredMessage="#{msgs.invalidEmptyPassword}"/>
                                 <h:message for="password" style="color:red" />
                                 <h:commandButton id="login_button" value="#{msgs.loginbutton}" action="#{loginController.login}"/>
-                                <h:commandButton id="go_to_registration_button" value="#{msgs.registerbutton}" action="registration"/>
-                            </h:form>
+                            </h:form>  
+                            <h:form id="go_to_registration_form"><h:commandButton id="go_to_registration_button" value="#{msgs.registerbutton}" action="registration"/></h:form>
+                            
                         
                         </div>
  
