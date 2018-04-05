@@ -26,6 +26,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -109,6 +111,8 @@ public class Book implements Serializable {
     private BigDecimal listPrice;
     @Basic(optional = false)
     @NotNull
+    @DecimalMin("0")
+    @DecimalMax("999.99")
     @Column(name = "SALE_PRICE")
     private BigDecimal salePrice;
     @Basic(optional = false)

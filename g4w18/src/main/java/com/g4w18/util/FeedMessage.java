@@ -1,4 +1,4 @@
-package rss;
+package com.g4w18.util;
 
 /*
  * @author http://www.vogella.com/tutorials/RSSFeed/article.html

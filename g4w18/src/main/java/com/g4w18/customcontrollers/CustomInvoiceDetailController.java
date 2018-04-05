@@ -13,17 +13,17 @@ import javax.persistence.PersistenceContext;
 
 /**
  * Custom InvoiceDetail JPA controller used to access and manipulate the InvoiceDetail records of the database.
- * 
+ *
  * @author Marc-Daniel
  */
 public class CustomInvoiceDetailController implements Serializable
 {
     @Inject
     private InvoiceDetailJpaController invoiceJpaController;
-    
+
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
-    
+
     public void create(InvoiceDetail invoiceDetail) throws RollbackFailureException, Exception {
         invoiceJpaController.create(invoiceDetail);
     }
@@ -51,11 +51,11 @@ public class CustomInvoiceDetailController implements Serializable
     public int getInvoiceDetailCount() {
         return invoiceJpaController.getInvoiceDetailCount();
     }
-    
+
     /**
      * Returns the invoice details for the given master invoice ID.
      * @param masterInvoice
-     * @return 
+     * @return
      */
     public List<InvoiceDetail> findInvoicesByMasterInvoice(MasterInvoice masterInvoice)
     {
