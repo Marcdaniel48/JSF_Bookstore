@@ -10,10 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -94,12 +92,6 @@ public class CustomReportQueries {
         return selling;
     }
     
-    /**
-     * Get books that haven't sold between two dates.
-     * @param begin
-     * @param end
-     * @return 
-     */
 //    public List<TopClientsResultBean> getZeroSalesBetween2Dates(Timestamp begin, Timestamp end)
 //    {     
 ////        Collection<Object[]> topSellers = entityManager.createNativeQuery("SELECT c.USERNAME, sum(m.GROSS_VALUE) AS TOTAL_SALES FROM client c "
