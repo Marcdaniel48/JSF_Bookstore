@@ -1,0 +1,23 @@
+.cart-page
+{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.cart-page .img-bg
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    background-image: url("#{resource['images/shopping_cart_bg.jpg']}");
+    background-size: cover;
+    background-position: center;
+}
+@media only screen and (max-width: 800px)
+{
+    .cart-page .img-bg
+    {
+        background-image: none;
+    }
+}

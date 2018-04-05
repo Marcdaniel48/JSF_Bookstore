@@ -60,6 +60,10 @@ public class CustomBookController implements Serializable {
         return bookController.getBookCount();
     }
 
+    /**
+     * @author Jephthia
+     * @return A list of books on sale
+     */
     public List<Book> getBooksOnSale()
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -75,21 +79,28 @@ public class CustomBookController implements Serializable {
         return books;
     }
 
+    /**
+     * @author Jephthia
+     * @return A list of the most recent books
+     */
     public List<Book> getMostRecentBooks()
     {
-
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> root = cq.from(Book.class);
         cq.select(root);
         cq.orderBy(cb.asc(root.get("inventoryDate")));
         Query q = em.createQuery(cq);
-        q.setMaxResults(3);
+        q.setMaxResults(4);
 
         List<Book> books = q.getResultList();
         return books;
     }
 
+    /**
+     * @author Jephthia
+     * @return A list of all the genres in the database
+     */
     public List<String> getGenres() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
@@ -101,7 +112,13 @@ public class CustomBookController implements Serializable {
         return genres.getResultList();
     }
 
-    public List<Book> findBooksByGenre(String genre) {
+    /**
+     * @author Jephthia
+     * @param genre The genre of the books to find
+     * @return A list of books matching the given genre
+     */
+    public List<Book> findBooksByGenre(String genre)
+    {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Book> book = cq.from(Book.class);
@@ -175,12 +192,12 @@ public class CustomBookController implements Serializable {
 
    
     /**
+     * @author Sebastian
      * Get a List of Book objects comprised only of Books which their Sale Price
      * is bigger than 0.
      *
      * @return List of books on sale.
      */
-    //Author: Sebastian
     public List<Book> findBooksOnSale() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -192,12 +209,12 @@ public class CustomBookController implements Serializable {
     }
 
     /**
+     * @author Sebastian
      * Get a List of Book objects comprised only of Books which their Sale Price
      * is equal to 0.
      *
      * @return List of books not on sale.
      */
-    //Author: Sebastian
     public List<Book> findBooksNotSale() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -208,6 +225,11 @@ public class CustomBookController implements Serializable {
         return toReturn;
     }
     
+    /**
+     * @author Jephthia
+     * @param genres The genres from which to get the recommended books
+     * @return A list of recommended books based on the given genres
+     */
     public List<Book> getRecommendedBooks(String[] genres)
     {   
         String whereIN = "";

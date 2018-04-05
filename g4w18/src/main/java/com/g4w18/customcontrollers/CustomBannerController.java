@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -62,6 +61,10 @@ public class CustomBannerController implements Serializable
         return bannerController.getBannerCount();
     }
     
+    /**
+     * @author Jephthia
+     * @return A list of all the currently active banners
+     */
     public List<Banner> getActiveBanners()
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();

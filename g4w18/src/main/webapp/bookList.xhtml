@@ -1,74 +1,70 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui">
-    <h:head>
-        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
-        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
-        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
-    </h:head>
-    <h:body>
-        <b:navBar brand="Booktopia" brandHref="bookList.xhtml" fluid="true">
-            <b:navbarLinks>
-                <b:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs">
-                    <b:inputText placeholder="Search for a book..."></b:inputText>
-                    <b:commandButton value="Search" iconAwesome="search" action="bookList"></b:commandButton>
-                </b:form>
-            </b:navbarLinks>
-            <b:navbarLinks pull="right" styleClass="hidden-xs">
-            </b:navbarLinks>
-        </b:navBar>
-        <b:container fluid="false">
-            <b:form>
-                <h:panelGroup rendered="#{bookListBackingBean.byGenre()}">
-                    <h1>Best Sellers</h1>
-                    <ui:repeat var="book" value="#{bookListBackingBean.topSellers}">
-                        <b:panel>
-                            <b:row styleClass="show-grid">
-                                <b:column col-md="2">
-                                    <b:image library="images" name="#{book.isbnNumber}hi.jpg" tooltip="#{book.title}" height="50%" width="50%"></b:image>
-                                </b:column>
-                                <b:column col-md="8">
-                                    <b:commandLink outcome="bookDetail">
-                                        <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
-                                        <f:param name="id" value="#{book.bookId}" />
-                                    </b:commandLink>
-                                </b:column>
-                                <b:column col-md="2">
-                                    <h:outputText value="#{book.listPrice} CAD"></h:outputText>
-                                </b:column>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="windowTitle">
+        #{msgs.bookListWindowTitle}
+    </ui:define>
+    
+    <ui:define name="content">
+        <div class="page_container">
+            <b:container fluid="false">
+                <b:form>
+                    <ui:fragment rendered="#{bookListBackingBean.byGenre()}">
+                        <b:container fluid="true" class="text-center">
+                            <b:row>
+                                <h1>Best Sellers</h1>
+                                <ui:repeat var="book" varStatus="varStatus" value="#{bookListBackingBean.topSellers}">
+                                    <b:column col-md="2" col-xs="5" offset-md="#{varStatus.first ? 1 : 0}">
+                                        <b:thumbnail>
+                                            <b:commandLink outcome="bookDetail">
+                                                <b:image library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}" width="100%"></b:image>
+                                                <f:param name="id" value="#{book.bookId}"></f:param>
+                                            </b:commandLink>
+                                            <f:facet name="caption">
+                                                <ui:fragment rendered="#{book.salePrice le 0}">
+                                                    <h2>$#{book.listPrice} CAD</h2>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{book.salePrice gt 0}">
+                                                    <h5>
+                                                        <span><s>$#{book.listPrice} CAD</s></span>
+                                                        <span class="sale-price">$#{book.salePrice} CAD</span>
+                                                    </h5>
+                                                </ui:fragment>
+                                            </f:facet>
+                                        </b:thumbnail>
+                                    </b:column>
+                                </ui:repeat>
                             </b:row>
-                        </b:panel>
-                    </ui:repeat>
-                    
-                    <hr/>
-                    <h1>Others</h1>
-                </h:panelGroup>
-                                
-                <ui:repeat var="book" value="#{bookListBackingBean.allBooks}">
-                    <b:panel>
-                        <b:row styleClass="show-grid">
-                            <b:column col-md="2">
-                                <b:image library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}" height="50%" width="50%"></b:image>
+                        </b:container>
+                        <hr/>
+                        <h1 style="text-align: center;">Other Books In This Genre</h1>
+                    </ui:fragment>
+
+                    <b:row class="text-center">
+                        <ui:repeat var="book" value="#{bookListBackingBean.allBooks}">
+                            <b:column col-md="2" col-sm="4" col-xs="4">
+                                <b:thumbnail>
+                                     <b:commandLink outcome="bookDetail">
+                                         <b:image library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}" width="100%"></b:image>
+                                         <f:param name="id" value="#{book.bookId}"></f:param>
+                                     </b:commandLink>
+                                </b:thumbnail>
                             </b:column>
-                            <b:column col-md="8">
-                                <b:commandLink outcome="bookDetail">
-                                    <h:outputText value="#{book.title}" styleClass="list-group-item-heading"></h:outputText>
-                                    <f:param name="id" value="#{book.bookId}" />
-                                </b:commandLink>
-                            </b:column>
-                            <b:column col-md="2">
-                                <h:outputText value="#{book.listPrice} CAD"></h:outputText>
-                            </b:column>
-                        </b:row>
-                    </b:panel>
-                </ui:repeat>
-            </b:form>
-        </b:container>
-        <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
-        <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
-    </h:body>
-</html>
+                        </ui:repeat>
+                   </b:row>
+               </b:form>
+           </b:container>
+
+           <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
+
+        </div>
+    </ui:define>
+</ui:composition>

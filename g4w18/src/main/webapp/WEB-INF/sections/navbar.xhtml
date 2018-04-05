@@ -5,23 +5,22 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:p="http://primefaces.org/ui"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-    <f:view locale="#{localeBean.locale}">
+
     <nav class="navbar">
-        <h:link outcome="index">
+        <h:link id="homeLink" outcome="index">
             <div class="logo"></div>
         </h:link>
 
         <div id="hamburger-icon">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
         </div>
-        
+                
         <div class="right">
-            <h:form id="searchForm" class="search-icon-container">
-                
             
-                
+            <h:form id="searchForm" class="search-icon-container">
+
                 <h:selectOneMenu styleClass="search-dropdown" id="searchOption" value="#{searchBackingBean.searchOption}">
                     <f:selectItems value="#{searchBackingBean.searchOptionValue}" />
                 </h:selectOneMenu>
@@ -31,26 +30,30 @@
                 <h:commandLink action="#{searchBackingBean.search}">
                     <h:graphicImage id="t1" class="navbar-icon" library="images" name="search.png" alt="Search Icon" />
                 </h:commandLink>
-                
 
             </h:form>
-            
-            <h:link outcome="shopping_cart">
+
+            <h:link id="cartLink" outcome="shopping_cart">
                 <h:graphicImage class="navbar-icon" library="images" name="shopping-cart.png" alt="Shoppping Cart Icon" />
             </h:link>
             
-            <h:form>
-                
-                <h:commandButton value="#{msgs.english}" action="#{localeBean.setLanguage('en', 'CA')}"></h:commandButton>
-                <h:commandButton value="#{msgs.francais}" action="#{localeBean.setLanguage('fr', 'CA')}"></h:commandButton>
+            <h:form id="navbarLangForm">
+                <h:commandLink rendered="#{localeBean.language ne 'fr'}" action="#{localeBean.setLanguage('fr', 'CA')}">
+                    <h:graphicImage class="navbar-icon" library="images" name="ca_flag.png" alt="Language Flag" />
+                </h:commandLink>
+                <h:commandLink rendered="#{localeBean.language ne 'en'}" action="#{localeBean.setLanguage('en', 'CA')}">
+                    <h:graphicImage class="navbar-icon" library="images" name="en_flag.png" alt="Language Flag" />
+                </h:commandLink>
             </h:form>
+
+            <ui:fragment rendered="#{!navbarBackingBean.userLoggedIn}">
+                <h:link id="loginLink" class="navbar-link" value="#{msgs.loginbutton}" outcome="login" />
+            </ui:fragment>
             
-            <h:link class="navbar-login" value="#{msgs.loginbutton}" outcome="login" />
-            
-            <h:link class="navbar-login" value="#{msgs.managerDownload}" outcome="download" />
-            
-            
-            
+            <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
+                <a id="navbarUsername" class="navbar-link">#{navbarBackingBean.username}</a>
+            </ui:fragment>
+
             <script>
                 
                 var $searchInput = $(".search-input").first();
@@ -64,10 +67,7 @@
                     {
                         $searchDropdown.stop();
                         $searchDropdown.show();
-                        $searchDropdown.animate({opacity: 1}, 900, function()
-                        {
-                            
-                        });
+                        $searchDropdown.animate({opacity: 1}, 900);
                     });
                 });
 
@@ -87,6 +87,41 @@
                 });
             </script>
         </div>
+        
     </nav>
-    </f:view>
+    
+    <div id="navbar-menu">
+        <h:form>
+            <h:commandLink value="Shopping Cart" action="shopping_cart" />
+            <a href="#search">Search</a>
+            <h:commandLink rendered="#{localeBean.language ne 'fr'}" value="French" action="#{localeBean.setLanguage('fr', 'CA')}" />
+            <h:commandLink rendered="#{localeBean.language ne 'en'}" value="English" action="#{localeBean.setLanguage('en', 'CA')}" />
+            <ui:fragment rendered="#{!navbarBackingBean.userLoggedIn}">
+                <h:link value="#{msgs.loginbutton}" outcome="login" />
+            </ui:fragment>
+            <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
+                <h:commandLink value="Downloads" action="@null" />
+                <ui:fragment rendered="#{navbarBackingBean.manager}">
+                    <h:commandLink value="Manager" action="management_home" />
+                </ui:fragment>
+                <h:commandLink value="Logout" action="#{navbarBackingBean.logout()}" />
+            </ui:fragment>
+            <a href="#help">Help</a>
+        </h:form>
+    </div>
+    
+    <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
+        <div class="navbar-user-menu">
+            <h:form id="navbarDropdownForm">
+                <h:commandLink id="downloadsLink" value="Downloads" action="@null" />
+
+                <ui:fragment rendered="#{navbarBackingBean.manager}">
+                    <h:commandLink id="managerLink" value="Manager" action="management_home" />
+                </ui:fragment>
+
+                <h:commandLink id="logoutLink" value="Logout" action="#{navbarBackingBean.logout()}" />
+            </h:form>
+        </div>
+    </ui:fragment>
+    
 </ui:composition>

@@ -18,7 +18,7 @@ and open the template in the editor.
         <h:form>
             <p:dataTable value="#{manageClientsBackingBean.clients}" var="client" paginator="true" rows="25" 
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                         editable="true">
+                         editable="true" tableStyle="width:auto">
                 <p:ajax event="rowEdit" listener="#{manageClientsBackingBean.onEditClient}" />
                 
                 <p:column headerText="Id" sortBy="#{client.clientId}" filterBy="#{client.clientId}">
