@@ -144,12 +144,12 @@
                     </b:column>
                 </b:row>
                 <br/>
-                <b:panel collapsible="false" title="#{msgs.bookDetailsRecommendedBooks}">
+                <b:panel collapsible="false" title="#{msgs.bookDetailsOtherBooksGenre}">
                     <h:form>
                         <ui:repeat var="recommended" value="#{bookDetailsBackingBean.recommendedBooks}">
                             <b:column col-sm="6" col-md="2" col-xs="12">
                                 <b:thumbnail>
-                                    <b:image library="images" name="#{recommended.isbnNumber}hi.png" tooltip="#{book.title}" styleClass="img-fluid"></b:image>
+                                    <b:image library="images" name="#{recommended.isbnNumber}hi.png" tooltip="#{recommended.title}" styleClass="img-fluid"></b:image>
                                     <f:facet name="caption">
                                         <b:commandLink outcome="bookDetail">
                                             <h:outputText value="#{recommended.title}" styleClass="list-group-item-heading"></h:outputText>
@@ -163,7 +163,7 @@
                 </b:panel>
                 <b:panel collapsible="false" title="#{msgs.bookDetailsReviews}">
                     <h:form>
-                        <ui:repeat var="existingReview" value="#{bookDetailsBackingBean.book.reviewList}">
+                        <ui:repeat var="existingReview" value="#{bookDetailsBackingBean.approvedReviews}">
                             <b:container fluid="true">
                                 <b:row>
                                     <b:column col-md="3">
@@ -194,8 +194,6 @@
                                     </p:rating>
                                     <p:commandButton id="primebutton" class="mButton" value="#{msgs.bookDetailsSubmitReview}"
                                                      action="#{bookDetailsBackingBean.createReview}" ajax="false" update="growl">
-                                        <f:param name="bookId" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
-                                        <f:param name="id" value="#{bookDetailsBackingBean.book.bookId}"></f:param>
                                     </p:commandButton>
                                 </b:column>
                             </b:row>

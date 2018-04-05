@@ -1,6 +1,9 @@
 package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.MasterInvoiceJpaController;
+import com.g4w18.customcontrollers.CustomClientController;
+import com.g4w18.customcontrollers.CustomMasterInvoiceController;
+import com.g4w18.entities.Client;
 import com.g4w18.entities.MasterInvoice;
 import java.io.IOException;
 import java.io.Serializable;
@@ -15,6 +18,7 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import jodd.mail.Email;
 import jodd.mail.SendMailSession;
 import jodd.mail.SmtpServer;
@@ -29,9 +33,14 @@ import jodd.mail.SmtpSslServer;
 public class InvoiceBackingBean implements Serializable {
 
     @Inject
-    private MasterInvoiceJpaController masterInvoiceJpaController;
+    private CustomMasterInvoiceController masterInvoiceController;
+
+    @Inject
+    CustomClientController clientController;
 
     private MasterInvoice masterInvoice;
+
+    private Client currentClient;
 
     private int taxes;
 
@@ -39,12 +48,25 @@ public class InvoiceBackingBean implements Serializable {
 
     public MasterInvoice getMasterInvoice() {
 //        log.log(Level.INFO,"getMasterInvoice called");
+        getClient();
         if (masterInvoice == null) {
-            log.info("masterInvoice was null");
-            masterInvoice = masterInvoiceJpaController.findMasterInvoice(1);
-            log.log(Level.INFO, "{0}", masterInvoice.getInvoiceId());
+            masterInvoice = masterInvoiceController.getMostRecentMasterInvoice(currentClient.getClientId());
         }
         return masterInvoice;
+    }
+
+    private Client getClient() {
+        if (currentClient == null) {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                    .getExternalContext().getSession(false);
+            String username = (String) session.getAttribute("username");
+            if (username != null) {
+                currentClient = clientController.findClientByUsername(username);
+            } else {
+
+            }
+        }
+        return currentClient;
     }
 
     private Email createEmail() throws IOException {

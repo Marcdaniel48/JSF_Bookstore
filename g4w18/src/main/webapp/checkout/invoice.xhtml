@@ -15,166 +15,172 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <b:container id="printable">
-            <b:row>
-                <b:column col-md="3">
-                    <h1>#{msgs.bookstoreName}</h1>
-                </b:column>
-                <b:column col-md="4" offset-md="5">
-                    <h1>
-                        <h:outputText value="#{msgs.invoiceIdLabel}#{invoiceBackingBean.masterInvoice.invoiceId}"></h:outputText>
-                    </h1>
-                </b:column>
-            </b:row>
-            <b:row>
-                <b:panel>
-                    <b:row>
-                        <b:column>
-                            <h2>#{msgs.invoiceClientInfo}</h2>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="3">
-                            <h4>
-                                #{msgs.invoiceClientName}
-                            </h4>
-                        </b:column>
-                        <b:column col-md="4" offset-md="5">
-                            <h4>
-                                <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.firstName} #{invoiceBackingBean.masterInvoice.clientId.lastName}"></h:outputText>
-                            </h4>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="3">
-                            <h4>
-                                #{msgs.invoiceClientAddress}
-                            </h4>
-                        </b:column>
-                        <b:column col-md="4" offset-md="5">
-                            <h4>
-                                <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.address1}"></h:outputText>
-                            </h4>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="4" offset-md="8">
-                            <h4>
-                                <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.city}, #{invoiceBackingBean.masterInvoice.clientId.province} #{invoiceBackingBean.masterInvoice.clientId.postalCode}"></h:outputText>
-                            </h4>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="4" offset-md="8">
-                            <h4>
-                                <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.country}"></h:outputText>
-                            </h4>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="3">
-                            <h4>
-                                #{msgs.invoiceClientEmail}
-                            </h4>
-                        </b:column>
-                        <b:column col-md="4" offset-md="5">
-                            <h4>
-                                <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.email}"></h:outputText>
-                            </h4>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="3">
-                            <h4>
-                                #{msgs.invoiceClientPhone}
-                            </h4>
-                        </b:column>
-                        <b:column col-md="4" offset-md="5">
-                            <h4>
-                                <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.homeTelephone}"></h:outputText>
-                            </h4>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="3">
-                            <h4>
-                                #{msgs.invoiceClientCell}
-                            </h4>
-                        </b:column>
-                        <b:column col-md="4" offset-md="5">
-                            <h4>
-                                <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.cellphone}"></h:outputText>
-                            </h4>
-                        </b:column>
-                    </b:row>
-                </b:panel>
-                <b:panel>
-                    <b:row>
-                        <b:column>
-                            <h2>#{msgs.invoiceClientBooks}</h2>
-                        </b:column>
-                    </b:row>
-                    <ui:repeat value="#{invoiceBackingBean.masterInvoice.invoiceDetailList}" var="invoice">
+        <h:form>
+            <b:container id="printable">
+                <b:row>
+                    <b:column col-md="3">
+                        <h1>#{msgs.bookstoreName}</h1>
+                    </b:column>
+                    <b:column col-md="4" offset-md="5">
+                        <h1>
+                            <h:outputText value="#{msgs.invoiceIdLabel}#{invoiceBackingBean.masterInvoice.invoiceId}"></h:outputText>
+                        </h1>
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <b:panel>
                         <b:row>
-                            <b:column col-md="6">
+                            <b:column>
+                                <h2>#{msgs.invoiceClientInfo}</h2>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="3">
                                 <h4>
-                                    <h:outputText value="#{invoice.bookId.title}"></h:outputText>
+                                    #{msgs.invoiceClientName}
                                 </h4>
                             </b:column>
-                            <b:column col-md="4">
+                            <b:column col-md="4" offset-md="5">
                                 <h4>
-                                    #{msgs.invoiceBookAuthors}
-                                    <ui:repeat value="#{invoice.bookId.authorList}" var="author">
-                                        <h:outputText value="#{author.firstName} #{author.lastName}"></h:outputText>
-                                    </ui:repeat>
-                                </h4>
-                            </b:column>
-                            <b:column col-md="2">
-                                <h4>
-                                    <h:outputText value="#{msgs.invoiceCurrency}#{invoice.bookId.salePrice}"></h:outputText>
+                                    <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.firstName} #{invoiceBackingBean.masterInvoice.clientId.lastName}"></h:outputText>
                                 </h4>
                             </b:column>
                         </b:row>
-                    </ui:repeat>
-                </b:panel>
-            </b:row>
-            <b:row>
-                <b:panel>
-                    <b:row>
-                        <b:column>
-                            <h2>#{msgs.invoiceSummary}</h2>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="1">
-                            <h4>#{msgs.invoiceSubtotal}</h4>
-                        </b:column>
-                        <b:column col-md="2" offset-md="9">
-                            <h4>
-                                #{msgs.invoiceCurrency}
-                                <h:outputText value="#{invoiceBackingBean.masterInvoice.netValue}"></h:outputText>
-                            </h4>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="1">
-                            <h4>#{msgs.invoiceTaxes}</h4>
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column col-md="1">
-                            <h4>#{msgs.invoiceTotal}</h4>
-                        </b:column>
-                        <b:column col-md="2" offset-md="9">
-                            <h4>
-                                #{msgs.invoiceCurrency}
-                                <h:outputText value="#{invoiceBackingBean.masterInvoice.grossValue}"></h:outputText>
-                            </h4>
-                        </b:column>
-                    </b:row>
-                </b:panel>
-            </b:row>
-        </b:container>
+                        <b:row>
+                            <b:column col-md="3">
+                                <h4>
+                                    #{msgs.invoiceClientAddress}
+                                </h4>
+                            </b:column>
+                            <b:column col-md="4" offset-md="5">
+                                <h4>
+                                    <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.address1}"></h:outputText>
+                                </h4>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="4" offset-md="8">
+                                <h4>
+                                    <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.city}, #{invoiceBackingBean.masterInvoice.clientId.province} #{invoiceBackingBean.masterInvoice.clientId.postalCode}"></h:outputText>
+                                </h4>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="4" offset-md="8">
+                                <h4>
+                                    <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.country}"></h:outputText>
+                                </h4>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="3">
+                                <h4>
+                                    #{msgs.invoiceClientEmail}
+                                </h4>
+                            </b:column>
+                            <b:column col-md="4" offset-md="5">
+                                <h4>
+                                    <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.email}"></h:outputText>
+                                </h4>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="3">
+                                <h4>
+                                    #{msgs.invoiceClientPhone}
+                                </h4>
+                            </b:column>
+                            <b:column col-md="4" offset-md="5">
+                                <h4>
+                                    <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.homeTelephone}"></h:outputText>
+                                </h4>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="3">
+                                <h4>
+                                    #{msgs.invoiceClientCell}
+                                </h4>
+                            </b:column>
+                            <b:column col-md="4" offset-md="5">
+                                <h4>
+                                    <h:outputText value="#{invoiceBackingBean.masterInvoice.clientId.cellphone}"></h:outputText>
+                                </h4>
+                            </b:column>
+                        </b:row>
+                    </b:panel>
+                    <b:panel>
+                        <b:row>
+                            <b:column>
+                                <h2>#{msgs.invoiceClientBooks}</h2>
+                            </b:column>
+                        </b:row>
+                        <ui:repeat value="#{invoiceBackingBean.masterInvoice.invoiceDetailList}" var="invoice">
+                            <b:row>
+                                <b:column col-md="6">
+                                    <h4>
+                                        <h:outputText value="#{invoice.bookId.title}"></h:outputText>
+                                    </h4>
+                                </b:column>
+                                <b:column col-md="4">
+                                    <h4>
+                                        #{msgs.invoiceBookAuthors}
+                                        <ui:repeat value="#{invoice.bookId.authorList}" var="author">
+                                            <h:outputText value="#{author.firstName} #{author.lastName}"></h:outputText>
+                                        </ui:repeat>
+                                    </h4>
+                                </b:column>
+                                <b:column col-md="2">
+                                    <h4>
+                                        <h:outputText value="#{msgs.invoiceCurrency}#{invoice.bookId.salePrice}"></h:outputText>
+                                    </h4>
+                                </b:column>
+                            </b:row>
+                        </ui:repeat>
+                    </b:panel>
+                </b:row>
+                <b:row>
+                    <b:panel>
+                        <b:row>
+                            <b:column>
+                                <h2>#{msgs.invoiceSummary}</h2>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="1">
+                                <h4>#{msgs.invoiceSubtotal}</h4>
+                            </b:column>
+                            <b:column col-md="2" offset-md="9">
+                                <h4>
+                                    #{msgs.invoiceCurrency}
+                                    <h:outputText value="#{invoiceBackingBean.masterInvoice.netValue}">
+                                        <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                                    </h:outputText>
+                                </h4>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="1">
+                                <h4>#{msgs.invoiceTaxes}</h4>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column col-md="1">
+                                <h4>#{msgs.invoiceTotal}</h4>
+                            </b:column>
+                            <b:column col-md="2" offset-md="9">
+                                <h4>
+                                    #{msgs.invoiceCurrency}
+                                    <h:outputText value="#{invoiceBackingBean.masterInvoice.grossValue}">
+                                        <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                                    </h:outputText>
+                                </h4>
+                            </b:column>
+                        </b:row>
+                    </b:panel>
+                </b:row>
+            </b:container>
+        </h:form>
         <b:container>
             <b:row>
                 <h:form>
