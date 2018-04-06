@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS AUTHOR;
 DROP TABLE IF EXISTS TAX;
 DROP TABLE IF EXISTS QUESTION;
 DROP TABLE IF EXISTS BANNER;
+DROP TABLE IF EXISTS RSS;
 
 CREATE TABLE BOOK (
     BOOK_ID int NOT NULL AUTO_INCREMENT,
@@ -70,7 +71,7 @@ CREATE TABLE REVIEW (
     CLIENT_ID int NOT NULL,
     REVIEW_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
     RATING int(1) NOT NULL default 1,
-    REVIEW MEDIUMTEXT NOT NULL,
+    REVIEW varchar(500) NOT NULL default '',
     APPROVAL_STATUS boolean NOT NULL default FALSE,
     PRIMARY KEY (REVIEW_ID),
     FOREIGN KEY (BOOK_ID) REFERENCES BOOK(BOOK_ID),
@@ -83,6 +84,7 @@ CREATE TABLE MASTER_INVOICE (
     SALE_DATE timestamp NOT NULL default CURRENT_TIMESTAMP,
     NET_VALUE decimal(6,2) NOT NULL default 0.00,
     GROSS_VALUE decimal(6,2) NOT NULL default 0.00,
+    AVAILABLE boolean NOT NULL default true,
     PRIMARY KEY (INVOICE_ID),
     FOREIGN KEY (CLIENT_ID) REFERENCES CLIENT(CLIENT_ID)
 ) ENGINE=InnoDB;
@@ -95,6 +97,7 @@ CREATE TABLE INVOICE_DETAIL (
     GST_RATE decimal (6,2) NOT NULL default 0.00,
     PST_RATE decimal (6,2) NOT NULL default 0.00,
     HST_RATE decimal (6,2) NOT NULL default 0.00,
+    AVAILABLE boolean NOT NULL default true,
     PRIMARY KEY (DETAIL_ID),
     FOREIGN KEY (INVOICE_ID) REFERENCES MASTER_INVOICE(INVOICE_ID),
     FOREIGN KEY (BOOK_ID) REFERENCES BOOK(BOOK_ID)
@@ -132,10 +135,17 @@ CREATE TABLE BANNER(
     PRIMARY KEY (BANNER_ID)
 ) ENGINE=InnoDB;
 
+CREATE TABLE RSS(
+    RSS_ID int NOT NULL AUTO_INCREMENT,
+    RSS_LINK varchar(100) NOT NULL default '',
+    IS_ACTIVE boolean NOT NULL default false,
+    PRIMARY KEY (RSS_ID)
+) engine=InnoDB;
+
 insert into banner values
-(null, "ad1.png", "https://google.ca", true),
+(null, "sl1.png", "https://kimgarts.com", true),
 -- (null, "slide1.jpg", "https://google.ca", true),
-(null, "ad2.png", "https://google.ca", true),
+(null, "sl2.png", "http://www.techjini.com/", true),
 (null, "slide3.jpg", "https://google.ca", false),
 (null, "slide4.jpg", "https://google.ca", false);
 
@@ -771,12 +781,12 @@ insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_ST
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (43, 25, '2017-04-15 11:14:14', 5, 'tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae', true);
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (100, 25, '2017-05-17 23:43:04', 4, 'dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet', false);
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (55, 20, '2017-07-08 11:09:01', 3, 'amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies', false);
-insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 3, CURRENT_TIME, 3, 'Test review 1', false);
-insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 4, CURRENT_TIME, 1, 'Test review 2', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 3, CURRENT_TIME, 3, 'Test review 1', true);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 4, CURRENT_TIME, 1, 'Test review 2', true);
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 5, CURRENT_TIME, 4, 'Test review 3', false);
-insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 6, CURRENT_TIME, 5, 'Test review 4', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 6, CURRENT_TIME, 5, 'Test review 4', true);
 insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 7, CURRENT_TIME, 2, 'Test review 5', false);
-insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 8, CURRENT_TIME, 1, 'Test review 6', false);
+insert into REVIEW (BOOK_ID, CLIENT_ID, REVIEW_DATE, RATING, REVIEW, APPROVAL_STATUS) values (1, 8, CURRENT_TIME, 1, 'Test review 6', true);
 
 
 --TAXES--
@@ -990,23 +1000,37 @@ insert into QUESTION (DESCRIPTION, ANSWER_ONE, ANSWER_TWO, ANSWER_THREE, ANSWER_
 ('Do you prefer physical books or e-books?', 'E-books', 'Physical', '', '', 0, 0, 0, 0, false),
 ('How many books have you read in your life?', 'Less than 1', 'Between 1 and 10', 'Between 11 and 50', 'More than 50', 0, 0, 0, 0, false);
 
-INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE) VALUES
-(10, CURRENT_TIME, 28.96, 33.29676),
-(6,'2018-02-18 02:19:53',28.96,33.29676),
-(7,'2018-02-12 02:19:53',13.98,16.07),
-(7,'2017-12-01 02:19:53',28.94,33.26);
+INSERT INTO MASTER_INVOICE (CLIENT_ID, SALE_DATE, NET_VALUE, GROSS_VALUE, AVAILABLE) VALUES
+(10, CURRENT_TIME, 28.96, 33.29676, true),
+(20, CURRENT_TIME, 29.07, 33.42, true),
+(15, CURRENT_TIME, 37.68, 43.32, true),
+(25, CURRENT_TIME, 1.85, 2.13, false);
 
-INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE, HST_RATE) VALUES
-(1, 1, 8.99, 9.975, 5, 0),
-(1, 2, 5.99, 9.975, 5, 0),
-(1, 3, 5.99, 9.975, 5, 0),
-(1, 4, 7.99, 9.975, 5, 0),
-(2, 1, 8.99, 9.975, 5, 0),
-(2, 2, 5.99, 9.975, 5, 0),
-(2, 3, 5.99, 9.975, 5, 0),
-(2, 4, 7.99, 9.975, 5, 0),
-(3, 3, 5.99, 9.975, 5, 0),
-(3, 4, 7.99, 9.975, 5, 0),
-(4, 9, 14.95, 9.975, 5, 0),
-(4, 37, 13.99, 9.975, 5, 0)
-;
+INSERT INTO INVOICE_DETAIL (INVOICE_ID, BOOK_ID, BOOK_PRICE, GST_RATE, PST_RATE, HST_RATE, AVAILABLE) VALUES
+(1, 1, 8.99, 9.975, 5, 0, true),
+(1, 2, 5.99, 9.975, 5, 0, true),
+(1, 3, 5.99, 9.975, 5, 0, true),
+(1, 4, 7.99, 9.975, 5, 0, false),
+(2, 1, 8.99, 9.975, 5, 0, true),
+(2, 2, 5.99, 9.975, 5, 0, true),
+(2, 3, 5.99, 9.975, 5, 0, true),
+(2, 4, 7.99, 9.975, 5, 0, true),
+(2, 22, 7.99, 9.975, 5, 0, true),
+(2, 54, 20.25, 9.975, 5, 0, false),
+(2, 79, 0.83, 9.975, 5, 0, true),
+(3, 3, 5.99, 9.975, 5, 0, true),
+(3, 4, 7.99, 9.975, 5, 0, true),
+(3, 55, 30.69, 9.975, 5, 0, true),
+(3, 44, 6.99, 9.975, 5, 0, true),
+(4, 9, 14.95, 9.975, 5, 0, true),
+(4, 37, 13.99, 9.975, 5, 0, true),
+(4, 67, 1.85, 9.975, 5, 0, false);
+
+INSERT INTO RSS (RSS_LINK, IS_ACTIVE) values
+('https://www.nasa.gov/rss/dyn/educationnews.rss', true),
+('http://www.cbc.ca/cmlink/rss-sports', false),
+('http://feeds.reuters.com/reuters/topNews', false),
+('http://rss.cnn.com/rss/cnn_topstories.rss', false),
+('http://abcnews.go.com/abcnews/topstories', false);
+
+

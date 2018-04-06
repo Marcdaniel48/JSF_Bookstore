@@ -1,13 +1,9 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.controllers.AuthorJpaController;
-import com.g4w18.controllers.BookJpaController;
 import com.g4w18.customcontrollers.CustomAuthorController;
 import com.g4w18.customcontrollers.CustomBookController;
 import com.g4w18.entities.Author;
-
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.g4w18.entities.Book;
@@ -22,7 +18,6 @@ import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.validation.constraints.Size;
 
 
 /**
@@ -68,6 +63,9 @@ public class SearchBackingBean implements Serializable {
        
         int result = 0;
         
+        FacesContext contextBundle = FacesContext.getCurrentInstance();
+        ResourceBundle bundle = contextBundle.getApplication().getResourceBundle(contextBundle, "msgs");
+        
         switch(searchOption)
         {
             case "Title":
@@ -96,7 +94,9 @@ public class SearchBackingBean implements Serializable {
       
        if(result > 1)
        {
-           message ="We have found " + result + " books for you! You searched for: " + searchTerm;
+           String found = bundle.getString("searchMessageFound");
+           String foundDetail = bundle.getString("searchMessageDetail");
+           message =found +" "+ result +" " +foundDetail + searchTerm;
            return "resultPlus";
        }
        else if(result == 1)
@@ -116,7 +116,8 @@ public class SearchBackingBean implements Serializable {
        }
        else
        {    
-           message="We have found nothing for you ! You searched for: " + searchTerm;
+            String messageFail = bundle.getString("searchMessageFail");
+           message=messageFail +" " + searchTerm;
            return "resultPlus";
        }
     }

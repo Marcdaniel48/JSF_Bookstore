@@ -169,8 +169,8 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- January 2018 Discovered that there is a guava conflict that 
-        prevents Selenium from functioning unless this explicit dependency is 
+        <!-- January 2018 Discovered that there is a guava conflict that
+        prevents Selenium from functioning unless this explicit dependency is
         included for testing -->
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -279,3 +279,4 @@
         </plugins>
     </build>
 </project>
+>>>>>>> 5595be2ab139139bc4792616161c2049c1ac1af3

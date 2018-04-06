@@ -1,6 +1,5 @@
 package com.g4w18.customcontrollers;
 
-import com.g4w18.backingbeans.SearchBackingBean;
 import com.g4w18.controllers.BookJpaController;
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -19,13 +18,15 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- * Custom JPA controller used to access and manipulate the Book records of the database.
+ * Custom JPA controller used to access and manipulate the Book records of the
+ * database.
+ *
  * @author Jephtia, Salman, Sebastian
  */
 public class CustomBookController implements Serializable {
-    
+
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    
+
     @Inject
     private BookJpaController bookController;
 
@@ -64,14 +65,13 @@ public class CustomBookController implements Serializable {
      * @author Jephthia
      * @return A list of books on sale
      */
-    public List<Book> getBooksOnSale()
-    {
+    public List<Book> getBooksOnSale() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> root = cq.from(Book.class);
         cq.select(root);
         cq.where(cb.gt(root.get("salePrice"), 0));
-        
+
         Query q = em.createQuery(cq);
         q.setMaxResults(10);
 
@@ -83,8 +83,7 @@ public class CustomBookController implements Serializable {
      * @author Jephthia
      * @return A list of the most recent books
      */
-    public List<Book> getMostRecentBooks()
-    {
+    public List<Book> getMostRecentBooks() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> root = cq.from(Book.class);
@@ -117,8 +116,7 @@ public class CustomBookController implements Serializable {
      * @param genre The genre of the books to find
      * @return A list of books matching the given genre
      */
-    public List<Book> findBooksByGenre(String genre)
-    {
+    public List<Book> findBooksByGenre(String genre) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Book> book = cq.from(Book.class);
@@ -153,13 +151,13 @@ public class CustomBookController implements Serializable {
     //Author: Salman
     public List<Book> findBooksByTitle(String title) {
         List<Book> findBookByTitle = em.createQuery("Select b from Book b where (b.title LIKE ?1) AND (b.removalStatus=0) order by b.title asc")
-                .setParameter(1,"%"+ title + "%")
+                .setParameter(1, "%" + title + "%")
                 .getResultList();
 
         return findBookByTitle;
     }
 
-     /**
+    /**
      * Get publishers from the database with the publisher provided(doesn't need
      * to match whole)
      *
@@ -169,11 +167,27 @@ public class CustomBookController implements Serializable {
     //Author: Salman
     public List<Book> findLikePublisher(String publisher) {
         List<Book> findPublisher = em.createQuery("Select b from Book b where (b.publisher LIKE ?1) AND (b.removalStatus=0) order by b.publisher asc")
-                .setParameter(1,"%"+ publisher + "%")
+                .setParameter(1, "%" + publisher + "%")
                 .getResultList();
 
         return findPublisher;
     }
+
+    /**
+     * Get books from the database with the isbn provided and can use it
+     *
+     * @param isbn number of the book the user is searching for
+     * @return Book found with the isbn
+     */
+    //Author: Salman
+    public List<Book> findBookByIsbn(String isbn) {
+        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where (b.isbnNumber LIKE ?1) AND (b.removalStatus=0) order by b.isbnNumber asc")
+                .setParameter(1, isbn + "%")
+                .getResultList();
+
+        return findBookByIsbn;
+    }
+
     /**
      * Get books from the database with the isbn provided
      *
@@ -181,20 +195,17 @@ public class CustomBookController implements Serializable {
      * @return Book found with the isbn
      */
     //Author: Salman
-    public List<Book> findBookByIsbn(String isbn) {
-        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where (b.isbnNumber LIKE ?1) AND (b.removalStatus=0) order by b.pageNumber asc")
-                .setParameter(1, isbn + "%")
+    public List<Book> findBookByIsbnSpecific(String isbn) {
+        List<Book> findBookByIsbn = em.createQuery("Select b from Book b where b.isbnNumber LIKE ?1 order by b.isbnNumber asc")
+                .setParameter(1, isbn)
                 .getResultList();
 
         return findBookByIsbn;
     }
 
-
-   
     /**
-     * @author Sebastian
-     * Get a List of Book objects comprised only of Books which their Sale Price
-     * is bigger than 0.
+     * @author Sebastian Get a List of Book objects comprised only of Books
+     * which their Sale Price is bigger than 0.
      *
      * @return List of books on sale.
      */
@@ -209,9 +220,8 @@ public class CustomBookController implements Serializable {
     }
 
     /**
-     * @author Sebastian
-     * Get a List of Book objects comprised only of Books which their Sale Price
-     * is equal to 0.
+     * @author Sebastian Get a List of Book objects comprised only of Books
+     * which their Sale Price is equal to 0.
      *
      * @return List of books not on sale.
      */
@@ -224,26 +234,40 @@ public class CustomBookController implements Serializable {
         List<Book> toReturn = query.getResultList();
         return toReturn;
     }
-    
+
     /**
      * @author Jephthia
      * @param genres The genres from which to get the recommended books
      * @return A list of recommended books based on the given genres
      */
-    public List<Book> getRecommendedBooks(String[] genres)
-    {   
+    public List<Book> getRecommendedBooks(String[] genres) {
         String whereIN = "";
-        
-        for(String genre : genres)
+
+        for (String genre : genres) {
             whereIN += "'" + genre + "',";
-        
+        }
+
         //Remove last comma
         whereIN = whereIN.substring(0, whereIN.length() - 1);
-        
+
         Query query = em.createNativeQuery("select * from book where genre in (" + whereIN + ") order by rand() limit 10", Book.class);
-        
-        List<Book> books = (List<Book>)query.getResultList();
-        
+
+        List<Book> books = (List<Book>) query.getResultList();
+
         return books;
+    }
+    /**
+     * @author Sebastian
+     * @param isbn
+     * @return 
+     */
+    public Book findUniqueBookByISBN(String isbn) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+        Root<Book> book = cq.from(Book.class);
+        cq.select(book).where(cb.equal(book.get("isbnNumber"), isbn));
+        TypedQuery<Book> query = em.createQuery(cq);
+        Book toReturn = query.getSingleResult();
+        return toReturn;
     }
 }

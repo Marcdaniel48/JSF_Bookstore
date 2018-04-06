@@ -1,5 +1,7 @@
-package rss;
+package com.g4w18.util;
 
+import com.g4w18.util.FeedMessage;
+import com.g4w18.util.Feed;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;

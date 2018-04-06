@@ -111,7 +111,7 @@ public class LoginTest
         wait.until(ExpectedConditions.titleIs("Sign into your account"));  
         
         Thread.sleep(1500);
-        driver.findElement(By.id("login_form:go_to_registration_button")).click();
+        driver.findElement(By.id("go_to_registration_form:go_to_registration_button")).click();
 
         Thread.sleep(1500);
         // If the sucessfully clicks on the working registration button, then he will be navigated to the registration page.

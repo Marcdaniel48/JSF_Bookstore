@@ -13,9 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -89,10 +87,6 @@ public class DownloadBackingBean implements Serializable {
      * @return
      */
     public StreamedContent getFile() {
-//        log.log(Level.INFO, "CREATED???");
-//
-//        log.log(Level.INFO, "GET FILE INFO: " + file.getContentType());
-//        log.log(Level.INFO, "GET FILE INFO: " + file.getName());
         return file;
     }
 

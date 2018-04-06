@@ -1,6 +1,5 @@
 package com.g4w18.backingbeans;
 
-import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.customcontrollers.CustomBannerController;
 import com.g4w18.entities.Banner;
 import java.io.File;

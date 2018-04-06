@@ -5,8 +5,12 @@ import com.g4w18.custombeans.BookWithTotalSales;
 import com.g4w18.custombeans.ClientWithTotalSales;
 import com.g4w18.custombeans.PublisherWithTotalSales;
 import com.g4w18.custombeans.ReportSelector;
+import com.g4w18.custombeans.TopClientsResultBean;
+import com.g4w18.custombeans.TopSellersResultBean;
 import com.g4w18.custombeans.TotalSalesBean;
+import com.g4w18.custombeans.ZeroReportBean;
 import com.g4w18.customcontrollers.ReportQueries;
+import com.g4w18.entities.Book;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -36,6 +40,11 @@ public class ReportsBackingBean implements Serializable
     private List<ClientWithTotalSales> clientsWithTotalSales;
     private List<AuthorWithTotalSales> authorsWithTotalSales;
     private List<PublisherWithTotalSales> publishersWithTotalSales;
+    
+    private List<TopSellersResultBean> topSellers;
+    private List<TopClientsResultBean> topClients;
+    private List<ZeroReportBean> zeroReport;
+    private List<Book> stockReport;
     
     // Contains the type of report that the user wants to request, as well as the dates of the sales for the requested report.
     @Inject
@@ -82,6 +91,14 @@ public class ReportsBackingBean implements Serializable
                 return "totalSalesByAuthor";
             case "Sales by Publisher":
                 return "totalSalesByPublisher";
+            case "Top Sellers":
+                return "topSellers";
+            case "Top Clients":
+                return "topClients";
+            case "Books with Zero Sales":
+                return "zeroReports";
+            case "Stock Report":
+                return "stockReport";
             default:
                 break;
         }
@@ -108,6 +125,7 @@ public class ReportsBackingBean implements Serializable
     
     /**
      * Retrieves in a list, the total sales per client information between the dates that the user has specified.
+     * 
      * @return 
      */
     public List<ClientWithTotalSales> getClientsWithTotalSales()
@@ -173,6 +191,75 @@ public class ReportsBackingBean implements Serializable
     }
     
     /**
+     * Retrieves in a list, the top seller books between two dates.
+     * @return 
+     */
+    public List<TopSellersResultBean> getTopSellers()
+    {
+        if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
+            reportSelector = (ReportSelector)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("reportTypeAndDates");
+
+        if(topSellers == null)
+        {
+            topSellers = reportQueries.getTopSellersBetween2Dates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
+        }
+        
+        return topSellers;
+    }
+    
+    /**
+     * Retrieves in a list, the top clients between two dates.
+     * @return 
+     */
+    public List<TopClientsResultBean> getTopClients()
+    {
+        if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
+            reportSelector = (ReportSelector)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("reportTypeAndDates");
+
+        if(topClients == null)
+        {
+            topClients = reportQueries.getTopClientsBetween2Dates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
+        }
+        
+        return topClients;
+    }
+    
+    /**
+     * Retrieves in a list, the books that were never sold between two dates.
+     * @return 
+     */
+    public List<ZeroReportBean> getZeroSales()
+    {
+        if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
+            reportSelector = (ReportSelector)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("reportTypeAndDates");
+
+        if(zeroReport == null)
+        {
+            zeroReport = reportQueries.getZeroSalesBetween2Dates(reportSelector.getFirstDate(), reportSelector.getSecondDate());
+        }
+        
+        return zeroReport;
+    }
+    
+     /**
+     * Retrieves in a list, all the books from the database.
+     * @return 
+     */
+    public List<Book> getStockInformation()
+    {
+        if(reportSelector.getFirstDate() == null || reportSelector.getSecondDate() == null)
+            reportSelector = (ReportSelector)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("reportTypeAndDates");
+
+        if(stockReport == null)
+        {
+            stockReport = reportQueries.getStockReport();
+        }
+        
+        return stockReport;
+    }
+    
+    
+    /**
      * Getter method. Returns the report type options for the report type drop-down list.
      * @return 
      */
@@ -189,5 +276,9 @@ public class ReportsBackingBean implements Serializable
         reportOptions.add(new SelectItem("Sales by Client"));
         reportOptions.add(new SelectItem("Sales by Author"));
         reportOptions.add(new SelectItem("Sales by Publisher"));
+        reportOptions.add(new SelectItem("Top Sellers"));
+        reportOptions.add(new SelectItem("Top Clients"));
+        reportOptions.add(new SelectItem("Books with Zero Sales"));
+        reportOptions.add(new SelectItem("Stock Report"));
     }
 }

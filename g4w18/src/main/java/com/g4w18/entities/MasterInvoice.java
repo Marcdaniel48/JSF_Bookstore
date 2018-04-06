@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.entities;
 
 import java.io.Serializable;
@@ -25,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 /**
  *
@@ -48,6 +44,7 @@ public class MasterInvoice implements Serializable {
     @Column(name = "INVOICE_ID")
     private Integer invoiceId;
     @Basic(optional = false)
+    @Past
     @NotNull
     @Column(name = "SALE_DATE")
     @Temporal(TemporalType.TIMESTAMP)
@@ -61,6 +58,10 @@ public class MasterInvoice implements Serializable {
     @NotNull
     @Column(name = "GROSS_VALUE")
     private BigDecimal grossValue;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "AVAILABLE")
+    private boolean available;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceId")
     private List<InvoiceDetail> invoiceDetailList;
     @JoinColumn(name = "CLIENT_ID", referencedColumnName = "CLIENT_ID")
@@ -74,11 +75,12 @@ public class MasterInvoice implements Serializable {
         this.invoiceId = invoiceId;
     }
 
-    public MasterInvoice(Integer invoiceId, Date saleDate, BigDecimal netValue, BigDecimal grossValue) {
+    public MasterInvoice(Integer invoiceId, Date saleDate, BigDecimal netValue, BigDecimal grossValue, boolean available) {
         this.invoiceId = invoiceId;
         this.saleDate = saleDate;
         this.netValue = netValue;
         this.grossValue = grossValue;
+        this.available = available;
     }
 
     public Integer getInvoiceId() {
@@ -112,7 +114,15 @@ public class MasterInvoice implements Serializable {
     public void setGrossValue(BigDecimal grossValue) {
         this.grossValue = grossValue;
     }
-
+    
+    public boolean getAvailable(){
+        return available;
+    }
+    
+    public void setAvailable(boolean available){
+        this.available = available;
+    }
+    
     public List<InvoiceDetail> getInvoiceDetailList() {
         return invoiceDetailList;
     }
@@ -153,5 +163,5 @@ public class MasterInvoice implements Serializable {
     public String toString() {
         return "com.g4w18.entities.MasterInvoice[ invoiceId=" + invoiceId + " ]";
     }
-    
+
 }
