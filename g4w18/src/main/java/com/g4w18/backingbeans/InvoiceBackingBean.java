@@ -43,7 +43,7 @@ public class InvoiceBackingBean implements Serializable {
 
     private int taxes;
 
-    private Logger log = Logger.getLogger(BookDetailsBackingBean.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
     public MasterInvoice getMasterInvoice() {
 //        log.log(Level.INFO,"getMasterInvoice called");
@@ -72,8 +72,8 @@ public class InvoiceBackingBean implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msgs");
         String subject = bundle.getString("invoiceEmailSubject");
-        log.log(Level.INFO, "Subject: {0}", subject);
-        log.log(Level.INFO, "Destinatary: {0}", masterInvoice.getClientId().getEmail());
+        LOGGER.log(Level.INFO, "Subject: {0}", subject);
+        LOGGER.log(Level.INFO, "Destinatary: {0}", masterInvoice.getClientId().getEmail());
         return Email.create().from("sramirezdawson2017@gmail.com")
                 .to("sramirezdawson2017@gmail.com")
                 .subject(subject).addHtml(viewAsHtml());
@@ -97,8 +97,17 @@ public class InvoiceBackingBean implements Serializable {
 //    https://stackoverflow.com/questions/16965229/is-there-a-way-to-get-the-generated-html-as-a-string-from-a-uicomponent-object
     private String viewAsHtml() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
+        if (context == null) {
+            LOGGER.log(Level.INFO, "context null");
+        }
         UIViewRoot root = context.getViewRoot();
-        UIComponent component = root.findComponent("printable");
+        if (root == null) {
+            LOGGER.log(Level.INFO, "root null");
+        }
+        UIComponent component = root.findComponent("j_idt10:printable");
+        if (component == null) {
+            LOGGER.log(Level.INFO, "component null");
+        }
         ResponseWriter originalWriter = context.getResponseWriter();
         StringWriter writer = new StringWriter();
         try {

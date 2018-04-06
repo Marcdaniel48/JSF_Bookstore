@@ -56,12 +56,16 @@ and open the template in the editor.
                     <h:outputText value="#{order.saleDate}"></h:outputText>
                 </p:column>
 
-                <p:column headerText="#{msgs.managerOrdersNetValue}" filterBy="#{order.netValue}" filterMatchMode="contains">
-                    <h:outputText value="#{order.netValue}"></h:outputText>
+                <p:column headerText="#{msgs.managerOrdersGrossValue}" filterBy="#{order.grossValue}" filterMatchMode="contains">
+                    <h:outputText value="#{order.grossValue}">
+                        <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                    </h:outputText>
                 </p:column>
 
-                <p:column headerText="#{msgs.managerOrdersGrossValue}" filterBy="#{order.grossValue}" filterMatchMode="contains">
-                    <h:outputText value="#{order.grossValue}"></h:outputText>
+                <p:column headerText="#{msgs.managerOrdersNetValue}" filterBy="#{order.netValue}" filterMatchMode="contains">
+                    <h:outputText value="#{order.netValue}">
+                        <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                    </h:outputText>
                 </p:column>
 
                 <p:column headerText="#{msgs.managerOrdersAvailable}" filterBy="#{order.available}" filterMatchMode="equals">
