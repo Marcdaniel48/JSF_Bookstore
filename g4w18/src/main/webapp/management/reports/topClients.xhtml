@@ -9,8 +9,8 @@
 
     <ui:define name="content">
 
-        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
-
+        <ui:include src="../../WEB-INF/sections/management_navbar.xhtml" />
+         <div class="management-content">
         <h:form>
             <p:dataTable value="#{reportsBackingBean.topClients}" var="topClient" paginator="true" rows="25" 
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
@@ -23,5 +23,6 @@
                 </p:column>
             </p:dataTable>
         </h:form>
+         </div>
     </ui:define>
 </ui:composition>

@@ -17,36 +17,37 @@ and open the template in the editor.
 
     <ui:define name="content">
 
-        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
+        <ui:include src="../../WEB-INF/sections/management_navbar.xhtml"/>
+        <div class="management-content">
+            <b:container fluid="true">
+                <h3>#{msgs.reportsManagement}</h3>
+                <b:column col-md="6">
+                    <b:panel title="#{msgs.reportsManagementRequest}" collapsible="false">
+                        <h:form>
+                            #{msgs.reportsReportType}:
+                            <br/><br/>
+                            <b:selectOneMenu id="reportType" value="#{reportsBackingBean.reportSelector.reportType}">
+                                <f:selectItems value="#{reportsBackingBean.reportOptions}"/>    
+                            </b:selectOneMenu>
+                            <p:message for="reportType" style="color:red" />
 
-        <b:container fluid="true">
-            <h3>#{msgs.reportsManagement}</h3>
-            <b:column col-md="6">
-                <b:panel title="#{msgs.reportsManagementRequest}" collapsible="false">
-                    <h:form>
-                        #{msgs.reportsReportType}:
-                        <br/><br/>
-                        <b:selectOneMenu id="reportType" value="#{reportsBackingBean.reportSelector.reportType}">
-                            <f:selectItems value="#{reportsBackingBean.reportOptions}"/>    
-                        </b:selectOneMenu>
-                        <p:message for="reportType" style="color:red" />
+                            #{msgs.reportsManagementBetweenDates}:
+                            <br/><br/>
+                            <b:column col-md="6">
+                                <b:datepicker id="button1" value="#{reportsBackingBean.reportSelector.firstDate}"/>
+                            </b:column>
 
-                        #{msgs.reportsManagementBetweenDates}:
-                        <br/><br/>
-                        <b:column col-md="6">
-                            <b:datepicker id="button1" value="#{reportsBackingBean.reportSelector.firstDate}"/>
-                        </b:column>
+                            <b:column col-md="6">
+                                <b:datepicker id="button2" value="#{reportsBackingBean.reportSelector.secondDate}"/>
+                            </b:column>
 
-                        <b:column col-md="6">
-                            <b:datepicker id="button2" value="#{reportsBackingBean.reportSelector.secondDate}"/>
-                        </b:column>
+                            <br/><br/><br/>
+                            <b:commandButton value="#{msgs.reportsManagementRequest}" action="#{reportsBackingBean.goToReportPage}"/>
+                        </h:form>
+                    </b:panel>
+                </b:column>
 
-                        <br/><br/><br/>
-                        <b:commandButton value="#{msgs.reportsManagementRequest}" action="#{reportsBackingBean.goToReportPage}"/>
-                    </h:form>
-                </b:panel>
-            </b:column>
-
-        </b:container>
+            </b:container>
+        </div>
     </ui:define>
 </ui:composition>

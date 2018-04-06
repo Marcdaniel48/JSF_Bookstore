@@ -17,8 +17,8 @@ and open the template in the editor.
 
     <ui:define name="content">
 
-        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
-    <h:body>
+        <ui:include src="../../WEB-INF/sections/management_navbar.xhtml" />
+         <div class="management-content">
         <h2>#{msgs.reportsTotalSales} : CDN$ #{reportsBackingBean.getTotalSales(reportsBackingBean.publishersWithTotalSales)}</h2>
         
         <h:form>
@@ -42,5 +42,6 @@ and open the template in the editor.
                 </p:column>
             </p:dataTable>
         </h:form>
+         </div>
     </ui:define>
 </ui:composition>

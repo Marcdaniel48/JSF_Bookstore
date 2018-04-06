@@ -17,7 +17,7 @@ and open the template in the editor.
     <ui:define name="content">
 
         <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
-
+ <div class="management-content">
         <h:form id="form">
             <p:growl id="growl" life="3000"/>
             <p:dataTable var="order" value="#{orderManagerBackingBean.allMasterInvoices}" 
@@ -189,5 +189,6 @@ and open the template in the editor.
                 </p:dataTable>
             </p:dialog>
         </h:form>
+ </div>
     </ui:define>
 </ui:composition>
