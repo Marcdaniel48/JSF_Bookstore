@@ -10,14 +10,12 @@
 
     <ui:define name="content">
         
+        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
+        
         <h:outputStylesheet library="css" name="reviews.css" />
         
-        <div class="parallax">
-
-            <div class="parallax-layer background">
-                <div class="content">
-                    <div class="reviews">
-                        <div class="container">
+ 
+                        <div class="management-content">
                             <h1>Reviews waiting for approval</h1>
                             
                             <h:form id="pendingReviews">
@@ -27,7 +25,8 @@
 
                                     <h:column>
                                         <f:facet name="header">Review</f:facet>
-                                        <h4>#{review.clientId.firstName} #{review.clientId.lastName}</h4>
+                                        <h3>#{review.clientId.firstName} #{review.clientId.lastName}</h3>
+                                        <h4>#{msgs.title}: #{review.bookId.title}</h4>
                                         <h5>#{review.reviewDate}</h5>
                                         <p>#{review.review}</p>
                                     </h:column>
@@ -74,10 +73,7 @@
                             
                             </h:form>
                             
-                        </div>
-                    </div>
-                </div>
-            </div>
+  
         
         </div>
             

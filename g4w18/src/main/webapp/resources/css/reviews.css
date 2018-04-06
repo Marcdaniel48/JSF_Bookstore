@@ -8,8 +8,8 @@
 .reviews-table
 {
     border-collapse: collapse;
-    border: 1px solid red;
+    border: 1px solid black;
 }
 .reviews-table, th, td {
-    border: 1px solid red;
+    border: 1px solid black;
 }
