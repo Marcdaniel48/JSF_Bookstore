@@ -5,39 +5,45 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>#{msgs.reportsTotalSales}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <h:body>
-        <h2>#{msgs.reportsTotalSales} : CDN$ #{reportsBackingBean.getTotalSales(reportsBackingBean.booksWithTotalSales)}</h2>
-        
-        <h:form>
-            <p:dataTable value="#{reportsBackingBean.booksWithTotalSales}" var="sale" paginator="true" rows="25" 
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
-                
-                <p:column headerText="#{msgs.reportsBookId}" sortBy="#{sale.book.bookId}" filterBy="#{sale.book.bookId}">
-                    <h:outputText value="#{sale.book.bookId}"/>
-                </p:column>
-                <p:column headerText="#{msgs.reportsBookIsbn}" sortBy="#{sale.book.isbnNumber}" filterBy="#{sale.book.isbnNumber}" filterMatchMode="contains">
-                    <h:outputText value="#{sale.book.isbnNumber}"/>
-                </p:column>
-                <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastRecordedSale}" filterBy="#{sale.lastRecordedSale}" filterMatchMode="contains">
-                    <h:outputText value="#{sale.lastRecordedSale}"/>
-                </p:column>
-                <p:column headerText="#{msgs.reportsTotalCost}" sortBy="#{sale.totalCostRounded}" filterBy="#{sale.totalCostRounded}">
-                    <h:outputText value="#{sale.totalCostRounded}"/>
-                </p:column>
-                <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{sale.totalSalesRounded}" filterBy="#{sale.totalSalesRounded}">
-                    <h:outputText value="#{sale.totalSalesRounded}"/>
-                </p:column>
-                <p:column headerText="#{msgs.reportsTotalProfit}" sortBy="#{sale.totalProfitRounded}" filterBy="#{sale.totalProfitRounded}">
-                    <h:outputText value="#{sale.totalProfitRounded}"/>
-                </p:column>
-            </p:dataTable>
-        </h:form>
-    </h:body>
-</html>
+<ui:composition
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">
+
+        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
+        <h:body>
+            <h2>#{msgs.reportsTotalSales} : CDN$ #{reportsBackingBean.getTotalSales(reportsBackingBean.booksWithTotalSales)}</h2>
+
+            <h:form>
+                <p:dataTable value="#{reportsBackingBean.booksWithTotalSales}" var="sale" paginator="true" rows="25" 
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                    <p:column headerText="#{msgs.reportsBookId}" sortBy="#{sale.book.bookId}" filterBy="#{sale.book.bookId}">
+                        <h:outputText value="#{sale.book.bookId}"/>
+                    </p:column>
+                    <p:column headerText="#{msgs.reportsBookIsbn}" sortBy="#{sale.book.isbnNumber}" filterBy="#{sale.book.isbnNumber}" filterMatchMode="contains">
+                        <h:outputText value="#{sale.book.isbnNumber}"/>
+                    </p:column>
+                    <p:column headerText="#{msgs.reportsLastRecordedSale}" sortBy="#{sale.lastRecordedSale}" filterBy="#{sale.lastRecordedSale}" filterMatchMode="contains">
+                        <h:outputText value="#{sale.lastRecordedSale}"/>
+                    </p:column>
+                    <p:column headerText="#{msgs.reportsTotalCost}" sortBy="#{sale.totalCostRounded}" filterBy="#{sale.totalCostRounded}">
+                        <h:outputText value="#{sale.totalCostRounded}"/>
+                    </p:column>
+                    <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{sale.totalSalesRounded}" filterBy="#{sale.totalSalesRounded}">
+                        <h:outputText value="#{sale.totalSalesRounded}"/>
+                    </p:column>
+                    <p:column headerText="#{msgs.reportsTotalProfit}" sortBy="#{sale.totalProfitRounded}" filterBy="#{sale.totalProfitRounded}">
+                        <h:outputText value="#{sale.totalProfitRounded}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+    </ui:define>
+</ui:composition>
