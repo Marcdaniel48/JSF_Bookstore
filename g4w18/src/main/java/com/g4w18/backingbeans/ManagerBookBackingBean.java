@@ -149,7 +149,6 @@ public class ManagerBookBackingBean implements Serializable {
             bookJpaController.create(book);
             createAuthors(newBookAuthors,book);
             addMessage("managerCreateBook");
-            clear();
             return null;
             
         }
@@ -185,6 +184,40 @@ public class ManagerBookBackingBean implements Serializable {
     }
     
     /**
+     * Display authors in the datatable.
+     * @param authors
+     * @return 
+     */
+    public String displayAuthor(List<Author> authors)
+    {
+        String authorList="";
+        
+        for(int i = 0; i < authors.size();i++)
+        {
+            authorList += authors.get(i).getFirstName() + "," + authors.get(i).getLastName();
+        }
+        return authorList;
+    }
+    
+    /**
+     * Edit authors in the datatable.
+     * @param authors
+     * @return 
+     */
+    public String editAuthor(List<Author> authors)
+    {
+        String authorList="";
+        
+        for(int i = 0; i < authors.size();i++)
+        {
+            authorList += authors.get(i).getFirstName() + " , " + authors.get(i).getLastName();
+        }
+        validateAuthorsForEdit(authorList);
+        
+        return authorList;
+    }
+    
+    /**
      * Get all books from database.
      * 
      * @return List of books found
@@ -215,54 +248,6 @@ public class ManagerBookBackingBean implements Serializable {
               Files.copy(input, new File(path, filename).toPath());
               
           }
-          
-//        Path folder = Paths.get("/resources/images/");
-//        
-//        String filename = book.getIsbnNumber() + "hi";
-//        String extension = FilenameUtils.getExtension(file.getFileName());
-//        Path file = Files.createFile(folder);
-           
-//        logger.log(Level.INFO, "INSIDE OF FILE UPLOAD HANDLER");
-//        
-//        uploadedImage = file.getFile();
-//        Path folder = Paths.get("/resources/images");
-//        String filename = book.getIsbnNumber();
-//        String extension = FilenameUtils.getExtension(uploadedImage.getFileName());
-//        logger.log(Level.INFO, "EXTENSION SHOW PLS " + extension + "   -----FOLDER PATHG::::" + folder.toString());
-//        Path file = Files.createTempFile(folder, filename +"hi.", extension);
-//        
-//        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-//        String folder = ec.getInitParameter("/resources/images/");
-//        String realP = ec.getRealPath("/");
-//        
-//        File imageFile = new File(realP+"/resources/images/"+book.getIsbnNumber()+".png");
-//        
-//        try{
-//            FileOutputStream out;
-//            try(FileInputStream in = (FileInputStream)up)
-//        }
-        
-//        if(getFile()==null)
-//        {
-//            logger.log(Level.INFO,"CHECKING IF FILE WAS UPLOADED NULL INSIDE OF UPLOADHANDLER");
-//            addMessageError("managerFileError");
-//            
-//        }
-//        else
-//        {
-//            
-//            
-//        File imageFile = new File("/resources/images/"+book.getIsbnNumber()+".png");
-        
-        
-//        logger.log(Level.INFO, "PATH FILEEEEEEEEEEEEE" + imageFile.getPath());
-//        
-//        try(InputStream input = uploadedImage.getInputstream())
-//        {
-//            Files.copy(input, imageFile.toPath());
-//        }
-//        addMessage("managerFileSuccess");
-//        }
     }
     
     //Get and set files
@@ -412,6 +397,38 @@ public class ManagerBookBackingBean implements Serializable {
         }
         
         return existence;
+    }
+    
+    
+    /**
+     * Check that the authors provided follow the proper format and are validly written.
+     * @param fc
+     * @param uic
+     * @param value 
+     */
+    public void validateAuthorsForEdit(String authorsWithCommas)
+    {
+        
+        authorList = Arrays.asList(authorsWithCommas.split(","));
+        
+        int size = authorList.size();
+        
+        logger.log(Level.INFO, "SIZE OF AUTHOR LIST=== " + size);
+        
+        if(size%2!=0)
+        {
+            String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidBookAuthorFormat");
+            throw new ValidatorException(new FacesMessage(validationMessage));
+        }
+        
+        for(int i = 0;i<size;i++)
+        {
+            if(authorList.get(i) == "" || !authorList.get(i).matches("^[a-zA-Z,.' ]*$"))
+            {
+                String validationMessage = ResourceBundle.getBundle("com.g4w18.bundles.messages").getString("invalidBookAuthorFormatOfNames");
+                throw new ValidatorException(new FacesMessage(validationMessage));
+            }
+        }
     }
     
     /**

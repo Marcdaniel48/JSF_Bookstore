@@ -105,7 +105,7 @@
 
             <h:form>
                 <p:growl id="msgs" showDetail="true"/>
-                <p:dataTable value="#{managerBookHandling.books}" var="book" paginator="true" rows="25" 
+                <p:dataTable  value="#{managerBookHandling.books}" var="book" paginator="true" rows="25" 
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                              editable="true">
                     <p:ajax event="rowEdit" listener="#{managerBookHandling.onBookEdit}" />
@@ -206,12 +206,9 @@
                         </p:cellEditor>
                     </p:column>
                     
-<!--                    <p:column headerText="#{msgs.managerEditAuhtors}" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" >
-                        <p:cellEditor>
-                            <f:facet name="output"><p:selectBooleanButton value="#{book.authorList}" disabled="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
-                            <f:facet name="input"><p:selectBooleanButton value="#{book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
-                        </p:cellEditor>
-                    </p:column>-->
+                    <p:column headerText="#{msgs.managerEditAuhtors}" filterMatchMode="contains" >
+                            <h:outputText value="#{managerBookHandling.displayAuthor(book.authorList)}"/>
+                    </p:column>
 
 
 
