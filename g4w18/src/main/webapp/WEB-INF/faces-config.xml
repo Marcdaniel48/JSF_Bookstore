@@ -133,6 +133,13 @@
             <to-view-id>/management/orders.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>rssFeed</from-outcome>
+            <to-view-id>/management/rssFeed.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
     <navigation-rule>
         <navigation-case>
@@ -204,7 +211,7 @@
         </navigation-case>
     </navigation-rule>
 
-<navigation-rule>
+    <navigation-rule>
         <navigation-case>
             <from-outcome>stockReport</from-outcome>
             <to-view-id>/management/reports/stockReport.xhtml</to-view-id>

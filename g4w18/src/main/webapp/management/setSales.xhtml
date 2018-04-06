@@ -55,8 +55,8 @@ and open the template in the editor.
                         <p:selectOneButton onchange="PF('booksTable').filter()">
                             <f:converter converterId="javax.faces.BigDecimal" />
                             <f:selectItem itemLabel="#{msgs.managerSetSalesAllBooks}" itemValue="" />
-                            <f:selectItem itemLabel="#{msgs.managerSetSalesSaleBooks}" itemValue="0" />
-                            <f:selectItem itemLabel="#{msgs.managerSetSalesNoSaleBooks}" itemValue="1"/>
+                            <f:selectItem itemLabel="#{msgs.managerSetSalesSaleBooks}" itemValue="1" />
+                            <f:selectItem itemLabel="#{msgs.managerSetSalesNoSaleBooks}" itemValue="0"/>
                         </p:selectOneButton>
                     </f:facet>
                     <p:cellEditor>
