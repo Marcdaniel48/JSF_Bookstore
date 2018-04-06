@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
  * @author 1331680
  */
 @Entity
-@Table(name = "banner", catalog = "bookstore", schema = "")
+@Table(name = "banner", catalog = "g4w18", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Banner.findAll", query = "SELECT b FROM Banner b")
     , @NamedQuery(name = "Banner.findByBannerId", query = "SELECT b FROM Banner b WHERE b.bannerId = :bannerId")

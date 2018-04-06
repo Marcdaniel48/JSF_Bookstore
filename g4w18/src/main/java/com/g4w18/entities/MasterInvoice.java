@@ -27,7 +27,7 @@ import javax.validation.constraints.Past;
  * @author 1331680
  */
 @Entity
-@Table(name = "master_invoice", catalog = "bookstore", schema = "")
+@Table(name = "master_invoice", catalog = "g4w18", schema = "")
 @NamedQueries({
     @NamedQuery(name = "MasterInvoice.findAll", query = "SELECT m FROM MasterInvoice m")
     , @NamedQuery(name = "MasterInvoice.findByInvoiceId", query = "SELECT m FROM MasterInvoice m WHERE m.invoiceId = :invoiceId")
