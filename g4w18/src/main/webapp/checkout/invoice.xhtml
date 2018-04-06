@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>#{msgs.invoiceTitle}</title>
-        <h:outputStylesheet library="css" name="styles.css"/>
-        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
-        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
-        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <h:body>
-        <h:form>
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="windowTitle">
+        #{msgs.invoiceTitle}
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
             <b:container id="printable">
                 <b:row>
                     <b:column col-md="3">
@@ -185,7 +184,7 @@
                     <h:form>
                         <b:column col-md="1">
                             <p:commandButton value="Print" type="button" style="display:block;margin-bottom: 20px">
-                                <p:printer target="j_idt10:printable" />
+                                <p:printer target="form:printable" />
                             </p:commandButton>
                         </b:column>
                         <b:column col-md="1" offset-md="10">
@@ -195,5 +194,5 @@
                 </b:row>
             </b:container>
         </h:form>
-    </h:body>
-</html>
+    </ui:define>
+</ui:composition>

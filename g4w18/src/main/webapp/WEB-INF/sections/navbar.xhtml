@@ -45,6 +45,10 @@
                     <h:graphicImage class="navbar-icon" library="images" name="en_flag.png" alt="Language Flag" />
                 </h:commandLink>
             </h:form>
+            
+            <h:link id="helpLink" outcome="help">
+                <h:graphicImage class="navbar-icon" library="images" name="help.png" alt="Help Page Icon" />
+            </h:link>
 
             <ui:fragment rendered="#{!navbarBackingBean.userLoggedIn}">
                 <h:link id="loginLink" class="navbar-link" value="#{msgs.loginbutton}" outcome="login" />
@@ -100,20 +104,20 @@
                 <h:link value="#{msgs.loginbutton}" outcome="login" />
             </ui:fragment>
             <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
-                <h:commandLink value="Downloads" action="@null" />
+                <h:commandLink value="Downloads" action="downloads" />
                 <ui:fragment rendered="#{navbarBackingBean.manager}">
                     <h:commandLink value="Manager" action="management_home" />
                 </ui:fragment>
                 <h:commandLink value="Logout" action="#{navbarBackingBean.logout()}" />
             </ui:fragment>
-            <a href="#help">Help</a>
+            <h:commandLink value="#{msgs.helpTitle}" action="help" />
         </h:form>
     </div>
     
     <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
         <div class="navbar-user-menu">
             <h:form id="navbarDropdownForm">
-                <h:commandLink id="downloadsLink" value="Downloads" action="@null" />
+                <h:commandLink id="downloadsLink" value="Downloads" action="downloads" />
 
                 <ui:fragment rendered="#{navbarBackingBean.manager}">
                     <h:commandLink id="managerLink" value="Manager" action="management_home" />

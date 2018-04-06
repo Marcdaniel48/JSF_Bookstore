@@ -10,12 +10,9 @@
 
     <ui:define name="content">
         
-        <h:outputStylesheet library="css" name="banner_page.css" />
+        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
         
-        <div class="parallax">
-
-            <div class="parallax-layer background">
-                <div class="content">
+                <div class="management-content">
                     
                     <div>
                         <h1>Add New Ad</h1>
@@ -73,9 +70,6 @@
                         </h:dataTable>
                     </h:form>
                 </div>
-            </div>
-        
-        </div>
             
     </ui:define>
 </ui:composition>

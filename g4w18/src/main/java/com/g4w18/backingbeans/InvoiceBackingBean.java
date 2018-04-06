@@ -104,7 +104,7 @@ public class InvoiceBackingBean implements Serializable {
         if (root == null) {
             LOGGER.log(Level.INFO, "root null");
         }
-        UIComponent component = root.findComponent("j_idt10:printable");
+        UIComponent component = root.findComponent("form:printable");
         if (component == null) {
             LOGGER.log(Level.INFO, "component null");
         }
