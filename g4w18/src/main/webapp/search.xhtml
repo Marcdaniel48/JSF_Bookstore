@@ -1,4 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="windowTitle">
+        #{msgs.searchResult}
+    </ui:define>
+    
+    <ui:define name="content">
+        <div class="page_container">
+            <b:container fluid="false">
+                <h1>#{searchBackingBean.message}</h1>
+                <b:form>
+                    
+                    <b:row class="text-center">
+                        <ui:repeat var="book" value="#{searchBackingBean.books}">
+                            <b:column col-md="2" col-sm="4" col-xs="4">
+                                <b:thumbnail>
+                                     <b:commandLink outcome="bookDetail">
+                                         <b:image library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}" width="100%"></b:image>
+                                         <f:param name="id" value="#{book.bookId}"></f:param>
+                                     </b:commandLink>
+                                </b:thumbnail>
+                            </b:column>
+                        </ui:repeat>
+                   </b:row>
+               </b:form>
+           </b:container>
+
+           <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
+
+        </div>
+    </ui:define>
+</ui:composition>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -94,4 +136,4 @@
         
         
     </body>
-</html>
+</html>-->
