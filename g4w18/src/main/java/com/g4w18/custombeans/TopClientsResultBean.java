@@ -10,11 +10,45 @@ import java.math.RoundingMode;
 public class TopClientsResultBean {
     private String username;
     private BigDecimal grossValue;
+    private BigDecimal totalCost;
+    private BigDecimal totalSales;
+    private BigDecimal totalProfit;
 
-    public TopClientsResultBean(String username, BigDecimal grossValue) {
+    public TopClientsResultBean(String username, BigDecimal grossValue, BigDecimal totalCost, BigDecimal totalSales, BigDecimal totalProfit) {
         this.username = username;
         this.grossValue = grossValue.setScale(2, RoundingMode.CEILING);
+        this.totalCost = totalCost.setScale(2, RoundingMode.CEILING);
+        this.totalSales = totalSales.setScale(2, RoundingMode.CEILING);
+        this.totalProfit = totalProfit.setScale(2, RoundingMode.CEILING);
     }
+    
+    
+    
+    public BigDecimal getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(BigDecimal totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public BigDecimal getTotalSales() {
+        return totalSales;
+    }
+
+    public void setTotalSales(BigDecimal totalSales) {
+        this.totalSales = totalSales;
+    }
+
+    public BigDecimal getTotalProfit() {
+        return totalProfit;
+    }
+
+    public void setTotalProfit(BigDecimal totalProfit) {
+        this.totalProfit = totalProfit;
+    }
+
+   
 
     public String getUsername() {
         return username;

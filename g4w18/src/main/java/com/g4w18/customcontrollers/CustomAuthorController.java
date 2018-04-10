@@ -58,6 +58,7 @@ public class CustomAuthorController implements Serializable
     /**
      * Get list of author names with the name provided
      * @param authorName provided by user
+     * @Author Salman Haidar
      * @return List of authors found with the param
      */
     public List<Author> findAuthor(String authorName)
@@ -73,6 +74,7 @@ public class CustomAuthorController implements Serializable
      * Get list of author names with the name provided
      * @param authorName provided by user
      * @return List of authors found with the param
+     * @Author Salman Haidar
      */
     public List<Author> findAuthor3Options(String authorName)
     {

@@ -192,6 +192,7 @@ public class ReportsBackingBean implements Serializable
     
     /**
      * Retrieves in a list, the top seller books between two dates.
+     * @Author Salman Haidar
      * @return 
      */
     public List<TopSellersResultBean> getTopSellers()
@@ -209,6 +210,7 @@ public class ReportsBackingBean implements Serializable
     
     /**
      * Retrieves in a list, the top clients between two dates.
+     * @Author Salman Haidar
      * @return 
      */
     public List<TopClientsResultBean> getTopClients()
@@ -226,6 +228,7 @@ public class ReportsBackingBean implements Serializable
     
     /**
      * Retrieves in a list, the books that were never sold between two dates.
+     * @Author Salman Haidar
      * @return 
      */
     public List<ZeroReportBean> getZeroSales()
@@ -243,6 +246,7 @@ public class ReportsBackingBean implements Serializable
     
      /**
      * Retrieves in a list, all the books from the database.
+     * @Author Salman Haidar
      * @return 
      */
     public List<Book> getStockInformation()

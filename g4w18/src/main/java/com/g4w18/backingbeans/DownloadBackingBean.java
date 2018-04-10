@@ -22,7 +22,7 @@ import org.primefaces.model.StreamedContent;
 
 /**
  *
- * @author salma
+ * @author Salman Haidar
  */
 @Named("downloadx")
 @RequestScoped

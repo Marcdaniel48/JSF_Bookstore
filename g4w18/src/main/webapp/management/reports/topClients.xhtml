@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
+<!-- Salman Haidar -->
 <ui:composition
     template="/WEB-INF/layouts/master.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
@@ -20,6 +21,15 @@
                 </p:column>
                 <p:column headerText="#{msgs.reportGrossValue}" sortBy="#{topClient.grossValue}" filterBy="#{topClient.grossValue}" filterMatchMode="contains">
                     <h:outputText value="#{topClient.grossValue}"/>
+                </p:column>
+                <p:column headerText="#{msgs.reportsTotalCost}" sortBy="#{topClient.totalCost}" filterBy="#{topClient.totalCost}" filterMatchMode="contains">
+                    <h:outputText value="#{topClient.totalCost}"/>
+                </p:column>
+                <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{topClient.totalSales}" filterBy="#{topClient.totalSales}" filterMatchMode="contains">
+                    <h:outputText value="#{topClient.totalSales}"/>
+                </p:column>
+                <p:column headerText="#{msgs.reportsTotalProfit}" sortBy="#{topClient.totalProfit}" filterBy="#{topClient.totalProfit}" filterMatchMode="contains">
+                    <h:outputText value="#{topClient.totalProfit}"/>
                 </p:column>
             </p:dataTable>
         </h:form>

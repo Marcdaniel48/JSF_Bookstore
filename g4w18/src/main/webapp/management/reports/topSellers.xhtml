@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE html>
+<!-- Salman Haidar -->
 <ui:composition
     template="/WEB-INF/layouts/master.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
@@ -16,14 +17,20 @@
             <p:dataTable value="#{reportsBackingBean.topSellers}" var="topBook" paginator="true" rows="25" 
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
                 
-                <p:column headerText="#{msgs.managerAddIsbn}" sortBy="#{topBook.isbn}" filterBy="#{topBook.isbn}">
+                <p:column headerText="#{msgs.managerAddIsbn}" sortBy="#{topBook.isbn}" filterBy="#{topBook.isbn}" filterMatchMode="contains" >
                     <h:outputText value="#{topBook.isbn}"/>
                 </p:column>
-                <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{topBook.title}" filterBy="#{topBook.title}" filterMatchMode="contains">
+                <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{topBook.title}" filterBy="#{topBook.title}" filterMatchMode="contains" >
                     <h:outputText value="#{topBook.title}"/>
+                </p:column>
+                <p:column headerText="#{msgs.reportsTotalCost}" sortBy="#{topBook.totalCost}" filterBy="#{topBook.totalCost}">
+                    <h:outputText value="#{topBook.totalCost}"/>
                 </p:column>
                 <p:column headerText="#{msgs.reportsTotalSales}" sortBy="#{topBook.totalSales}" filterBy="#{topBook.totalSales}">
                     <h:outputText value="#{topBook.totalSales}"/>
+                </p:column>
+                <p:column headerText="#{msgs.reportsTotalProfit}" sortBy="#{topBook.totalProfit}" filterBy="#{topBook.totalProfit}">
+                    <h:outputText value="#{topBook.totalProfit}"/>
                 </p:column>
             </p:dataTable>
         </h:form>
