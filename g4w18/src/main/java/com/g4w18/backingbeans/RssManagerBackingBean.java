@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.backingbeans;
 
 import com.g4w18.controllers.exceptions.NonexistentEntityException;
@@ -20,10 +15,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 
-
 /**
+ * The RssManagerBackingBean class is in charge of the functionality needed for
+ * the RSS Feed part of the management site.
  *
- * @author Juan Sebastian Ramirez
+ * @author Sebastian Ramirez
  */
 @Named
 @RequestScoped
@@ -117,6 +113,13 @@ public class RssManagerBackingBean implements Serializable {
         return toDelete;
     }
 
+    /**
+     * Getter method for the newRss class variable. It creates a new Rss object
+     * if it is null. This object is used to create a new incoming Rss in the
+     * DB.
+     *
+     * @return The newRss to hold the values from the form.
+     */
     public Rss getNewRss() {
         if (newRss == null) {
             newRss = new Rss();
@@ -124,6 +127,12 @@ public class RssManagerBackingBean implements Serializable {
         return newRss;
     }
 
+    /**
+     * The createRSS method persists an Rss object coming from the view.
+     *
+     * @return null
+     * @throws Exception
+     */
     public String createRss() throws Exception {
         rssController.create(newRss);
         Messages.addMessage("managerRSSNewSuccess");

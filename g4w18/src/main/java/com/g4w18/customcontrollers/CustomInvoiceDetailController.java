@@ -12,12 +12,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- * Custom InvoiceDetail JPA controller used to access and manipulate the InvoiceDetail records of the database.
+ * Custom InvoiceDetail JPA controller used to access and manipulate the
+ * InvoiceDetail records of the database.
  *
  * @author Marc-Daniel
  */
-public class CustomInvoiceDetailController implements Serializable
-{
+public class CustomInvoiceDetailController implements Serializable {
+
     @Inject
     private InvoiceDetailJpaController invoiceJpaController;
 
@@ -54,11 +55,11 @@ public class CustomInvoiceDetailController implements Serializable
 
     /**
      * Returns the invoice details for the given master invoice ID.
+     *
      * @param masterInvoice
      * @return
      */
-    public List<InvoiceDetail> findInvoicesByMasterInvoice(MasterInvoice masterInvoice)
-    {
+    public List<InvoiceDetail> findInvoicesByMasterInvoice(MasterInvoice masterInvoice) {
         List<InvoiceDetail> invoices = em.createQuery("Select i from InvoiceDetail i where i.invoiceId = ?1").setParameter(1, masterInvoice).getResultList();
         return invoices;
     }

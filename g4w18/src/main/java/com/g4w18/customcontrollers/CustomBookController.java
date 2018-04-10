@@ -204,32 +204,34 @@ public class CustomBookController implements Serializable {
     }
 
     /**
-     * @author Sebastian Get a List of Book objects comprised only of Books
-     * which their Sale Price is bigger than 0.
+     * Get a List of Book objects comprised only of Books which their Sale Price
+     * is bigger than 0.
      *
+     * @author Sebastian Ramirez
      * @return List of books on sale.
      */
     public List<Book> findBooksOnSale() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Book> book = cq.from(Book.class);
-        cq.select(book).where(cb.gt(book.get("salePrice"), 0));
+        cq.select(book).where(cb.gt(book.get(Book_.salePrice), 0));
         TypedQuery<Book> query = em.createQuery(cq);
         List<Book> toReturn = query.getResultList();
         return toReturn;
     }
 
     /**
-     * @author Sebastian Get a List of Book objects comprised only of Books
-     * which their Sale Price is equal to 0.
+     * Get a List of Book objects comprised only of Books which their Sale Price
+     * is equal to 0.
      *
+     * @author Sebastian Ramirez
      * @return List of books not on sale.
      */
     public List<Book> findBooksNotSale() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Book> book = cq.from(Book.class);
-        cq.select(book).where(cb.equal(book.get("salePrice"), 0));
+        cq.select(book).where(cb.equal(book.get(Book_.salePrice), 0));
         TypedQuery<Book> query = em.createQuery(cq);
         List<Book> toReturn = query.getResultList();
         return toReturn;
@@ -256,16 +258,19 @@ public class CustomBookController implements Serializable {
 
         return books;
     }
+
     /**
+     * Finds an unique book by ISBN.
+     *
      * @author Sebastian
      * @param isbn
-     * @return 
+     * @return
      */
     public Book findUniqueBookByISBN(String isbn) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> book = cq.from(Book.class);
-        cq.select(book).where(cb.equal(book.get("isbnNumber"), isbn));
+        cq.select(book).where(cb.equal(book.get(Book_.isbnNumber), isbn));
         TypedQuery<Book> query = em.createQuery(cq);
         Book toReturn = query.getSingleResult();
         return toReturn;

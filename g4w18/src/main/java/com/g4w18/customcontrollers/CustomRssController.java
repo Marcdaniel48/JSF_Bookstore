@@ -14,8 +14,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
+ * The CustomRssController class is responsible to encapsule the functionality
+ * of the RssJpaController class as well as containing custom query methods.
  *
- * @author 1331680
+ * @author Sebastian Ramirez
  */
 public class CustomRssController implements Serializable {
 
@@ -62,6 +64,13 @@ public class CustomRssController implements Serializable {
         rssController.edit(rss);
     }
 
+    /**
+     * This method is called by the view when deleting an specific Rss entry.
+     *
+     * @param id
+     * @throws RollbackFailureException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws RollbackFailureException, Exception {
         if (findRss(id).getIsActive()) {
             setFirstAsActive();
@@ -95,7 +104,7 @@ public class CustomRssController implements Serializable {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Rss> cq = cb.createQuery(Rss.class);
         Root<Rss> rss = cq.from(Rss.class);
-        cq.select(rss).where(cb.equal(rss.get("isActive"), true));
+        cq.select(rss).where(cb.equal(rss.get(Rss_.isActive), true));
         TypedQuery<Rss> query = em.createQuery(cq);
         return query.getSingleResult();
     }
@@ -110,7 +119,7 @@ public class CustomRssController implements Serializable {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Rss> cq = cb.createQuery(Rss.class);
         Root<Rss> rss = cq.from(Rss.class);
-        cq.select(rss).where(cb.equal(rss.get("isActive"), false));
+        cq.select(rss).where(cb.equal(rss.get(Rss_.isActive), false));
         TypedQuery<Rss> query = em.createQuery(cq);
         return query.getResultList();
     }

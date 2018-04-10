@@ -12,10 +12,12 @@ import com.g4w18.util.FeedMessage;
 import com.g4w18.util.RSSFeedParser;
 
 /**
+ * The RssBackingBean class is in charge of the functionality needed to display
+ * RSSFeeds on the index page.
+ *
  * @author Jephthia Louis
  * @author Sebastian Ramirez
  */
-
 @Named("rssBackingBean")
 @RequestScoped
 public class RssBackingBean implements Serializable {

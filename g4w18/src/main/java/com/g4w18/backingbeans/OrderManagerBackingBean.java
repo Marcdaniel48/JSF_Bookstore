@@ -93,11 +93,13 @@ public class OrderManagerBackingBean implements Serializable {
         Messages.addMessage("managerRSSEdit");
         return null;
     }
-    
+
     /**
-     * The setInvoiceDetails
+     * The setInvoiceDetailsStatus method ensures that when a MasterInvoice
+     * status is set as removed, all its Invoice Details are set as removed too.
+     *
      * @param masterInvoice
-     * @throws Exception 
+     * @throws Exception
      */
     private void setInvoiceDetailsStatus(MasterInvoice masterInvoice) throws Exception {
         if (!masterInvoice.getAvailable()) {
@@ -108,6 +110,14 @@ public class OrderManagerBackingBean implements Serializable {
         }
     }
 
+    /**
+     * The onRowEditInvoiceDetail method is used by the primefaces framework to
+     * edit a particular InvoiceDetail.
+     *
+     * @param event
+     * @return
+     * @throws Exception
+     */
     public String onRowEditInvoiceDetail(RowEditEvent event) throws Exception {
         LOGGER.log(Level.INFO, "onRowEditInvoiceDetail called");
         InvoiceDetail editedDetail = (InvoiceDetail) event.getObject();

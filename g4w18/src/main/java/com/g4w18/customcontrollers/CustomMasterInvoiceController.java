@@ -21,6 +21,7 @@ import javax.persistence.criteria.Root;
  * of the database.
  *
  * @author Marc-Daniel
+ * @author Sebastian Ramirez
  */
 public class CustomMasterInvoiceController implements Serializable {
 
@@ -90,11 +91,19 @@ public class CustomMasterInvoiceController implements Serializable {
         return masterInvoices;
     }
 
+    /**
+     * This method returns the most recent Master Invoice from an specific
+     * client.
+     *
+     * @author Sebastian Ramirez
+     * @param clientId
+     * @return
+     */
     public MasterInvoice getMostRecentMasterInvoice(int clientId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<MasterInvoice> cq = cb.createQuery(MasterInvoice.class);
         Root<MasterInvoice> masterInvoice = cq.from(MasterInvoice.class);
-        cq.select(masterInvoice).orderBy(cb.desc(masterInvoice.get("saleDate")));
+        cq.select(masterInvoice).orderBy(cb.desc(masterInvoice.get(Book_.saleDate)));
         TypedQuery<MasterInvoice> query = em.createQuery(cq);
         return query.setMaxResults(1).getSingleResult();
     }

@@ -45,12 +45,31 @@ public class SetSalesBackingBean implements Serializable {
         return allBooks;
     }
 
+    /**
+     * The onRowEdit method is used to persist an edited Book object coming from
+     * the view.
+     *
+     * @param event
+     * @return
+     * @throws NonexistentEntityException
+     * @throws RollbackFailureException
+     * @throws Exception
+     */
     public String onRowEdit(RowEditEvent event) throws NonexistentEntityException, RollbackFailureException, Exception {
         Book editedBook = (Book) event.getObject();
         customBookController.edit(editedBook);
         return null;
     }
 
+    /**
+     * The filterBySalePrice method filters the PrimeFace's datatable by all
+     * books, books on sale and books not on sale.
+     *
+     * @param value
+     * @param filter
+     * @param locale
+     * @return
+     */
     public boolean filterBySalePrice(Object value, Object filter, Locale locale) {
         String filterText = (filter == null) ? null : filter.toString().trim();
         String valueText = (value == null) ? null : value.toString().trim();
