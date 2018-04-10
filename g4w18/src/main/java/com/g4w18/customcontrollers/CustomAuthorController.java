@@ -58,6 +58,7 @@ public class CustomAuthorController implements Serializable {
      * Get list of author names with the name provided
      * 
      * @param authorName provided by user
+     * @Author Salman Haidar
      * @return List of authors found with the param
      */
     public List<Author> findAuthor(String authorName) {
@@ -73,6 +74,7 @@ public class CustomAuthorController implements Serializable {
      *
      * @param authorName provided by user
      * @return List of authors found with the param
+     * @Author Salman Haidar
      */
     public List<Author> findAuthor3Options(String authorName) {
         List<Author> findAuthorByName = em.createQuery("Select a from Author a where (CONCAT(a.firstName,' ',a.lastName) LIKE ?1) OR (a.firstName LIKE ?1) OR (a.lastName LIKE ?1)")

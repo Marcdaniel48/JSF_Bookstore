@@ -234,10 +234,10 @@ public class ReportQueries implements Serializable {
      */
     public List<TopSellersResultBean> getTopSellersBetween2Dates(Date begin, Date end)
     {      
-        Collection<Object[]> topSellers = em.createNativeQuery("SELECT b.TITLE, b.ISBN_NUMBER, sum(i.BOOK_PRICE) AS TOTAL_SALES FROM book b "
+        Collection<Object[]> topSellers = em.createNativeQuery("SELECT b.TITLE, b.ISBN_NUMBER,sum(i.book_price) AS TOTAL_COST ,sum(i.book_price * (1 + i.gst_rate/100.0 + i.pst_rate/100.0 + i.hst_rate/100.0)) AS TOTAL_SALES,(sum(i.book_price * (1 + i.gst_rate/100.0 + i.pst_rate/100.0 + i.hst_rate/100.0)) - sum(i.book_price)) AS TOTAL_PROFIT FROM book b "
                 + "INNER JOIN invoice_detail i on b.BOOK_ID = i.BOOK_ID "
                 + "INNER JOIN master_invoice m on m.INVOICE_ID = i.INVOICE_ID "
-                + "WHERE m.SALE_DATE BETWEEN ?1 AND ?2 GROUP BY b.title ORDER BY TOTAL_SALES desc")
+                + "WHERE m.SALE_DATE BETWEEN ?1 AND ?2 GROUP BY b.title ORDER BY TOTAL_PROFIT desc")
                 .setParameter(1, begin)
                 .setParameter(2, end)
                 .getResultList();
@@ -248,10 +248,12 @@ public class ReportQueries implements Serializable {
         Iterator<Object[]> iterator = topSellers.iterator();
         while(iterator.hasNext()){
             Object[] topSeller = iterator.next();
-            containerTopSeller = new TopSellersResultBean((String)topSeller[0],(String)topSeller[1],(BigDecimal)topSeller[2]);
+            containerTopSeller = new TopSellersResultBean((String)topSeller[0],(String)topSeller[1],(BigDecimal)topSeller[2],(BigDecimal)topSeller[3],(BigDecimal)topSeller[4]);
             logger.log(Level.INFO, "TITLE OF BOOK: "+ topSeller[0]);
             logger.log(Level.INFO, "ISBN OF BOOK: "+ topSeller[1]);
-            logger.log(Level.INFO, "SALE OF BOOK: "+ topSeller[2]);
+            logger.log(Level.INFO, "COST OF BOOK: "+ topSeller[2]);
+            logger.log(Level.INFO, "SALE OF BOOK: "+ topSeller[3]);
+            logger.log(Level.INFO, "PROFIT OF BOOK: "+ topSeller[4]);
             selling.add(containerTopSeller);
         }
         logger.log(Level.INFO, "INSIDE OF TOP SELLERS BETWEEN 2 DATES: " + begin.toString() + "00000  " + end.toString());
@@ -270,9 +272,10 @@ public class ReportQueries implements Serializable {
      */
     public List<TopClientsResultBean> getTopClientsBetween2Dates(Date begin, Date end)
     {      
-        Collection<Object[]> topSellers = em.createNativeQuery("SELECT c.USERNAME, sum(m.GROSS_VALUE) AS TOTAL_SALES FROM client c "
+        Collection<Object[]> topSellers = em.createNativeQuery("SELECT c.USERNAME, sum(m.GROSS_VALUE) AS GROSS_VALUES,sum(i.book_price) AS TOTAL_COST,sum(i.book_price * (1 + i.gst_rate/100.0 + i.pst_rate/100.0 + i.hst_rate/100.0)) AS TOTAL_SALES,(sum(i.book_price * (1 + i.gst_rate/100.0 + i.pst_rate/100.0 + i.hst_rate/100.0)) - sum(i.book_price)) AS TOTAL_PROFIT FROM client c "
                 + "INNER JOIN master_invoice m on c.CLIENT_ID = m.CLIENT_ID "
-                + "WHERE m.SALE_DATE BETWEEN ?1 AND ?2 GROUP BY c.USERNAME ORDER BY TOTAL_SALES desc")
+                + "INNER JOIN invoice_detail i on m.invoice_id = i.invoice_id "
+                + "WHERE m.SALE_DATE BETWEEN ?1 AND ?2 GROUP BY c.USERNAME ORDER BY GROSS_VALUES desc")
                 .setParameter(1, begin)
                 .setParameter(2, end)
                 .getResultList();
@@ -283,7 +286,7 @@ public class ReportQueries implements Serializable {
         Iterator<Object[]> iterator = topSellers.iterator();
         while(iterator.hasNext()){
             Object[] topClient = iterator.next();
-            containerTopClient = new TopClientsResultBean((String)topClient[0],(BigDecimal)topClient[1]);
+            containerTopClient = new TopClientsResultBean((String)topClient[0],(BigDecimal)topClient[1],(BigDecimal)topClient[2],(BigDecimal)topClient[3],(BigDecimal)topClient[4]);
             logger.log(Level.INFO, "CLIENT USERNAME OF BOOK: "+ topClient[0]);
             logger.log(Level.INFO, "TOTAL GROSS SALES: "+ topClient[1]);
             selling.add(containerTopClient);

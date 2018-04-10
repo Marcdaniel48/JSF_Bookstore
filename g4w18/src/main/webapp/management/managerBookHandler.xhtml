@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Salman Haidar -->
 <ui:composition
+    
     template="/WEB-INF/layouts/master.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -25,7 +27,7 @@
         <p:panel id="toggleable" header="#{msgs.managerAddSousTitre}" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
 
 
-            <h:form >
+            <h:form enctype="multipart/form-data">
 
                 <p:growl id="growl" showDetail="true" sticky="true"/>
                 <h:panelGrid columns="2" cellpadding="10">
@@ -91,13 +93,13 @@
                     <p:selectBooleanButton value="#{managerBookHandling.book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
                     
                     
-<!--                    <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
+                    <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
                     <h:inputFile value="#{managerBookHandling.file}" required="true" requiredMessage="#{msgs.managerFileError}" />
-                   actionListener="#{managerBookHandling.fileUploadHandler}"
-                    -->
+                
                     
                     
-                    <p:commandButton value="#{msgs.submitButton}"  action="#{managerBookHandling.createBook()}"  update="growl"/>
+                    
+                    <h:commandButton value="#{msgs.submitButton}"  action="#{managerBookHandling.createBook()}" />
                     <h:outputLabel>#{managerBookHandling.message}</h:outputLabel>
 
                 </h:panelGrid>
@@ -114,25 +116,25 @@
                     <p:ajax event="rowEdit" listener="#{managerBookHandling.onBookEdit}" />
                     <p:ajax event="rowEditCancel" listener="#{managerBookHandling.onBookEditCancel}" />
 
-                    <p:column headerText="#{msgs.managerAddIsbn}" sortBy="#{book.isbnNumber}" filterBy="#{book.isbnNumber}" >
+                    <p:column headerText="#{msgs.managerAddIsbn}" sortBy="#{book.isbnNumber}" filterBy="#{book.isbnNumber}" filterMatchMode="contains" >
                         <h:outputText value="#{book.isbnNumber}"/>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{book.title}" filterBy="#{book.title}" >
+                    <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{book.title}" filterBy="#{book.title}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.title}"/></f:facet>
                             <f:facet name="input"><p:inputText value="#{book.title}" required="true" requiredMessage="#{msgs.invalidBookTitle}"/></f:facet>
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddPublisher}" sortBy="#{book.publisher}" filterBy="#{book.publisher}" >
+                    <p:column headerText="#{msgs.managerAddPublisher}" sortBy="#{book.publisher}" filterBy="#{book.publisher}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.publisher}"/></f:facet>
                             <f:facet name="input"><p:inputText value="#{book.publisher}"/></f:facet>
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddPublisherDate}" sortBy="#{book.publicationDate}" filterBy="#{book.publicationDate}" >
+                    <p:column headerText="#{msgs.managerAddPublisherDate}" sortBy="#{book.publicationDate}" filterBy="#{book.publicationDate}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.publicationDate}"/></f:facet>
                             <f:facet name="input"><p:inputText value="#{book.publicationDate}" required="true" >
@@ -142,14 +144,14 @@
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddPageNumber}" sortBy="#{book.pageNumber}" filterBy="#{book.pageNumber}" >
+                    <p:column headerText="#{msgs.managerAddPageNumber}" sortBy="#{book.pageNumber}" filterBy="#{book.pageNumber}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.pageNumber}"/></f:facet>
                             <f:facet name="input"><p:inputText value="#{book.pageNumber}" required="true" /></f:facet>
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddGenre}" sortBy="#{book.genre}" filterBy="#{book.genre}" >
+                    <p:column headerText="#{msgs.managerAddGenre}" sortBy="#{book.genre}" filterBy="#{book.genre}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.genre}"/></f:facet>
                             <f:facet name="input"><h:selectOneMenu value="#{book.genre}" required="true" >
@@ -159,14 +161,14 @@
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddDescription}" sortBy="#{book.description}" filterBy="#{book.description}" >
+                    <p:column headerText="#{msgs.managerAddDescription}" sortBy="#{book.description}" filterBy="#{book.description}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.description}"/></f:facet>
                             <f:facet name="input"><p:inputText value="#{book.description}" required="true" /></f:facet>
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddFormat}" sortBy="#{book.format}" filterBy="#{book.format}" >
+                    <p:column headerText="#{msgs.managerAddFormat}" sortBy="#{book.format}" filterBy="#{book.format}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.format}"/></f:facet>
                             <f:facet name="input"><h:selectOneMenu value="#{book.format}" required="true" >
@@ -176,25 +178,25 @@
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddWholePrice}" sortBy="#{book.wholesalePrice}" filterBy="#{book.wholesalePrice}" >
+                    <p:column headerText="#{msgs.managerAddWholePrice}" sortBy="#{book.wholesalePrice}" filterBy="#{book.wholesalePrice}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.wholesalePrice}"/></f:facet>
                             <f:facet name="input"><p:inputNumber value="#{book.wholesalePrice}" required="true"/></f:facet>
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddListPrice}" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" >
+                    <p:column headerText="#{msgs.managerAddListPrice}" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.listPrice}"/></f:facet>
                             <f:facet name="input"><p:inputNumber value="#{book.listPrice}" required="true"/></f:facet>
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddPublisherDate}" sortBy="#{book.publicationDate}" filterBy="#{book.publicationDate}" >
+                    <p:column headerText="#{msgs.managerAddPublisherDate}" sortBy="#{book.publicationDate}" filterBy="#{book.publicationDate}" filterMatchMode="contains" >
                         <h:outputText value="#{book.publicationDate}"/>
                     </p:column>
 
-                    <p:column headerText="#{msgs.managerAddListPrice}" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" >
+                    <p:column headerText="#{msgs.managerAddListPrice}" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{book.listPrice}"/></f:facet>
                             <f:facet name="input"><p:inputNumber value="#{book.listPrice}" required="true"/></f:facet>
@@ -202,14 +204,14 @@
                     </p:column>
 
 
-                    <p:column headerText="#{msgs.managerRemovalStatus}" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" >
+                    <p:column headerText="#{msgs.managerRemovalStatus}" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" filterMatchMode="contains" >
                         <p:cellEditor>
                             <f:facet name="output"><p:selectBooleanButton value="#{book.removalStatus}" disabled="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
                             <f:facet name="input"><p:selectBooleanButton value="#{book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column headerText="#{msgs.managerEditAuhtors}" filterMatchMode="contains" >
+                    <p:column headerText="#{msgs.managerEditAuhtors}" >
                             <h:outputText value="#{managerBookHandling.displayAuthor(book.authorList)}"/>
                     </p:column>
 

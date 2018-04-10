@@ -30,8 +30,8 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.model.UploadedFile;
 
 /**
  * Handle manager ability to add, edit and remove books. 
@@ -66,7 +66,7 @@ public class ManagerBookBackingBean implements Serializable {
     private String authors;
     private List<String> formats;
     
-    private UploadedFile uploadedImage;
+    private Part uploadedImage;
     
     //Genredown search options
     private static Map<String,Object> genreOptions;
@@ -126,12 +126,15 @@ public class ManagerBookBackingBean implements Serializable {
     public String createBook() throws Exception
     {
         logger.log(Level.INFO, "INSIDE OF CREATE BOOK");
-//        if(getFile()==null)
-//        {
-//            logger.log(Level.INFO,"CHECKING IF FILE WAS UPLOADED NULL");
-//            addMessageError("managerFileError");
-//            return null;
-//        }
+        if(getFile()==null)
+        {
+            logger.log(Level.INFO,"CHECKING IF FILE WAS UPLOADED NULL");
+            addMessageError("managerFileError");
+            return null;
+        }
+        
+        
+        
         List<Book> bookResult = bookJpaController.findBookByIsbnSpecific(book.getIsbnNumber());
         logger.log(Level.INFO,"BOOK ISBN THAT WILL BE ADDED TO DB "+ book.getIsbnNumber());
         logger.log(Level.INFO, "RESULTS OF BOOKS FOUND WITH THEW ISBN"+ bookResult.size());
@@ -144,7 +147,7 @@ public class ManagerBookBackingBean implements Serializable {
             book.setAuthorList(exist);
             
             
-            
+            fileUploadHandler();
             message="The book was created!";
             bookJpaController.create(book);
             createAuthors(newBookAuthors,book);
@@ -237,27 +240,31 @@ public class ManagerBookBackingBean implements Serializable {
      */
     public void fileUploadHandler() throws IOException
     {
-          try(InputStream input = uploadedImage.getInputstream())
+          try(InputStream input = uploadedImage.getInputStream())
           {
-              String filename = uploadedImage.getFileName();
+              String filename = book.getIsbnNumber()+"hi.png";
+              
               
               ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
               ServletContext sc = (ServletContext)context.getContext();
               String path = sc.getRealPath("/resources/images/");
               
+              
+              
+              logger.log(Level.INFO, "PAAAAAAAATH:    " +path+ "     filename:    " + filename + " input ::"+input.toString());
               Files.copy(input, new File(path, filename).toPath());
               
           }
     }
     
     //Get and set files
-    public UploadedFile getFile()
+    public Part getFile()
     {
         logger.log(Level.INFO, "GETTING FILE?");
         return uploadedImage;
     }
     
-    public void setFile(UploadedFile uploadedImage)
+    public void setFile(Part uploadedImage)
     {
         logger.log(Level.INFO, "SETTING FILE?");
         this.uploadedImage = uploadedImage;
