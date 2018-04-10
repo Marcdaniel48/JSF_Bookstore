@@ -142,6 +142,13 @@ public class Messages {
         return loader;
     }
 
+    /**
+     * Added this method to be able to add messages to the context accross
+     * different controllers.
+     *
+     * @author Sebastian Ramirez
+     * @param key
+     */
     public static void addMessage(String key) {
         FacesMessage message = com.g4w18.util.Messages.getMessage(
                 "com.g4w18.bundles.messages", key, null);

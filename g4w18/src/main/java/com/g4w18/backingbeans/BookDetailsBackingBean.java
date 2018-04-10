@@ -25,9 +25,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 /**
- * This is a backing bean. It is used when a page or form must interact with
- * beans that are not managed such as entity beans. In this example the entity
- * bean for Inventory will be manually loaded with data for the example page.
+ * Backing bean in charge of the functionality of the bookDetail page.
  *
  * @author Sebastian Ramirez
  */
@@ -50,13 +48,21 @@ public class BookDetailsBackingBean implements Serializable {
     private List<Book> recommendedBooks;
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
+    /**
+     * Getter method for the book class variable. If book is null, it will
+     * retrieve the id from the request parameter map and find the book with
+     * that id.
+     *
+     * @author Sebastian Ramirez
+     * @return The book to display.
+     */
     public Book getBook() {
         Map<String, String> params
                 = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         if (book == null) {
-                int id = Integer.parseInt(params.get("id"));
-                book = customBookController.findBook(id);
-                storeBookCookie(book);
+            int id = Integer.parseInt(params.get("id"));
+            book = customBookController.findBook(id);
+            storeBookCookie(book);
         }
         return book;
     }
@@ -87,6 +93,14 @@ public class BookDetailsBackingBean implements Serializable {
         context.getExternalContext().addResponseCookie("VisitedGenres", genres, null);
     }
 
+    /**
+     * Getter method for the recommendedBooks class variable. If the variable is
+     * null, it will retrieve the recommended books by genre from the
+     * controller.
+     *
+     * @author Sebastian Ramirez
+     * @return The list of recommended books.
+     */
     public List<Book> getRecommendedBooks() {
         if (recommendedBooks == null) {
             List<Book> booksByGenre = customBookController.findBooksByGenre(book.getGenre());
@@ -97,6 +111,13 @@ public class BookDetailsBackingBean implements Serializable {
         return recommendedBooks;
     }
 
+    /**
+     * Getter method for the approvedReviews class variable. If the variable is
+     * null, it will retrieve the approved reviews from the controller.
+     *
+     * @author Sebastian Ramirez
+     * @return
+     */
     public List<Review> getApprovedReviews() {
         if (approvedReviews == null) {
             List<Review> bookReviews = new ArrayList<>();
@@ -109,6 +130,13 @@ public class BookDetailsBackingBean implements Serializable {
         return approvedReviews;
     }
 
+    /**
+     * Getter method for the averageRating variable. It collects the rating from
+     * all the reviews of an specific book and calculates the average.
+     *
+     * @author Sebastian Ramirez
+     * @return The average rating for an specific book.
+     */
     public int getRating() {
         averageRating = 0;
         Collection<Review> reviews = book.getReviewList();
@@ -124,6 +152,14 @@ public class BookDetailsBackingBean implements Serializable {
         return averageRating;
     }
 
+    /**
+     * Getter method for the review class variable. The review class variable is
+     * used for the creation of a new review. If the variable is null it will
+     * create a new variable object to contain the variable created.
+     *
+     * @author Sebastian Ramirez
+     * @return
+     */
     public Review getReview() {
         LOGGER.log(Level.INFO, "getReview() called");
         if (review == null) {
@@ -132,6 +168,13 @@ public class BookDetailsBackingBean implements Serializable {
         return review;
     }
 
+    /**
+     * Getter method for the client class variable. If the variable is null and
+     * the user is not registered it will create a new Client named guest. If
+     * the user is registered it will retrieve it from the session object.
+     *
+     * @return The client leaving a review.
+     */
     public Client getClient() {
         if (client == null) {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
@@ -149,6 +192,15 @@ public class BookDetailsBackingBean implements Serializable {
         return client;
     }
 
+    /**
+     * This method creates a new review. If the user is a guest, it will display
+     * a message suggesting the user to login and not create the review. If the
+     * user is logged in, it will create a new review object ONLY if the user
+     * has not reviewed the book already.
+     *
+     * @return
+     * @throws Exception
+     */
     public String createReview() throws Exception {
         if (client.getFirstName().equals("Guest")) {
 //            FacesMessage loginMessage = new FacesMessage("Please login before leaving a review");

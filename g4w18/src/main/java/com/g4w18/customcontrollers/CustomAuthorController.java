@@ -9,77 +9,76 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 /**
- * @author 1331680
+ * The CustomAuthorController class is responsible to encapsule the
+ * functionality of the AuthorJpaController class as well as containing custom
+ * query methods.
+ *
+ * @author Sebastian Ramirez
+ * @author Salman Haidar
  */
-public class CustomAuthorController implements Serializable
-{
+public class CustomAuthorController implements Serializable {
+
     @Inject
     private AuthorJpaController authorController;
 
     @PersistenceContext(unitName = "bookstorePU")
     private EntityManager em;
-    
-    public void create(Author author) throws RollbackFailureException, Exception
-    {
+
+    public void create(Author author) throws RollbackFailureException, Exception {
         authorController.create(author);
     }
 
-    public void edit(Author author) throws NonexistentEntityException, RollbackFailureException, Exception
-    {
+    public void edit(Author author) throws NonexistentEntityException, RollbackFailureException, Exception {
         authorController.edit(author);
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception
-    {
+    public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
         authorController.destroy(id);
     }
 
-    public List<Author> findAuthorEntities()
-    {
+    public List<Author> findAuthorEntities() {
         return authorController.findAuthorEntities();
     }
 
-    public List<Author> findAuthorEntities(int maxResults, int firstResult)
-    {
+    public List<Author> findAuthorEntities(int maxResults, int firstResult) {
         return authorController.findAuthorEntities(maxResults, firstResult);
     }
 
-    public Author findAuthor(Integer id)
-    {
+    public Author findAuthor(Integer id) {
         return authorController.findAuthor(id);
     }
 
-    public int getAuthorCount()
-    {
+    public int getAuthorCount() {
         return authorController.getAuthorCount();
     }
-    
+
     /**
      * Get list of author names with the name provided
+     * 
      * @param authorName provided by user
      * @return List of authors found with the param
      */
-    public List<Author> findAuthor(String authorName)
-    {
+    public List<Author> findAuthor(String authorName) {
         List<Author> findAuthorByName = em.createQuery("Select a from Author a where CONCAT(a.firstName,' ',a.lastName) LIKE ?1")
                 .setParameter(1, authorName + "%")
                 .getResultList();
-        
+
         return findAuthorByName;
     }
-    
+
     /**
      * Get list of author names with the name provided
+     *
      * @param authorName provided by user
      * @return List of authors found with the param
      */
-    public List<Author> findAuthor3Options(String authorName)
-    {
+    public List<Author> findAuthor3Options(String authorName) {
         List<Author> findAuthorByName = em.createQuery("Select a from Author a where (CONCAT(a.firstName,' ',a.lastName) LIKE ?1) OR (a.firstName LIKE ?1) OR (a.lastName LIKE ?1)")
                 .setParameter(1, authorName + "%")
                 .getResultList();
-        
+
         return findAuthorByName;
     }
 }

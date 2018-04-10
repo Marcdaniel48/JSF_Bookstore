@@ -19,8 +19,10 @@ import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 
 /**
+ * Backing bean in charge of the functionality of the orders.xhtml page in the
+ * management part of the site.
  *
- * @author Juan Sebastian Ramirez
+ * @author Sebastian Ramirez
  */
 @Named
 @ViewScoped
@@ -37,6 +39,12 @@ public class OrderManagerBackingBean implements Serializable {
     private MasterInvoice selectedInvoice;
     private static final Logger LOGGER = Logger.getLogger(BookDetailsBackingBean.class.getName());
 
+    /**
+     * Getter method for the allMasterInvoices variable. If the variable is
+     * null, it will retrieve all the Master Invoice records from the database.
+     *
+     * @return
+     */
     public List<MasterInvoice> getAllMasterInvoices() {
         if (allMasterInvoices == null) {
             allMasterInvoices = masterInvoiceController.findMasterInvoiceEntities();
@@ -44,6 +52,11 @@ public class OrderManagerBackingBean implements Serializable {
         return allMasterInvoices;
     }
 
+    /**
+     * Getter method for the selectedInvoice class variable.
+     *
+     * @return
+     */
     public MasterInvoice getSelectedInvoice() {
 //        LOGGER.log(Level.INFO, "getDetails called");
 //        for (InvoiceDetail id : details) {
@@ -52,14 +65,19 @@ public class OrderManagerBackingBean implements Serializable {
         return selectedInvoice;
     }
 
+    /**
+     * Setter method for the selectedInvoice class variable.
+     *
+     * @param selectedInvoice
+     */
     public void setSelectedInvoice(MasterInvoice selectedInvoice) {
         LOGGER.log(Level.INFO, "setSelectedInvoice called");
         this.selectedInvoice = selectedInvoice;
     }
 
     /**
-     * The onRowEdit method updates any record edited in the datatable by
-     * updating the values of the entry in the database.
+     * The onRowEditMasterInvoice method updates any record edited in the
+     * datatable by updating the values of the entry in the database.
      *
      * @param event
      * @return
@@ -76,6 +94,13 @@ public class OrderManagerBackingBean implements Serializable {
         return null;
     }
 
+    /**
+     * The setInvoiceDetailsStatus method ensures that when a MasterInvoice
+     * status is set as removed, all its Invoice Details are set as removed too.
+     *
+     * @param masterInvoice
+     * @throws Exception
+     */
     private void setInvoiceDetailsStatus(MasterInvoice masterInvoice) throws Exception {
         if (!masterInvoice.getAvailable()) {
             for (InvoiceDetail invoiceDetail : masterInvoice.getInvoiceDetailList()) {
@@ -85,6 +110,14 @@ public class OrderManagerBackingBean implements Serializable {
         }
     }
 
+    /**
+     * The onRowEditInvoiceDetail method is used by the primefaces framework to
+     * edit a particular InvoiceDetail.
+     *
+     * @param event
+     * @return
+     * @throws Exception
+     */
     public String onRowEditInvoiceDetail(RowEditEvent event) throws Exception {
         LOGGER.log(Level.INFO, "onRowEditInvoiceDetail called");
         InvoiceDetail editedDetail = (InvoiceDetail) event.getObject();
