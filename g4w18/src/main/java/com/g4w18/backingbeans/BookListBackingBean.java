@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.backingbeans;
 
 import com.g4w18.customcontrollers.CustomAuthorController;
@@ -22,8 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Backing in charge of functionality for the bookList.xhtml page
  *
- * @author Sebastien, Jephthia
+ * @author Sebastian, Jephthia
  */
 @Named
 @RequestScoped
@@ -61,6 +57,13 @@ public class BookListBackingBean implements Serializable {
         return author;
     }
 
+    /**
+     * Getter method for the authorBooks class variable. If the variable is
+     * null, it will assign the author's books.
+     *
+     * @author Sebastian Ramirez
+     * @return
+     */
     public Collection<Book> getAuthorBooks() {
         if (authorBooks == null) {
             authorBooks = author.getBookList();
@@ -112,6 +115,14 @@ public class BookListBackingBean implements Serializable {
         return books.subList(5, books.size());
     }
 
+    /**
+     * Getter method for allBooks variable. It will call getRemainingBooks if
+     * byGenre returns true. If allBooks is null it will retrieve all the book
+     * entities from the DB.
+     *
+     * @author Sebastian Ramirez
+     * @return
+     */
     public List<Book> getAllBooks() {
         if (byGenre()) {
             return getRemainingBooks();
