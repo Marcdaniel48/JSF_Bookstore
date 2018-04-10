@@ -6,6 +6,7 @@ import com.g4w18.controllers.exceptions.NonexistentEntityException;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Client;
 import com.g4w18.entities.MasterInvoice;
+import com.g4w18.entities.MasterInvoice_;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -103,7 +104,7 @@ public class CustomMasterInvoiceController implements Serializable {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<MasterInvoice> cq = cb.createQuery(MasterInvoice.class);
         Root<MasterInvoice> masterInvoice = cq.from(MasterInvoice.class);
-        cq.select(masterInvoice).orderBy(cb.desc(masterInvoice.get(Book_.saleDate)));
+        cq.select(masterInvoice).orderBy(cb.desc(masterInvoice.get(MasterInvoice_.saleDate)));
         TypedQuery<MasterInvoice> query = em.createQuery(cq);
         return query.setMaxResults(1).getSingleResult();
     }

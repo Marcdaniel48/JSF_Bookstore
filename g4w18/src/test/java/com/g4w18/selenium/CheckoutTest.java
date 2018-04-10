@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Tests the checkout process with Selenium.
  * @author Marc-Daniel
  */
-@Ignore
 public class CheckoutTest 
 {
     private WebDriver driver;

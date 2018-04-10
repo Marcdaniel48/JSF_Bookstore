@@ -3,6 +3,7 @@ package com.g4w18.customcontrollers;
 import com.g4w18.controllers.RssJpaController;
 import com.g4w18.controllers.exceptions.RollbackFailureException;
 import com.g4w18.entities.Rss;
+import com.g4w18.entities.Rss_;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
