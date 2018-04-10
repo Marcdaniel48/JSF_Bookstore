@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
  * @author 1331680
  */
 @Entity
-@Table(name = "invoice_detail", catalog = "bookstore", schema = "")
+@Table(name = "invoice_detail", catalog = "g4w18", schema = "")
 @NamedQueries({
     @NamedQuery(name = "InvoiceDetail.findAll", query = "SELECT i FROM InvoiceDetail i")
     , @NamedQuery(name = "InvoiceDetail.findByDetailId", query = "SELECT i FROM InvoiceDetail i WHERE i.detailId = :detailId")

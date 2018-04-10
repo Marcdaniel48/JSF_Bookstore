@@ -5,21 +5,19 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <title>#{msgs.managerOrdersTitle}</title>
-        <h:outputStylesheet library="css" name="style.css"/>
-        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
-        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
-        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
-    </h:head>
-    <h:body>
+    <ui:define name="content">
+
+        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
+ <div class="management-content">
         <h:form id="form">
             <p:growl id="growl" life="3000"/>
             <p:dataTable var="order" value="#{orderManagerBackingBean.allMasterInvoices}" 
@@ -56,12 +54,16 @@ and open the template in the editor.
                     <h:outputText value="#{order.saleDate}"></h:outputText>
                 </p:column>
 
-                <p:column headerText="#{msgs.managerOrdersNetValue}" filterBy="#{order.netValue}" filterMatchMode="contains">
-                    <h:outputText value="#{order.netValue}"></h:outputText>
+                <p:column headerText="#{msgs.managerOrdersGrossValue}" filterBy="#{order.grossValue}" filterMatchMode="contains">
+                    <h:outputText value="#{order.grossValue}">
+                        <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                    </h:outputText>
                 </p:column>
 
-                <p:column headerText="#{msgs.managerOrdersGrossValue}" filterBy="#{order.grossValue}" filterMatchMode="contains">
-                    <h:outputText value="#{order.grossValue}"></h:outputText>
+                <p:column headerText="#{msgs.managerOrdersNetValue}" filterBy="#{order.netValue}" filterMatchMode="contains">
+                    <h:outputText value="#{order.netValue}">
+                        <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                    </h:outputText>
                 </p:column>
 
                 <p:column headerText="#{msgs.managerOrdersAvailable}" filterBy="#{order.available}" filterMatchMode="equals">
@@ -187,5 +189,6 @@ and open the template in the editor.
                 </p:dataTable>
             </p:dialog>
         </h:form>
-    </h:body>
-</html>
+ </div>
+    </ui:define>
+</ui:composition>

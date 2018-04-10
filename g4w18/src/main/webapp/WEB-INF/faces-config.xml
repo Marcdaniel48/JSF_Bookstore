@@ -45,6 +45,13 @@
     
     <navigation-rule>
         <navigation-case>
+            <from-outcome>help</from-outcome>
+            <to-view-id>/help.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
             <from-outcome>login</from-outcome>
             <to-view-id>/login.xhtml</to-view-id>
         </navigation-case>
@@ -66,6 +73,20 @@
     
     <navigation-rule>
         <navigation-case>
+            <from-outcome>shopping_cart</from-outcome>
+            <to-view-id>/shopping_cart.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>downloads</from-outcome>
+            <to-view-id>/download.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
             <from-outcome>management_home</from-outcome>
             <to-view-id>/management/index.xhtml</to-view-id>
         </navigation-case>
@@ -73,15 +94,15 @@
     
     <navigation-rule>
         <navigation-case>
-            <from-outcome>inventory</from-outcome>
-            <to-view-id>/management/inventory.xhtml</to-view-id>
+            <from-outcome>reviews</from-outcome>
+            <to-view-id>/management/reviews.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
         <navigation-case>
-            <from-outcome>reviews</from-outcome>
-            <to-view-id>/management/reviews.xhtml</to-view-id>
+            <from-outcome>setSales</from-outcome>
+            <to-view-id>/management/setSales.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
@@ -101,8 +122,36 @@
 
     <navigation-rule>
         <navigation-case>
-            <from-outcome>resultEdit</from-outcome>
-            <to-view-id>/management/managerBookEnRHandler.xhtml</to-view-id>
+            <from-outcome>clients</from-outcome>
+            <to-view-id>/management/clients.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>orders</from-outcome>
+            <to-view-id>/management/orders.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>rssFeed</from-outcome>
+            <to-view-id>/management/rssFeed.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>request_report</from-outcome>
+            <to-view-id>/management/reports/request_report.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>inventory</from-outcome>
+            <to-view-id>/management/managerBookHandler.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
@@ -162,7 +211,7 @@
         </navigation-case>
     </navigation-rule>
 
-<navigation-rule>
+    <navigation-rule>
         <navigation-case>
             <from-outcome>stockReport</from-outcome>
             <to-view-id>/management/reports/stockReport.xhtml</to-view-id>

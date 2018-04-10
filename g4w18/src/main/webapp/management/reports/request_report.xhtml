@@ -5,44 +5,49 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:b="http://bootsfaces.net/ui">
-    <h:head>
-        <title>#{msgs.reportsManagement}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <h:body>
-        <b:container fluid="true">
-            <h3>#{msgs.reportsManagement}</h3>
-            <b:column col-md="6">
-                <b:panel title="#{msgs.reportsManagementRequest}" collapsible="false">
-                    <h:form>
-                        #{msgs.reportsReportType}:
-                        <br/><br/>
-                        <b:selectOneMenu id="reportType" value="#{reportsBackingBean.reportSelector.reportType}">
-                            <f:selectItems value="#{reportsBackingBean.reportOptions}"/>    
-                        </b:selectOneMenu>
-                        <p:message for="reportType" style="color:red" />
+<ui:composition
+    template="/WEB-INF/layouts/master.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:b="http://bootsfaces.net/ui">
 
-                        #{msgs.reportsManagementBetweenDates}:
-                        <br/><br/>
-                        <b:column col-md="6">
-                            <b:datepicker id="button1" value="#{reportsBackingBean.reportSelector.firstDate}"/>
-                        </b:column>
+    <ui:define name="content">
 
-                        <b:column col-md="6">
-                            <b:datepicker id="button2" value="#{reportsBackingBean.reportSelector.secondDate}"/>
-                        </b:column>
+        <ui:include src="../../WEB-INF/sections/management_navbar.xhtml"/>
+        <div class="management-content">
+            <b:container fluid="true">
+                <h3>#{msgs.reportsManagement}</h3>
+                <b:column col-md="6">
+                    <b:panel title="#{msgs.reportsManagementRequest}" collapsible="false">
+                        <h:form>
+                            #{msgs.reportsReportType}:
+                            <br/><br/>
+                            <b:selectOneMenu id="reportType" value="#{reportsBackingBean.reportSelector.reportType}">
+                                <f:selectItems value="#{reportsBackingBean.reportOptions}"/>    
+                            </b:selectOneMenu>
+                            <p:message for="reportType" style="color:red" />
 
-                        <br/><br/><br/>
-                        <b:commandButton value="#{msgs.reportsManagementRequest}" action="#{reportsBackingBean.goToReportPage}"/>
-                    </h:form>
-                </b:panel>
-            </b:column>
-            
-        </b:container>
-    </h:body>
-</html>
+                            #{msgs.reportsManagementBetweenDates}:
+                            <br/><br/>
+                            <b:column col-md="6">
+                                <b:datepicker id="button1" value="#{reportsBackingBean.reportSelector.firstDate}"/>
+                            </b:column>
+
+                            <b:column col-md="6">
+                                <b:datepicker id="button2" value="#{reportsBackingBean.reportSelector.secondDate}"/>
+                            </b:column>
+
+                            <br/><br/><br/>
+                            <b:commandButton value="#{msgs.reportsManagementRequest}" action="#{reportsBackingBean.goToReportPage}"/>
+                        </h:form>
+                    </b:panel>
+                </b:column>
+
+            </b:container>
+        </div>
+    </ui:define>
+</ui:composition>
