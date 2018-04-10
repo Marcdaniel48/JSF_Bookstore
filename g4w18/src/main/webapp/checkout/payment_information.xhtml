@@ -16,6 +16,9 @@
     </ui:define>
 
     <ui:define name="content">
+
+        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
+         <div class="management-content">
         
         <b:container fluid="true">
             <h3>#{msgs.payment}</h3>
@@ -57,6 +60,6 @@
         
         <h:outputScript library="webjars" name="jquery/3.1.1-1/jquery.min.js"/>
         <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
-        
+        </div>
     </ui:define>
 </ui:composition>
