@@ -26,7 +26,7 @@
 
                     <b:inputText placeholder="Search for a book..."></b:inputText>
 
-                    <b:commandButton value="Search" iconAwesome="search" action="bookList"></b:commandButton>
+                    <b:commandButton value="Search" iconAwesome="search" action="#{searchBackingBean.books}"></b:commandButton>
 
                 </b:form>
 
@@ -50,7 +50,7 @@
 
                             <b:column col-md="2">
 
-                                <b:image library="images" name="lo/#{book.isbnNumber}low.jpg" tooltip="#{book.title}" height="50%" width="50%"></b:image>
+                                <b:image library="images" name="#{book.isbnNumber}hi.png" tooltip="#{book.title}" height="50%" width="50%"></b:image>
 
                             </b:column>
 
@@ -71,13 +71,8 @@
                                 <h:outputText value="#{book.listPrice} CAD"></h:outputText>
 
                             </b:column>
-                            <!-- AUTHOR INFOOOOOOOO
-                            <b:form>
-                                <ui:repeat var="author" value="#{searchBackingBean.books}">
-                                    <h:outputText value="#{author.firstName} #{author.lastName}" styleClass="list-group-item-heading"></h:outputText>                     
-                                </ui:repeat>
-                                    </b:form>
--->
+                            
+
 
                         </b:row>
 
@@ -93,32 +88,7 @@
 
         <h:outputScript library="webjars" name="bootstrap/3.3.7-1/js/bootstrap.min.js" />
       
- <!--   
-<h:form> 
-           <p:dataScroller value="#{searchBackingBean.booksByTitle}" var="book" chunkSize="10">
-        <f:facet name="header">
-            Scroll Down to Load More Cars
-        </f:facet>
- 
-        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-            <p:graphicImage url="/resources/images/lo/#{book.isbnNumber}low.jpg" width="50px" height="70px"/> 
- 
-            <p:outputPanel>
-                <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputText value="Title:" />
-                    <h:outputText value="#{book.title}" style="font-weight: bold"/>
- 
-                    <h:outputText value="Description:" />
-                    <h:outputText value="#{book.description}" style="font-weight: bold"/>
- 
-                    <h:outputText value="Genre:" />
-                    <h:outputText value="#{book.genre}" style="font-weight: bold"/>
-                </h:panelGrid>
-            </p:outputPanel>
-        </h:panelGrid>
-    </p:dataScroller>
-</h:form>
- -->
+
            
         
         

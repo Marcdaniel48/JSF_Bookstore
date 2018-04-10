@@ -33,10 +33,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Ignore;
 
 /**
  * @author Jephthia
  */
+@Ignore
 @RunWith(Arquillian.class)
 public class JPABookTest
 {

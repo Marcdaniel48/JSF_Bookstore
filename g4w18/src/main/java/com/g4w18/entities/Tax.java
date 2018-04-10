@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.entities;
 
 import java.io.Serializable;
@@ -139,6 +134,12 @@ public class Tax implements Serializable {
         return "com.g4w18.entities.Tax[ taxId=" + taxId + " ]";
     }
 
+    /**
+     * Sums up the GST, HST, and PST rates and returns that sum.
+     * 
+     * @author Marc-Daniel
+     * @return 
+     */
     public BigDecimal getOverallTaxRate()
     {
         BigDecimal taxRate = gstRate.add(hstRate).add(pstRate);

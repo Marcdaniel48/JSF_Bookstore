@@ -1,15 +1,20 @@
 <ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
     template="/WEB-INF/layouts/master.xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:p="http://primefaces.org/ui">
 
+    <ui:define name="windowTitle">
+        #{msgs.homeWindowTitle}
+    </ui:define>
+    
     <ui:define name="content">
         
         <div class="content">
             
-            <div class="content-overlay"></div>
+            <div class="content-overlay"></div>            
 
             <div class="top-section">
 
@@ -17,13 +22,14 @@
 
                     <div class="section-title-container">
                         <div class="section-title-img"></div>
-                        <h1 class="section-title">Books On Sale!</h1>
+                        <h1 class="section-title">#{msgs.booksOnSale}</h1>
                     </div>                        
 
                     <div class="fix-image-gap">  
                         <h:form>
 
                             <ui:repeat value="#{theBooks.booksOnSale}" var="book">
+
                                 <h:commandLink action="bookDetail">
                                     <f:param name="id" value="#{book.bookId}" />
 
@@ -49,17 +55,19 @@
 
                 <div id="genres">
 
-                    <h1 class="section-title">Genres</h1>
+                    <h1 class="section-title">#{msgs.genres}</h1>
 
                     <div class="outer">
-                        <h:form>
-                            <ui:repeat value="#{theBooks.genres}" var="genre">
-                                <div class="genre-item">
-                                    <h:graphicImage library="images" name="#{genre}.png" />
-                                    <h:commandLink styleClass="genre-title" action="bookList" value="#{genre}">
+                        <h:form id="genresForm">
+                            <ui:repeat id="repeat" value="#{theBooks.genres}" var="genre">
+                                <h:commandLink class="genre-link" action="bookList">
+                                    <div class="genre-item">
+                                        <h:graphicImage library="images" name="#{genre}.png" />
                                         <f:param name="genre" value="#{genre}"/>
-                                    </h:commandLink>
-                                </div>
+                                        <p class="genre-title">#{genre}</p>
+                                    </div>
+                                </h:commandLink>
+
                             </ui:repeat>
                         </h:form>
                     </div>
@@ -69,13 +77,14 @@
 
                     <div class="section-title-container">
                         <div class="section-title-img"></div>
-                        <h1 class="section-title">Recent Books</h1>
+                        <h1 class="section-title">#{msgs.recentBooks}</h1>
                     </div>
 
                     <div class="fix-image-gap">
                         <h:form>
 
                             <ui:repeat value="#{theBooks.mostRecentBooks}" var="book">
+
                                 <h:commandLink action="bookDetail">
                                     <f:param name="id" value="#{book.bookId}" />
 
@@ -101,6 +110,7 @@
 
                         <ui:repeat value="#{bannerBackingBean.activeBanners}" var="banner">
                             <h:outputLink styleClass="slide-link" target="_blank" value="#{banner.bannerLink}">
+                                <!--<p:graphicImage name="#{banner.bannerName}"--> 
                                 <h:graphicImage class="slide-img" library="images" name="#{banner.bannerName}" alt="#{banner.bannerName}" />
                             </h:outputLink>
                         </ui:repeat>
@@ -112,34 +122,37 @@
                     <div class="dots-container"></div>
                 </div>
 
-                <div id="survey">
+                <h:panelGroup id="surveyPanel">
+                    <div id="survey">
 
-                    <h:form id="surveyForm" rendered="#{!surveyBackingBean.showResults()}">
-                        <ui:repeat value="#{surveyBackingBean.activeQuestion}" var="question">
-                            <h1 class="section-title">#{question.description}</h1>
+                        <h:form id="surveyForm" rendered="#{!surveyBackingBean.showResults()}">
+                            <h1 class="section-title">#{surveyBackingBean.activeQuestion.description}</h1>
 
-                            <h:selectOneRadio class="surveyChoices" id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="Please select one option">
-                                <f:selectItems value="#{surveyBackingBean.answers}" />
+                            <h:message id="choiceError" for="surveyChoices" styleClass="error" />
+                            <h:selectOneRadio class="surveyChoices" id="surveyChoices" value="#{surveyBackingBean.answer}" required="true" requiredMessage="#{msgs.surveyChoiceMissing}">
+                                <f:selectItems id="choice" class="c" value="#{surveyBackingBean.answers}" />
                             </h:selectOneRadio>
-                            <h:message for="surveyChoices" />
-                        </ui:repeat>
 
-                        <h:commandButton type="submit" value="Submit" action="#{surveyBackingBean.submitVote}"/>
+                            <h:commandButton id="submit" type="submit" value="#{msgs.submit}" action="#{surveyBackingBean.submitVote}">
+                                <f:ajax execute="@form" render="surveyPanel" />
+                            </h:commandButton>
 
-                    </h:form>
+                        </h:form>
 
-                    <div id="surveyChart">
-                        <p:chart rendered="#{surveyBackingBean.showResults()}" type="pie" model="#{surveyBackingBean.chart}" />                        
+                        <div id="surveyChart">
+                            <p:chart id="pie" rendered="#{surveyBackingBean.showResults()}" type="pie" model="#{surveyBackingBean.chart}" />                        
+                        </div>
+
                     </div>
 
-                </div>
+                </h:panelGroup>
 
                 <ui:fragment rendered="#{theBooks.hasRecommendations()}">
                     <div class="recommendations">
 
                         <div class="section-title-container">
                             <div class="section-title-img"></div>
-                            <h1 class="section-title">Recommendations</h1>
+                            <h1 class="section-title">#{msgs.recommendations}</h1>
                         </div>
 
                         <div class="fix-image-gap">
@@ -180,7 +193,7 @@
                                 <br/>
                                 <p>#{article.description}</p>
                                 <br/>
-                                <h:outputLink target="_blank" value="#{article.link}"><b>Read More</b></h:outputLink>
+                                <h:outputLink class="rss-link" target="_blank" value="#{article.link}"><b>#{msgs.readMore}</b></h:outputLink>
                             </div>
                         </ui:repeat>
                     </form>
@@ -198,7 +211,7 @@
                                 <br/>
                                 <p>#{article.description}</p>
                                 <br/>
-                                <h:outputLink target="_blank" value="#{article.link}"><b>Read More</b></h:outputLink>
+                                <h:outputLink class="rss-link" target="_blank" value="#{article.link}"><b>#{msgs.readMore}</b></h:outputLink>
                             </div>
                         </ui:repeat>
                     </form>
@@ -208,6 +221,6 @@
             </div>
 
         </div>
-        
+
     </ui:define>
 </ui:composition>

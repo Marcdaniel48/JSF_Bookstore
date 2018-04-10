@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.entities;
 
 import java.io.Serializable;
@@ -14,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -59,8 +53,7 @@ public class Review implements Serializable {
     private int rating;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 16777215)
+    @Size(min = 1, max = 500)
     @Column(name = "REVIEW")
     private String review;
     @Basic(optional = false)

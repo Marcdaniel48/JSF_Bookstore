@@ -6,100 +6,109 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui"
     xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
+    <ui:define name="windowTitle">
+        #{msgs.registerWindowTitle}
+    </ui:define>
+    
     <ui:define name="content">
         
-        <h:outputStylesheet library="css" name="login.css" />
-        
-        <div class="parallax">
+        <h:outputStylesheet library="css" name="registration.css" />
 
-            <div class="parallax-layer background">
+        <div class="page_container">
+            <div class="registration">
+                <div class="bg-img">
+                <div class="container">
+                    <h1 class="register-title">Register</h1>
+                        <h:form id="registerForm">
+                            <div>
+                                    <h:outputLabel value="#{msgs.username}"/>
+                                    <h:inputText id="username" value="#{clientBacking.client.username}" required="true" requiredMessage="#{msgs.invalidEmptyUsername}" validator="#{clientBacking.validateExistingUsername}"/>
+                                    <h:message for="username" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.password}"/>
+                                    <h:inputSecret id="password" value="#{clientBacking.client.password}" required="true" requiredMessage="#{msgs.invalidEmptyPassword}"/>
+                                    <h:message for="password" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.title}"/>
+                                    <h:selectOneMenu id="title" value="#{clientBacking.client.title}" validatorMessage="#{msgs.invalidTitle}">
+                                        <f:selectItems value="#{clientBacking.titleOptions}"/>
+                                    </h:selectOneMenu>
+                                    <h:message for="title" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.firstname}"/>
+                                    <h:inputText id="firstname" value="#{clientBacking.client.firstName}" required="true" requiredMessage="#{msgs.invalidEmptyFirstname}"/>
+                                    <h:message for="firstname" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.lastname}"/>
+                                    <h:inputText id="lastname" value="#{clientBacking.client.lastName}" required="true" requiredMessage="#{msgs.invalidEmptyLastname}"/>
+                                    <h:message for="lastname" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.companyname}"/>
+                                    <h:inputText id="companyname" value="#{clientBacking.client.companyName}"/>
+                                    <h:message for="companyname" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.address1}"/>
+                                    <h:inputText id="address1" value="#{clientBacking.client.address1}" required="true" requiredMessage="#{msgs.invalidEmptyAddress1}"/>
+                                    <h:message for="address1" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.address2}"/>
+                                    <h:inputText id="address2" value="#{clientBacking.client.address2}"/>
+                                    <h:message for="address2" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.city}"/>
+                                    <h:inputText id="city" value="#{clientBacking.client.city}" required="true" requiredMessage="#{msgs.invalidEmptyCity}"/>
+                                    <h:message for="city" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.province}"/>
+                                    <h:selectOneMenu id="province" value="#{clientBacking.client.province}" validatorMessage="#{msgs.invalidProvince}">
+                                        <f:selectItems value="#{clientBacking.provinceOptions}"/>    
+                                    </h:selectOneMenu>
+                                    <h:message for="province" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.postalcode}"/>
+                                    <h:inputText id="postalcode" value="#{clientBacking.client.postalCode}" validatorMessage="#{msgs.invalidPostalCode}">
+                                        <f:validateRegex pattern="^[A-Za-z0-9]{6}$" />
+                                    </h:inputText>
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.hometelephone}"/>
+                                    <h:inputText id="homephone" value="#{clientBacking.client.homeTelephone}" validatorMessage="#{msgs.invalidTelephone}">
+                                        <f:validateRegex pattern="^(|\d{3}-\d{3}-\d{4})$"/>
+                                    </h:inputText>
+                                    <h:message for="homephone" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.cellphone}"/>
+                                    <h:inputText id="cellphone" value="#{clientBacking.client.cellphone}" validatorMessage="#{msgs.invalidCellPhone}">
+                                       <f:validateRegex pattern="^(|\d{3}-\d{3}-\d{4})$"/>
+                                    </h:inputText>
+                                    <h:message for="cellphone" class="error" />
+                            </div>
+                            <div>
+                                    <h:outputLabel value="#{msgs.email}"/>
+                                    <h:inputText id="email" value="#{clientBacking.client.email}" validator="#{clientBacking.validateExistingEmail}"/>
+                                    <h:message for="email" class="error" />
+                            </div>
+                            
+                            <h:commandButton value="#{msgs.registerbutton}" action="#{clientBacking.createClient()}"/>
 
-                <div class="content">
-            
-                    <div class="registration">
-                        
-                        <div class="container">
-                    
-                            <h:form>
-                                <h:outputLabel value="#{msgs.username}"/>
-                                <h:inputText id="username" value="#{clientBacking.client.username}" required="true" requiredMessage="#{msgs.invalidEmptyUsername}" validator="#{clientBacking.validateExistingUsername}"/>
-                                <h:message for="username" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.password}"/>
-                                <h:inputSecret id="password" value="#{clientBacking.client.password}" required="true" requiredMessage="#{msgs.invalidEmptyPassword}"/>
-                                <h:message for="password" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.title}"/>
-                                <h:selectOneMenu id="title" value="#{clientBacking.client.title}" validatorMessage="#{msgs.invalidTitle}">
-                                    <f:selectItems value="#{clientBacking.titleOptions}"/>
-                                </h:selectOneMenu>
-                                <h:message for="title" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.firstname}"/>
-                                <h:inputText id="firstname" value="#{clientBacking.client.firstName}" required="true" requiredMessage="#{msgs.invalidEmptyFirstname}"/>
-                                <h:message for="firstname" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.lastname}"/>
-                                <h:inputText id="lastname" value="#{clientBacking.client.lastName}" required="true" requiredMessage="#{msgs.invalidEmptyLastname}"/>
-                                <h:message for="lastname" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.companyname}"/>
-                                <h:inputText id="companyname" value="#{clientBacking.client.companyName}"/>
-                                <h:message for="companyname" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.address1}"/>
-                                <h:inputText id="address1" value="#{clientBacking.client.address1}" required="true" requiredMessage="#{msgs.invalidEmptyAddress1}"/>
-                                <h:message for="address1" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.address2}"/>
-                                <h:inputText id="address2" value="#{clientBacking.client.address2}"/>
-                                <h:message for="address2" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.city}"/>
-                                <h:inputText id="city" value="#{clientBacking.client.city}" required="true" requiredMessage="#{msgs.invalidEmptyCity}"/>
-                                <h:message for="city" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.province}"/>
-                                <h:selectOneMenu id="province" value="#{clientBacking.client.province}" validatorMessage="#{msgs.invalidProvince}">
-                                    <f:selectItems value="#{clientBacking.provinceOptions}"/>    
-                                </h:selectOneMenu>
-                                <h:message for="province" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.postalcode}"/>
-                                <h:inputText id="postalcode" value="#{clientBacking.client.postalCode}" validatorMessage="#{msgs.invalidPostalCode}">
-                                    <f:validateRegex pattern="^[A-Za-z0-9]{6}$" />
-                                </h:inputText>
-                                <h:message for="postalcode" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.hometelephone}"/>
-                                <h:inputText id="homephone" value="#{clientBacking.client.homeTelephone}" validatorMessage="#{msgs.invalidTelephone}">
-                                    <f:validateRegex pattern="^(|\d{3}-\d{3}-\d{4})$"/>
-                                </h:inputText>
-                                <h:message for="homephone" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.cellphone}"/>
-                                <h:inputText id="cellphone" value="#{clientBacking.client.cellphone}" validatorMessage="#{msgs.invalidCellPhone}">
-                                   <f:validateRegex pattern="^(|\d{3}-\d{3}-\d{4})$"/>
-                                </h:inputText>
-                                <h:message for="cellphone" style="color:red" />
-
-                                <h:outputLabel value="#{msgs.email}"/>
-                                <h:inputText id="email" value="#{clientBacking.client.email}" validator="#{clientBacking.validateExistingEmail}"/>
-                                <h:message for="email" style="color:red" />
-
-                                <h:commandButton value="#{msgs.registerbutton}" action="#{clientBacking.createClient()}"/>
-                            </h:form>
-                        
-                        </div>
- 
+                        </h:form>
                     </div>
-                    
                 </div>
-            
             </div>
-        
         </div>
             
     </ui:define>

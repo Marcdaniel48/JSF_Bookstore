@@ -7,7 +7,7 @@
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <nav class="navbar">
-        <h:link outcome="index">
+        <h:link id="homeLink" outcome="index">
             <div class="logo"></div>
         </h:link>
 
@@ -16,8 +16,9 @@
             <div class="bar2"></div>
             <div class="bar3"></div>
         </div>
-        
+                
         <div class="right">
+            
             <h:form id="searchForm" class="search-icon-container">
 
                 <h:selectOneMenu styleClass="search-dropdown" id="searchOption" value="#{searchBackingBean.searchOption}">
@@ -32,12 +33,25 @@
 
             </h:form>
 
-            <h:link outcome="shopping_cart">
+            <h:link id="cartLink" outcome="shopping_cart">
                 <h:graphicImage class="navbar-icon" library="images" name="shopping-cart.png" alt="Shoppping Cart Icon" />
+            </h:link>
+            
+            <h:form id="navbarLangForm">
+                <h:commandLink rendered="#{localeBean.language ne 'fr'}" action="#{localeBean.setLanguage('fr', 'CA')}">
+                    <h:graphicImage class="navbar-icon" library="images" name="ca_flag.png" alt="Language Flag" />
+                </h:commandLink>
+                <h:commandLink rendered="#{localeBean.language ne 'en'}" action="#{localeBean.setLanguage('en', 'CA')}">
+                    <h:graphicImage class="navbar-icon" library="images" name="en_flag.png" alt="Language Flag" />
+                </h:commandLink>
+            </h:form>
+            
+            <h:link id="helpLink" outcome="help">
+                <h:graphicImage class="navbar-icon" library="images" name="help.png" alt="Help Page Icon" />
             </h:link>
 
             <ui:fragment rendered="#{!navbarBackingBean.userLoggedIn}">
-                <h:link class="navbar-link" value="#{msgs.loginbutton}" outcome="login" />
+                <h:link id="loginLink" class="navbar-link" value="#{msgs.loginbutton}" outcome="login" />
             </ui:fragment>
             
             <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
@@ -77,24 +91,39 @@
                 });
             </script>
         </div>
+        
     </nav>
     
     <div id="navbar-menu">
-        <a href="#news">Login</a>
-        <a href="#contact">Shopping Cart</a>
-        <a href="#about">About</a>
+        <h:form>
+            <h:commandLink value="Shopping Cart" action="shopping_cart" />
+            <a href="#search">Search</a>
+            <h:commandLink rendered="#{localeBean.language ne 'fr'}" value="French" action="#{localeBean.setLanguage('fr', 'CA')}" />
+            <h:commandLink rendered="#{localeBean.language ne 'en'}" value="English" action="#{localeBean.setLanguage('en', 'CA')}" />
+            <ui:fragment rendered="#{!navbarBackingBean.userLoggedIn}">
+                <h:link value="#{msgs.loginbutton}" outcome="login" />
+            </ui:fragment>
+            <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
+                <h:commandLink value="Downloads" action="downloads" />
+                <ui:fragment rendered="#{navbarBackingBean.manager}">
+                    <h:commandLink value="Manager" action="management_home" />
+                </ui:fragment>
+                <h:commandLink value="Logout" action="#{navbarBackingBean.logout()}" />
+            </ui:fragment>
+            <h:commandLink value="#{msgs.helpTitle}" action="help" />
+        </h:form>
     </div>
     
     <ui:fragment rendered="#{navbarBackingBean.userLoggedIn}">
         <div class="navbar-user-menu">
-            <h:form>
-                <h:commandLink value="Downloads" action="@null" />
+            <h:form id="navbarDropdownForm">
+                <h:commandLink id="downloadsLink" value="Downloads" action="downloads" />
 
                 <ui:fragment rendered="#{navbarBackingBean.manager}">
-                    <h:commandLink value="Manager" action="management_home" />
+                    <h:commandLink id="managerLink" value="Manager" action="management_home" />
                 </ui:fragment>
 
-                <h:commandLink value="Logout" action="#{navbarBackingBean.logout()}" />
+                <h:commandLink id="logoutLink" value="Logout" action="#{navbarBackingBean.logout()}" />
             </h:form>
         </div>
     </ui:fragment>

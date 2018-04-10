@@ -8,28 +8,19 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
+    <ui:define name="windowTitle">
+        Management Home
+    </ui:define>
+    
+    
     <ui:define name="content">
+    
+        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
         
-        <h:outputStylesheet library="css" name="banner_page.css" />
-        
-        <div class="parallax">
+        <div class="management-content">
 
-            <div class="parallax-layer background">
-                <div class="content">
-                   
-                    <h1>Menu</h1>
-                    
-                    <h:form>
-                        <h:commandLink value="Inventory" action="@null" />
-                        <h:commandLink value="Banners" action="banners" />
-                        <h:commandLink value="Orders" action="@null" />
-                        <h:commandLink value="Reviews" action="reviews" />
-                        <h:commandLink value="Books on Sale" action="@null" />
-                        <h:commandLink value="Survey" action="survey" />
-                     </h:form>
-                </div>
-            </div>
-        
+            <h1 class="welcome-back-title">Welcome Back, #{navbarBackingBean.username}!</h1>
+
         </div>
             
     </ui:define>

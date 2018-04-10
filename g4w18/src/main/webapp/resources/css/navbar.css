@@ -9,8 +9,9 @@
     line-height: 70px;
     color: #F2BFA0;
     font-size: 1.5em;
-    background-color: rgba(0,0,0,0.95);
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
+    background-color: black;
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.8);
+    border-radius: 0px;
 /*    opacity: 0;
     animation: 1s ease-out 2s 1 fadeIn;
     animation-fill-mode: forwards;*/
@@ -72,6 +73,11 @@
     transition: opacity .4s ease;
 /*     border: 1px solid yellow; */
 }
+#navbarLangForm
+{
+    height: 100%;
+    display: inline;
+}
 .navbar-icon:hover
 {
     cursor: pointer;
@@ -104,12 +110,13 @@
     display: none;
     opacity: 0;
     width: auto;
-    height: 30px;
-    padding: 5px;
+    height: 30px !important;
+    padding: 0px;
     margin-top: 25px;
     text-align: center;
     vertical-align: top;
     color: #F2BFA0;
+    font-size: initial;
     background-color: transparent;
     border: 1px solid #F2BFA0;
     -moz-appearance:none; /* Firefox */
@@ -130,7 +137,7 @@
 {
     height: auto;
     display: none;
-    z-index: 1;
+    z-index: 9999;
     position: absolute;
     right: 0;
     top: 70px;

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msgs.managerTitle}</title>
+    </h:head>
+    <h:body>
+
+        <p:panel id="basic" header="#{msgs.managerExplanationSousTitre}" style="margin-bottom:20px">
+            <h:panelGrid columns="1" cellpadding="10">
+                <h:outputText
+                    value="#{msgs.managerExplanation}" />
+            </h:panelGrid>
+        </p:panel>
+
+        <p:panel id="toggleable" header="#{msgs.managerAddSousTitre}" toggleable="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+
+
+            <h:form >
+
+                <p:growl id="growl" showDetail="true" sticky="true"/>
+                <h:panelGrid columns="2" cellpadding="10">
+                    <p:outputLabel>#{msgs.managerAddIsbn}</p:outputLabel>
+                    <p:inputText id="mIsbn" validatorMessage="Isbn must be 13 valid characters.(ex:978-1788541602)" required="true" requiredMessage="#{msgs.invalidBookIsbn}" value="#{managerBookHandling.book.isbnNumber}" >
+                        <f:validateLength minimum="14" maximum="14"/>
+                        <f:validateRegex  pattern="[0-9]{3}-[0-9]{10}$"></f:validateRegex>
+                    </p:inputText>
+                    
+                    <p:outputLabel>#{msgs.managerAddAuthor}</p:outputLabel>
+                    <p:inputText required="true" requiredMessage="#{msgs.invalidBookAuthor}" value="#{managerBookHandling.authors}" validator="#{managerBookHandling.validateAuthors}" >
+                       
+                    </p:inputText>
+                    
+                    <p:outputLabel>#{msgs.managerAddTitle}</p:outputLabel>
+                    <p:inputText id="mTitle" required="true" requiredMessage="#{msgs.invalidBookTitle}" value="#{managerBookHandling.book.title}" >
+                        <f:validateLength maximum="100"></f:validateLength>
+                    </p:inputText>
+
+                    <p:outputLabel>#{msgs.managerAddPublisher}</p:outputLabel>
+                    <p:inputText id="mPublisher" required="true" requiredMessage="#{msgs.invalidBookPublisher}" value="#{managerBookHandling.book.publisher}" >
+                        <f:validateLength maximum="50"></f:validateLength>
+                    </p:inputText>
+                    
+                    <p:outputLabel>#{msgs.managerAddPublisherDate}</p:outputLabel>
+                    <p:calendar id="datetime" value="#{managerBookHandling.book.publicationDate}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="#{msgs.invalidBookPublisherDate}" />
+
+                    <p:outputLabel>#{msgs.managerAddPageNumber}</p:outputLabel>
+                    <p:inputNumber id="mPageNum" value="#{managerBookHandling.book.pageNumber}" required="true" requiredMessage="#{msgs.invalidBookPageNumber}" decimalPlaces="0" ></p:inputNumber>
+                    
+                    
+                    <p:outputLabel>#{msgs.managerAddGenre}</p:outputLabel>
+                    <p:selectOneMenu required="true"  value="#{managerBookHandling.book.genre}" >
+                        <f:selectItems value="#{managerBookHandling.genreOptionValue}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel>#{msgs.managerAddDescription}</p:outputLabel>
+                    <p:inputTextarea id="mDescription" rows="6" cols="50" value="#{managerBookHandling.book.description}"  required="true" requiredMessage="#{msgs.invalidBookDescription}"></p:inputTextarea> 
+                    
+                    
+                    <p:outputLabel>#{msgs.managerAddFormat}</p:outputLabel>
+                    <p:selectOneRadio id="format" value="#{managerBookHandling.book.format}" required="true" requiredMessage="#{msgs.invalidBookFormat}" >
+                        <f:selectItems value="#{managerBookHandling.formats}" var="f" itemLabel="#{managerBookHandling.book.format}" itemValue="#{managerBookHandling.book.format}"></f:selectItems>
+                    </p:selectOneRadio>
+
+                    <p:outputLabel>#{msgs.managerAddWholePrice}</p:outputLabel>
+                    <p:inputNumber id="mWPrice" value="#{managerBookHandling.book.wholesalePrice}" required="true" requiredMessage="#{msgs.invalidBookWholeSalePrice}" decimalPlaces="2" maxValue="99999.99"  ></p:inputNumber>
+                    
+                    
+                    <p:outputLabel>#{msgs.managerAddListPrice}</p:outputLabel>
+                    <p:inputNumber id="mLPrice" value="#{managerBookHandling.book.listPrice}" required="true" requiredMessage="#{msgs.invalidBookListSalePrice}" decimalPlaces="2" maxValue="99999.99" ></p:inputNumber>
+                    
+                    
+                    <p:outputLabel>#{msgs.managerAddSalePrice}</p:outputLabel>
+                    <p:inputNumber id="mSPrice" value="#{managerBookHandling.book.salePrice}" required="true" requiredMessage="#{msgs.invalidBookSalePrice}" decimalPlaces="2" maxValue="99999.99"  ></p:inputNumber>
+                    
+                    
+                    <p:outputLabel>#{msgs.managerAddInventoryDate}</p:outputLabel>
+                    <p:calendar id="mDateInventory"  value="#{managerBookHandling.book.inventoryDate}" mindate="0" maxdate="0" required="true" requiredMessage="#{msgs.invalidBookInventoryDate}" />
+                    
+                    
+                    <p:outputLabel>#{msgs.managerAddRemovalStatus}</p:outputLabel>
+                    <p:selectBooleanButton value="#{managerBookHandling.book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton>
+                    
+                    
+<!--                    <p:outputLabel>#{msgs.managerChooseImage}</p:outputLabel>
+                    <h:inputFile value="#{managerBookHandling.file}" required="true" requiredMessage="#{msgs.managerFileError}" />
+                   actionListener="#{managerBookHandling.fileUploadHandler}"
+                    -->
+                    
+                    
+                    <p:commandButton value="#{msgs.submitButton}"  action="#{managerBookHandling.createBook()}"  update="growl"/>
+                    <h:outputLabel>#{managerBookHandling.message}</h:outputLabel>
+
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+
+        <p:panel header="#{msgs.managerEditRemoveTitle}" widgetVar="panelEdit" toggleable="true"  toggleSpeed="500" closeSpeed="500" style="margin-bottom:100px ">
+
+            <h:form>
+                <p:growl id="msgs" showDetail="true"/>
+                <p:dataTable  value="#{managerBookHandling.books}" var="book" paginator="true" rows="25" 
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             editable="true">
+                    <p:ajax event="rowEdit" listener="#{managerBookHandling.onBookEdit}" />
+                    <p:ajax event="rowEditCancel" listener="#{managerBookHandling.onBookEditCancel}" />
+
+                    <p:column headerText="#{msgs.managerAddIsbn}" sortBy="#{book.isbnNumber}" filterBy="#{book.isbnNumber}" >
+                        <h:outputText value="#{book.isbnNumber}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{book.title}" filterBy="#{book.title}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.title}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.title}" required="true" requiredMessage="#{msgs.invalidBookTitle}"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddPublisher}" sortBy="#{book.publisher}" filterBy="#{book.publisher}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.publisher}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.publisher}"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddPublisherDate}" sortBy="#{book.publicationDate}" filterBy="#{book.publicationDate}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.publicationDate}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.publicationDate}" required="true" >
+                                    <f:convertDateTime pattern="yyyy/mm/dd" />
+                                </p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddPageNumber}" sortBy="#{book.pageNumber}" filterBy="#{book.pageNumber}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.pageNumber}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.pageNumber}" required="true" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddGenre}" sortBy="#{book.genre}" filterBy="#{book.genre}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.genre}"/></f:facet>
+                            <f:facet name="input"><h:selectOneMenu value="#{book.genre}" required="true" >
+                                    <f:selectItems value="#{managerBookHandling.genreOptionValue}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddDescription}" sortBy="#{book.description}" filterBy="#{book.description}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.description}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.description}" required="true" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddFormat}" sortBy="#{book.format}" filterBy="#{book.format}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.format}"/></f:facet>
+                            <f:facet name="input"><h:selectOneMenu value="#{book.format}" required="true" >
+                                    <f:selectItems value="#{managerBookHandling.formats}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddWholePrice}" sortBy="#{book.wholesalePrice}" filterBy="#{book.wholesalePrice}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.wholesalePrice}"/></f:facet>
+                            <f:facet name="input"><p:inputNumber value="#{book.wholesalePrice}" required="true"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddListPrice}" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.listPrice}"/></f:facet>
+                            <f:facet name="input"><p:inputNumber value="#{book.listPrice}" required="true"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddPublisherDate}" sortBy="#{book.publicationDate}" filterBy="#{book.publicationDate}" >
+                        <h:outputText value="#{book.publicationDate}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddListPrice}" sortBy="#{book.listPrice}" filterBy="#{book.listPrice}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.listPrice}"/></f:facet>
+                            <f:facet name="input"><p:inputNumber value="#{book.listPrice}" required="true"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+
+                    <p:column headerText="#{msgs.managerRemovalStatus}" sortBy="#{book.removalStatus}" filterBy="#{book.removalStatus}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><p:selectBooleanButton value="#{book.removalStatus}" disabled="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
+                            <f:facet name="input"><p:selectBooleanButton value="#{book.removalStatus}" required="true" onLabel="#{msgs.managerBooleanOn}" offLabel="#{msgs.managerBooleanOff}" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:80px"></p:selectBooleanButton></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="#{msgs.managerEditAuhtors}" filterMatchMode="contains" >
+                            <h:outputText value="#{managerBookHandling.displayAuthor(book.authorList)}"/>
+                    </p:column>
+
+
+
+
+                    <p:column>
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+
+
+
+
+        </p:panel>
+
+        
+        <p:panel header="#{msgs.managerEditRemoveAuthorTitle}" widgetVar="panelEditAuthor" toggleable="true"  toggleSpeed="500" closeSpeed="500" style="margin-bottom:100px ">
+
+            <h:form>
+                <p:growl id="msgs" showDetail="true"/>
+                <p:dataTable value="#{managerBookHandling.books}" var="book" paginator="true" rows="25" 
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             editable="true">
+                    <p:ajax event="rowEdit" listener="#{managerBookHandling.onBookEdit}" />
+                    <p:ajax event="rowEditCancel" listener="#{managerBookHandling.onBookEditCancel}" />
+
+                    <p:column headerText="#{msgs.managerAddIsbn}" sortBy="#{book.isbnNumber}" filterBy="#{book.isbnNumber}" >
+                        <h:outputText value="#{book.isbnNumber}"/>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddTitle}" sortBy="#{book.title}" filterBy="#{book.title}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.title}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.title}" required="true" requiredMessage="#{msgs.invalidBookTitle}"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddPublisher}" sortBy="#{book.publisher}" filterBy="#{book.publisher}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.publisher}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.publisher}"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddPublisherDate}" sortBy="#{book.publicationDate}" filterBy="#{book.publicationDate}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.publicationDate}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.publicationDate}" required="true" >
+                                    <f:convertDateTime pattern="yyyy/mm/dd" />
+                                </p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddPageNumber}" sortBy="#{book.pageNumber}" filterBy="#{book.pageNumber}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.pageNumber}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.pageNumber}" required="true" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddGenre}" sortBy="#{book.genre}" filterBy="#{book.genre}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.genre}"/></f:facet>
+                            <f:facet name="input"><h:selectOneMenu value="#{book.genre}" required="true" >
+                                    <f:selectItems value="#{managerBookHandling.genreOptionValue}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddDescription}" sortBy="#{book.description}" filterBy="#{book.description}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.description}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{book.description}" required="true" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerAddFormat}" sortBy="#{book.format}" filterBy="#{book.format}" >
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{book.format}"/></f:facet>
+                            <f:facet name="input"><h:selectOneMenu value="#{book.format}" required="true" >
+                                    <f:selectItems value="#{managerBookHandling.formats}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    
+
+
+
+                    <p:column>
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+
+
+
+
+        </p:panel>
+        
+        
+    </h:body>
+</html>

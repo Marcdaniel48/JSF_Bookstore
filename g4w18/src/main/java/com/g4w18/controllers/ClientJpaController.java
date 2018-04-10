@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.controllers;
 
 import com.g4w18.controllers.exceptions.IllegalOrphanException;
@@ -20,7 +15,6 @@ import java.util.List;
 import com.g4w18.entities.MasterInvoice;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.UserTransaction;

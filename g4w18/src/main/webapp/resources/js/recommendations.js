@@ -6,7 +6,7 @@ var $prev = null;
 var $next = null;
 
 var leftIndex = 0;
-var rightIndex = 2;
+var rightIndex = 3;
 
 var inAnimation = false;
 
@@ -123,7 +123,7 @@ function init()
         rightIndex = $books.length;
     }
     
-    $books.slice(0, 3).css("display", "inline-block");
+    $books.slice(0, 4).css("display", "inline-block");
     
     setInterval(function()
     {

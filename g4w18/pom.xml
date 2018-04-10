@@ -15,6 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <skipTests>true</skipTests>
     </properties>
 
     <!-- Dependencies listed here are usually bom or bill of materials-->
@@ -48,6 +49,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
+            <!--<version>4.0.0-2</version>-->
             <version>3.3.7-1</version>
         </dependency>
         <dependency>
@@ -69,6 +71,12 @@
             <version>2.5.1</version>
             <scope>provided</scope>
         </dependency>-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+            <type>jar</type>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -161,8 +169,8 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- January 2018 Discovered that there is a guava conflict that 
-        prevents Selenium from functioning unless this explicit dependency is 
+        <!-- January 2018 Discovered that there is a guava conflict that
+        prevents Selenium from functioning unless this explicit dependency is
         included for testing -->
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -170,7 +178,6 @@
             <version>24.1-jre</version>
             <scope>test</scope>
         </dependency>
-
 
         <!-- A better way to write assertions -->
         <dependency>
@@ -216,6 +223,13 @@
             <groupId>org.jodd</groupId>
             <artifactId>jodd-mail</artifactId>
             <version>3.8.6</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.6</version>
         </dependency>
 
     </dependencies>
@@ -265,3 +279,4 @@
         </plugins>
     </build>
 </project>
+>>>>>>> 5595be2ab139139bc4792616161c2049c1ac1af3

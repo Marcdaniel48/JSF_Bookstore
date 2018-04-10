@@ -5,13 +5,13 @@
     margin-bottom: 10px;
     padding: 10px;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.9);
     /*opacity: 0;*/
     /*transform: translateX(100%);*/
     /*animation: 1s ease-out 2.2s 1 slideInFromRight;*/
     /*animation-fill-mode: forwards;*/
     font-weight: bolder;
+    clear: both;
 }
 #rss-feed a:hover
 {

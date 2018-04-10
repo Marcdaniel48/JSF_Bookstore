@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.g4w18.entities;
 
 import java.io.Serializable;
@@ -127,7 +122,7 @@ public class Client implements Serializable {
     @Size(min = 0, max = 12)
     @Column(name = "CELLPHONE")
     private String cellphone;
-    @Pattern(regexp="^[A-Za-z0-9\\._]+@[A-Za-z0-9\\\\._]+\\.[A-Za-z0-9\\\\._]+[^\\.]$", message="{invalidEmail}")
+    @Pattern(regexp="^[A-Za-z0-9_\\.]+@[A-Za-z0-9_\\.]+\\.[A-Za-z0-9_\\.]+$", message="Invalid Email")
     @Basic(optional = false)
     @NotNull
     @Size(min = 0, max = 50)

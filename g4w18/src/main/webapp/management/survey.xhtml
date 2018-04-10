@@ -10,9 +10,11 @@
 
     <ui:define name="content">
         
+        <ui:include src="../WEB-INF/sections/management_navbar.xhtml" />
+        
         <h:outputStylesheet library="css" name="survey_page.css" />
         
-        <div class="page">
+        <div class="management-content">
         
             <h:form id="allSurveysForm">
 
@@ -21,7 +23,7 @@
                     <ui:repeat value="#{surveyBackingBean.allQuestions}" var="survey">
 
                         <input id="question#{survey.questionId}" type="radio" name="question"
-                               value="#{survey.questionId}" checked="#{survey.isActive ? 'checked' : null}">
+                               value="#{survey.questionId}" checked="#{survey.isActive ? 'checked' : null}" required="true">
                             <div>
                                 <p>#{survey.description}</p>
 

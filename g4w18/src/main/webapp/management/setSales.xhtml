@@ -21,38 +21,52 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <h:form>
-            <p:dataTable var="booksOnSale" value="#{setSalesBackingBean.allBooks}" 
+            <p:dataTable var="book" value="#{setSalesBackingBean.allBooks}" 
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                          paginator="true" rows="15"
                          emptyMessage="#{msgs.managerSetSalesNoBooksFound}"
-                         editable="true">
-                <p:column headerText="#{msgs.managerSetSalesBookId}" filterBy="#{booksOnSale.bookId}" filterMatchMode="contains">
-                    <h:outputText value="#{booksOnSale.bookId}"></h:outputText>
+                         editable="true"
+                         widgetVar="booksTable">
+                <f:facet name="header">
+                    #{msgs.managerSetSalesTitle}
+                </f:facet>
+                <p:ajax event="rowEdit" listener="#{setSalesBackingBean.onRowEdit}"/>
+
+                <p:column headerText="#{msgs.managerSetSalesBookId}" filterBy="#{book.bookId}" filterMatchMode="contains">
+                    <h:outputText value="#{book.bookId}"></h:outputText>
                 </p:column>
 
-                <p:column headerText="#{msgs.managerSetSalesBookISBN}" filterBy="#{booksOnSale.isbnNumber}" filterMatchMode="contains">
-                    <h:outputText value="#{booksOnSale.isbnNumber}"></h:outputText>
+                <p:column headerText="#{msgs.managerSetSalesBookISBN}" filterBy="#{book.isbnNumber}" filterMatchMode="contains">
+                    <h:outputText value="#{book.isbnNumber}"></h:outputText>
                 </p:column>
 
-                <p:column headerText="#{msgs.managerSetSalesBookTitle}" filterBy="#{booksOnSale.title}" filterMatchMode="contains">
-                    <h:outputText value="#{booksOnSale.title}"></h:outputText>
+                <p:column headerText="#{msgs.managerSetSalesBookTitle}" filterBy="#{book.title}" filterMatchMode="contains">
+                    <h:outputText value="#{book.title}"></h:outputText>
                 </p:column>
 
-                <p:column headerText="#{msgs.managerSetSalesBookWholesalePrice}" filterBy="#{booksOnSale.wholesalePrice}" filterMatchMode="contains">
-                    <h:outputText value="#{booksOnSale.wholesalePrice}"></h:outputText>
+                <p:column headerText="#{msgs.managerSetSalesBookWholesalePrice}">
+                    <h:outputText value="#{book.wholesalePrice}"></h:outputText>
                 </p:column>
 
-                <p:column headerText="#{msgs.managerSetSalesBookListPrice}" filterBy="#{booksOnSale.listPrice}" filterMatchMode="contains">
-                    <h:outputText value="#{booksOnSale.listPrice}"></h:outputText>
+                <p:column headerText="#{msgs.managerSetSalesBookListPrice}" >
+                    <h:outputText value="#{book.listPrice}"></h:outputText>
                 </p:column>
 
-                <p:column headerText="#{msgs.managerSetSalesBookSalePrice}" filterBy="#{booksOnSale.salePrice}" filterMatchMode="contains">
+                <p:column headerText="#{msgs.managerSetSalesBookSalePrice}" filterBy="#{book.salePrice}" filterFunction="#{setSalesBackingBean.filterBySalePrice}">
+                    <f:facet name="filter">
+                        <p:selectOneButton onchange="PF('booksTable').filter()">
+                            <f:converter converterId="javax.faces.BigDecimal" />
+                            <f:selectItem itemLabel="#{msgs.managerSetSalesAllBooks}" itemValue="" />
+                            <f:selectItem itemLabel="#{msgs.managerSetSalesSaleBooks}" itemValue="0" />
+                            <f:selectItem itemLabel="#{msgs.managerSetSalesNoSaleBooks}" itemValue="1"/>
+                        </p:selectOneButton>
+                    </f:facet>
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{booksOnSale.salePrice}" /></f:facet>
-                        <f:facet name="input"><p:inputText id="modelInput" value="#{booksOnSale.salePrice}" style="width:100%"/></f:facet>
+                        <f:facet name="output"><h:outputText value="#{book.salePrice}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{book.salePrice}" style="width:100%"/></f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column style="width:32px">
+                <p:column headerText="#{msgs.managerEdit}">
                     <p:rowEditor />
                 </p:column>
             </p:dataTable>

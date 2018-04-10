@@ -5,12 +5,191 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>#{msgs.managerOrdersTitle}</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.7-1/css/bootstrap-theme.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:growl id="growl" life="3000"/>
+            <p:dataTable var="order" value="#{orderManagerBackingBean.allMasterInvoices}" 
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                         paginator="true" rows="15"
+                         emptyMessage="#{msgs.managerOrdersNoneFound}"
+                         editable="true"
+                         widgetVar="ordersTable">
+                <f:facet name="header">
+                    #{msgs.managerOrdersTitle}
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{orderManagerBackingBean.onRowEditMasterInvoice}" update=":form:growl" oncomplete="PF('ordersTable').filter();"/>
+                <p:column headerText="#{msgs.managerOrdersId}" filterBy="#{order.invoiceId}" filterMatchMode="contains">
+                    <h:outputText value="#{order.invoiceId}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerOrdersClient}">
+                    <h:outputText value="#{order.clientId.firstName} #{order.clientId.lastName}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerOrdersSaleDate}">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="">
+                            </h:outputText>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:calendar id="mask" value="#{order.saleDate}" pattern="dd-MM-yyyy HH:mm:ss" mask="true">
+                                <f:validator validatorId="dateRangeValidator"></f:validator>
+                            </p:calendar>
+                        </f:facet>
+                    </p:cellEditor>
+                    <h:outputText value="#{order.saleDate}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerOrdersGrossValue}" filterBy="#{order.grossValue}" filterMatchMode="contains">
+                    <h:outputText value="#{order.grossValue}">
+                        <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerOrdersNetValue}" filterBy="#{order.netValue}" filterMatchMode="contains">
+                    <h:outputText value="#{order.netValue}">
+                        <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerOrdersAvailable}" filterBy="#{order.available}" filterMatchMode="equals">
+                    <f:facet name="filter">
+                        <p:selectOneButton onchange="PF('ordersTable').filter()">
+                            <f:converter converterId="javax.faces.Boolean" />
+                            <f:selectItem itemLabel="#{msgs.managerRSSAll}" itemValue="" />
+                            <f:selectItem itemLabel="#{msgs.managerRSSActive}" itemValue="true" />
+                            <f:selectItem itemLabel="#{msgs.managerRSSInactive}" itemValue="false" />
+                        </p:selectOneButton>
+                    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{order.available}"/></f:facet>
+                        <f:facet name="input">
+                            <p:selectBooleanCheckbox value="#{order.available}"></p:selectBooleanCheckbox>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="#{msgs.managerEdit}">
+                    <p:rowEditor />
+                </p:column>
+                <p:column headerText="#{msgs.managerOrdersDetails}">
+                    <p:commandButton value="#{msgs.managerOrdersSeeDetails}" oncomplete="PF('detailsDialog').show();">
+                        <f:setPropertyActionListener value="#{order}" target="#{orderManagerBackingBean.selectedInvoice}" ></f:setPropertyActionListener>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form>
+            <p:dialog widgetVar="detailsDialog" modal="true" dynamic="true" onShow="PF('detailsTable').filter();">
+                <p:dataTable var="detail" value="#{orderManagerBackingBean.selectedInvoice.invoiceDetailList}" 
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             paginator="true" rows="5"
+                             emptyMessage="#{msgs.managerOrdersNoDetails}"
+                             editable="true"
+                             widgetVar="detailsTable">
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.managerOrdersDetailsFor}#{orderManagerBackingBean.selectedInvoice.invoiceId}"></h:outputText>
+                    </f:facet>
+
+                    <p:ajax event="rowEdit" listener="#{orderManagerBackingBean.onRowEditInvoiceDetail}" update=":form:growl" oncomplete="PF('ordersTable').filter();"/>
+
+                    <p:column headerText="#{msgs.managerDetailId}" filterBy="#{detail.detailId}" filterMatchMode="contains">
+                        <h:outputText value="#{detail.detailId}"></h:outputText>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerDetailBook}" filterBy="#{detail.bookId.title}" filterMatchMode="contains">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{detail.bookId.isbnNumber}"></h:outputText>
+                                <br/>
+                                <h:outputText value="#{detail.bookId.title}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{detail.bookId.isbnNumber}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerDetailPrice}" filterBy="#{detail.bookPrice}" filterMatchMode="contains">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{detail.bookPrice}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{detail.bookPrice}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerDetailGST}" filterBy="#{detail.gstRate}" filterMatchMode="contains">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{detail.gstRate}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{detail.gstRate}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerDetailPST}" filterBy="#{detail.pstRate}" filterMatchMode="contains">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{detail.pstRate}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{detail.pstRate}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="#{msgs.managerDetailHST}" filterBy="#{detail.hstRate}" filterMatchMode="contains">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{detail.hstRate}"></h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{detail.hstRate}"></p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="#{msgs.managerOrdersAvailable}" filterBy="#{detail.available}" filterMatchMode="equals">
+                        <f:facet name="filter">
+                            <p:selectOneButton onchange="PF('detailsTable').filter()">
+                                <f:converter converterId="javax.faces.Boolean" />
+                                <f:selectItem itemLabel="#{msgs.managerRSSAll}" itemValue="" />
+                                <f:selectItem itemLabel="#{msgs.managerRSSActive}" itemValue="true" />
+                                <f:selectItem itemLabel="#{msgs.managerRSSInactive}" itemValue="false" />
+                            </p:selectOneButton>
+                        </f:facet>
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{detail.available}"/></f:facet>
+                            <f:facet name="input">
+                                <p:selectBooleanCheckbox value="#{detail.available}"></p:selectBooleanCheckbox>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="#{msgs.managerEdit}">
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+        </h:form>
+    </h:body>
 </html>

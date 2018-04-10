@@ -10,6 +10,10 @@
     /*animation: 1s ease-out 1.98s 1 slideInFromLeft;*/
     /*animation-fill-mode: forwards;*/
 }
+#genres a:hover
+{
+    opacity: 1;
+}
 .outer
 {
 /*    margin: auto;
