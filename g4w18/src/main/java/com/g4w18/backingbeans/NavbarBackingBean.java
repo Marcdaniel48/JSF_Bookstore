@@ -31,6 +31,10 @@ public class NavbarBackingBean implements Serializable
     
     private static Logger logger = Logger.getLogger(NavbarBackingBean.class.getName());
     
+    /**
+     * @author Jephthia
+     * @return true if the user is logged in, false otherwise
+     */
     public boolean isUserLoggedIn()
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -50,18 +54,25 @@ public class NavbarBackingBean implements Serializable
         return isUserLoggedIn;
     }
     
+    /**
+     * @author
+     * @return the user's username 
+     */
     public String getUsername()
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
         username = (String)session.getAttribute("username");
-//        username = loginController.getUsername();
 
         logger.log(Level.INFO, LocalDateTime.now() + " >>> username: {0}", username);
         
         return username;
     }
     
+    /**
+     * @author Jephthia
+     * @return true if this user is a manager, false otherwise
+     */
     public boolean isManager()
     {
         logger.log(Level.INFO, LocalDateTime.now() + " isManager() {0}", getUsername());
@@ -71,6 +82,10 @@ public class NavbarBackingBean implements Serializable
         return client.getIsManager();
     }
     
+    /**
+     * @author Jephthia
+     * @return the index string to go to the index
+     */
     public String logout()
     {
         loginController.logout();
