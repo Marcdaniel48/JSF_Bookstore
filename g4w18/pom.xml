@@ -4,7 +4,7 @@
 
     <groupId>com.g4w18</groupId>
     <artifactId>g4w18</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-FINAL</version>
     <packaging>war</packaging>
 
     <name>g4w18</name>
@@ -257,7 +257,9 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <configuration>
+                        <warName>g4w18</warName>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -279,4 +281,3 @@
         </plugins>
     </build>
 </project>
->>>>>>> 5595be2ab139139bc4792616161c2049c1ac1af3

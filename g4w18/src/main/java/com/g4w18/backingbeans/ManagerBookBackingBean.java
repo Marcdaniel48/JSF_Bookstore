@@ -126,12 +126,12 @@ public class ManagerBookBackingBean implements Serializable {
     public String createBook() throws Exception
     {
         logger.log(Level.INFO, "INSIDE OF CREATE BOOK");
-        if(getFile()==null)
-        {
-            logger.log(Level.INFO,"CHECKING IF FILE WAS UPLOADED NULL");
-            addMessageError("managerFileError");
-            return null;
-        }
+//        if(getFile()==null)
+//        {
+//            logger.log(Level.INFO,"CHECKING IF FILE WAS UPLOADED NULL");
+//            addMessageError("managerFileError");
+//            return null;
+//        }
         List<Book> bookResult = bookJpaController.findBookByIsbnSpecific(book.getIsbnNumber());
         logger.log(Level.INFO,"BOOK ISBN THAT WILL BE ADDED TO DB "+ book.getIsbnNumber());
         logger.log(Level.INFO, "RESULTS OF BOOKS FOUND WITH THEW ISBN"+ bookResult.size());
