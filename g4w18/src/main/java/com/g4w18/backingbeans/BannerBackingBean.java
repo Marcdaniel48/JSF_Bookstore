@@ -127,6 +127,10 @@ public class BannerBackingBean implements Serializable
         }
     }
     
+    /**
+     * @author Jephthia Louis
+     * Adds a new banner to the database
+     */
     public void addNewBanner()
     {
         logger.log(Level.INFO, LocalDateTime.now() + " >>> file {0}", uploadedBannerFile);
@@ -167,6 +171,12 @@ public class BannerBackingBean implements Serializable
         uploadedBannerStatus = false;
     }
     
+    /**
+     * Validates that the url is validate
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateLink(FacesContext context, UIComponent component, Object value)
     {   
         String url = (String)value;

@@ -15,7 +15,7 @@ import javax.servlet.http.Cookie;
 
 /**
  *
- * @author 1430047
+ * @author Jephthia Louis
  */
 @Named("theBooks")
 @SessionScoped
@@ -75,6 +75,9 @@ public class BookBackingBean implements Serializable
         return books;
     }
     
+    /**
+     * @return Checks if this user should be shown book recommendations
+     */
     public boolean hasRecommendations()
     {
         FacesContext context = FacesContext.getCurrentInstance();

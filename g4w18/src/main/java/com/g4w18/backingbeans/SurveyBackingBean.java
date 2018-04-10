@@ -34,14 +34,11 @@ public class SurveyBackingBean implements Serializable
     private String answer;
     private PieChartModel chart;
 
-    @PostConstruct
-    public void init()
-    {
-        //HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        //session.setAttribute("surveyQuestionID", null);
-        //initChart();
-    }
-    
+    /**
+     * @author Jephthia
+     * @param question 
+     * initiates the pie chart for the survey
+     */
     private void initChart(Question question)
     {
         chart = new PieChartModel();
@@ -70,21 +67,37 @@ public class SurveyBackingBean implements Serializable
         chart.setDiameter(150);
     }
     
+    /**
+     * @author Jephthia
+     * @return get the pie chart
+     */
     public PieChartModel getChart()
     {
         return chart;
     }
     
+    /**
+     * @author
+     * @return the current answer 
+     */
     public String getAnswer()
     {
         return answer;
     }
     
+    /**
+     * @author Jephthia
+     * @param answer The current answer
+     */
     public void setAnswer(String answer)
     {
         this.answer = answer;
     }
     
+    /**
+     * @author Jephthia
+     * @return all the answers as a map
+     */
     public Map<String, Object> getAnswers()
     {
         Map<String, Object> answers = new LinkedHashMap<String, Object>();
@@ -110,11 +123,19 @@ public class SurveyBackingBean implements Serializable
         return answers;
     }
     
+    /**
+     * @author Jephthia
+     * @return The current active question
+     */
     public Question getActiveQuestion()
     {
         return surveyController.getActiveQuestion();
     }
     
+    /**
+     * @author Jephthia
+     * submit the vote so that it is saved in to the database
+     */
     public void submitVote()
     {
         logger.log(Level.INFO, LocalDateTime.now() + " >>> submit vote");
@@ -153,15 +174,24 @@ public class SurveyBackingBean implements Serializable
         }
     }
     
+    /**
+     * @author Jephthia
+     * @return All the questions
+     */
     public List<Question> getAllQuestions()
     {
         return surveyController.findQuestionEntities();
     }
     
+    /**
+     * @author Jephthia
+     * Saved the current active question to the database
+     */
     public void saveActiveQuestion()
     {
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         
+        //Get the question from the session
         String x = request.getParameter("question");
         
         Question activeQuestion = getActiveQuestion();
@@ -184,6 +214,10 @@ public class SurveyBackingBean implements Serializable
         logger.log(Level.INFO, LocalDateTime.now() + " >>> survey questionID: {0}", x);
     }
     
+    /**
+     * @author Jephthia
+     * @return true if you should show the results false otherwise
+     */
     public boolean showResults()
     {       
         HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -191,6 +225,7 @@ public class SurveyBackingBean implements Serializable
         
         logger.log(Level.INFO, LocalDateTime.now() + " >>> questionID: {0}", questionID);
         
+        //Check if the id is already in the session
         if(questionID != null)
         {
             Question question = surveyController.findQuestion((int)questionID);
